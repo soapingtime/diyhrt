@@ -1,0 +1,94 @@
+/*!
+ * jQuery.tipsy
+ * Copyright (c) 2014 CreativeDream
+ * Version: 1.0 (18-11-2014)
+*/
+
+:root {
+--tipsy-background: rgba(0,0,0,100);
+--tipsy-color: #fff;
+}
+
+.tipsy {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 6px 8px;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    line-height: normal;
+    color: var(--tipsy-color);
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    background-color: var(--tipsy-background);
+    z-index: 9999;
+    max-width: 200px;
+}
+
+.tipsy:before {
+    position: absolute;
+    bottom: -5px;
+    left: 5px;
+    display: inline-block;
+    content: '';
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--tipsy-background);
+    border-bottom: 0 solid var(--tipsy-background);
+    border-left: 5px solid transparent;
+}
+
+.tipsy.arrow-top:before {
+    bottom: auto;
+    top: -5px;
+    border-top-width: 0;
+    border-bottom-width: 5px;
+}
+
+.tipsy.arrow-bottom:before {
+    bottom: -5px;
+    top: auto;
+    border-top-width: 5px;
+    border-bottom-width: 0;
+}
+
+.tipsy.arrow-left:before {
+    left: 5px;
+    right: auto;
+}
+
+.tipsy.arrow-center:before {
+    left: 50%;
+    right: auto;
+    margin-left: -5px;
+}
+
+.tipsy.arrow-right:before {
+    right: 5px;
+    left: auto;
+}
+
+.tipsy.arrow-side-left:before {
+    top: 50%;
+    bottom: auto;
+    left: 0;
+    right: auto;
+    margin-top: -5px;
+    margin-left: -5px;
+    border-right-color: var(--tipsy-background);
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 0;
+}
+
+.tipsy.arrow-side-right:before {
+    top: 50%;
+    bottom: auto;
+    right: 0;
+    left: auto;
+    margin-top: -5px;
+    margin-right: -5px;
+    border-left-color: var(--tipsy-background);
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 0;
+}

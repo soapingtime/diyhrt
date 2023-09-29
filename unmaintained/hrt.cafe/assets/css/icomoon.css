@@ -1,0 +1,129 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?132qfd');
+  src:  url('fonts/icomoon.eot?132qfd') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?123qfd') format('truetype'),
+    url('fonts/icomoon.woff?132qfd') format('woff'),
+    url('fonts/icomoon.svg?132qfd') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-fa5-spinner:before {
+  content: "\e921";
+}
+.icon-fa5-angle-up:before {
+  content: "\e920";
+}
+.icon-fa4-bars:before {
+  content: "\e91d";
+}
+.icon-fa5-key:before {
+  content: "\e91e";
+}
+.icon-fa5-network:before {
+  content: "\e91f";
+}
+.icon-fa5-link:before {
+  content: "\e91b";
+}
+.icon-fa5-times:before {
+  content: "\e91c";
+}
+.icon-brand-hrtcafe:before {
+  content: "\e91a";
+}
+.icon-brand-moneygram:before {
+  content: "\e900";
+}
+.icon-brand-skrill:before {
+  content: "\e901";
+}
+.icon-brand-westernunion:before {
+  content: "\e902";
+  font-size: 90%;
+}
+.icon-brand-wise:before {
+  content: "\e903";
+}
+.icon-fa4-bank:before {
+  content: "\e904";
+}
+.icon-fa4-bitcoin:before {
+  content: "\e905";
+}
+.icon-fa4-coffee:before {
+  content: "\e906";
+}
+.icon-fa4-cog:before {
+  content: "\e907";
+}
+.icon-fa4-credit:before {
+  content: "\e908";
+}
+.icon-fa4-exclamation:before {
+  content: "\e909";
+}
+.icon-fa4-fire:before {
+  content: "\e90a";
+}
+.icon-fa4-history:before {
+  content: "\e90b";
+}
+.icon-fa4-home:before {
+  content: "\e90c";
+}
+.icon-fa4-info:before {
+  content: "\e90d";
+}
+.icon-fa4-paypal:before {
+  content: "\e90e";
+}
+.icon-fa4-refresh:before {
+  content: "\e90f";
+}
+.icon-fa4-twitter:before {
+  content: "\e910";
+}
+.icon-fa5-bandaid:before {
+  content: "\e911";
+}
+.icon-fa5-capsules:before {
+  content: "\e912";
+}
+.icon-fa5-donate:before {
+  content: "\e913";
+}
+.icon-fa5-moon:before {
+  content: "\e914";
+}
+.icon-fa5-pills:before {
+  content: "\e915";
+}
+.icon-fa5-shipping:before {
+  content: "\e916";
+}
+.icon-fa5-spray:before {
+  content: "\e917";
+}
+.icon-fa5-sun:before {
+  content: "\e918";
+}
+.icon-fa5-syringe:before {
+  content: "\e919";
+}

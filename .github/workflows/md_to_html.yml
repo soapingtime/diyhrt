@@ -1,0 +1,32 @@
+name: Convert markdown to html
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+    - 'README.md'
+    - 'DISCLAIMER.md'
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+      - uses: actions/setup-python@v4
+        with:
+          python-version: pypy-3.7-v7.3.3
+      - name: Convert to html
+        run: |
+          pip install markdown bleach
+          python scripts/md_to_html.py README.md readme.html
+          python scripts/md_to_html.py DISCLAIMER.md disclaimer.html
+      - name: Commit changes
+        if: ${{ success() }}
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "['readme.html', 'disclaimer.html']"
+          pull: "--rebase --autostash ."
+          message: "[automated] update markdown files"
+          default_author: github_actions

@@ -1,0 +1,40 @@
+name: HRT.coffee
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 4'
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+      - name: Check for 404
+        run: |
+          url="https://hrt.coffee"
+          status=$(curl -o /dev/null -s -w "%{http_code}" $url)
+          if [ $status -eq 404 ]; then
+            echo "Got 404. Exiting."
+            curl -H "Content-Type: application/json" -d '{"content": "${{ secrets.DISCORD_USER_ID }} $URL returned 404"}' ${{ secrets.WEBHOOK_URL }}
+            exit 1
+          fi
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install wget
+      - name: Download hrt.coffee
+        run: |
+          rm -rf hrt.coffee
+          export USER_AGENT="Mosaic/9.0 (Commodore AmigaOS 4.0) AmiWeb/4.1.33 (KHTML, like Gecko) Version/22.1 Mozilla/5.0. Contact: https://boytw.ink/crawl_contact.txt"
+          wget --adjust-extension --convert-links -e robots=off --mirror --page-requisites --waitretry 5 --timeout 60 --tries 5 --wait 1 -U "$USER_AGENT" https://hrt.coffee
+      - name: Commit changes
+        if: ${{ success() }}
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: hrt.coffee
+          pull: "--rebase --autostash ."
+          message: "[automated] update hrt.coffee"
+          default_author: github_actions

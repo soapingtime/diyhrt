@@ -1,0 +1,25 @@
+{
+  "name": "Transfeminine Science",
+  "short_name": "TFSci",
+  "icons": [
+    {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "mask-icon.png",
+      "sizes": "344x344",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "theme_color": "#ece5ff",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}

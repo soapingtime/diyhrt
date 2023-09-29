@@ -1,0 +1,26 @@
+name: groups.io wiki
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 3"
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+      - name: download groups.io wiki
+        run: |
+          rm -rf groups.io
+          wget -e robots=off --mirror --limit-rate=10m --convert-links --adjust-extension --page-requisites --random-wait --no-parent https://groups.io/g/MTFHRT/wiki/ https://groups.io/g/MTFHRT/topic/80225302/ https://groups.io/g/MTFHRT/topic/79606271/ || true
+      - name: commit changes
+        if: ${{ success() }}
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "groups.io"
+          pull: --rebase --autostash .
+          message: "[automated] update groups.io wiki"
+          default_author: github_actions

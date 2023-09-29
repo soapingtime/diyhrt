@@ -1,0 +1,40 @@
+name: Reddit Wikis
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 5"
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+      - name: check for 404
+        run: |
+          urls=("https://old.reddit.com/r/TransDIY/wiki/pharmacies" "https://old.reddit.com/r/TransDIY/wiki" "https://old.reddit.com/r/TransSurgeriesWiki/wiki/index/" "https://old.reddit.com/r/FTM/wiki")
+          failed=""
+          for url in "${urls[@]}"; do
+            status=$(curl -o /dev/null -s -w "%{http_code}" $url)
+            if [ $status -eq 404 ]; then
+              failed=$url
+              echo "Got 404 on $failed. Exiting."
+              curl -H "Content-Type: application/json" -d "{\"content\": \"${{ secrets.DISCORD_USER_ID }} $url returned 404\"}" ${{ secrets.WEBHOOK_URL }}
+            fi
+          done
+      - name: Download Wikis
+        run: |
+          rm -rf old.reddit.com && rm -rf reddit
+          wget --no-cookies --header "Cookie: over18=1" -E -H -k -p -r -l1 --domains=old.reddit.com https://old.reddit.com/r/TransDIY/wiki https://old.reddit.com/r/TransDIY/wiki/pharmacies https://old.reddit.com/r/TransSurgeriesWiki/wiki/index/ https://old.reddit.com/r/FTM/wiki || true
+          mv old.reddit.com reddit
+          cd reddit && rm robots.txt
+      - name: Commit Changes
+        if: ${{ success() }}
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: reddit
+          pull: --rebase --autostash .
+          message: "[automated] update /r/TransDIY wiki"
+          default_author: github_actions

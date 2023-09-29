@@ -1,0 +1,80 @@
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
+  }
+
+  #header, #footer {
+    background-color: transparent;
+  }
+
+  #header {
+    position: absolute;
+    height: var(--header-height);
+    top: 0px;
+  }
+
+  #header-subcontainer {
+    width: 100%;
+    height: var(--header-height);
+  }
+
+  #site-icon {
+    width: 28px;
+    min-width: 28px;
+    padding: 0px;
+    margin-right: 15px;
+    margin-bottom: 2px;
+  }
+
+  #site-title {
+    font-size: 24px;
+  }
+
+  #site-title-text-lg {
+    display: inline-block;
+    max-width: 100%;
+    overflow: visible;
+    text-overflow: clip;
+  }
+
+  #top-links, #top-buttons, #mobile-menu, #restore-persistent-header-button, #sidebar, #sidebar-button-standalone {
+    display: none;
+  }
+
+  #mid-section {
+    margin-top: var(--header-height);
+  }
+
+  #main-area {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  #article {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* These don't seem to do what I want (break whole graph, not the offending line) */
+  #article p {
+    /* break-inside: avoid; */
+    /* page-break-inside: avoid; */ /* Legacy / alias for break-inside */
+  }
+
+  #article .table-wrapper, #article table {
+    break-inside: avoid;
+    page-break-inside: avoid; /* Legacy / alias for break-inside */
+    overflow-y: hidden; /* Required to get rid of unneeded scrollbars */
+  }
+
+  #article thead {
+    display: table-row-group; /* Prevent thead row from repeating on each new page */
+  }
+
+  #gt-nvframe {
+    display: none;
+  }
+}
+

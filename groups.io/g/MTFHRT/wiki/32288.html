@@ -1,0 +1,982 @@
+
+	
+	<!DOCTYPE html>
+	<html lang="en-US">
+		<head>
+			<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			
+				<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+			
+			<meta name="pinterest" content="nopin" />
+			<meta name="pinterest" content="nohover" />
+			
+			<meta name="3778517eb4810dfb5d143ed8f1b359b3b5a82923" content="0f56257c3db4a222e91b11bc6871c4df2e263b28" />
+			<link rel="apple-touch-icon" sizes="57x57" href="https://groups.io/img/org.1/favicons/apple-icon-57x57.png">
+			<link rel="apple-touch-icon" sizes="60x60" href="https://groups.io/img/org.1/favicons/apple-icon-60x60.png">
+			<link rel="apple-touch-icon" sizes="72x72" href="https://groups.io/img/org.1/favicons/apple-icon-72x72.png">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://groups.io/img/org.1/favicons/apple-icon-76x76.png">
+			<link rel="apple-touch-icon" sizes="114x114" href="https://groups.io/img/org.1/favicons/apple-icon-114x114.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://groups.io/img/org.1/favicons/apple-icon-120x120.png">
+			<link rel="apple-touch-icon" sizes="144x144" href="https://groups.io/img/org.1/favicons/apple-icon-144x144.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://groups.io/img/org.1/favicons/apple-icon-152x152.png">
+			<link rel="apple-touch-icon" sizes="180x180" href="https://groups.io/img/org.1/favicons/apple-icon-180x180.png">
+			<link rel="icon" type="image/png" sizes="192x192"  href="../../../img/org.1/favicons/android-icon-192x192.png">
+			<link rel="icon" type="image/png" sizes="32x32" href="../../../img/org.1/favicons/favicon-32x32.png">
+			<link rel="icon" type="image/png" sizes="96x96" href="../../../img/org.1/favicons/favicon-96x96.png">
+			<link rel="icon" type="image/png" sizes="16x16" href="../../../img/org.1/favicons/favicon-16x16.png">
+			<link rel="manifest" href="../../../img/org.1/favicons/manifest.json">
+			<meta name="msapplication-TileColor" content="#ffffff">
+			<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+			
+			
+			
+
+
+			
+<script>
+	
+		function setPullToRefresh() {}
+	
+	function gotoURL(inurl) {
+		window.location.href = inurl;
+		return;
+	}
+
+	function contentLoaded(isHTMX, f) {
+		console.log("contentLoaded: " + isHTMX);
+		if (isHTMX == true) {
+			document.body.addEventListener('htmx:afterSettle', f, {once: true});
+		} else {
+			if (document.readyState !== 'loading') {
+				console.log('document is already ready, just execute code here');
+				f();
+			} else {
+				console.log('document was not ready, place code here');
+				document.addEventListener('DOMContentLoaded', f, {once: true});
+			}
+		}
+	}
+
+	// stub
+	function logError(data, url, linenumber) {
+		console.log(data)
+		return;
+	}
+	var pushSubToken;
+	var ignoreErrors = false;
+	var lastError = "";
+	
+		window.onerror = function(errorMessage, errorUrl, errorLine, errorColumn, errorObj) {
+			let column;
+			let stack;
+			if (console && console.log) {
+				console.log("msg:", errorMessage);
+				console.log("url:", errorUrl);
+				console.log("line:", errorLine);
+				if (errorColumn !== undefined && errorObj != null) {
+					console.log("column:", errorColumn);
+					column = errorColumn;
+				}
+				if (errorObj !== undefined && errorObj != null) {
+					console.log("stack:", errorObj.stack);
+					stack = errorObj.stack;
+				}
+				console.log("client_id:", "web.web09.356311.1693355052712533550");
+				console.log("last_error:", lastError);
+			}
+			if (errorUrl == "" || errorUrl === null) {
+				errorUrl = window.location.href;
+			}
+			if (errorMessage.includes("SecurityError:") == true) {
+				ignoreErrors = true;
+			}
+			if (ignoreErrors == true) {
+				console.log("cookies, disabled, ignoring");
+				lastError = errorMessage;
+				return;
+			}
+			jQuery.ajax({
+				type: 'POST',
+				url: '/jsclienterror',
+				data: {
+					msg: errorMessage,
+					url: errorUrl,
+					line: errorLine,
+					column: column,
+					stack: stack,
+					last_error: lastError,
+					client_id: "web.web09.356311.1693355052712533550"
+				},
+				success: function() {
+					if (console && console.log) {
+						console.log('JS error report successful.');
+					}
+					lastError = errorMessage;
+				},
+				error: function() {
+					if (console && console.error) {
+						console.error('JS error report submission failed!');
+					}
+					lastError = errorMessage;
+				}
+			});
+			return true;
+		}
+	
+</script>
+			
+			
+			<script src="../../../tinymce-4.7.13/tinymce.min.js"></script>
+			<script src="../../../js/browser-image-compression-2.0.2.min.js"></script>
+			<link href="../../../css/application-559820a385e6acd40fd39c83eb4ef1cd.css" rel="stylesheet" id="groupsio-css">
+			<script src="../../../js/application-512d6dec6217cbf3f29d34d006f298ce.js" id="groupsio-js"></script>
+			<script src="../../../js/run_prettify.js"></script>
+			<title>
+				
+	MTFHRT@groups.io | Wiki
+
+			</title>
+			
+
+			
+				
+
+
+  
+			
+			
+
+		</head>
+		<body class="fuelux" hx-headers='{"Accept-Version": "fbfa78c63596e2814d57691d1a39c4048f326824"}' hx-ext="preload">
+			
+				<div class="navbar navbar-head"  role="navigation" id="headerbar">
+					<div class="container-fluid" style="padding-left:0px;">
+						<a href="https://groups.io" class="navbar-left">
+							<img src="../../../img/org.1/mainlogo.png" height="50" alt="Groups.io">
+						</a>
+							
+								<ul class="nav navbar-nav hidden-xs">
+									<li>
+										<a href="https://groups.io/search?p=SubsCount,,,20,2,0,0">
+											<i class="fa fa-search"></i>
+											Find or Create a Group
+										</a>
+									</li>
+									
+								</ul>
+							
+							<ul class="nav navbar-nav pull-right visible-xs" style="margin-top:5px;margin-bottom:5px;">
+								<li>
+									<a href="32288.html#" data-toggle="modal" data-target="#mobileAccount">
+										<i class="fa-fw fa fa-bars fa-lg"></i>
+									</a>
+								</li>
+							</ul>
+
+							<ul class="nav navbar-nav pull-right hidden-xs">
+								<li class="dropdown">
+									<a href="32288.html#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<i class="fa-fw fa-regular fa-globe"></i>
+										
+											EN
+										
+										<b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="https://groups.io/unsetlang">
+												EN
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/de">
+												DE
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/es">
+												ES
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/fr">
+												FR
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/it">
+												IT
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/uk">
+												UK
+											</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="https://groups.io/helpcenter" target="_blank">
+										<i class="fa-fw fa fa-info-circle"></i>
+										Help
+									</a>
+								</li>
+								<li>
+									<a href="https://groups.io/login">
+										<i class="fa fa-sign-in-alt"></i>
+										Log In
+									</a>
+								</li>
+								
+									<li>
+										<a href="https://groups.io/register">
+											<i class="fa fa-user"></i>
+											Sign Up
+										</a>
+									</li>
+								
+							</ul>
+					</div>
+				</div>
+				<div class="modal fade" id="mobileAccount" role="dialog">
+					<div class="modal-dialog" style="margin-top:50px;">
+						<div class="modal-content">
+							<div class="modal-body">
+
+									<ul class="list-group noborderlist">
+
+										<li class="noborderitem list-group-item">
+											<a href="https://groups.io/login">
+												<i class="fa fa-sign-in-alt"></i>
+												Log In
+											</a>
+										</li>
+										
+											<li class="noborderitem list-group-item">
+												<a href="https://groups.io/register">
+													<i class="fa fa-user"></i>
+													Sign Up
+												</a>
+											</li>
+										
+										<li class="noborderitem list-group-item">
+											<a href="https://groups.io/helpcenter" target="_blank">
+												<i class="fa-fw fa fa-info-circle"></i>
+												Help
+											</a>
+										</li>
+
+										<li class="dropdown noborderitem list-group-item">
+											<a href="32288.html#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<i class="fa-fw fa-regular fa-globe"></i>
+												
+													EN
+												
+												<b class="caret"></b>
+											</a>
+											<ul class="dropdown-menu">
+												<li>
+													<a href="https://groups.io/unsetlang">
+														EN
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/de">
+														DE
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/es">
+														ES
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/fr">
+														FR
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/it">
+														IT
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/uk">
+														UK
+													</a>
+												</li>
+											</ul>
+										</li>
+
+									</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+			<div id="content" class="container-fluid">
+<script>
+	// submitEvent acts like .submit(), except it is compatible with the app, by using events instead.
+	function submitEvent(ele) {
+		console.log("in submitEvent");
+		const theEvent = new CustomEvent('submit', {
+			bubbles: true,
+			cancelable: true
+		});
+		if (typeof ele === 'string' || ele instanceof String) {
+			if (ele.startsWith("#") == true) {
+				ele = ele.slice(1);
+			}
+			if (document.getElementById(ele).dispatchEvent(theEvent) == true) {
+				// if not cancelled, do normal submit
+				console.log("calling submit");
+				document.getElementById(ele).submit();
+			}
+			return;
+		}
+		// assume ele is the element
+		if (ele.dispatchEvent(theEvent) == true) {
+			// if not cancelled, do normal submit
+			console.log("calling submit");
+			ele.submit();
+		}
+	}
+
+	// gioDestroy is a convenience function for destroy callbacks
+	function gioDestroy(eventCB) {
+		document.body.addEventListener("htmx:beforeSwap", eventCB, {
+			once: true
+		});
+	}
+	document.body.addEventListener('htmx:beforeSwap', function(evt) {
+		drawer = document.getElementById('drawer-name');
+		if (drawer != null) {
+			drawerObj.closeDrawer(drawer);
+		}
+	});
+</script>
+				
+	
+	<div id="mainrow" class="row">
+		<div class="col-md-3 col-lg-2 hidden-xs hidden-sm">
+			<div class="list-group noborderlist">
+				
+	<a title="Group Home" href="https://groups.io/g/MTFHRT" class="noborderitem list-group-item sidebar-item">
+		<i class="fa-fw fa fa-home fa-lg"></i>
+		Home
+		
+	</a>
+	
+	
+
+	
+
+	
+		
+			
+	
+		
+			
+
+	<a title="Messages" href="https://groups.io/g/MTFHRT/topics" hx-get-disable="https://groups.io/g/MTFHRT/topics" preload hx-target="#maincontent-refresh" hx-push-url="true"
+ id="sidebar-archives" class="noborderitem list-group-item sidebar-item sidebar-archives">
+		<i class="fa-fw fa fa-comments fa-lg"></i>
+		Messages
+	</a>
+
+		
+	
+	
+		
+
+	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" hx-get-disable="https://groups.io/g/MTFHRT/hashtags" preload hx-target="#maincontent-refresh" hx-push-url="true"
+ id="sidebar-hashtags" class="noborderitem list-group-item sidebar-item sidebar-hashtags">
+		<i class="fa-fw fa fa-hashtag fa-lg"></i>
+		Hashtags
+	</a>
+
+	
+	
+	
+
+	
+
+			
+	
+
+		
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+		
+
+	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" hx-get-disable="https://groups.io/g/MTFHRT/wiki" preload hx-target="#maincontent-refresh" hx-push-url="true"
+ id="sidebar-wiki" class="noborderitem list-group-item sidebar-item sidebar-wiki active">
+		<i class="fa-fw fa fa-book fa-lg"></i>
+		Wiki
+	</a>
+
+	
+
+	
+
+			</div>
+		</div>
+		<div id="maincontent" class="col-xs-12 col-sm-12 col-md-9 col-lg-10">
+			<div id="maincontent-refresh">
+				
+	
+	
+	
+
+	
+
+	
+	<div id="alertdiv"></div>
+	<div class="noticetemplate template">
+		<div class="alert alert-success alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">
+					&times;
+				</span>
+			</button>
+			<span id="msg"></span>
+		</div>
+	</div>
+	<div class="alerttemplate template">
+		<div class="alert alert-danger alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">
+					&times;
+				</span>
+			</button>
+			<span id="msg"></span>
+		</div>
+	</div>
+	<div class="alertnoclosetemplate template">
+		<div class="alert alert-danger" role="alert">
+			<span id="msg"></span>
+		</div>
+	</div>
+
+
+
+ 
+<script>
+function dismiss() {
+    console.log("dismiss");
+    $.get( "/dismissalert");
+}
+
+var $alerttemplate = $(".alerttemplate");
+var $alertnoclosetemplate = $(".alertnoclosetemplate");
+var $noticetemplate = $(".noticetemplate");
+function createAlert(msg, isError, autoClose, noClose) {
+	if (isError == false) {
+		$newPanel = $noticetemplate.clone();
+	} else {
+        if (noClose) {
+		  $newPanel = $alertnoclosetemplate.clone();
+        } else {
+		  $newPanel = $alerttemplate.clone();
+        }
+	}
+	$newPanel.find("#msg").html(msg);
+	if (autoClose == true) {
+		$("#alertdiv").append($newPanel.fadeTo(2000, 500).slideUp(500, function(){
+		    $newPanel.slideUp(500);
+		    $newPanel.remove();
+		}));  	
+	} else {
+		$("#alertdiv").append($newPanel.fadeIn());
+	}
+    return $newPanel;
+}
+
+
+
+
+</script>
+
+
+
+	
+		
+<form class="form-inline pull-right hidden-xs" method="get" action="https://groups.io/g/MTFHRT/wikisearch">
+  
+  <div class="input-group">
+    <input type="text" class="form-control" placeholder="Search" title="Search" name="q" size="20">
+    <div class="input-group-btn">
+      <button class="btn btn-primary" type="submit">
+        <span class="fa fa-search"></span>
+      </button>
+    </div>
+  </div>
+</form>
+
+
+<span class="hidden-sm hidden-md hidden-lg pull-right" style="padding:8px 15px;"><a data-toggle="modal" data-target="#searchModal"><i class="fa fa-search"></i></a></span>
+<ol class="breadcrumb">
+  <li class="hidden-xs"><a href="https://groups.io/g/MTFHRT"><i class="fa fa-home"></i> MTFHRT</a></li>
+  <li><a href="https://groups.io/g/MTFHRT/wiki"><i class="fa fa-book"></i> Wiki</a></li>
+	
+	<li class="active"><i class="fa fa-book"></i> How to measure melting point of most organic powders using typical household items.</li>
+</ol>
+
+
+	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">
+							&times;
+						</span>
+						<span class="sr-only">
+							Close
+						</span>
+					</button>
+					<h4 class="modal-title" id="searchModalLabel">
+						Search
+					</h4>
+				</div>
+				<form class="form-horizontal" method="get" action="https://groups.io/g/MTFHRT/wikisearch">
+					<div class="modal-body">
+						<div class="form-group">
+							<div class="col-sm-12">
+								<input type="text" class="form-control" placeholder="Search" title="Search" name="q">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-primary btn-sm">
+							<i class="fa fa-search"></i>
+							Search
+						</button>
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+							<i class="fa fa-times"></i>
+							Cancel
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	
+
+	
+
+	
+		<div class="pull-right">
+			Last edited 
+<script id="timedispupdated32288">
+	$('#timedispupdated32288').replaceWith(DisplayShortTime(1666754939519775143, false
+		));
+</script>
+ &middot;
+			<a href="32288/history.html">
+				1 revision
+			</a>
+			&nbsp;&nbsp;
+			<a href="32288.html">
+				<i class="fa fa-link fa-lg"></i>
+			</a>
+		</div>
+		<p>
+			&nbsp;
+		</p>
+		<br>
+	
+	<div class="row">
+		<div class="col-sm-12">
+			
+				<span class="visitedlinks">
+					<p>Tools</p>
+<ul>
+<li>Single-egg frying pan. You can use something bigger, but you&#39;ll need more oil.</li>
+<li>Half a cup of cooking oil, more for larger pan.</li>
+<li>Small metal cap, such as the cap of a beer bottle.</li>
+<li>Digital meat/candy themometer. (example: Taylor&#39;s folding thermometer&#39;s range is -40°C to 230°C)</li>
+</ul>
+<p>Procedure</p>
+<ol>
+<li>Place oil in frying pan</li>
+<li>Place cap like a little boat in the oil</li>
+<li>Place tiny bit of powder on the boat</li>
+<li>Suspend probe of thermometer into the oil, but not touching the sides</li>
+<li>Double check it&#39;s not touching the sides, and is just in the oil</li>
+<li>Heat slowly (low, low heat)</li>
+<li>Note temp where it &#39;pauses&#39; briefly while the substance turns to liquid</li>
+</ol>
+<p> </p>
+<p><img src="https://i.imgur.com/LOWBMtc.png" class="myimg-responsive"/></p>
+<p><br/>My test today, I was off by 0.2°C from expected value. Absolutely within tolerance. <br/><br/>The above setup can be had for around $10-20 US, if you don&#39;t have stuff laying around, and really is &#39;accurate enough&#39;. </p>
+					<p />
+				</span>
+			
+		</div>
+		
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			
+			<div class="hidden-print">
+				<div class="btn-group">
+					<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+						Pages
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						
+							<li>
+								<a href="30843.html">
+									Basic Estrogel Guide
+								</a>
+							</li>
+						
+							<li>
+								<a href="30846.html">
+									Home
+								</a>
+							</li>
+						
+							<li>
+								<a href="32288.html">
+									How to measure melting point of most organic powders using typical household items.
+								</a>
+							</li>
+						
+							<li>
+								<a href="34293.html">
+									steam sterilization
+								</a>
+							</li>
+						
+							<li>
+								<a href="29602.html">
+									Ultimate DIY
+								</a>
+							</li>
+						
+					</ul>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+
+			</div>
+		</div>
+	</div>
+	<div class="row" id="mobileSidebar">
+		<div class="col-xs-12 hidden-md hidden-lg">
+			<div class="navbar navbar-default navbar-fixed-bottom" id="groupsidebarendXX">
+				<div class="container" style="display: flex; justify-content: space-around;">
+					
+						
+	
+		
+			
+	
+	<div id="mobilesidebar-archives" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center;" hx-get="https://groups.io/g/MTFHRT/topics" preload hx-target="#maincontent-refresh" hx-push-url="true">
+		<div style="display: inline-block; position: relative;">
+			<div style="position: relative;display: inline-block;">
+			<i class="fa-fw fa-light fa-comments fa-2x"></i>
+			
+			</div><br>
+			<span style="font-size:12px;">Messages</span>
+		</div>
+	</div>
+
+		
+	
+
+	
+
+						
+	
+
+					
+					<div style="flex: 1; text-align: center;margin-top:10px" data-drawer-trigger aria-controls="drawer-name" aria-expanded="false">
+						<i class="fa-fw fa-light fa-bars fa-2x"></i><br>
+						<span style="font-size:12px;">Menu</span>
+					</div>
+				</div>
+			</div>
+			<section class="drawer drawer--left" id="drawer-name" data-drawer-target>
+				<div class="drawer__overlay" data-drawer-close tabindex="-1"></div>
+				<div class="drawer__wrapper">
+					<div class="drawer__header">
+						<div class="drawer__title">
+							<i class="fa-fw fa-regular fa-bars fa-3x"></i>
+							<span class="sr-only">
+								More Options
+							</span>
+							More
+						</div>
+						<button class="drawer__close" data-drawer-close aria-label="Close Drawer"></button>
+					</div>
+					<div class="drawer__content">
+						<div class="list-group noborderlist">
+							
+	<a title="Group Home" href="https://groups.io/g/MTFHRT" class="noborderitem list-group-item sidebar-item">
+		<i class="fa-fw fa fa-home fa-lg"></i>
+		Home
+		
+	</a>
+	
+	
+
+	
+
+	
+		
+			
+
+	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" hx-get-disable="https://groups.io/g/MTFHRT/hashtags" preload hx-target="#maincontent-refresh" hx-push-url="true"
+ id="sidebar-hashtags" class="noborderitem list-group-item sidebar-item sidebar-hashtags">
+		<i class="fa-fw fa fa-hashtag fa-lg"></i>
+		Hashtags
+	</a>
+
+		
+		
+		
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+		
+
+	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" hx-get-disable="https://groups.io/g/MTFHRT/wiki" preload hx-target="#maincontent-refresh" hx-push-url="true"
+ id="sidebar-wiki" class="noborderitem list-group-item sidebar-item sidebar-wiki active">
+		<i class="fa-fw fa fa-book fa-lg"></i>
+		Wiki
+	</a>
+
+	
+
+	
+
+							
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/about" style="border-top:5px solid #ddd;">
+									<i class="fa-fw fal fa-envelope fa-lg"></i>
+									About
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/features">
+									<i class="fa-fw far fa-tasks fa-lg"></i>
+									Features
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/pricing">
+									<i class="fa-fw fa fa-dollar-sign fa-lg"></i>
+									Pricing
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/g/updates/messages?expanded=1">
+									<i class="fa-fw far fa-thermometer-three-quarters fa-lg"></i>
+									Updates
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/tos">
+									<i class="fa-fw fal fa-newspaper fa-lg"></i>
+									Terms
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/helpcenter">
+									<i class="fa-fw fa fa-info-circle fa-lg"></i>
+									Help
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="http://twitter.com/groupsio" target="_blank">
+									<i class="fab fa-twitter fa-lg"></i>
+									Twitter
+								</a>
+							
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+<script>
+	document.body.addEventListener("gio:keyboardWillShow", keyboardWillShow);
+	document.body.addEventListener("gio:keyboardWillHide", keyboardWillHide);
+	var restorePadding = false;
+	function keyboardWillShow() {
+		$("#mobileSidebar").hide();
+		// On narrow screens, we add a padding-bottom in groupsio.css to make room for the mobile sidebar.
+		// We need to remove this when we remove the mobile sidebar for the keyboard. And then
+		// we need to restore it afterwards.
+		let padding = $("#content").css("padding-bottom");
+		console.log("padding-bottom is " + padding);
+		if (padding == "70px") {
+			$("#content").css("padding-bottom", "0px");
+			console.log("REMOVING PADDING");
+			restorePadding = true;
+		}
+	}
+	function keyboardWillHide() {
+		$("#mobileSidebar").show();
+		if (restorePadding == true) {
+			$("#content").css("padding-bottom", "70px");
+			console.log("RESTORING PADDING");
+			restorePadding = false;
+		}
+	}
+	document.body.addEventListener('htmx:beforeSend', function(evt) {
+		let id = evt.detail.elt.id;
+		if(id.startsWith("mobilesidebar-")) {
+			console.log(id + " was clicked");
+			var sidebarItems = document.querySelectorAll('.mobilesidebar-item');
+			sidebarItems.forEach(function(item) {
+				var iElement = item.getElementsByTagName('div')[0].getElementsByTagName('i')[0];
+				console.log("ID:" + item.id);
+				if (item.id == id) {
+					console.log("making solid")
+					iElement.classList.add('fa-solid');
+					iElement.classList.remove('fa-light');
+				} else {
+					console.log("making light")
+					iElement.classList.remove('fa-solid');
+					iElement.classList.add('fa-light');
+				}
+			});
+		} else if (id.startsWith("sidebar-")) {
+			var sidebarItems = document.querySelectorAll('.sidebar-item');
+			// remove 'active' class from all 'sidebar-item' elements
+			sidebarItems.forEach(function(item) {
+				if (item.id == id) {
+					item.classList.add('active');
+				} else {
+					item.classList.remove('active');
+				}
+			});
+		}
+
+	});
+</script>
+
+
+				<p></p>
+			</div>
+			
+				<div id="scroll-top" class="scroll-top-wrapper hidden-xs">
+					<span class="scroll-top-inner">
+						<i class="fa fa-arrow-circle-up fa-fw fa-2x" style="vertical-align:-.25em"></i>
+					</span>
+				</div>
+				<div class="hidden-xs hidden-sm" id="footer">
+					<div class="navbar navbar-default">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#footercollapse">
+								<span class="sr-only">
+									Toggle navigation
+								</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="collapse navbar-collapse" id="footercollapse">
+							<ul class="nav navbar-nav">
+								
+									
+										<li>
+											<a href="https://groups.io/static/about">
+												About
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/static/features">
+												Features
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/static/pricing">
+												Pricing
+											</a>
+										</li>
+										<li>
+											<a rel="nofollow" href="https://groups.io/g/updates/messages?expanded=1">
+												Updates
+											</a>
+										</li>
+									
+									<li>
+										<a href="https://groups.io/static/tos">
+											Terms
+										</a>
+									</li>
+									<li>
+										<a href="https://groups.io/helpcenter" target="_blank">
+											Help
+										</a>
+									</li>
+									<li>
+										<a href="https://twitter.com/groupsio" target="_blank">
+											<i class="fab fa-twitter fa-lg"></i>
+										</a>
+									</li>
+								
+							</ul>
+							<ul class="nav navbar-nav navbar-right">
+								<li>
+									<p class="navbar-text">
+										&copy;
+										<span class="hidden-sm">
+											2023
+										</span>
+										Groups.io
+									</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+<script>
+	$(function() {
+		$(document).on('scroll', function() {
+			if ($(window).scrollTop() > 100) {
+				$('.scroll-top-wrapper').addClass('show');
+			} else {
+				$('.scroll-top-wrapper').removeClass('show');
+			}
+		});
+		$('.scroll-top-wrapper').on('click', scrollToTop);
+	});
+
+	function scrollToTop() {
+		verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
+		element = $('body');
+		offset = element.offset();
+		offsetTop = offset.top;
+		$('html, body').animate({
+			scrollTop: offsetTop
+		}, 100, 'linear');
+	}
+</script>
+				
+
+
+			
+		</body>
+	</html>
+

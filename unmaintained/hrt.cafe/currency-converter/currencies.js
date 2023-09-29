@@ -1,0 +1,2 @@
+var usdChangeRate = { USD: 1.0,  EUR: 1.01991, GBP: 0.896861, NOK: 10.886065, THB: 37.803038, AUD: 1.561524, CAD: 1.38327 }; 
+//last updated on 2022-10-02 16:10:03 via https://free.currencyconverterapi.com/.

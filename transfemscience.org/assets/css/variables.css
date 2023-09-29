@@ -1,0 +1,150 @@
+/* Variables */
+
+/* General */
+:root {
+  --header-height: 60px;
+  --header-height-persistent: 40px;
+  --header-height-mobile: 55px;
+  --header-height-persistent-mobile: 55px; /* Formerly 50px */
+  --mobile-menu-height: 55px;
+  --footer-height: 60px;
+  --sidebar-width: 300px;
+  --sidebar-width-wide: 450px;
+  --article-width: 745px;
+  --article-width-wide: 1000px;
+  --google-translate-bar-height: 0px; /* Dynamic—updated by JS (56px when active) */
+
+  /* Not currently used but for reference and JS (can't be used in CSS media queries) */
+  --viewport-width-x-small-1: 320px;
+  --viewport-width-x-small-2: 380px;
+  --viewport-width-x-small-3: 460px;
+  --viewport-width-small: 500px;
+  --viewport-width-medium: 900px;
+  --viewport-width-medium-large: 1150px;
+  --viewport-width-large: 1400px;
+  --viewport-width-x-large: 1700px;
+}
+
+/* Light mode */
+:root {
+  --site-logo: url(../images/branding/logo.png);
+  --site-title-color: rgb(39, 38, 43);
+  --font-color: rgb(92, 89, 98);
+  --background-color: rgb(255, 255, 255);
+  --header-footer-background-color-mobile: rgb(253, 252, 255);
+  --background-lighter-color: rgb(255, 255, 255); /* For tools */
+  --link-color: rgb(129, 83, 237);
+  --link-underline-color: rgb(238, 235, 238);
+  --link-underline-color-hover: rgb(129, 83, 237, 0.45);
+  --top-link-font-color: rgb(92, 89, 98);
+  --top-link-background-color-hover: rgb(244, 239, 255);
+  --button-icon-fill-color: rgb(92, 89, 98);
+  --button-icon-fill-color-hover: rgb(129, 83, 237);
+  --layout-border-style: solid 1px rgb(238, 235, 238);
+  --tap-highlight-color: rgb(233, 223, 255, 0.5); /* --top-link-background-color-hover with 0.5 opacity */
+
+  --sidebar-button-icon-fill-color: rgb(206, 209, 211);
+  --sidebar-item-font-color-hover: rgb(129, 83, 237);
+  --sidebar-item-background-color-hover: rgba(245, 239, 255, 0.8);
+
+  --article-font-color: rgb(92, 89, 98);
+  --article-heading-font-color: rgb(39, 38, 43);
+  --list-prefix-color: rgb(149, 147, 150);
+
+  --blockquote-background-color: rgb(249, 249, 249);
+  --blockquote-border-left-color: rgb(221, 221, 221);
+
+  --code-background-color: rgb(245, 246, 250);
+  --code-border-color: rgb(238, 235, 238);
+
+  --horizontal-rule-color: rgb(238, 235, 238);
+  
+  --table-background-color: rgb(255, 255, 255);
+  --table-inner-border-color: rgb(238, 235, 238);
+  --table-inner-border-color-row: rgba(238, 235, 238, 0.5);
+
+  --input-background-color: rgb(255, 255, 255);
+  --input-border-color: rgb(133, 133, 133);
+  --input-border-width: 1px;
+
+  --footer-font-color: rgb(149, 147, 150);
+  --footer-button-colors: rgb(213, 213, 213);
+
+  --selection-font-color: rgb(255, 255, 255);
+  --selection-background-color: rgb(176, 133, 240);
+
+  --notice-background-color: rgb(243, 237, 255);
+  --notice-border-color: rgb(237, 229, 255);
+
+  --scrollbar-thumb-color: rgb(191, 191, 191);
+  --scrollbar-thumb-color-hover: rgb(163, 163, 163);
+}
+
+/* Dark mode */
+@media only screen {
+  [data-theme="dark"] {
+    --site-logo: url(../images/branding/logo-dark.png);
+    --site-title-color: rgb(245, 246, 250);
+    --font-color: rgb(230, 225, 232);
+    /* --background-color: rgb(39, 38, 43); */
+    --background-color: rgb(36, 38, 44);
+    --background-lighter-color: rgb(46, 46, 54); /* For tools */
+    /*--header-footer-background-color-mobile: rgb(39, 38, 43);*/
+    --header-footer-background-color-mobile: rgb(36, 38, 44);
+    --link-color: rgb(189, 163, 255);
+    --link-underline-color: rgb(68, 67, 77);
+    --link-underline-color-hover: rgb(189, 163, 255, 0.45);
+    --top-link-font-color: rgb(230, 225, 232);
+    --top-link-background-color-hover: rgb(30, 29, 33);
+    --button-icon-fill-color: rgb(230, 225, 232);
+    --button-icon-fill-color-hover: rgb(189, 163, 255);
+    /*--layout-border-style: solid 1px rgb(68, 67, 77);*/
+    --layout-border-style: solid 1px rgb(67, 67, 78);
+    --tap-highlight-color: rgb(21, 20, 23, 0.5); /* Based on --background-color and top-link-background-color-hover with 0.5 opacity */
+
+    --sidebar-button-icon-fill-color: rgb(120, 122, 123);
+    --sidebar-item-font-color-hover: rgb(189, 163, 255);
+    /*--sidebar-item-font-color-hover: rgb(255, 255, 255);*/
+    --sidebar-item-background-color-hover: rgb(30, 29, 33);
+    /*--sidebar-item-background-color-hover: rgb(167, 134, 250);*/
+
+    --article-font-color: rgb(230, 225, 232);
+    --article-heading-font-color: rgb(245, 246, 250);
+    --list-prefix-color: rgb(149, 147, 150);
+
+    /*--blockquote-background-color: rgb(32, 31, 35);
+    --blockquote-border-left-color: rgb(27, 26, 29);*/
+    --blockquote-background-color: rgb(29, 29, 33);
+    --blockquote-border-left-color: rgb(25, 25, 28);
+
+    /*--code-background-color: rgb(48, 46, 54);*/
+    --code-background-color: rgb(46, 46, 54);
+    --code-border-color: rgb(68, 67, 77);
+
+    --horizontal-rule-color: rgb(68, 67, 77);
+
+    /*--table-background-color: rgb(48, 46, 54);*/
+    --table-background-color: rgb(46, 46, 54);
+    --table-inner-border-color: rgb(68, 67, 77);
+    --table-inner-border-color-row: rgba(68, 67, 77, 0.5);
+
+    --input-background-color: rgb(63, 62, 71);
+    --input-border-color: rgb(50, 50, 50) rgb(80, 80, 80) rgb(80, 80, 80) rgb(50, 50, 50);
+    --input-border-width: 2px;
+
+    --footer-font-color: rgb(149, 147, 150);
+    --footer-button-colors: rgb(149, 147, 150);
+
+    --selection-font-color: rgb(255, 255, 255);
+    --selection-background-color: rgb(191, 168, 246);
+
+    /*--notice-background-color: rgb(48, 46, 54);*/
+    --notice-background-color: rgb(46, 46, 54);
+    --notice-border-color: rgb(68, 67, 77);
+
+    /*--scrollbar-thumb-color: rgb(68, 68, 68);*/
+    --scrollbar-thumb-color: rgb(67, 67, 78);
+    --scrollbar-thumb-color-hover: rgb(30, 29, 33);
+  }
+}
+

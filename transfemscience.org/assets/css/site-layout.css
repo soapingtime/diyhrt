@@ -1,0 +1,1203 @@
+/* General */
+
+html, body {
+  width: 100%;
+  height: auto; /* Needed for persistent header */
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--font-color);
+  font-family: -apple-system, BlinkMacSystemFont, "helvetica neue", helvetica, roboto, noto, "segoe ui", arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  scroll-behavior: auto; /* 'auto' = jump straight there, 'smooth' = "animation" */
+  box-sizing: border-box;
+  /* -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* To disable it fallback */
+  /* -webkit-tap-highlight-color: transparent; */ /* To disable it */
+  -webkit-tap-highlight-color: var(--tap-highlight-color);
+  overflow-anchor: none;
+  -ms-text-size-adjust: none; /* Disable font size scaling on mobile devices */
+  -moz-text-size-adjust: none; /* Disable font size scaling on mobile devices */
+  -webkit-text-size-adjust: none; /* Disable font size scaling on mobile devices */
+  text-size-adjust: none; /* Disable font size scaling on mobile devices */
+}
+
+@media only screen and (max-width: 499.9px) {
+  html, body {
+    /* font-size: 15px; */ /* Maybe no */
+  }
+}
+
+html {
+  overflow-y: scroll; /* Prevent FOUC if scrollbar is absent (scrollbar-gutter not working) */
+  scrollbar-gutter: stable; /* Doesn't seem to be working? (Maybe not supported on html/body? To-do: fix?) */
+}
+
+/* Disable article scrolling when contents sidebar is open on mobile */
+@media only screen and (max-width: 499.9px) {
+  html[data-sidebar-open] {
+    max-height: 100%;
+    overflow: hidden;
+  }
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+@media only screen {
+  ::selection {
+    color: var(--selection-font-color);
+    background-color: var(--selection-background-color);
+  }  
+
+  :target {
+    scroll-margin-top: calc(20px + var(--header-height-persistent) + var(--google-translate-bar-height));
+  }
+
+  html[data-persistent-header-hidden]:not([data-header-persistent]) :target {
+    scroll-margin-top: calc(20px + var(--google-translate-bar-height));
+  }
+
+  html[data-header-persistent][data-persistent-header-hidden] :target {
+    scroll-margin-top: calc(20px + var(--google-translate-bar-height));
+  }
+}
+
+@media only screen and (max-width: 899.9px) {
+  html :target {
+    scroll-margin-top: calc(20px + var(--header-height-persistent-mobile) + var(--google-translate-bar-height));
+  }
+
+  html[data-mobile-menu-open] :target {
+    scroll-margin-top: calc(20px + var(--header-height-persistent-mobile) + var(--mobile-menu-height) + var(--google-translate-bar-height));
+  }
+}
+
+button {
+  display: inline-block;
+  border: none;
+  border-radius: 2px;
+  padding: 0px;
+  margin: 0px;
+  text-decoration: none;
+  background: none;
+  background-image: none;
+  color: none;
+  font-family: -apple-system, BlinkMacSystemFont, "helvetica neue", helvetica, roboto, noto, "segoe ui", arial, sans-serif;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  text-align: center;
+  transition: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;  
+}
+
+button:hover, button:focus {
+  background: none;
+}
+
+button:focus {
+  outline: 2px solid #000;
+  outline-offset: 0px;
+}
+
+@media only screen {
+  html[data-theme='dark'] button:focus {
+    outline: 1.5px solid #fff;
+  }
+}
+
+button:active {
+  transform: none;
+}
+
+/* Header */
+
+#header {
+  width: 100%;
+  height: var(--header-height); /* Needed for transition animation to work both ways */
+  /* ^ If not using transition animation, can just use height: auto; and that's it */
+  border-bottom: var(--layout-border-style);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0); /* Needed for transition */
+  background-color: var(--background-color);
+  position: fixed;
+  top: var(--google-translate-bar-height);
+  z-index: 99999;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scrollbar-width: none; /* Hide scrollbar (Firefox) */
+  transition: height 200ms, border-bottom-width 200ms, box-shadow 200ms;
+}
+
+/* Hide scrollbar (Chrome, etc.) */
+#header::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+@media only screen {
+  html[data-header-persistent] #header {
+    height: var(--header-height-persistent); /* Needed for transition animation to work both ways */
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  html[data-header-persistent][data-persistent-header-hidden] #header {
+    height: 0px; /* Using this instead of display: none; for transition animation */
+    border-bottom-width: 0px; /* Needed for transition */
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0); /* Needed for transition */
+  }
+}
+
+@media only screen and (max-width: 899.9px) {
+  #header {
+    height: var(--header-height-mobile); /* Needed for transition animation to work both ways */
+  }
+
+  html[data-header-persistent] #header {
+    height: var(--header-height-persistent-mobile);
+  }
+
+  html[data-mobile-menu-open] #header {
+    height: calc(var(--header-height-mobile) + var(--mobile-menu-height));
+  }
+
+  html[data-header-persistent][data-mobile-menu-open] #header {
+    height: calc(var(--header-height-persistent-mobile) + var(--mobile-menu-height));
+  }
+}
+
+@media only screen and (max-width: 899.9px) {
+  #header {
+    background-color: var(--header-footer-background-color-mobile);
+    border-bottom-width: 0px; /* Needed for transition */
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.25); /* Needed for transition */
+  }
+  html[data-header-persistent] #header {
+    border-bottom: var(--layout-border-style);
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  }
+}
+
+#header-subcontainer {
+  height: var(--header-height);
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  transition: width 200ms, height 200ms;
+}
+
+@media only screen and (max-width: 899.9px) {
+  #header-subcontainer {
+    height: var(--header-height-mobile);
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1149.9px) {
+  #header-subcontainer {
+    width: 100%;
+  }
+}
+
+@media only screen {
+  html[data-header-persistent] #header-subcontainer {
+    height: var(--header-height-persistent);
+  }
+}
+
+@media only screen and (max-width: 899.9px) {
+  html[data-header-persistent] #header-subcontainer {
+    height: var(--header-height-persistent-mobile);
+  }
+}
+
+#site-icon-and-title-container {
+  height: 100%;
+  cursor: pointer;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-decoration: none;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#site-icon-and-title-container:active {
+  background-color: var(--top-link-background-color-hover);
+}
+
+@media only screen and (min-width: 900px) {
+  #site-icon-and-title-container {
+    min-width: 300px;
+  }
+
+  #site-icon-and-title-container:hover {
+    background-color: var(--top-link-background-color-hover);
+  }
+}
+
+@media only screen and (max-width: 899.9px) {
+  #site-icon-and-title-container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+#site-icon {
+  width: 30px; /* Old larger style: 33px */
+  min-width: 30px; /* Old larger style: 33px */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-image: var(--site-logo);
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: contain;
+  padding: 2px;
+  margin-right: 9px;
+  transition: width 200ms, min-width 200ms, margin-right 200ms;
+}
+
+@media only screen {
+  html[data-persistent-header-toggle-no-transition]:not([data-persistent-header-hidden]) #site-icon {
+    transition: none;
+  }
+
+  html[data-persistent-header-toggle-no-transition][data-persistent-header-hidden] #site-icon {
+    transition-delay: 200ms;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  html[data-header-persistent]:not([data-persistent-header-hidden]) #site-icon {
+    width: 22px;
+    min-width: 22px;
+    margin-right: 7px;
+  }
+}
+
+@media only screen and (max-width: 899.9px) {
+  #site-icon {
+    width: 27px; /* Formerly 29px */
+    min-width: 27px; /* Formerly 29px */
+    margin-right: 9px; /* Formerly 10px */
+  }
+
+  /* Shrink top bar on mobile upon scrolling down (disabled now) */
+  html[data-header-persistent] #site-icon {
+    width: 27px; /* Formerly 25px */
+    min-width: 27px; /* Formerly 25px */
+    margin-right: 9px; /* Formerly 8px */
+  }
+}
+
+#site-title {
+  height: 100%;
+  font-size: 21px; /* Old larger style: 24px */
+  font-family: Georgia, serif;
+  color: var(--site-title-color);
+  display: flex;
+  align-items: center;
+  transition: font-size 200ms;
+}
+
+@media only screen {
+  html[data-persistent-header-toggle-no-transition]:not([data-persistent-header-hidden]) #site-title {
+    transition: none;
+  }
+
+  html[data-persistent-header-toggle-no-transition][data-persistent-header-hidden] #site-title {
+    transition-delay: 200ms;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  html[data-header-persistent]:not([data-persistent-header-hidden]) #site-title {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 899.9px) {
+  #site-title {
+    font-size: 18px;
+  }
+
+  /* Shrink top bar on mobile upon scrolling down (disabled now) */
+  html[data-header-persistent] #site-title {
+    font-size: 18px; /* Formerly smaller px (?) */
+  }
+}
+
+#site-title-text-xs, #site-title-text-sm, #site-title-text-md, #site-title-text-lg {
+  display: none;
+  max-width: 220px; /* 300px - 40px left/right padding - 30px icon - 10px margin between icon and title */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* These media queries include -5px to allow for extra space (e.g., for Firefox mobile) */
+
+@media only screen and (min-width: 305px) and (max-width: 319.9px) {
+  #site-title-text-xs { /* "TFS" */
+    display: inline-block;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 379.9px) {
+  #site-title-text-sm { /* "TFSci" */
+    display: inline-block;
+  }
+}
+
+@media only screen and (min-width: 380px) and (max-width: 459.9px) {
+  #site-title-text-md { /* "Transfem Sci" */
+    display: inline-block;
+  }
+}
+
+@media only screen and (min-width: 460px) {
+  #site-title-text-lg { /* "Transfeminine Science" */
+    display: inline-block;
+  }
+}
+
+#top-links, #top-buttons {
+  height: 100%;
+  display: flex; /* Needed to prevent unexplained space between children; see: https://stackoverflow.com/questions/19038799/why-is-there-an-unexplainable-gap-between-these-inline-block-div-elements */
+  align-items: center;
+  justify-content: center;
+}
+
+#top-buttons {
+  margin-left: 20px; /* To balance margin of logo/title block */
+  margin-right: 20px; /* To balance margin of logo/title block */
+}
+
+@media only screen and (min-width: 1150px) {
+  #top-buttons {
+    width: 250px;
+  }
+}
+
+@media only screen and (max-width: 899.9px) {
+  #top-buttons {
+    margin-left: 0px;
+    margin-right: 5px;
+  }
+}
+
+/* Add right/right padding on iOS devices to avoid overlay scrollbar interference with rightmost button */
+/* Include left padding as well to keep sides balanced */ 
+@supports (-webkit-touch-callout: none) {
+  @media only screen and (max-width: 899.9px) {
+    #header-subcontainer {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    #top-buttons {
+      margin-left: 0px;
+      margin-right: 0px;
+    }
+  }
+}
+
+.top-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 16px;
+  /*color: var(--top-link-font-color);*/
+  color: var(--link-color);
+  padding-left: 17px;
+  padding-right: 17px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: font-size 200ms;
+}
+
+@media only screen {
+  html[data-persistent-header-toggle-no-transition]:not([data-persistent-header-hidden]) .top-link {
+    transition: none;
+  }
+
+  html[data-persistent-header-toggle-no-transition][data-persistent-header-hidden] .top-link {
+    transition-delay: 200ms;
+  }
+}
+
+.top-link:active {
+  background-color: var(--top-link-background-color-hover);
+  color: var(--link-color);
+}
+
+@media only screen and (min-width: 900px) {
+  .top-link:hover {
+    background-color: var(--top-link-background-color-hover);
+    color: var(--link-color);
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  html[data-header-persistent]:not([data-persistent-header-hidden]) .top-link {
+    font-size: 15px;
+  }
+}
+
+.top-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 44px; /* Padding-inclusive (24px) */
+  padding-left: 12px;
+  padding-right: 12px;
+  cursor: pointer;
+  fill: var(--button-icon-fill-color);
+  color: var(--button-icon-fill-color); /* Needed for mobile menu button */
+}
+
+@media only screen and (max-width: 899.9px) {
+  .top-button {
+    width: 40px; /* Padding-inclusive (18px) */
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+}
+
+.top-button:active, #menu-button-mobile-menu {
+  fill: var(--button-icon-fill-color-hover);
+  color: var(--button-icon-fill-color-hover); /* Needed for mobile menu button */
+}
+
+@media only screen and (min-width: 900px) {
+  .top-button:hover {
+    fill: var(--button-icon-fill-color-hover);
+    color: var(--button-icon-fill-color-hover); /* Needed for mobile menu button */  
+  }
+}
+
+#theme-button-light-svg {
+  display: inline-block;
+}
+
+#theme-button-dark-svg {
+  display: none;
+}
+
+@media only screen {
+  html[data-theme='dark'] #theme-button-dark-svg {
+    display: inline-block;
+  }
+
+  html[data-theme='dark'] #theme-button-light-svg {
+    display: none;
+  }
+}
+
+.top-button-svg {
+  height: 24px;
+  transition: height 200ms;
+  pointer-events: none;
+}
+
+@media only screen {
+  html[data-persistent-header-toggle-no-transition]:not([data-persistent-header-hidden]) .top-button-svg {
+    transition: none;
+  }
+
+  html[data-persistent-header-toggle-no-transition][data-persistent-header-hidden] .top-button-svg {
+    transition-delay: 200ms;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  html[data-header-persistent]:not([data-persistent-header-hidden]) .top-button-svg {
+    height: 18px;
+  }
+  html[data-header-persistent]:not([data-persistent-header-hidden]) #search-button .top-button-svg {
+    height: 22px;
+  }
+  html[data-header-persistent]:not([data-persistent-header-hidden]) #toc-button-mobile .top-button-svg {
+    height: 15px;
+  }
+}
+
+@media only screen and (max-width: 899.9px) {
+  html[data-no-contents-sidebar] #toc-button-mobile {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  html[data-no-contents-sidebar] #toc-button-mobile {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  #menu-button-mobile-menu {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 899.9px) {
+  #top-links {
+    display: none;
+  }
+}
+
+#mobile-menu {
+  width: 100%;
+  height: 0px;
+  background-color: var(--header-footer-background-color-mobile);
+  display: none;
+  transition: height 200ms;
+}
+
+@media only screen and (max-width: 899.9px) {
+  #mobile-menu {
+    display: block;
+  }
+
+  html[data-mobile-menu-open] #mobile-menu {
+    height: var(--mobile-menu-height);
+  }
+}
+
+#top-links-mobile {
+  display: flex;
+  align-items: center;
+  height: var(--mobile-menu-height);
+}
+
+@media only screen and (max-width: 899.9px) {
+  .top-link {
+    color: var(--link-color);
+  }
+}
+
+@media only screen and (max-width: 499.9px) {
+  .top-link {
+    font-size: 15.5px;
+  }
+}
+
+#hide-persistent-header-button {
+  display: none;
+  width: 40px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  padding-left: 0px;
+  padding-right: 0px;
+  opacity: 0;
+  transition: opacity 200ms;
+  pointer-events: none;
+}
+
+@media only screen and (min-width: 900px) {
+  html[data-header-persistent] #hide-persistent-header-button {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  html[data-header-persistent][data-persistent-header-hidden] #hide-persistent-header-button {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@media only screen and (min-width: 1150px) {
+  html[data-header-persistent] #hide-persistent-header-button {
+    position: absolute;
+    top: 0px;
+    right: 20px;
+  }
+}
+
+@media only screen and (max-width: 1149.9px) {
+  #hide-persistent-header-button {
+    display: flex;
+  }
+}
+
+@media only screen and (max-width: 899.9px) {
+  #hide-persistent-header-button {
+    display: none;
+  }
+}
+
+#restore-persistent-header-button {
+  height: calc(var(--header-height-persistent)); /* Will always be this since only shows on persistent header */
+  width: 40px;
+  position: fixed;
+  top: var(--google-translate-bar-height);
+  right: 20px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  padding-left: 0px;
+  padding-right: 0px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms;
+}
+
+@media only screen and (min-width: 900px) {
+  html[data-header-persistent][data-persistent-header-hidden] #restore-persistent-header-button {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+@media only screen and (max-width: 899.9px) {
+  #restore-persistent-header-button {
+    display: none;
+  }
+}
+
+#hide-persistent-header-button-svg {
+  transform: rotate(270deg);
+  /* fill: var(--sidebar-button-icon-fill-color); */
+  pointer-events: none;
+}
+
+#restore-persistent-header-button-svg {
+  transform: rotate(90deg);
+  fill: var(--sidebar-button-icon-fill-color);
+  pointer-events: none;
+}
+
+#hide-persistent-header-button:active #hide-persistent-header-button-svg {
+  fill: var(--button-icon-fill-color-hover);
+}
+
+@media only screen and (min-width: 900px) {
+  #hide-persistent-header-button:hover #hide-persistent-header-button-svg {
+    fill: var(--button-icon-fill-color-hover);
+  }
+}
+
+#restore-persistent-header-button:active #restore-persistent-header-button-svg {
+  fill: var(--button-icon-fill-color-hover);
+}
+
+@media only screen and (min-width: 900px) {
+  #restore-persistent-header-button:hover #restore-persistent-header-button-svg {
+    fill: var(--button-icon-fill-color-hover);
+  }
+}
+
+/* Middle section */
+
+#mid-section {
+  width: 100%;
+  margin-top: calc(var(--header-height) + var(--google-translate-bar-height));
+  transition: margin-top 200ms;
+}
+
+@media only screen {
+  /*html[data-header-persistent] #mid-section {
+    margin-top: calc(var(--header-height-persistent) + var(--google-translate-bar-height));
+  }
+
+  html[data-header-persistent][data-persistent-header-hidden] #mid-section {
+    margin-top: calc(var(--google-translate-bar-height));
+  }*/
+}
+
+@media only screen and (max-width: 899.9px) {
+  #mid-section {
+    margin-top: calc(var(--header-height-mobile) + var(--google-translate-bar-height));
+  }
+
+  /*html[data-header-persistent] #mid-section {
+    margin-top: calc(var(--header-height-persistent-mobile) + var(--google-translate-bar-height));
+  }*/
+
+  html[data-mobile-menu-open] #mid-section {
+    margin-top: calc(var(--header-height-mobile) + var(--mobile-menu-height) + var(--google-translate-bar-height));
+  }
+
+  /*html[data-header-persistent][data-mobile-menu-open] #mid-section {
+    margin-top: calc(var(--header-height-persistent-mobile) + var(--mobile-menu-height) + var(--google-translate-bar-height));
+  }*/
+}
+
+/* Sidebar */
+
+#sidebar {
+  position: fixed;
+  z-index: 9999;
+  width: 0px;
+  display: inline-block;
+  left: 0px;
+  top: calc(var(--header-height) + var(--google-translate-bar-height));
+  bottom: 0;
+  background-color: var(--background-color);
+  border-right: var(--layout-border-style);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: width 150ms, height 150ms, top 150ms;
+}
+
+#sidebar {
+  scrollbar-width: none; /* Hide scrollbar Firefox */
+}
+
+/* Hide scrollbar Chrome */
+#sidebar::-webkit-scrollbar {
+  width: 0px;
+}
+
+@media only screen and (min-width: 900px) {
+  /* Show scrollbar Firefox */
+  #sidebar:hover {
+    scrollbar-width: thin;
+  }
+
+  /* Show scrollbar Chrome */
+  #sidebar:hover::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+
+
+#sidebar-button-standalone {
+  top: calc(var(--header-height) + var(--google-translate-bar-height));
+}
+
+@media only screen {
+  html[data-sidebar-open] #sidebar-button-standalone {
+    pointer-events: none; /* Do things this way to avoid flicker between button swaps */
+  }
+}
+
+@media only screen and (max-width: 899.9px) {
+  #sidebar-button-standalone {
+    display: none;
+  }  
+}
+
+@media only screen {
+  html[data-sidebar-open] #sidebar {
+    width: var(--sidebar-width);
+    /* box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25); */
+  }
+}
+
+@media only screen and (min-width: 1700px) {
+  html[data-sidebar-open] #sidebar {
+    width: var(--sidebar-width-wide);
+  }
+}
+
+@media only screen and (max-width: 899.9px) {
+  #sidebar {
+    border-right: none;
+    /* box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.15); */ /* Border right */
+    transition: width 150ms, height 150ms, top 150ms;
+  }
+  html[data-sidebar-open] #sidebar {
+    width: 100%;
+    /* box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25); */
+    /* border-right: solid 1px rgba(0, 0, 0, 0.15); */
+  }
+  html[data-sidebar-slide-transition-disable] #sidebar {
+    transition: width 0ms, height 150ms, top 150ms;
+  }
+}
+
+@media only screen {
+  html[data-header-persistent] #sidebar,
+  html[data-header-persistent] #sidebar-button-standalone {
+    top: calc(var(--header-height-persistent) + var(--google-translate-bar-height));
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  html[data-header-persistent][data-persistent-header-hidden] #sidebar,
+  html[data-header-persistent][data-persistent-header-hidden] #sidebar-button-standalone {
+    top: var(--google-translate-bar-height);
+  }
+}
+
+@media only screen and (max-width: 899.9px) {
+  #sidebar {
+    top: calc(var(--header-height-mobile) + var(--google-translate-bar-height));
+  }
+
+  html[data-header-persistent] #sidebar {
+    top: calc(var(--header-height-persistent-mobile) + var(--google-translate-bar-height));
+  }
+
+  html[data-mobile-menu-open] #sidebar {
+    top: calc(var(--header-height-mobile) + var(--mobile-menu-height) + var(--google-translate-bar-height));
+  }
+
+  html[data-header-persistent][data-mobile-menu-open] #sidebar {
+    top: calc(var(--header-height-persistent-mobile) + var(--mobile-menu-height) + var(--google-translate-bar-height));
+  }
+}
+
+#sidebar-subcontainer {
+  width: var(--sidebar-width);
+  padding-top: 25px;
+  padding-bottom: 35px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media only screen and (min-width: 1700px) {
+  html[data-sidebar-open] #sidebar-subcontainer {
+    width: var(--sidebar-width-wide);
+  }
+}
+
+@media only screen and (max-width: 899.9px) {
+  #sidebar-subcontainer {
+    width: 100vw;
+    padding-top: 25px;
+    padding-bottom: 35px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+#sidebar-title-container {
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-button {
+  padding: 14px;
+  cursor: pointer;
+  margin-left: -10px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: top 200ms;
+}
+
+/* Fix positioning on Firefox only */
+@-moz-document url-prefix() {
+  .sidebar-button {
+    margin-top: -0.5px;
+  }
+}
+
+#sidebar-button-standalone {
+  position: fixed;
+  left: 20px;
+  margin-top: 25px; /* ~25px (sidebar padding-top) */
+}
+
+/* Fix positioning on Firefox only */
+@-moz-document url-prefix() {
+  #sidebar-button-standalone {
+    margin-top: 25px;
+  }
+}
+
+.sidebar-button-icon {
+  fill: var(--sidebar-button-icon-fill-color);
+  pointer-events: none;
+}
+
+.sidebar-button:active .sidebar-button-icon {
+  fill: var(--button-icon-fill-color-hover);
+}
+
+@media only screen and (min-width: 900px) {
+  .sidebar-button:hover .sidebar-button-icon {
+    fill: var(--button-icon-fill-color-hover);
+  }
+}
+
+/* Fix SVG icon positioning... */
+.sidebar-button-icon-svg {
+  margin-top: 3px;
+  margin-left: 2px;
+  pointer-events: none;
+}
+
+@media only screen and (max-width: 899.9px) {
+  .sidebar-button {
+    display: none;
+  }
+}
+
+#sidebar-title {
+  font-size: 21px;
+  color: var(--article-heading-font-color);
+}
+
+@media only screen and (max-width: 899.9px) {
+  #sidebar-title {
+    font-size: 24px;
+    margin-top: -15px; /* Hack for now to fix positioning on this on mobile (to-do: fix/change?) */
+    margin-left: 5px;
+  }
+}
+
+@media only screen and (max-width: 499.9px) {
+  #sidebar-title {
+    font-size: 28px;
+  }
+}
+
+#sidebar-contents {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+@media only screen and (max-width: 899.9px) {
+  #sidebar-contents {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (max-width: 499.9px) {
+  #sidebar-contents {
+    font-size: 16px;
+  }
+}
+
+@media only screen {
+  html[data-sidebar-open] #sidebar-title {
+    display: inline-block;
+  }
+}
+
+#sidebar-contents a {
+  color: var(--article-font-color);
+  text-decoration: none;
+  padding: 5px 5px 5px 5px;
+  display: block;
+  scroll-margin: calc((100vh - var(--header-height) - var(--google-translate-bar-height)) / 2); /* Padding when scrolling */
+}
+
+@media only screen and (max-width: 899.9px) {
+  #sidebar-contents a {
+    scroll-margin: calc((100vh - var(--header-height-mobile) - var(--google-translate-bar-height)) / 2); /* Padding when scrolling */
+  }
+
+  html[data-mobile-menu-open] #sidebar-contents a {
+    scroll-margin: calc((100vh - var(--header-height-mobile) - var(--mobile-menu-height) - var(--google-translate-bar-height)) / 2); /* Padding when scrolling */
+  }
+}
+
+#sidebar-contents a:active, #sidebar-contents a.active-section {
+  color: var(--sidebar-item-font-color-hover);
+  background-color: var(--sidebar-item-background-color-hover);
+  border-radius: 3px;
+}
+
+@media only screen and (min-width: 900px) {
+  #sidebar-contents a:hover {
+    color: var(--sidebar-item-font-color-hover);
+    background-color: var(--sidebar-item-background-color-hover);
+    border-radius: 3px;
+  }
+}
+
+@media only screen and (max-width: 899.9px) {
+  #sidebar-contents a {
+    padding: 10px 5px 10px 5px;
+  }
+}
+
+.toc-h1, .toc-h2 {
+  padding-left: 0px;
+}
+
+.toc-h3, .toc-h4, .toc-h5, .toc-h6 {
+  padding-left: 10px;
+}
+
+html[data-no-contents-sidebar] #sidebar,
+html[data-no-contents-sidebar] #sidebar-button-standalone {
+  display: none;
+}
+
+/* Main area and article */
+
+#main-area {
+  width: 100%;
+  min-height: calc(100vh - var(--header-height) - var(--google-translate-bar-height) - var(--footer-height)); /* Get footer at bottom */
+  display: block;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 50px;
+  padding-right: 50px;
+  /* overflow-x: scroll; */
+  overflow-x: auto; /* Hide scrollbar in Firefox when not needed */
+  transition: width 150ms, min-height 150ms, margin-left 150ms;
+}
+
+@media only screen and (max-width: 899.9px) {
+  #main-area {
+    min-height: calc(100vh - var(--header-height-mobile) - var(--google-translate-bar-height) - var(--footer-height)); /* Get footer at bottom */
+    padding: 15px;
+  }
+
+  html[data-mobile-menu-open] #main-area {
+    min-height: calc(100vh - var(--header-height) - var(--mobile-menu-height) - var(--google-translate-bar-height) - var(--footer-height)); /* Get footer at bottom */
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  html[data-sidebar-open]:not([data-no-contents-sidebar]) #main-area {
+    width: calc(100% - var(--sidebar-width));
+    margin-left: var(--sidebar-width);
+  }
+}
+
+@media only screen and (min-width: 1700px) {
+  html[data-sidebar-open]:not([data-no-contents-sidebar]) #main-area {
+    width: calc(100% - var(--sidebar-width-wide));
+    margin-left: var(--sidebar-width-wide);
+  }
+}
+
+#article {
+  margin: 0 auto;
+  max-width: var(--article-width);
+  height: 100%;
+}
+
+@media only screen and (max-width: 899.9px) {
+  #article {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1700px) {
+  #article {
+    max-width: var(--article-width-wide);
+  }
+}
+
+/* Footer */
+
+#footer {
+  width: 100%;
+  height: var(--footer-height);
+  padding: 5px;
+  border-top: var(--layout-border-style);
+  display: block;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#footer-subcontainer {
+  height: 100%;
+  font-size: 12px;
+  color: var(--footer-font-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 499.9px) {
+  #footer-subcontainer {
+    font-size: 11px;
+  }
+}
+
+.footer-divider {
+  margin-left: 12px;
+  margin-right: 9px;
+}
+
+@media only screen and (max-width: 899.9px) {
+  #footer {
+    border-top: none;
+    background-color: var(--header-footer-background-color-mobile);
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  html[data-sidebar-open]:not([data-no-contents-sidebar]) #footer {
+    width: calc(100% - var(--sidebar-width));
+    margin-left: var(--sidebar-width);
+  }
+}
+
+@media only screen and (min-width: 1700px) {
+  html[data-sidebar-open]:not([data-no-contents-sidebar]) #footer {
+    width: calc(100% - var(--sidebar-width-wide));
+    margin-left: var(--sidebar-width-wide);
+  }
+}
+
+#social-media-buttons a {
+  text-decoration: none;
+  display: inline-block;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#social-media-buttons a svg {
+  vertical-align: middle;
+  fill: var(--footer-button-colors);
+}
+
+#social-media-buttons > span:hover { cursor: pointer; }
+#social-media-buttons > span#facebook-button:hover > a > svg { fill: #3B5998; }
+#social-media-buttons > span#twitter-button:hover > a > svg { fill: #55ACEE; }
+#social-media-buttons > span#reddit-button:hover > a > svg { fill: #ff4500; }
+#social-media-buttons > span#rss-feed-button:hover > a > svg { fill: #f99839; }
+#social-media-buttons > span#facebook-button > a > svg { height: 16px; }
+#social-media-buttons > span#twitter-button > a > svg { height: 18px; }
+#social-media-buttons > span#reddit-button > a > svg { height: 16px; }
+#social-media-buttons > span#rss-feed-button > a > svg { height: 15px; }
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  background-color: var(--background-color);
+  border: none;
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-color);
+  border: 1px solid var(--scrollbar-thumb-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-color-hover);
+  box-shadow: inset 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
+  border: none;
+}
+

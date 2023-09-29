@@ -1,0 +1,36 @@
+name: DIYHRT.cafe
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 0"
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+      - name: check for 404
+        run: |
+          url="https://diyhrt.cafe"
+          status=$(curl -o /dev/null -s -w "%{http_code}" $url)
+          if [ $status -eq 404 ]; then
+            echo "Got 404. Exiting."
+            curl -H "Content-Type: application/json" -d '{"content": "${{ secrets.DISCORD_USER_ID }} $URL returned 404"}' ${{ secrets.WEBHOOK_URL }}
+            exit 1
+          fi
+      - name: download .cafe
+        if: always()
+        run: |
+          rm -rf diyhrt.cafe
+          wget --convert-links --page-requisites --span-hosts --no-parent --reject 'rocket-loader.min.js' --reject '*UserLogin*' --reject '*visualEditor*' --reject '*CreateAccount*' --reject '*load.php*' --wait 3 --limit-rate 4m --continue --random-wait --adjust-extension -U 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.6) Gecko/20070802 SeaMonkey/1.1.4 Contact: hrt.boytw.ink/crawl_contact.txt' -e robots=off -i scripts/cafe.txt || true
+      - name: commit changes
+        if: ${{ success() }}
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "diyhrt.cafe"
+          pull: "--rebase --autostash ."
+          message: "[automated] update diyhrt.cafe"
+          default_author: github_actions

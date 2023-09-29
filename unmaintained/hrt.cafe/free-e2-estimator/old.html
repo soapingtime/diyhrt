@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <title>Free E2</title>
+    <style>
+        p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px 'Helvetica Neue'; color: #000000}
+        p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #000000; min-height: 12.0px}
+        p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #000000}
+        p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #000000; min-height: 13.0px}
+        p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+
+    </style>
+	<!-- Meta tags -->
+	<meta name="theme-color" content="#f5a9b8">
+	<meta name="author" content="hrt.cafe">
+	<meta name="url" content="https://diyhrt.cafe">
+	<meta name="og:url" content="https://diyhrt.cafe">
+	<meta name="og:see_also" content="https://diyhrt.cafe">
+	<meta name="twitter:url" content="https://diyhrt.cafe">
+	<meta name="og:site_name" content="diyhrt.cafe">
+	<meta name="name" content="diyhrt.cafe">
+	<meta name="og:title" content="diyhrt.cafe">
+	<meta name="twitter:title" content="diyhrt.cafe">
+	<meta name="image" content="https://diyhrt.cafe/assets/img/coffee-breaks.png?v=19">
+	<meta name="og:image" content="https://diyhrt.cafe/assets/img/coffee-breaks.png?v=19">
+	<meta name="twitter:image" content="https://diyhrt.cafe/assets/img/coffee-breaks.png?v=19">
+	<meta name="description" content="HRT resources for transgender people.">
+	<meta name="og:description" content="HRT resources for transgender people.">
+	<meta name="twitter:description" content="HRT resources for transgender people.">
+</head>
+<body>
+<p class="p1"><b>Free Estradiol Estimator</b></p>
+<p class="p2"><br></p>
+<p class="p3">Note: The results will be low if you are taking Boron. It will also be low if your T is a significant proportion of your SHBG.</p>
+<p class="p2"><br></p>
+<p class="p3">To use, enter your E2 and T in SI or US units and hit the calculate button.</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="Apple-converted-space"> </span><i>The equations used come from here: https://cebp.aacrjournals.org/content/11/10/1065</i></p>
+<p class="p3"><i><span class="Apple-converted-space"> </span>They are from the 1st set by Vermeulen et al</i></p>
+<br/>
+<table>
+    <tr>
+        <td>Estradiol (E2) pmol/L </td>
+        <td><input tabindex = 1 id= "E2SI" type="text" name="E2SI" value="0" onchange="E2SIChange(this.value)"></td>
+        <td>Estradiol (E2) pg/mL</td>
+        <td><input tabindex = 2 id="E2US" type="text" name="E2US" value="0" onchange="E2USChange(this.value)"></td>
+    </tr>
+    <tr>
+        <td>Testosterone (T) nmol/L </td>
+        <td><input tabindex = 3 id="TSI" type="text" name="TSI" value="0" onchange="TSIChange(this.value)"></td>
+        <td>Testosterone (T) ng/dL</td>
+        <td><input tabindex = 4 id="TUS" type="text" name="TUS" value="0" onchange="TUSChange(this.value)"></td>
+    </tr>
+    <tr>
+        <td/>
+        <td>SHBG nmol/L </td>
+        <td><input tabindex = 5 id=SHBG type="text" name="SHBG" value="0"></td>
+    </tr>
+    <tr>
+        <td/>
+        <td colspan="2"><br/><input tabindex = 6 type="button" name="Calculate Free E2" value="Calculate Free E2" onclick="CalculateFreeE2()"></td>
+    </tr>
+    <tr>
+        <td>Free E2 pmol/L </td>
+        <td id="FreeE2SI"/>
+        <td>Free E2 pg/mL</td>
+        <td id="FreeE2US"/>
+    </tr>
+    <tr>
+        <td>Free T pmol/L </td>
+        <td id="FreeTSI"/>
+        <td>Free T ng/dL</td>
+        <td id="FreeTUS"/>
+    </tr>
+</table>
+<br/>
+<p class="p4"><i>For any issues, contact u/Ally-SR on Reddit</i><br></p>
+<script>
+    function E2SIChange(newValue) {
+        E2US.value = (newValue * 0.2724).toFixed(2);
+    }
+    function E2USChange(newValue) {
+        E2SI.value = (newValue / 0.2724).toFixed(2);
+    }
+    function TSIChange(newValue) {
+        TUS.value = (newValue * 28.842).toFixed(2);
+    }
+    function TUSChange(newValue) {
+        TSI.value = (newValue / 28.842).toFixed(2);
+    }
+
+    function CalculateFreeE2() {
+
+        // This is a chunk of code to calculate Free E2 and Free T
+        // You are free to use it for whatever you want, just don't claim copyright over it.
+        //
+        // All quantities are normalised into mol/L as the various constants are in L/mol
+        //
+        // The equations used come from here: https://cebp.aacrjournals.org/content/11/10/1065
+        // They are from the 1st set by Vermeulen et al
+        //
+        // Following the reference to the linked paper, and extrapolating I also tried to calculate the Albumen bound E2
+        // Apparently around 60% of E2 is bound to Albumin and that's about the result I get so ...
+        //
+
+        E2 = E2SI.value;
+        E2 = E2 * 1e-12;
+
+        CSHBG = SHBG.value;
+        CSHBG = CSHBG * 1e-9;
+
+        fE2 = E2/100;  // First cut estimate. The algorithm will refine this up or down until the require accuracy is reached.
+
+        T = TSI.value;
+        T = T * 1e-9;
+
+
+        KaE2 = 4.21e4;  // L/mol  - Affinity constant for E2 to bind to Albumin
+        Ca = 6.5e-4;    // mol/L  - Apparently Albumen is normally in this concentration in the blood (from the paper above)
+        //          Looking back at my labs it is spot on for one test and off 2% for another. I figure close enough
+        // Vermeulen paper has this constant slightly lower at 6.2e-4
+
+        N2 = (KaE2 * Ca) + 1;   // N2 from the equation in the reference. Albumen loves E2 even more than T
+        KsE2 = 3.14e8;   // L/mol - Affinity constant for E2 to bind to SHBG
+        KaT = 4.06e4;    // L/mol - Affinity constant to bind T to Albumin  - lower than E2?
+        KsT = 1.0e9;     // L/mol - Affinity constant to bind  T to SHBG. It's a little over 3 x KsE2, but I thought I heard people say it was more
+        N1 = (KaT * Ca) + 1;  // N1 calculation from the paper
+
+        fE2diff = 1;    // can be any number to start off, gets refined each loop.
+
+        // My maths is too rusty to solve the equation properly, so I'm brute forcing it, trying values until I am
+        // within .01pmol/L of the answer. I figure that is accurate enough.
+
+        increment = 1e-12; // We start at 1% and step upwards at first trying to find a closer answer
+        fE2 = E2/100;
+
+        while (fE2diff > 1e-15) {
+
+            // The equation from the referenced paper for calculating fE2
+            // I start with a guessed value first and run the calculation.
+            //
+            fE2p = (E2 - N2 * fE2)/(KsE2 * (CSHBG - E2 + (N2*fE2)));
+
+            // See how close provisional and calculated values are
+            lastdiff = fE2diff;   // how close were we last time
+            fE2diff = Math.abs(fE2p - fE2);  // calculate how close we were this time
+
+            // If we are further away than last time, start moving in the other direction, but more slowly.
+            if (fE2diff > lastdiff) {
+                increment = -increment / 10;
+            }
+            // Neither of the values will be right,the right value will be somewhere in the middle.
+            // We iterate until we get something close enough
+
+            //# print fE2*1e12, fE2p*1e12, fE2diff*1e12
+            //# raw_input("Iter: ")
+
+            fE2 += increment; // move to a closer value;
+            // fE2 = (fE2 + fE2p)/2
+        }
+
+        // We have iterated to within .01 of a pmol/L so that is the answer we print out
+        // print "Free E2 pmol/L = {0:.2f}".format(fE2 * 1.0e12)
+        // print "Free E2 % = {0:.2f}".format(fE2/E2*100)
+
+
+        //# Not confident of this equation, but it is the E2 equivalent of the T equation in the Vermuelen paper
+        //AE2 = KaE2*Ca*fE2
+        //print "Albumin bound E2 = {0:.2f}".format(AE2 * 1.0e12)
+
+        // Same algorithm again, but this time for T
+
+        fTdiff = 1;
+        fT = T/100;
+        increment = 1.0e-9;
+        while (fTdiff > 1e-15) {
+            fTp = (T - N1 * fT)/(KsT * (CSHBG - T + (N1*fT)));
+            lastdiff = fTdiff;
+            fTdiff = Math.abs(fTp - fT);
+            if (fTdiff > lastdiff) {
+                increment = -increment / 10;
+            }
+            fT += increment;
+        }
+
+
+        AT = KaT*Ca*fT;
+        // print "Albumin bound T (nmol/L) = {0:.2f}".format(AT * 1.0e9)
+        SHBGT = (T-AT-fT);
+        // print "SHBG bound T (nmol/L) = {0:.2f}".format(SHBGT*1e9)
+
+        if (SHBGT > CSHBG / 20) {
+            alert ("T is stealing a lot of SHBG, so Free E value is probably a bit lower than it should be");
+        }
+        // calculations
+        fE2SIf = (fE2 * 1.0e12).toFixed(2);
+        fE2USf = (fE2 * 1.0e12 * 0.2724).toFixed(2);
+        fE2percent = (fE2 / E2 * 100).toFixed(2);
+
+        fTSIf = (fT * 1.0e12).toFixed(2);
+        fTUSf = (fT * 1.0e9 * 28.842).toFixed(2);
+        fTpercent = (fT / T * 100).toFixed(2);
+
+        window.document.getElementById('FreeE2SI').innerText = fE2SIf + " ("+fE2percent+"%)";
+        window.document.getElementById('FreeE2US').innerText = fE2USf + " ("+fE2percent+"%)";
+        window.document.getElementById('FreeTSI').innerText = fTSIf + " ("+fTpercent+"%)";
+        window.document.getElementById('FreeTUS').innerText = fTUSf + " ("+fTpercent+"%)";
+    }
+
+</script>
+</body>
+</html>

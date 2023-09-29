@@ -1,0 +1,36 @@
+name: transfemscience.org
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 6"
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+      - name: check for 404
+        run: |
+          url="https://transfemscience.org"
+          status=$(curl -o /dev/null -s -w "%{http_code}" $url)
+          if [ $status -eq 404 ]; then
+            echo "Got 404. Exiting."
+            curl -H "Content-Type: application/json" -d '{"content": "${{ secrets.DISCORD_USER_ID }} $URL returned 404"}' ${{ secrets.WEBHOOK_URL }}
+            exit 1
+          fi
+      - name: download transfemscience
+        run: |
+          rm -rf transfemscience.org
+          wget -mkpKEH --limit-rate 10m --random-wait -e robots=off --user-agent="Contact: hrt.boytw.ink/crawl_contact.txt" --domains=transfemscience.org,files.transfemscience.org https://transfemscience.org || true
+          find . -name "*.orig" -type f -delete
+      - name: commit changes
+        if: ${{ success() }}
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "['files.transfemscience.org', 'transfemscience.org']"
+          pull: "--rebase --autostash ."
+          message: "[automated] update transfemscience"
+          default_author: github_actions

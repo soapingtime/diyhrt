@@ -1,0 +1,2 @@
+if you're a webmaster who wants to contact me for any reason - open an issue github.com/boytwink/diyhrt/issues and give it the webmaster label. there's also a couple ways to contact me on my github profile.
+i do not and will not respect robots.txt. if you want me to not crawl a certain page or use different rate limits, read this https://wiki.archiveteam.org/index.php/Robots.txt, then ask me. 
