@@ -10,7 +10,7 @@ Use [this link](https://codeberg.org/diyhrt/pages/archive/main.zip) and it will 
 
 ## Mirroring
 
-I encourage you to start your own mirror, and open an issue or pull request if you would like it added to the readme. If you decide create a public mirror, it should be automatically by simply running git pull at least once a week with a [simple cron job](https://stackoverflow.com/a/69553820). Feel free to open an issue if you need any help.
+I encourage you to start your own mirror, and open an issue or pull request if you would like it added to the readme. If you decide create a public mirror, it should be automatically updated by simply running git pull at least once a week with a [simple cron job](https://stackoverflow.com/a/69553820). Feel free to open an issue if you need any help.
 
 This project is currently hosted on Codeberg and mirrored at [GitHub](https://boytwink.github.io/diyhrt) and [git.disroot.org](https://git.disroot.org/diyhrt/mirrors).
 
