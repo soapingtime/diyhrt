@@ -6,11 +6,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="../static/css/style.css" rel="stylesheet" />
+<link href="../static/css/bootstrap-table.min.css" rel="stylesheet" />
 <link href="../static/flags/css/flag-icons.min.css" rel="stylesheet" />
 <link rel="apple-touch-icon" sizes="180x180" href="../static/favicon/apple-touch-icon.png%3Fv=2">
 <link rel="icon" type="image/png" sizes="32x32" href="../static/favicon/favicon-32x32.png%3Fv=2">
 <link rel="icon" type="image/png" sizes="16x16" href="../static/favicon/favicon-16x16.png%3Fv=2">
-<link rel="manifest" href="../static/favicon/site.webmanifest%3Fv=2.html">
+<link rel="manifest" href="../static/favicon/site.webmanifest%3Fv=2">
 <link rel="mask-icon" href="../static/favicon/safari-pinned-tab.svg%3Fv=2" color="#5bbad5">
 <link rel="shortcut icon" href="../static/favicon/favicon.ico%3Fv=2">
 <meta name="apple-mobile-web-app-title" content="DIYHRT.Market">
@@ -51,11 +52,10 @@
 <img class="bi me-2 d-none d-lg-block" height="76px" style="margin-top: -34px; margin-bottom: -35px;" src="../static/img/diymarket_logo3.png" />
 </a>
 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-<li><a href="../index.html" class="nav-link px-2 text-white">Home</a></li>
-<li><a href="../meds/products/index.html" class="nav-link px-2 text-white">Products</a></li>
 <li><a href="index.html" class="nav-link px-2 text-white">Stores</a></li>
+<li><a href="../resources.html" class="nav-link px-2 text-white">Resources</a></li>
 </ul>
-<form method="GET" action="../meds/products/index.html" class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
+<form method="GET" action="https://diyhrt.market/meds/products/" class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
 <input type="search" class="form-control" name="name__icontains" placeholder="Search..." aria-label="Search">
 </form>
 <div class="col-12 col-lg-auto mb-3 mb-lg-0 d-flex justify-content-center px-2">
@@ -74,8 +74,8 @@
 <img class="w-100 img-responsive" src="../../cdn.diyhrt.market/stores/logos/R8dAbH.png" />
 <ul class="list-group my-3">
 <li class="list-group-item active">
-https://vannapharma.com/
-<a href="https://vannapharma.com/" class="stretched-link"></a>
+https://vannapharmacy.com/
+<a href="https://vannapharmacy.com/" class="stretched-link"></a>
 </li>
 <li class="list-group-item">
 Rating:
@@ -107,122 +107,183 @@ Ships To:
 </div>
 <div class="row">
 <div class="col">
+<hr/>
 <h5 class="mt-3">Estradiol Gels</h5>
-<div class="card my-1">
-<div class="row">
-<div class="col-1 justify-content-middle d-none d-sm-block">
-<img class="w-100 mx-2" src="../../cdn.diyhrt.market/110ml.png" />
-</div>
-<div class="col d-flex align-items-center">
-<span class="mx-sm-2">VannaPharma Estradiol Gel (110ml)</span>
-</div>
-<div class="col-auto d-flex align-items-center justify-content-end">
-<span style="font-size: 1rem;" class="badge mx-1 my-1 bg-danger">
-US$160.00
+<div class="table-responsive">
+<table data-toggle="table" class="table table-bordered table-striped table-hover">
+<thead>
+<tr>
+<th data-field="product" data-sortable="true" data-sorter="productSorter">Product</th>
+<th data-field="product_value" data-visible="false">Product</th>
+<th data-field="store">Store</th>
+<th data-field="price" data-sortable="true" data-sorter="priceSorter">Price</th>
+<th data-field="price_value" data-visible="false">Price</th>
+<th data-field="unit_price" data-sortable="true" data-sorter="unitPriceSorter">Unit Price</th>
+<th data-field="unit_price_value" data-visible="false">Unit Price</th>
+<th data-field="status" data-sortable="true">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../meds/products/vannapharma-estradiol-gel-110ml.html">VannaPharma Estradiol Gel (110ml)</a></td>
+<td>VannaPharma Estradiol Gel (110ml)</td>
+<td><a href="https://vannapharmacy.com/shop/estradiol-gel-110ml/">Store Page</a></td>
+<td>US$160.00</td>
+<td>US$160.00</td>
+<td>US$0.15 per mg</td>
+<td>US$0.15</td>
+<td>
+<span class="text-danger">
+Last in stock 153 days ago
 </span>
-<span style="font-size: 1rem;" class="badge mx-1 bg-dark d-none d-sm-block">
-US$0.15 per mg
+</td>
+</tr>
+<tr>
+<td><a href="../meds/products/vannapharma-estradiol-gel-55ml.html">VannaPharma Estradiol Gel (55ml)</a></td>
+<td>VannaPharma Estradiol Gel (55ml)</td>
+<td><a href="https://vannapharmacy.com/shop/estradiol-gel-55ml/">Store Page</a></td>
+<td>US$95.00</td>
+<td>US$95.00</td>
+<td>US$0.17 per mg</td>
+<td>US$0.17</td>
+<td>
+<span class="text-success">
+In Stock
 </span>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-</div>
-<a href="../meds/products/vannapharma-estradiol-gel-110ml.html" class="stretched-link"></a>
-</div>
-<div class="card my-1">
-<div class="row">
-<div class="col-1 justify-content-middle d-none d-sm-block">
-<img class="w-100 mx-2" src="../../cdn.diyhrt.market/55ml.png" />
-</div>
-<div class="col d-flex align-items-center">
-<span class="mx-sm-2">VannaPharma Estradiol Gel (55ml)</span>
-</div>
-<div class="col-auto d-flex align-items-center justify-content-end">
-<span style="font-size: 1rem;" class="badge mx-1 my-1 bg-success">
-US$95.00
-</span>
-<span style="font-size: 1rem;" class="badge mx-1 bg-dark d-none d-sm-block">
-US$0.17 per mg
-</span>
-</div>
-</div>
-<a href="../meds/products/vannapharma-estradiol-gel-55ml.html" class="stretched-link"></a>
-</div>
+<script>
+    function sorter(val1, val2) {
+        if (val1 > val2) {
+            return 1;
+        } else if (val2 > val1) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
+    function productSorter(valueA, valueB, rowA, rowB) {
+        return sorter(rowA.product_value, rowB.product_value);
+    }
+
+    function storeSorter(valueA, valueB, rowA, rowB) {
+        return sorter(rowA.store_value, rowB.store_value);
+    }
+
+    function priceSorter(valueA, valueB, rowA, rowB) {
+        return sorter(rowA.price_value, rowB.price_value);
+    }
+
+    function unitPriceSorter(valueA, valueB, rowA, rowB) {
+        return sorter(rowA.unit_price_value, rowB.unit_price_value);
+    }
+</script>
 <h5 class="mt-3">Estradiol Injections</h5>
-<div class="card my-1">
-<div class="row">
-<div class="col-1 justify-content-middle d-none d-sm-block">
-<img class="w-100 mx-2" src="../../cdn.diyhrt.market/EC-1.png" />
-</div>
-<div class="col d-flex align-items-center">
-<span class="mx-sm-2">VannaPharma Estradiol Cypionate (10ml 40mg/ml)</span>
-</div>
-<div class="col-auto d-flex align-items-center justify-content-end">
-<span style="font-size: 1rem;" class="badge mx-1 my-1 bg-success">
-US$65.00
+<div class="table-responsive">
+<table data-toggle="table" class="table table-bordered table-striped table-hover">
+<thead>
+<tr>
+<th data-field="product" data-sortable="true" data-sorter="productSorter">Product</th>
+<th data-field="product_value" data-visible="false">Product</th>
+<th data-field="store">Store</th>
+<th data-field="price" data-sortable="true" data-sorter="priceSorter">Price</th>
+<th data-field="price_value" data-visible="false">Price</th>
+<th data-field="unit_price" data-sortable="true" data-sorter="unitPriceSorter">Unit Price</th>
+<th data-field="unit_price_value" data-visible="false">Unit Price</th>
+<th data-field="status" data-sortable="true">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../meds/products/vannapharma-estradiol-cypionate-10ml-40mg-ml.html">VannaPharma Estradiol Cypionate</a></td>
+<td>VannaPharma Estradiol Cypionate</td>
+<td><a href="https://vannapharmacy.com/shop/estradiol-cypionate/">Store Page</a></td>
+<td>US$65.00</td>
+<td>US$65.00</td>
+<td>US$0.16 per mg</td>
+<td>US$0.16</td>
+<td>
+<span class="text-danger">
+Last in stock 15 days ago
 </span>
-<span style="font-size: 1rem;" class="badge mx-1 bg-dark d-none d-sm-block">
-US$0.16 per mg
+</td>
+</tr>
+<tr>
+<td><a href="../meds/products/vannapharma-estradiol-enanthate-10ml-40mg-ml.html">VannaPharma Estradiol Enanthate</a></td>
+<td>VannaPharma Estradiol Enanthate</td>
+<td><a href="https://vannapharmacy.com/shop/estradiol-enanthate/">Store Page</a></td>
+<td>US$60.00</td>
+<td>US$60.00</td>
+<td>US$0.15 per mg</td>
+<td>US$0.15</td>
+<td>
+<span class="text-success">
+In Stock
 </span>
-</div>
-</div>
-<a href="../meds/products/vannapharma-estradiol-cypionate-10ml-40mg-ml.html" class="stretched-link"></a>
-</div>
-<div class="card my-1">
-<div class="row">
-<div class="col-1 justify-content-middle d-none d-sm-block">
-<img class="w-100 mx-2" src="../../cdn.diyhrt.market/EE-1.png" />
-</div>
-<div class="col d-flex align-items-center">
-<span class="mx-sm-2">VannaPharma Estradiol Enanthate (10ml 40mg/ml)</span>
-</div>
-<div class="col-auto d-flex align-items-center justify-content-end">
-<span style="font-size: 1rem;" class="badge mx-1 my-1 bg-success">
-US$60.00
+</td>
+</tr>
+<tr>
+<td><a href="../meds/products/vannapharma-estradiol-undecylate-10ml-40mg-ml.html">VannaPharma Estradiol Undecylate</a></td>
+<td>VannaPharma Estradiol Undecylate</td>
+<td><a href="https://vannapharmacy.com/shop/estradiol-undecylate-10ml-40mg-ml/">Store Page</a></td>
+<td>US$95.00</td>
+<td>US$95.00</td>
+<td>US$0.24 per mg</td>
+<td>US$0.24</td>
+<td>
+<span class="text-success">
+In Stock
 </span>
-<span style="font-size: 1rem;" class="badge mx-1 bg-dark d-none d-sm-block">
-US$0.15 per mg
+</td>
+</tr>
+<tr>
+<td><a href="../meds/products/vannapharma-estradiol-valerate-10ml-40mg-ml.html">VannaPharma Estradiol Valerate</a></td>
+<td>VannaPharma Estradiol Valerate</td>
+<td><a href="https://vannapharmacy.com/shop/estradiol-valerate/">Store Page</a></td>
+<td>US$60.00</td>
+<td>US$60.00</td>
+<td>US$0.15 per mg</td>
+<td>US$0.15</td>
+<td>
+<span class="text-success">
+In Stock
 </span>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-</div>
-<a href="../meds/products/vannapharma-estradiol-enanthate-10ml-40mg-ml.html" class="stretched-link"></a>
-</div>
-<div class="card my-1">
-<div class="row">
-<div class="col-1 justify-content-middle d-none d-sm-block">
-<img class="w-100 mx-2" src="../../cdn.diyhrt.market/EU-1.png" />
-</div>
-<div class="col d-flex align-items-center">
-<span class="mx-sm-2">VannaPharma Estradiol Undecylate (10ml 40mg/ml)</span>
-</div>
-<div class="col-auto d-flex align-items-center justify-content-end">
-<span style="font-size: 1rem;" class="badge mx-1 my-1 bg-success">
-US$95.00
-</span>
-<span style="font-size: 1rem;" class="badge mx-1 bg-dark d-none d-sm-block">
-US$0.24 per mg
-</span>
-</div>
-</div>
-<a href="../meds/products/vannapharma-estradiol-undecylate-10ml-40mg-ml.html" class="stretched-link"></a>
-</div>
-<div class="card my-1">
-<div class="row">
-<div class="col-1 justify-content-middle d-none d-sm-block">
-<img class="w-100 mx-2" src="../../cdn.diyhrt.market/EV-1.png" />
-</div>
-<div class="col d-flex align-items-center">
-<span class="mx-sm-2">VannaPharma Estradiol Valerate (10ml 40mg/ml)</span>
-</div>
-<div class="col-auto d-flex align-items-center justify-content-end">
-<span style="font-size: 1rem;" class="badge mx-1 my-1 bg-success">
-US$60.00
-</span>
-<span style="font-size: 1rem;" class="badge mx-1 bg-dark d-none d-sm-block">
-US$0.15 per mg
-</span>
-</div>
-</div>
-<a href="../meds/products/vannapharma-estradiol-valerate-10ml-40mg-ml.html" class="stretched-link"></a>
-</div>
+<script>
+    function sorter(val1, val2) {
+        if (val1 > val2) {
+            return 1;
+        } else if (val2 > val1) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
+    function productSorter(valueA, valueB, rowA, rowB) {
+        return sorter(rowA.product_value, rowB.product_value);
+    }
+
+    function storeSorter(valueA, valueB, rowA, rowB) {
+        return sorter(rowA.store_value, rowB.store_value);
+    }
+
+    function priceSorter(valueA, valueB, rowA, rowB) {
+        return sorter(rowA.price_value, rowB.price_value);
+    }
+
+    function unitPriceSorter(valueA, valueB, rowA, rowB) {
+        return sorter(rowA.unit_price_value, rowB.unit_price_value);
+    }
+</script>
 </div>
 </div>
 </div>
@@ -246,6 +307,8 @@ DIYHRT.Market 2022
 </footer>
 </div>
 <script src="../static/js/bootstrap.bundle.min.js"></script>
+<script src="../static/js/jquery-3.7.1.min.js"></script>
+<script src="../static/js/bootstrap-table.min.js"></script>
 <script src="../static/fontawesomefree/js/all.min.js"></script>
 <script>
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
