@@ -3205,10 +3205,10 @@ table.table-fixed {
 .panel-collapsable a.collapsed:after {
     content:"\e080";
 }
-.panel-title {
+.panel-titleDISABLED {
     font-weight: 400;
 }
-label {
+labelDISABLED {
   font-weight: normal;
 }
 
