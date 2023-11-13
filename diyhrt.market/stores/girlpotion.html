@@ -106,6 +106,66 @@ European Union
 <div class="row">
 <div class="col">
 <hr/>
+<h5 class="mt-3">Estradiol Gels</h5>
+<div class="table-responsive">
+<table data-toggle="table" class="table table-bordered table-striped table-hover">
+<thead>
+<tr>
+<th data-field="product" data-sortable="true" data-sorter="productSorter">Product</th>
+<th data-field="product_value" data-visible="false">Product</th>
+<th data-field="store">Store</th>
+<th data-field="price" data-sortable="true" data-sorter="priceSorter">Price</th>
+<th data-field="price_value" data-visible="false">Price</th>
+<th data-field="unit_price" data-sortable="true" data-sorter="unitPriceSorter">Unit Price</th>
+<th data-field="unit_price_value" data-visible="false">Unit Price</th>
+<th data-field="status" data-sortable="true">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../meds/products/girlpotion-estradiol-gel.html">Girlpotion Estradiol Gel</a></td>
+<td>Girlpotion Estradiol Gel</td>
+<td><a href="https://girlpotion.com/product/estradiol-transdermal-gel-50ml-2mg-pump/">Store Page</a></td>
+<td>40.00 €</td>
+<td>US$42.79</td>
+<td>0.12 € per mg</td>
+<td>US$0.13</td>
+<td>
+<span class="text-success">
+In Stock
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<script>
+    function sorter(val1, val2) {
+        if (val1 > val2) {
+            return 1;
+        } else if (val2 > val1) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
+    function productSorter(valueA, valueB, rowA, rowB) {
+        return sorter(rowA.product_value, rowB.product_value);
+    }
+
+    function storeSorter(valueA, valueB, rowA, rowB) {
+        return sorter(rowA.store_value, rowB.store_value);
+    }
+
+    function priceSorter(valueA, valueB, rowA, rowB) {
+        return sorter(rowA.price_value, rowB.price_value);
+    }
+
+    function unitPriceSorter(valueA, valueB, rowA, rowB) {
+        return sorter(rowA.unit_price_value, rowB.unit_price_value);
+    }
+</script>
 <h5 class="mt-3">Estradiol Injections</h5>
 <div class="table-responsive">
 <table data-toggle="table" class="table table-bordered table-striped table-hover">
@@ -123,16 +183,30 @@ European Union
 </thead>
 <tbody>
 <tr>
+<td><a href="../meds/products/girlpotion-estadiol-undecylate-400mg-10ml.html">Girlpotion Estadiol Undecylate 400mg/10mL</a></td>
+<td>Girlpotion Estadiol Undecylate 400mg/10mL</td>
+<td><a href="https://girlpotion.com/product/estradiol-undecylate-400mg-10ml/">Store Page</a></td>
+<td>55.00 €</td>
+<td>US$58.84</td>
+<td>0.14 € per mg</td>
+<td>US$0.15</td>
+<td>
+<span class="text-success">
+In Stock
+</span>
+</td>
+</tr>
+<tr>
 <td><a href="../meds/products/girlpotion-estradiol-enanthate-10ml.html">Girlpotion Estradiol Enanthate 400mg/10mL</a></td>
 <td>Girlpotion Estradiol Enanthate 400mg/10mL</td>
 <td><a href="https://girlpotion.com/product/estradiol-enanthate-400mg-10ml/">Store Page</a></td>
 <td>35.00 €</td>
-<td>US$37.58</td>
+<td>US$37.44</td>
 <td>0.09 € per mg</td>
 <td>US$0.09</td>
 <td>
 <span class="text-danger">
-Last in stock 18 days ago
+Last in stock 25 days ago
 </span>
 </td>
 </tr>
@@ -141,12 +215,12 @@ Last in stock 18 days ago
 <td>Girlpotion Estradiol Enanthate 500mg/10mL</td>
 <td><a href="https://girlpotion.com/product/estradiol-enanthate-500mg-10ml/">Store Page</a></td>
 <td>45.00 €</td>
-<td>US$48.31</td>
+<td>US$48.14</td>
 <td>0.09 € per mg</td>
 <td>US$0.10</td>
 <td>
 <span class="text-danger">
-Last in stock 28 days ago
+Last in stock 35 days ago
 </span>
 </td>
 </tr>
@@ -155,12 +229,12 @@ Last in stock 28 days ago
 <td>Girlpotion Estradiol Valerate 400mg/10mL</td>
 <td><a href="https://girlpotion.com/product/estradiol-valerate-400mg-10ml/">Store Page</a></td>
 <td>35.00 €</td>
-<td>US$37.58</td>
+<td>US$37.44</td>
 <td>0.09 € per mg</td>
 <td>US$0.09</td>
 <td>
 <span class="text-danger">
-Last in stock 37 days ago
+Last in stock 44 days ago
 </span>
 </td>
 </tr>
@@ -224,5 +298,5 @@ DIYHRT.Market 2022-2023
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
         </script>
-<script>(function(){var js = "window['__CF$cv$params']={r:'82196f8f9b5eaa3d',t:'MTY5OTIzMjgwNi43NjcwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
+<script>(function(){var js = "window['__CF$cv$params']={r:'825320a2d9a615ae',t:'MTY5OTgzNzc0OC4xODMwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
 </html>
