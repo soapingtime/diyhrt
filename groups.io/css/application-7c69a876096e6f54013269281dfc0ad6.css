@@ -2197,6 +2197,16 @@ hr {
     color: #eeeeee;
 }
 
+.modal-dialog {
+	margin-top: max(10px, env(safe-area-inset-top));
+}
+
+@media (min-width: 768px) {
+	.modal-dialog {
+		margin-top: max(30px, env(safe-area-inset-top));
+	}
+}
+
 /* otherwise selects extend to the entire width, which is too wide */
 select.form-control {
     width: auto;
@@ -4221,5 +4231,31 @@ body.app .navbar-fixed-top {
 	transform: translate(-50%, -50%);
 	font-size: 32px;
 	color: white;
+}
+
+.fs-1 {
+	font-size: 40px;
+}
+
+/* Larger */
+.fs-2 {
+	font-size: 32px;
+}
+
+.fs-3 {
+	font-size: 28px;
+}
+
+.fs-4 {
+	font-size: 24px;
+}
+
+.fs-5 {
+	font-size: 20px;
+}
+
+/* Default */
+.fs-6 {
+	font-size: 16px;
 }
 
