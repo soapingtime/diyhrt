@@ -1,1 +1,24 @@
-.stock-chart{table-layout:fixed}.stock-chart tr td.date{height:26px;padding:0;border-bottom:1px solid var(--bs-border-color-translucent)}.stock-chart tr td.date span{position:absolute;height:26px;margin-top:-13px;padding-left:.5rem;font-weight:500;border-left:1px solid var(--bs-card-border-color);overflow:hidden}.stock-chart tr td.day{height:1.9rem;border-bottom:2px solid var(--bs-card-border-color)}
+.stock-chart {
+    table-layout: fixed;
+}
+
+.stock-chart tr td.date {
+    height: 26px;
+    padding: 0;
+    border-bottom: 1px solid var(--bs-border-color-translucent);
+}
+
+.stock-chart tr td.date span {
+    position: absolute;
+    height: 26px;
+    margin-top: -13px;
+    padding-left: 0.5rem;
+    font-weight: 500;
+    border-left: 1px solid var(--bs-card-border-color);
+    overflow: hidden;
+}
+
+.stock-chart tr td.day {
+    height: 1.9rem;
+    border-bottom: 2px solid var(--bs-card-border-color);
+}
