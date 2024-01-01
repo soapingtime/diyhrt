@@ -74,21 +74,6 @@
 <p>In particular we've made sure that none of the major data farming tech company like Google, Amazon or Facebook are ever exposed to your data on any level.</p>
 <p>Backups of the site are taken regularly and stored offline.</p>
 <p>For your peace of mind here's an ELI5 run down of exactly what's stored, where, and who with.</p>
-<h5>Vendors</h5>
-<ul>
-<li>This site is hosted on private servers provided by German hosting company <strong><a href="https://www.hetzner.com/">Hetzner</a></strong>. All user data is stored on these servers and only a single person has access to it.
-<ul>
-<li>The server maintains a log of which pages get visited and when, but absolutely no information about was visiting them.</li>
-</ul>
-</li>
-<li><strong>CloudFlare</strong> is used as a reverse proxy which hides these servers from the internet for both DDoS protection and as an extra layer of security.
-<ul>
-<li>CloudFlare holds a log of your page visits for up to 4 hours before they are added to anonymised statistics and eventually deleted, you can read more about their policy <a href="https://blog.cloudflare.com/what-cloudflare-logs/">here</a>.</li>
-</ul>
-</li>
-<li>If you created an account and receive a subscription email, that email lands in your inbox via <strong><a href="https://sendgrid.com/">SendGrid</a></strong>. They hold a copy of that email for 30 days for debugging purposes on our end. They do not share your email with any other third party.</li>
-<li>If you get an error while browsing the site, a log of that error and what you were doing when it happened is sent to <strong><a href="https://sentry.io/">Sentry</a></strong> so that we have the information we need to fix it. This log is deleted after 14 days.</li>
-</ul>
 <h5>User Data</h5>
 <p>The only user data we track is the email, password and first name you give us if you create an account. We also of course store a list of any listings you subscribe to so that we can send you updates via email about them. At any time you can go to your <a href="profile.html">Profile page</a>, click the "Delete User Account" button and all of this information will be immediately and irretrieveably deleted from our servers.</p>
 <h5>Analytics</h5>
@@ -100,7 +85,7 @@
 <div class="container">
 <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
 <p class="col-md-4 mb-0 text-muted align-items-center">
-DIYHRT.Market 2022-2023
+DIYHRT.Market 2022-2024
 </p>
 <a href="index.html" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
 <img style="height: 2rem;" src="static/img/logograyscale.png">
@@ -123,5 +108,5 @@ DIYHRT.Market 2022-2023
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
         </script>
-<script>(function(){var js = "window['__CF$cv$params']={r:'83ad2bb39cc87ff7',t:'MTcwMzQ2NjI3NC4xOTQwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
+<script>(function(){var js = "window['__CF$cv$params']={r:'83e6e0f8ad927fbe',t:'MTcwNDA3MTM4Ny40MjgwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
 </html>
