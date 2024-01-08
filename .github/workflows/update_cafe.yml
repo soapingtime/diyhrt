@@ -20,7 +20,7 @@ jobs:
         run: |
           rm scripts/cafe.txt
           pip install beautifulsoup4 bs4
-          python scripts/getlinks.py 'https://diyhrt.cafe/index.php/Special:AllPages' > scripts/cafe.txt
+          python scripts/getlinks.py 'https://hrtcafe.net/index.php/Special:AllPages' > scripts/cafe.txt
           cd scripts && python formatlinks.py cafe.txt
       - name: Commit changes
         if: ${{ success() }}

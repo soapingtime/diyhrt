@@ -14,7 +14,7 @@ jobs:
           token: ${{ secrets.PAT_TOKEN }}
       - name: check for 404
         run: |
-          url="https://diyhrt.cafe"
+          url="https://hrtcafe.net"
           status=$(curl -o /dev/null -s -w "%{http_code}" $url)
           if [ $status -eq 404 ]; then
             echo "Got 404. Exiting."
@@ -25,6 +25,7 @@ jobs:
         if: always()
         run: |
           rm -rf diyhrt.cafe
+          rm -rf hrtcafe.net
           wget --convert-links --page-requisites --span-hosts --no-parent --reject 'rocket-loader.min.js' --reject '*UserLogin*' --reject '*visualEditor*' --reject '*CreateAccount*' --reject '*load.php*' --wait 3 --limit-rate 4m --continue --random-wait --adjust-extension -U 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.6) Gecko/20070802 SeaMonkey/1.1.4 Contact: hrt.boytw.ink/crawl_contact.txt' -e robots=off -i scripts/cafe.txt || true
       - name: commit changes
         if: ${{ success() }}

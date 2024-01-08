@@ -12,4 +12,4 @@ Do not rely on content found on this website without independent verification.
 
 By using this website, you acknowledge that you have read this disclaimer and agree not to hold us responsible for anything you see or any action you take becase of this website.
 
-This website should not be accessed by anyone under the age of 21, and by using it you agree that you are 21 or over.
+This website must not be accessed by anyone under the age of 21, and by using it you agree that you are 21 or over.

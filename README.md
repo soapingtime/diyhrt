@@ -3,7 +3,7 @@ This an archive of diyhrt.cafe, diyhrt.wiki, diyhrt.market, hrt.coffee, transfem
 
 ## Accessing this archive
 ### Online, no download required.
-https://hrt.boytw.ink
+https://hrt.soap.systems
 
 ### Locally
 Use [this link](https://codeberg.org/diyhrt/pages/archive/main.zip) and it will start a download. To access the archive, open index.html with your browser.
