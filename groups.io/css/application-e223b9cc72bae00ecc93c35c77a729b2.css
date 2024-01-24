@@ -4233,6 +4233,29 @@ body.app .navbar-fixed-top {
 	color: white;
 }
 
+.database-truncate-cell {
+	position: relative;
+	line-height: 1.2em;
+	/* Example line height */
+	max-height: 2.4em;
+	/* Adjust this to be twice the line height for exactly two lines */
+	overflow: hidden;
+	padding-bottom: 1.2em;
+	/* Equal to line height to make space for 'Show More' link */
+}
+
+.database-text-container {
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.database-show-more {
+	display: none;
+}
+
 .fs-1 {
 	font-size: 40px;
 }
