@@ -763,24 +763,25 @@ button:active {
   -webkit-user-select: none;
   user-select: none;
   transition: width 150ms, height 150ms, top 150ms;
+  scrollbar-color: var(--scrollbar-thumb-color) var(--background-color); /* Set scrollbar color Firefox, Chrome (≥v121) */
 }
 
 #sidebar {
-  scrollbar-width: none; /* Hide scrollbar Firefox */
+  scrollbar-width: none; /* Hide scrollbar Firefox, Chrome (≥v121) */
 }
 
-/* Hide scrollbar Chrome */
+/* Hide scrollbar Chrome (<v121) */
 #sidebar::-webkit-scrollbar {
   width: 0px;
 }
 
 @media only screen and (min-width: 900px) {
-  /* Show scrollbar Firefox */
+  /* Show scrollbar Firefox, Chrome (≥v121) */
   #sidebar:hover {
     scrollbar-width: thin;
   }
 
-  /* Show scrollbar Chrome */
+  /* Show scrollbar Chrome (<v121) */
   #sidebar:hover::-webkit-scrollbar {
     width: 5px;
   }
