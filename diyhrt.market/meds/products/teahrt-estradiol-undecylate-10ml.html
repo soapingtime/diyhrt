@@ -66,12 +66,11 @@ Unlike many other medications on this site these products are produced by privat
 <img class="bi me-2 d-none d-lg-block" height="76px" style="margin-top: -34px; margin-bottom: -35px;" src="../../static/img/diymarket_logo3.png" />
 </a>
 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-<li><a href="../../stores/index.html" class="nav-link px-2 text-white">Stores</a></li>
 <li><a href="../../resources.html" class="nav-link px-2 text-white">Resources</a></li>
 <li><a href="../../transfem-hrt-guide.html" class="nav-link px-2 text-white">Guide</a></li>
 </ul>
 <form method="GET" action="https://diyhrt.market/meds/products/" class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
-<input type="search" class="form-control" name="name__icontains" placeholder="Search..." aria-label="Search">
+<input type="search" class="form-control" name="q" placeholder="Search..." aria-label="Search">
 </form>
 <div class="col-12 col-lg-auto mb-3 mb-lg-0 d-flex justify-content-center px-2">
 <a class="btn btn-outline-danger mx-1" role="button" href="../../login.html">Login</a>
@@ -83,15 +82,48 @@ Unlike many other medications on this site these products are produced by privat
 <div class="container">
 </div>
 <div class="container">
-<div class="row p-3">
-<div class="col-lg-4">
-<h2 class="d-block d-lg-none">TeaHRT Estradiol Undecylate 10mL</h2>
-<img class="w-100" src="../../media/EUn-updated-photo-front.jpg" />
-<div class="list-group">
+<div class="row">
+<div class="col mb-3">
+<h2>TeaHRT Estradiol Undecylate 10mL</h2>
 </div>
+</div>
+<div class="row">
+<div class="col-lg-4">
+<div class="card mb-3">
+<img class="card-img-top" src="../../media/EUn-updated-photo-front.jpg" />
+<div class="list-group list-group-flush">
+<a href="https://teahrt.com/product/estradiol-undecylate-10ml/" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" style="border-left-width: 0.2rem; border-left-color: #9F1A1A;">
+Tea HRT
+<span class="badge bg-danger rounded-pill">
+<strong>$100.00</strong>
+</span>
+</a>
+</div>
+</div>
+<ul id="product-attributes" class="list-group mb-3">
+<li class="list-group-item d-flex justify-content-between">
+<span>Group:</span>
+<span>Estradiol Injections</span>
+</li>
+<li class="list-group-item d-flex justify-content-between">
+<span>Manufacturer:</span>
+<span>Tea HRT</span>
+</li>
+<li class="list-group-item d-flex justify-content-between">
+<span>Active Ingredient:</span>
+<span>Estradiol Undecylate</span>
+</li>
+<li class="list-group-item d-flex justify-content-between">
+<span>Dosage Form:</span>
+<span>Injection</span>
+</li>
+<li class="list-group-item d-flex justify-content-between">
+<span>Concentration:</span>
+<span>40.0 mg/ml</span>
+</li>
+</ul>
 </div>
 <div class="col-lg-8">
-<h2 class="d-none d-lg-block">TeaHRT Estradiol Undecylate 10mL</h2>
 <p>
 
 <p><a href="https://en.wikipedia.org/wiki/Estradiol_undecylate">Estradiol Undecylate</a> is an estered form of bioidentical estradiol suspended in an oil solution making it suitable for subcutaneous and intramuscular injections. <a href="https://en.wikipedia.org/wiki/Steroid_ester">Esterification</a> is the process of combining Estradiol with an acid which the human body will then slowly break down over time, creating a slow-release form of the medication so that it can be delivered as larger injections at lower frequencies, typically around weekly. Estradiol has been delivered in this form for almost a century and it's a well-studied, safe and convenient process. Estradiol Undecylate has a biological half-life of ~30 days.</p>
@@ -104,13 +136,17 @@ This product is 10ml of liquid, at a concentration of
 </p>
 
 </p>
+<hr/>
+<canvas id="price-chart" style="max-height: 400px;"></canvas>
 </div>
 </div>
+<div class="row">
+<div class="col-12 mt-3">
 <form method="POST">
-<input type="hidden" name="csrfmiddlewaretoken" value="qjB1iYH3FgRyyNw3BbOowV5lr3lL4uhSkaJ7u5FYWKGHDPVO96Fdv0kwJ644Tf5A">
+<input type="hidden" name="csrfmiddlewaretoken" value="zWWfUmqkdRX00MI8nvTKNd3GeneRKJ49u6ZO7RQ53N70znwhJ7kypPAfjlpPbET8">
 <input type="hidden" name="listing_id" value="173">
 <input type="hidden" name="action" value="subscribe">
-<div class="card m-3">
+<div class="card mb-3">
 <div class="card-header">
 <div class="row">
 <div class="col-sm-6 mb-1">
@@ -121,11 +157,11 @@ Tea HRT
 </strong>
 </div>
 <div class="col-sm-6 d-flex justify-content-between justify-content-sm-end">
-<span class="badge bg-success">$75.00</span>
-<span class="badge ms-1 mx-lg-1 bg-dark">$0.19 per mg</span>
+<span class="badge bg-danger">$100.00</span>
+<span class="badge ms-1 mx-lg-1 bg-dark">$0.25 per mg</span>
 <div data-bs-toggle="tooltip" data-bs-placement="top" title="Subscribing to this listing will let you receive emails when it comes back in stock. You must be logged in to subscribe to a listing.">
 <button type="submit" class="btn btn-sm btn-primary d-none d-lg-block
-                                        " style="font-size: 0.80rem;" disabled>
+                                                " style="font-size: 0.80rem;" disabled>
 Subscribe
 </button>
 </div>
@@ -143,21 +179,6 @@ Subscribe
 <div class="col">
 <table class="w-100 stock-chart">
 <tr>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-<span>Nov 2023</span>
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
 <td class="date text-muted">
 </td>
 <td class="date text-muted">
@@ -387,22 +408,23 @@ Subscribe
 </td>
 <td class="date text-muted">
 </td>
+<td class="date text-muted">
+</td>
+<td class="date text-muted">
+</td>
+<td class="date text-muted">
+</td>
+<td class="date text-muted">
+<span>Mar 2024</span>
+</td>
+<td class="date text-muted">
+</td>
+<td class="date text-muted">
+</td>
+<td class="date text-muted">
+</td>
 </tr>
 <tr>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Oct. 30, 2023">
-</td>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Oct. 31, 2023">
-</td>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 1, 2023">
-</td>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 2, 2023">
-</td>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 3, 2023">
-</td>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 4, 2023">
-</td>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 5, 2023">
-</td>
 <td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 6, 2023">
 </td>
 <td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 7, 2023">
@@ -629,6 +651,20 @@ Subscribe
 </td>
 <td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Feb. 26, 2024">
 </td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Feb. 27, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Feb. 28, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Feb. 29, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 1, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 2, 2024">
+</td>
+<td class="day bg-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 3, 2024">
+</td>
+<td class="day bg-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 4, 2024">
+</td>
 </tr>
 </table>
 </div>
@@ -654,6 +690,47 @@ Subscribe
 <tr>
 <td>
 <span class="d-none d-lg-block">
+March 3, 2024, 6:30 a.m.
+</span>
+<span class="d-block d-lg-none">
+March 3, 2024
+</span>
+</td>
+<td>$100.00</td>
+<td>
+<span class="text-danger">Out of Stock</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="d-none d-lg-block">
+Feb. 29, 2024, 10:17 p.m.
+</span>
+<span class="d-block d-lg-none">
+Feb. 29, 2024
+</span>
+</td>
+<td></td>
+<td>
+<span class="text-success">In Stock</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="d-none d-lg-block">
+Feb. 29, 2024, 6:15 a.m.
+</span>
+<span class="d-block d-lg-none">
+Feb. 29, 2024
+</span>
+</td>
+<td>$95.00</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<span class="d-none d-lg-block">
 Feb. 19, 2024, 7:55 a.m.
 </span>
 <span class="d-block d-lg-none">
@@ -662,7 +739,6 @@ Feb. 19, 2024
 </td>
 <td>$75.00</td>
 <td>
-<span class="text-success">In Stock</span>
 </td>
 </tr>
 <tr>
@@ -933,7 +1009,9 @@ Oct. 9, 2023
 </div>
 </div>
 </div>
+</div>
 </form>
+</div>
 </div>
 </main>
 <div class="container">
@@ -958,9 +1036,14 @@ DIYHRT.Market 2022-2024
 <script src="../../static/js/jquery-3.7.1.min.js"></script>
 <script src="../../static/js/bootstrap-table.min.js"></script>
 <script src="../../static/fontawesomefree/js/all.min.js"></script>
+<script id="pricechart-data" type="application/json">{"datasets": [{"label": "Tea HRT", "yAxisID": "yAxis", "borderColor": "#9F1A1A", "backgroundColor": "#9F1A1A", "fill": false, "stepped": true, "data": [{"x": "2023-10-09 23:05:08.175699+00:00", "y": "110.00", "state": "In Stock", "in_stock": true}, {"x": "2023-10-25 23:41:44.415377+00:00", "y": "110.00", "state": "Out of Stock", "in_stock": false}, {"x": "2023-10-30 03:41:40.053529+00:00", "y": "110.00", "state": "In Stock", "in_stock": true}, {"x": "2023-11-20 23:41:34.557050+00:00", "y": "110.00", "state": "Out of Stock", "in_stock": false}, {"x": "2023-11-26 07:41:54.284881+00:00", "y": "110.00", "state": "In Stock", "in_stock": true}, {"x": "2023-11-30 03:42:12.521208+00:00", "y": "110.00", "state": "Out of Stock", "in_stock": false}, {"x": "2023-12-01 03:41:40.355874+00:00", "y": "110.00", "state": "In Stock", "in_stock": true}, {"x": "2023-12-06 17:41:40.106346+00:00", "y": "110.00", "state": "Out of Stock", "in_stock": false}, {"x": "2023-12-12 05:42:09.807118+00:00", "y": "110.00", "state": "In Stock", "in_stock": true}, {"x": "2023-12-14 07:41:54.065963+00:00", "y": "95.00", "state": "In Stock", "in_stock": true}, {"x": "2023-12-20 09:41:57.584254+00:00", "y": "95.00", "state": "Out of Stock", "in_stock": false}, {"x": "2023-12-29 07:41:44.773410+00:00", "y": "95.00", "state": "In Stock", "in_stock": true}, {"x": "2024-01-03 09:43:12.047583+00:00", "y": "85.00", "state": "In Stock", "in_stock": true}, {"x": "2024-01-16 05:45:41.780101+00:00", "y": "95.00", "state": "In Stock", "in_stock": true}, {"x": "2024-01-17 09:45:58.183910+00:00", "y": "95.00", "state": "Delisted from store", "in_stock": false}, {"x": "2024-01-17 11:45:47.930452+00:00", "y": "95.00", "state": "In Stock", "in_stock": true}, {"x": "2024-01-18 01:46:38.499215+00:00", "y": "95.00", "state": "Delisted from store", "in_stock": false}, {"x": "2024-01-18 07:46:47.566391+00:00", "y": "85.00", "state": "In Stock", "in_stock": true}, {"x": "2024-01-30 01:46:11.565109+00:00", "y": "95.00", "state": "In Stock", "in_stock": true}, {"x": "2024-02-19 07:55:37.504503+00:00", "y": "75.00", "state": "In Stock", "in_stock": true}, {"x": "2024-02-29 06:15:40.695818+00:00", "y": "95.00", "state": "In Stock", "in_stock": true}, {"x": "2024-02-29 22:17:21.995668+00:00", "y": "100.00", "state": "In Stock", "in_stock": true}, {"x": "2024-03-03 06:30:55.549239+00:00", "y": "100.00", "state": "Out of Stock", "in_stock": false}]}]}</script>
+<script src="../../static/js/chart.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script src="../../static/meds/js/pricechart.js"></script>
 <script>
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
         </script>
-<script>(function(){var js = "window['__CF$cv$params']={r:'85b44820ec27114b',t:'MTcwODkwOTU0OC4zODEwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
+<script>(function(){var js = "window['__CF$cv$params']={r:'85edf0042f5e17f0',t:'MTcwOTUxNDExMy41MDUwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
 </html>

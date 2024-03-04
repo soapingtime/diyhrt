@@ -24,7 +24,6 @@
 <meta property="og:description" content="United Pharmacies UK is the UK division of United Pharmacies who&#x27;ve been around since 2001 and ship to several countries. They operate out of Hong Kong and all orders are shipped from there." />
 <meta property="og:title" content="Store - United Pharmacies UK" />
 <meta property="og:type" content="website" />
-<meta property="og:image" content="/media/stores/logos/uplogo.jpg" />
 <meta property="og:site_name" content="DIYHRT.Market" />
 
 <script>
@@ -52,12 +51,11 @@
 <img class="bi me-2 d-none d-lg-block" height="76px" style="margin-top: -34px; margin-bottom: -35px;" src="../static/img/diymarket_logo3.png" />
 </a>
 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-<li><a href="index.html" class="nav-link px-2 text-white">Stores</a></li>
 <li><a href="../resources.html" class="nav-link px-2 text-white">Resources</a></li>
 <li><a href="../transfem-hrt-guide.html" class="nav-link px-2 text-white">Guide</a></li>
 </ul>
 <form method="GET" action="https://diyhrt.market/meds/products/" class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
-<input type="search" class="form-control" name="name__icontains" placeholder="Search..." aria-label="Search">
+<input type="search" class="form-control" name="q" placeholder="Search..." aria-label="Search">
 </form>
 <div class="col-12 col-lg-auto mb-3 mb-lg-0 d-flex justify-content-center px-2">
 <a class="btn btn-outline-danger mx-1" role="button" href="../login.html">Login</a>
@@ -70,35 +68,60 @@
 </div>
 <div class="container">
 <div class="row">
+<div class="col mb-3">
+<h2>United Pharmacies UK</h2>
+</div>
+</div>
+<div class="row">
 <div class="col-lg-4">
-<h2 class="d-block d-lg-none">United Pharmacies UK</h2>
-<img class="w-100 img-responsive" src="../media/stores/logos/uplogo.jpg" />
-<ul class="list-group my-3">
-<li class="list-group-item active">
-https://www.unitedpharmacies-uk.md/
-<a href="https://www.unitedpharmacies-uk.md/" class="stretched-link"></a>
-</li>
-<li class="list-group-item">
-Rating:
+<div class="list-group mb-3">
+<a class="list-group-item list-group-item-action d-flex justify-content-between" href="https://www.unitedpharmacies-uk.md/" style="border-left-width: 0.2rem; border-left-color: #18B2CB;">
+<strong>United Pharmacies UK</strong>
+<span class="text-success">
+Active
+</span>
+</a>
+<a class="list-group-item list-group-item-action d-flex justify-content-between" href="united-pharmacies-uk/reviews.html" style="border-left-width: 0.2rem; border-left-color: #18B2CB;">
 <span class="text-warning">
 <i class="fa-solid fa-star"></i>
 5/5
 </span>
-<a href="united-pharmacies-uk/reviews.html">(2 reviews)</a>
+<span>2 reviews</span>
+</a>
+<li class="list-group-item d-flex justify-content-between" style="border-left-width: 0.2rem; border-left-color: #18B2CB;">
+<span>Category:</span>
+<span>Pharmacies</span>
 </li>
-<li class="list-group-item">
-Ships From: <span class="fi fi-hk"></span> Hong Kong
+<li class="list-group-item d-flex justify-content-between" style="border-left-width: 0.2rem; border-left-color: #18B2CB;">
+<span>Ships From:</span>
+<span>Hong Kong</span>
 </li>
-<li class="list-group-item">
-Ships To:
-<ul>
-<li><span class="fi fi-gb"></span> United Kingdom</li>
-</ul>
+<li class="list-group-item d-flex justify-content-between" style="border-left-width: 0.2rem; border-left-color: #18B2CB;">
+<span>Ships To:</span>
+<span>United Kingdom</span>
 </li>
-</ul>
+<li class="list-group-item d-flex justify-content-between" style="border-left-width: 0.2rem; border-left-color: #18B2CB;">
+<span>Payment Methods:</span>
+<span>
+<span data-bs-toggle="tooltip" data-bs-placement="top" title="Bank Transfer">
+<i class="fa-solid fa-building-columns ms-1"></i>
+</span>
+<span data-bs-toggle="tooltip" data-bs-placement="top" title="Mastercard">
+<i class="fa-brands fa-cc-mastercard ms-1"></i>
+</span>
+<span data-bs-toggle="tooltip" data-bs-placement="top" title="Visa">
+<i class="fa-brands fa-cc-visa ms-1"></i>
+</span>
+<span data-bs-toggle="tooltip" data-bs-placement="top" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+</span>
+</li>
+</div>
+<div class="accordion">
+</div>
 </div>
 <div class="col-lg-8">
-<h2 class="d-none d-lg-block">United Pharmacies UK</h2>
 <p><p>United Pharmacies UK is the UK division of United Pharmacies who've been around since 2001 and ship to several countries. They operate out of Hong Kong and all orders are shipped from there.</p>
 <p>They source medications through standard international supply channels, typically selling whichever country's branding is cheaper, Australia and Turkey being quite common.</p>
 <h5>Payments</h5>
@@ -112,825 +135,757 @@ Ships To:
 <div class="col">
 <hr/>
 <h5 class="mt-3">Dutasteride</h5>
-<div class="table-responsive">
-<table data-toggle="table" class="table table-bordered table-striped table-hover">
-<thead>
-<tr>
-<th data-field="product" data-sortable="true" data-sorter="productSorter">Product</th>
-<th data-field="product_value" data-visible="false">Product</th>
-<th data-field="store">Store</th>
-<th data-field="price" data-sortable="true" data-sorter="priceSorter">Price</th>
-<th data-field="price_value" data-visible="false">Price</th>
-<th data-field="unit_price" data-sortable="true" data-sorter="unitPriceSorter">Unit Price</th>
-<th data-field="unit_price_value" data-visible="false">Unit Price</th>
-<th data-field="status" data-sortable="true">Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../meds/products/dutasteride-avodart-0-5mg-x30.html">Dutasteride (Avodart) 0.5mg x30</a></td>
-<td>Dutasteride (Avodart) 0.5mg x30</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Avodart-Dutasteride-05mg-30-Capsules-Turkey-p-1801.html">Store Page</a></td>
-<td>£27.82</td>
-<td>$35.25</td>
-<td>£0.93 per pill</td>
-<td>$1.18</td>
-<td>
-<span class="text-danger">
-Last in stock 206 days ago
+<div class="list-group list-group-striped mb-3">
+<a href="../meds/products/dutasteride-avodart-0-5mg-x30.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-danger);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Dutasteride (Avodart) 0.5mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
 </span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/dutasteride-duprost-0-5mg-x10.html">Dutasteride (Duprost) 0.5mg x10</a></td>
-<td>Dutasteride (Duprost) 0.5mg x10</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Duprost-Dutasteride-05mg-10-Capsules-p-465.html">Store Page</a></td>
-<td>£7.89</td>
-<td>$10.00</td>
-<td>£0.79 per pill</td>
-<td>$1.00</td>
-<td>
-<span class="text-success">
-In Stock
-</span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/dutasteride-dutagen-0-5mg-x10.html">Dutasteride (Dutagen) 0.5mg x10</a></td>
-<td>Dutasteride (Dutagen) 0.5mg x10</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Dutagen-Dutasteride-05mg-10-Capsules-p-504.html">Store Page</a></td>
-<td>£7.62</td>
-<td>$9.66</td>
-<td>£0.76 per pill</td>
-<td>$0.97</td>
-<td>
-<span class="text-success">
-In Stock
-</span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/dutasteride-dutas-0-5mg-x30.html">Dutasteride (Dutas) 0.5mg x30</a></td>
-<td>Dutasteride (Dutas) 0.5mg x30</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Dutas-Dutasteride-05mg-30-Capsules-p-2370.html">Store Page</a></td>
-<td>£22.96</td>
-<td>$29.10</td>
-<td>£0.77 per pill</td>
-<td>$0.97</td>
-<td>
-<span class="text-success">
-In Stock
-</span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/dutasteride-veltride-0-5mg-x10.html">Dutasteride (Veltride) 0.5mg x10</a></td>
-<td>Dutasteride (Veltride) 0.5mg x10</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Veltride-Dutasteride-05mg-10-Tablets-p-922.html">Store Page</a></td>
-<td>£7.07</td>
-<td>$8.96</td>
-<td>£0.71 per pill</td>
-<td>$0.90</td>
-<td>
-<span class="text-success">
-In Stock
-</span>
-</td>
-</tr>
-</tbody>
-</table>
 </div>
-<script>
-    function sorter(val1, val2) {
-        if (val1 > val2) {
-            return 1;
-        } else if (val2 > val1) {
-            return -1;
-        } else {
-            return 0;
-        }
-    }
-
-    function productSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.product_value, rowB.product_value);
-    }
-
-    function storeSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.store_value, rowB.store_value);
-    }
-
-    function priceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.price_value, rowB.price_value);
-    }
-
-    function unitPriceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.unit_price_value, rowB.unit_price_value);
-    }
-</script>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+30 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£27.82<br/>
+<span class="text-secondary">
+£0.93
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-danger">
+213 days ago
+</div>
+</div>
+</a>
+<a href="../meds/products/dutasteride-duprost-0-5mg-x10.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Dutasteride (Duprost) 0.5mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+10 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£7.89<br/>
+<span class="text-secondary">
+£0.79
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+<a href="../meds/products/dutasteride-dutagen-0-5mg-x10.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Dutasteride (Dutagen) 0.5mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+10 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£7.62<br/>
+<span class="text-secondary">
+£0.76
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+<a href="../meds/products/dutasteride-dutas-0-5mg-x30.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Dutasteride (Dutas) 0.5mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+30 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£22.96<br/>
+<span class="text-secondary">
+£0.77
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+<a href="../meds/products/dutasteride-veltride-0-5mg-x10.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Dutasteride (Veltride) 0.5mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+10 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£7.07<br/>
+<span class="text-secondary">
+£0.71
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+</div>
 <h5 class="mt-3">Finasteride</h5>
-<div class="table-responsive">
-<table data-toggle="table" class="table table-bordered table-striped table-hover">
-<thead>
-<tr>
-<th data-field="product" data-sortable="true" data-sorter="productSorter">Product</th>
-<th data-field="product_value" data-visible="false">Product</th>
-<th data-field="store">Store</th>
-<th data-field="price" data-sortable="true" data-sorter="priceSorter">Price</th>
-<th data-field="price_value" data-visible="false">Price</th>
-<th data-field="unit_price" data-sortable="true" data-sorter="unitPriceSorter">Unit Price</th>
-<th data-field="unit_price_value" data-visible="false">Unit Price</th>
-<th data-field="status" data-sortable="true">Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../meds/products/finasteride-finast-5mg-x30.html">Finasteride (Finast) 5mg x30</a></td>
-<td>Finasteride (Finast) 5mg x30</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Finast-Finasteride-5mg-30-Tablets-p-2214.html">Store Page</a></td>
-<td>£18.49</td>
-<td>$23.43</td>
-<td>£0.62 per pill</td>
-<td>$0.78</td>
-<td>
-<span class="text-success">
-In Stock
+<div class="list-group list-group-striped mb-3">
+<a href="../meds/products/finasteride-finast-5mg-x30.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Finasteride (Finast) 5mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
 </span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/finasteride-finax-1mg-x30.html">Finasteride (Finax) 1mg x30</a></td>
-<td>Finasteride (Finax) 1mg x30</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Finax-Finasteride-1mg-30-Tablets-p-2174.html">Store Page</a></td>
-<td>£17.42</td>
-<td>$22.08</td>
-<td>£0.58 per pill</td>
-<td>$0.74</td>
-<td>
-<span class="text-success">
-In Stock
-</span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/finasteride-fincar-5mg-x10.html">Finasteride (Fincar) 5mg x10</a></td>
-<td>Finasteride (Fincar) 5mg x10</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Fincar-Finasteride-5mg-10-Tablets-p-2175.html">Store Page</a></td>
-<td>£9.33</td>
-<td>$11.82</td>
-<td>£0.93 per pill</td>
-<td>$1.18</td>
-<td>
-<span class="text-success">
-In Stock
-</span>
-</td>
-</tr>
-</tbody>
-</table>
 </div>
-<script>
-    function sorter(val1, val2) {
-        if (val1 > val2) {
-            return 1;
-        } else if (val2 > val1) {
-            return -1;
-        } else {
-            return 0;
-        }
-    }
-
-    function productSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.product_value, rowB.product_value);
-    }
-
-    function storeSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.store_value, rowB.store_value);
-    }
-
-    function priceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.price_value, rowB.price_value);
-    }
-
-    function unitPriceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.unit_price_value, rowB.unit_price_value);
-    }
-</script>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+30 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£18.49<br/>
+<span class="text-secondary">
+£0.62
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+<a href="../meds/products/finasteride-finax-1mg-x30.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Finasteride (Finax) 1mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+30 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£17.42<br/>
+<span class="text-secondary">
+£0.58
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+<a href="../meds/products/finasteride-fincar-5mg-x10.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Finasteride (Fincar) 5mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+10 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£9.33<br/>
+<span class="text-secondary">
+£0.93
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+</div>
 <h5 class="mt-3">Bicalutamide</h5>
-<div class="table-responsive">
-<table data-toggle="table" class="table table-bordered table-striped table-hover">
-<thead>
-<tr>
-<th data-field="product" data-sortable="true" data-sorter="productSorter">Product</th>
-<th data-field="product_value" data-visible="false">Product</th>
-<th data-field="store">Store</th>
-<th data-field="price" data-sortable="true" data-sorter="priceSorter">Price</th>
-<th data-field="price_value" data-visible="false">Price</th>
-<th data-field="unit_price" data-sortable="true" data-sorter="unitPriceSorter">Unit Price</th>
-<th data-field="unit_price_value" data-visible="false">Unit Price</th>
-<th data-field="status" data-sortable="true">Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../meds/products/bicalutamide-calutide-50mg-x10.html">Bicalutamide (Calutide) 50mg x10</a></td>
-<td>Bicalutamide (Calutide) 50mg x10</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Calutide-Bicalutamide-50mg-10-Tablets-p-426.html">Store Page</a></td>
-<td>£17.61</td>
-<td>$22.32</td>
-<td>£1.76 per pill</td>
-<td>$2.23</td>
-<td>
-<span class="text-success">
-In Stock
+<div class="list-group list-group-striped mb-3">
+<a href="../meds/products/bicalutamide-calutide-50mg-x10.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Bicalutamide (Calutide) 50mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
 </span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/bicalutamide-procalut-50mg-x28.html">Bicalutamide (Procalut) 50mg x28</a></td>
-<td>Bicalutamide (Procalut) 50mg x28</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Procalut-Bicalutamide-50mg-28-Tablets-p-2502.html">Store Page</a></td>
-<td>£23.23</td>
-<td>$29.44</td>
-<td>£0.83 per pill</td>
-<td>$1.05</td>
-<td>
-<span class="text-danger">
-Last in stock over a year ago
-</span>
-</td>
-</tr>
-</tbody>
-</table>
 </div>
-<script>
-    function sorter(val1, val2) {
-        if (val1 > val2) {
-            return 1;
-        } else if (val2 > val1) {
-            return -1;
-        } else {
-            return 0;
-        }
-    }
-
-    function productSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.product_value, rowB.product_value);
-    }
-
-    function storeSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.store_value, rowB.store_value);
-    }
-
-    function priceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.price_value, rowB.price_value);
-    }
-
-    function unitPriceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.unit_price_value, rowB.unit_price_value);
-    }
-</script>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+10 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£17.61<br/>
+<span class="text-secondary">
+£1.76
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+<a href="../meds/products/bicalutamide-procalut-50mg-x28.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-danger);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Bicalutamide (Procalut) 50mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+28 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£23.23<br/>
+<span class="text-secondary">
+£0.83
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-danger">
+Over a year ago
+</div>
+</div>
+</a>
+</div>
 <h5 class="mt-3">Cyproterone</h5>
-<div class="table-responsive">
-<table data-toggle="table" class="table table-bordered table-striped table-hover">
-<thead>
-<tr>
-<th data-field="product" data-sortable="true" data-sorter="productSorter">Product</th>
-<th data-field="product_value" data-visible="false">Product</th>
-<th data-field="store">Store</th>
-<th data-field="price" data-sortable="true" data-sorter="priceSorter">Price</th>
-<th data-field="price_value" data-visible="false">Price</th>
-<th data-field="unit_price" data-sortable="true" data-sorter="unitPriceSorter">Unit Price</th>
-<th data-field="unit_price_value" data-visible="false">Unit Price</th>
-<th data-field="status" data-sortable="true">Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../meds/products/cyproterone-androcur-50mg-x50.html">Cyproterone (Androcur) 50mg x50</a></td>
-<td>Cyproterone (Androcur) 50mg x50</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Androcur-Cyproterone-Acetate-50mg-50-Tablets-p-2053.html">Store Page</a></td>
-<td>£30.12</td>
-<td>$38.17</td>
-<td>£0.60 per pill</td>
-<td>$0.76</td>
-<td>
-<span class="text-danger">
-Last in stock over a year ago
+<div class="list-group list-group-striped mb-3">
+<a href="../meds/products/cyproterone-androcur-50mg-x50.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-danger);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Cyproterone (Androcur) 50mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
 </span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/cyproterone-procur-50mg-x50.html">Cyproterone (Procur) 50mg x50</a></td>
-<td>Cyproterone (Procur) 50mg x50</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Procur-Cyproterone-Acetate-50mg-50-Tablets-p-2601.html">Store Page</a></td>
-<td>£32.96</td>
-<td>$41.77</td>
-<td>£0.66 per pill</td>
-<td>$0.84</td>
-<td>
-<span class="text-danger">
-Last in stock over a year ago
-</span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/cyproterone-siterone-50mg-x50.html">Cyproterone (Siterone) 50mg x50</a></td>
-<td>Cyproterone (Siterone) 50mg x50</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Siterone-Cyproterone-Acetate-50mg-50-Tablets-p-789.html">Store Page</a></td>
-<td>£34.76</td>
-<td>$44.05</td>
-<td>£0.70 per pill</td>
-<td>$0.88</td>
-<td>
-<span class="text-success">
-In Stock
-</span>
-</td>
-</tr>
-</tbody>
-</table>
 </div>
-<script>
-    function sorter(val1, val2) {
-        if (val1 > val2) {
-            return 1;
-        } else if (val2 > val1) {
-            return -1;
-        } else {
-            return 0;
-        }
-    }
-
-    function productSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.product_value, rowB.product_value);
-    }
-
-    function storeSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.store_value, rowB.store_value);
-    }
-
-    function priceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.price_value, rowB.price_value);
-    }
-
-    function unitPriceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.unit_price_value, rowB.unit_price_value);
-    }
-</script>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+50 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£30.12<br/>
+<span class="text-secondary">
+£0.60
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-danger">
+Over a year ago
+</div>
+</div>
+</a>
+<a href="../meds/products/cyproterone-procur-50mg-x50.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-danger);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Cyproterone (Procur) 50mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+50 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£32.96<br/>
+<span class="text-secondary">
+£0.66
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-danger">
+Over a year ago
+</div>
+</div>
+</a>
+<a href="../meds/products/cyproterone-siterone-50mg-x50.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Cyproterone (Siterone) 50mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+50 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£34.76<br/>
+<span class="text-secondary">
+£0.70
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+</div>
 <h5 class="mt-3">Spironolactone</h5>
-<div class="table-responsive">
-<table data-toggle="table" class="table table-bordered table-striped table-hover">
-<thead>
-<tr>
-<th data-field="product" data-sortable="true" data-sorter="productSorter">Product</th>
-<th data-field="product_value" data-visible="false">Product</th>
-<th data-field="store">Store</th>
-<th data-field="price" data-sortable="true" data-sorter="priceSorter">Price</th>
-<th data-field="price_value" data-visible="false">Price</th>
-<th data-field="unit_price" data-sortable="true" data-sorter="unitPriceSorter">Unit Price</th>
-<th data-field="unit_price_value" data-visible="false">Unit Price</th>
-<th data-field="status" data-sortable="true">Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../meds/products/spironolactone-aldactone-100mg-x15.html">Spironolactone (Aldactone) 100mg x15</a></td>
-<td>Spironolactone (Aldactone) 100mg x15</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Aldactone-Spironolactone-100mg-15-Tablets-p-592.html">Store Page</a></td>
-<td>£8.37</td>
-<td>$10.61</td>
-<td>£0.56 per pill</td>
-<td>$0.71</td>
-<td>
-<span class="text-success">
-In Stock
+<div class="list-group list-group-striped mb-3">
+<a href="../meds/products/spironolactone-aldactone-100mg-x15.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Spironolactone (Aldactone) 100mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
 </span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/spironolactone-aldactone-25mg-x15.html">Spironolactone (Aldactone) 25mg x15</a></td>
-<td>Spironolactone (Aldactone) 25mg x15</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Aldactone-Spironolactone-25mg-15-Tablets-p-1105.html">Store Page</a></td>
-<td>£2.34</td>
-<td>$2.97</td>
-<td>£0.16 per pill</td>
-<td>$0.20</td>
-<td>
-<span class="text-success">
-In Stock
-</span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/spironolactone-spiractin-100mg-x100.html">Spironolactone (Spiractin) 100mg x100</a></td>
-<td>Spironolactone (Spiractin) 100mg x100</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Spiractin-Spironolactone-100mg-100-Tablets-p-2348.html">Store Page</a></td>
-<td>£20.46</td>
-<td>$25.93</td>
-<td>£0.20 per pill</td>
-<td>$0.26</td>
-<td>
-<span class="text-success">
-In Stock
-</span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/spironolactone-spiractin-25mg-x100.html">Spironolactone (Spiractin) 25mg x100</a></td>
-<td>Spironolactone (Spiractin) 25mg x100</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Spiractin-Spironolactone-25mg-100-Tablets-p-2347.html">Store Page</a></td>
-<td>£9.39</td>
-<td>$11.90</td>
-<td>£0.09 per pill</td>
-<td>$0.12</td>
-<td>
-<span class="text-danger">
-Last in stock 3 days ago
-</span>
-</td>
-</tr>
-</tbody>
-</table>
 </div>
-<script>
-    function sorter(val1, val2) {
-        if (val1 > val2) {
-            return 1;
-        } else if (val2 > val1) {
-            return -1;
-        } else {
-            return 0;
-        }
-    }
-
-    function productSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.product_value, rowB.product_value);
-    }
-
-    function storeSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.store_value, rowB.store_value);
-    }
-
-    function priceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.price_value, rowB.price_value);
-    }
-
-    function unitPriceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.unit_price_value, rowB.unit_price_value);
-    }
-</script>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+15 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£8.37<br/>
+<span class="text-secondary">
+£0.56
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+<a href="../meds/products/spironolactone-aldactone-25mg-x15.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Spironolactone (Aldactone) 25mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+15 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£2.34<br/>
+<span class="text-secondary">
+£0.16
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+<a href="../meds/products/spironolactone-spiractin-100mg-x100.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Spironolactone (Spiractin) 100mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+100 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£20.46<br/>
+<span class="text-secondary">
+£0.20
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+<a href="../meds/products/spironolactone-spiractin-25mg-x100.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Spironolactone (Spiractin) 25mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+100 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£9.39<br/>
+<span class="text-secondary">
+£0.09
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+</div>
 <h5 class="mt-3">Estradiol Gels</h5>
-<div class="table-responsive">
-<table data-toggle="table" class="table table-bordered table-striped table-hover">
-<thead>
-<tr>
-<th data-field="product" data-sortable="true" data-sorter="productSorter">Product</th>
-<th data-field="product_value" data-visible="false">Product</th>
-<th data-field="store">Store</th>
-<th data-field="price" data-sortable="true" data-sorter="priceSorter">Price</th>
-<th data-field="price_value" data-visible="false">Price</th>
-<th data-field="unit_price" data-sortable="true" data-sorter="unitPriceSorter">Unit Price</th>
-<th data-field="unit_price_value" data-visible="false">Unit Price</th>
-<th data-field="status" data-sortable="true">Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../meds/products/gynokadin-dosiergel.html">Gynokadin Dosiergel</a></td>
-<td>Gynokadin Dosiergel</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Gynokadin-Dosiergel-Estradiol-06mg-g-80g-p-2409.html">Store Page</a></td>
-<td>£29.69</td>
-<td>$37.62</td>
-<td>£0.62 per mg</td>
-<td>$0.78</td>
-<td>
-<span class="text-success">
-In Stock
+<div class="list-group list-group-striped mb-3">
+<a href="../meds/products/gynokadin-dosiergel.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Gynokadin Dosiergel<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
 </span>
-</td>
-</tr>
-</tbody>
-</table>
 </div>
-<script>
-    function sorter(val1, val2) {
-        if (val1 > val2) {
-            return 1;
-        } else if (val2 > val1) {
-            return -1;
-        } else {
-            return 0;
-        }
-    }
-
-    function productSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.product_value, rowB.product_value);
-    }
-
-    function storeSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.store_value, rowB.store_value);
-    }
-
-    function priceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.price_value, rowB.price_value);
-    }
-
-    function unitPriceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.unit_price_value, rowB.unit_price_value);
-    }
-</script>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+48mg
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£29.69<br/>
+<span class="text-secondary">
+£0.62
+per mg
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+</div>
 <h5 class="mt-3">Estradiol Patches</h5>
-<div class="table-responsive">
-<table data-toggle="table" class="table table-bordered table-striped table-hover">
-<thead>
-<tr>
-<th data-field="product" data-sortable="true" data-sorter="productSorter">Product</th>
-<th data-field="product_value" data-visible="false">Product</th>
-<th data-field="store">Store</th>
-<th data-field="price" data-sortable="true" data-sorter="priceSorter">Price</th>
-<th data-field="price_value" data-visible="false">Price</th>
-<th data-field="unit_price" data-sortable="true" data-sorter="unitPriceSorter">Unit Price</th>
-<th data-field="unit_price_value" data-visible="false">Unit Price</th>
-<th data-field="status" data-sortable="true">Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../meds/products/climara-100mcg-x4.html">Climara 100mcg x4</a></td>
-<td>Climara 100mcg x4</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Climara-100-Estradiol-76mg-4-Patches-p-384.html">Store Page</a></td>
-<td>£29.08</td>
-<td>$36.85</td>
-<td>£7.27 per patch</td>
-<td>$9.21</td>
-<td>
-<span class="text-danger">
-Last in stock over a year ago
+<div class="list-group list-group-striped mb-3">
+<a href="../meds/products/climara-100mcg-x4.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-danger);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Climara 100mcg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
 </span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/climara-50mcg-x4.html">Climara 50mcg x4</a></td>
-<td>Climara 50mcg x4</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Climara-50-Estradiol-38mg-4-Patches-p-383.html">Store Page</a></td>
-<td>£23.97</td>
-<td>$30.38</td>
-<td>£5.99 per patch</td>
-<td>$7.59</td>
-<td>
-<span class="text-danger">
-Last in stock over a year ago
-</span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/estradot-100mcg-x8.html">Estradot 100mcg x8</a></td>
-<td>Estradot 100mcg x8</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Estradot-Oestradiol-100mcg-8-Patches-p-1487.html">Store Page</a></td>
-<td>£23.72</td>
-<td>$30.06</td>
-<td>£2.96 per patch</td>
-<td>$3.76</td>
-<td>
-<span class="text-danger">
-Last in stock over a year ago
-</span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/estradot-50mcg-x8.html">Estradot 50mcg x8</a></td>
-<td>Estradot 50mcg x8</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Estradot-Oestradiol-50mcg-8-Patches-p-1936.html">Store Page</a></td>
-<td>£19.52</td>
-<td>$24.74</td>
-<td>£2.44 per patch</td>
-<td>$3.09</td>
-<td>
-<span class="text-danger">
-Last in stock over a year ago
-</span>
-</td>
-</tr>
-</tbody>
-</table>
 </div>
-<script>
-    function sorter(val1, val2) {
-        if (val1 > val2) {
-            return 1;
-        } else if (val2 > val1) {
-            return -1;
-        } else {
-            return 0;
-        }
-    }
-
-    function productSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.product_value, rowB.product_value);
-    }
-
-    function storeSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.store_value, rowB.store_value);
-    }
-
-    function priceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.price_value, rowB.price_value);
-    }
-
-    function unitPriceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.unit_price_value, rowB.unit_price_value);
-    }
-</script>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+4 patches
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£29.08<br/>
+<span class="text-secondary">
+£7.27
+per patch
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-danger">
+Over a year ago
+</div>
+</div>
+</a>
+<a href="../meds/products/climara-50mcg-x4.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-danger);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Climara 50mcg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+4 patches
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£23.97<br/>
+<span class="text-secondary">
+£5.99
+per patch
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-danger">
+Over a year ago
+</div>
+</div>
+</a>
+<a href="../meds/products/estradot-100mcg-x8.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-danger);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Estradot 100mcg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+8 patches
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£23.72<br/>
+<span class="text-secondary">
+£2.96
+per patch
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-danger">
+Over a year ago
+</div>
+</div>
+</a>
+<a href="../meds/products/estradot-50mcg-x8.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-danger);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Estradot 50mcg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+8 patches
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£19.52<br/>
+<span class="text-secondary">
+£2.44
+per patch
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-danger">
+Over a year ago
+</div>
+</div>
+</a>
+</div>
 <h5 class="mt-3">Estradiol Pills</h5>
-<div class="table-responsive">
-<table data-toggle="table" class="table table-bordered table-striped table-hover">
-<thead>
-<tr>
-<th data-field="product" data-sortable="true" data-sorter="productSorter">Product</th>
-<th data-field="product_value" data-visible="false">Product</th>
-<th data-field="store">Store</th>
-<th data-field="price" data-sortable="true" data-sorter="priceSorter">Price</th>
-<th data-field="price_value" data-visible="false">Price</th>
-<th data-field="unit_price" data-sortable="true" data-sorter="unitPriceSorter">Unit Price</th>
-<th data-field="unit_price_value" data-visible="false">Unit Price</th>
-<th data-field="status" data-sortable="true">Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../meds/products/estrofem-2mg-x28.html">Estrofem 2mg x28</a></td>
-<td>Estrofem 2mg x28</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Estrofem-Oestradiol-2mg-28-Tablets-p-261.html">Store Page</a></td>
-<td>£22.39</td>
-<td>$28.37</td>
-<td>£0.80 per pill</td>
-<td>$1.01</td>
-<td>
-<span class="text-success">
-In Stock
+<div class="list-group list-group-striped mb-3">
+<a href="../meds/products/estrofem-2mg-x28.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Estrofem 2mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
 </span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/progynova-1mg-x28.html">Progynova 1mg x28</a></td>
-<td>Progynova 1mg x28</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Progynova-Estradiol-Valerate-1mg-28-Tablets-p-1696.html">Store Page</a></td>
-<td>£8.46</td>
-<td>$10.72</td>
-<td>£0.30 per pill</td>
-<td>$0.38</td>
-<td>
-<span class="text-success">
-In Stock
-</span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/progynova-1mg-3-pack-x72.html">Progynova 1mg (3 pack) x72</a></td>
-<td>Progynova 1mg (3 pack) x72</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Progynova-Oestradiol-Valerate-1mg-3-x-28-Tablets-p-1278.html">Store Page</a></td>
-<td>£18.35</td>
-<td>$23.25</td>
-<td>£0.25 per pill</td>
-<td>$0.32</td>
-<td>
-<span class="text-danger">
-Last in stock 5 days ago
-</span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/progynova-2mg-x28.html">Progynova 2mg x28</a></td>
-<td>Progynova 2mg x28</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Progynova-Estradiol-Valerate-2mg-28-Tablets-p-1697.html">Store Page</a></td>
-<td>£14.79</td>
-<td>$18.74</td>
-<td>£0.53 per pill</td>
-<td>$0.67</td>
-<td>
-<span class="text-success">
-In Stock
-</span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/progynova-2mg-3-pack-x72.html">Progynova 2mg (3 pack) x72</a></td>
-<td>Progynova 2mg (3 pack) x72</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Progynova-Oestradiol-Valerate-2mg-3-x-28-Tablets-p-1005.html.html">Store Page</a></td>
-<td>£26.73</td>
-<td>$33.87</td>
-<td>£0.37 per pill</td>
-<td>$0.47</td>
-<td>
-<span class="text-danger">
-Last in stock over a year ago
-</span>
-</td>
-</tr>
-</tbody>
-</table>
 </div>
-<script>
-    function sorter(val1, val2) {
-        if (val1 > val2) {
-            return 1;
-        } else if (val2 > val1) {
-            return -1;
-        } else {
-            return 0;
-        }
-    }
-
-    function productSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.product_value, rowB.product_value);
-    }
-
-    function storeSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.store_value, rowB.store_value);
-    }
-
-    function priceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.price_value, rowB.price_value);
-    }
-
-    function unitPriceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.unit_price_value, rowB.unit_price_value);
-    }
-</script>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+28 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£22.39<br/>
+<span class="text-secondary">
+£0.80
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+<a href="../meds/products/progynova-1mg-x28.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Progynova 1mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+28 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£8.46<br/>
+<span class="text-secondary">
+£0.30
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+<a href="../meds/products/progynova-1mg-3-pack-x72.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Progynova 1mg (3 pack)<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+72 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£18.35<br/>
+<span class="text-secondary">
+£0.25
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+<a href="../meds/products/progynova-2mg-x28.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Progynova 2mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+28 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£14.79<br/>
+<span class="text-secondary">
+£0.53
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+<a href="../meds/products/progynova-2mg-3-pack-x72.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-danger);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Progynova 2mg (3 pack)<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+72 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£26.73<br/>
+<span class="text-secondary">
+£0.37
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-danger">
+Over a year ago
+</div>
+</div>
+</a>
+</div>
 <h5 class="mt-3">Progesterone</h5>
-<div class="table-responsive">
-<table data-toggle="table" class="table table-bordered table-striped table-hover">
-<thead>
-<tr>
-<th data-field="product" data-sortable="true" data-sorter="productSorter">Product</th>
-<th data-field="product_value" data-visible="false">Product</th>
-<th data-field="store">Store</th>
-<th data-field="price" data-sortable="true" data-sorter="priceSorter">Price</th>
-<th data-field="price_value" data-visible="false">Price</th>
-<th data-field="unit_price" data-sortable="true" data-sorter="unitPriceSorter">Unit Price</th>
-<th data-field="unit_price_value" data-visible="false">Unit Price</th>
-<th data-field="status" data-sortable="true">Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../meds/products/progesterone-microgest-100mg-x50.html">Progesterone (Microgest) 100mg x50</a></td>
-<td>Progesterone (Microgest) 100mg x50</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Microgest-Micronised-Progesterone-100mg-50-Capsules-p-378.html">Store Page</a></td>
-<td>£22.97</td>
-<td>$29.11</td>
-<td>£0.46 per pill</td>
-<td>$0.58</td>
-<td>
-<span class="text-success">
-In Stock
+<div class="list-group list-group-striped mb-3">
+<a href="../meds/products/progesterone-microgest-100mg-x50.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Progesterone (Microgest) 100mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
 </span>
-</td>
-</tr>
-<tr>
-<td><a href="../meds/products/progesterone-microgest-200mg-x50.html">Progesterone (Microgest) 200mg x50</a></td>
-<td>Progesterone (Microgest) 200mg x50</td>
-<td><a href="https://www.unitedpharmacies-uk.md/Microgest-Micronised-Progesterone-200mg-50-Capsules-p-1189.html">Store Page</a></td>
-<td>£51.90</td>
-<td>$65.77</td>
-<td>£1.04 per pill</td>
-<td>$1.32</td>
-<td>
-<span class="text-success">
-In Stock
-</span>
-</td>
-</tr>
-</tbody>
-</table>
 </div>
-<script>
-    function sorter(val1, val2) {
-        if (val1 > val2) {
-            return 1;
-        } else if (val2 > val1) {
-            return -1;
-        } else {
-            return 0;
-        }
-    }
-
-    function productSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.product_value, rowB.product_value);
-    }
-
-    function storeSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.store_value, rowB.store_value);
-    }
-
-    function priceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.price_value, rowB.price_value);
-    }
-
-    function unitPriceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.unit_price_value, rowB.unit_price_value);
-    }
-</script>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+50 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£22.97<br/>
+<span class="text-secondary">
+£0.46
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+<a href="../meds/products/progesterone-microgest-200mg-x50.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+Progesterone (Microgest) 200mg<br/>
+<span style="color: #18B2CB;">United Pharmacies UK</span>
+</span>
+</div>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+50 pills
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+£51.90<br/>
+<span class="text-secondary">
+£1.04
+per pill
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-success">
+In Stock
+</div>
+</div>
+</a>
+</div>
 </div>
 </div>
 </div>
@@ -961,5 +916,5 @@ DIYHRT.Market 2022-2024
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
         </script>
-<script>(function(){var js = "window['__CF$cv$params']={r:'85b447ae3f02114b',t:'MTcwODkwOTUzMC4zNzIwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
+<script>(function(){var js = "window['__CF$cv$params']={r:'85edefdafda817f0',t:'MTcwOTUxNDEwNy4wMjYwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
 </html>

@@ -55,12 +55,11 @@ The main downsides of transdermal sprays are that some users may have issues wit
 <img class="bi me-2 d-none d-lg-block" height="76px" style="margin-top: -34px; margin-bottom: -35px;" src="../../static/img/diymarket_logo3.png" />
 </a>
 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-<li><a href="../../stores/index.html" class="nav-link px-2 text-white">Stores</a></li>
 <li><a href="../../resources.html" class="nav-link px-2 text-white">Resources</a></li>
 <li><a href="../../transfem-hrt-guide.html" class="nav-link px-2 text-white">Guide</a></li>
 </ul>
 <form method="GET" action="https://diyhrt.market/meds/products/" class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
-<input type="search" class="form-control" name="name__icontains" placeholder="Search..." aria-label="Search">
+<input type="search" class="form-control" name="q" placeholder="Search..." aria-label="Search">
 </form>
 <div class="col-12 col-lg-auto mb-3 mb-lg-0 d-flex justify-content-center px-2">
 <a class="btn btn-outline-danger mx-1" role="button" href="../../login.html">Login</a>
@@ -74,8 +73,8 @@ The main downsides of transdermal sprays are that some users may have issues wit
 <div class="container">
 <div class="row">
 <div class="col-md-4 col-lg-3">
-<div class="list-group">
-<a class="list-group-item 
+<div class="list-group mb-3">
+<a class="list-group-item
         active">
 <strong>Estradiol</strong>
 </a>
@@ -103,7 +102,7 @@ The main downsides of transdermal sprays are that some users may have issues wit
                 ">
 <i class="fa-solid fa-eye-dropper"></i> Estradiol Droppers
 </a>
-<a class="list-group-item 
+<a class="list-group-item
         ">
 <strong>Anti-Androgens</strong>
 </a>
@@ -119,7 +118,7 @@ The main downsides of transdermal sprays are that some users may have issues wit
                 ">
 <i class="fa-solid fa-pills"></i> Bicalutamide
 </a>
-<a class="list-group-item 
+<a class="list-group-item
         ">
 <strong>5-Alpha Reductase Inhibitors</strong>
 </a>
@@ -131,7 +130,7 @@ The main downsides of transdermal sprays are that some users may have issues wit
                 ">
 <i class="fa-solid fa-pills"></i> Dutasteride
 </a>
-<a class="list-group-item 
+<a class="list-group-item
         ">
 <strong>Miscellaneous</strong>
 </a>
@@ -147,67 +146,33 @@ The main downsides of transdermal sprays are that some users may have issues wit
 <p>Transdermal sprays work by spraying them onto a small area of skin and allowing it to be absorbed in. It then makes its way into the bloodstream and there is a depoting effect when applied near fatty tissue that allows it to be done as little as daily. Sprays have similar efficacy to injections in terms of achieving higher levels and share the safety of transdermal patches.</p>
 <p>The main downsides of transdermal sprays are that some users may have issues with absorption, and absorption tends to be lower than with transdermal gels therefore a higher dose is often required.</p>
 <hr/>
-<div class="table-responsive">
-<table data-toggle="table" class="table table-bordered table-striped table-hover">
-<thead>
-<tr>
-<th data-field="product" data-sortable="true" data-sorter="productSorter">Product</th>
-<th data-field="product_value" data-visible="false">Product</th>
-<th data-field="store" data-sortable="true" data-sorter="storeSorter">Store</th>
-<th data-field="store_value" data-visible="false">Store</th>
-<th data-field="price" data-sortable="true" data-sorter="priceSorter">Price</th>
-<th data-field="price_value" data-visible="false">Price</th>
-<th data-field="unit_price" data-sortable="true" data-sorter="unitPriceSorter">Unit Price</th>
-<th data-field="unit_price_value" data-visible="false">Unit Price</th>
-<th data-field="status" data-sortable="true">Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../products/teahrt-estradiol-spray.html">TeaHRT Estradiol Spray</a></td>
-<td>TeaHRT Estradiol Spray</td>
-<td><a href="https://teahrt.com/product/transdermal-estradiol-spray-30ml-20mg-ml/">Tea HRT</a></td>
-<td>Tea HRT</td>
-<td>$65.00</td>
-<td>$65.00</td>
-<td>$0.11 per mg</td>
-<td>$0.11</td>
-<td>
-<span class="text-danger">
-Last in stock 7 days ago
+<div class="list-group list-group-striped mb-3">
+<a href="../products/teahrt-estradiol-spray.html" class="list-group-item list-group-item-action px-2 px-sm-3 py-1" style="border-left-width: 0.2rem; border-left-color: #9F1A1A; border-right-width: 0.2rem; border-right-color: var(--bs-danger);">
+<div class="row">
+<div class="col-7 col-sm-4 d-flex align-items-center">
+<span>
+TeaHRT Estradiol Spray<br/>
+<span style="color: #9F1A1A;">Tea HRT</span>
 </span>
-</td>
-</tr>
-</tbody>
-</table>
 </div>
-<script>
-    function sorter(val1, val2) {
-        if (val1 > val2) {
-            return 1;
-        } else if (val2 > val1) {
-            return -1;
-        } else {
-            return 0;
-        }
-    }
-
-    function productSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.product_value, rowB.product_value);
-    }
-
-    function storeSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.store_value, rowB.store_value);
-    }
-
-    function priceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.price_value, rowB.price_value);
-    }
-
-    function unitPriceSorter(valueA, valueB, rowA, rowB) {
-        return sorter(rowA.unit_price_value, rowB.unit_price_value);
-    }
-</script>
+<div class="col-sm d-none d-sm-flex align-items-center text-secondary">
+600mg
+</div>
+<div class="col-5 col-sm d-flex align-items-center justify-content-end justify-content-sm-start text-end text-sm-start">
+<span>
+$65.00<br/>
+<span class="text-secondary">
+$0.11
+per mg
+</span>
+</span>
+</div>
+<div class="col-12 col-sm d-flex justify-content-end text-end align-items-center text-danger">
+14 days ago
+</div>
+</div>
+</a>
+</div>
 </div>
 </div>
 </div>
@@ -238,5 +203,5 @@ DIYHRT.Market 2022-2024
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
         </script>
-<script>(function(){var js = "window['__CF$cv$params']={r:'85b4420e5968114b',t:'MTcwODkwOTI5OS41OTcwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
+<script>(function(){var js = "window['__CF$cv$params']={r:'85edef80abb217f0',t:'MTcwOTUxNDA5Mi4zODcwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
 </html>

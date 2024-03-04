@@ -5084,6 +5084,8 @@ textarea.form-control-lg {
   --bs-list-group-action-active-bg: #e9ecef;
   --bs-list-group-disabled-color: #868e96;
   --bs-list-group-disabled-bg: #fff;
+  --bs-list-group-striped-color: #212529;
+  --bs-list-group-striped-bg: rgba(0, 0, 0, 0.012);
   --bs-list-group-active-color: #fff;
   --bs-list-group-active-bg: #EE2B4F;
   --bs-list-group-active-border-color: #EE2B4F;
@@ -5092,6 +5094,22 @@ textarea.form-control-lg {
   padding-left: 0;
   margin-bottom: 0;
   border-radius: var(--bs-list-group-border-radius);
+}
+
+.list-group-striped .list-group-item:nth-of-type(odd) {
+  background-color: var(--bs-list-group-striped-bg);
+}
+
+.list-group-striped .list-group-item:nth-of-type(odd):hover, .list-group-striped .list-group-item:nth-of-type(odd):focus {
+  z-index: 1;
+  color: var(--bs-list-group-action-hover-color);
+  text-decoration: none;
+  background-color: var(--bs-list-group-action-hover-bg);
+}
+
+.list-group-striped .list-group-item:nth-of-type(odd):active {
+  color: var(--bs-list-group-action-active-color);
+  background-color: var(--bs-list-group-action-active-bg);
 }
 
 .list-group-numbered {
