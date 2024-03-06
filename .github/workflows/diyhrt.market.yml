@@ -24,7 +24,7 @@ jobs:
       - name: download diyhrt.market
         run: |
           rm -rf diyhrt.market cdn.diyhrt.market
-          wget -mkpKEH --limit-rate 10m --random-wait --user-agent="Contact: hrt.boytw.ink/crawl_contact.txt" --domains=diyhrt.market,cdn.diyhrt.market  https://diyhrt.market || true
+          wget -mkpKEH --limit-rate 10m --random-wait --user-agent="github.com/soapingtime/diyhrt" --domains=diyhrt.market,cdn.diyhrt.market  https://diyhrt.market || true
           find . -name "*.orig" -type f -delete
       - name: commit changes
         if: ${{ success() }}

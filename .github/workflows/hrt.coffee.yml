@@ -28,7 +28,7 @@ jobs:
       - name: Download hrt.coffee
         run: |
           rm -rf hrt.coffee
-          export USER_AGENT="Mosaic/9.0 (Commodore AmigaOS 4.0) AmiWeb/4.1.33 (KHTML, like Gecko) Version/22.1 Mozilla/5.0. Contact: https://boytw.ink/crawl_contact.txt"
+          export USER_AGENT="Mosaic/9.0 (Commodore AmigaOS 4.0) AmiWeb/4.1.33 (KHTML, like Gecko) Version/22.1 Mozilla/5.0. github.com/soapingtime/diyhrt"
           wget --adjust-extension --convert-links -e robots=off --mirror --page-requisites --waitretry 5 --timeout 60 --tries 5 --wait 1 -U "$USER_AGENT" https://hrt.coffee
       - name: Commit changes
         if: ${{ success() }}

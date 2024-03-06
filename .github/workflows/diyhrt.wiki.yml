@@ -24,7 +24,7 @@ jobs:
       - name: download diyhrt.wiki
         run: |
           rm -rf diyhrt.wiki
-          wget -mkxKE -e robots=off --limit-rate=10m --random-wait --user-agent="Contact: hrt.boytw.ink/crawl_contact.txt" --reject '*age-check*' https://diyhrt.wiki https://diyhrt.wiki/nav.html || true # downloads nav.html because it doesn't crawl properly without it
+          wget -mkxKE -e robots=off --limit-rate=10m --random-wait --user-agent="github.com/soapingtime/diyhrt" --reject '*age-check*' https://diyhrt.wiki https://diyhrt.wiki/nav.html || true # downloads nav.html because it doesn't crawl properly without it
           cd diyhrt.wiki && rm *.orig && cd ..
       - name: setup python
         uses: actions/setup-python@v4

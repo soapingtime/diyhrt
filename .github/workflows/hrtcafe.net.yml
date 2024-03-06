@@ -26,7 +26,7 @@ jobs:
         run: |
           rm -rf diyhrt.cafe
           rm -rf hrtcafe.net
-          wget --convert-links --page-requisites --span-hosts --no-parent --reject 'rocket-loader.min.js' --reject '*UserLogin*' --reject '*visualEditor*' --reject '*CreateAccount*' --reject '*load.php*' --wait 3 --limit-rate 4m --continue --random-wait --adjust-extension -U 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.6) Gecko/20070802 SeaMonkey/1.1.4 Contact: hrt.boytw.ink/crawl_contact.txt' -e robots=off -i scripts/cafe.txt || true
+          wget -mkpKEH --limit-rate 10m --random-wait --user-agent="github.com/soapingtime/diyhrt" --domains=hrtcafe.net https://hrtcafe.net || true
       - name: commit changes
         if: ${{ success() }}
         uses: EndBug/add-and-commit@v9
