@@ -60,18 +60,18 @@
 <meta property="og:site_name" content="DIYHRT.Market" />
 
 <script>
-            var _paq = window._paq = window._paq || [];
-            /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-            _paq.push(['trackPageView']);
-            _paq.push(['enableLinkTracking']);
-            (function() {
-            var u="//a.diyhrt.market/";
-            _paq.push(['setTrackerUrl', u+'matomo.php']);
-            _paq.push(['setSiteId', '1']);
-            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-            g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-            })();
-        </script>
+                var _paq = window._paq = window._paq || [];
+                /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+                _paq.push(['trackPageView']);
+                _paq.push(['enableLinkTracking']);
+                (function() {
+                var u="//a.diyhrt.market/";
+                _paq.push(['setTrackerUrl', u+'matomo.php']);
+                _paq.push(['setSiteId', '1']);
+                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+                g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+                })();
+            </script>
 
 </head>
 <body>
@@ -110,40 +110,71 @@
 <div class="card mb-3">
 <img class="card-img-top" src="../../media/0038676_progynova-1mg-63tb.jpeg" />
 <div class="list-group list-group-flush">
-<a href="https://www.inhousepharmacy.vu/p-1109-progynova-1mg-3x28s.aspx" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" style="border-left-width: 0.2rem; border-left-color: #EC008B;">
-Inhouse Pharmacy
-<span class="badge bg-success rounded-pill">
-<strong>$30.96</strong>
+<a href="https://www.inhousepharmacy.vu/p-1109-progynova-1mg-3x28s.aspx" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" style="border-left-width: 0.2rem; border-left-color: #EC008B; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<span class="text-primary">
+<span class="text-decoration-underline">Inhouse Pharmacy</span>
+<i class="fa-solid fa-arrow-up-right-from-square"></i>
 </span>
+$30.96
 </a>
-<a href="https://www.unitedpharmacies-uk.md/Progynova-Oestradiol-Valerate-1mg-3-x-28-Tablets-p-1278.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" style="border-left-width: 0.2rem; border-left-color: #18B2CB;">
-United Pharmacies UK
-<span class="badge bg-success rounded-pill">
-<strong>£18.35</strong>
+<a href="https://www.unitedpharmacies-uk.md/Progynova-Oestradiol-Valerate-1mg-3-x-28-Tablets-p-1278.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<span class="text-primary">
+<span class="text-decoration-underline">United Pharmacies UK</span>
+<i class="fa-solid fa-arrow-up-right-from-square"></i>
 </span>
+£18.35
+</a>
+<a href="https://www.unitedpharmacies.md/Progynova-Estradiol-Valerate.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" style="border-left-width: 0.2rem; border-left-color: #0D7581; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<span class="text-primary">
+<span class="text-decoration-underline">United Pharmacies US</span>
+<i class="fa-solid fa-arrow-up-right-from-square"></i>
+</span>
+$24.00
 </a>
 </div>
 </div>
 <ul id="product-attributes" class="list-group mb-3">
 <li class="list-group-item d-flex justify-content-between">
 <span>Group:</span>
-<span>Estradiol Pills</span>
+<div class="text-end">
+<a href="../groups/estradiol-pills.html">Estradiol Pills</a>
+</div>
+</li>
+<li class="list-group-item d-flex justify-content-between">
+<span>Dosage form:</span>
+<div class="text-end">
+Pill
+</div>
 </li>
 <li class="list-group-item d-flex justify-content-between">
 <span>Manufacturer:</span>
-<span>Bayer</span>
+<div class="text-end">
+Bayer
+</div>
 </li>
 <li class="list-group-item d-flex justify-content-between">
-<span>Brand Name:</span>
-<span>Progynova</span>
+<span>Brand name:</span>
+<div class="text-end">
+Progynova
+</div>
 </li>
 <li class="list-group-item d-flex justify-content-between">
-<span>Active Ingredient:</span>
-<span>Estradiol Valerate</span>
+<span>Active ingredient:</span>
+<div class="text-end">
+Estradiol Valerate
+</div>
 </li>
 <li class="list-group-item d-flex justify-content-between">
-<span>Dosage Form:</span>
-<span>Pill</span>
+<span>Pack size:</span>
+<div class="text-end">
+72 pills
+</div>
+</li>
+<li class="list-group-item d-flex justify-content-between">
+<span>Dose per pill:</span>
+<div class="text-end">
+1.0 mg
+</div>
 </li>
 </ul>
 </div>
@@ -168,307 +199,42 @@ Estradiol Hemihydrate pills will result in slightly higher levels due to a lower
 </p>
 <hr/>
 <canvas id="price-chart" style="max-height: 400px;"></canvas>
-</div>
-</div>
+<hr/>
 <div class="row">
-<div class="col-12 mt-3">
+<div class="col-12">
+<div class="card mb-3 d-flex justify-content-between align-items-start" style="border-left-width: 0.2rem; border-left-color: #EC008B; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="card-body w-100 py-2">
+<div class="row">
+<div class="col-md-6 mb-1 mb-md-0 align-self-center">
+<a href="../../stores/inhouse-pharmacy.html">
+<strong>Inhouse Pharmacy</strong>
+</a>
+</div>
+<div class="col-md-6 text-md-end">
 <form method="POST">
-<input type="hidden" name="csrfmiddlewaretoken" value="9MkDi8OxaYtdBgqhnMvCVw9bmzOQ8kMf4WncvDei0UDdaReqJoWqx8GKrxZOzfBe">
+<input type="hidden" name="csrfmiddlewaretoken" value="ZLqqa6pzA8E4PWQ8adXVpVH4o2FPo0M16GMexb7AllRuGrqUC1aGuHgPuleHTXIo">
 <input type="hidden" name="listing_id" value="171">
 <input type="hidden" name="action" value="subscribe">
-<div class="card mb-3">
-<div class="card-header">
-<div class="row">
-<div class="col-sm-6 mb-1">
-<strong>
-<a href="../../stores/inhouse-pharmacy.html">
-Inhouse Pharmacy
-</a>
-</strong>
-</div>
-<div class="col-sm-6 d-flex justify-content-between justify-content-sm-end">
-<span class="badge bg-success">$30.96</span>
-<span class="badge ms-1 mx-lg-1 bg-dark">$0.43 per pill</span>
-<div data-bs-toggle="tooltip" data-bs-placement="top" title="Subscribing to this listing will let you receive emails when it comes back in stock. You must be logged in to subscribe to a listing.">
-<button type="submit" class="btn btn-sm btn-primary d-none d-lg-block
-                                                " style="font-size: 0.80rem;" disabled>
+<div class="btn-group w-100" role="group">
+<button class="btn btn-outline-success" disabled>
+$30.96
+</button>
+<button class="btn btn-outline-success" disabled>
+<span class="text-success">
+In Stock
+</span>
+</button>
+<button class="btn btn-info " data-bs-toggle="tooltip" data-bs-placement="top" title="Subscribing to this listing will let you receive emails when it comes back in stock. You must be logged in to subscribe to a listing.">
 Subscribe
 </button>
 </div>
-</div>
-<div class="col-sm-12 d-block d-lg-none mt-2">
-<button type="submit" class="btn btn btn-primary w-100">Subscribe</button>
+</form>
 </div>
 </div>
 </div>
-<div class="row">
-<div class="col">
-</div>
-</div>
-<div class="row">
-<div class="col">
+<div class="card-body p-0">
 <table class="w-100 stock-chart">
 <tr>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-<span>Dec 2023</span>
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-<span>Jan 2024</span>
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-<span>Feb 2024</span>
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-<span>Mar 2024</span>
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-</tr>
-<tr>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 6, 2023">
-</td>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 7, 2023">
-</td>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 8, 2023">
-</td>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 9, 2023">
-</td>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 10, 2023">
-</td>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 11, 2023">
-</td>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 12, 2023">
-</td>
 <td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 13, 2023">
 </td>
 <td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 14, 2023">
@@ -695,43 +461,47 @@ Subscribe
 </td>
 <td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 4, 2024">
 </td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 5, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 6, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 7, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 8, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 9, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 10, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 11, 2024">
+</td>
 </tr>
 </table>
 </div>
-</div>
-<div class="accordion accordion-flush">
-<div class="accordion-item">
+<div class="accordion accordion-flush w-100" id="listingChangeLog171">
 <h2 class="accordion-header">
-<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-171" aria-expanded="false" aria-controls="flush-collapse-171">
+<button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#listing-change-log-171" aria-expanded="false" aria-controls="flush-collapse-171">
 <small>Change Log</small>
 </button>
 </h2>
-<div id="flush-collapse-171" class="accordion-collapse collapse" aria-labelledby="flush-collapse-171" data-bs-parent="#accordionFlushExample">
-<div class="accordion-body p-2">
-<table class="table table-sm">
+<div id="listing-change-log-171" class="accordion-collapse collapse" aria-labelledby="listing-change-log-171-heading" data-bs-parent="#accordionFlushExample">
+<div class="accordion-body p-0">
+<div class="table-responsive">
+<table class="table table-striped mb-0">
 <thead>
 <tr>
-<th>First Seen</th>
+<th class="ps-3">First Seen</th>
 <th>Price</th>
-<th>State</th>
+<th class="pe-3 text-end">State</th>
 </tr>
 </thead>
-<tbody>
 <tr>
-<td>
-<span class="d-none d-lg-block">
-Sept. 24, 2023, 11:36 p.m.
-</span>
-<span class="d-block d-lg-none">
-Sept. 24, 2023
-</span>
-</td>
+<td class="ps-3">Sept. 24, 2023, 11:36 p.m.</td>
 <td>$30.96</td>
-<td>
-<span class="text-success">In Stock</span>
+<td class="pe-3 text-end text-success">
+In Stock
 </td>
 </tr>
-</tbody>
 </table>
 </div>
 </div>
@@ -739,305 +509,40 @@ Sept. 24, 2023
 </div>
 </div>
 </div>
-</form>
-<div class="col-12 mt-3">
+<div class="col-12">
+<div class="card mb-3 d-flex justify-content-between align-items-start" style="border-left-width: 0.2rem; border-left-color: #18B2CB; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="card-body w-100 py-2">
+<div class="row">
+<div class="col-md-6 mb-1 mb-md-0 align-self-center">
+<a href="../../stores/united-pharmacies-uk.html">
+<strong>United Pharmacies UK</strong>
+</a>
+</div>
+<div class="col-md-6 text-md-end">
 <form method="POST">
-<input type="hidden" name="csrfmiddlewaretoken" value="9MkDi8OxaYtdBgqhnMvCVw9bmzOQ8kMf4WncvDei0UDdaReqJoWqx8GKrxZOzfBe">
+<input type="hidden" name="csrfmiddlewaretoken" value="ZLqqa6pzA8E4PWQ8adXVpVH4o2FPo0M16GMexb7AllRuGrqUC1aGuHgPuleHTXIo">
 <input type="hidden" name="listing_id" value="169">
 <input type="hidden" name="action" value="subscribe">
-<div class="card mb-3">
-<div class="card-header">
-<div class="row">
-<div class="col-sm-6 mb-1">
-<strong>
-<a href="../../stores/united-pharmacies-uk.html">
-United Pharmacies UK
-</a>
-</strong>
-</div>
-<div class="col-sm-6 d-flex justify-content-between justify-content-sm-end">
-<span class="badge bg-success">£18.35</span>
-<span class="badge ms-1 mx-lg-1 bg-dark">£0.25 per pill</span>
-<div data-bs-toggle="tooltip" data-bs-placement="top" title="Subscribing to this listing will let you receive emails when it comes back in stock. You must be logged in to subscribe to a listing.">
-<button type="submit" class="btn btn-sm btn-primary d-none d-lg-block
-                                                " style="font-size: 0.80rem;" disabled>
+<div class="btn-group w-100" role="group">
+<button class="btn btn-outline-success" disabled>
+£18.35
+</button>
+<button class="btn btn-outline-success" disabled>
+<span class="text-success">
+In Stock
+</span>
+</button>
+<button class="btn btn-info " data-bs-toggle="tooltip" data-bs-placement="top" title="Subscribing to this listing will let you receive emails when it comes back in stock. You must be logged in to subscribe to a listing.">
 Subscribe
 </button>
 </div>
-</div>
-<div class="col-sm-12 d-block d-lg-none mt-2">
-<button type="submit" class="btn btn btn-primary w-100">Subscribe</button>
+</form>
 </div>
 </div>
 </div>
-<div class="row">
-<div class="col">
-</div>
-</div>
-<div class="row">
-<div class="col">
+<div class="card-body p-0">
 <table class="w-100 stock-chart">
 <tr>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-<span>Dec 2023</span>
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-<span>Jan 2024</span>
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-<span>Feb 2024</span>
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-<span>Mar 2024</span>
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-<td class="date text-muted">
-</td>
-</tr>
-<tr>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 6, 2023">
-</td>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 7, 2023">
-</td>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 8, 2023">
-</td>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 9, 2023">
-</td>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 10, 2023">
-</td>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 11, 2023">
-</td>
-<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 12, 2023">
-</td>
 <td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 13, 2023">
 </td>
 <td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Nov. 14, 2023">
@@ -1264,99 +769,75 @@ Subscribe
 </td>
 <td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 4, 2024">
 </td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 5, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 6, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 7, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 8, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 9, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 10, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 11, 2024">
+</td>
 </tr>
 </table>
 </div>
-</div>
-<div class="accordion accordion-flush">
-<div class="accordion-item">
+<div class="accordion accordion-flush w-100" id="listingChangeLog169">
 <h2 class="accordion-header">
-<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-169" aria-expanded="false" aria-controls="flush-collapse-169">
+<button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#listing-change-log-169" aria-expanded="false" aria-controls="flush-collapse-169">
 <small>Change Log</small>
 </button>
 </h2>
-<div id="flush-collapse-169" class="accordion-collapse collapse" aria-labelledby="flush-collapse-169" data-bs-parent="#accordionFlushExample">
-<div class="accordion-body p-2">
-<table class="table table-sm">
+<div id="listing-change-log-169" class="accordion-collapse collapse" aria-labelledby="listing-change-log-169-heading" data-bs-parent="#accordionFlushExample">
+<div class="accordion-body p-0">
+<div class="table-responsive">
+<table class="table table-striped mb-0">
 <thead>
 <tr>
-<th>First Seen</th>
+<th class="ps-3">First Seen</th>
 <th>Price</th>
-<th>State</th>
+<th class="pe-3 text-end">State</th>
 </tr>
 </thead>
-<tbody>
 <tr>
-<td>
-<span class="d-none d-lg-block">
-Feb. 28, 2024, 4:07 a.m.
-</span>
-<span class="d-block d-lg-none">
-Feb. 28, 2024
-</span>
-</td>
+<td class="ps-3">Feb. 28, 2024, 4:07 a.m.</td>
 <td>£18.35</td>
-<td>
-<span class="text-success">In Stock</span>
+<td class="pe-3 text-end text-success">
+In Stock
 </td>
 </tr>
 <tr>
-<td>
-<span class="d-none d-lg-block">
-Feb. 22, 2024, 11:56 p.m.
-</span>
-<span class="d-block d-lg-none">
-Feb. 22, 2024
-</span>
-</td>
+<td class="ps-3">Feb. 22, 2024, 11:56 p.m.</td>
 <td></td>
-<td>
-<span class="text-danger">Out of Stock</span>
+<td class="pe-3 text-end text-danger">
+Out of Stock
 </td>
 </tr>
 <tr>
-<td>
-<span class="d-none d-lg-block">
-Nov. 22, 2023, 5:42 a.m.
-</span>
-<span class="d-block d-lg-none">
-Nov. 22, 2023
-</span>
-</td>
+<td class="ps-3">Nov. 22, 2023, 5:42 a.m.</td>
 <td></td>
-<td>
-<span class="text-success">In Stock</span>
+<td class="pe-3 text-end text-success">
+In Stock
 </td>
 </tr>
 <tr>
-<td>
-<span class="d-none d-lg-block">
-Nov. 17, 2023, 3:42 a.m.
-</span>
-<span class="d-block d-lg-none">
-Nov. 17, 2023
-</span>
-</td>
+<td class="ps-3">Nov. 17, 2023, 3:42 a.m.</td>
 <td></td>
-<td>
-<span class="text-danger">Out of Stock</span>
+<td class="pe-3 text-end text-danger">
+Out of Stock
 </td>
 </tr>
 <tr>
-<td>
-<span class="d-none d-lg-block">
-Sept. 24, 2023, 11:35 p.m.
-</span>
-<span class="d-block d-lg-none">
-Sept. 24, 2023
-</span>
-</td>
+<td class="ps-3">Sept. 24, 2023, 11:35 p.m.</td>
 <td></td>
-<td>
-<span class="text-success">In Stock</span>
+<td class="pe-3 text-end text-success">
+In Stock
 </td>
 </tr>
-</tbody>
 </table>
 </div>
 </div>
@@ -1364,7 +845,90 @@ Sept. 24, 2023
 </div>
 </div>
 </div>
+<div class="col-12">
+<div class="card mb-3 d-flex justify-content-between align-items-start" style="border-left-width: 0.2rem; border-left-color: #0D7581; border-right-width: 0.2rem; border-right-color: var(--bs-success);">
+<div class="card-body w-100 py-2">
+<div class="row">
+<div class="col-md-6 mb-1 mb-md-0 align-self-center">
+<a href="../../stores/united-pharmacies-us.html">
+<strong>United Pharmacies US</strong>
+</a>
+</div>
+<div class="col-md-6 text-md-end">
+<form method="POST">
+<input type="hidden" name="csrfmiddlewaretoken" value="ZLqqa6pzA8E4PWQ8adXVpVH4o2FPo0M16GMexb7AllRuGrqUC1aGuHgPuleHTXIo">
+<input type="hidden" name="listing_id" value="201">
+<input type="hidden" name="action" value="subscribe">
+<div class="btn-group w-100" role="group">
+<button class="btn btn-outline-success" disabled>
+$24.00
+</button>
+<button class="btn btn-outline-success" disabled>
+<span class="text-success">
+In Stock
+</span>
+</button>
+<button class="btn btn-info " data-bs-toggle="tooltip" data-bs-placement="top" title="Subscribing to this listing will let you receive emails when it comes back in stock. You must be logged in to subscribe to a listing.">
+Subscribe
+</button>
+</div>
 </form>
+</div>
+</div>
+</div>
+<div class="card-body p-0">
+<table class="w-100 stock-chart">
+<tr>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 5, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 6, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 7, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 8, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 9, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 10, 2024">
+</td>
+<td class="day bg-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="March 11, 2024">
+</td>
+</tr>
+</table>
+</div>
+<div class="accordion accordion-flush w-100" id="listingChangeLog201">
+<h2 class="accordion-header">
+<button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#listing-change-log-201" aria-expanded="false" aria-controls="flush-collapse-201">
+<small>Change Log</small>
+</button>
+</h2>
+<div id="listing-change-log-201" class="accordion-collapse collapse" aria-labelledby="listing-change-log-201-heading" data-bs-parent="#accordionFlushExample">
+<div class="accordion-body p-0">
+<div class="table-responsive">
+<table class="table table-striped mb-0">
+<thead>
+<tr>
+<th class="ps-3">First Seen</th>
+<th>Price</th>
+<th class="pe-3 text-end">State</th>
+</tr>
+</thead>
+<tr>
+<td class="ps-3">March 5, 2024, 12:15 a.m.</td>
+<td>$24.00</td>
+<td class="pe-3 text-end text-success">
+In Stock
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </main>
@@ -1390,7 +954,7 @@ DIYHRT.Market 2022-2024
 <script src="../../static/js/jquery-3.7.1.min.js"></script>
 <script src="../../static/js/bootstrap-table.min.js"></script>
 <script src="../../static/fontawesomefree/js/all.min.js"></script>
-<script id="pricechart-data" type="application/json">{"datasets": [{"label": "Inhouse Pharmacy", "yAxisID": "yAxis", "borderColor": "#EC008B", "backgroundColor": "#EC008B", "fill": false, "stepped": true, "data": [{"x": "2023-09-24 23:36:53.192509+00:00", "y": "30.96", "state": "In Stock", "in_stock": true}, {"x": "2024-03-04 01:06:45.158247+00:00", "y": "30.96", "state": "In Stock", "in_stock": true}]}, {"label": "United Pharmacies UK", "yAxisID": "yAxis", "borderColor": "#18B2CB", "backgroundColor": "#18B2CB", "fill": false, "stepped": true, "data": [{"x": "2023-09-24 23:35:57.425451+00:00", "y": "23.22191034697457105904566174", "state": "In Stock", "in_stock": true}, {"x": "2023-11-17 03:42:10.017996+00:00", "y": "23.22191034697457105904566174", "state": "Out of Stock", "in_stock": false}, {"x": "2023-11-22 05:42:00.483501+00:00", "y": "23.22191034697457105904566174", "state": "In Stock", "in_stock": true}, {"x": "2024-02-22 23:56:55.735813+00:00", "y": "23.22191034697457105904566174", "state": "Out of Stock", "in_stock": false}, {"x": "2024-02-28 04:07:38.055531+00:00", "y": "23.22191034697457105904566174", "state": "In Stock", "in_stock": true}, {"x": "2024-03-04 01:06:45.176258+00:00", "y": "23.22191034697457105904566174", "state": "In Stock", "in_stock": true}]}]}</script>
+<script id="pricechart-data" type="application/json">{"datasets": [{"label": "Inhouse Pharmacy", "yAxisID": "yAxis", "borderColor": "#EC008B", "backgroundColor": "#EC008B", "fill": false, "stepped": true, "data": [{"x": "2023-09-24 23:36:53.192509+00:00", "y": "30.96", "state": "In Stock", "in_stock": true}, {"x": "2024-03-11 01:07:01.878469+00:00", "y": "30.96", "state": "In Stock", "in_stock": true}]}, {"label": "United Pharmacies UK", "yAxisID": "yAxis", "borderColor": "#18B2CB", "backgroundColor": "#18B2CB", "fill": false, "stepped": true, "data": [{"x": "2023-09-24 23:35:57.425451+00:00", "y": "23.60726769355064884607418213", "state": "In Stock", "in_stock": true}, {"x": "2023-11-17 03:42:10.017996+00:00", "y": "23.60726769355064884607418213", "state": "Out of Stock", "in_stock": false}, {"x": "2023-11-22 05:42:00.483501+00:00", "y": "23.60726769355064884607418213", "state": "In Stock", "in_stock": true}, {"x": "2024-02-22 23:56:55.735813+00:00", "y": "23.60726769355064884607418213", "state": "Out of Stock", "in_stock": false}, {"x": "2024-02-28 04:07:38.055531+00:00", "y": "23.60726769355064884607418213", "state": "In Stock", "in_stock": true}, {"x": "2024-03-11 01:07:01.900685+00:00", "y": "23.60726769355064884607418213", "state": "In Stock", "in_stock": true}]}, {"label": "United Pharmacies US", "yAxisID": "yAxis", "borderColor": "#0D7581", "backgroundColor": "#0D7581", "fill": false, "stepped": true, "data": [{"x": "2024-03-05 00:15:00.345110+00:00", "y": "24.00", "state": "In Stock", "in_stock": true}, {"x": "2024-03-11 01:07:01.905165+00:00", "y": "24.00", "state": "In Stock", "in_stock": true}]}]}</script>
 <script src="../../static/js/chart.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
@@ -1399,5 +963,5 @@ DIYHRT.Market 2022-2024
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
         </script>
-<script>(function(){var js = "window['__CF$cv$params']={r:'85edf7261a1917f0',t:'MTcwOTUxNDQwNS4zODkwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
+<script>(function(){var js = "window['__CF$cv$params']={r:'8627a52eef9c1694',t:'MTcxMDExOTIyMi4xMDIwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
 </html>
