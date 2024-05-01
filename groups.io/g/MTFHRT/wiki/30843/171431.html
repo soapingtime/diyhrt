@@ -1,0 +1,1404 @@
+
+	
+	<!DOCTYPE html>
+	<html lang="en-US">
+		<head>
+			<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			
+			<meta name="pinterest" content="nopin" />
+			<meta name="pinterest" content="nohover" />
+			
+			<meta name="3778517eb4810dfb5d143ed8f1b359b3b5a82923" content="0f56257c3db4a222e91b11bc6871c4df2e263b28" />
+			<link rel="apple-touch-icon" sizes="57x57" href="https://groups.io/img/org.1/favicons/apple-icon-57x57.png">
+			<link rel="apple-touch-icon" sizes="60x60" href="https://groups.io/img/org.1/favicons/apple-icon-60x60.png">
+			<link rel="apple-touch-icon" sizes="72x72" href="https://groups.io/img/org.1/favicons/apple-icon-72x72.png">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://groups.io/img/org.1/favicons/apple-icon-76x76.png">
+			<link rel="apple-touch-icon" sizes="114x114" href="https://groups.io/img/org.1/favicons/apple-icon-114x114.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://groups.io/img/org.1/favicons/apple-icon-120x120.png">
+			<link rel="apple-touch-icon" sizes="144x144" href="https://groups.io/img/org.1/favicons/apple-icon-144x144.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://groups.io/img/org.1/favicons/apple-icon-152x152.png">
+			<link rel="apple-touch-icon" sizes="180x180" href="https://groups.io/img/org.1/favicons/apple-icon-180x180.png">
+			<link rel="icon" type="image/png" sizes="192x192"  href="../../../../img/org.1/favicons/android-icon-192x192.png">
+			<link rel="icon" type="image/png" sizes="32x32" href="../../../../img/org.1/favicons/favicon-32x32.png">
+			<link rel="icon" type="image/png" sizes="96x96" href="../../../../img/org.1/favicons/favicon-96x96.png">
+			<link rel="icon" type="image/png" sizes="16x16" href="../../../../img/org.1/favicons/favicon-16x16.png">
+			<link rel="manifest" href="../../../../img/org.1/favicons/manifest.json">
+			<meta name="msapplication-TileColor" content="#ffffff">
+			<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+			
+			
+			
+
+<script>
+/* stubs */
+const hapticsImpactHeavy = async () => {
+};
+const hapticsImpactMedium = async () => {
+};
+const hapticsImpactLight = async () => {
+};
+const hapticsVibrate = async () => {
+};
+const hapticsSelectionStart = async () => {
+};
+const hapticsSelectionChanged = async () => {
+};
+const hapticsSelectionEnd = async () => {
+};
+</script>
+
+			
+<script>
+	
+		function setPullToRefresh() {}
+	
+	function gotoURL(inurl) {
+		window.location.href = inurl;
+		return;
+	}
+	function contentLoaded(isHTMX, f, caller = "") {
+		console.log("contentLoaded: " + isHTMX + " " + caller);
+		if (isHTMX == true) {
+			document.body.addEventListener('htmx:afterSettle', f, {once: true});
+		} else {
+			if (document.readyState !== 'loading') {
+				console.log('document is already ready, just execute code here');
+				f();
+			} else {
+				console.log('document was not ready, place code here');
+				document.addEventListener('DOMContentLoaded', f, {once: true});
+			}
+		}
+	}
+
+	// stub
+	function logError(data, url, linenumber) {
+		console.log(data)
+		return;
+	}
+	var pushSubToken;
+	var ignoreErrors = false;
+	var lastError = "";
+	
+		window.onerror = function(errorMessage, errorUrl, errorLine, errorColumn, errorObj) {
+			let column;
+			let stack;
+			if (console && console.log) {
+				console.log("msg:", errorMessage);
+				console.log("url:", errorUrl);
+				console.log("line:", errorLine);
+				if (errorColumn !== undefined && errorObj != null) {
+					console.log("column:", errorColumn);
+					column = errorColumn;
+				}
+				if (errorObj !== undefined && errorObj != null) {
+					console.log("stack:", errorObj.stack);
+					stack = errorObj.stack;
+				}
+				console.log("client_id:", "web.web08.237158.1714523381232795081");
+				console.log("last_error:", lastError);
+				console.log("stack:", stack);
+			}
+			if (errorUrl == "" || errorUrl === null) {
+				errorUrl = window.location.href;
+			}
+			if (errorMessage.includes("SecurityError:") == true) {
+				ignoreErrors = true;
+			}
+			if (ignoreErrors == true) {
+				console.log("cookies, disabled, ignoring");
+				lastError = errorMessage;
+				return;
+			}
+			jQuery.ajax({
+				type: 'POST',
+				url: '/jsclienterror',
+				data: {
+					msg: errorMessage,
+					url: errorUrl,
+					line: errorLine,
+					column: column,
+					stack: stack,
+					last_error: lastError,
+					client_id: "web.web08.237158.1714523381232795081"
+				},
+				success: function() {
+					if (console && console.log) {
+						console.log('JS error report successful.');
+					}
+					lastError = errorMessage;
+				},
+				error: function() {
+					if (console && console.error) {
+						console.error('JS error report submission failed!');
+					}
+					lastError = errorMessage;
+				}
+			});
+			return true;
+		}
+	
+</script>
+			
+			
+			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
+			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
+			<link href="../../../../css/application-0fdc8fb7b212ef119ea05f76b6c42703.css" rel="stylesheet" id="groupsio-css">
+			<script src="../../../../js/application-2fb8693374ebdea0ffcbb3b8c1d39910.js" id="groupsio-js"></script>
+			<script src="../../../../js/run_prettify.js"></script>
+			<title>
+				
+	MTFHRT@groups.io | Wiki
+
+			</title>
+			
+
+			
+				
+
+
+  
+			
+			
+
+<script>
+	htmx.config.scrollBehavior = "instant";
+	htmx.config.historyCacheSize = 0;
+	htmx.config.defaultSettleDelay = 0;
+	console.log("FULL PAGE LOAD");
+</script>
+		</head>
+		<body id="body" class="" hx-headers='{"Accept-Version": "7efa45c3c9d9df5d5c891fb6d7c86572635ba331"}' hx-ext="preload" hx-boost="false">
+			
+				<script>
+					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+						document.body.classList.add('dark-mode');
+					}
+				</script>
+			
+
+			
+				<div class="navbar navbar-head navbar-fixed-top"  role="navigation" id="headerbar">
+					<div class="container-fluid" style="padding-left:0px;">
+						<a href="https://groups.io" class="navbar-left">
+							<img src="../../../../img/org.1/mainlogo.png" height="50" alt="Groups.io">
+						</a>
+							
+								<ul class="nav navbar-nav hidden-xs">
+									<li>
+										<a href="https://groups.io/search">
+											Find or Create a Group
+										</a>
+									</li>
+									
+								</ul>
+							
+							<ul class="nav navbar-nav pull-right visible-xs" style="margin-top:5px;margin-bottom:5px;">
+								<li>
+									<a href="171431.html#" data-toggle="modal" data-target="#mobileAccount">
+										<i class="fa-fw fa fa-bars fa-lg"></i>
+									</a>
+								</li>
+							</ul>
+
+							<ul class="nav navbar-nav pull-right hidden-xs">
+								<li class="dropdown">
+									<a href="171431.html#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<i class="fa-fw fa-regular fa-globe"></i>
+										
+											EN
+										
+										<b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="https://groups.io/unsetlang">
+												EN
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/de">
+												DE
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/es">
+												ES
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/fr">
+												FR
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/it">
+												IT
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/uk">
+												UK
+											</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="https://groups.io/helpcenter" target="_blank">
+										Help
+									</a>
+								</li>
+								<li>
+									<a href="https://groups.io/login">
+										<i class="fa fa-sign-in-alt"></i>
+										Log In
+									</a>
+								</li>
+								
+									<li>
+										<a href="https://groups.io/register">
+											<i class="fa fa-user"></i>
+											Sign Up
+										</a>
+									</li>
+								
+							</ul>
+					</div>
+				</div>
+				<div class="modal fade" id="mobileAccount" role="dialog">
+					<div class="modal-dialog" style="margin-top:50px;">
+						<div class="modal-content">
+							<div class="modal-body">
+
+									<ul class="list-group noborderlist">
+
+										<li class="noborderitem list-group-item">
+											<a href="https://groups.io/login">
+												<i class="fa fa-sign-in-alt"></i>
+												Log In
+											</a>
+										</li>
+										
+											<li class="noborderitem list-group-item">
+												<a href="https://groups.io/register">
+													<i class="fa fa-user"></i>
+													Sign Up
+												</a>
+											</li>
+										
+										<li class="noborderitem list-group-item">
+											<a href="https://groups.io/helpcenter" target="_blank">
+												<i class="fa-fw fa fa-question-circle"></i>
+												Help
+											</a>
+										</li>
+
+										<li class="dropdown noborderitem list-group-item">
+											<a href="171431.html#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<i class="fa-fw fa-regular fa-globe"></i>
+												
+													EN
+												
+												<b class="caret"></b>
+											</a>
+											<ul class="dropdown-menu">
+												<li>
+													<a href="https://groups.io/unsetlang">
+														EN
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/de">
+														DE
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/es">
+														ES
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/fr">
+														FR
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/it">
+														IT
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/uk">
+														UK
+													</a>
+												</li>
+											</ul>
+										</li>
+
+									</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+<script>
+var groupnavigatorData = [
+
+];
+</script>
+
+
+<!-- Modal Dialog for Autocomplete -->
+<div class="modal fade" id="groupnavigatorModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <input type="text" class="form-control" id="groupnavigatorInput" placeholder="Go to group..." style="margin-bottom:10px">
+        <div id="groupnavigatorContainer" class="autocompleteResults" style="max-height:250px; overflow-y: auto;"></div>
+		<div class="text-center" style="margin-top:10px; font-size:12px;"><i class="fa-sharp fa-arrow-up-arrow-down"></i> to navigate&nbsp;&nbsp;&nbsp;<i class="fa-sharp fa-arrow-turn-down-left"></i> to use&nbsp;&nbsp;&nbsp;<strong>esc</strong> to dismiss</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// Keep track of the currently selected index
+var selectedIndex = -1;
+
+// Function to highlight the matched substring
+function highlightSubstring(str, substring) {
+  var index = str.toLowerCase().indexOf(substring.toLowerCase());
+  if (index !== -1) {
+    var before = str.substring(0, index);
+    var middle = str.substring(index, index + substring.length);
+    var after = str.substring(index + substring.length);
+    return before + '<span class="autocomplete-highlight">' + middle + '</span>' + after;
+  }
+  return str;
+}
+
+// Function to highlight the selected item and ensure it is visible in the scrollable list
+function highlightSelectedItem(modalName) {
+  var listContainer = document.getElementById(modalName + 'Container');
+  var items = document.getElementsByClassName(modalName + '-list-item');
+  Array.from(items).forEach(function(item, idx) {
+    item.className = idx === selectedIndex ? modalName + '-list-item autocomplete-list-item btn-primary no-hover' : modalName + '-list-item autocomplete-list-item no-hover'; // Apply btn-primary class to the selected item
+  });
+  if (items.length > 0 && selectedIndex >= 0) {
+    var selectedItem = items[selectedIndex];
+    var containerTop = listContainer.scrollTop;
+    var containerBottom = containerTop + listContainer.clientHeight;
+    var itemTop = selectedItem.offsetTop;
+    var itemBottom = itemTop + selectedItem.offsetHeight;
+	const fudge = 59;
+    if (selectedIndex > 0 && itemTop > containerBottom) {
+      // If there are items below the selected item and the selected item is not fully visible, scroll down
+      listContainer.scrollTop = itemTop - listContainer.clientHeight + items[selectedIndex - 1].offsetHeight;
+    } else if (selectedIndex < items.length - 1 && (itemTop - fudge) < containerTop) {
+      // If there are items above the selected item and the selected item is not fully visible, scroll up
+      listContainer.scrollTop = itemTop - fudge - items[selectedIndex + 1].offsetHeight;
+    }
+  }
+}
+
+// function to populate the list based on the input
+function populateList(modalName, data) {
+  var input = document.getElementById(modalName+'Input').value;
+  var listContainer = document.getElementById(modalName+'Container');
+  listContainer.innerHTML = '';
+  data.forEach(function(item) {
+    if (item.name.toLowerCase().includes(input.toLowerCase())) {
+      var div = document.createElement('div');
+      div.innerHTML = highlightSubstring(item.name, input);
+      div.className = modalName+'-list-item autocomplete-list-item no-hover'; // Apply no-hover class
+      div.addEventListener('click', function() {
+        // Navigate to the specified URL when a list item is clicked
+        window.location.href = item.url;
+      });
+      div.addEventListener('mousemove', function() {
+        // Remove no-hover class from all items when the mouse is moved over any item
+		console.log("mouse move");
+        var items = document.getElementsByClassName(modalName+'-list-item');
+        Array.from(items).forEach(function(item) {
+          item.classList.remove('no-hover');
+        });
+      });
+      listContainer.appendChild(div);
+    }
+  });
+  highlightSelectedItem(modalName);
+}
+
+function InitAutocomplete(modalName, data) {
+	// Focus the input field when the modal is shown and populate the list
+	$('#' + modalName + 'Modal').on('shown.bs.modal', function () {
+		$('#' + modalName + 'Input').focus().val('');
+		populateList(modalName, data);
+		selectedIndex = 0;
+		highlightSelectedItem(modalName);
+	});
+
+	// Event listener for input field typing
+	document.getElementById(modalName + 'Input').addEventListener('input', function() {
+		populateList(modalName, data);
+		selectedIndex = 0;
+	});
+
+	// Event listener for arrow keys and enter key
+	document.getElementById(modalName + 'Input').addEventListener('keydown', function(event) {
+		var items = document.getElementsByClassName(modalName + '-list-item');
+		if (event.key === 'ArrowDown') {
+			event.preventDefault();
+			if (selectedIndex < items.length - 1) selectedIndex++;
+			highlightSelectedItem(modalName);
+		} else if (event.key === 'ArrowUp') {
+			event.preventDefault();
+			if (selectedIndex > 0) selectedIndex--;
+			highlightSelectedItem(modalName);
+		} else if (event.key === 'Enter' && selectedIndex >= 0 && selectedIndex < items.length) {
+			event.preventDefault();
+			items[selectedIndex].click();
+		}
+	});
+}
+
+function showAutocompleteModal(modalName) {
+	$('#' + modalName + 'Modal').modal('show');
+	selectedIndex = -1;
+}
+</script>
+
+			<div id="content" class="container-fluid">
+<script>
+	InitAutocomplete("groupnavigator", groupnavigatorData);
+
+	document.body.addEventListener("showReloadPageDialog", function(evt) {
+		$('#reloadPageModal').modal('show');
+	});
+
+	// submitEvent acts like .submit(), except it is compatible with the app, by using events instead.
+	function submitEvent(ele) {
+		console.log("in submitEvent");
+		if (ele.startsWith('#')) {
+    		ele = ele.slice(1);
+		}
+		document.getElementById(ele).submit();
+		return;
+		/*
+		const theEvent = new CustomEvent('submit', {
+			bubbles: true,
+			cancelable: true
+		});
+		if (typeof ele === 'string' || ele instanceof String) {
+			if (ele.startsWith("#") == true) {
+				ele = ele.slice(1);
+			}
+			if (document.getElementById(ele).dispatchEvent(theEvent) == true) {
+				// if not cancelled, do normal submit
+				console.log("calling submit");
+				document.getElementById(ele).submit();
+			}
+			return;
+		}
+		// assume ele is the element
+		if (ele.dispatchEvent(theEvent) == true) {
+			// if not cancelled, do normal submit
+			console.log("calling submit");
+			ele.submit();
+		}
+		*/
+	}
+
+	// gioDestroy is a convenience function for destroy callbacks
+	function gioDestroy(eventCB) {
+		let internalGioDestroy = function(evt) {
+			// do not activate on infinite scroll events
+			if (evt.detail.target !== undefined && evt.detail.target.id != "maincontent-refresh") {
+				console.log("Ignoring infinite scroll event");
+				return;
+			}
+			console.log("Calling destroy callback");
+			eventCB(evt);
+		}
+		document.body.addEventListener("htmx:beforeSwap", internalGioDestroy, {once: true});
+		document.body.addEventListener("htmx:historyCacheMiss", internalGioDestroy, {once: true});
+	}
+			
+	var drawerCloseFunc = function(evt) {
+		console.log("in drawerCloseFunc");
+		// Find all elements with the class 'drawer'
+		var drawers = document.querySelectorAll('.drawer');
+
+		// Iterate over each element and call closeDrawer() on each
+		drawers.forEach(function(obj) {
+			drawerObj.closeDrawer(obj);
+		});
+		$('.modal').modal('hide');
+	}
+	document.body.addEventListener('htmx:beforeSwap', drawerCloseFunc);
+	document.body.addEventListener('htmx:historyCacheMiss', drawerCloseFunc);
+
+	var keydownFunc = function(event) {
+		var tagName = event.target.tagName.toLowerCase();
+		if (tagName === 'input' || tagName === 'textarea' || event.target.isContentEditable) {
+			if (event.key === 'Escape') {
+				event.target.blur();
+			}
+			return;
+		}
+		// check if the viewimages viewer is up
+		let element = document.getElementById('overlay');
+		if (element && element.classList.contains('visible')) {
+			return;
+		}
+		console.log("HERE: " + event.key + " " + event.ctrlKey + " " + event.shiftKey + " " + event.metaKey);
+		if (event.ctrlKey && event.shiftKey && (event.key === '?' || event.key === '/')) {
+			event.preventDefault(); // Prevent the default action
+			// Show the modal dialog for keyboard shortcuts
+			$('#shortcutModal').modal('show');
+			return;
+		}
+		$('#shortcutModal').modal('hide');
+
+		if (event.key.toLowerCase() === 'g') {
+			if (navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
+				// For Mac
+				// Check if Command (event.metaKey) is pressed, and either Option (event.altKey) is pressed or not
+				if (event.metaKey) {
+					event.preventDefault();
+					showAutocompleteModal("groupnavigator");
+					return;
+				}
+			} else {
+				// For Windows and Linux
+				if (event.ctrlKey) {
+					event.preventDefault();
+					showAutocompleteModal("groupnavigator");
+					return;
+				}
+			}
+		}
+
+		// Check if the pressed key is '/'
+		if ((event.key === 'f' || event.key === 'F') && event.shiftKey) {
+			if (navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
+				if (event.metaKey) {
+					event.preventDefault(); // Prevent the default action
+					// Focus on the search box
+					let box = document.getElementById('searchbox')
+					if (box != null) {
+						document.getElementById('searchbox').focus();
+					}
+				}
+			} else {
+				// For Windows and Linux
+				if (event.ctrlKey) {
+					event.preventDefault(); // Prevent the default action
+					// Focus on the search box
+					let box = document.getElementById('searchbox')
+					if (box != null) {
+						document.getElementById('searchbox').focus();
+					}
+				}
+			}
+		}
+	}
+	document.addEventListener('keydown', keydownFunc);
+	var removeDrawerCloseFunc = function(evt) {
+		document.body.removeEventListener('htmx:beforeSwap', drawerCloseFunc);
+		document.body.removeEventListener('htmx:historyCacheMiss', drawerCloseFunc);
+		document.removeEventListener('keydown', keydownFunc);
+	}
+	document.body.addEventListener("htmx:historyCacheMiss", removeDrawerCloseFunc, {once: true});
+</script>
+<!-- Modal Dialog for Keyboard Shortcuts -->
+<div class="modal fade" id="shortcutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Keyboard Shortcuts</h4>
+      </div>
+      <div class="modal-body">
+		<div class="row">
+			<div class="col-xs-3 text-right"><strong>ctrl</strong> + <strong>shift</strong> + <strong>?</strong>&nbsp;&nbsp;:</div>
+			<div class="col-xs-9" style="margin-left: -23px;">Show all keyboard shortcuts</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>shift</strong> + <strong>f</strong>&nbsp;&nbsp;:</div>
+			<div class="col-xs-9" style="margin-left: -23px;">Find</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>g</strong>&nbsp;&nbsp;:</div>
+			<div class="col-xs-9" style="margin-left: -23px;">Navigate to a group</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>/</strong>&nbsp;&nbsp;:</div>
+			<div class="col-xs-9" style="margin-left: -23px;">Quick actions</div>
+		</div>
+		</div>
+		<div class="text-center" style="margin-top:10px; margin-bottom:10px; font-size:12px;"><strong>esc</strong> to dismiss</div>
+    </div>
+  </div>
+</div>
+<!-- Modal Dialog for Keyboard Shortcuts -->
+<div class="modal fade" id="reloadPageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Update</h4>
+      </div>
+      <div class="modal-body">
+		  The website has been updated. Please click the button to reload the page.
+	  </div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default btn-sm" data-dismiss="modal" onclick="javascript:location.reload()">
+			Reload
+		</button>
+	</div>
+    </div>
+  </div>
+</div>
+
+				
+	
+	<div id="mainrow" class="row"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-swap="innerHTML scroll:top" >
+		<div id="groupsidebar" class="scrollbar hidden-print">
+			<div class="scrollbar-content">
+				<div id="accordion" role="tablist" aria-multiselectable="true" style="margin-bottom:20px;">
+					<div class="list-group noborderlist panel" style="border:0;margin-bottom:0px">
+						
+
+
+	<a id="sidebar-home" title="Group Home" href="https://groups.io/g/MTFHRT" class="list-group-item sidebar-item">
+		<i class="fa-fw fa fa-home fa-lg"></i>
+		Home
+		
+	</a>
+
+	
+
+	
+
+	
+		
+	
+		
+
+	<a title="Messages" href="https://groups.io/g/MTFHRT/topics?sidebar=true" id="sidebar-archives" class="noborderitem list-group-item sidebar-item sidebar-item-archives"> 
+		<i class="fa-fw fa fa-comments fa-lg"></i>
+		Messages
+		<span id="sidebar-archives-badge" class="badge"></span>
+	</a>
+
+	
+	
+	
+	
+	
+		
+
+	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" id="sidebar-hashtags" class="noborderitem list-group-item sidebar-item sidebar-item-hashtags"> 
+		<i class="fa-fw fa fa-hashtag fa-lg"></i>
+		Hashtags
+		<span id="sidebar-hashtags-badge" class="badge"></span>
+	</a>
+
+	
+
+		
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+		
+
+	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" id="sidebar-wiki" class="noborderitem list-group-item sidebar-item sidebar-item-wiki active"> 
+		<i class="fa-fw fa fa-book fa-lg"></i>
+		Wiki
+		<span id="sidebar-wiki-badge" class="badge"></span>
+	</a>
+
+	
+
+	
+
+					</div>
+				</div>
+				
+	<div class="text-center" style="font-size:13px;margin-bottom:30px">
+		<div style="padding-bottom:10px;">
+			<strong>ctrl</strong> + <strong>shift</strong> + <strong>?</strong> for shortcuts
+		</div>
+		<div style="padding-bottom:5px;">
+			<a href="https://groups.io/static/about">
+				About
+			</a> &middot;
+			<a href="https://groups.io/static/features">
+				Features
+			</a> &middot;
+			<a href="https://groups.io/static/pricing">
+				Pricing
+			</a>
+		</div>
+		<div style="padding-bottom:5px;">
+			<a rel="nofollow" href="https://groups.io/g/updates/messages?expanded=1">
+				Updates
+			</a> &middot;
+			<a href="https://groups.io/static/tos">
+				Terms
+			</a> &middot;
+			<a href="https://groups.io/helpcenter" target="_blank">
+				Help
+			</a>
+		</div>
+		<div style="padding-bottom:5px;">
+			&copy; 2024 Groups.io
+		</div>
+	</div>
+
+			</div>
+		</div>
+		<div id="maincontent" class="groupmaincontent">
+			<div id="maincontent-refresh" style="height:100%">
+				<div id="maincontent-column" class="col-xs-12 maincontent-column">
+					
+	
+	
+	
+
+	
+
+	<div class="alert alert-info alert-dismissible" role="alert">
+		We are pleased to announce several enhancements to the Groups.io web and app experience. <a href="https://groups.io/static/newui" style="color:#333333">Click here</a> for more information.
+	</div>
+
+	
+	<div id="alertdiv"></div>
+	<div class="noticetemplate template">
+		<div class="alert alert-success alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">
+					&times;
+				</span>
+			</button>
+			<span id="msg"></span>
+		</div>
+	</div>
+	<div class="alerttemplate template">
+		<div class="alert alert-danger alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">
+					&times;
+				</span>
+			</button>
+			<span id="msg"></span>
+		</div>
+	</div>
+	<div class="alertnoclosetemplate template">
+		<div class="alert alert-danger" role="alert">
+			<span id="msg"></span>
+		</div>
+	</div>
+
+
+
+ 
+<script>
+function dismiss() {
+    console.log("dismiss");
+    $.get( "/dismissalert");
+}
+
+var $alerttemplate = $(".alerttemplate");
+var $alertnoclosetemplate = $(".alertnoclosetemplate");
+var $noticetemplate = $(".noticetemplate");
+function createAlert(msg, isError, autoClose, noClose) {
+	if (isError == false) {
+		$newPanel = $noticetemplate.clone();
+	} else {
+        if (noClose) {
+		  $newPanel = $alertnoclosetemplate.clone();
+        } else {
+		  $newPanel = $alerttemplate.clone();
+        }
+	}
+	$newPanel.find("#msg").html(msg);
+	if (autoClose == true) {
+		$("#alertdiv").append($newPanel.fadeTo(2000, 500).slideUp(500, function(){
+		    $newPanel.slideUp(500);
+		    $newPanel.remove();
+		}));  	
+	} else {
+		$("#alertdiv").append($newPanel.fadeIn());
+	}
+    return $newPanel;
+}
+
+
+
+
+</script>
+
+
+
+	
+		
+
+	<form class="form-inline pull-right hidden-xs" method="get" action="https://groups.io/g/MTFHRT/wikisearch">
+		
+		
+		<div class="input-group">
+			<input id="searchbox" type="text" class="form-control" placeholder="Search" title="Search" name="q" size="20" style="height:37px">
+			<div class="input-group-btn">
+				<button class="btn btn-primary" type="submit" style="height:37px;">
+					<span class="fa fa-search"></span>
+				</button>
+			</div>
+		</div>
+	</form>
+
+	
+		<span class="hidden-sm hidden-md hidden-lg pull-right" style="padding:8px 15px;"><a data-toggle="modal" data-target="#searchModal"><i class="fa fa-search"></i></a></span>
+		<ol class="breadcrumb">
+			<li class="hidden-xs"><a href="https://groups.io/g/MTFHRT"><i class="fa fa-home"></i> MTFHRT</a></li>
+			<li><a href="https://groups.io/g/MTFHRT/wiki"><i class="fa fa-book"></i> Wiki</a></li>
+			
+			<li class="active"><i class="fa fa-book"></i> Basic Estrogel Guide</li>
+		</ol>
+	
+
+	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">
+							&times;
+						</span>
+						<span class="sr-only">
+							Close
+						</span>
+					</button>
+					<h4 class="modal-title" id="searchModalLabel">
+						Search
+					</h4>
+				</div>
+				<form class="form-horizontal" method="get" action="https://groups.io/g/MTFHRT/wikisearch">
+					
+					<div class="modal-body">
+						<div class="form-group">
+							<div class="col-sm-12">
+								<input type="text" class="form-control" placeholder="Search" title="Search" name="q">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-primary btn-sm">
+							<i class="fa fa-search"></i>
+							Search
+						</button>
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+							<i class="fa fa-times"></i>
+							Cancel
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	
+
+	
+	<div class="row" style="margin-bottom:20px;">
+		<div class="col-xs-12">
+			<span class="hidden-print">
+				<div class="btn-group">
+					<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+						Pages
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						
+							<li>
+								<a href="../30843.html">
+									Basic Estrogel Guide
+								</a>
+							</li>
+						
+							<li>
+								<a href="../30846.html">
+									Home
+								</a>
+							</li>
+						
+							<li>
+								<a href="../32288.html">
+									How to measure melting point of most organic powders using typical household items.
+								</a>
+							</li>
+						
+							<li>
+								<a href="../34293.html">
+									steam sterilization
+								</a>
+							</li>
+						
+							<li>
+								<a href="../29602.html">
+									Ultimate DIY
+								</a>
+							</li>
+						
+					</ul>
+				</div>
+				
+			</span>
+
+	
+		<div class="pull-right">
+			Last edited 
+<script id="timedispupdated30843">
+	$('#timedispupdated30843').replaceWith(DisplayShortTime(1661574176278897107, false
+		));
+</script>
+ &middot;
+			<a href="history.html">
+				5 revisions
+			</a>
+			&nbsp;&nbsp;
+			<a href="../30843.html">
+				<i class="fa fa-link fa-lg"></i>
+			</a>
+		</div>
+	
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			
+				<span class="wikidisplay user-content">
+					<h1>DIY Estrogel Guide</h1>
+<p>This guide will instruct you on the materials and tools needed for home DIY basic estrogel compounding. There are easier methods out there, such as mixing estradiol into pre-made hand sanitizers, but this is for those who would prefer to compound their own gels, or manufacture at a scale where buying hand sanitizer is cost prohibitive. There are also some concerns about hand sanitizer formulations containing denaturing agents or other additives that might be bad for transdermal drug delivery. If you are interested in more experimental gel formulations or ones based on hand sanitizer, you can check out reddit.com/r/estrogel/wiki, which is where I got most of this information. <br/><br/>With this guide, you can produce supersaturated estrogels that are suitable for high-dose estradiol monotherapy. This is a great alternative to injections for the needle-shy or paranoid. <br/><br/>This recipe is based off of a patent that includes a generic estrogel recipe, available here: <a href="https://patents.google.com/patent/US20070154533A1/en" target="_blank" rel="nofollow noopener">https://patents.google.com/patent/US20070154533A1/en</a> - page 39 of the PDF has the recipe. This recipe has been adjusted for higher concentrations and higher absorption, using 60% ethanol, which is known to have the best absorption for estradiol. (<a href="https://sci-hub.se/https://doi.org/10.1016/j.addr.2012.09.032" target="_blank" rel="nofollow noopener">https://sci-hub.se/https://doi.org/10.1016/j.addr.2012.09.032</a>)</p>
+<p> </p>
+<h3>Sourcing Estradiol</h3>
+<p>The sources for estradiol are much the same as DIY injections, so I won&#39;t go into detail here. Look on made-in-china.com and search for 17b-estradiol, or more specifically, CAS number 50-28-2. For a single person, assuming they are doing monotherapy at 1-2mg a day, a typical yearly consumption is half a gram. This means 50 grams is enough to last you 100 years. I got 100 grams for $200 shipped from Hubei Vanz. You want 17 beta estradiol, not estradiol valerate, cypionate, enanthate, etc. </p>
+<h3><br/>Other ingredients</h3>
+<p>Other ingredients, including the quantity and price I got them before, are listed below.</p>
+<ul>
+<li>Carbomer/Carbopol 980 x 120g - $25 - amazon, ebay, cosmetic supply, aliexpress</li>
+<li>Triethanolamine x 250ml - $20 - amazon, ebay, cosmetic supply</li>
+<li>Distilled Water - $2-3 from your local grocery store</li>
+<li>95% (190 proof) grain alcohol, such as everclear - 750 ml - $20 - liquor store (any alcohol over 60%/120 proof is okay)</li>
+</ul>
+<h3>Tools</h3>
+<ul>
+<li>Coffee frother wand - $5-10 on ebay, aliexpress, amazon. The longer and narrower the better.</li>
+<li>Airless pump dispenser bottles - I have used this style(<a href="https://m.media-amazon.com/images/I/51D0UnNSu+L._SL1500_.jpg" target="_blank" rel="nofollow noopener">https://m.media-amazon.com/images/I/51D0UnNSu+L._SL1500_.jpg</a>) in the past because one pump = 225mg which is roughly equivalent to .5mg of estradiol (at .24% concentration). This works out well for me because it means two pumps a day is enough for monotherapy. It also means 1 80 ml bottle (80 ml is just under the 3 oz limit on airplanes) is enough to last me roughly a month. These might not be the easiest pumps to work with though, but more on that later.</li>
+<li>100ml syringes with cap (like these <a href="https://www.amazon.com/100ml-Syringe-s-Caps-Industrial-Scientific/dp/B086H7TC1T" target="_blank" rel="nofollow noopener">https://www.amazon.com/100ml-Syringe-s-Caps-Industrial-Scientific/dp/B086H7TC1T</a>) - also might not be necessary, more on that later</li>
+<li>milligram scale such as the gemini-20 - $20-30</li>
+<li>mixing container of some kind, such as a mason jar, glass cup, beaker, etc.</li>
+<li>optional - metal stirrers and weighing spatulas such as these: <a href="https://www.amazon.com/gp/product/B07HHWCNB9/" target="_blank" rel="nofollow noopener">https://www.amazon.com/gp/product/B07HHWCNB9/</a> - $10<br/><br/></li>
+</ul>
+<p><strong>Total:</strong> I spent about $350 to get started, but you can get everything much cheaper if you are willing to shop around and buy small quantities. The amount of carbomer, estradiol, triethanolamine, etc. per bottle is very little, so even small amounts will last you a long time. If you spent what I did, raw materials alone (not counting tools) and the pump bottle is about $5-10 per bottle. The most expensive components for me are ethanol and airless pumps. Buying airless pumps in bulk from alibaba or made-in-china sellers can get prices down lower, I know some also try using 99% isopropyl alcohol instead of ethanol, though I haven&#39;t tried this. One 80ml bottle will last you about a month at .5mg a day @ .24% concentration.</p>
+<h3>Preparation of gel</h3>
+<p>Gel preparation is quite simple, first you need to find out how much alcohol and water you need. You are trying to reach a concentration of 60/40 ethanol to water. You can easily find out how much water you need to reach an overall concentration of 60%(by volume). You can easily find online calculators for this, such as here: <a href="https://ezcalc.me/alcohol-dilution-calculator/" target="_blank" rel="nofollow noopener">https://ezcalc.me/alcohol-dilution-calculator/</a>. Assuming you want to make 100ml of gel, for example, and have 95%(190 proof) grain alcohol, you&#39;ll need ~63ml of 95% ethanol and 37ml of distilled water. From here on out I will assume you want 100ml of gel and have 95% ethanol.</p>
+<p> </p>
+<h4>Recipe</h4>
+<p>63ml ethanol<br/>37ml distilled water<br/>1g Carbomer 980<br/>1.35g Triethanolamine<br/>Estradiol to your desired concentration, I usually do .24%(by weight of the entire solution, accounting for the density of 95% ethanol at ~.8g/ml), which comes to ~215mg.</p>
+<p> </p>
+<h4>Procedure</h4>
+<ol>
+<li>Pour the ethanol into a mixing container, such as a beaker or jar.</li>
+<li>Weigh your estradiol on a weighing paper, weighing boat, or a piece of tinfoil with your weighing spatulas, or another instrument.</li>
+<li>Dissolve your estradiol into your ethanol and stir with a stirring instrument or coffee frother. Your solution should be clear, without any undissolved material.</li>
+<li>Add water and stir.</li>
+<li>Add Carbomer 980, and mix with coffee frother. This can take a long time to dissolve completely. I usually stir it with the coffee frother until most of it dissolves, then I let the solution sit while covered for 20 minutes. Then, I come back and stir it again until there are no clumps or undissolved powder.</li>
+<li>Remove plunger from 100ml syringe. Twist on luer lock cap.</li>
+<li>Transfer gel solution into your 100ml syringe, from the plunger side.</li>
+<li>Add triethanolamine to your solution, stirring with your coffee frother. The solution will now go from liquid to a thicker gel, much like hand sanitizer. Stir extremely thoroughly and try to distribute the triethanolamine throughout the entire solution.</li>
+<li>Insert plunger into back of syringe and remove the luer lock cap.</li>
+<li>Use syringe to dispense gel into your airless pump of choice. You may want to stop a few times to let the gel settle to avoid huge air bubbles. You can tap the bottom of the airless pump against a hard surface to make the gel settle.</li>
+</ol>
+<p> </p>
+<h3>Potential improvements and challenges</h3>
+<p>The hardest part of this procedure is working with the gel after triethanolamine has been added, as it almost immediately becomes very thick, clumpy, sticky, etc. You do not want to add triethanolamine to the gel before it is either in its final container, or in a syringe. If you add triethanolamine in the mixing container, it will be extremely difficult to transfer. If you get airless pumps of this style: <a href="https://www.aliexpress.com/item/2251832632413742.html" target="_blank" rel="nofollow noopener">https://www.aliexpress.com/item/2251832632413742.html</a> you may be able to add the triethanolamine to the solution after it&#39;s already in the pump, however the mouth needs to be wide enough to fit your coffee frother. You need to be able to thoroughly mix the triethanolamine so that it can neutralize the pH of the carbomer 980. I haven&#39;t tried these bottles, but I have some other candidates on order and will update if I find a better bottle.<br/><br/>One possible area of improvement is adding a penetration enhancer, such as oleic acid, d-limonene, or isopropyl myristate. I personally experimented with 2% isopropyl myristate but found it incredibly irritating to my skin, and made the gel burn really badly. It also fell out of solution in my pump bottle. Personally, I just apply the gel scrotally, which results in extremely high absorption, so I feel no need to use penetration enhancers.</p>
+<p> </p>
+<h3>Usage/my results</h3>
+<p>With the bottles I recommend, each pump will dispense about 225mg of gel, or .5mg per pump. I used 4 pumps a day at first, putting 1 pump on my scrotum, and 1 on my thigh, morning and night, and after a month of this, I had the following blood test results:<br/>Testosterone: 29 ng/dL<br/>Estradiol: 326 pg/mL<br/><br/>I am currently lowering my dose to 2 pumps a day, on the scrotum only, to see if 1mg scrotally is enough for monotherapy. I will report back once I have blood test results. Although conventional wisdom with transdermal delivery says that transdermal gels have a depot effect, scrotal application has not been studied much and it could be the case that absorption is much quicker, so to be safe I apply twice a day rather than using 2 pumps once a day, and I also get my blood tests done at trough (before I do my morning dose).<br/><br/>This is a promising alternative to injections, and because it&#39;s alcohol based, the risk of contamination is low, even without a clean room or heat sterilization. This is also a great alternative for those who are needle-phobic or are for some reason not wanting to do injections. <br/><br/>If I can answer any questions, please feel free to reach out to me at <a href="mailto:owl@owl.haus" target="_blank" rel="nofollow noopener">owl@owl.haus</a> or on discord: allie castro#1234</p>
+<p>Discussion: https://groups.io/g/MTFHRT/topic/wiki_article_about_estrogel/93220481</p>
+					<p />
+				</span>
+			
+		</div>
+		
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			
+		</div>
+	</div>
+	
+<script>
+contentLoaded(false, function() {
+	UpdateSidebar("wiki");
+});
+</script>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row hidden-print" id="mobileSidebar"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-swap="innerHTML scroll:top" >
+		<div class="col-xs-12 hidden-md hidden-lg">
+			<div class="navbar navbar-default navbar-fixed-bottom">
+				<div class="container" style="display: flex; justify-content: space-around;">
+					
+						
+	
+		
+	
+	<div id="mobilesidebar-archives" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center;" hx-get="https://groups.io/g/MTFHRT/topics?sidebar=true"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-swap="innerHTML scroll:top" >
+		<div style="display: inline-block; position: relative;">
+			<div style="position: relative;display: inline-block;">
+			<i class="fa-fw fa-light fa-comments fa-2x"></i>
+			
+			</div><br>
+			<span style="font-size:12px;">Messages</span>
+		</div>
+	</div>
+
+	
+	
+
+						
+	
+
+					
+					<div style="flex: 1; text-align: center;margin-top:10px" data-drawer-trigger aria-controls="drawer-name" aria-expanded="false">
+						<i class="fa-fw fa-light fa-bars fa-2x"></i><br>
+						<span style="font-size:12px;">Menu</span>
+					</div>
+				</div>
+			</div>
+			<section class="drawer drawer--left" id="drawer-name" data-drawer-target>
+				<div class="drawer__overlay" data-drawer-close tabindex="-1"></div>
+				<div class="drawer__wrapper">
+					<div class="drawer__header">
+						<div class="drawer__title">
+							<i class="fa-fw fa-regular fa-bars fa-3x"></i>
+							<span class="sr-only">
+								More Options
+							</span>
+							More
+						</div>
+						<button class="drawer__close" data-drawer-close aria-label="Close Drawer"></button>
+					</div>
+					<div class="drawer__content">
+						<div class="list-group noborderlist">
+							
+
+
+	<a id="sidebar-home" title="Group Home" href="https://groups.io/g/MTFHRT" class="list-group-item sidebar-item">
+		<i class="fa-fw fa fa-home fa-lg"></i>
+		Home
+		
+	</a>
+
+	
+
+	
+
+	
+		
+	
+		
+
+	<a title="Messages" href="https://groups.io/g/MTFHRT/topics?sidebar=true" id="sidebar-archives-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-archives"> 
+		<i class="fa-fw fa fa-comments fa-lg"></i>
+		Messages
+		<span id="sidebar-archives-mobile-badge" class="badge"></span>
+	</a>
+
+	
+	
+	
+	
+	
+		
+
+	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" id="sidebar-hashtags-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-hashtags"> 
+		<i class="fa-fw fa fa-hashtag fa-lg"></i>
+		Hashtags
+		<span id="sidebar-hashtags-mobile-badge" class="badge"></span>
+	</a>
+
+	
+
+		
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+		
+
+	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" id="sidebar-wiki-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-wiki active"> 
+		<i class="fa-fw fa fa-book fa-lg"></i>
+		Wiki
+		<span id="sidebar-wiki-mobile-badge" class="badge"></span>
+	</a>
+
+	
+
+	
+
+							
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/about" style="border-top:5px solid #ddd;">
+									<i class="fa-fw fal fa-envelope fa-lg"></i>
+									About
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/features">
+									<i class="fa-fw far fa-tasks fa-lg"></i>
+									Features
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/pricing">
+									<i class="fa-fw fa fa-dollar-sign fa-lg"></i>
+									Pricing
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/g/updates/messages?expanded=1">
+									<i class="fa-fw far fa-thermometer-three-quarters fa-lg"></i>
+									# Changelog
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/tos">
+									<i class="fa-fw fal fa-newspaper fa-lg"></i>
+									Terms
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/helpcenter">
+									<i class="fa-fw fa fa-info-circle fa-lg"></i>
+									Help
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="http://twitter.com/groupsio" target="_blank">
+									<i class="fab fa-twitter fa-lg"></i>
+									Twitter
+								</a>
+							
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+<!-- Modal Dialog for Autocomplete -->
+<div class="modal fade" id="quickActionsModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <input type="text" class="form-control" id="quickActionsInput" placeholder="Go to page..." style="margin-bottom:10px">
+        <div id="quickActionsContainer" class="autocompleteResults" style="max-height:250px; overflow-y: auto;"></div>
+		<div class="text-center" style="margin-top:10px; font-size:12px;"><i class="fa-sharp fa-arrow-up-arrow-down"></i> to navigate&nbsp;&nbsp;&nbsp;<i class="fa-sharp fa-arrow-turn-down-left"></i> to use&nbsp;&nbsp;&nbsp;<strong>esc</strong> to dismiss</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script>
+	var quickActionsData = [
+		
+		
+			{name: "Group Home", url: "https://groups.io/g/MTFHRT"},
+		
+
+		
+			{name: "Topics", url: "https://groups.io/g/MTFHRT/topics"},
+			{name: "Messages", url: "https://groups.io/g/MTFHRT/messages"},
+			{name: "Expanded Messages", url: "https://groups.io/g/MTFHRT/messages?expanded=1"},
+		
+		
+			{name: "Polls", url: "https://groups.io/g/MTFHRT/polls"},
+		
+		
+			{name: "Hashtags", url: "https://groups.io/g/MTFHRT/hashtags"},
+		
+		
+		
+		
+
+		
+
+		
+		
+		
+
+		
+
+		
+		
+			{name: "Wiki", url: "https://groups.io/g/MTFHRT/wiki"},
+		
+		
+		/* other pages */
+		{name: "Help", url: "/helpcenter"},
+		{name: "Feed", url: "/feed"},
+		{name: "Your Groups", url: "/groups"},
+		{name: "Your Calendar", url: "/calendar"},
+		{name: "Your Activity", url: "/activity"},
+		{name: "Your Pending Messages", url: "/pendingmsgs"},
+		{name: "Account Login", url: "/account"},
+		{name: "Account Preferences", url: "/account?page=prefs"},
+		{name: "Account Security", url: "/account?page=security"},
+		{name: "Account Identity", url: "/account?page=profile&member_info_id=0"},
+		{name: "Account Notifications", url: "/account?page=notifications"},
+		{name: "Account Other Services", url: "/account?page=oauth"},
+		{name: "Account Bounces", url: "/account?page=bounces"},
+		{name: "Account Billing", url: "/account?page=billing"},
+		{name: "Find a Group", url: "/search?p=SubsCount,,,20,2,0,0"},
+	];
+
+
+	InitAutocomplete("quickActions", quickActionsData);
+
+	document.addEventListener('keydown', function(event) {
+		var tagName = event.target.tagName.toLowerCase();
+		if (tagName === 'input' || tagName === 'textarea' || event.target.isContentEditable) {
+			return;
+		}
+		// check if the viewimages viewer is up
+		let element = document.getElementById('overlay');
+		if (element && element.classList.contains('visible')) {
+			return;
+		}
+		if (event.key.toLowerCase() === '/') {
+			if (navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
+				// For Mac
+				// Check if Command (event.metaKey) is pressed, and either Option (event.altKey) is pressed or not
+				if (event.metaKey) {
+					event.preventDefault();
+					showAutocompleteModal("quickActions");
+					return;
+				}
+			} else {
+				// For Windows and Linux
+				if (event.ctrlKey) {
+					event.preventDefault();
+					showAutocompleteModal("quickActions");
+					return;
+				}
+			}
+		}
+	});
+	function UpdateSidebar(id) {
+		console.log(id + " was clicked");
+		var sidebarItems = document.querySelectorAll('.mobilesidebar-item');
+		sidebarItems.forEach(function(item) {
+			var iElement = item.getElementsByTagName('div')[0].getElementsByTagName('i')[0];
+			if (item.id == "mobilesidebar-" + id) {
+				console.log("making solid " + id)
+				iElement.classList.add('fa-solid');
+				iElement.classList.remove('fa-light');
+			} else {
+				iElement.classList.remove('fa-solid');
+				iElement.classList.add('fa-light');
+			}
+		});
+		var sidebarItems = document.querySelectorAll('.sidebar-item');
+		// remove 'active' class from all 'sidebar-item' elements
+		sidebarItems.forEach(function(item) {
+			if (item.id == "sidebar-" + id) {
+				console.log("making active " + id)
+				item.classList.add('active');
+			} else {
+				item.classList.remove('active');
+			}
+		});
+	}
+</script>
+
+
+			</div>
+			
+				<div id="scroll-top" class="scroll-top-wrapper hidden-xs">
+					<span class="scroll-top-inner">
+						<i class="fa fa-arrow-circle-up fa-fw fa-2x"></i>
+					</span>
+				</div>
+
+<script>
+	$(function() {
+		$(document).on('scroll', function() {
+			if ($(window).scrollTop() > 100) {
+				$('.scroll-top-wrapper').addClass('show');
+			} else {
+				$('.scroll-top-wrapper').removeClass('show');
+			}
+		});
+		$('.scroll-top-wrapper').on('click', scrollToTop);
+	});
+
+	function scrollToTop() {
+		verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
+		element = $('body');
+		offset = element.offset();
+		offsetTop = offset.top;
+		$('html, body').animate({
+			scrollTop: offsetTop
+		}, 100, 'linear');
+	}
+
+	if (navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
+		let elements = document.querySelectorAll('strong.ctrlmeta');
+		elements.forEach((element) => {
+			// Check if the innerText is "ctrl"
+			if (element.innerText === 'ctrl') {
+				// Create a new "i" element
+				let newElement = document.createElement('i');
+				newElement.classList.add('fa-solid', 'fa-command');
+				
+				// Replace the old "strong" element with the new "i" element
+				element.parentNode.replaceChild(newElement, element);
+			}
+		});
+	}
+</script>
+			
+			
+
+
+		</body>
+	</html>
+

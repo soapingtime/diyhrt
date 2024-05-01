@@ -6,7 +6,7 @@
 			<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			
-				<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			
 			<meta name="pinterest" content="nopin" />
 			<meta name="pinterest" content="nohover" />
@@ -59,9 +59,8 @@ const hapticsSelectionEnd = async () => {
 		window.location.href = inurl;
 		return;
 	}
-
-	function contentLoaded(isHTMX, f) {
-		console.log("contentLoaded: " + isHTMX);
+	function contentLoaded(isHTMX, f, caller = "") {
+		console.log("contentLoaded: " + isHTMX + " " + caller);
 		if (isHTMX == true) {
 			document.body.addEventListener('htmx:afterSettle', f, {once: true});
 		} else {
@@ -99,8 +98,9 @@ const hapticsSelectionEnd = async () => {
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.web09.774191.1713918442194199178");
+				console.log("client_id:", "web.web09.236870.1714523383744930602");
 				console.log("last_error:", lastError);
+				console.log("stack:", stack);
 			}
 			if (errorUrl == "" || errorUrl === null) {
 				errorUrl = window.location.href;
@@ -123,7 +123,7 @@ const hapticsSelectionEnd = async () => {
 					column: column,
 					stack: stack,
 					last_error: lastError,
-					client_id: "web.web09.774191.1713918442194199178"
+					client_id: "web.web09.236870.1714523383744930602"
 				},
 				success: function() {
 					if (console && console.log) {
@@ -144,10 +144,10 @@ const hapticsSelectionEnd = async () => {
 </script>
 			
 			
-			<script src="../../../../tinymce-4.7.13/tinymce.min.js"></script>
+			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-e223b9cc72bae00ecc93c35c77a729b2.css" rel="stylesheet" id="groupsio-css">
-			<script src="../../../../js/application-6b3b1791facc58d99b1e9c143e69bd45.js" id="groupsio-js"></script>
+			<link href="../../../../css/application-0fdc8fb7b212ef119ea05f76b6c42703.css" rel="stylesheet" id="groupsio-css">
+			<script src="../../../../js/application-2fb8693374ebdea0ffcbb3b8c1d39910.js" id="groupsio-js"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>
 				
@@ -164,10 +164,24 @@ const hapticsSelectionEnd = async () => {
 			
 			
 
+<script>
+	htmx.config.scrollBehavior = "instant";
+	htmx.config.historyCacheSize = 0;
+	htmx.config.defaultSettleDelay = 0;
+	console.log("FULL PAGE LOAD");
+</script>
 		</head>
-		<body class="fuelux" hx-headers='{"Accept-Version": "1ebf4951efb00d946a5fc7b821fff971e62f1ef8"}' hx-ext="preload">
+		<body id="body" class="" hx-headers='{"Accept-Version": "7efa45c3c9d9df5d5c891fb6d7c86572635ba331"}' hx-ext="preload" hx-boost="false">
 			
-				<div class="navbar navbar-head"  role="navigation" id="headerbar">
+				<script>
+					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+						document.body.classList.add('dark-mode');
+					}
+				</script>
+			
+
+			
+				<div class="navbar navbar-head navbar-fixed-top"  role="navigation" id="headerbar">
 					<div class="container-fluid" style="padding-left:0px;">
 						<a href="https://groups.io" class="navbar-left">
 							<img src="../../../../img/org.1/mainlogo.png" height="50" alt="Groups.io">
@@ -176,7 +190,6 @@ const hapticsSelectionEnd = async () => {
 								<ul class="nav navbar-nav hidden-xs">
 									<li>
 										<a href="https://groups.io/search">
-											<i class="fa fa-search"></i>
 											Find or Create a Group
 										</a>
 									</li>
@@ -235,7 +248,6 @@ const hapticsSelectionEnd = async () => {
 								</li>
 								<li>
 									<a href="https://groups.io/helpcenter" target="_blank">
-										<i class="fa-fw fa fa-info-circle"></i>
 										Help
 									</a>
 								</li>
@@ -279,7 +291,7 @@ const hapticsSelectionEnd = async () => {
 										
 										<li class="noborderitem list-group-item">
 											<a href="https://groups.io/helpcenter" target="_blank">
-												<i class="fa-fw fa fa-info-circle"></i>
+												<i class="fa-fw fa fa-question-circle"></i>
 												Help
 											</a>
 										</li>
@@ -332,11 +344,151 @@ const hapticsSelectionEnd = async () => {
 					</div>
 				</div>
 			
+<script>
+var groupnavigatorData = [
+
+];
+</script>
+
+
+<!-- Modal Dialog for Autocomplete -->
+<div class="modal fade" id="groupnavigatorModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <input type="text" class="form-control" id="groupnavigatorInput" placeholder="Go to group..." style="margin-bottom:10px">
+        <div id="groupnavigatorContainer" class="autocompleteResults" style="max-height:250px; overflow-y: auto;"></div>
+		<div class="text-center" style="margin-top:10px; font-size:12px;"><i class="fa-sharp fa-arrow-up-arrow-down"></i> to navigate&nbsp;&nbsp;&nbsp;<i class="fa-sharp fa-arrow-turn-down-left"></i> to use&nbsp;&nbsp;&nbsp;<strong>esc</strong> to dismiss</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// Keep track of the currently selected index
+var selectedIndex = -1;
+
+// Function to highlight the matched substring
+function highlightSubstring(str, substring) {
+  var index = str.toLowerCase().indexOf(substring.toLowerCase());
+  if (index !== -1) {
+    var before = str.substring(0, index);
+    var middle = str.substring(index, index + substring.length);
+    var after = str.substring(index + substring.length);
+    return before + '<span class="autocomplete-highlight">' + middle + '</span>' + after;
+  }
+  return str;
+}
+
+// Function to highlight the selected item and ensure it is visible in the scrollable list
+function highlightSelectedItem(modalName) {
+  var listContainer = document.getElementById(modalName + 'Container');
+  var items = document.getElementsByClassName(modalName + '-list-item');
+  Array.from(items).forEach(function(item, idx) {
+    item.className = idx === selectedIndex ? modalName + '-list-item autocomplete-list-item btn-primary no-hover' : modalName + '-list-item autocomplete-list-item no-hover'; // Apply btn-primary class to the selected item
+  });
+  if (items.length > 0 && selectedIndex >= 0) {
+    var selectedItem = items[selectedIndex];
+    var containerTop = listContainer.scrollTop;
+    var containerBottom = containerTop + listContainer.clientHeight;
+    var itemTop = selectedItem.offsetTop;
+    var itemBottom = itemTop + selectedItem.offsetHeight;
+	const fudge = 59;
+    if (selectedIndex > 0 && itemTop > containerBottom) {
+      // If there are items below the selected item and the selected item is not fully visible, scroll down
+      listContainer.scrollTop = itemTop - listContainer.clientHeight + items[selectedIndex - 1].offsetHeight;
+    } else if (selectedIndex < items.length - 1 && (itemTop - fudge) < containerTop) {
+      // If there are items above the selected item and the selected item is not fully visible, scroll up
+      listContainer.scrollTop = itemTop - fudge - items[selectedIndex + 1].offsetHeight;
+    }
+  }
+}
+
+// function to populate the list based on the input
+function populateList(modalName, data) {
+  var input = document.getElementById(modalName+'Input').value;
+  var listContainer = document.getElementById(modalName+'Container');
+  listContainer.innerHTML = '';
+  data.forEach(function(item) {
+    if (item.name.toLowerCase().includes(input.toLowerCase())) {
+      var div = document.createElement('div');
+      div.innerHTML = highlightSubstring(item.name, input);
+      div.className = modalName+'-list-item autocomplete-list-item no-hover'; // Apply no-hover class
+      div.addEventListener('click', function() {
+        // Navigate to the specified URL when a list item is clicked
+        window.location.href = item.url;
+      });
+      div.addEventListener('mousemove', function() {
+        // Remove no-hover class from all items when the mouse is moved over any item
+		console.log("mouse move");
+        var items = document.getElementsByClassName(modalName+'-list-item');
+        Array.from(items).forEach(function(item) {
+          item.classList.remove('no-hover');
+        });
+      });
+      listContainer.appendChild(div);
+    }
+  });
+  highlightSelectedItem(modalName);
+}
+
+function InitAutocomplete(modalName, data) {
+	// Focus the input field when the modal is shown and populate the list
+	$('#' + modalName + 'Modal').on('shown.bs.modal', function () {
+		$('#' + modalName + 'Input').focus().val('');
+		populateList(modalName, data);
+		selectedIndex = 0;
+		highlightSelectedItem(modalName);
+	});
+
+	// Event listener for input field typing
+	document.getElementById(modalName + 'Input').addEventListener('input', function() {
+		populateList(modalName, data);
+		selectedIndex = 0;
+	});
+
+	// Event listener for arrow keys and enter key
+	document.getElementById(modalName + 'Input').addEventListener('keydown', function(event) {
+		var items = document.getElementsByClassName(modalName + '-list-item');
+		if (event.key === 'ArrowDown') {
+			event.preventDefault();
+			if (selectedIndex < items.length - 1) selectedIndex++;
+			highlightSelectedItem(modalName);
+		} else if (event.key === 'ArrowUp') {
+			event.preventDefault();
+			if (selectedIndex > 0) selectedIndex--;
+			highlightSelectedItem(modalName);
+		} else if (event.key === 'Enter' && selectedIndex >= 0 && selectedIndex < items.length) {
+			event.preventDefault();
+			items[selectedIndex].click();
+		}
+	});
+}
+
+function showAutocompleteModal(modalName) {
+	$('#' + modalName + 'Modal').modal('show');
+	selectedIndex = -1;
+}
+</script>
+
 			<div id="content" class="container-fluid">
 <script>
+	InitAutocomplete("groupnavigator", groupnavigatorData);
+
+	document.body.addEventListener("showReloadPageDialog", function(evt) {
+		$('#reloadPageModal').modal('show');
+	});
+
 	// submitEvent acts like .submit(), except it is compatible with the app, by using events instead.
 	function submitEvent(ele) {
 		console.log("in submitEvent");
+		if (ele.startsWith('#')) {
+    		ele = ele.slice(1);
+		}
+		document.getElementById(ele).submit();
+		return;
+		/*
 		const theEvent = new CustomEvent('submit', {
 			bubbles: true,
 			cancelable: true
@@ -358,69 +510,204 @@ const hapticsSelectionEnd = async () => {
 			console.log("calling submit");
 			ele.submit();
 		}
+		*/
 	}
 
 	// gioDestroy is a convenience function for destroy callbacks
 	function gioDestroy(eventCB) {
-		document.body.addEventListener("htmx:beforeSwap", eventCB, {
-			once: true
-		});
-	}
-	document.body.addEventListener('htmx:beforeSwap', function(evt) {
-		drawer = document.getElementById('drawer-name');
-		if (drawer != null) {
-			drawerObj.closeDrawer(drawer);
+		let internalGioDestroy = function(evt) {
+			// do not activate on infinite scroll events
+			if (evt.detail.target !== undefined && evt.detail.target.id != "maincontent-refresh") {
+				console.log("Ignoring infinite scroll event");
+				return;
+			}
+			console.log("Calling destroy callback");
+			eventCB(evt);
 		}
-	});
+		document.body.addEventListener("htmx:beforeSwap", internalGioDestroy, {once: true});
+		document.body.addEventListener("htmx:historyCacheMiss", internalGioDestroy, {once: true});
+	}
+			
+	var drawerCloseFunc = function(evt) {
+		console.log("in drawerCloseFunc");
+		// Find all elements with the class 'drawer'
+		var drawers = document.querySelectorAll('.drawer');
+
+		// Iterate over each element and call closeDrawer() on each
+		drawers.forEach(function(obj) {
+			drawerObj.closeDrawer(obj);
+		});
+		$('.modal').modal('hide');
+	}
+	document.body.addEventListener('htmx:beforeSwap', drawerCloseFunc);
+	document.body.addEventListener('htmx:historyCacheMiss', drawerCloseFunc);
+
+	var keydownFunc = function(event) {
+		var tagName = event.target.tagName.toLowerCase();
+		if (tagName === 'input' || tagName === 'textarea' || event.target.isContentEditable) {
+			if (event.key === 'Escape') {
+				event.target.blur();
+			}
+			return;
+		}
+		// check if the viewimages viewer is up
+		let element = document.getElementById('overlay');
+		if (element && element.classList.contains('visible')) {
+			return;
+		}
+		console.log("HERE: " + event.key + " " + event.ctrlKey + " " + event.shiftKey + " " + event.metaKey);
+		if (event.ctrlKey && event.shiftKey && (event.key === '?' || event.key === '/')) {
+			event.preventDefault(); // Prevent the default action
+			// Show the modal dialog for keyboard shortcuts
+			$('#shortcutModal').modal('show');
+			return;
+		}
+		$('#shortcutModal').modal('hide');
+
+		if (event.key.toLowerCase() === 'g') {
+			if (navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
+				// For Mac
+				// Check if Command (event.metaKey) is pressed, and either Option (event.altKey) is pressed or not
+				if (event.metaKey) {
+					event.preventDefault();
+					showAutocompleteModal("groupnavigator");
+					return;
+				}
+			} else {
+				// For Windows and Linux
+				if (event.ctrlKey) {
+					event.preventDefault();
+					showAutocompleteModal("groupnavigator");
+					return;
+				}
+			}
+		}
+
+		// Check if the pressed key is '/'
+		if ((event.key === 'f' || event.key === 'F') && event.shiftKey) {
+			if (navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
+				if (event.metaKey) {
+					event.preventDefault(); // Prevent the default action
+					// Focus on the search box
+					let box = document.getElementById('searchbox')
+					if (box != null) {
+						document.getElementById('searchbox').focus();
+					}
+				}
+			} else {
+				// For Windows and Linux
+				if (event.ctrlKey) {
+					event.preventDefault(); // Prevent the default action
+					// Focus on the search box
+					let box = document.getElementById('searchbox')
+					if (box != null) {
+						document.getElementById('searchbox').focus();
+					}
+				}
+			}
+		}
+	}
+	document.addEventListener('keydown', keydownFunc);
+	var removeDrawerCloseFunc = function(evt) {
+		document.body.removeEventListener('htmx:beforeSwap', drawerCloseFunc);
+		document.body.removeEventListener('htmx:historyCacheMiss', drawerCloseFunc);
+		document.removeEventListener('keydown', keydownFunc);
+	}
+	document.body.addEventListener("htmx:historyCacheMiss", removeDrawerCloseFunc, {once: true});
 </script>
+<!-- Modal Dialog for Keyboard Shortcuts -->
+<div class="modal fade" id="shortcutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Keyboard Shortcuts</h4>
+      </div>
+      <div class="modal-body">
+		<div class="row">
+			<div class="col-xs-3 text-right"><strong>ctrl</strong> + <strong>shift</strong> + <strong>?</strong>&nbsp;&nbsp;:</div>
+			<div class="col-xs-9" style="margin-left: -23px;">Show all keyboard shortcuts</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>shift</strong> + <strong>f</strong>&nbsp;&nbsp;:</div>
+			<div class="col-xs-9" style="margin-left: -23px;">Find</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>g</strong>&nbsp;&nbsp;:</div>
+			<div class="col-xs-9" style="margin-left: -23px;">Navigate to a group</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>/</strong>&nbsp;&nbsp;:</div>
+			<div class="col-xs-9" style="margin-left: -23px;">Quick actions</div>
+		</div>
+		</div>
+		<div class="text-center" style="margin-top:10px; margin-bottom:10px; font-size:12px;"><strong>esc</strong> to dismiss</div>
+    </div>
+  </div>
+</div>
+<!-- Modal Dialog for Keyboard Shortcuts -->
+<div class="modal fade" id="reloadPageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Update</h4>
+      </div>
+      <div class="modal-body">
+		  The website has been updated. Please click the button to reload the page.
+	  </div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default btn-sm" data-dismiss="modal" onclick="javascript:location.reload()">
+			Reload
+		</button>
+	</div>
+    </div>
+  </div>
+</div>
+
 				
 	
-	<div id="mainrow" class="row">
-		<div class="col-md-3 col-lg-2 hidden-xs hidden-sm">
-			<div class="list-group noborderlist">
-				
-	<a title="Group Home" href="https://groups.io/g/MTFHRT" class="noborderitem list-group-item sidebar-item">
+	<div id="mainrow" class="row"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-swap="innerHTML scroll:top" >
+		<div id="groupsidebar" class="scrollbar hidden-print">
+			<div class="scrollbar-content">
+				<div id="accordion" role="tablist" aria-multiselectable="true" style="margin-bottom:20px;">
+					<div class="list-group noborderlist panel" style="border:0;margin-bottom:0px">
+						
+
+
+	<a id="sidebar-home" title="Group Home" href="https://groups.io/g/MTFHRT" class="list-group-item sidebar-item">
 		<i class="fa-fw fa fa-home fa-lg"></i>
 		Home
 		
 	</a>
-	
+
 	
 
 	
 
 	
 		
-			
 	
 		
-			
 
-	<a title="Messages" href="https://groups.io/g/MTFHRT/topics" hx-get-disable="https://groups.io/g/MTFHRT/topics" preload hx-target="#maincontent-refresh" hx-push-url="true"
- id="sidebar-archives" class="noborderitem list-group-item sidebar-item sidebar-archives">
+	<a title="Messages" href="https://groups.io/g/MTFHRT/topics?sidebar=true" id="sidebar-archives" class="noborderitem list-group-item sidebar-item sidebar-item-archives"> 
 		<i class="fa-fw fa fa-comments fa-lg"></i>
 		Messages
+		<span id="sidebar-archives-badge" class="badge"></span>
 	</a>
 
-		
+	
+	
+	
 	
 	
 		
 
-	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" hx-get-disable="https://groups.io/g/MTFHRT/hashtags" preload hx-target="#maincontent-refresh" hx-push-url="true"
- id="sidebar-hashtags" class="noborderitem list-group-item sidebar-item sidebar-hashtags">
+	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" id="sidebar-hashtags" class="noborderitem list-group-item sidebar-item sidebar-item-hashtags"> 
 		<i class="fa-fw fa fa-hashtag fa-lg"></i>
 		Hashtags
+		<span id="sidebar-hashtags-badge" class="badge"></span>
 	</a>
 
 	
-	
-	
-
-	
-
-			
-	
 
 		
 	
@@ -436,23 +723,62 @@ const hapticsSelectionEnd = async () => {
 	
 
 	
+
+	
+
+	
 		
 
-	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" hx-get-disable="https://groups.io/g/MTFHRT/wiki" preload hx-target="#maincontent-refresh" hx-push-url="true"
- id="sidebar-wiki" class="noborderitem list-group-item sidebar-item sidebar-wiki active">
+	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" id="sidebar-wiki" class="noborderitem list-group-item sidebar-item sidebar-item-wiki active"> 
 		<i class="fa-fw fa fa-book fa-lg"></i>
 		Wiki
+		<span id="sidebar-wiki-badge" class="badge"></span>
 	</a>
 
 	
 
 	
+
+					</div>
+				</div>
+				
+	<div class="text-center" style="font-size:13px;margin-bottom:30px">
+		<div style="padding-bottom:10px;">
+			<strong>ctrl</strong> + <strong>shift</strong> + <strong>?</strong> for shortcuts
+		</div>
+		<div style="padding-bottom:5px;">
+			<a href="https://groups.io/static/about">
+				About
+			</a> &middot;
+			<a href="https://groups.io/static/features">
+				Features
+			</a> &middot;
+			<a href="https://groups.io/static/pricing">
+				Pricing
+			</a>
+		</div>
+		<div style="padding-bottom:5px;">
+			<a rel="nofollow" href="https://groups.io/g/updates/messages?expanded=1">
+				Updates
+			</a> &middot;
+			<a href="https://groups.io/static/tos">
+				Terms
+			</a> &middot;
+			<a href="https://groups.io/helpcenter" target="_blank">
+				Help
+			</a>
+		</div>
+		<div style="padding-bottom:5px;">
+			&copy; 2024 Groups.io
+		</div>
+	</div>
 
 			</div>
 		</div>
-		<div id="maincontent" class="col-xs-12 col-sm-12 col-md-9 col-lg-10">
-			<div id="maincontent-refresh">
-				
+		<div id="maincontent" class="groupmaincontent">
+			<div id="maincontent-refresh" style="height:100%">
+				<div id="maincontent-column" class="col-xs-12 maincontent-column">
+					
 	
 	
 	
@@ -460,8 +786,7 @@ const hapticsSelectionEnd = async () => {
 	
 
 	<div class="alert alert-info alert-dismissible" role="alert">
-		We are pleased to announce several enhancements to the Groups.io web and app experience, which will be in effect starting Thursday, April 25th.
-		<a href="https://groups.io/static/newui" style="color:#333333">Click here</a> for more information.
+		We are pleased to announce several enhancements to the Groups.io web and app experience. <a href="https://groups.io/static/newui" style="color:#333333">Click here</a> for more information.
 	</div>
 
 	
@@ -535,27 +860,29 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 	
 		
-<form class="form-inline pull-right hidden-xs" method="get" action="https://groups.io/g/MTFHRT/wikisearch">
-  
-  <div class="input-group">
-    <input type="text" class="form-control" placeholder="Search" title="Search" name="q" size="20">
-    <div class="input-group-btn">
-      <button class="btn btn-primary" type="submit">
-        <span class="fa fa-search"></span>
-      </button>
-    </div>
-  </div>
-</form>
 
+	<form class="form-inline pull-right hidden-xs" method="get" action="https://groups.io/g/MTFHRT/wikisearch">
+		
+		
+		<div class="input-group">
+			<input id="searchbox" type="text" class="form-control" placeholder="Search" title="Search" name="q" size="20" style="height:37px">
+			<div class="input-group-btn">
+				<button class="btn btn-primary" type="submit" style="height:37px;">
+					<span class="fa fa-search"></span>
+				</button>
+			</div>
+		</div>
+	</form>
 
-<span class="hidden-sm hidden-md hidden-lg pull-right" style="padding:8px 15px;"><a data-toggle="modal" data-target="#searchModal"><i class="fa fa-search"></i></a></span>
-<ol class="breadcrumb">
-  <li class="hidden-xs"><a href="https://groups.io/g/MTFHRT"><i class="fa fa-home"></i> MTFHRT</a></li>
-  <li><a href="https://groups.io/g/MTFHRT/wiki"><i class="fa fa-book"></i> Wiki</a></li>
 	
-	<li class="active"><i class="fa fa-book"></i> Ultimate DIY</li>
-</ol>
-
+		<span class="hidden-sm hidden-md hidden-lg pull-right" style="padding:8px 15px;"><a data-toggle="modal" data-target="#searchModal"><i class="fa fa-search"></i></a></span>
+		<ol class="breadcrumb">
+			<li class="hidden-xs"><a href="https://groups.io/g/MTFHRT"><i class="fa fa-home"></i> MTFHRT</a></li>
+			<li><a href="https://groups.io/g/MTFHRT/wiki"><i class="fa fa-book"></i> Wiki</a></li>
+			
+			<li class="active"><i class="fa fa-book"></i> Ultimate DIY</li>
+		</ol>
+	
 
 	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel">
 		<div class="modal-dialog" role="document">
@@ -574,6 +901,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 					</h4>
 				</div>
 				<form class="form-horizontal" method="get" action="https://groups.io/g/MTFHRT/wikisearch">
+					
 					<div class="modal-body">
 						<div class="form-group">
 							<div class="col-sm-12">
@@ -599,32 +927,75 @@ function createAlert(msg, isError, autoClose, noClose) {
 	
 
 	
+	<div class="row" style="margin-bottom:20px;">
+		<div class="col-xs-12">
+			<span class="hidden-print">
+				<div class="btn-group">
+					<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+						Pages
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						
+							<li>
+								<a href="../30843.html">
+									Basic Estrogel Guide
+								</a>
+							</li>
+						
+							<li>
+								<a href="../30846.html">
+									Home
+								</a>
+							</li>
+						
+							<li>
+								<a href="../32288.html">
+									How to measure melting point of most organic powders using typical household items.
+								</a>
+							</li>
+						
+							<li>
+								<a href="../34293.html">
+									steam sterilization
+								</a>
+							</li>
+						
+							<li>
+								<a href="../29602.html">
+									Ultimate DIY
+								</a>
+							</li>
+						
+					</ul>
+				</div>
+				
+			</span>
 
 	
 		<div class="pull-right">
 			Last edited 
 <script id="timedispupdated29602">
-	$('#timedispupdated29602').replaceWith(DisplayShortTime(1713169488373935500, false
+	$('#timedispupdated29602').replaceWith(DisplayShortTime(1714463966229202489, false
 		));
 </script>
  &middot;
 			<a href="history.html">
-				265 revisions
+				266 revisions
 			</a>
 			&nbsp;&nbsp;
 			<a href="../29602.html">
 				<i class="fa fa-link fa-lg"></i>
 			</a>
 		</div>
-		<p>
-			&nbsp;
-		</p>
-		<br>
 	
+		</div>
+	</div>
+
 	<div class="row">
 		<div class="col-sm-12">
 			
-				<span class="visitedlinks">
+				<span class="wikidisplay user-content">
 					<p style="text-align: center;"><span style="font-size: 24pt;">MtF HRT: Ultimate DIY</span></p>
 <p>Here I describe Do-It-Yourself hormonal treatment for male-to-female transsexuals/transgender: be your own gatekeeper, endocrinologist, pharmacist and nurse. Cook injectable estradiol by yourself. Safer, more effective and unbelievably cheaper than relying on medical professionals.</p>
 <p style="text-align: right;"><a href="https://groups.io/g/TGrus/wiki/Ultimate-DIY" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">эта инструкция по-русски</span></a></p>
@@ -671,7 +1042,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 <h2><a name="Equipment"></a>Equipment</h2>
 <h3><a name="Necessary"></a>Necessary</h3>
 <p>The only necessary equipment is cheap ($7 - $15) pocket 0.001 g (1 mg) scales (or DIY balance scales you can make from a long narrow wooden plank, 2 small nails and 2 syringes, one of them with 0.5 ml water as a precise weight).</p>
-<p>If you buy ready-to-use scales then they must look exactly like this:<br/><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13908/354x254.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1713919042&Signature=ZkrYjTFLVRFBsPk2T%2Beh6Dtdme8%3D" align="right" class="myimg-responsive"/><span style="text-decoration: underline;"><a href="https://www.ebay.com/itm/363747240371" target="_blank" rel="nofollow noopener">https://www.ebay.com/itm/363747240371</a></span><br/><a href="https://www.aliexpress.com/item/4000586480263.html" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">https://www.aliexpress.com/item/4000586480263.html</span></a></p>
+<p>If you buy ready-to-use scales then they must look exactly like this:<br/><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13908/354x254.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1714523983&Signature=4ABK5CBHitZkYbnFjaxdRCbXlF0%3D" align="right" class="myimg-responsive"/><span style="text-decoration: underline;"><a href="https://www.ebay.com/itm/363747240371" target="_blank" rel="nofollow noopener">https://www.ebay.com/itm/363747240371</a></span><br/><a href="https://www.aliexpress.com/item/4000586480263.html" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">https://www.aliexpress.com/item/4000586480263.html</span></a></p>
 <p>Newer models are not suitable because they attempt to appear more precise and stable by ignoring small weight changes.</p>
 <p>Search for other sellers:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=scale+0.001&amp;_sacat=0&amp;_blrs=recall_filtering&amp;LH_BIN=1&amp;_sop=15&amp;_ipg=120&amp;_oac=1" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">https://www.ebay.com/sch/i.html?_nkw=scale+0.001&amp;_sacat=0&amp;_blrs=recall_filtering&amp;LH_BIN=1&amp;_sop=15&amp;_ipg=120&amp;_oac=1</span></a></p>
 <p><a href="https://www.ebay.com/sch/i.html?_nkw=scale+digital+diamond&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_blrs=recall_filtering&amp;_ipg=120&amp;_oac=1" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">https://www.ebay.com/sch/i.html?_nkw=scale+digital+diamond&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_blrs=recall_filtering&amp;_ipg=120&amp;_oac=1</span></a></p>
@@ -687,10 +1058,10 @@ function createAlert(msg, isError, autoClose, noClose) {
 <p>Unnecessary: beaker, mixer/stirrer, room with controlled airflow, depyrogenation. My technology: terminal heat sterilization (after the vials are sealed); measure and mix in each vial separately, so no glassware to wash with water  or collecting dust (skin flakes and <a href="https://en.wikipedia.org/wiki/House_dust_mite" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">mites</span></a>) if never washed. Water - bacteria - pyrogens. Don&#39;t try to improve this technology: it protects you from mistakes and unexpected problems.</p>
 <h2><a name="Other-raw-materials-and-expendables"></a>Other raw materials and expendables</h2>
 <h3><a name="Vials2C-stoppers2C-caps"></a>Vials, stoppers, caps</h3>
-<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13965/s-l300.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1713919042&Signature=pxwqs%2FxvOaVAAgEqdlqcphAKk3g%3D" align="right" class="myimg-responsive"/>Buy 10 clear glass vials 10 ml each with 20 mm grey (butyl rubber) stoppers and aluminium caps. Caps may be bare aluminium or painted, with plastic tops or all-metal. Screw-on and all-plastic caps are not suitable. Stoppers must have this shape:<br/><a href="https://www.ebay.com/itm/185908326110" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">https://www.ebay.com/itm/185908326110</span></a><br/><a href="https://www.aliexpress.us/item/2251832717628622.html" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">https://www.aliexpress.us/item/2251832717628622.html</span></a><br/>Flat septa are not suitable instead of stoppers. Search:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1</span></a></p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13965/s-l300.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1714523983&Signature=dLmwZ1iT8vpeDD8pb5hp79Eerjc%3D" align="right" class="myimg-responsive"/>Buy 10 clear glass vials 10 ml each with 20 mm grey (butyl rubber) stoppers and aluminium caps. Caps may be bare aluminium or painted, with plastic tops or all-metal. Screw-on and all-plastic caps are not suitable. Stoppers must have this shape:<br/><a href="https://www.ebay.com/itm/185908326110" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">https://www.ebay.com/itm/185908326110</span></a><br/><a href="https://www.aliexpress.us/item/2251832717628622.html" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">https://www.aliexpress.us/item/2251832717628622.html</span></a><br/>Flat septa are not suitable instead of stoppers. Search:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1</span></a></p>
 <p><a href="https://www.aliexpress.com/wholesale?SearchText=vial+10ml+stopper+cap" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">https://www.aliexpress.com/wholesale?SearchText=vial+10ml+stopper+cap</span></a></p>
 <p>After you remove central part of the cap, most of the cap must remain and hold the rubber stopper at place. Caps must <strong>not</strong> have tear-off weak place on one side like this:</p>
-<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13909/cap-tear-off.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1713919042&Signature=B3pmrFm3nXbY1M1CpA%2FKuYv1%2BVk%3D" class="myimg-responsive"/></p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13909/cap-tear-off.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1714523983&Signature=0mzQBn70yaN%2BGMvBZqliEalvxZM%3D" class="myimg-responsive"/></p>
 <p>In EU you can buy <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/VIC010-001NS" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">vials</span></a>, stoppers <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22STG20-%200001%22" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">1</span></a> or <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/STR20-0001" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">2</span></a>, <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22BKMA%2020-GO%22" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">caps</span></a>, <span style="text-decoration: underline;"><a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22BA%200020%22" target="_blank" rel="nofollow noopener">benzyl alcohol</a></span> and <span style="text-decoration: underline;"><a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22MCT%201L%22" target="_blank" rel="nofollow noopener">MCT oil</a></span> in one shop, or (cheaper) <a href="https://www.glas-shop.com/glasprodukte/injektionsflascheninfusionsflaschen/injektionsflaschenklarglas5100ml/injektionsflasche-klarglas-10ml.php" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">vials</span></a>+<span style="text-decoration: underline;"><a href="https://www.glas-shop.com/verschluesse2/verschluesse-fuer-injektionsflaschen/injektionsstopfeneinzeln20mmrotausbrombutyl.php" target="_blank" rel="nofollow noopener">stoppers</a></span>+<span style="text-decoration: underline;"><a href="https://www.glas-shop.com/verschluesse2/verschluesse-fuer-injektionsflaschen/boerdelkappe-2025-x-74-mm-mittel-abriss-gruen.php" target="_blank" rel="nofollow noopener">caps</a></span>, or <span style="text-decoration: underline;"><a href="https://www.amazon.de/-/en/Mikikit-Clear-Glass-Bottle-Transparent/dp/B09TPLQQRB/" target="_blank" rel="nofollow noopener">here</a></span>, or <a href="https://www.amazon.es/gp/product/B09TFPB6SR/" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">here</span></a>, or <span style="text-decoration: underline;"><a href="https://www.amazon.de/-/en/H566EJW15X19NTIP4/dp/B09TFPB6SR/" target="_blank" rel="nofollow noopener">here</a></span>. In UK <span style="text-decoration: underline;"><a href="https://www.ebay.co.uk/itm/333152620103" target="_blank" rel="nofollow noopener">here</a></span> or <a href="https://www.amazon.co.uk/Mikikit-10ml-Clear-Glass-Bottle/dp/B09TFPB6SR/" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">here</span></a>. In USA <span style="text-decoration: underline;"><a href="https://www.medical-and-lab-supplies.com/vials/open/rls-10ml-tubular-clear-glass-serum-vials-qty-1.html" target="_blank" rel="nofollow noopener">vials</a></span>+<span style="text-decoration: underline;"><a href="https://www.medical-and-lab-supplies.com/lab-supplies/butyl-rubber-stoppers-for-vials-20mm-gray.html" target="_blank" rel="nofollow noopener">stoppers</a></span>+<span style="text-decoration: underline;"><a href="https://www.medical-and-lab-supplies.com/lab-supplies/20mm-standard-aluminum-seal-please-click-to-view-all-colors.html" target="_blank" rel="nofollow noopener">caps</a></span> (<span style="text-decoration: underline;"><a href="https://www.medical-and-lab-supplies.com/usp-oils/mct-60-40-caprylic-c8-capric-c10-oil.html" target="_blank" rel="nofollow noopener">oil</a></span>, <a href="https://www.medical-and-lab-supplies.com/chemicals-solvents/benzyl-alcohol-usp.html" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">BA</span></a>, <span style="text-decoration: underline;"><a href="https://www.medical-and-lab-supplies.com/medical-supplies/syringes-and-needles/diabetic-syringes/aimsco-maxicomfort-diabetic-insulin-syringes.html" target="_blank" rel="nofollow noopener">syringes</a></span>) or <span style="text-decoration: underline;"><a href="https://lemelange.com/unsterilevialwide10ml20mm.aspx" target="_blank" rel="nofollow noopener">vials</a></span>+<a href="https://lemelange.com/20-mm-vial-stoppers-grey.aspx" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">stoppers</span></a>+<span style="text-decoration: underline;"><a href="https://lemelange.com/20mmaluminumringwithcentertearout.aspx" target="_blank" rel="nofollow noopener">caps</a></span> or <a href="https://qcvialz.com/vial-samples/316-10ml-clear-shorty-serum-vials-iso-10r-24x45mm-sample-pack-of-10.html" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">vials</span></a>+<a href="https://qcvialz.com/vial-stopper-samples/319-20mm-round-bottom-vial-stopper-sample-pack-of-10.html" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">stoppers</span></a>+<span style="text-decoration: underline;"><a href="https://qcvialz.com/superior-flip-cap-vial-seals/482-light-blue-20mm-superior-flip-cap-vial-seals-pack-of-10pc.html" target="_blank" rel="nofollow noopener">caps</a></span> or <span style="text-decoration: underline;"><a href="https://www.gpzmedlab.com/store/p/110-10-ML-Unsealed-Clear-Vial.aspx" target="_blank" rel="nofollow noopener">vials</a></span>+<span style="text-decoration: underline;"><a href="https://www.gpzmedlab.com/store/p/38-Grey-Butyl-Stopper.aspx" target="_blank" rel="nofollow noopener">stoppers</a></span>+<a href="https://www.gpzmedlab.com/store/p/102-Aluminum-Seal-Center-Tear-Out.aspx" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">caps</span></a> (<span style="text-decoration: underline;"><a href="https://www.gpzmedlab.com/easy-touch-1-cc-insulin-syringe-with-28-g-x-1-2-needle-100-count.aspx" target="_blank" rel="nofollow noopener">syringes</a></span>) or <a href="https://www.premiumvials.com/10ml-glass-bottle-with-lid-transparent-vial-b-10pcs/" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">here</span></a> or (the cheapest) <span style="text-decoration: underline;"><a href="https://www.amazon.com/Depyrogenated-Sterile-Clear-Borosillicate-Glass/dp/B077KFKKJM/" target="_blank" rel="nofollow noopener">sealed vials</a></span>+<a href="https://www.amazon.com/20MM-13MM-Single-Seals-Eco-Green/dp/B094Q5VVTH/" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">new caps</span></a>. In Canada <span style="text-decoration: underline;"><a href="https://canadianmedhealthsupplies.ca/collections/10ml-vials-clear/products/10ml-vial-22mm-x-50mm-clear?variant=8081524817966" target="_blank" rel="nofollow noopener">vials</a></span>+<a href="https://canadianmedhealthsupplies.ca/collections/all-rubber-stoppers/products/20mm-rubber-stopper-grey?variant=8081553915950" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">stoppers</span></a>+<span style="text-decoration: underline;"><a href="https://canadianmedhealthsupplies.ca/collections/20mm-flip-off-cap-flip-off/products/20mm-white-flip-off-cap-flip-off" target="_blank" rel="nofollow noopener">caps</a></span> (<a href="https://canadianmedhealthsupplies.ca/collections/solvents/products/benzyl-alcohol" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">BA</span></a>). In Mexico <a href="https://varienvases.mx/products/antibiotico-10ml-con-tapon-y-casquillo?variant=42526677467355" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">here</span></a>.</p>
 <p>If you are paranoid and believe incompetent or deceitful slander about this guide then you can buy washed sealed sterile empty vials on <a href="https://www.ebay.com/sch/i.html?_nkw=vial+10ml+sterile&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_blrs=recall_filtering&amp;_ipg=240" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline;">eBay</span></a> or <span style="text-decoration: underline;"><a href="https://www.amazon.com/Depyrogenated-Sterile-Clear-Borosillicate-Glass/dp/B077KFKKJM/" target="_blank" rel="nofollow noopener">Amazon</a></span> and buy <span style="text-decoration: underline;"><a href="https://www.amazon.com/20MM-13MM-Single-Seals-Eco-Green/dp/B094Q5VVTH/" target="_blank" rel="nofollow noopener">new caps</a></span> or carefully unbend crimped caps with a small flat screwdriver. Really it&#39;d not improve &#34;safety&#34;. But in USA and UK these vials are cheaper if you want fast shipping.</p>
 <h3><a name="Oil"></a>Oil</h3>
@@ -703,7 +1074,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 <h2><a name="Mix"></a>Mix</h2>
 <p>(See below for an alternate way without a funnel).</p>
 <p>Make a small funnel from a piece of foil (the thicker foil the better; shinier side inside), hold it folded with a small piece of sticky tape. If you have only thin foil then perhaps strengthen it by wide sticky tape on another side (or try to strip the outer paint from a few different beer or soft drink aluminium cans with nail polish remover, then cut a clean can with scissors). May be use something conical to wrap the foil around before cutting off unneeded parts. The hole at the pointy end of the funnel must be slightly (not much) smaller than the opening in the vial. Use this funnel to weigh up estradiol enanthate powder and to pour the powder into a vial. The funnel I&#39;m using at the center, unfolded piece of foil from my previous funnel at the left, a funnel in a vial at the right:</p>
-<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13910/cone.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1713919042&Signature=hII4IgS9ywj1erMW%2BVpSLNq8Xl4%3D" class="myimg-responsive"/></p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13910/cone.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1714523983&Signature=MBVC8fMgHuPu8XOWLLG6MEC3Y1U%3D" class="myimg-responsive"/></p>
 <p>Two recipes I can recommend:</p>
 <p>1) 500 mg = 0.5 g of estradiol enanthate (density 1.1 g/cm<sup><small>3</small></sup>),<br/>benzyl alcohol (preservative - antibacterial) 0.2 ml,<br/>MCT oil 10-0.2-0.5/1.1= 9.35 ml.</p>
 <p>2) 0.5 g of estradiol enanthate,<br/>MCT oil 10-0.5/1.1= 9.55 ml.</p>
@@ -810,66 +1181,30 @@ function createAlert(msg, isError, autoClose, noClose) {
 	<div class="row">
 		<div class="col-sm-12">
 			
-			<div class="hidden-print">
-				<div class="btn-group">
-					<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-						Pages
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" role="menu">
-						
-							<li>
-								<a href="../30843.html">
-									Basic Estrogel Guide
-								</a>
-							</li>
-						
-							<li>
-								<a href="../30846.html">
-									Home
-								</a>
-							</li>
-						
-							<li>
-								<a href="../32288.html">
-									How to measure melting point of most organic powders using typical household items.
-								</a>
-							</li>
-						
-							<li>
-								<a href="../34293.html">
-									steam sterilization
-								</a>
-							</li>
-						
-							<li>
-								<a href="../29602.html">
-									Ultimate DIY
-								</a>
-							</li>
-						
-					</ul>
-				</div>
-				
-			</div>
 		</div>
 	</div>
 	
+<script>
+contentLoaded(false, function() {
+	UpdateSidebar("wiki");
+});
+</script>
 
+
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="row" id="mobileSidebar">
+	<div class="row hidden-print" id="mobileSidebar"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-swap="innerHTML scroll:top" >
 		<div class="col-xs-12 hidden-md hidden-lg">
-			<div class="navbar navbar-default navbar-fixed-bottom" id="groupsidebarendXX">
+			<div class="navbar navbar-default navbar-fixed-bottom">
 				<div class="container" style="display: flex; justify-content: space-around;">
 					
 						
 	
 		
-			
 	
-	<div id="mobilesidebar-archives" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center;" hx-get="https://groups.io/g/MTFHRT/topics" preload hx-target="#maincontent-refresh" hx-push-url="true">
+	<div id="mobilesidebar-archives" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center;" hx-get="https://groups.io/g/MTFHRT/topics?sidebar=true"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-swap="innerHTML scroll:top" >
 		<div style="display: inline-block; position: relative;">
 			<div style="position: relative;display: inline-block;">
 			<i class="fa-fw fa-light fa-comments fa-2x"></i>
@@ -879,9 +1214,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 		</div>
 	</div>
 
-		
 	
-
 	
 
 						
@@ -910,48 +1243,43 @@ function createAlert(msg, isError, autoClose, noClose) {
 					<div class="drawer__content">
 						<div class="list-group noborderlist">
 							
-	<a title="Group Home" href="https://groups.io/g/MTFHRT" class="noborderitem list-group-item sidebar-item">
+
+
+	<a id="sidebar-home" title="Group Home" href="https://groups.io/g/MTFHRT" class="list-group-item sidebar-item">
 		<i class="fa-fw fa fa-home fa-lg"></i>
 		Home
 		
 	</a>
-	
+
 	
 
 	
 
 	
 		
-			
 	
 		
-			
 
-	<a title="Messages" href="https://groups.io/g/MTFHRT/topics" hx-get-disable="https://groups.io/g/MTFHRT/topics" preload hx-target="#maincontent-refresh" hx-push-url="true"
- id="sidebar-archives" class="noborderitem list-group-item sidebar-item sidebar-archives">
+	<a title="Messages" href="https://groups.io/g/MTFHRT/topics?sidebar=true" id="sidebar-archives-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-archives"> 
 		<i class="fa-fw fa fa-comments fa-lg"></i>
 		Messages
+		<span id="sidebar-archives-mobile-badge" class="badge"></span>
 	</a>
 
-		
+	
+	
+	
 	
 	
 		
 
-	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" hx-get-disable="https://groups.io/g/MTFHRT/hashtags" preload hx-target="#maincontent-refresh" hx-push-url="true"
- id="sidebar-hashtags" class="noborderitem list-group-item sidebar-item sidebar-hashtags">
+	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" id="sidebar-hashtags-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-hashtags"> 
 		<i class="fa-fw fa fa-hashtag fa-lg"></i>
 		Hashtags
+		<span id="sidebar-hashtags-mobile-badge" class="badge"></span>
 	</a>
 
 	
-	
-	
-
-	
-
-			
-	
 
 		
 	
@@ -967,12 +1295,16 @@ function createAlert(msg, isError, autoClose, noClose) {
 	
 
 	
+
+	
+
+	
 		
 
-	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" hx-get-disable="https://groups.io/g/MTFHRT/wiki" preload hx-target="#maincontent-refresh" hx-push-url="true"
- id="sidebar-wiki" class="noborderitem list-group-item sidebar-item sidebar-wiki active">
+	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" id="sidebar-wiki-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-wiki active"> 
 		<i class="fa-fw fa fa-book fa-lg"></i>
 		Wiki
+		<span id="sidebar-wiki-mobile-badge" class="badge"></span>
 	</a>
 
 	
@@ -994,7 +1326,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 								</a>
 								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/g/updates/messages?expanded=1">
 									<i class="fa-fw far fa-thermometer-three-quarters fa-lg"></i>
-									Updates
+									# Changelog
 								</a>
 								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/tos">
 									<i class="fa-fw fal fa-newspaper fa-lg"></i>
@@ -1015,138 +1347,144 @@ function createAlert(msg, isError, autoClose, noClose) {
 			</section>
 		</div>
 	</div>
-<script>
-	document.body.addEventListener("gio:keyboardWillShow", keyboardWillShow);
-	document.body.addEventListener("gio:keyboardWillHide", keyboardWillHide);
-	var restorePadding = false;
-	function keyboardWillShow() {
-		return;
-		$("#mobileSidebar").hide();
-		// On narrow screens, we add a padding-bottom in groupsio.css to make room for the mobile sidebar.
-		// We need to remove this when we remove the mobile sidebar for the keyboard. And then
-		// we need to restore it afterwards.
-		let padding = $("#content").css("padding-bottom");
-		console.log("padding-bottom is " + padding);
-		if (padding == "70px") {
-			$("#content").css("padding-bottom", "0px");
-			console.log("REMOVING PADDING");
-			restorePadding = true;
-		}
-	}
-	function keyboardWillHide() {
-		return;
-		$("#mobileSidebar").show();
-		if (restorePadding == true) {
-			$("#content").css("padding-bottom", "70px");
-			console.log("RESTORING PADDING");
-			restorePadding = false;
-		}
-	}
-	document.body.addEventListener('htmx:beforeSend', function(evt) {
-		let id = evt.detail.elt.id;
-		if(id.startsWith("mobilesidebar-")) {
-			console.log(id + " was clicked");
-			var sidebarItems = document.querySelectorAll('.mobilesidebar-item');
-			sidebarItems.forEach(function(item) {
-				var iElement = item.getElementsByTagName('div')[0].getElementsByTagName('i')[0];
-				console.log("ID:" + item.id);
-				if (item.id == id) {
-					console.log("making solid")
-					iElement.classList.add('fa-solid');
-					iElement.classList.remove('fa-light');
-				} else {
-					console.log("making light")
-					iElement.classList.remove('fa-solid');
-					iElement.classList.add('fa-light');
-				}
-			});
-		} else if (id.startsWith("sidebar-")) {
-			var sidebarItems = document.querySelectorAll('.sidebar-item');
-			// remove 'active' class from all 'sidebar-item' elements
-			sidebarItems.forEach(function(item) {
-				if (item.id == id) {
-					item.classList.add('active');
-				} else {
-					item.classList.remove('active');
-				}
-			});
-		}
 
+<!-- Modal Dialog for Autocomplete -->
+<div class="modal fade" id="quickActionsModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <input type="text" class="form-control" id="quickActionsInput" placeholder="Go to page..." style="margin-bottom:10px">
+        <div id="quickActionsContainer" class="autocompleteResults" style="max-height:250px; overflow-y: auto;"></div>
+		<div class="text-center" style="margin-top:10px; font-size:12px;"><i class="fa-sharp fa-arrow-up-arrow-down"></i> to navigate&nbsp;&nbsp;&nbsp;<i class="fa-sharp fa-arrow-turn-down-left"></i> to use&nbsp;&nbsp;&nbsp;<strong>esc</strong> to dismiss</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script>
+	var quickActionsData = [
+		
+		
+			{name: "Group Home", url: "https://groups.io/g/MTFHRT"},
+		
+
+		
+			{name: "Topics", url: "https://groups.io/g/MTFHRT/topics"},
+			{name: "Messages", url: "https://groups.io/g/MTFHRT/messages"},
+			{name: "Expanded Messages", url: "https://groups.io/g/MTFHRT/messages?expanded=1"},
+		
+		
+			{name: "Polls", url: "https://groups.io/g/MTFHRT/polls"},
+		
+		
+			{name: "Hashtags", url: "https://groups.io/g/MTFHRT/hashtags"},
+		
+		
+		
+		
+
+		
+
+		
+		
+		
+
+		
+
+		
+		
+			{name: "Wiki", url: "https://groups.io/g/MTFHRT/wiki"},
+		
+		
+		/* other pages */
+		{name: "Help", url: "/helpcenter"},
+		{name: "Feed", url: "/feed"},
+		{name: "Your Groups", url: "/groups"},
+		{name: "Your Calendar", url: "/calendar"},
+		{name: "Your Activity", url: "/activity"},
+		{name: "Your Pending Messages", url: "/pendingmsgs"},
+		{name: "Account Login", url: "/account"},
+		{name: "Account Preferences", url: "/account?page=prefs"},
+		{name: "Account Security", url: "/account?page=security"},
+		{name: "Account Identity", url: "/account?page=profile&member_info_id=0"},
+		{name: "Account Notifications", url: "/account?page=notifications"},
+		{name: "Account Other Services", url: "/account?page=oauth"},
+		{name: "Account Bounces", url: "/account?page=bounces"},
+		{name: "Account Billing", url: "/account?page=billing"},
+		{name: "Find a Group", url: "/search?p=SubsCount,,,20,2,0,0"},
+	];
+
+
+	InitAutocomplete("quickActions", quickActionsData);
+
+	document.addEventListener('keydown', function(event) {
+		var tagName = event.target.tagName.toLowerCase();
+		if (tagName === 'input' || tagName === 'textarea' || event.target.isContentEditable) {
+			return;
+		}
+		// check if the viewimages viewer is up
+		let element = document.getElementById('overlay');
+		if (element && element.classList.contains('visible')) {
+			return;
+		}
+		if (event.key.toLowerCase() === '/') {
+			if (navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
+				// For Mac
+				// Check if Command (event.metaKey) is pressed, and either Option (event.altKey) is pressed or not
+				if (event.metaKey) {
+					event.preventDefault();
+					showAutocompleteModal("quickActions");
+					return;
+				}
+			} else {
+				// For Windows and Linux
+				if (event.ctrlKey) {
+					event.preventDefault();
+					showAutocompleteModal("quickActions");
+					return;
+				}
+			}
+		}
 	});
+	function UpdateSidebar(id) {
+		console.log(id + " was clicked");
+		var sidebarItems = document.querySelectorAll('.mobilesidebar-item');
+		sidebarItems.forEach(function(item) {
+			var iElement = item.getElementsByTagName('div')[0].getElementsByTagName('i')[0];
+			if (item.id == "mobilesidebar-" + id) {
+				console.log("making solid " + id)
+				iElement.classList.add('fa-solid');
+				iElement.classList.remove('fa-light');
+			} else {
+				iElement.classList.remove('fa-solid');
+				iElement.classList.add('fa-light');
+			}
+		});
+		var sidebarItems = document.querySelectorAll('.sidebar-item');
+		// remove 'active' class from all 'sidebar-item' elements
+		sidebarItems.forEach(function(item) {
+			if (item.id == "sidebar-" + id) {
+				console.log("making active " + id)
+				item.classList.add('active');
+			} else {
+				item.classList.remove('active');
+			}
+		});
+	}
 </script>
 
 
-				<p></p>
 			</div>
 			
 				<div id="scroll-top" class="scroll-top-wrapper hidden-xs">
 					<span class="scroll-top-inner">
-						<i class="fa fa-arrow-circle-up fa-fw fa-2x" style="vertical-align:-.25em"></i>
+						<i class="fa fa-arrow-circle-up fa-fw fa-2x"></i>
 					</span>
 				</div>
-				<div class="hidden-xs hidden-sm" id="footer">
-					<div class="navbar navbar-default">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#footercollapse">
-								<span class="sr-only">
-									Toggle navigation
-								</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-						</div>
-						<div class="collapse navbar-collapse" id="footercollapse">
-							<ul class="nav navbar-nav">
-								
-									
-										<li>
-											<a href="https://groups.io/static/about">
-												About
-											</a>
-										</li>
-										<li>
-											<a href="https://groups.io/static/features">
-												Features
-											</a>
-										</li>
-										<li>
-											<a href="https://groups.io/static/pricing">
-												Pricing
-											</a>
-										</li>
-										<li>
-											<a rel="nofollow" href="https://groups.io/g/updates/messages?expanded=1">
-												Updates
-											</a>
-										</li>
-									
-									<li>
-										<a href="https://groups.io/static/tos">
-											Terms
-										</a>
-									</li>
-									<li>
-										<a href="https://groups.io/helpcenter" target="_blank">
-											Help
-										</a>
-									</li>
-								
-							</ul>
-							<ul class="nav navbar-nav navbar-right">
-								<li>
-									<p class="navbar-text">
-										&copy;
-										<span class="hidden-sm">
-											2024
-										</span>
-										Groups.io
-									</p>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
+
 <script>
 	$(function() {
 		$(document).on('scroll', function() {
@@ -1167,6 +1505,21 @@ function createAlert(msg, isError, autoClose, noClose) {
 		$('html, body').animate({
 			scrollTop: offsetTop
 		}, 100, 'linear');
+	}
+
+	if (navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
+		let elements = document.querySelectorAll('strong.ctrlmeta');
+		elements.forEach((element) => {
+			// Check if the innerText is "ctrl"
+			if (element.innerText === 'ctrl') {
+				// Create a new "i" element
+				let newElement = document.createElement('i');
+				newElement.classList.add('fa-solid', 'fa-command');
+				
+				// Replace the old "strong" element with the new "i" element
+				element.parentNode.replaceChild(newElement, element);
+			}
+		});
 	}
 </script>
 			
