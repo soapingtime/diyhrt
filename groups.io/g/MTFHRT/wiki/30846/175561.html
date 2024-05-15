@@ -98,7 +98,7 @@ const hapticsSelectionEnd = async () => {
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.web09.156495.1715127759080900488");
+				console.log("client_id:", "web.web09.536211.1715732883512708230");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -123,7 +123,7 @@ const hapticsSelectionEnd = async () => {
 					column: column,
 					stack: stack,
 					last_error: lastError,
-					client_id: "web.web09.156495.1715127759080900488"
+					client_id: "web.web09.536211.1715732883512708230"
 				},
 				success: function() {
 					if (console && console.log) {
@@ -146,7 +146,7 @@ const hapticsSelectionEnd = async () => {
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-f34f1af7af74d23ecd02cfa5c7d40d42.css" rel="stylesheet" id="groupsio-css">
+			<link href="../../../../css/application-dd5f7573172c822cf8f887b39fdc5fd6.css" rel="stylesheet" id="groupsio-css">
 			<script src="../../../../js/application-2fb8693374ebdea0ffcbb3b8c1d39910.js" id="groupsio-js"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>
@@ -171,7 +171,7 @@ const hapticsSelectionEnd = async () => {
 	console.log("FULL PAGE LOAD");
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "995c60e8275df280105c27fecccb44eed6da6088"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "ab9d9aa9d1f4b4d7942dc3eba3d935c3c017d0ec"}' hx-ext="preload" hx-boost="false">
 			
 				<script>
 					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -565,21 +565,11 @@ function showAutocompleteModal(modalName) {
 		$('#shortcutModal').modal('hide');
 
 		if (event.key.toLowerCase() === 'g') {
-			if (navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
-				// For Mac
-				// Check if Command (event.metaKey) is pressed, and either Option (event.altKey) is pressed or not
-				if (event.metaKey) {
-					event.preventDefault();
-					showAutocompleteModal("groupnavigator");
-					return;
-				}
-			} else {
-				// For Windows and Linux
-				if (event.ctrlKey) {
-					event.preventDefault();
-					showAutocompleteModal("groupnavigator");
-					return;
-				}
+			// For Windows and Linux
+			if (event.ctrlKey) {
+				event.preventDefault();
+				showAutocompleteModal("groupnavigator");
+				return;
 			}
 		}
 
@@ -628,12 +618,12 @@ function showAutocompleteModal(modalName) {
 			<div class="col-xs-9" style="margin-left: -23px;">Show all keyboard shortcuts</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>shift</strong> + <strong>f</strong>&nbsp;&nbsp;:</div>
-			<div class="col-xs-9" style="margin-left: -23px;">Find</div>
+			<div class="col-xs-3 text-right"><strong>ctrl</strong> + <strong>g</strong>&nbsp;&nbsp;:</div>
+			<div class="col-xs-9" style="margin-left: -23px;">Navigate to a group</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>g</strong>&nbsp;&nbsp;:</div>
-			<div class="col-xs-9" style="margin-left: -23px;">Navigate to a group</div>
+			<div class="col-xs-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>shift</strong> + <strong>f</strong>&nbsp;&nbsp;:</div>
+			<div class="col-xs-9" style="margin-left: -23px;">Find</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>/</strong>&nbsp;&nbsp;:</div>

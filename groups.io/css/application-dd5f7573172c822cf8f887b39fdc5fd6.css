@@ -2468,6 +2468,10 @@ body {
 	background-color: var(--light-mode-body-color);
 }
 
+#maincontent-column {
+	margin-bottom: 50px;
+}
+
 /*
   This is to prevent the header and footer on Safari from moving when scrolling the
   page.
@@ -2485,8 +2489,10 @@ body {
 		top: 0px !important;
 		left: 0px !important;
 		width: 100% !important;
+		margin-bottom: 0px !important;
 	}
 }
+
 
 #maincontent-refresh {
 	scroll-margin-top: 60px;
@@ -3557,7 +3563,14 @@ table.table-fixed {
 }
 
 .help-block {
+	margin-top: 0px;
 	margin-bottom: 0px;
+}
+.radio .help-block {
+	padding-left: 20px;
+}
+.checkbox .help-block {
+	padding-left: 20px;
 }
 
 .fa-stack-1x {
@@ -4233,6 +4246,7 @@ body.app .navbar-fixed-top {
 	left: 225px;
 	width: calc(100vw - 225px);
 	padding-right:0px;
+	margin-bottom: 0px !important;
 }
 
 /* chat */
@@ -4763,6 +4777,17 @@ body.app .navbar-fixed-top {
 	-webkit-line-clamp: 4;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
+}
+
+.stickywiki {
+	max-height: 100px;
+	overflow: hidden;
+	line-height: 20px;
+	word-wrap: break-word;
+}
+
+.stickywiki>p {
+	margin-bottom: 20px;
 }
 
 .database-truncate-cell {
