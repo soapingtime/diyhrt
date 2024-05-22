@@ -98,7 +98,7 @@ const hapticsSelectionEnd = async () => {
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.web09.536202.1715732883252272088");
+				console.log("client_id:", "web.web09.625179.1716337689092221985");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -123,7 +123,7 @@ const hapticsSelectionEnd = async () => {
 					column: column,
 					stack: stack,
 					last_error: lastError,
-					client_id: "web.web09.536202.1715732883252272088"
+					client_id: "web.web09.625179.1716337689092221985"
 				},
 				success: function() {
 					if (console && console.log) {
@@ -171,7 +171,7 @@ const hapticsSelectionEnd = async () => {
 	console.log("FULL PAGE LOAD");
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "ab9d9aa9d1f4b4d7942dc3eba3d935c3c017d0ec"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "b10899f8f5f7ba2ec4fe62d1ebb2b782621790f7"}' hx-ext="preload" hx-boost="false">
 			
 				<script>
 					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -477,7 +477,8 @@ function showAutocompleteModal(modalName) {
 	InitAutocomplete("groupnavigator", groupnavigatorData);
 
 	document.body.addEventListener("showReloadPageDialog", function(evt) {
-		$('#reloadPageModal').modal('show');
+		console.log("Forced reload");
+		location.reload();
 	});
 
 	// submitEvent acts like .submit(), except it is compatible with the app, by using events instead.
@@ -631,24 +632,6 @@ function showAutocompleteModal(modalName) {
 		</div>
 		</div>
 		<div class="text-center" style="margin-top:10px; margin-bottom:10px; font-size:12px;"><strong>esc</strong> to dismiss</div>
-    </div>
-  </div>
-</div>
-<!-- Modal Dialog for Keyboard Shortcuts -->
-<div class="modal fade" id="reloadPageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Update</h4>
-      </div>
-      <div class="modal-body">
-		  The website has been updated. Please click the button to reload the page.
-	  </div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-default btn-sm" data-dismiss="modal" onclick="javascript:location.reload()">
-			Reload
-		</button>
-	</div>
     </div>
   </div>
 </div>
