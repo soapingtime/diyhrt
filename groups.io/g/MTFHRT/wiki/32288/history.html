@@ -98,7 +98,7 @@ const hapticsSelectionEnd = async () => {
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.web08.308558.1716942585952182206");
+				console.log("client_id:", "web.web08.559696.1717547325052667677");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -123,7 +123,7 @@ const hapticsSelectionEnd = async () => {
 					column: column,
 					stack: stack,
 					last_error: lastError,
-					client_id: "web.web08.308558.1716942585952182206"
+					client_id: "web.web08.559696.1717547325052667677"
 				},
 				success: function() {
 					if (console && console.log) {
@@ -146,7 +146,7 @@ const hapticsSelectionEnd = async () => {
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-dd5f7573172c822cf8f887b39fdc5fd6.css" rel="stylesheet" id="groupsio-css">
+			<link href="../../../../css/application-b35c46a4f2933b80328831b245058b7d.css" rel="stylesheet" id="groupsio-css">
 			<script src="../../../../js/application-2fb8693374ebdea0ffcbb3b8c1d39910.js" id="groupsio-js"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>
@@ -171,7 +171,7 @@ const hapticsSelectionEnd = async () => {
 	console.log("FULL PAGE LOAD");
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "bacb18388c7ee34255b655736ec35923a2f94935"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "e401e3db1ef5632008e37243e277cc231ed330ab"}' hx-ext="preload" hx-boost="false">
 			
 				<script>
 					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -638,7 +638,7 @@ function showAutocompleteModal(modalName) {
 
 				
 	
-	<div id="mainrow" class="row"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-swap="innerHTML scroll:top" >
+	<div id="mainrow" class="row"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
 		<div id="groupsidebar" class="scrollbar hidden-print">
 			<div class="scrollbar-content">
 				<div id="accordion" role="tablist" aria-multiselectable="true" style="margin-bottom:20px;">
@@ -943,7 +943,7 @@ function countChecked(id) {
 			</div>
 		</div>
 	</div>
-	<div class="row hidden-print" id="mobileSidebar"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-swap="innerHTML scroll:top" >
+	<div class="row hidden-print" id="mobileSidebar"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
 		<div class="col-xs-12 hidden-md hidden-lg">
 			<div class="navbar navbar-default navbar-fixed-bottom">
 				<div class="container" style="display: flex; justify-content: space-around;">
@@ -952,7 +952,7 @@ function countChecked(id) {
 	
 		
 	
-	<div id="mobilesidebar-archives" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center;" hx-get="https://groups.io/g/MTFHRT/topics?sidebar=true"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-swap="innerHTML scroll:top" >
+	<div id="mobilesidebar-archives" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center;" hx-get="https://groups.io/g/MTFHRT/topics?sidebar=true"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
 		<div style="display: inline-block; position: relative;">
 			<div style="position: relative;display: inline-block;">
 			<i class="fa-fw fa-light fa-comments fa-2x"></i>

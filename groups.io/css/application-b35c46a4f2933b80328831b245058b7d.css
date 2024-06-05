@@ -2469,9 +2469,40 @@ body {
 }
 
 #maincontent-column {
-	margin-bottom: 50px;
+	padding-bottom: 50px;
 }
 
+.breadcrumb-row {
+	background-color: rgb(245, 245, 245);
+}
+
+.breadcrumb-container {
+	overflow-x: auto;
+	white-space: nowrap;
+	background-color: rgb(245, 245, 245);
+}
+.scroll-breadcrumb {
+	display: inline-block !important;
+	width: 100% !important;
+	background-color: rgb(245,245,245);
+	margin-left: 0px !important;
+	margin-right: 0px !important;
+	margin-bottom: 0px !important;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+.breadcrumb-container::-webkit-scrollbar {
+	height: 0px;
+}
+/*
+.breadcrumb-container::-webkit-scrollbar-thumb {
+	background-color: #ccc;
+	border-radius: 4px;
+}
+.breadcrumb-container::-webkit-scrollbar-track {
+	background-color: #f1f1f1;
+}
+*/
 /*
   This is to prevent the header and footer on Safari from moving when scrolling the
   page.
@@ -2489,7 +2520,8 @@ body {
 		top: 0px !important;
 		left: 0px !important;
 		width: 100% !important;
-		margin-bottom: 0px !important;
+		padding-bottom: 0px !important;
+		padding-left: 0px;
 	}
 }
 
@@ -2820,7 +2852,7 @@ body {
 
 	/* fix chat */
 	#chat-container {
-		height: calc(100% - 50px) !important;
+		height: calc(100% - 35px) !important;
 	}
 
 	.nav-pills>li {
@@ -3554,10 +3586,6 @@ table.table-fixed {
 	overflow-x: hidden;
 }
 
-.template {
-	display: none;
-}
-
 .nomargin {
 	margin-bottom: 0px;
 }
@@ -4254,7 +4282,7 @@ body.app .navbar-fixed-top {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	height: calc(100% - 39px);
+	height: calc(100% - 0px);
 	margin: 0 auto;
 	box-sizing: border-box;
 	font-size: 17px;
@@ -4596,7 +4624,10 @@ body.app .navbar-fixed-top {
 }
 
 .og-card-body {
-	padding: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
 }
 
 .og-title {
@@ -4905,7 +4936,7 @@ body.app .navbar-fixed-top {
 	background-color: transparent !important;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1280px) {
 
 	.col-xl-1,
 	.col-xl-2,
@@ -4970,6 +5001,27 @@ body.app .navbar-fixed-top {
 		width: 8.33333333%;
 	}
 }
+
+.justify-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.justify-buttons .btn {
+	flex: 1;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+.justify-buttons .btn:first-child {
+	margin-left: 0;
+}
+
+.justify-buttons .btn:last-child {
+	margin-right: 0;
+}
+
 .calendar-date {
 	width: 65px;
 	text-align: center;
@@ -4995,7 +5047,7 @@ body.app .navbar-fixed-top {
 .sticky-sidebar {
 	position: -webkit-sticky;
 	position: sticky;
-	top: calc(70px + env(safe-area-inset-top));
+	top: calc(60px + env(safe-area-inset-top));
 }
 
 /* pulled in from Bootstrap 5 */
@@ -5624,7 +5676,9 @@ body.dark-mode .label>a:hover {
 
 
 /* Breadcrumbs */
-body.dark-mode .breadcrumb {
+body.dark-mode .breadcrumb,
+body.dark-mode .breadcrumb-row,
+body.dark-mode .breadcrumb-container {
 	background-color: var(--dark-mode-primary-color);
 	color: var(--dark-mode-text-color);
 }

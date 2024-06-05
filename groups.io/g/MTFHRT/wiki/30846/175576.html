@@ -98,7 +98,7 @@ const hapticsSelectionEnd = async () => {
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.web09.308117.1716942586562546691");
+				console.log("client_id:", "web.web09.559051.1717547325670185891");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -123,7 +123,7 @@ const hapticsSelectionEnd = async () => {
 					column: column,
 					stack: stack,
 					last_error: lastError,
-					client_id: "web.web09.308117.1716942586562546691"
+					client_id: "web.web09.559051.1717547325670185891"
 				},
 				success: function() {
 					if (console && console.log) {
@@ -146,7 +146,7 @@ const hapticsSelectionEnd = async () => {
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-dd5f7573172c822cf8f887b39fdc5fd6.css" rel="stylesheet" id="groupsio-css">
+			<link href="../../../../css/application-b35c46a4f2933b80328831b245058b7d.css" rel="stylesheet" id="groupsio-css">
 			<script src="../../../../js/application-2fb8693374ebdea0ffcbb3b8c1d39910.js" id="groupsio-js"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>
@@ -164,6 +164,7 @@ const hapticsSelectionEnd = async () => {
 			
 			
 
+
 <script>
 	htmx.config.scrollBehavior = "instant";
 	htmx.config.historyCacheSize = 0;
@@ -171,7 +172,7 @@ const hapticsSelectionEnd = async () => {
 	console.log("FULL PAGE LOAD");
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "bacb18388c7ee34255b655736ec35923a2f94935"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "e401e3db1ef5632008e37243e277cc231ed330ab"}' hx-ext="preload" hx-boost="false">
 			
 				<script>
 					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -638,7 +639,7 @@ function showAutocompleteModal(modalName) {
 
 				
 	
-	<div id="mainrow" class="row"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-swap="innerHTML scroll:top" >
+	<div id="mainrow" class="row"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
 		<div id="groupsidebar" class="scrollbar hidden-print">
 			<div class="scrollbar-content">
 				<div id="accordion" role="tablist" aria-multiselectable="true" style="margin-bottom:20px;">
@@ -830,28 +831,36 @@ function createAlert(msg, isError, autoClose, noClose) {
 	
 		
 
-	<form class="form-inline pull-right hidden-xs" method="get" action="https://groups.io/g/MTFHRT/wikisearch">
-		
-		
-		<div class="input-group">
-			<input id="searchbox" type="text" class="form-control" placeholder="Search" title="Search" name="q" size="20" style="height:37px">
-			<div class="input-group-btn">
-				<button class="btn btn-primary" type="submit" style="height:37px;" aria-label="Search">
-					<span class="fa fa-search"></span>
-				</button>
+	<div class="row breadcrumb-row" style="margin-bottom: 10px">
+		<div class="col-xs-12 col-sm-9">
+			<span class="hidden-sm hidden-md hidden-lg pull-right" style="padding:8px 15px;"><a data-toggle="modal" data-target="#searchModal"><i class="fa fa-search"></i></a></span>
+			<div class="breadcrumb-container">
+				
+					<ol class="breadcrumb scroll-breadcrumb">
+						<li><a href="https://groups.io/g/MTFHRT"><i class="fa fa-home"></i> MTFHRT</a></li>
+						<li><a href="https://groups.io/g/MTFHRT/wiki"><i class="fa fa-book"></i> Wiki</a></li>
+						
+						<li class="active"><i class="fa fa-book"></i> Home</li>
+					</ol>
+				
 			</div>
 		</div>
-	</form>
+		<div class="col-sm-3 hidden-xs">
+			<form class="form-inline pull-right" method="get" action="https://groups.io/g/MTFHRT/wikisearch">
+				
+				
+				<div class="input-group">
+					<input id="searchbox" type="text" class="form-control" placeholder="Search" title="Search" name="q" size="20" style="height:37px">
+					<div class="input-group-btn">
+						<button class="btn btn-primary" type="submit" style="height:37px;" aria-label="Search">
+							<span class="fa fa-search"></span>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 
-	
-		<span class="hidden-sm hidden-md hidden-lg pull-right" style="padding:8px 15px;"><a data-toggle="modal" data-target="#searchModal"><i class="fa fa-search"></i></a></span>
-		<ol class="breadcrumb">
-			<li class="hidden-xs"><a href="https://groups.io/g/MTFHRT"><i class="fa fa-home"></i> MTFHRT</a></li>
-			<li><a href="https://groups.io/g/MTFHRT/wiki"><i class="fa fa-book"></i> Wiki</a></li>
-			
-			<li class="active"><i class="fa fa-book"></i> Home</li>
-		</ol>
-	
 
 	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel">
 		<div class="modal-dialog" role="document">
@@ -941,23 +950,18 @@ function createAlert(msg, isError, autoClose, noClose) {
 				
 			</span>
 
-	
-		<div class="pull-right">
-			Last edited 
+			
+				<div class="pull-right">
+					<a href="history.html">
+						
 <script id="timedispupdated30846">
 	$('#timedispupdated30846').replaceWith(DisplayShortTime(1666818091540635289, false
 		));
 </script>
- &middot;
-			<a href="history.html">
-				5 revisions
-			</a>
-			&nbsp;&nbsp;
-			<a href="../30846.html">
-				<i class="fa fa-link fa-lg"></i>
-			</a>
-		</div>
-	
+
+					</a>
+				</div>
+			
 		</div>
 	</div>
 
@@ -987,9 +991,9 @@ function createAlert(msg, isError, autoClose, noClose) {
 	</div>
 	
 <script>
-contentLoaded(false, function() {
-	UpdateSidebar("wiki");
-});
+	contentLoaded(  false  , function() {
+		UpdateSidebar("wiki");
+	});
 </script>
 
 
@@ -997,7 +1001,7 @@ contentLoaded(false, function() {
 			</div>
 		</div>
 	</div>
-	<div class="row hidden-print" id="mobileSidebar"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-swap="innerHTML scroll:top" >
+	<div class="row hidden-print" id="mobileSidebar"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
 		<div class="col-xs-12 hidden-md hidden-lg">
 			<div class="navbar navbar-default navbar-fixed-bottom">
 				<div class="container" style="display: flex; justify-content: space-around;">
@@ -1006,7 +1010,7 @@ contentLoaded(false, function() {
 	
 		
 	
-	<div id="mobilesidebar-archives" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center;" hx-get="https://groups.io/g/MTFHRT/topics?sidebar=true"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-swap="innerHTML scroll:top" >
+	<div id="mobilesidebar-archives" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center;" hx-get="https://groups.io/g/MTFHRT/topics?sidebar=true"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
 		<div style="display: inline-block; position: relative;">
 			<div style="position: relative;display: inline-block;">
 			<i class="fa-fw fa-light fa-comments fa-2x"></i>
