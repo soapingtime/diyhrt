@@ -74,6 +74,9 @@ const hapticsSelectionEnd = async () => {
 		}
 	}
 
+	function HideAppSidebarOnKeyboard() {
+		
+	}
 	// stub
 	function logError(data, url, linenumber) {
 		console.log(data)
@@ -98,7 +101,7 @@ const hapticsSelectionEnd = async () => {
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.web09.558866.1717547322541022037");
+				console.log("client_id:", "web.web09.27078.1718152167998276004");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -123,7 +126,7 @@ const hapticsSelectionEnd = async () => {
 					column: column,
 					stack: stack,
 					last_error: lastError,
-					client_id: "web.web09.558866.1717547322541022037"
+					client_id: "web.web09.27078.1718152167998276004"
 				},
 				success: function() {
 					if (console && console.log) {
@@ -146,8 +149,8 @@ const hapticsSelectionEnd = async () => {
 			
 			<script src="../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../css/application-b35c46a4f2933b80328831b245058b7d.css" rel="stylesheet" id="groupsio-css">
-			<script src="../../../js/application-2fb8693374ebdea0ffcbb3b8c1d39910.js" id="groupsio-js"></script>
+			<link href="../../../css/application-b74c0047a22d46d995d7acefd9e1e186.css" rel="stylesheet" id="groupsio-css">
+			<script src="../../../js/application-9932515daa74aa541b2e25a200653153.js" id="groupsio-js"></script>
 			<script src="../../../js/run_prettify.js"></script>
 			<title>
 				
@@ -172,7 +175,7 @@ const hapticsSelectionEnd = async () => {
 	console.log("FULL PAGE LOAD");
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "e401e3db1ef5632008e37243e277cc231ed330ab"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "2bd2ac9a0feb20833e34b3eb3bc9843373731b42"}' hx-ext="preload" hx-boost="false">
 			
 				<script>
 					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -238,6 +241,11 @@ const hapticsSelectionEnd = async () => {
 										<li>
 											<a href="https://groups.io/setlang/it">
 												IT
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/pt">
+												PT
 											</a>
 										</li>
 										<li>
@@ -329,6 +337,11 @@ const hapticsSelectionEnd = async () => {
 												<li>
 													<a href="https://groups.io/setlang/it">
 														IT
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/pt">
+														PT
 													</a>
 												</li>
 												<li>
@@ -1013,7 +1026,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 		</div>
 	</div>
 	<div class="row hidden-print" id="mobileSidebar"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
-		<div class="col-xs-12 hidden-md hidden-lg">
+		<div id="mobileSidebarSub" class="col-xs-12 hidden-md hidden-lg">
 			<div class="navbar navbar-default navbar-fixed-bottom">
 				<div class="container" style="display: flex; justify-content: space-around;">
 					
