@@ -2405,7 +2405,6 @@ blockquote {
 	display: none;
 }
 
-
 /* subject font size */
 .subject {
 	font-size: 17px;
@@ -2473,6 +2472,10 @@ body {
 
 #body {
 	padding-top: calc(60px + env(safe-area-inset-top));
+}
+
+.dropdown-menu {
+	font-size: 16px;
 }
 
 .list-group-item {
@@ -4016,7 +4019,7 @@ table.table-fixed {
 	display: none;
 }
 
-.drawer__header {
+.drawer-header {
 	padding: 1.5rem;
 	display: flex;
 	justify-content: space-between;
@@ -4024,7 +4027,7 @@ table.table-fixed {
 	border-bottom: 1px solid #ddd;
 }
 
-.drawer__close {
+.drawer-close {
 	margin: 0;
 	padding: 0;
 	border: none;
@@ -4035,7 +4038,7 @@ table.table-fixed {
 	height: 15px;
 }
 
-.drawer__wrapper {
+.drawer-wrapper {
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -4059,7 +4062,7 @@ table.table-fixed {
 	padding-top: max(0px, env(safe-area-inset-top));
 }
 
-.drawer__content {
+.drawer-content {
 	position: relative;
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -4069,19 +4072,19 @@ table.table-fixed {
 }
 
 .drawer.is-active {
-	display: inline-block;
+	display: inline;
 }
 
-.drawer.is-visible .drawer__wrapper {
+.drawer.is-visible .drawer-wrapper {
 	-webkit-transform: translateX(0);
 	transform: translateX(0);
 }
 
-.drawer.is-visible .drawer__overlay {
+.drawer.is-visible .drawer-overlay {
 	opacity: 0.5;
 }
 
-.drawer__overlay {
+.drawer-overlay {
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -4099,14 +4102,14 @@ table.table-fixed {
 	user-select: none;
 }
 
-.drawer--left .drawer__wrapper {
+.drawer-left .drawer-wrapper {
 	left: 0;
 	right: auto;
 	-webkit-transform: translate3d(-100%, 0, 0);
 	transform: translate3d(-100%, 0, 0);
 }
 
-.drawer--bottom .drawer__wrapper {
+.drawer-bottom .drawer-wrapper {
 	top: auto;
 	right: 0;
 	bottom: 0;
@@ -5089,50 +5092,71 @@ body.app .navbar-fixed-top {
 }
 
 .mt-0 {
-	margin-top: 0 !important;
+	margin-top: 0px !important;
 }
 .mb-0 {
-	margin-bottom: 0 !important;
+	margin-bottom: 0px !important;
 }
 .my-0 {
-	margin-top: 0 !important;
-	margin-bottom: 0 !important;
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
 }
 .ms-0 {
-	margin-left: 0 !important;
+	margin-left: 0px !important;
 }
 .me-0 {
-	margin-right: 0 !important;
+	margin-right: 0px !important;
 }
 .mx-0 {
-	margin-left: 0 !important;
-	margin-right: 0 !important;
+	margin-left: 0px !important;
+	margin-right: 0px !important;
 }
 
 .pt-0 {
-	padding-top: 0 !important;
+	padding-top: 0px !important;
 }
-
 .pb-0 {
-	padding-bottom: 0 !important;
+	padding-bottom: 0px !important;
 }
-
 .py-0 {
-	padding-top: 0 !important;
-	padding-bottom: 0 !important;
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
 }
-
 .ps-0 {
-	padding-left: 0 !important;
+	padding-left: 0px !important;
 }
-
 .pe-0 {
-	padding-right: 0 !important;
+	padding-right: 0px !important;
+}
+.px-0 {
+	padding-left: 0px !important;
+	padding-right: 0px !important;
 }
 
-.px-0 {
-	padding-left: 0 !important;
-	padding-right: 0 !important;
+.pt-1 {
+	padding-top: 15px !important;
+}
+
+.pb-1 {
+	padding-bottom: 15px !important;
+}
+
+.py-1 {
+	padding-top: 15px !important;
+	padding-bottom: 15px !important;
+}
+
+.ps-1 {
+	padding-left: 15px !important;
+}
+
+.pe-1 {
+	padding-right: 15px !important;
+}
+
+.px-1 {
+	padding-left: 15px !important;
+	padding-right: 15px !important;
 }
 
 .Xmce-statusbar {
@@ -5954,7 +5978,7 @@ body.dark-mode .mobilebadge {
 	border: 0px;
 }
 
-body.dark-mode .drawer__wrapper {
+body.dark-mode .drawer-wrapper {
 	background-color: var(--dark-mode-primary-color);
 }
 
