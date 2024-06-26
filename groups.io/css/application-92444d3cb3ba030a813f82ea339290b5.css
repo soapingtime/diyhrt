@@ -5830,7 +5830,8 @@ body.dark-mode .btn-primary:active {
 }
 
 /* Success Button */
-body.dark-mode .btn-success {
+body.dark-mode .btn-success,
+body.dark-mode .panel-success {
 	background-color: #388e3c;
 	border-color: #2e7d32;
 	color: var(--dark-mode-text-color);
@@ -5844,7 +5845,8 @@ body.dark-mode .btn-success:active {
 }
 
 /* Info Button */
-body.dark-mode .btn-info {
+body.dark-mode .btn-info,
+body.dark-mode .panel-info {
 	color: var(--dark-mode-reverse-text-color);
 	background-color: #3da8c0;
 	border-color: #3da8c0;
