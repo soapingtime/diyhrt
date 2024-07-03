@@ -2535,8 +2535,14 @@ body {
 		bottom: 80px;
 		right: 0;
 		left: 0;
-		overflow-y: auto !important;
+		/* COMMENTED OUT for now because it causes HTMX to not handle infinite scrolling correctly. It causes a jump back to the top of the page. */
+		/*overflow-y: auto !important;*/
 	}
+	/* added this in when we commented out overflow-y above. */
+	#maincontent-column {
+		padding-bottom: 100px;
+	}
+
 	.maincontent-chat-column {
 		top: 0px !important;
 		left: 0px !important;
