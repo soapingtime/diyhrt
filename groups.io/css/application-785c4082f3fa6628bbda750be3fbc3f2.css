@@ -2788,6 +2788,11 @@ body {
 	margin-left: 10px;
 }
 
+.XXmce-content-body {
+	white-space: pre-wrap;
+}
+
+
 .Xmce-panel {
 	border-color: #ccc !important;
 }
