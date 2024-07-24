@@ -2271,20 +2271,11 @@ th {
 }
 
 a.button-link {
-	color: #888 !important;
-	text-decoration: none;
 	padding: 8px 12px;
-	border-radius: 4px;
-	transition: background-color 0.3s ease;
 }
 
 .button-link-group a.button-link {
 	padding-right: 15px;
-}
-
-a.button-link:hover {
-	background-color: rgba(0, 123, 255, 0.1);
-	/* Faint background on hover, change the rgba values as desired */
 }
 
 /* otherwise selects extend to the entire width, which is too wide */
@@ -2432,7 +2423,6 @@ body:not(.dark-mode) .panel-default>.panel-heading a {
 }
 
 body:not(.dark-mode) a.showvisited:visited,
-body:not(.dark-mode) a.button-link,
 body:not(.dark-mode) .thread-attribution,
 body:not(.dark-mode) .text-muted,
 body:not(.dark-mode) .breadcrumb>.active,
@@ -5394,7 +5384,6 @@ body.dark-mode a:focus {
 }
 
 body.dark-mode a.showvisited:visited,
-body.dark-mode a.button-link,
 body.dark-mode .wikidisplay a:visited,
 body.dark-mode .thread-attribution,
 body.dark-mode .truncate-two-lines+div,
@@ -5745,10 +5734,6 @@ body.dark-mode .breadcrumb-container {
 
 body.dark-mode .breadcrumb>li+li:before {
 	color: #999999;
-}
-
-body.dark-mode a.button-link {
-	color: #999999 !important;
 }
 
 body.dark-mode .table {
