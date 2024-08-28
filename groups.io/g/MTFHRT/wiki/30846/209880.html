@@ -1,0 +1,1350 @@
+
+	
+	<!DOCTYPE html>
+	<html lang="en-US">
+		<head>
+			<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			
+			<meta name="pinterest" content="nopin" />
+			<meta name="pinterest" content="nohover" />
+			
+			<meta name="3778517eb4810dfb5d143ed8f1b359b3b5a82923" content="0f56257c3db4a222e91b11bc6871c4df2e263b28" />
+			<link rel="apple-touch-icon" sizes="57x57" href="https://groups.io/img/org.1/favicons/apple-icon-57x57.png">
+			<link rel="apple-touch-icon" sizes="60x60" href="https://groups.io/img/org.1/favicons/apple-icon-60x60.png">
+			<link rel="apple-touch-icon" sizes="72x72" href="https://groups.io/img/org.1/favicons/apple-icon-72x72.png">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://groups.io/img/org.1/favicons/apple-icon-76x76.png">
+			<link rel="apple-touch-icon" sizes="114x114" href="https://groups.io/img/org.1/favicons/apple-icon-114x114.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://groups.io/img/org.1/favicons/apple-icon-120x120.png">
+			<link rel="apple-touch-icon" sizes="144x144" href="https://groups.io/img/org.1/favicons/apple-icon-144x144.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://groups.io/img/org.1/favicons/apple-icon-152x152.png">
+			<link rel="apple-touch-icon" sizes="180x180" href="https://groups.io/img/org.1/favicons/apple-icon-180x180.png">
+			<link rel="icon" type="image/png" sizes="192x192"  href="../../../../img/org.1/favicons/android-icon-192x192.png">
+			<link rel="icon" type="image/png" sizes="32x32" href="../../../../img/org.1/favicons/favicon-32x32.png">
+			<link rel="icon" type="image/png" sizes="96x96" href="../../../../img/org.1/favicons/favicon-96x96.png">
+			<link rel="icon" type="image/png" sizes="16x16" href="../../../../img/org.1/favicons/favicon-16x16.png">
+			<link rel="manifest" href="../../../../img/org.1/favicons/manifest.json">
+			<meta name="msapplication-TileColor" content="#ffffff">
+			<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+			
+			
+			
+
+<script>
+/* stubs */
+if (false) {
+	const hapticsImpactHeavy = async () => {
+	};
+	const hapticsImpactMedium = async () => {
+	};
+	const hapticsImpactLight = async () => {
+	};
+	const hapticsVibrate = async () => {
+	};
+	const hapticsSelectionStart = async () => {
+	};
+	const hapticsSelectionChanged = async () => {
+	};
+	const hapticsSelectionEnd = async () => {
+	};
+}
+</script>
+
+			
+<script>
+	
+		function setPullToRefresh() {}
+	
+	function gotoURL(inurl) {
+		window.location.href = inurl;
+		return;
+	}
+	function contentLoaded(isHTMX, f, caller = "") {
+		console.log("contentLoaded: " + isHTMX + " " + caller);
+		if (isHTMX == true) {
+			document.body.addEventListener('htmx:afterSettle', f, {once: true});
+		} else {
+			if (document.readyState !== 'loading') {
+				console.log('document is already ready, just execute code here');
+				f();
+			} else {
+				console.log('document was not ready, place code here');
+				document.addEventListener('DOMContentLoaded', f, {once: true});
+			}
+		}
+	}
+
+	function HideAppSidebarOnKeyboard() {
+		console.log("In HideAppSidebarOnKeyboard");
+		
+	}
+	// stub
+	function logError(data, url, linenumber) {
+		console.log(data)
+		return;
+	}
+	var pushSubToken;
+	var ignoreErrors = false;
+	var lastError = "";
+	
+		window.onerror = function(errorMessage, errorUrl, errorLine, errorColumn, errorObj) {
+			let column;
+			let stack;
+			if (console && console.log) {
+				console.log("msg:", errorMessage);
+				console.log("url:", errorUrl);
+				console.log("line:", errorLine);
+				if (errorColumn !== undefined && errorObj != null) {
+					console.log("column:", errorColumn);
+					column = errorColumn;
+				}
+				if (errorObj !== undefined && errorObj != null) {
+					console.log("stack:", errorObj.stack);
+					stack = errorObj.stack;
+				}
+				console.log("client_id:", "web.web09.564633.1724805127715838762");
+				console.log("last_error:", lastError);
+				console.log("stack:", stack);
+			}
+			if (errorUrl == "" || errorUrl === null) {
+				errorUrl = window.location.href;
+			}
+			if (errorMessage.includes("SecurityError:") == true) {
+				ignoreErrors = true;
+			}
+			if (ignoreErrors == true) {
+				console.log("cookies, disabled, ignoring");
+				lastError = errorMessage;
+				return;
+			}
+			jQuery.ajax({
+				type: 'POST',
+				url: '/jsclienterror',
+				data: {
+					msg: errorMessage,
+					url: errorUrl,
+					line: errorLine,
+					column: column,
+					stack: stack,
+					last_error: lastError,
+					client_id: "web.web09.564633.1724805127715838762"
+				},
+				success: function() {
+					if (console && console.log) {
+						console.log('JS error report successful.');
+					}
+					lastError = errorMessage;
+				},
+				error: function() {
+					if (console && console.error) {
+						console.error('JS error report submission failed!');
+					}
+					lastError = errorMessage;
+				}
+			});
+			return true;
+		}
+	
+</script>
+			
+			
+			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
+			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
+			<link href="../../../../css/application-0ed6ee9ed59e033ba7e87b4da83ddec9.css" rel="stylesheet" id="groupsio-css">
+			<script src="../../../../js/application-9b2c27b802a13063cf8a712fe566f004.js" id="groupsio-js"></script>
+			<script src="../../../../js/run_prettify.js"></script>
+			<title>
+				
+	MTFHRT@groups.io | Wiki
+
+			</title>
+			
+
+			
+				
+
+
+  
+			
+			
+
+
+<script>
+	htmx.config.scrollBehavior = "instant";
+	htmx.config.historyCacheSize = 0;
+	htmx.config.defaultSettleDelay = 0;
+	console.log("FULL PAGE LOAD");
+</script>
+		</head>
+		<body id="body" class="" hx-headers='{"Accept-Version": "46946e38aebf7358a351d22c2204f9c6e236a8bb"}' hx-ext="preload" hx-boost="false">
+			
+				<script>
+					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+						document.body.classList.add('dark-mode');
+					}
+				</script>
+			
+
+			
+				<div class="navbar navbar-head navbar-fixed-top"  role="navigation" id="headerbar">
+					<div class="container-fluid" style="padding-left:0px;">
+						<a href="https://groups.io" class="navbar-left" hx-boost="false" hx-disinherit="*">
+							<img src="../../../../img/org.1/mainlogo.png" height="50" alt="Groups.io">
+						</a>
+							
+								<ul class="nav navbar-nav hidden-xs">
+									<li>
+										<a href="https://groups.io/search">
+											Find or Create a Group
+										</a>
+									</li>
+									
+								</ul>
+							
+							<ul class="nav navbar-nav pull-right visible-xs" style="margin-top:5px;margin-bottom:5px;">
+								<li>
+									<a href="209880.html#" data-toggle="modal" data-target="#mobileAccount">
+										<i class="fa-fw fa fa-bars fa-lg"></i>
+									</a>
+								</li>
+							</ul>
+
+							<ul class="nav navbar-nav pull-right hidden-xs">
+								<li class="dropdown">
+									<a href="209880.html#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<i class="fa-fw fa-regular fa-globe"></i>
+										
+											EN
+										
+										<b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="https://groups.io/unsetlang">
+												EN
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/de">
+												DE
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/es">
+												ES
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/fr">
+												FR
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/it">
+												IT
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/pt">
+												PT
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/uk">
+												UK
+											</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="https://groups.io/helpcenter" target="_blank">
+										Help
+									</a>
+								</li>
+								<li>
+									<a href="https://groups.io/login" hx-boost="false" hx-disinherit="*">
+										<i class="fa fa-sign-in-alt"></i>
+										Log In
+									</a>
+								</li>
+								
+									<li>
+										<a href="https://groups.io/register">
+											<i class="fa fa-user"></i>
+											Sign Up
+										</a>
+									</li>
+								
+							</ul>
+					</div>
+				</div>
+				<div class="modal fade" id="mobileAccount" role="dialog">
+					<div class="modal-dialog" style="margin-top:50px;">
+						<div class="modal-content">
+							<div class="modal-body">
+
+									<ul class="list-group noborderlist">
+
+										<li class="noborderitem list-group-item">
+											<a href="https://groups.io/login" hx-boost="false" hx-disinherit="*">
+												<i class="fa fa-sign-in-alt"></i>
+												Log In
+											</a>
+										</li>
+										
+											<li class="noborderitem list-group-item">
+												<a href="https://groups.io/register">
+													<i class="fa fa-user"></i>
+													Sign Up
+												</a>
+											</li>
+										
+										<li class="noborderitem list-group-item">
+											<a href="https://groups.io/helpcenter" target="_blank">
+												<i class="fa-fw fa fa-question-circle"></i>
+												Help
+											</a>
+										</li>
+
+										<li class="dropdown noborderitem list-group-item">
+											<a href="209880.html#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<i class="fa-fw fa-regular fa-globe"></i>
+												
+													EN
+												
+												<b class="caret"></b>
+											</a>
+											<ul class="dropdown-menu">
+												<li>
+													<a href="https://groups.io/unsetlang">
+														EN
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/de">
+														DE
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/es">
+														ES
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/fr">
+														FR
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/it">
+														IT
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/pt">
+														PT
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/uk">
+														UK
+													</a>
+												</li>
+											</ul>
+										</li>
+
+									</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+<script>
+var groupnavigatorData = [
+
+];
+</script>
+
+
+<!-- Modal Dialog for Autocomplete -->
+<div class="modal fade" id="groupnavigatorModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <input type="text" class="form-control" id="groupnavigatorInput" placeholder="Go to group..." style="margin-bottom:10px">
+        <div id="groupnavigatorContainer" class="autocompleteResults" style="max-height:250px; overflow-y: auto;"></div>
+		<div class="text-center" style="margin-top:10px; font-size:12px;"><i class="fa-sharp fa-arrow-up-arrow-down"></i> to navigate&nbsp;&nbsp;&nbsp;<i class="fa-sharp fa-arrow-turn-down-left"></i> to use&nbsp;&nbsp;&nbsp;<strong>esc</strong> to dismiss</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// Keep track of the currently selected index
+var selectedIndex = -1;
+
+// Function to highlight the matched substring
+function highlightSubstring(str, substring) {
+  var index = str.toLowerCase().indexOf(substring.toLowerCase());
+  if (index !== -1) {
+    var before = str.substring(0, index);
+    var middle = str.substring(index, index + substring.length);
+    var after = str.substring(index + substring.length);
+    return before + '<span class="autocomplete-highlight">' + middle + '</span>' + after;
+  }
+  return str;
+}
+
+// Function to highlight the selected item and ensure it is visible in the scrollable list
+function highlightSelectedItem(modalName) {
+  var listContainer = document.getElementById(modalName + 'Container');
+  var items = document.getElementsByClassName(modalName + '-list-item');
+  Array.from(items).forEach(function(item, idx) {
+    item.className = idx === selectedIndex ? modalName + '-list-item autocomplete-list-item btn-primary no-hover' : modalName + '-list-item autocomplete-list-item no-hover'; // Apply btn-primary class to the selected item
+  });
+  if (items.length > 0 && selectedIndex >= 0) {
+    var selectedItem = items[selectedIndex];
+    var containerTop = listContainer.scrollTop;
+    var containerBottom = containerTop + listContainer.clientHeight;
+    var itemTop = selectedItem.offsetTop;
+    var itemBottom = itemTop + selectedItem.offsetHeight;
+	const fudge = 59;
+    if (selectedIndex > 0 && itemTop > containerBottom) {
+      // If there are items below the selected item and the selected item is not fully visible, scroll down
+      listContainer.scrollTop = itemTop - listContainer.clientHeight + items[selectedIndex - 1].offsetHeight;
+    } else if (selectedIndex < items.length - 1 && (itemTop - fudge) < containerTop) {
+      // If there are items above the selected item and the selected item is not fully visible, scroll up
+      listContainer.scrollTop = itemTop - fudge - items[selectedIndex + 1].offsetHeight;
+    }
+  }
+}
+
+// function to populate the list based on the input
+function populateList(modalName, data) {
+  var input = document.getElementById(modalName+'Input').value;
+  var listContainer = document.getElementById(modalName+'Container');
+  listContainer.innerHTML = '';
+  data.forEach(function(item) {
+    if (item.name.toLowerCase().includes(input.toLowerCase())) {
+      var div = document.createElement('div');
+      div.innerHTML = highlightSubstring(item.name, input);
+      div.className = modalName+'-list-item autocomplete-list-item no-hover'; // Apply no-hover class
+      div.addEventListener('click', function() {
+        // Navigate to the specified URL when a list item is clicked
+        window.location.href = item.url;
+      });
+      div.addEventListener('mousemove', function() {
+        // Remove no-hover class from all items when the mouse is moved over any item
+		console.log("mouse move");
+        var items = document.getElementsByClassName(modalName+'-list-item');
+        Array.from(items).forEach(function(item) {
+          item.classList.remove('no-hover');
+        });
+      });
+      listContainer.appendChild(div);
+    }
+  });
+  highlightSelectedItem(modalName);
+}
+
+function InitAutocomplete(modalName, data) {
+	// Focus the input field when the modal is shown and populate the list
+	$('#' + modalName + 'Modal').on('shown.bs.modal', function () {
+		$('#' + modalName + 'Input').focus().val('');
+		populateList(modalName, data);
+		selectedIndex = 0;
+		highlightSelectedItem(modalName);
+	});
+
+	// Event listener for input field typing
+	document.getElementById(modalName + 'Input').addEventListener('input', function() {
+		populateList(modalName, data);
+		selectedIndex = 0;
+	});
+
+	// Event listener for arrow keys and enter key
+	document.getElementById(modalName + 'Input').addEventListener('keydown', function(event) {
+		var items = document.getElementsByClassName(modalName + '-list-item');
+		if (event.key === 'ArrowDown') {
+			event.preventDefault();
+			if (selectedIndex < items.length - 1) selectedIndex++;
+			highlightSelectedItem(modalName);
+		} else if (event.key === 'ArrowUp') {
+			event.preventDefault();
+			if (selectedIndex > 0) selectedIndex--;
+			highlightSelectedItem(modalName);
+		} else if (event.key === 'Enter' && selectedIndex >= 0 && selectedIndex < items.length) {
+			event.preventDefault();
+			items[selectedIndex].click();
+		}
+	});
+}
+
+function showAutocompleteModal(modalName) {
+	$('#' + modalName + 'Modal').modal('show');
+	selectedIndex = -1;
+}
+</script>
+
+			<div id="content" class="container-fluid">
+<script>
+	InitAutocomplete("groupnavigator", groupnavigatorData);
+
+	document.body.addEventListener("showReloadPageDialog", function(evt) {
+		console.log("Forced reload");
+		location.reload();
+	});
+
+	// submitEvent acts like .submit(), except it is compatible with the app, by using events instead.
+	function submitEvent(ele) {
+		console.log("in submitEvent");
+		if (ele.startsWith('#')) {
+    		ele = ele.slice(1);
+		}
+		document.getElementById(ele).submit();
+		return;
+		/*
+		const theEvent = new CustomEvent('submit', {
+			bubbles: true,
+			cancelable: true
+		});
+		if (typeof ele === 'string' || ele instanceof String) {
+			if (ele.startsWith("#") == true) {
+				ele = ele.slice(1);
+			}
+			if (document.getElementById(ele).dispatchEvent(theEvent) == true) {
+				// if not cancelled, do normal submit
+				console.log("calling submit");
+				document.getElementById(ele).submit();
+			}
+			return;
+		}
+		// assume ele is the element
+		if (ele.dispatchEvent(theEvent) == true) {
+			// if not cancelled, do normal submit
+			console.log("calling submit");
+			ele.submit();
+		}
+		*/
+	}
+
+	// gioDestroy is a convenience function for destroy callbacks
+	function gioDestroy(eventCB) {
+		let internalGioDestroy = function(evt) {
+			// do not activate on infinite scroll events
+			if (evt.detail.target !== undefined && evt.detail.target.id != "maincontent-refresh") {
+				console.log("Ignoring infinite scroll event");
+				return;
+			}
+			console.log("Calling destroy callback");
+			eventCB(evt);
+		}
+		document.body.addEventListener("htmx:beforeSwap", internalGioDestroy, {once: true});
+		document.body.addEventListener("htmx:historyCacheMiss", internalGioDestroy, {once: true});
+	}
+			
+	var drawerCloseFunc = function(evt) {
+		console.log("in drawerCloseFunc");
+		// Find all elements with the class 'drawer'
+		var drawers = document.querySelectorAll('.drawer');
+
+		// Iterate over each element and call closeDrawer() on each
+		drawers.forEach(function(obj) {
+			drawerObj.closeDrawer(obj);
+		});
+		$('.modal').modal('hide');
+	}
+	document.body.addEventListener('htmx:beforeSwap', drawerCloseFunc);
+	document.body.addEventListener('htmx:historyCacheMiss', drawerCloseFunc);
+
+	var keydownFunc = function(event) {
+		var tagName = event.target.tagName.toLowerCase();
+		if (tagName === 'input' || tagName === 'textarea' || event.target.isContentEditable) {
+			if (event.key === 'Escape') {
+				event.target.blur();
+			}
+			return;
+		}
+		// check if the viewimages viewer is up
+		let element = document.getElementById('overlay');
+		if (element && element.classList.contains('visible')) {
+			return;
+		}
+		console.log("HERE: " + event.key + " " + event.ctrlKey + " " + event.shiftKey + " " + event.metaKey);
+		if (event.ctrlKey && event.shiftKey && (event.key === '?' || event.key === '/')) {
+			event.preventDefault(); // Prevent the default action
+			// Show the modal dialog for keyboard shortcuts
+			$('#shortcutModal').modal('show');
+			return;
+		}
+		$('#shortcutModal').modal('hide');
+
+		if (event.key.toLowerCase() === 'g') {
+			// For Windows and Linux
+			if (event.ctrlKey) {
+				event.preventDefault();
+				showAutocompleteModal("groupnavigator");
+				return;
+			}
+		}
+
+		// Check if the pressed key is '/'
+		if ((event.key === 'f' || event.key === 'F') && event.shiftKey) {
+			if (navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
+				if (event.metaKey) {
+					event.preventDefault(); // Prevent the default action
+					// Focus on the search box
+					let box = document.getElementById('searchbox')
+					if (box != null) {
+						document.getElementById('searchbox').focus();
+					}
+				}
+			} else {
+				// For Windows and Linux
+				if (event.ctrlKey) {
+					event.preventDefault(); // Prevent the default action
+					// Focus on the search box
+					let box = document.getElementById('searchbox')
+					if (box != null) {
+						document.getElementById('searchbox').focus();
+					}
+				}
+			}
+		}
+	}
+	document.addEventListener('keydown', keydownFunc);
+	var removeDrawerCloseFunc = function(evt) {
+		document.body.removeEventListener('htmx:beforeSwap', drawerCloseFunc);
+		document.body.removeEventListener('htmx:historyCacheMiss', drawerCloseFunc);
+		document.removeEventListener('keydown', keydownFunc);
+	}
+	document.body.addEventListener("htmx:historyCacheMiss", removeDrawerCloseFunc, {once: true});
+</script>
+<!-- Modal Dialog for Keyboard Shortcuts -->
+<div class="modal fade" id="shortcutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Keyboard Shortcuts</h4>
+      </div>
+      <div class="modal-body">
+		<div class="row">
+			<div class="col-xs-3 text-right"><strong>ctrl</strong> + <strong>shift</strong> + <strong>?</strong>&nbsp;&nbsp;:</div>
+			<div class="col-xs-9" style="margin-left: -23px;">Show all keyboard shortcuts</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3 text-right"><strong>ctrl</strong> + <strong>g</strong>&nbsp;&nbsp;:</div>
+			<div class="col-xs-9" style="margin-left: -23px;">Navigate to a group</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>shift</strong> + <strong>f</strong>&nbsp;&nbsp;:</div>
+			<div class="col-xs-9" style="margin-left: -23px;">Find</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>/</strong>&nbsp;&nbsp;:</div>
+			<div class="col-xs-9" style="margin-left: -23px;">Quick actions</div>
+		</div>
+		</div>
+		<div class="text-center" style="margin-top:10px; margin-bottom:10px; font-size:12px;"><strong>esc</strong> to dismiss</div>
+    </div>
+  </div>
+</div>
+
+				
+	
+	<div id="mainrow" class="row"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
+		<div id="groupsidebar" class="scrollbar hidden-print">
+			<div class="scrollbar-content">
+				<div id="accordion" role="tablist" aria-multiselectable="true" style="margin-bottom:20px;">
+					<div class="list-group noborderlist" style="border:0;margin-bottom:0px">
+						
+
+
+	<a id="sidebar-home" title="Group Home" href="https://groups.io/g/MTFHRT" class="list-group-item sidebar-item">
+		<i class="fa-fw fa fa-home fa-lg"></i>
+		Home
+		
+	</a>
+
+	
+
+	
+
+	
+		
+	
+		
+
+	<a title="Messages" href="https://groups.io/g/MTFHRT/topics?sidebar=true" id="sidebar-archives" class="noborderitem list-group-item sidebar-item sidebar-item-archives"> 
+		<i class="fa-fw fa fa-comments fa-lg"></i>
+		Messages
+		<span id="sidebar-archives-badge" class="badge"></span>
+	</a>
+
+	
+	
+	
+	
+	
+		
+
+	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" id="sidebar-hashtags" class="noborderitem list-group-item sidebar-item sidebar-item-hashtags"> 
+		<i class="fa-fw fa fa-hashtag fa-lg"></i>
+		Hashtags
+		<span id="sidebar-hashtags-badge" class="badge"></span>
+	</a>
+
+	
+
+		
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+		
+
+	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" id="sidebar-wiki" class="noborderitem list-group-item sidebar-item sidebar-item-wiki active"> 
+		<i class="fa-fw fa fa-book fa-lg"></i>
+		Wiki
+		<span id="sidebar-wiki-badge" class="badge"></span>
+	</a>
+
+	
+
+	
+
+					</div>
+				</div>
+				
+	<div class="text-center" style="font-size:13px;margin-bottom:30px">
+		<div style="padding-bottom:10px;">
+			<strong>ctrl</strong> + <strong>shift</strong> + <strong>?</strong> for shortcuts
+		</div>
+		<div style="padding-bottom:5px;">
+			<a href="https://groups.io/static/about">
+				About
+			</a> &middot;
+			<a href="https://groups.io/static/features">
+				Features
+			</a> &middot;
+			<a href="https://groups.io/static/pricing">
+				Pricing
+			</a>
+		</div>
+		<div style="padding-bottom:5px;">
+			<a rel="nofollow" href="https://groups.io/g/updates/messages?expanded=1">
+				Updates
+			</a> &middot;
+			<a href="https://groups.io/static/tos">
+				Terms
+			</a> &middot;
+			<a href="https://groups.io/helpcenter" target="_blank">
+				Help
+			</a>
+		</div>
+		<div style="padding-bottom:5px;">
+			&copy; 2024 Groups.io
+		</div>
+	</div>
+
+			</div>
+		</div>
+		<div id="maincontent" class="groupmaincontent">
+			<div id="maincontent-refresh">
+				<div id="maincontent-column" class="col-xs-12 maincontent-column">
+					
+	
+	
+	
+
+	
+
+	
+	<div id="alertdiv"></div>
+	<div class="noticetemplate template">
+		<div class="alert alert-success alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">
+					&times;
+				</span>
+			</button>
+			<span id="msg"></span>
+		</div>
+	</div>
+	<div class="alerttemplate template">
+		<div class="alert alert-danger alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">
+					&times;
+				</span>
+			</button>
+			<span id="msg"></span>
+		</div>
+	</div>
+	<div class="alertnoclosetemplate template">
+		<div class="alert alert-danger" role="alert">
+			<span id="msg"></span>
+		</div>
+	</div>
+
+
+
+ 
+<script>
+function dismiss() {
+    console.log("dismiss");
+    $.get( "/dismissalert");
+}
+
+var $alerttemplate = $(".alerttemplate");
+var $alertnoclosetemplate = $(".alertnoclosetemplate");
+var $noticetemplate = $(".noticetemplate");
+function createAlert(msg, isError, autoClose, noClose) {
+	if (isError == false) {
+		$newPanel = $noticetemplate.clone();
+	} else {
+        if (noClose) {
+		  $newPanel = $alertnoclosetemplate.clone();
+        } else {
+		  $newPanel = $alerttemplate.clone();
+        }
+	}
+	$newPanel.find("#msg").html(msg);
+	if (autoClose == true) {
+		$("#alertdiv").append($newPanel.fadeTo(2000, 500).slideUp(500, function(){
+		    $newPanel.slideUp(500);
+		    $newPanel.remove();
+		}));  	
+	} else {
+		$("#alertdiv").append($newPanel.fadeIn());
+	}
+    return $newPanel;
+}
+
+
+
+
+</script>
+
+
+
+	
+		
+
+	<div class="row breadcrumb-row" style="margin-bottom: 10px">
+		<div class="col-xs-12 col-sm-9">
+			<span class="hidden-sm hidden-md hidden-lg pull-right" style="padding:8px 15px;"><a data-toggle="modal" data-target="#searchModal"><i class="fa fa-search"></i></a></span>
+			<div class="breadcrumb-container">
+				
+					<ol class="breadcrumb scroll-breadcrumb">
+						<li><a href="https://groups.io/g/MTFHRT"><i class="fa fa-home"></i> MTFHRT</a></li>
+						<li><a href="https://groups.io/g/MTFHRT/wiki"><i class="fa fa-book"></i> Wiki</a></li>
+						
+						<li class="active"><i class="fa fa-book"></i> Home</li>
+					</ol>
+				
+			</div>
+		</div>
+		<div class="col-sm-3 hidden-xs">
+			<form class="form-inline pull-right" method="get" action="https://groups.io/g/MTFHRT/wikisearch">
+				
+				
+				<div class="input-group">
+					<input id="searchbox" type="text" class="form-control" placeholder="Search" title="Search" name="q" size="20" style="height:37px">
+					<div class="input-group-btn">
+						<button class="btn btn-primary" type="submit" style="height:37px;" aria-label="Search">
+							<span class="fa fa-search"></span>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">
+							&times;
+						</span>
+						<span class="sr-only">
+							Close
+						</span>
+					</button>
+					<h4 class="modal-title" id="searchModalLabel">
+						Search
+					</h4>
+				</div>
+				<form class="form-horizontal" method="get" action="https://groups.io/g/MTFHRT/wikisearch">
+					
+					<div class="modal-body">
+						<div class="form-group">
+							<div class="col-sm-12">
+								<input type="text" class="form-control" placeholder="Search" title="Search" name="q">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-primary btn-sm" aria-label="Search">
+							<i class="fa fa-search"></i>
+							Search
+						</button>
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+							<i class="fa fa-times"></i>
+							Cancel
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	
+
+	
+	<div class="row" style="margin-bottom:20px;">
+		<div class="col-xs-12">
+			<span class="hidden-print">
+				<div class="btn-group">
+					<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+						Pages
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						
+							<li>
+								<a href="../37530.html">
+									Basic Estrogel Guide
+								</a>
+							</li>
+						
+							<li>
+								<a href="../30846.html">
+									Home
+								</a>
+							</li>
+						
+							<li>
+								<a href="../32288.html">
+									How to measure melting point of most organic powders using typical household items.
+								</a>
+							</li>
+						
+							<li>
+								<a href="../34293.html">
+									steam sterilization
+								</a>
+							</li>
+						
+							<li>
+								<a href="../29602.html">
+									Ultimate DIY
+								</a>
+							</li>
+						
+					</ul>
+				</div>
+				
+			</span>
+
+			
+				<div class="pull-right">
+					<a href="history.html">
+						
+<script id="timedispupdated30846">
+	$('#timedispupdated30846').replaceWith(DisplayShortTime(1724794424452712818, false
+		));
+</script>
+
+					</a>
+				</div>
+			
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			
+				<span class="wikidisplay user-content">
+					<p><a href="../29602.html" rel="nofollow">Injections</a></p>
+<p><a href="../37530.html" rel="nofollow">Gel</a></p>
+<p><a title="How to measure melting point of most organic powders using typical household items." href="../32288.html" target="_blank" rel="nofollow noopener">How to measure melting point of most organic powders using typical household items.</a></p>
+<p>Literature and discussions on:</p>
+<p>  <a href="https://groups.io/g/MTFHRT/topic/80225302" rel="nofollow">hGH, igf-1 and effects on hrt</a></p>
+<p>  <a href="https://groups.io/g/MTFHRT/topic/79606271" rel="nofollow">Hrt and brain</a></p>
+<p> </p>
+<p> </p>
+<p> </p>
+					<p />
+				</span>
+			
+		</div>
+		
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			
+		</div>
+	</div>
+	
+<script>
+	contentLoaded(  false  , function() {
+		UpdateSidebar("wiki");
+	});
+</script>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row hidden-print" id="mobileSidebar"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
+		<div id="mobileSidebarSub" class="col-xs-12 hidden-md hidden-lg">
+			<div class="navbar navbar-default navbar-fixed-bottom">
+				<div class="container" style="display: flex; justify-content: space-around;">
+					
+						
+	
+		
+	
+	<div id="mobilesidebar-archives" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center;" hx-get="https://groups.io/g/MTFHRT/topics?sidebar=true"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
+		<div style="display: inline-block; position: relative;">
+			<div style="position: relative;display: inline-block;">
+			<i class="fa-fw fa-light fa-comments fa-2x"></i>
+			
+			</div><br>
+			<span style="font-size:12px;">Messages</span>
+		</div>
+	</div>
+
+	
+	
+
+						
+	
+
+					
+					<div style="flex: 1; text-align: center;margin-top:10px" data-drawer-trigger aria-controls="drawer-name" aria-expanded="false">
+						<i class="fa-fw fa-light fa-bars fa-2x"></i><br>
+						<span style="font-size:12px;">More</span>
+					</div>
+				</div>
+			</div>
+			<section class="drawer drawer-left" id="drawer-name" data-drawer-target>
+				<div class="drawer-overlay" data-drawer-close tabindex="-1"></div>
+				<div class="drawer-wrapper">
+					<div class="drawer-header">
+						<div class="drawer-title">
+							<i class="fa-fw fa-regular fa-bars fa-3x"></i>
+							<span class="sr-only">
+								More Options
+							</span>
+							More
+						</div>
+						<button class="drawer-close" data-drawer-close aria-label="Close Drawer"></button>
+					</div>
+					<div class="drawer-content">
+						<div class="list-group noborderlist">
+							
+
+
+	<a id="sidebar-home" title="Group Home" href="https://groups.io/g/MTFHRT" class="list-group-item sidebar-item">
+		<i class="fa-fw fa fa-home fa-lg"></i>
+		Home
+		
+	</a>
+
+	
+
+	
+
+	
+		
+	
+		
+
+	<a title="Messages" href="https://groups.io/g/MTFHRT/topics?sidebar=true" id="sidebar-archives-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-archives"> 
+		<i class="fa-fw fa fa-comments fa-lg"></i>
+		Messages
+		<span id="sidebar-archives-mobile-badge" class="badge"></span>
+	</a>
+
+	
+	
+	
+	
+	
+		
+
+	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" id="sidebar-hashtags-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-hashtags"> 
+		<i class="fa-fw fa fa-hashtag fa-lg"></i>
+		Hashtags
+		<span id="sidebar-hashtags-mobile-badge" class="badge"></span>
+	</a>
+
+	
+
+		
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+		
+
+	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" id="sidebar-wiki-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-wiki active"> 
+		<i class="fa-fw fa fa-book fa-lg"></i>
+		Wiki
+		<span id="sidebar-wiki-mobile-badge" class="badge"></span>
+	</a>
+
+	
+
+	
+
+							
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/about" style="border-top:5px solid #ddd;">
+									<i class="fa-fw fal fa-envelope fa-lg"></i>
+									About
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/features">
+									<i class="fa-fw far fa-tasks fa-lg"></i>
+									Features
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/pricing">
+									<i class="fa-fw fa fa-dollar-sign fa-lg"></i>
+									Pricing
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/g/updates/messages?expanded=1">
+									<i class="fa-fw far fa-thermometer-three-quarters fa-lg"></i>
+									# Changelog
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/tos">
+									<i class="fa-fw fal fa-newspaper fa-lg"></i>
+									Terms
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/helpcenter">
+									<i class="fa-fw fa fa-info-circle fa-lg"></i>
+									Help
+								</a>
+							
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+<!-- Modal Dialog for Autocomplete -->
+<div class="modal fade" id="quickActionsModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <input type="text" class="form-control" id="quickActionsInput" placeholder="Go to page..." style="margin-bottom:10px">
+        <div id="quickActionsContainer" class="autocompleteResults" style="max-height:250px; overflow-y: auto;"></div>
+		<div class="text-center" style="margin-top:10px; font-size:12px;"><i class="fa-sharp fa-arrow-up-arrow-down"></i> to navigate&nbsp;&nbsp;&nbsp;<i class="fa-sharp fa-arrow-turn-down-left"></i> to use&nbsp;&nbsp;&nbsp;<strong>esc</strong> to dismiss</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script>
+	var quickActionsData = [
+		
+		
+			{name: "Group Home", url: "https://groups.io/g/MTFHRT"},
+		
+
+		
+			{name: "Topics", url: "https://groups.io/g/MTFHRT/topics"},
+			{name: "Messages", url: "https://groups.io/g/MTFHRT/messages"},
+			{name: "Expanded Messages", url: "https://groups.io/g/MTFHRT/messages?expanded=1"},
+		
+		
+			{name: "Polls", url: "https://groups.io/g/MTFHRT/polls"},
+		
+		
+			{name: "Hashtags", url: "https://groups.io/g/MTFHRT/hashtags"},
+		
+		
+		
+		
+
+		
+
+		
+		
+		
+
+		
+
+		
+		
+			{name: "Wiki", url: "https://groups.io/g/MTFHRT/wiki"},
+		
+		
+		/* other pages */
+		{name: "Help", url: "/helpcenter"},
+		{name: "Feed", url: "/feed"},
+		{name: "Your Groups", url: "/groups"},
+		{name: "Your Calendar", url: "/calendar"},
+		{name: "Your Activity", url: "/activity"},
+		{name: "Your Pending Messages", url: "/pendingmsgs"},
+		{name: "Account Login", url: "/account"},
+		{name: "Account Preferences", url: "/account?page=prefs"},
+		{name: "Account Security", url: "/account?page=security"},
+		{name: "Account Identity", url: "/account?page=profile&member_info_id=0"},
+		{name: "Account Notifications", url: "/account?page=notifications"},
+		{name: "Account Other Services", url: "/account?page=oauth"},
+		{name: "Account Bounces", url: "/account?page=bounces"},
+		{name: "Account Billing", url: "/account?page=billing"},
+		{name: "Find a Group", url: "/search?p=SubsCount,,,20,2,0,0"},
+	];
+
+
+	InitAutocomplete("quickActions", quickActionsData);
+
+	document.addEventListener('keydown', function(event) {
+		var tagName = event.target.tagName.toLowerCase();
+		if (tagName === 'input' || tagName === 'textarea' || event.target.isContentEditable) {
+			return;
+		}
+		// check if the viewimages viewer is up
+		let element = document.getElementById('overlay');
+		if (element && element.classList.contains('visible')) {
+			return;
+		}
+		if (event.key.toLowerCase() === '/') {
+			if (navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
+				// For Mac
+				// Check if Command (event.metaKey) is pressed, and either Option (event.altKey) is pressed or not
+				if (event.metaKey) {
+					event.preventDefault();
+					showAutocompleteModal("quickActions");
+					return;
+				}
+			} else {
+				// For Windows and Linux
+				if (event.ctrlKey) {
+					event.preventDefault();
+					showAutocompleteModal("quickActions");
+					return;
+				}
+			}
+		}
+	});
+	function UpdateSidebar(id) {
+		console.log(id + " was clicked");
+		var sidebarItems = document.querySelectorAll('.mobilesidebar-item');
+		sidebarItems.forEach(function(item) {
+			var iElement = item.getElementsByTagName('div')[0].getElementsByTagName('i')[0];
+			if (item.id == "mobilesidebar-" + id) {
+				console.log("making solid " + id)
+				iElement.classList.add('fa-solid');
+				iElement.classList.remove('fa-light');
+			} else {
+				iElement.classList.remove('fa-solid');
+				iElement.classList.add('fa-light');
+			}
+		});
+		var sidebarItems = document.querySelectorAll('.sidebar-item');
+		// remove 'active' class from all 'sidebar-item' elements
+		sidebarItems.forEach(function(item) {
+			if (item.id == "sidebar-" + id) {
+				console.log("making active " + id)
+				item.classList.add('active');
+			} else {
+				item.classList.remove('active');
+			}
+		});
+	}
+</script>
+
+
+			</div>
+			
+				<div id="scroll-top-outer">
+					<div id="scroll-top" class="scroll-top-wrapper hidden-xs">
+						<span class="scroll-top-inner">
+							<i class="fa fa-arrow-circle-up fa-fw fa-2x"></i>
+						</span>
+					</div>
+				</div>
+<script>
+	$(function() {
+		$(document).on('scroll', function() {
+			if ($(window).scrollTop() > 100) {
+				$('.scroll-top-wrapper').addClass('show');
+			} else {
+				$('.scroll-top-wrapper').removeClass('show');
+			}
+		});
+		$('.scroll-top-wrapper').on('click', scrollToTop);
+	});
+
+	function scrollToTop() {
+		verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
+		element = $('body');
+		offset = element.offset();
+		offsetTop = offset.top;
+		$('html, body').animate({
+			scrollTop: offsetTop
+		}, 100, 'linear');
+	}
+
+	if (navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
+		let elements = document.querySelectorAll('strong.ctrlmeta');
+		elements.forEach((element) => {
+			// Check if the innerText is "ctrl"
+			if (element.innerText === 'ctrl') {
+				// Create a new "i" element
+				let newElement = document.createElement('i');
+				newElement.classList.add('fa-solid', 'fa-command');
+				
+				// Replace the old "strong" element with the new "i" element
+				element.parentNode.replaceChild(newElement, element);
+			}
+		});
+	}
+</script>
+			
+			
+
+
+		</body>
+	</html>
+
