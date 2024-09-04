@@ -104,7 +104,7 @@ if (false) {
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.web08.565017.1724805126093906708");
+				console.log("client_id:", "web.web09.8027316.1725409980527492746");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -129,7 +129,7 @@ if (false) {
 					column: column,
 					stack: stack,
 					last_error: lastError,
-					client_id: "web.web08.565017.1724805126093906708"
+					client_id: "web.web09.8027316.1725409980527492746"
 				},
 				success: function() {
 					if (console && console.log) {
@@ -178,7 +178,7 @@ if (false) {
 	console.log("FULL PAGE LOAD");
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "46946e38aebf7358a351d22c2204f9c6e236a8bb"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "9174e21ada1ff47f09e2ff3c45d4c8abdf789467"}' hx-ext="preload" hx-boost="false">
 			
 				<script>
 					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -655,7 +655,7 @@ function showAutocompleteModal(modalName) {
 
 				
 	
-	<div id="mainrow" class="row"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
+	<div id="mainrow" class="row"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-history="false" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
 		<div id="groupsidebar" class="scrollbar hidden-print">
 			<div class="scrollbar-content">
 				<div id="accordion" role="tablist" aria-multiselectable="true" style="margin-bottom:20px;">
@@ -784,7 +784,7 @@ function showAutocompleteModal(modalName) {
 					&times;
 				</span>
 			</button>
-			<span id="msg"></span>
+			<span class="flashmsg"></span>
 		</div>
 	</div>
 	<div class="alerttemplate template">
@@ -794,12 +794,12 @@ function showAutocompleteModal(modalName) {
 					&times;
 				</span>
 			</button>
-			<span id="msg"></span>
+			<span class="flashmsg"></span>
 		</div>
 	</div>
 	<div class="alertnoclosetemplate template">
 		<div class="alert alert-danger" role="alert">
-			<span id="msg"></span>
+			<span class="flashmsg"></span>
 		</div>
 	</div>
 
@@ -825,7 +825,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 		  $newPanel = $alerttemplate.clone();
         }
 	}
-	$newPanel.find("#msg").html(msg);
+	$newPanel.find(".flashmsg").html(msg);
 	if (autoClose == true) {
 		$("#alertdiv").append($newPanel.fadeTo(2000, 500).slideUp(500, function(){
 		    $newPanel.slideUp(500);
@@ -1017,7 +1017,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 			</div>
 		</div>
 	</div>
-	<div class="row hidden-print" id="mobileSidebar"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
+	<div class="row hidden-print" id="mobileSidebar"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-history="false" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
 		<div id="mobileSidebarSub" class="col-xs-12 hidden-md hidden-lg">
 			<div class="navbar navbar-default navbar-fixed-bottom">
 				<div class="container" style="display: flex; justify-content: space-around;">
@@ -1026,7 +1026,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 	
 		
 	
-	<div id="mobilesidebar-archives" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center;" hx-get="https://groups.io/g/MTFHRT/topics?sidebar=true"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
+	<div id="mobilesidebar-archives" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center;" hx-get="https://groups.io/g/MTFHRT/topics?sidebar=true"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-history="false" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
 		<div style="display: inline-block; position: relative;">
 			<div style="position: relative;display: inline-block;">
 			<i class="fa-fw fa-light fa-comments fa-2x"></i>

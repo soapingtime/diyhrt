@@ -104,7 +104,7 @@ if (false) {
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.web08.565150.1724805127939956783");
+				console.log("client_id:", "web.web08.8028262.1725409984555272741");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -129,7 +129,7 @@ if (false) {
 					column: column,
 					stack: stack,
 					last_error: lastError,
-					client_id: "web.web08.565150.1724805127939956783"
+					client_id: "web.web08.8028262.1725409984555272741"
 				},
 				success: function() {
 					if (console && console.log) {
@@ -178,7 +178,7 @@ if (false) {
 	console.log("FULL PAGE LOAD");
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "46946e38aebf7358a351d22c2204f9c6e236a8bb"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "9174e21ada1ff47f09e2ff3c45d4c8abdf789467"}' hx-ext="preload" hx-boost="false">
 			
 				<script>
 					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -655,7 +655,7 @@ function showAutocompleteModal(modalName) {
 
 				
 	
-	<div id="mainrow" class="row"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
+	<div id="mainrow" class="row"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-history="false" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
 		<div id="groupsidebar" class="scrollbar hidden-print">
 			<div class="scrollbar-content">
 				<div id="accordion" role="tablist" aria-multiselectable="true" style="margin-bottom:20px;">
@@ -784,7 +784,7 @@ function showAutocompleteModal(modalName) {
 					&times;
 				</span>
 			</button>
-			<span id="msg"></span>
+			<span class="flashmsg"></span>
 		</div>
 	</div>
 	<div class="alerttemplate template">
@@ -794,12 +794,12 @@ function showAutocompleteModal(modalName) {
 					&times;
 				</span>
 			</button>
-			<span id="msg"></span>
+			<span class="flashmsg"></span>
 		</div>
 	</div>
 	<div class="alertnoclosetemplate template">
 		<div class="alert alert-danger" role="alert">
-			<span id="msg"></span>
+			<span class="flashmsg"></span>
 		</div>
 	</div>
 
@@ -825,7 +825,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 		  $newPanel = $alerttemplate.clone();
         }
 	}
-	$newPanel.find("#msg").html(msg);
+	$newPanel.find(".flashmsg").html(msg);
 	if (autoClose == true) {
 		$("#alertdiv").append($newPanel.fadeTo(2000, 500).slideUp(500, function(){
 		    $newPanel.slideUp(500);
@@ -1003,7 +1003,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 <li>Note temp where it &#39;pauses&#39; briefly while the substance turns to liquid</li>
 </ol>
 <p> </p>
-<p><img src="https://i.imgur.com/LOWBMtc.png" class="myimg-responsive"/></p>
+<p><img src="https://i.imgur.com/LOWBMtc.png" loading="lazy" class="myimg-responsive"/></p>
 <p><br/>My test today, I was off by 0.2°C from expected value. Absolutely within tolerance. <br/><br/>The above setup can be had for around $10-20 US, if you don&#39;t have stuff laying around, and really is &#39;accurate enough&#39;. </p>
 					<p />
 				</span>
@@ -1028,7 +1028,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 			</div>
 		</div>
 	</div>
-	<div class="row hidden-print" id="mobileSidebar"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
+	<div class="row hidden-print" id="mobileSidebar"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-history="false" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
 		<div id="mobileSidebarSub" class="col-xs-12 hidden-md hidden-lg">
 			<div class="navbar navbar-default navbar-fixed-bottom">
 				<div class="container" style="display: flex; justify-content: space-around;">
@@ -1037,7 +1037,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 	
 		
 	
-	<div id="mobilesidebar-archives" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center;" hx-get="https://groups.io/g/MTFHRT/topics?sidebar=true"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
+	<div id="mobilesidebar-archives" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center;" hx-get="https://groups.io/g/MTFHRT/topics?sidebar=true"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-history="false" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
 		<div style="display: inline-block; position: relative;">
 			<div style="position: relative;display: inline-block;">
 			<i class="fa-fw fa-light fa-comments fa-2x"></i>
