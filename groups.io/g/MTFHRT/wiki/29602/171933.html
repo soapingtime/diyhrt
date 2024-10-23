@@ -1,53 +1,1531 @@
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="../../../../groupsio/current/content/maintenance/groupsio.css%3Fv=1.0.css">
+	
+	<!DOCTYPE html>
+	<html lang="en-US">
+		<head>
+			<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			
+			<meta name="pinterest" content="nopin" />
+			<meta name="pinterest" content="nohover" />
+			
+			<meta name="3778517eb4810dfb5d143ed8f1b359b3b5a82923" content="0f56257c3db4a222e91b11bc6871c4df2e263b28" />
+			<link rel="apple-touch-icon" sizes="57x57" href="https://groups.io/img/org.1/favicons/apple-icon-57x57.png">
+			<link rel="apple-touch-icon" sizes="60x60" href="https://groups.io/img/org.1/favicons/apple-icon-60x60.png">
+			<link rel="apple-touch-icon" sizes="72x72" href="https://groups.io/img/org.1/favicons/apple-icon-72x72.png">
+			<link rel="apple-touch-icon" sizes="76x76" href="https://groups.io/img/org.1/favicons/apple-icon-76x76.png">
+			<link rel="apple-touch-icon" sizes="114x114" href="https://groups.io/img/org.1/favicons/apple-icon-114x114.png">
+			<link rel="apple-touch-icon" sizes="120x120" href="https://groups.io/img/org.1/favicons/apple-icon-120x120.png">
+			<link rel="apple-touch-icon" sizes="144x144" href="https://groups.io/img/org.1/favicons/apple-icon-144x144.png">
+			<link rel="apple-touch-icon" sizes="152x152" href="https://groups.io/img/org.1/favicons/apple-icon-152x152.png">
+			<link rel="apple-touch-icon" sizes="180x180" href="https://groups.io/img/org.1/favicons/apple-icon-180x180.png">
+			<link rel="icon" type="image/png" sizes="192x192"  href="../../../../img/org.1/favicons/android-icon-192x192.png">
+			<link rel="icon" type="image/png" sizes="32x32" href="../../../../img/org.1/favicons/favicon-32x32.png">
+			<link rel="icon" type="image/png" sizes="96x96" href="../../../../img/org.1/favicons/favicon-96x96.png">
+			<link rel="icon" type="image/png" sizes="16x16" href="../../../../img/org.1/favicons/favicon-16x16.png">
+			<link rel="manifest" href="../../../../img/org.1/favicons/manifest.json">
+			<meta name="msapplication-TileColor" content="#ffffff">
+			<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+			
+			
+			
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+/* stubs */
+	const hapticsImpactHeavy = async () => {
+	};
+	const hapticsImpactMedium = async () => {
+	};
+	const hapticsImpactLight = async () => {
+	};
+	const hapticsVibrate = async () => {
+	};
+	const hapticsSelectionStart = async () => {
+	};
+	const hapticsSelectionChanged = async () => {
+	};
+	const hapticsSelectionEnd = async () => {
+	};
+</script>
 
-    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-    <title>Groups.io Maintenance</title>
-</head>
-<body>
+			
+<script>
+	
+		function setPullToRefresh() {}
+	
+	function gotoURL(inurl) {
+		window.location.href = inurl;
+		return;
+	}
+	function contentLoaded(isHTMX, f, caller = "") {
+		console.log("contentLoaded: " + isHTMX + " " + caller);
+		if (isHTMX == true) {
+			document.body.addEventListener('htmx:afterSettle', f, {once: true});
+		} else {
+			if (document.readyState !== 'loading') {
+				console.log('document is already ready, just execute code here');
+				f();
+			} else {
+				console.log('document was not ready, place code here');
+				document.addEventListener('DOMContentLoaded', f, {once: true});
+			}
+		}
+	}
 
-<div class="navbar navbar-head" role="navigation">
-  <div class="navbar-header">
-    <a href="https://groups.io/" class="navbar-left"><img src="../../../../groupsio/current/content/maintenance/img/mainlogo.png" height="50"></a>
+	function HideAppSidebarOnKeyboard() {
+		console.log("In HideAppSidebarOnKeyboard");
+		
+	}
+	// stub
+	function logError(data, url, linenumber) {
+		console.log(data)
+		return;
+	}
+	var pushSubToken;
+	var ignoreErrors = false;
+	var lastError = "";
+	
+		window.onerror = function(errorMessage, errorUrl, errorLine, errorColumn, errorObj) {
+			let column;
+			let stack;
+			if (console && console.log) {
+				console.log("msg:", errorMessage);
+				console.log("url:", errorUrl);
+				console.log("line:", errorLine);
+				if (errorColumn !== undefined && errorObj != null) {
+					console.log("column:", errorColumn);
+					column = errorColumn;
+				}
+				if (errorObj !== undefined && errorObj != null) {
+					console.log("stack:", errorObj.stack);
+					stack = errorObj.stack;
+				}
+				console.log("client_id:", "web.web09.2340281.1729643732282787343");
+				console.log("last_error:", lastError);
+				console.log("stack:", stack);
+			}
+			if (errorUrl == "" || errorUrl === null) {
+				errorUrl = window.location.href;
+			}
+			if (errorMessage.includes("SecurityError:") == true) {
+				ignoreErrors = true;
+			}
+			if (ignoreErrors == true) {
+				console.log("cookies, disabled, ignoring");
+				lastError = errorMessage;
+				return;
+			}
+			jQuery.ajax({
+				type: 'POST',
+				url: '/jsclienterror',
+				data: {
+					msg: errorMessage,
+					url: errorUrl,
+					line: errorLine,
+					column: column,
+					stack: stack,
+					last_error: lastError,
+					client_id: "web.web09.2340281.1729643732282787343"
+				},
+				success: function() {
+					if (console && console.log) {
+						console.log('JS error report successful.');
+					}
+					lastError = errorMessage;
+				},
+				error: function() {
+					if (console && console.error) {
+						console.error('JS error report submission failed!');
+					}
+					lastError = errorMessage;
+				}
+			});
+			return true;
+		}
+	
+</script>
+			
+			
+			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
+			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
+			<link href="../../../../css/application-111b8509e66f2fa6aded8e6a2590a467.css" rel="stylesheet" id="groupsio-css">
+			<script src="../../../../js/application-9b2c27b802a13063cf8a712fe566f004.js" id="groupsio-js"></script>
+			<script src="../../../../js/run_prettify.js"></script>
+			<title>
+				
+	MTFHRT@groups.io | Wiki
+
+			</title>
+			
+
+			
+				
+
+
+  
+			
+			
+
+
+<script>
+	htmx.config.scrollBehavior = "instant";
+	htmx.config.historyCacheSize = 0;
+	htmx.config.defaultSettleDelay = 0;
+	console.log("FULL PAGE LOAD");
+</script>
+		</head>
+		<body id="body" class="" hx-headers='{"Accept-Version": "6de56da9b5f3d31d0e6f097a2f35fc04da2568af"}' hx-ext="preload" hx-boost="false">
+			
+				<script>
+					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+						document.body.classList.add('dark-mode');
+					}
+				</script>
+			
+
+			
+				<div class="navbar navbar-head navbar-fixed-top"  role="navigation" id="headerbar">
+					<div class="container-fluid" style="padding-left:0px;">
+						<a href="https://groups.io" class="navbar-left" hx-boost="false" hx-disinherit="*">
+							<img src="../../../../img/org.1/mainlogo.png" height="50" alt="Groups.io">
+						</a>
+							
+								<ul class="nav navbar-nav hidden-xs">
+									<li>
+										<a href="https://groups.io/search">
+											Find or Create a Group
+										</a>
+									</li>
+									
+								</ul>
+							
+							<ul class="nav navbar-nav pull-right visible-xs" style="margin-top:5px;margin-bottom:5px;">
+								<li>
+									<a href="171933.html#" data-toggle="modal" data-target="#mobileAccount">
+										<i class="fa-fw fa fa-bars fa-lg"></i>
+									</a>
+								</li>
+							</ul>
+
+							<ul class="nav navbar-nav pull-right hidden-xs">
+								<li class="dropdown">
+									<a href="171933.html#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<i class="fa-fw fa-regular fa-globe"></i>
+										
+											EN
+										
+										<b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="https://groups.io/unsetlang">
+												EN
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/de">
+												DE
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/es">
+												ES
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/fr">
+												FR
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/it">
+												IT
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/pt">
+												PT
+											</a>
+										</li>
+										<li>
+											<a href="https://groups.io/setlang/uk">
+												UK
+											</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="https://groups.io/helpcenter" target="_blank">
+										Help
+									</a>
+								</li>
+								<li>
+									<a href="https://groups.io/login" hx-boost="false" hx-disinherit="*">
+										<i class="fa fa-sign-in-alt"></i>
+										Log In
+									</a>
+								</li>
+								
+									<li>
+										<a href="https://groups.io/register">
+											<i class="fa fa-user"></i>
+											Sign Up
+										</a>
+									</li>
+								
+							</ul>
+					</div>
+				</div>
+				<div class="modal fade" id="mobileAccount" role="dialog">
+					<div class="modal-dialog" style="margin-top:50px;">
+						<div class="modal-content">
+							<div class="modal-body">
+
+									<ul class="list-group noborderlist">
+
+										<li class="noborderitem list-group-item">
+											<a href="https://groups.io/login" hx-boost="false" hx-disinherit="*">
+												<i class="fa fa-sign-in-alt"></i>
+												Log In
+											</a>
+										</li>
+										
+											<li class="noborderitem list-group-item">
+												<a href="https://groups.io/register">
+													<i class="fa fa-user"></i>
+													Sign Up
+												</a>
+											</li>
+										
+										<li class="noborderitem list-group-item">
+											<a href="https://groups.io/helpcenter" target="_blank">
+												<i class="fa-fw fa fa-question-circle"></i>
+												Help
+											</a>
+										</li>
+
+										<li class="dropdown noborderitem list-group-item">
+											<a href="171933.html#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<i class="fa-fw fa-regular fa-globe"></i>
+												
+													EN
+												
+												<b class="caret"></b>
+											</a>
+											<ul class="dropdown-menu">
+												<li>
+													<a href="https://groups.io/unsetlang">
+														EN
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/de">
+														DE
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/es">
+														ES
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/fr">
+														FR
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/it">
+														IT
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/pt">
+														PT
+													</a>
+												</li>
+												<li>
+													<a href="https://groups.io/setlang/uk">
+														UK
+													</a>
+												</li>
+											</ul>
+										</li>
+
+									</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+<script>
+var groupnavigatorData = [
+
+];
+</script>
+
+
+<!-- Modal Dialog for Autocomplete -->
+<div class="modal fade" id="groupnavigatorModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <input type="text" class="form-control" id="groupnavigatorInput" placeholder="Go to group..." style="margin-bottom:10px">
+        <div id="groupnavigatorContainer" class="autocompleteResults" style="max-height:250px; overflow-y: auto;"></div>
+		<div class="text-center" style="margin-top:10px; font-size:12px;"><i class="fa-sharp fa-arrow-up-arrow-down"></i> to navigate&nbsp;&nbsp;&nbsp;<i class="fa-sharp fa-arrow-turn-down-left"></i> to use&nbsp;&nbsp;&nbsp;<strong>esc</strong> to dismiss</div>
+      </div>
+    </div>
   </div>
 </div>
 
-<div id="content" class="container-fluid">
 
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Groups.io Maintenance</h3>
+<script>
+// Keep track of the currently selected index
+var selectedIndex = -1;
+
+// Function to highlight the matched substring
+function highlightSubstring(str, substring) {
+  var index = str.toLowerCase().indexOf(substring.toLowerCase());
+  if (index !== -1) {
+    var before = str.substring(0, index);
+    var middle = str.substring(index, index + substring.length);
+    var after = str.substring(index + substring.length);
+    return before + '<span class="autocomplete-highlight">' + middle + '</span>' + after;
+  }
+  return str;
+}
+
+// Function to highlight the selected item and ensure it is visible in the scrollable list
+function highlightSelectedItem(modalName) {
+  var listContainer = document.getElementById(modalName + 'Container');
+  var items = document.getElementsByClassName(modalName + '-list-item');
+  Array.from(items).forEach(function(item, idx) {
+    item.className = idx === selectedIndex ? modalName + '-list-item autocomplete-list-item btn-primary no-hover' : modalName + '-list-item autocomplete-list-item no-hover'; // Apply btn-primary class to the selected item
+  });
+  if (items.length > 0 && selectedIndex >= 0) {
+    var selectedItem = items[selectedIndex];
+    var containerTop = listContainer.scrollTop;
+    var containerBottom = containerTop + listContainer.clientHeight;
+    var itemTop = selectedItem.offsetTop;
+    var itemBottom = itemTop + selectedItem.offsetHeight;
+	const fudge = 59;
+    if (selectedIndex > 0 && itemTop > containerBottom) {
+      // If there are items below the selected item and the selected item is not fully visible, scroll down
+      listContainer.scrollTop = itemTop - listContainer.clientHeight + items[selectedIndex - 1].offsetHeight;
+    } else if (selectedIndex < items.length - 1 && (itemTop - fudge) < containerTop) {
+      // If there are items above the selected item and the selected item is not fully visible, scroll up
+      listContainer.scrollTop = itemTop - fudge - items[selectedIndex + 1].offsetHeight;
+    }
+  }
+}
+
+// function to populate the list based on the input
+function populateList(modalName, data) {
+  var input = document.getElementById(modalName+'Input').value;
+  var listContainer = document.getElementById(modalName+'Container');
+  listContainer.innerHTML = '';
+  data.forEach(function(item) {
+    if (item.name.toLowerCase().includes(input.toLowerCase())) {
+      var div = document.createElement('div');
+      div.innerHTML = highlightSubstring(item.name, input);
+      div.className = modalName+'-list-item autocomplete-list-item no-hover'; // Apply no-hover class
+      div.addEventListener('click', function() {
+        // Navigate to the specified URL when a list item is clicked
+        window.location.href = item.url;
+      });
+      div.addEventListener('mousemove', function() {
+        // Remove no-hover class from all items when the mouse is moved over any item
+		console.log("mouse move");
+        var items = document.getElementsByClassName(modalName+'-list-item');
+        Array.from(items).forEach(function(item) {
+          item.classList.remove('no-hover');
+        });
+      });
+      listContainer.appendChild(div);
+    }
+  });
+  highlightSelectedItem(modalName);
+}
+
+function InitAutocomplete(modalName, data) {
+	// Focus the input field when the modal is shown and populate the list
+	$('#' + modalName + 'Modal').on('shown.bs.modal', function () {
+		$('#' + modalName + 'Input').focus().val('');
+		populateList(modalName, data);
+		selectedIndex = 0;
+		highlightSelectedItem(modalName);
+	});
+
+	// Event listener for input field typing
+	document.getElementById(modalName + 'Input').addEventListener('input', function() {
+		populateList(modalName, data);
+		selectedIndex = 0;
+	});
+
+	// Event listener for arrow keys and enter key
+	document.getElementById(modalName + 'Input').addEventListener('keydown', function(event) {
+		var items = document.getElementsByClassName(modalName + '-list-item');
+		if (event.key === 'ArrowDown') {
+			event.preventDefault();
+			if (selectedIndex < items.length - 1) selectedIndex++;
+			highlightSelectedItem(modalName);
+		} else if (event.key === 'ArrowUp') {
+			event.preventDefault();
+			if (selectedIndex > 0) selectedIndex--;
+			highlightSelectedItem(modalName);
+		} else if (event.key === 'Enter' && selectedIndex >= 0 && selectedIndex < items.length) {
+			event.preventDefault();
+			items[selectedIndex].click();
+		}
+	});
+}
+
+function showAutocompleteModal(modalName) {
+	$('#' + modalName + 'Modal').modal('show');
+	selectedIndex = -1;
+}
+</script>
+
+			<div id="content" class="container-fluid">
+<script>
+	InitAutocomplete("groupnavigator", groupnavigatorData);
+
+	document.body.addEventListener("showReloadPageDialog", function(evt) {
+		console.log("Forced reload");
+		location.reload();
+	});
+
+	function ShowBackButton(label) {
+		var logoElement = document.getElementById("logo");
+		if (logoElement) {
+			logoElement.innerHTML = `
+				<span style="color:#fff;margin-top:14px;margin-left:12px;float:left !important">
+				<a onclick="goBack()" style="color:#fff">
+					<i class="fa-fw fa-solid fa-chevron-left fa-lg"></i>
+				</a>&nbsp;` + label + "</span>";
+		}
+	}
+
+	function HideBackButton() {
+		var logoElement = document.getElementById("logo");
+		if (logoElement) {
+			logoElement.innerHTML = `
+				<a href="https://groups.io" class="navbar-left">
+					<img src="../../../../img/org.1/mainlogo.png" height="50" alt="Groups.io">
+				</a>`;
+		}
+	}
+
+	function goBack() {
+		history.back();
+	}
+
+	// submitEvent acts like .submit(), except it is compatible with the app, by using events instead.
+	function submitEvent(ele) {
+		console.log("in submitEvent");
+		if (ele.startsWith('#')) {
+    		ele = ele.slice(1);
+		}
+		document.getElementById(ele).submit();
+		return;
+		/*
+		const theEvent = new CustomEvent('submit', {
+			bubbles: true,
+			cancelable: true
+		});
+		if (typeof ele === 'string' || ele instanceof String) {
+			if (ele.startsWith("#") == true) {
+				ele = ele.slice(1);
+			}
+			if (document.getElementById(ele).dispatchEvent(theEvent) == true) {
+				// if not cancelled, do normal submit
+				console.log("calling submit");
+				document.getElementById(ele).submit();
+			}
+			return;
+		}
+		// assume ele is the element
+		if (ele.dispatchEvent(theEvent) == true) {
+			// if not cancelled, do normal submit
+			console.log("calling submit");
+			ele.submit();
+		}
+		*/
+	}
+
+	// gioDestroy is a convenience function for destroy callbacks
+	function gioDestroy(eventCB) {
+		let internalGioDestroy = function(evt) {
+			// do not activate on infinite scroll events
+			if (evt.detail.target !== undefined && evt.detail.target.id != "maincontent-refresh") {
+				console.log("Ignoring infinite scroll event");
+				return;
+			}
+			console.log("Calling destroy callback");
+			eventCB(evt);
+		}
+		document.body.addEventListener("htmx:beforeSwap", internalGioDestroy, {once: true});
+		document.body.addEventListener("htmx:historyCacheMiss", internalGioDestroy, {once: true});
+	}
+			
+	var drawerCloseFunc = function(evt) {
+		console.log("in drawerCloseFunc");
+		// Find all elements with the class 'drawer'
+		var drawers = document.querySelectorAll('.drawer');
+
+		// Iterate over each element and call closeDrawer() on each
+		drawers.forEach(function(obj) {
+			drawerObj.closeDrawer(obj);
+		});
+		$('.modal').modal('hide');
+	}
+	document.body.addEventListener('htmx:beforeSwap', drawerCloseFunc);
+	document.body.addEventListener('htmx:historyCacheMiss', drawerCloseFunc);
+
+	var keydownFunc = function(event) {
+		var tagName = event.target.tagName.toLowerCase();
+		if (tagName === 'input' || tagName === 'textarea' || event.target.isContentEditable) {
+			if (event.key === 'Escape') {
+				event.target.blur();
+			}
+			return;
+		}
+		// check if the viewimages viewer is up
+		let element = document.getElementById('overlay');
+		if (element && element.classList.contains('visible')) {
+			return;
+		}
+		console.log("HERE: " + event.key + " " + event.ctrlKey + " " + event.shiftKey + " " + event.metaKey);
+		if (event.ctrlKey && event.shiftKey && (event.key === '?' || event.key === '/')) {
+			event.preventDefault(); // Prevent the default action
+			// Show the modal dialog for keyboard shortcuts
+			$('#shortcutModal').modal('show');
+			return;
+		}
+		$('#shortcutModal').modal('hide');
+
+		if (event.key.toLowerCase() === 'g') {
+			// For Windows and Linux
+			if (event.ctrlKey) {
+				event.preventDefault();
+				showAutocompleteModal("groupnavigator");
+				return;
+			}
+		}
+
+		// Check if the pressed key is '/'
+		if ((event.key === 'f' || event.key === 'F') && event.shiftKey) {
+			if (navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
+				if (event.metaKey) {
+					event.preventDefault(); // Prevent the default action
+					// Focus on the search box
+					let box = document.getElementById('searchbox')
+					if (box != null) {
+						document.getElementById('searchbox').focus();
+					}
+				}
+			} else {
+				// For Windows and Linux
+				if (event.ctrlKey) {
+					event.preventDefault(); // Prevent the default action
+					// Focus on the search box
+					let box = document.getElementById('searchbox')
+					if (box != null) {
+						document.getElementById('searchbox').focus();
+					}
+				}
+			}
+		}
+	}
+	document.addEventListener('keydown', keydownFunc);
+	var removeDrawerCloseFunc = function(evt) {
+		document.body.removeEventListener('htmx:beforeSwap', drawerCloseFunc);
+		document.body.removeEventListener('htmx:historyCacheMiss', drawerCloseFunc);
+		document.removeEventListener('keydown', keydownFunc);
+	}
+	document.body.addEventListener("htmx:historyCacheMiss", removeDrawerCloseFunc, {once: true});
+</script>
+<!-- Modal Dialog for Keyboard Shortcuts -->
+<div class="modal fade" id="shortcutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Keyboard Shortcuts</h4>
       </div>
-      <div class="panel-body">
-        <p>Groups.io is currently undergoing maintenance. We apologize for the downtime, and expect to be back shortly.</p>
-<!--
-        <p>Groups.io is currently undergoing scheduled maintenance. We expect to be back by 10:00AM Pacific Time.</p>
--->
-      </div>
-      <div class="panel-footer">To see some cats, <a href="https://groups.io/groupsio/current/content/maintenance/cats.html">click here</a></div>
+      <div class="modal-body">
+		<div class="row">
+			<div class="col-xs-3 text-right"><strong>ctrl</strong> + <strong>shift</strong> + <strong>?</strong>&nbsp;&nbsp;:</div>
+			<div class="col-xs-9" style="margin-left: -23px;">Show all keyboard shortcuts</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3 text-right"><strong>ctrl</strong> + <strong>g</strong>&nbsp;&nbsp;:</div>
+			<div class="col-xs-9" style="margin-left: -23px;">Navigate to a group</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>shift</strong> + <strong>f</strong>&nbsp;&nbsp;:</div>
+			<div class="col-xs-9" style="margin-left: -23px;">Find</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>/</strong>&nbsp;&nbsp;:</div>
+			<div class="col-xs-9" style="margin-left: -23px;">Quick actions</div>
+		</div>
+		</div>
+		<div class="text-center" style="margin-top:10px; margin-bottom:10px; font-size:12px;"><strong>esc</strong> to dismiss</div>
     </div>
-
+  </div>
 </div>
-</body>
+
+				
+	
+	<div id="mainrow" class="row"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-history="false" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
+		<div id="groupsidebar" class="scrollbar hidden-print">
+			<div class="scrollbar-content">
+				<div id="accordion" role="tablist" aria-multiselectable="true" style="margin-bottom:20px;">
+					<div class="list-group noborderlist" style="border:0;margin-bottom:0px">
+						
+
+
+	<a id="sidebar-home" title="Group Home" href="https://groups.io/g/MTFHRT" class="list-group-item sidebar-item">
+		<i class="fa-fw fa fa-home fa-lg"></i>
+		Home
+		
+	</a>
+
+	
+
+	
+
+	
+		
+	
+		
+
+	<a title="Messages" href="https://groups.io/g/MTFHRT/topics?sidebar=true" id="sidebar-archives" class="noborderitem list-group-item sidebar-item sidebar-item-archives"> 
+		<i class="fa-fw fa fa-comments fa-lg"></i>
+		Messages
+		<span id="sidebar-archives-badge" class="badge"></span>
+	</a>
+
+	
+	
+	
+	
+	
+		
+
+	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" id="sidebar-hashtags" class="noborderitem list-group-item sidebar-item sidebar-item-hashtags"> 
+		<i class="fa-fw fa fa-hashtag fa-lg"></i>
+		Hashtags
+		<span id="sidebar-hashtags-badge" class="badge"></span>
+	</a>
+
+	
+
+		
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+		
+
+	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" id="sidebar-wiki" class="noborderitem list-group-item sidebar-item sidebar-item-wiki active"> 
+		<i class="fa-fw fa fa-book fa-lg"></i>
+		Wiki
+		<span id="sidebar-wiki-badge" class="badge"></span>
+	</a>
+
+	
+
+	
+
+					</div>
+				</div>
+				
+	<div class="text-center" style="font-size:13px;margin-bottom:30px">
+		<div style="padding-bottom:10px;">
+			<strong>ctrl</strong> + <strong>shift</strong> + <strong>?</strong> for shortcuts
+		</div>
+		<div style="padding-bottom:5px;">
+			<a href="https://groups.io/static/about">
+				About
+			</a> &middot;
+			<a href="https://groups.io/static/features">
+				Features
+			</a> &middot;
+			<a href="https://groups.io/static/pricing">
+				Pricing
+			</a>
+		</div>
+		<div style="padding-bottom:5px;">
+			<a rel="nofollow" href="https://groups.io/g/updates/messages?expanded=1">
+				Updates
+			</a> &middot;
+			<a href="https://groups.io/static/tos">
+				Terms
+			</a> &middot;
+			<a href="https://groups.io/helpcenter" target="_blank">
+				Help
+			</a>
+		</div>
+		<div style="padding-bottom:5px;">
+			&copy; 2024 Groups.io
+		</div>
+	</div>
+
+			</div>
+		</div>
+		<div id="maincontent" class="groupmaincontent">
+			<div id="maincontent-refresh">
+				<div id="maincontent-column" class="col-xs-12 maincontent-column">
+					
+	
+	
+	
+
+	
+
+	
+	<div id="alertdiv"></div>
+	<div class="noticetemplate template">
+		<div class="alert alert-success alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">
+					&times;
+				</span>
+			</button>
+			<span class="flashmsg"></span>
+		</div>
+	</div>
+	<div class="alerttemplate template">
+		<div class="alert alert-danger alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">
+					&times;
+				</span>
+			</button>
+			<span class="flashmsg"></span>
+		</div>
+	</div>
+	<div class="alertnoclosetemplate template">
+		<div class="alert alert-danger" role="alert">
+			<span class="flashmsg"></span>
+		</div>
+	</div>
+
+
+
+ 
+<script>
+function dismiss() {
+    console.log("dismiss");
+    $.get( "/dismissalert");
+}
+
+var $alerttemplate = $(".alerttemplate");
+var $alertnoclosetemplate = $(".alertnoclosetemplate");
+var $noticetemplate = $(".noticetemplate");
+function createAlert(msg, isError, autoClose, noClose) {
+	if (isError == false) {
+		$newPanel = $noticetemplate.clone();
+	} else {
+        if (noClose) {
+		  $newPanel = $alertnoclosetemplate.clone();
+        } else {
+		  $newPanel = $alerttemplate.clone();
+        }
+	}
+	$newPanel.find(".flashmsg").html(msg);
+	if (autoClose == true) {
+		$("#alertdiv").append($newPanel.fadeTo(2000, 500).slideUp(500, function(){
+		    $newPanel.slideUp(500);
+		    $newPanel.remove();
+		}));  	
+	} else {
+		$("#alertdiv").append($newPanel.fadeIn());
+	}
+    return $newPanel;
+}
+
+
+
+
+</script>
+
+
+
+	
+		
+
+	<div class="row breadcrumb-row" style="margin-bottom: 10px">
+		<div class="col-xs-12 col-sm-9">
+			<span class="hidden-sm hidden-md hidden-lg pull-right" style="padding:8px 15px;"><a data-toggle="modal" data-target="#searchModal"><i class="fa fa-search"></i></a></span>
+			<div class="breadcrumb-container">
+				
+					<ol class="breadcrumb scroll-breadcrumb">
+						<li><a href="https://groups.io/g/MTFHRT"><i class="fa fa-home"></i> MTFHRT</a></li>
+						<li><a href="https://groups.io/g/MTFHRT/wiki"><i class="fa fa-book"></i> Wiki</a></li>
+						
+						<li class="active"><i class="fa fa-book"></i> Ultimate DIY</li>
+					</ol>
+				
+			</div>
+		</div>
+		<div class="col-sm-3 hidden-xs">
+			<form class="form-inline pull-right" method="get" action="https://groups.io/g/MTFHRT/wikisearch">
+				
+				
+				<div class="input-group">
+					<input id="searchbox" type="text" class="form-control" placeholder="Search" title="Search" name="q" size="20" style="height:37px">
+					<div class="input-group-btn">
+						<button class="btn btn-primary" type="submit" style="height:37px;" aria-label="Search">
+							<span class="fa fa-search"></span>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">
+							&times;
+						</span>
+						<span class="sr-only">
+							Close
+						</span>
+					</button>
+					<h4 class="modal-title" id="searchModalLabel">
+						Search
+					</h4>
+				</div>
+				<form class="form-horizontal" method="get" action="https://groups.io/g/MTFHRT/wikisearch">
+					
+					<div class="modal-body">
+						<div class="form-group">
+							<div class="col-sm-12">
+								<input type="text" class="form-control" placeholder="Search" title="Search" name="q">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-primary btn-sm" aria-label="Search">
+							<i class="fa fa-search"></i>
+							Search
+						</button>
+						<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+							<i class="fa fa-times"></i>
+							Cancel
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	
+
+	
+	<div class="row" style="margin-bottom:20px;">
+		<div class="col-xs-12">
+			<span class="hidden-print">
+				<div class="btn-group">
+					<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+						Pages
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						
+							<li>
+								<a href="../37530.html">
+									Basic Estrogel Guide
+								</a>
+							</li>
+						
+							<li>
+								<a href="../30846.html">
+									Home
+								</a>
+							</li>
+						
+							<li>
+								<a href="../32288.html">
+									How to measure melting point of most organic powders using typical household items.
+								</a>
+							</li>
+						
+							<li>
+								<a href="../34293.html">
+									steam sterilization
+								</a>
+							</li>
+						
+							<li>
+								<a href="../29602.html">
+									Ultimate DIY
+								</a>
+							</li>
+						
+					</ul>
+				</div>
+				
+			</span>
+
+			
+				<div class="pull-right">
+					<a href="history.html">
+						
+<script id="timedispupdated171933">
+	$('#timedispupdated171933').replaceWith(DisplayShortTime(1662522102833590121, false
+		));
+</script>
+
+					</a>
+				</div>
+			
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			
+				<span class="wikidisplay user-content">
+					<p style="text-align: center"><span style="">MtF HRT: Ultimate DIY</span></p>
+<p>Here I describe Do-It-Yourself hormonal treatment for male-to-female transsexuals: be your own gatekeeper, endocrinologist, pharmacist and nurse. Cook injectable estradiol by yourself. Safer, more effective and unbelievably cheaper than relying on medical professionals.</p>
+<p style="text-align: right"><a href="https://groups.io/g/TGrus/wiki/Ultimate-DIY" target="_blank" rel="nofollow noopener">эта инструкция по-русски</a></p>
+<p></p><div class="row">
+<div class="col-sm-12">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a class="accordion-toggle" href="171933.html#collapseTOC" rel="nofollow">Contents</a>
+    </h4>
+  </div>
+  <div id="collapseTOC" class="panel-collapse collapse in">
+    <div class="panel-body" style="padding-left: 0px"><span class="toc"><ol style=""><li><a href="171933.html#Without-gatekeepers" rel="nofollow">Without gatekeepers</a></li><li><a href="171933.html#Be-your-own-endocrinologist" rel="nofollow">Be your own endocrinologist</a></li><li><a href="171933.html#Cook-your-injectable-estradiol-by-yourself" rel="nofollow">Cook your injectable estradiol by yourself</a><ol style=""><li><a href="171933.html#Buy-estradiol-enanthate-powder" rel="nofollow">Buy estradiol enanthate powder</a></li><li><a href="171933.html#Equipment" rel="nofollow">Equipment</a><ol style=""><li><a href="171933.html#Necessary" rel="nofollow">Necessary</a></li><li><a href="171933.html#Optional" rel="nofollow">Optional</a></li><li><a href="171933.html#Unnecessary" rel="nofollow">Unnecessary</a></li></ol></li><li><a href="171933.html#Other-raw-materials-and-expendables" rel="nofollow">Other raw materials and expendables</a><ol style=""><li><a href="171933.html#Vials2C-stoppers2C-caps" rel="nofollow">Vials, stoppers, caps</a></li><li><a href="171933.html#Oil" rel="nofollow">Oil</a></li><li><a href="171933.html#Preservative-28optional29" rel="nofollow">Preservative (optional)</a></li><li><a href="171933.html#Syringes-for-mixing" rel="nofollow">Syringes for mixing</a></li></ol></li><li><a href="171933.html#Mix" rel="nofollow">Mix</a></li><li><a href="171933.html#Sterilize" rel="nofollow">Sterilize</a></li><li><a href="171933.html#Begin-a-new-vial" rel="nofollow">Begin a new vial</a></li><li><a href="171933.html#Keep" rel="nofollow">Keep</a></li><li><a href="171933.html#Total-price" rel="nofollow">Total price</a></li><li><a href="171933.html#Legal" rel="nofollow">Legal</a></li></ol></li><li><a href="171933.html#Inject-yourself" rel="nofollow">Inject yourself</a><ol style=""><li><a href="171933.html#Syringes-for-injections" rel="nofollow">Syringes for injections</a></li><li><a href="171933.html#Needle-fright" rel="nofollow">Needle fright</a></li><li><a href="171933.html#Dosage" rel="nofollow">Dosage</a></li><li><a href="171933.html#How-to-inject" rel="nofollow">How to inject</a></li></ol></li><li><a href="171933.html#22Monitoring22-unnecessary" rel="nofollow">&#34;Monitoring&#34; unnecessary</a></li><li><a href="171933.html#Myths-and-what-not-to-do" rel="nofollow">Myths and what not to do</a></li></ol></span></div></div></div></div></div><p></p>
+<h1><a name="Without-gatekeepers"></a>Without gatekeepers</h1>
+<p>Endocrinologists usually require a letter/referral from gatekeepers: psychotherapists, psychologists, sexologists or psychiatrists. Not because endocrinologists care for you, but because they care for themselves: they fear that you regret and sue them for causing you bodily harm. There isn&#39;t a medical examination, blood or psychological test able to prove or disprove presence or absence of transsexualism in each separate person. Statistics is meaningless when the question is whether you&#39;ll regret social transition or not. So, gatekeepers make appearances of &#34;examination&#34; and stall you for long time while milking you (or insurance/taxpayers) for money.</p>
+<p>Medical professionals routinely make mistakes in both directions: approve crazy people and unnecessarily delay transsexuals who&#39;ll not regret.</p>
+<p>If you obtain or make hormones without prescription, you&#39;ll have nobody but yourself to blame if you regret social consequences of <strong>your</strong> decision to take hormones.</p>
+<h1><a name="Be-your-own-endocrinologist"></a>Be your own endocrinologist</h1>
+<p>Endocrinologists treat mostly diabetes and problems with thyroid. For that endos prescribe multiple blood tests and adjust meds dosages to drive blood glucose or T4 level into &#34;normal range&#34;. Endos are used to such approach, it keeps them busy and paid. With the only goal to maximize quantity of doctor visits paid by patients or insurance, gangs of American endos write guidelines how to treat transsexuals: with same approach. All the numbers in such guidelines and all the bogeyman stories about side effects of estradiol are bullshit.</p>
+<p>&#34;Normal range&#34; is from measurements of 90% of healthy people: 5% of lowest and 5% of highest results are discounted. Normal range of estradiol for pregnancy is up to 40000 pg/ml = 147000 pmol/l.<br/>In a group of 86 pregnant women estradiol level was up to 75137 pg/ml = 275753 pmol/l: <a href="http://cebp.aacrjournals.org/content/12/5/452.figures-only" target="_blank" rel="nofollow noopener">http://cebp.aacrjournals.org/content/12/5/452.figures-only</a> Pregnant women don&#39;t drop dead from such estradiol level, so you wouldn&#39;t even if your peak reaches 5000 pg/ml.</p>
+<p>It&#39;s even darker than that: the numbers in guidelines are chosen deliberately low to force transsexuals to pay for more doctor visits to beg for more estradiol.</p>
+<p>Doctors also recall the mantra in their gospels (textbooks) about estrogens: dosage the less the better, stop as soon as possible. They never realize that this mantra was written in the fear of uterine cancer. And that you haven&#39;t an uterus.</p>
+<p>Currently lifetime breast cancer risk for cis-women in North America is 13% because of hundreds of monthly hormonal cycles. Doctors believe &#34;the more estrogen, the more breast cancer risk&#34;. But statistically, every pregnancy decreases the woman&#39;s breast cancer risk though during pregnancy blood estradiol level increases in hundred times. Explanation of this seeming contradiction: because every pregnancy decreases cumulative number of menstrual cycles. In more detail: At one phase of hormonal cycle ductal epithelium in milk glands proliferates (proliferation is tissue growth by cell division), at another phase apoptosis comes (tissue shrinking by cell suicide). Each cell division (mitosis) carries risk of mutation. Mutations cause cancer. Before advent of contraceptives, breast cancer was a disease of celibate nuns. A woman was pregnant, then breastfeeding for few years (that also usually suppresses menstruations), then quickly :) impregnated again and so on until death or menopause. Then a woman had few menstruations during her whole life. If you don&#39;t make monthly cycles then your breast cancer risk is as low as men&#39;s, no matter how high estradiol level.</p>
+<p>Giving MtF low estrogen dosage alone doesn&#39;t work. So, doctors prescribe antiandrogens: spironolactone (dangerous and mostly ineffective) or cyproterone acetate (harmful, dangerous, counterproductive) or GnRH superagonists such as Lupron or Zoladex (insanely expensive) or bicalutamide (expensive, and very few endos heard of it, side effects listed in package insert seem dangerous though really they aren&#39;t). Doctors love to prescribe expensive meds because doctors&#39; fee seems less significant in comparison. Most likely you&#39;d be prescribed spironolactone or cyproterone acetate, so your doctor is hazardous for your health.</p>
+<p>Why not to give more estradiol? Because largest estradiol pills nowadays are 2 mg. One pill a day according to the gospel (package insert) does nothing for MtF. No doctor would prescribe more than 4 pills a day. Medical school is cramming huge amount of info. Doctors aren&#39;t used to dig for numbers and to think by themselves. They blindly believe other doctors&#39; opinions. No doctor managed to dig for numbers and calculate: birth control pills prescribed to over hundred million women contain ethinylestradiol 0.03 mg/day which affects liver and blood clotting 500 times stronger than oral estradiol, so risk from oral estradiol 0.03*500= 15 mg/day is considered acceptable. But estradiol 15 mg/day is 8 pills per day - seems too much for doctors. Simple arithmetic is alien science for them.<br/>I&#39;m an engineer, I&#39;m not afraid of arithmetic. :) And I study MtF HRT in depth since 1989. In Italy ethinylestradiol 1000 mcg = 1 mg pills are <a href="https://imgur.com/Y54NMeZ" target="_blank" rel="nofollow noopener">available</a>, so doctors there prescribe 2 such pills per day to MtF. That&#39;s as dangerous as oral estradiol 2*500= 1000 mg/day. And? Nobody notices. I conclude that oral estradiol 20 mg/day is okay.</p>
+<p>MtF HRT with an estrogen without antiandrogens is called &#34;monotherapy&#34;. Oral estradiol 20 mg/day (10 mg twice a day) suppresses testosterone production by testicles completely, so antiandrogens are unnecessary. You can mail-order estradiol pills from abroad, though expensive:<br/><a href="https://www.inhousepharmacy.vu/p-166-estrofem-2mg.aspx" target="_blank" rel="nofollow noopener">https://www.inhousepharmacy.vu/p-166-estrofem-2mg.aspx</a><br/><a href="https://www.inhousepharmacy.vu/p-2073-estradiol-2mg.aspx" target="_blank" rel="nofollow noopener">https://www.inhousepharmacy.vu/p-2073-estradiol-2mg.aspx</a><br/><a href="https://www.inhousepharmacy.vu/p-1866-estrofem-tablets-2mg.aspx" target="_blank" rel="nofollow noopener">https://www.inhousepharmacy.vu/p-1866-estrofem-tablets-2mg.asp</a></p>
+<p>Only 5% of swallowed estradiol reaches blood. Sublingually (under the tongue) or subbuccally (between a lip and a gum) gives better absorption, but I don&#39;t believe that more than in 1.5 times, can cause mood swings and soon becomes too inconvenient. Transdermal patches and gels with estradiol are even more expensive than pills. One more way to deliver estradiol is injections, 100% absorption. If the solution is concentrated then you can use insulin syringes. Estradiol valerate (EV) 40 mg/ml 0.18 ml every 5 days or estradiol enanthate (EEn) 50 mg/ml 0.22 ml weekly is as effective as oral estradiol 20 mg/day, but is cheaper. Factory-made injectable EV is available without prescription <a href="https://www.inhousepharmacy.vu/p-99900888-ar-estradiol-valerate-40mgml.aspx" target="_blank" rel="nofollow noopener">https://www.inhousepharmacy.vu/p-99900888-ar-estradiol-valerate-40mgml.aspx</a> (though often out of stock, &#34;expected&#34; date is a lie: they just increase it). I make a copy 15 times cheaper than that, and I make EEn suitable for injections every 7 or 10 days:<a href="http://lena.kiev.ua/EV/" target="_blank" rel="nofollow noopener"> http://lena.kiev.ua/EV/</a> Below I explain how you can cook injectable estradiol by yourself.</p>
+<p>If you had male pattern baldness then add finasteride 0.05 - 0.1 mg (<a href="https://groups.io/g/MTFHRT/message/26" target="_blank" rel="nofollow noopener">1/100 - 1/50</a> of a 5 mg pill) once a day, available in <a href="https://www.inhousepharmacy.vu/search.aspx?searchterm=finasteride" target="_blank" rel="nofollow noopener">InHousePharmacy</a> or <a href="https://www.alldaychemist.com/catalogsearch/result/?q=finasteride" target="_blank" rel="nofollow noopener">AllDayChemist</a> or from me as an addition to ready-to-use injectable EV or EEn. Don&#39;t take dutasteride because of possible mental side effects (also, dutasteride accumulates in blood and continues to give side effects for months after stopping it). Finasteride is necessary despite complete suppression of testosterone production by testicles by injectable estradiol or/and surgical removal of testicles because of DHEA production by adrenals. Finasteride blocks DHEA-&gt;T-&gt;DHT conversion inside hair follicle cells which is unnoticed by blood tests.</p>
+<p>I advise everybody (not only MtF) to take a vitamins+minerals supplement like plain Centrum non-stop, all year round. If in USA then <a href="https://www.walgreens.com/store/c/centrum-adults-complete-multivitamin-%26-multimineral-supplement-tablets/ID=prod6031127-product" target="_blank" rel="nofollow noopener">here</a> or <a href="https://www.costco.com/kirkland-signature-daily-multi%2C-500-tablets.product.11491625.html" target="_blank" rel="nofollow noopener">this</a>. In Europe &#34;One-a-Day&#34; by Hungarian company <a href="https://shop.biotechusa.com/collections/vitamins/products/one-a-day-100-tablets" target="_blank" rel="nofollow noopener">&#34;BiotechUSA&#34;</a> is cheaper in sports nutrition stores or Amazon.</p>
+<p>It really is that simple after you throw out all the bullshit about &#34;physiological&#34; or &#34;target&#34; levels and learn all the details which side effects are real and which aren&#39;t.</p>
+<p>Why I chose this dosage to advise for monotherapy: with it I can be sure that it&#39;s enough for any MtF without blood tests. Different people on the same dosage get blood estradiol level differing in up to 10 times. Sensitivity of different people for the same level of the same hormone differs in times. Sensitivity is as important as levels. There isn&#39;t a test for sensitivity. In USA a blood test without prescription costs $76 (<a href="https://www.privatemdlabs.com/lab_tests.php?view=category_result&amp;show=1032&amp;category=6&amp;ven=&amp;search=#1032" target="_blank" rel="nofollow noopener">1</a> <a href="https://www.labsmd.com/tests.php?view=search_results&amp;show=2222&amp;search=estradiol#2222" target="_blank" rel="nofollow noopener">2</a> <a href="https://newcenturylabs.com/product/estradiol" target="_blank" rel="nofollow noopener">3a</a>+<a href="https://newcenturylabs.com/product/testosterone-total-females" target="_blank" rel="nofollow noopener">3b</a>) and is available not everywhere. In UK <a href="https://medichecks.com/products/testosterone-and-oestradiol-blood-test" target="_blank" rel="nofollow noopener">£89</a>. In Australia <a href="https://imedical.com.au/order/blood-tests/hormone-testing-australia/testosterone-blood-test" target="_blank" rel="nofollow noopener">$69</a>. In many countries only with prescription, and doctors refuse to prescribe tests for meds they didn&#39;t prescribe. My or DIY injectables without blood tests are cheaper than lower dosage with several blood tests. And no time wasted on determining barely enough dosage.</p>
+<p>I don&#39;t believe that beginning from lower estradiol dosage (possible safely only with addition of bicalutamide) gives better results. Doctors love to begin from low estrogen dosage with lots of blood tests because this keeps them busy and paid. So they claim that it&#39;s allegedly better. Doctors in other countries parrot that. There isn&#39;t any evidence. People repeat doctors&#39; claims.</p>
+<p>In short: when it&#39;s about MtF HRT, doctors do <strong>not</strong> know better.</p>
+<h1><a name="Cook-your-injectable-estradiol-by-yourself"></a>Cook your injectable estradiol by yourself</h1>
+<p>If you are attentive and diligent then you can make injectable estradiol by yourself (for yourself only) as I described below. If you are afraid or unsure then you&#39;ll be able to buy ready-to-use vials <a href="http://lena.kiev.ua/EV/" target="_blank" rel="nofollow noopener">from me</a> after I return to Kiev - depends on the war. I have over 3300 satisfied customers. I lost count how many times I was called lifesaver, fairy godmother, angel, godsend, saint.</p>
+<h2><a name="Buy-estradiol-enanthate-powder"></a>Buy estradiol enanthate powder</h2>
+<p>Don&#39;t buy estradiol valerate because it&#39;s inferior: requires injections every 5 days and either lower concentration (more oil to inject) or addition of a solvent (benzyl benzoate) which costs money and sometimes causes allergy. Both estradiol valerate and estradiol enanthate are converted to the same estradiol in blood, <a href="https://doi.org/10.1097/00008571-200307000-00008" target="_blank" rel="nofollow noopener">spleen</a> and lymph nodes (in leukocytes: by carboxylesterase 1 <a href="http://dx.doi.org/10.1136/jcp.2010.084657" target="_blank" rel="nofollow noopener">in</a> monocytes and macrophages and carboxylesterase 2 <a href="https://pubmed.ncbi.nlm.nih.gov/27149931/" target="_blank" rel="nofollow noopener">in</a> plasma cells). Estradiol enanthate is absorbed into blood slower, that gives more stable blood estradiol level and allows longer time between injections.</p>
+<p>Most of substances used by Western pharmaceutical manufacturers comes from chemical factories in China. There are vendors in China selling the same substances to anybody (private persons too), no questions asked. Testosterone is a controlled substance, estradiol isn&#39;t.</p>
+<p><a href="https://www.dragonordnance.com/goods?code=08101305637" target="_blank" rel="nofollow noopener">This</a> cheaper (for EEn powder quantities 20 g or less) Chinese vendor is untested for estrogens, but has multiple testimonials for anabolics and testosterone on bodybuilder forums. Shipping $50. &#34;Stealth shipping&#34; means that there may be also something else in the parcel besides the hidden bag with EEn powder, don&#39;t throw out anything. Order 5, 10 or 20 g, and also 100 ml (minimal order) of <a href="https://www.dragonordnance.com/goods?code=11524742447" target="_blank" rel="nofollow noopener">MCT oil</a> and 100 ml of <a href="https://www.dragonordnance.com/goods?code=11224739544" target="_blank" rel="nofollow noopener">benzyl alcohol</a>. How to distinguish: the alcohol has an odor. If you haven&#39;t crypto then you can buy LTC directly to the vendor&#39;s wallet address using for example <a href="https://paybis.com/buy-litecoin/" target="_blank" rel="nofollow noopener">Paybis</a>.</p>
+<p>Vendors I bought from:<br/>1) <a href="https://aoksbio.en.made-in-china.com/product/gdnfPERUILkb/China-99-Purity-Oestradiol-17-Heptanoate-Powder-CAS-4956-37-0-with-Safe-Delivery-and-Good-Price.html" target="_blank" rel="nofollow noopener">https://aoksbio.en.made-in-china.com/product/gdnfPERUILkb/China-99-Purity-Oestradiol-17-Heptanoate-Powder-CAS-4956-37-0-with-Safe-Delivery-and-Good-Price.html</a><br/>2) <a href="https://hbldbiotech.en.made-in-china.com/product/fdIAjtZoAGWq/China-Estradiol-Enanthate-CAS-4956-37-0-Large-Particle-or-Powder.html" target="_blank" rel="nofollow noopener">https://hbldbiotech.en.made-in-china.com/product/fdIAjtZoAGWq/China-Estradiol-Enanthate-CAS-4956-37-0-Large-Particle-or-Powder.html</a></p>
+<p><span class="visitedlinks">(if the website redirects to the vendor&#39;s home page then use a VPN or proxy, for example a free browser extension <a href="https://browsec.com/en/" target="_blank" rel="nofollow noopener">browsec</a>, country in the free list for example Netherlands/Holland).<br/></span></p>
+<p>There are other vendors there, but it&#39;s a gamble: some sellers send unrelated white powder (not a hormone at all). Don&#39;t use a dishonest vendor &#34;Vanz&#34; (their another company name is &#34;Wuhan Yiruo&#34;) and spammers &#34;Faithful&#34;, &#34;Luoxing&#34;, &#34;Jiangsu Aimi&#34;, &#34;Hebei Mingyi&#34;. Elsewhere I saw negative reviews about: &#34;Wison&#34;. Don&#39;t use sellers touting anabolics etc. for bodybuilders on their main page: you don&#39;t want to get testosterone instead of estradiol. I checked <a href="https://hhd-pharm.en.made-in-china.com/product/gFxTZpLcqfGU/China-Wuhan-Hhd-99-Purity-Estradiol-Powder-CAS-50-28-2-and-CAS-979-32-8-Estradiol-Valerate-CAS-4956-37-0-Estradiol-Enanthate-CAS-57-63-6-Ethynyl-Estradiol.html" target="_blank" rel="nofollow noopener">this</a> trader with lower prices - nothing suspicious. &#34;gzbiocar&#34; seems suspicious for me.</p>
+<p>Salespeople on made-in-china use nicknames or European-sounding aliases, same was on Alibaba. You&#39;ll see a real Chinese name only if you pay via Western Union.</p>
+<p>Such vendors are not manufacturers of estradiol powder, just resellers/traders/retail. You&#39;ll never know who was the manufacturer (perhaps <a href="http://www.xianle.com/template/producten.html" target="_blank" rel="nofollow noopener">1</a> <a href="http://www.xypharm.com/product_en/typeid/2.html" target="_blank" rel="nofollow noopener">2</a> <a href="http://www.junyepharm.com/product_en/typeid/4.html" target="_blank" rel="nofollow noopener">3</a>). Vendors&#39; pages are full of mistakes and lies, including photos of manufacturing plants (they manufacture few substances if any but sell hundreds), numbers, prices and minimal order (MOQ). <a href="https://membercenter.made-in-china.com/join/" target="_blank" rel="nofollow noopener">Register</a> (type zeros instead of phone number and &#34;private person&#34; instead of company name) and <strong>after</strong> that use the &#34;Get Latest Price&#34; link, tell them your requirement &#34;Estradiol Enanthate (Estradiol Heptanoate) CAS 4956-37-0, I prefer powder with large particle size (not micronized)&#34; and ask for price for quantity 20 g with the cheapest shipping. If the vendor answers with &#34;FOB&#34; price then that means not including shipping, ask again for cheapest shipping fee. Don&#39;t ask for CoA (certificate of analysis), it&#39;d be fake. Really you&#39;ll get slightly better than 98% purity according to USP and <a href="https://digicollections.net/phint/pdf/b/6.1.144.Estradiol-valerate-(Estradioli-valeras).pdf" target="_blank" rel="nofollow noopener">similar</a> standards for pharmaceuticals for humans, there isn&#39;t estradiol powder with any worse purity (manufacturers of veterinarian pharmaceuticals get the same purity); better purity (&#34;reference standard&#34;) is used only for calibration of measuring equipment and costs for example €353 for 100 mg. Cheapest shipping gives also least chances of problems with Customs. The (separate) &#34;forwarding&#34; company they use knows what to lie on the Customs declaration; you may find also papers about an unrelated benign substance like vitamin C - also to fool Customs. Ignore offers/requests to communicate via Whatsapp or other messengers (never give them your number/nickname), don&#39;t reply to emails, reply to the vendor <strong>only</strong> via <a href="https://membercenter.made-in-china.com/message/index.html" target="_blank" rel="nofollow noopener">https://membercenter.made-in-china.com/message/index.html</a></p>
+<p>Vendors offer several payment options, some vendors take payment via Alibaba (allows to pay with card and takes 3% fee). &#34;Aoksbio&#34; accepts Western Union, Bitcoin and SWIFT (wire/bank transfer), same total price for 10 and 20 g, so order 20 g. If you pay with bank transfer then &#34;Aoksbio&#34; may ask for your ID with the same name as in your bank account (if other payment options then ID is not required). If Western Union (WU) then you tell &#34;Aoksbio&#34; the 10-digit number WU gives you and sender name you gave to WU.</p>
+<p>If the vendor ignores your requirement and sends you micronized powder then it&#39;s suitable but more difficult to work with because clings to everything.</p>
+<p>Please <a href="https://groups.io/g/MTFHRT/join" target="_blank" rel="nofollow noopener">join</a> this [MTFHRT] group (you must both &#34;confirm&#34; your email address with the link you&#39;ll be emailed and email an intro about yourself to moderators) and post prices and your experiences in detail, ask questions.</p>
+<h2><a name="Equipment"></a>Equipment</h2>
+<h3><a name="Necessary"></a>Necessary</h3>
+<p>The only necessary equipment is cheap ($7 - $15) pocket 0.001 g (1 mg) scales (or DIY balance scales you can make from a long narrow wooden plank, 2 small nails and 2 syringes, one of them with 0.5 ml water as a precise weight).</p>
+<p>If you buy ready-to-use scales then they must look exactly like this:<br/><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13908/354x254.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1729644332&Signature=MjPin%2BlBVhCXOCF8spj9Ne2OI%2Fs%3D" align="right" loading="lazy" class="myimg-responsive"/><a href="https://www.ebay.com/itm/363747240371" target="_blank" rel="nofollow noopener">https://www.ebay.com/itm/363747240371</a><br/><a href="https://www.aliexpress.com/item/4000586480263.html" target="_blank" rel="nofollow noopener">https://www.aliexpress.com/item/4000586480263.html</a></p>
+<p>Newer models are not suitable because they attempt to appear more precise and stable by ignoring small weight changes.</p>
+<p>Search for other sellers:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=scale+0.001&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_blrs=recall_filtering&amp;_ipg=120" target="_blank" rel="nofollow noopener">https://www.ebay.com/sch/i.html?_nkw=scale+0.001&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_blrs=recall_filtering&amp;_ipg=120</a></p>
+<p><a href="https://www.ebay.com/sch/i.html?_nkw=scale+digital+diamond&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_blrs=recall_filtering&amp;_ipg=120" target="_blank" rel="nofollow noopener">https://www.ebay.com/sch/i.html?_nkw=scale+digital+diamond&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_blrs=recall_filtering&amp;_ipg=120</a></p>
+<p><a href="https://www.aliexpress.com/wholesale?SearchText=scales+0.001g+diamond" target="_blank" rel="nofollow noopener">https://www.aliexpress.com/wholesale?SearchText=scales+0.001g+diamond</a><br/>(check all pages).</p>
+<p>If the scales have slots for 4 batteries then insert only 2 at any one side.</p>
+<p>If you already have 0.01 g (not 0.1 g) scales then you may use them: precision 2% is enough as you make injectable for yourself only.</p>
+<h3><a name="Optional"></a>Optional</h3>
+<p>The vials are designed to be sealed with rubber stoppers and aluminium caps using a tool (crimper, $36). But you can crimp a cap without a crimper: by hand using a piece of metal like a spoon handle.</p>
+<p>You can buy a 129°C autoclave for $170, but it&#39;s not really necessary as you make vials for yourself only. 121°C was necessary for obsolete reusable syringes with fresh blood of another patient because hepatitis B virus can survive 100°C for short time if in blood. You are not dealing with fresh blood, so 100°C (water boiling in a pot) is enough. I use an autoclave just for customers&#39; peace of mind. At first I sold kits with EV powder, solvent, preservative and instructions how to mix and sterilize in a pot, multiple people including myself sterilized at 100°C, never a problem. If you live at significant altitude (like in Denver &#34;mile high city&#34;) then likely you already have a pressure cooker. I advise against dry heat sterilizers and ovens because of too uneven temperature, too much can burst a vial. Bead sterilizers not suitable.</p>
+<p>American &#34;homebrewing&#34; bodybuilders were afraid that their anabolics would be &#34;inactivated&#34; during heat sterilization, so they started the filtering fad: they assumed (wrong) that 0.2 μm filtering sterilizes. Filtering is <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2896367/" target="_blank" rel="nofollow noopener"><strong>not</strong></a> a reliable sterilization. I can understand filtering for intravenous infusions liters per day (in ICU), but for our subcutaneous injections 1 ml/month filtering doesn&#39;t make sense. There were multiple complaints that some EV ampules made by pharmaceutical factories in India are fake. I think not deliberately fake but just incompetent technologists and managers: they mixed in a tank in an air-conditioned cold (to limit bacteria) room without solvent for not enough time, then undissolved powder got stuck in a filter. If you are paranoid and insist on following the filtering fad then wait several days until every last clump of powder finishes dissolving in a vial, then use a PVDF or PTFE 0.22 μm syringe filter (not hydrophilic, better 25 or 33 mm), a 10 ml Luer Lock syringe and optionally a homemade filtering rig, I made mine (for paranoid customers, I don&#39;t filter what I inject into myself) from 4 stacks of books, a piece of plywood/MDF with a hole for the syringe, a wide wooden plank/board, a 6 L (1.5 gallon) plastic bottle with water as a weight, the plank slightly tilted and leaning on a wall for stability. And anyway sterilize the sealed vial you filtered into at 100°C <strong>after</strong> filtering!</p>
+<h3><a name="Unnecessary"></a>Unnecessary</h3>
+<p>Unnecessary: beaker, mixer/stirrer, room with controlled airflow, depyrogenation. My technology: terminal heat sterilization (after the vials are sealed); measure and mix in each vial separately, so no glassware to wash with water  or collecting dust (skin flakes and <a href="https://en.wikipedia.org/wiki/House_dust_mite" target="_blank" rel="nofollow noopener">mites</a>) if never washed. Water - bacteria - pyrogens. Don&#39;t try to improve this technology: it protects you from mistakes and unexpected problems.</p>
+<h2><a name="Other-raw-materials-and-expendables"></a>Other raw materials and expendables</h2>
+<h3><a name="Vials2C-stoppers2C-caps"></a>Vials, stoppers, caps</h3>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13965/s-l300.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1729644332&Signature=W%2F972jmE7g1rvbylgM1jUdLuUnU%3D" align="right" loading="lazy" class="myimg-responsive"/>Buy 10 clear glass vials 10 ml each with 20 mm grey (butyl rubber) stoppers and aluminium caps. Caps may be bare aluminium or painted, with plastic tops or all-metal. Screw-on and all-plastic caps are not suitable. Stoppers must have this shape:<br/><a href="https://www.ebay.com/itm/223836409810" target="_blank" rel="nofollow noopener">https://www.ebay.com/itm/223836409810</a><br/><a href="https://www.aliexpress.com/item/32903943374.html" target="_blank" rel="nofollow noopener">https://www.aliexpress.com/item/32903943374.html</a><br/><a href="https://www.aliexpress.com/item/33024594919.html" target="_blank" rel="nofollow noopener">https://www.aliexpress.com/item/33024594919.html</a><br/>Flat septa are not suitable instead of stoppers. Search:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15" target="_blank" rel="nofollow noopener">https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15</a></p>
+<p><a href="https://www.aliexpress.com/wholesale?SearchText=vials+10ml+stoppers+caps" target="_blank" rel="nofollow noopener">https://www.aliexpress.com/wholesale?SearchText=vials+10ml+stoppers+caps</a></p>
+<p>After you remove central part of the cap, most of the cap must remain and hold the rubber stopper at place. Caps must <strong>not</strong> have tear-off weak place on one side like this:</p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13909/cap-tear-off.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1729644332&Signature=Eqb6LUTSFNqVTtJd0xqRxVXgsSI%3D" loading="lazy" class="myimg-responsive"/></p>
+<p>In Europe you can buy <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22VIC10%20000%22" target="_blank" rel="nofollow noopener">vials</a>, <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22STG%20000%22" target="_blank" rel="nofollow noopener">stoppers</a>, <a href="https://lab-supply-shop.com/epages/171448.sf/de_DE/?ObjectPath=/Shops/171448/Products/%22BKMA%20000%22" target="_blank" rel="nofollow noopener">caps</a>, <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22BA%20000%22" target="_blank" rel="nofollow noopener">benzyl alcohol</a> and <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22MCT%201L%22" target="_blank" rel="nofollow noopener">MCT oil</a> in one shop.</p>
+<h3><a name="Oil"></a>Oil</h3>
+<p>MCT oil (liquid, not powder, not in capsules, without flavor added) - cheapest bottle you can find, in a local sports nutrition store or mail-order. It&#39;s the only ingredient with somewhat limited shelf life: roughly 5 years as rumored though bottles are usually marked with arbitrary shelf life 2 years. You&#39;ll use up 10 ml per year. In USA you can mail-order a 2 oz (60 ml) sample bottle <a href="https://www.ebay.com/sch/i.html?_nkw=mct+oil&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_fcid=1&amp;_blrs=recall_filtering&amp;_ipg=240" target="_blank" rel="nofollow noopener">on eBay</a> for $6 including shipping. Check prices also on Amazon. In local stores smallest bottle can be 400 ml, roughly $13. MCT oil is marketed as a food supplement to be taken 15 ml/day, taken orally is rapidly absorbed. You&#39;ll inject 500 times less, so any purity is okay (it&#39;s really all the same purity despite some dishonest sellers&#39; claims).</p>
+<h3><a name="Preservative-28optional29"></a>Preservative (optional)</h3>
+<p>If you can, add a preservative (antibacterial): benzyl alcohol. You&#39;ll use up 7 ml for 30 years. Usually cheaper <a href="https://www.ebay.com/sch/i.html?_nkw=%22benzyl+alcohol%22&amp;_sacat=0&amp;LH_TitleDesc=0&amp;_blrs=recall_filtering&amp;LH_BIN=1&amp;_sop=15&amp;_fcid=1&amp;_oac=1" target="_blank" rel="nofollow noopener">on eBay</a>. Look also for companies selling ingredients for perfumes, cosmetics, soap crafting, for example in Europe <a href="https://www.mysticmomentsuk.com/products/benzyl-alcohol" target="_blank" rel="nofollow noopener">here</a> (they also sell MCT oil under <a href="https://www.mysticmomentsuk.com/products/caprylic-capric-triglyceride-liquid" target="_blank" rel="nofollow noopener">another name</a>), or <a href="https://www.thesoapkitchen.co.uk/benzyl-alcohol#/33962-custom_size-100g" target="_blank" rel="nofollow noopener">here</a> (and <a href="https://www.thesoapkitchen.co.uk/caprylic-capric-triglyceride-cctkc#/33963-custom_size-100ml" target="_blank" rel="nofollow noopener">oil</a>). In Australia <a href="https://www.ebay.com.au/sch/i.html?_nkw=%22benzyl+alcohol%22&amp;_sacat=0&amp;LH_BIN=1&amp;_fcid=15&amp;_sop=15&amp;_blrs=recall_filtering" target="_blank" rel="nofollow noopener">here</a>. If you don&#39;t add the preservative then make sure that each time you draw from a sterilized vial, you take a new syringe. I inject myself with estradiol enanthate in MCT oil without preservative because of my allergy.</p>
+<h3><a name="Syringes-for-mixing"></a>Syringes for mixing</h3>
+<p>Measure MCT oil with a 10 ml (or 5 ml) syringe. If you can find an all-plastic syringe without (usually black) rubber at the inner end of the plunger then one syringe will last you forever. Else likely you&#39;ll have to take a new disposable syringe every time you cook a few vials (up to 5 years apart) because the oil very slowly spoils that rubber. Vial stoppers are made from resistant rubber.</p>
+<p>If you add a preservative then use one of syringes you bought for injections (see below) to measure 0.2 ml.</p>
+<h2><a name="Mix"></a>Mix</h2>
+<p>Make a small funnel from a piece of foil (the thicker foil the better; shinier side inside), hold it folded with a small piece of sticky tape. If you have only thin foil then perhaps strengthen it by wide sticky tape on another side (or try to strip the outer paint from a few different beer or soft drink aluminium cans with nail polish remover, then cut a clean can with scissors). May be use something conical to wrap the foil around before cutting off unneeded parts. The hole at the pointy end of the funnel must be slightly (not much) smaller than the opening in the vial. Use this funnel to weigh up estradiol enanthate powder and to pour the powder into a vial. The funnel I&#39;m using at the center, unfolded piece of foil from my previous funnel at the left, a funnel in a vial at the right:</p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13910/cone.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1729644332&Signature=gvXzS14LkhZAEJIn7hStwP%2BiFHM%3D" loading="lazy" class="myimg-responsive"/></p>
+<p>Two recipes I can recommend:</p>
+<p>1) 500 mg = 0.5 g of estradiol enanthate (density 1.1 g/cm<sup><small>3</small></sup>),<br/>benzyl alcohol (preservative - antibacterial) 0.2 ml,<br/>MCT oil 10-0.2-0.5/1.1= 9.35 ml.</p>
+<p>2) 0.5 g of estradiol enanthate,<br/>MCT oil 10-0.5/1.1= 9.55 ml.</p>
+<p>Sit comfortably at a table, put the scales onto the center of a sheet of blank paper (&#34;landscape&#34; orientation: width more than height). Put the funnel onto the circle on the scales, pointy side to the left (as at the center of the photo above). Turn the scales on, wait for 0.000<br/>Pour estradiol enanthate powder onto the funnel over the center of the circle on the scales until the scales show any number between 0.501 and 0.503<br/>If you poured too much, take excess powder off with a knife tip. Don&#39;t fuss over part of powder which may fall off through the pointy end of the funnel or elsewhere, it&#39;s what the paper sheet is for.</p>
+<p>Take an empty vial with fingers of left hand, put the vial hole to the pointy end of the funnel. Lightly press the funnel into the vial with left index finger (it&#39;s the most tricky part: you must prevent the funnel from falling off the vial and spilling the powder, but you must press lightly to not crumple the foil). Carefully rotate the vial upright together with the funnel over the paper sheet while continuing holding the funnel in the vial with the left index finger. Take a plastic pen or wooden pencil with right hand, tap lightly multiple times on the glass vial you hold in left hand fingers to shake the funnel until all the powder pours from the funnel into the vial.</p>
+<p>If some powder fell off, use knife tip to put most of it back into the bag.</p>
+<p>Now you may optionally draw 0.2 ml of benzyl alcohol into a syringe, pour it into the vial over the powder and watch as the powder sags a little and partially dissolves.</p>
+<p>Measure the MCT oil with a syringe and pour into the vial.</p>
+<p>Close the vial with the rubber stopper, put the cap onto the stopper. While pressing the cap onto the vial, put the vial upside down (cap down) onto a book. While pressing the vial down, bend the rim of the cap in several (8-10) places with a spoon handle so that the cap holds the stopper at place. Don&#39;t press too strongly to not shatter the glass.</p>
+<p>While clenching the vial with two fingers at bottom and cap, shake up the vial thoroughly during a full minute (it&#39;s a long time).</p>
+<p>Wait several days, shake up the first vial few times each day. The warmer in the room, the faster dissolving. If the powder dissolved completely to clear solution then you were sold the real thing and enough pure. For next vials don&#39;t wait.</p>
+<p>Another way to make sure that you got really estradiol enanthate is checking melting point of the powder: it may be slightly less or slightly more than 100°C. Measure/pour 500 mg more powder into another vial, don&#39;t pour liquids yet, close the vial, but bend the cap rim in only 3 places. Put the vial into a pot with tap water, boil the water (while watching the powder in it), turn the heat off, wait for the water to cool off, take the vial out of the water. If the powder partly solidified and doesn&#39;t all move completely freely in the vial then it&#39;s the real thing. Few oil-soluble substances have such relatively low melting point. But if melting point of the powder you got happens to be slightly more than 100°C then this test is inconclusive: you&#39;d need a pressure cooker or an autoclave to heat the vial to slightly more than 100°C. After the test unbend the cap, open the vial, pour liquid[s], seal, and now you&#39;ll have to wait for much longer time (up to a month) until the solidified part of the powder dissolves.</p>
+<h2><a name="Sterilize"></a>Sterilize</h2>
+<p>For sterilization put the sealed vial into a pot with tap water, <strong>after</strong> that boil the water, keep the water boiling for 30 min, turn off the heat, wait until the water cools off. The cap darkens - that doesn&#39;t matter. If you already have any pressure cooker then use it instead of a pot, else a pot is enough!</p>
+<p>During sterilization the powder finishes dissolving. Shake up the vial (ignore tiny bubbles).</p>
+<p>Wash off limescale (calcium carbonate from heated tap water) from the vial with cloth wet with vinegar.</p>
+<p>Let the vial to dry, handwrite &#34;estradiol enanthate 50 mg/ml&#34; in small letters on paper in 3 lines, cut that out (the smaller label the better) and glue it onto the vial with a piece of transparent sticky tape just slightly larger than the label.</p>
+<h2><a name="Begin-a-new-vial"></a>Begin a new vial</h2>
+<p>If the aluminium cap is all-metal without plastic top then the cap has 2 or 3 incisions in a circle at the center of the top of the cap. Either tear off the center of a cap (hold to not pull entire cap off) or cut it out using small scissors with sharp tips to expose central part of the rubber stopper underneath. Don&#39;t pierce the rubber stopper.</p>
+<p>If your caps are with plastic tops then stick a flat screwdriver or a knife under the top, the top should detach with the central part of the cap. If you accidentally pulled entire cap off and the rubber stopper came out of the vial then fix the cap back and repeat sterilization.</p>
+<p>The very center of the rubber stopper is marked with smaller circle - it&#39;s where needles should be inserted.</p>
+<h2><a name="Keep"></a>Keep</h2>
+<p>Keep the powder sealed airtight in a vial or in <a href="https://groups.io/g/MTFHRT/message/7354" target="_blank" rel="nofollow noopener">bags</a> with as little air as possible. Keep the powder, mixed but yet unused vials, benzyl alcohol and oil wrapped in foil to protect from light. Keep the vial you are using in a box, drawer or cupboard. Not in a fridge. Keep at room temperature (whatever it is), in standing position. Before use, look at the bottom of a vial: if it became white instead of transparent then put the vial at a warm place, and EEn will dissolve back, the warmer the faster. Then shake up the vial (ignore tiny bubbles).</p>
+<h2><a name="Total-price"></a>Total price</h2>
+<p>Here I use prices (including shipping) I saw at the time of this writing for people living in USA:</p>
+<p>20 g of estradiol enanthate powder $180 + Alibaba fee 3%<br/>Scales $14.26<br/>10 vials with stoppers and caps $4.45<br/>2 oz (60 ml) of MCT oil $5.99<br/>20 ml of benzyl alcohol (preservative) $6.75<br/><a href="https://www.aliexpress.com/item/1005002753787929.html" target="_blank" rel="nofollow noopener">5 syringes 10 ml</a> (for measuring MCT oil) $2.66<br/>100 <a href="https://www.amazon.com/EasyTouch-Insulin-Syringe-12-7mm-Polybag/dp/B07T8F2RKB/" target="_blank" rel="nofollow noopener">syringes</a> for injections $14.94</p>
+<p>20 g of estradiol enanthate powder will be enough to cook 39 vials which will last you 39*10/0.223*7/365= 33 years.</p>
+<p>Initial expenses 180*1.03+14.26+4.45+5.99+6.75+2.66+14.94= $235</p>
+<p>Total expenses during 33 years (180*1.03+14.26+4*4.45+7*5.99+6.75+2.66+18*14.94)/(33.5*12)= $1.34 per month. A hundred times cheaper for safer and much more effective HRT than doctor-prescribed. And you don&#39;t depend on doctors&#39; whims and meds shortages.</p>
+<h2><a name="Legal"></a>Legal</h2>
+<p>If you make injectable estradiol for yourself only, no problem. But if you sell or gift it to anybody else, you are in legal trouble. Somebody is going to snitch, guaranteed.</p>
+<h1><a name="Inject-yourself"></a>Inject yourself</h1>
+<h2><a name="Syringes-for-injections"></a>Syringes for injections</h2>
+<p>Syringes for injections - insulin syringes with permanently attached (fixed, integrated, non-detachable) needles 1/2&#34; (12-13 mm) long, a new syringe every week or 10 days.<br/>&#34;Tuberculin&#34; syringes with fixed needles 5/8&#34; (16 mm) are available only in few mail-order stores in USA.</p>
+<p>Needle gauge/diameter doesn&#39;t matter, drawing MCT oil through 30G takes one minute. Both U-100 and U-40 insulin syringes are suitable. Insulin syringes marketed for animals (veterinarian) are perfectly okay too.</p>
+<p>If you discard an usual syringe with detachable needle after each injection then you lose 0.092 ml of the solution in the &#34;dead space&#34; in the socket between syringe and needle: <a href="http://lena.kiev.ua/deadspace.png" target="_blank" rel="nofollow noopener">http://lena.kiev.ua/deadspace.png</a> , so a vial will last you 7 months instead of 10. Also, the socket can leak air which makes drawing seem impossible (tighten the socket with force and twist).</p>
+<p>In most countries <strong>insulin</strong> syringes are available in most local pharmacies without prescription. Some pharmacists or pharmacy chains are holier than Pope, don&#39;t believe if few pharmacists claim prescription-only, just go to another pharmacy.</p>
+<p>Or you can mail-order. Depending on country: <a href="https://www.amazon.com/EasyTouch-Insulin-Syringe-12-7mm-Polybag/dp/B07T8F2RKB/" target="_blank" rel="nofollow noopener">USA</a> (or <a href="https://www.amazon.com/s?k=29G+100&amp;s=price-asc-rank" target="_blank" rel="nofollow noopener">search</a>), Canada: <a href="https://paylessmedical.ca/products/am-22-8005" target="_blank" rel="nofollow noopener">1</a> <a href="https://paylessmedical.ca/products/bd-305535" target="_blank" rel="nofollow noopener">2</a>, UK: <a href="https://www.medisave.co.uk/unisharp-1ml-fixed-27g-white-x-100.html" target="_blank" rel="nofollow noopener">1</a> <a href="https://ukmedi.co.uk/1ml-0-5-27g-unisharp-syringe-needle/" target="_blank" rel="nofollow noopener">2</a> <a href="https://www.shdmedical.co.uk/syringes/unisharp-1ml-27g-fixed-needle-syringe-white/" target="_blank" rel="nofollow noopener">3</a>, France: <a href="https://www.robe-materiel-medical.com/Seringue-insuline-NIPRO-1-ml-avec-aiguille-sertie-27G-Par-100-SIN713-materiel-medical.htm" target="_blank" rel="nofollow noopener">1</a> <a href="https://www.farla-medical.com/fr/bd-seringues-tuberculine/2491-bd-plastipak-sub-q-syringe-with-needle-26g-12-syringe-1-ml.html" target="_blank" rel="nofollow noopener">2</a> <a href="https://www.robe-materiel-medical.com/Seringue-insuline-1ml-aiguille-sertie-27G-29G-30G-Chirana-Injecta-Boite-de-100-CIN127-materiel-medical.htm" target="_blank" rel="nofollow noopener">3</a>, Netherlands: <a href="https://www.medischeartikelen.nl/product/bd-plastipak-sub-q-insulinespuiten-1ml-26g-0-45mm-x-12-7mm-per-100-stuks/" target="_blank" rel="nofollow noopener">1</a> <a href="https://www.pazzox.nl/nl/apotheek/thuiszorg-en-ehbo/naalden-en-spuiten/spuiten/bd-microfine-ins-spuit-1-0ml-29g-12-7mm100-324827/" target="_blank" rel="nofollow noopener">2</a> <a href="https://www.medischeartikelen.nl/product/bd-micro-fine-insulinespuiten-u100-0-5ml-29g-0-33mm-x-12-7mm-per-100-stuks/" target="_blank" rel="nofollow noopener">3</a>, <a href="https://www.medplus24.de/Plastipak-Spritze-1-ml-mit-Kanuele" target="_blank" rel="nofollow noopener">Germany</a>, <a href="https://www.ebay.it/itm/SIRINGA-PER-INSULINA-BECTON-DICKINSON-1-ML-100-UI-AGO-29-GAUGE-30-PEZZI/164679685033" target="_blank" rel="nofollow noopener">Italy</a>, Spain: <a href="https://novaclinic.es/desechable/1188-jeringa-bd-1ml-sub-q-aguja-03x6mm-caja-100un.html" target="_blank" rel="nofollow noopener">1</a> <a href="https://www.parafarmaciacampoamor.com/es/256362-bd-microfine-jeringa-insulina-1ml-033x127mm-10-uds.html" target="_blank" rel="nofollow noopener">2</a>, <a href="https://www.apotekeren.dk/produkter/bd-microfine100enh-127mm/p-6347" target="_blank" rel="nofollow noopener">Denmark</a>, <a href="https://www.bonusapteekki.fi/Insuliiniruisku-Kruuse-1-ml-/-29G-100-kpl" target="_blank" rel="nofollow noopener">Finland</a>, <a href="https://jtc.com.mx/jeringa-de-insulina-1-ml-27-x-13-c-100pzs.html" target="_blank" rel="nofollow noopener">Mexico</a>, Australia: <a href="https://www.medshop.com.au/products/terumo-insulin-syringes?variant=30180994449506" target="_blank" rel="nofollow noopener">1</a> <a href="https://www.livingstone.com.au/Product/id/DSL001ML27G/LIV-INSULIN-SYRINGE-1ML-WITH-NEEDLE-27GX0-5-100-BX/" target="_blank" rel="nofollow noopener">2</a>, <a href="https://www.netpharmacy.co.nz/products/bd-ultra-fine-insulin-syringe-sterile-interior?variant=17143348723755" target="_blank" rel="nofollow noopener">NZ</a>, Ukraine: <a href="https://tabletki.ua/uk/Medicare/1006302/" target="_blank" rel="nofollow noopener">1</a> <a href="https://tabletki.ua/uk/%D0%93%D0%B5%D0%BC%D0%BE%D0%BF%D0%BB%D0%B0%D1%81%D1%82/1020938/" target="_blank" rel="nofollow noopener">2</a> <a href="https://tabletki.ua/uk/%D0%93%D0%B5%D0%BC%D0%BE%D0%BF%D0%BB%D0%B0%D1%81%D1%82/1020939/" target="_blank" rel="nofollow noopener">3</a> <a href="https://tabletki.ua/uk/Medicare/1019236/" target="_blank" rel="nofollow noopener">4</a> <a href="https://tabletki.ua/uk/%D0%93%D0%B5%D0%BC%D0%BE%D0%BF%D0%BB%D0%B0%D1%81%D1%82/1020937/" target="_blank" rel="nofollow noopener">5</a>, Russia: <a href="https://apteka.ru/product/shpricz-insulinovyj-100-me05-ml-s-integrirovannoj-igloj-29g-10-sht-bd-5e326db0f5a9ae000140ada9/" target="_blank" rel="nofollow noopener">1</a> <a href="https://www.ozon.ru/product/insulinovyy-shprits-u100-1-ml-s-integrirovannoy-igloy-29g-0-33-x-13-mm-medical-germaniya-100-shtuk-552711855/" target="_blank" rel="nofollow noopener">2</a>. Worldwide: <a href="https://www.exchangesupplies.org/shopdisp_unisharp_fixed_1ml_green_27.php" target="_blank" rel="nofollow noopener">1</a> <a href="https://direct-peptides.com/product/unisharp-1ml-27g-fixed-needle-syringe-white/" target="_blank" rel="nofollow noopener">2</a> <a href="https://www.shdmedical.co.uk/needles/unisharp-1ml-27g-fixed-needle-syringe-white/" target="_blank" rel="nofollow noopener">3</a>.</p>
+<h2><a name="Needle-fright"></a>Needle fright</h2>
+<p>If you are deadly afraid of needles (hey, I have instinctive fear of heights, so I understand) then buy an insulin syringe, lie down on your bed on your side (if you faint, no problem) and stick yourself with the empty syringe into the butt. If you manage that (possibly after several attempts), next times will be much easier.</p>
+<p>As last resort, instead of estradiol enanthate you can buy micronized estradiol powder and take it <a href="https://groups.io/g/MTFHRT/topic/89863132#6268" target="_blank" rel="nofollow noopener">orally</a> 10 mg twice a day. 20 g will last you 33 months instead of 33 years, $5/month.</p>
+<h2><a name="Dosage"></a>Dosage</h2>
+<p>I recommend to inject 0.22 ml (22 units on U-100 insulin syringe scale or 8 units if U-40) weekly (on the same day of every week) or 0.31 ml every 10 days (on 1, 11, 21 of every month). The same dosage from the very beginning of MtF HRT and all the time later, post-op too, never stop. I chose this dosage to advise so that it&#39;s enough for complete suppression of testosterone production by testicles in any MtF. On the same dosage of the same hormone different people get trough blood estradiol level (just before next injection) differing in up to 10 times. Also, sensitivity of different people to the same level of the same hormone differs in times. Sensitivity is as important as levels. There isn&#39;t a test for sensitivity. So, why do doctors prescribe blood tests to MtF? Just to impress naive patients and to keep themselves busy and paid. For most MtF the dosage I advise is more than enough, but so what? It&#39;s laughably cheap. For a few this dosage is barely enough, so don&#39;t gamble and don&#39;t waste time. A few blood tests would be more expensive than all the hormone you&#39;ll ever take, so why bother?  Doctors love to tell bogeyman stories about side effects - just to scare you into blood tests and - paying them for more doctor visits.</p>
+<p>If a doctor sees results of your blood tests, likely he&#39;ll claim &#34;too much estradiol, dangerous&#34;. Then give him the <a href="https://www.thieme-connect.com/products/ejournals/abstract/10.1055/s-2007-1001723" target="_blank" rel="nofollow noopener">link</a> to a scientific article describing how doctors injected women with 4 times higher estradiol dosage than I advise, those women got blood estradiol level roughly 3000 pg/ml = 11000 pmol/l in average. Full text of that article can be accessed via <a href="https://en.wikipedia.org/wiki/Sci-Hub" target="_blank" rel="nofollow noopener">Sci-Hub</a>, or members of this [MTFHRT] group can read it <a href="https://groups.io/g/MTFHRT/files/estrogens/ulrich1994.pdf" target="_blank" rel="nofollow noopener">here</a>. I quote that article:</p>
+<blockquote>
+<p><span style="font-size: 15px; font-family: serif">The treatment was well tolerated. No adverse </span><span style="font-size: 15px; font-family: serif">effects were seen, the patients expressed a feeling of particular </span><span style="font-size: 15px; font-family: serif">well being, 23% of them wanted to have the injections repeated and </span><span style="font-size: 15px; font-family: serif">none of them wanted to stop treatment because of troubles or </span><span style="font-size: 15px; font-family: serif">side effects.</span></p>
+</blockquote>
+<p>That&#39;s on 4 times higher estradiol dosage than I advise.</p>
+<h2><a name="How-to-inject"></a>How to inject</h2>
+<p>I recommend to inject into the upper outer quarter of a buttock into fat (subcutaneous) while lying on a bed on your side. It&#39;s the safest and least painful place. I advise against injecting into thigh because that can cause too fast absorption and faster blood estradiol level drop.</p>
+<p>Take care to touch the needle to nothing except inner surface of needle cap, the skin at the place of injection and the rubber stopper of the vial.</p>
+<p>There is an old tradition to disinfect skin (and the rubber stopper of the vial) with alcohol before an injection. Pharmacies sell alcohol-soaked swabs/wipes for that. However, this ritual is optional. World Health Organization <a href="https://www.who.int/bulletin/volumes/81/7/Hutin0703.pdf" target="_blank" rel="nofollow noopener">says</a>:</p>
+<blockquote>
+<p>Wash skin that is visibly soiled or dirty. Swabbing of the clean skin before giving an injection is unnecessary. Swabbing of clean vial tops or ampoules with an antiseptic or disinfectant is unnecessary.</p>
+</blockquote>
+<p>Also, you can read Introduction in a scientific <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7794031/#sec001title" target="_blank" rel="nofollow noopener">article</a>.</p>
+<p>Anyway, even if you follow this ritual, don&#39;t wipe the needle because that would make it more dirty.</p>
+<p>How to inject:<br/>Lie down on a bed on your side. Injection will be into fat in the upper outer quarter of a buttock (exact place doesn&#39;t matter, fat layer in buttocks is thicker than needle length even in skinny people). Pull off the cap from the needle. Pull as much air into the syringe as you intend to inject. Pierce the center of the rubber stopper with the needle, inject the air into the vial. Turn so that the vial is at the top, syringe at the bottom. Pull the plunger to 0.1 ml more than you intend to inject (create vacuum in the syringe), hold and wait several minutes until the liquid very slowly seeps down and top surface of the liquid rises up to 0.08 ml mark on the scale. Push most of air bubbles and excess liquid back into the vial. Small air bubbles may remain, don&#39;t worry, injecting air bubbles is completely harmless. Pull the needle out, stick it into your butt (at about 90° angle) all the way in, inject (can take some time - speed doesn&#39;t matter). Pull out the needle, immediately press at the place of injection with a finger or a cotton wool pad/disc. While continuing to press, make a few circular motions (shift the skin, don&#39;t drag the finger across skin). Continue to press for 1 min. Cap the needle.</p>
+<h1><a name="22Monitoring22-unnecessary"></a>&#34;Monitoring&#34; unnecessary</h1>
+<p>If you begin your HRT from injectable estradiol as I describe here then likely in a few weeks you&#39;ll experience pain in breast buds (in many cases only at one side at first) like many cis-girls experience at puberty. The pain is not a sign of a problem and will last not forever.</p>
+<p>Dosage I advise stops testosterone production by testicles as completely as surgical removal of testicles, but that will not rid you of the grey shade from shaven mustache and beard - a dead giveaway: you&#39;ll not pass until you <strong>complete</strong> needle electrolysis. Despite false advertising, laser and other hair removal methods using intense light in most cases remove facial hair temporarily, no matter how many sessions. Ignore this wisdom at your peril.</p>
+<p>Any estradiol (E2) level between 300 and 5000 pg/ml (1100 - 18000 pmol/l) is okay for both pre-ops and post-ops. Estrone (E1) level doesn&#39;t matter. All doctors&#39; assertions &#34;too much&#34; are bullshit meant to control us and extort money under guise of &#34;care&#34;. The only reasonable cause to do a blood test for estradiol (once, at least a month after first injection, only on a day of next injection before it) is your peace of mind that you got indeed estradiol enanthate. But above I described two other ways to check that, and likely you&#39;ll experience pain in breast buds. I tested a new batch of estradiol enanthate powder on myself, my blood estradiol level was 1272 pg/ml = 4670 pmol/l 5 days after an injection. I had SRS in 1999, I needn&#39;t to suppress testosterone. Nevertheless, I don&#39;t intend to decrease my dosage. It slows down aging, on it I look and feel better.</p>
+<h1><a name="Myths-and-what-not-to-do"></a>Myths and what not to do</h1>
+<p>Above I explained about some myths and fallacies. Some more:</p>
+<p>Myth: <span style="background-color: #ff99cc">discard a vial 30 days after you began it</span>. Bureaucrats get their salaries for inventing new rules, no matter how unreasonable. This rule was invented for hospitals with multiple patients (some with infectious diseases), not for your home.</p>
+<p>Fallacy: <span style="background-color: #ff99cc">use separate needles for drawing and injection</span>. It&#39;s easy to bend needle tip on hard glass ampule bottom while drawing from an all-glass single-dose ampule, it&#39;s where the myth of &#34;needle blunting&#34; originates. Insulin syringes with non-detachable needles are designed for insulin vials also with rubber stoppers.</p>
+<p>If an average doctor prescribes injectable estradiol, he says nothing about needles, he says &#34;<span style="background-color: #ff99cc">inject into muscle</span>&#34; because the gospel (instructions sold with injectable estradiol) says so (without explanation why - really it&#39;s because the solvent used with EV sometimes causes allergy, then IM helps). You go to a pharmacy and ask for intramuscular injections. An average pharmacist asks you for injection volume (less than 1 ml) and sells you 2 ml syringes, each syringe comes with a needle in the same pack. Manufacturers put long needles with 10 ml syringes and shorter needles with 2 ml syringes. Why? Aesthetics. :-/ You get syringes with dead space and needles 25 mm long, you inject into buttock. You, pharmacist, nurse and doctor think that you inject into muscle. Really fat layer in buttocks is thicker even in very skinny people. You in fact inject into fat. And... it works. Gospels are full of fallacies.</p>
+<p>Don&#39;t give a vial into the hands of a doctor, he&#39;d destroy it. Doctors are jealous.</p>
+<p>Don&#39;t use an emulator (calculator of blood levels). It uses average statistical data, but <strong>you</strong> are not a statistically average person.</p>
+<p>Myth: <span style="background-color: #ff99cc">begin from pills (low dosage), then after some time switch to injections</span>. Doctors love to begin from low dosage because that keeps them busy and paid. So they invent explanations why it&#39;s allegedly better. People repeat doctor claims.</p>
+<p>Myth: <span style="background-color: #ff99cc">decrease estrogen dosage post-op</span>. Estrogen dosages described in pharmaceutical reference books (collections of package inserts) for men with prostatic cancer are higher (designed to suppress testosterone production by testicles) than for women (after menopause) - limited in the fear of uterine cancer. Only after SRS we magically become women in doctors&#39; eyes.</p>
+<p>Myth: <span style="background-color: #ff99cc">&#34;estrogens&#34; increase risk of blood clots, take Aspirin to counteract that</span>. Ethinylestradiol increases risk of venous thrombosis, Aspirin decreases risk of arterial thrombosis in coronal arteries in the heart. Combination of ethinylestradiol with Aspirin is like wearing a flak jacket while going against a gas attack. Don&#39;t confuse ethinylestradiol (EE) with estradiol enanthate (EEn). Unlike ethinylestradiol, injectable estradiol practically doesn&#39;t affect risk of thrombosis. Did you know that thrombosis risk depends (among other things) on whether your blood is type 0(1) or any other type (&#34;non-zero&#34;)? Estradiol enanthate dosage I advise affects blood clotting less.</p>
+<p>Fallacy: <span style="background-color: #ff99cc">stop &#34;hormones&#34; some time before SRS or another surgery, resume only some time later</span>. Surgeons don&#39;t know and don&#39;t want to know differences between various estrogens and routes of their delivery. Ethinylestradiol in combination with bloodflow in immobile legs stopped by stirrups (to move legs out of surgeon&#39;s way during SRS) can cause deep vein thrombosis and deadly pulmonary embolism as a consequence. Don&#39;t try to explain to the surgeon that injectable estradiol doesn&#39;t do that, tell that you comply but silently continue injections for your passability and mood not to worsen. Blood tests surgeons require check some blood clotting parameters, not estradiol.</p>
+<p>Myth: <span style="background-color: #ff99cc">libido and erections are signs of testosterone</span>. In many MtF estradiol dosage I advise stimulates libido and erections though suppresses testosterone production by testicles completely. If still in doubt, do a blood test for testosterone on a day of next injection before it. Cis-women (and post-SRS MtF) get erections of clitoris - exactly same mechanism as erections of penis.</p>
+<p>Myth: <span style="background-color: #ff99cc">excess estrogen is converted to testosterone</span>. The conversion estrone&lt;-&gt;estradiol is bidirectional, but the conversion testosterone-&gt;estradiol is strictly <a href="https://www.genome.jp/kegg-bin/show_pathway?hsa00140" target="_blank" rel="nofollow noopener">unidirectional</a>.</p>
+<p>Myth: <span style="background-color: #ff99cc">if you take too much estradiol then SHBG will bind it and make it unusable</span>. If estradiol level increases, liver produces more SHBG. Nevertheless, free estradiol level increases too.</p>
+<p>Words &#34;<span style="background-color: #ff99cc">estrogen dominance</span>&#34; were invented by marketers of progesterone and quackeries they call progesterone bla-bla-something like &#34;Wild Yam&#34;. Long ago progesterone was produced chemically from wild yam, but human body cannot perform that chemical conversion.</p>
+<p>If you are wondering about real progesterone:</p>
+<p>1) Injectable progesterone is very short-living, must be injected daily. Oral progesterone is ineffective because most of it is converted to allopregnanolone which common blood tests confuse with progesterone. Hydroxyprogesterone caproate is not bioidentical, it&#39;s not converted in the body to progesterone (unlike estradiol valerate and estradiol enanthate).</p>
+<p>2) Progesterone decreases rate of synthesis of estrogen receptors. Cis-women are supposed to benefit from that, but goals of MtF are opposite.</p>
+<p>3) Estradiol develops ducts in milk glands, progesterone develops alveoles. Most of breast volume is ducts and connective tissue between them. If an alveole formed (at the end of a duct), that duct will not grow in length anymore. So, progesterone can stunt breast growth. Cyproterone acetate too, it&#39;s a strong progestogen.</p>
+<p>I advise <strong>not</strong> to add progesterone for at least 3 years since starting estradiol injections at least 40 mg/month (<strong>not</strong> since the very beginning of HRT). Or never add progesterone. Though progesterone is a female hormone, that doesn&#39;t mean that it&#39;s beneficial for MtF (no uterus).</p>
+<p>Myth: an article linked from Wikipedia <span style="background-color: #ff99cc">claimed a case of prolactinoma as a side effect of estradiol enanthate</span>. Actually factory-made injections with estradiol enanthate always contain also high dosage of a progestin. Cyproterone acetate is a strong progestin and is known to cause prolactinoma. One more reason to never add progesterone if you haven&#39;t an uterus.</p>
+<p>Myth: <span style="background-color: #ff99cc">compounding pharmacies make superior products</span>. If you get exceptionally lucky and find a doctor willing to prescribe as high injectable estradiol dosage as I advise who doesn&#39;t freak out at blood test results (you&#39;d have to pay to gatekeeprs, doctor, pharmacy and labs), compounding pharmacies in few countries can cook injectable estradiol with prescription. No compounding pharmacy would have estradiol enanthate powder, and I doubt that they can make estradiol cypionate (EC) 50 mg/ml because factory-made EC is 5 mg/ml max. They cannot make more than 10 mg/ml without solvent (benzyl benzoate) which can cause allergy. They use other oils which also cause allergy more often than MCT oil. But the main their problem is that they never mix in each vial separately and often repeat Indian factories&#39; mistake I described above: undissolved powder gets stuck in a filter, so you get much less estradiol than prescribed (often happens in Canada). Another example of their stupidity: a compounding (&#34;Galenic&#34;) pharmacy in Italy <a href="https://imgur.com/a/pmOmypJ" target="_blank" rel="nofollow noopener">used</a> ethoxylated Castor oil (essentially a soap) instead of plain Castor oil, so of course injections hurt immensely and were ineffective. If you want it to be done right, Do It Yourself.</p>
+<hr/>
+<p>Another my how-to: <a href="http://lena.kiev.ua/voice/" target="_blank" rel="nofollow noopener">voice</a>.</p>
+<p><a href="http://lena.kiev.ua" target="_blank" rel="nofollow noopener">Lena</a></p>
+					<p />
+				</span>
+			
+		</div>
+		
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			
+		</div>
+	</div>
+	
+<script>
+	contentLoaded(  false  , function() {
+		UpdateSidebar("wiki");
+	});
+</script>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row hidden-print" id="mobileSidebar"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-history="false" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
+		<div id="mobileSidebarSub" class="col-xs-12 hidden-md hidden-lg">
+			<div class="navbar navbar-default navbar-fixed-bottom">
+				<div class="container" style="display: flex; justify-content: space-around;">
+					
+						
+	
+		
+	
+	<div id="mobilesidebar-archives" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center;" hx-get="https://groups.io/g/MTFHRT/topics?sidebar=true"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-history="false" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
+		<div style="display: inline-block; position: relative;">
+			<div style="position: relative;display: inline-block;">
+			<i class="fa-fw fa-light fa-comments fa-2x"></i>
+			
+			</div><br>
+			<span style="font-size:12px;">Messages</span>
+		</div>
+	</div>
+
+	
+	
+
+						
+	
+
+					
+					<div style="flex: 1; text-align: center;margin-top:10px" data-drawer-trigger aria-controls="drawer-name" aria-expanded="false">
+						<i class="fa-fw fa-light fa-bars fa-2x"></i><br>
+						<span style="font-size:12px;">More</span>
+					</div>
+				</div>
+			</div>
+			<section class="drawer drawer-left" id="drawer-name" data-drawer-target>
+				<div class="drawer-overlay" data-drawer-close tabindex="-1"></div>
+				<div class="drawer-wrapper">
+					<div class="drawer-header">
+						<div class="drawer-title">
+							<i class="fa-fw fa-regular fa-bars fa-3x"></i>
+							<span class="sr-only">
+								More Options
+							</span>
+							More
+						</div>
+						<button class="drawer-close" data-drawer-close aria-label="Close Drawer"></button>
+					</div>
+					<div class="drawer-content">
+						<div class="list-group noborderlist">
+							
+
+
+	<a id="sidebar-home" title="Group Home" href="https://groups.io/g/MTFHRT" class="list-group-item sidebar-item">
+		<i class="fa-fw fa fa-home fa-lg"></i>
+		Home
+		
+	</a>
+
+	
+
+	
+
+	
+		
+	
+		
+
+	<a title="Messages" href="https://groups.io/g/MTFHRT/topics?sidebar=true" id="sidebar-archives-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-archives"> 
+		<i class="fa-fw fa fa-comments fa-lg"></i>
+		Messages
+		<span id="sidebar-archives-mobile-badge" class="badge"></span>
+	</a>
+
+	
+	
+	
+	
+	
+		
+
+	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" id="sidebar-hashtags-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-hashtags"> 
+		<i class="fa-fw fa fa-hashtag fa-lg"></i>
+		Hashtags
+		<span id="sidebar-hashtags-mobile-badge" class="badge"></span>
+	</a>
+
+	
+
+		
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+		
+
+	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" id="sidebar-wiki-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-wiki active"> 
+		<i class="fa-fw fa fa-book fa-lg"></i>
+		Wiki
+		<span id="sidebar-wiki-mobile-badge" class="badge"></span>
+	</a>
+
+	
+
+	
+
+							
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/about" style="border-top:5px solid #ddd;">
+									<i class="fa-fw fal fa-envelope fa-lg"></i>
+									About
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/features">
+									<i class="fa-fw far fa-tasks fa-lg"></i>
+									Features
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/pricing">
+									<i class="fa-fw fa fa-dollar-sign fa-lg"></i>
+									Pricing
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/g/updates/messages?expanded=1">
+									<i class="fa-fw far fa-thermometer-three-quarters fa-lg"></i>
+									# Changelog
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/tos">
+									<i class="fa-fw fal fa-newspaper fa-lg"></i>
+									Terms
+								</a>
+								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/helpcenter">
+									<i class="fa-fw fa fa-info-circle fa-lg"></i>
+									Help
+								</a>
+							
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+<!-- Modal Dialog for Autocomplete -->
+<div class="modal fade" id="quickActionsModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <input type="text" class="form-control" id="quickActionsInput" placeholder="Go to page..." style="margin-bottom:10px">
+        <div id="quickActionsContainer" class="autocompleteResults" style="max-height:250px; overflow-y: auto;"></div>
+		<div class="text-center" style="margin-top:10px; font-size:12px;"><i class="fa-sharp fa-arrow-up-arrow-down"></i> to navigate&nbsp;&nbsp;&nbsp;<i class="fa-sharp fa-arrow-turn-down-left"></i> to use&nbsp;&nbsp;&nbsp;<strong>esc</strong> to dismiss</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script>
+	var quickActionsData = [
+		
+		
+			{name: "Group Home", url: "https://groups.io/g/MTFHRT"},
+		
+
+		
+			{name: "Topics", url: "https://groups.io/g/MTFHRT/topics"},
+			{name: "Messages", url: "https://groups.io/g/MTFHRT/messages"},
+			{name: "Expanded Messages", url: "https://groups.io/g/MTFHRT/messages?expanded=1"},
+		
+		
+			{name: "Polls", url: "https://groups.io/g/MTFHRT/polls"},
+		
+		
+			{name: "Hashtags", url: "https://groups.io/g/MTFHRT/hashtags"},
+		
+		
+		
+		
+
+		
+
+		
+		
+		
+
+		
+
+		
+		
+			{name: "Wiki", url: "https://groups.io/g/MTFHRT/wiki"},
+		
+		
+		/* other pages */
+		{name: "Help", url: "/helpcenter"},
+		{name: "Feed", url: "/feed"},
+		{name: "Your Groups", url: "/groups"},
+		{name: "Your Calendar", url: "/calendar"},
+		{name: "Your Activity", url: "/activity"},
+		{name: "Your Pending Messages", url: "/pendingmsgs"},
+		{name: "Account Login", url: "/account"},
+		{name: "Account Preferences", url: "/account?page=prefs"},
+		{name: "Account Security", url: "/account?page=security"},
+		{name: "Account Identity", url: "/account?page=profile&member_info_id=0"},
+		{name: "Account Notifications", url: "/account?page=notifications"},
+		{name: "Account Other Services", url: "/account?page=oauth"},
+		{name: "Account Bounces", url: "/account?page=bounces"},
+		{name: "Account Billing", url: "/account?page=billing"},
+		{name: "Find a Group", url: "/search?p=SubsCount,,,20,2,0,0"},
+	];
+
+
+	InitAutocomplete("quickActions", quickActionsData);
+
+	document.addEventListener('keydown', function(event) {
+		var tagName = event.target.tagName.toLowerCase();
+		if (tagName === 'input' || tagName === 'textarea' || event.target.isContentEditable) {
+			return;
+		}
+		// check if the viewimages viewer is up
+		let element = document.getElementById('overlay');
+		if (element && element.classList.contains('visible')) {
+			return;
+		}
+		if (event.key.toLowerCase() === '/') {
+			if (navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
+				// For Mac
+				// Check if Command (event.metaKey) is pressed, and either Option (event.altKey) is pressed or not
+				if (event.metaKey) {
+					event.preventDefault();
+					showAutocompleteModal("quickActions");
+					return;
+				}
+			} else {
+				// For Windows and Linux
+				if (event.ctrlKey) {
+					event.preventDefault();
+					showAutocompleteModal("quickActions");
+					return;
+				}
+			}
+		}
+	});
+	function UpdateSidebar(id) {
+		console.log(id + " was clicked");
+		var sidebarItems = document.querySelectorAll('.mobilesidebar-item');
+		sidebarItems.forEach(function(item) {
+			var iElement = item.getElementsByTagName('div')[0].getElementsByTagName('i')[0];
+			if (item.id == "mobilesidebar-" + id) {
+				console.log("making solid " + id)
+				iElement.classList.add('fa-solid');
+				iElement.classList.remove('fa-light');
+			} else {
+				iElement.classList.remove('fa-solid');
+				iElement.classList.add('fa-light');
+			}
+		});
+		var sidebarItems = document.querySelectorAll('.sidebar-item');
+		// remove 'active' class from all 'sidebar-item' elements
+		sidebarItems.forEach(function(item) {
+			if (item.id == "sidebar-" + id) {
+				console.log("making active " + id)
+				item.classList.add('active');
+			} else {
+				item.classList.remove('active');
+			}
+		});
+	}
+</script>
+
+
+			</div>
+			
+				<div id="scroll-top-outer">
+					<div id="scroll-top" class="scroll-top-wrapper hidden-xs">
+						<span class="scroll-top-inner">
+							<i class="fa fa-arrow-circle-up fa-fw fa-2x"></i>
+						</span>
+					</div>
+				</div>
+<script>
+	$(function() {
+		$(document).on('scroll', function() {
+			if ($(window).scrollTop() > 100) {
+				$('.scroll-top-wrapper').addClass('show');
+			} else {
+				$('.scroll-top-wrapper').removeClass('show');
+			}
+		});
+		$('.scroll-top-wrapper').on('click', scrollToTop);
+	});
+
+	function scrollToTop() {
+		verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
+		element = $('body');
+		offset = element.offset();
+		offsetTop = offset.top;
+		$('html, body').animate({
+			scrollTop: offsetTop
+		}, 100, 'linear');
+	}
+
+	if (navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
+		let elements = document.querySelectorAll('strong.ctrlmeta');
+		elements.forEach((element) => {
+			// Check if the innerText is "ctrl"
+			if (element.innerText === 'ctrl') {
+				// Create a new "i" element
+				let newElement = document.createElement('i');
+				newElement.classList.add('fa-solid', 'fa-command');
+				
+				// Replace the old "strong" element with the new "i" element
+				element.parentNode.replaceChild(newElement, element);
+			}
+		});
+	}
+</script>
+			
+			
+
+
+		</body>
+	</html>
+

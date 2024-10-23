@@ -2469,7 +2469,18 @@ p.MsoListParagraph {
 	word-wrap: break-word;
 }
 
+.h3, h3 {
+	font-size: 22px;
+}
+/* NEED to fix this for messages/wiki/llm results
+.content ol, .content ul {
+	margin-top: 10px;
+	margin-bottom: 10px !important;
+}
+*/
 blockquote {
+	margin-top: 10px;
+	margin-bottom: 10px;
 	font-size: 16px;
 	border-left: 5px solid #e0e0e0;
 }

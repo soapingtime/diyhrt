@@ -102,7 +102,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.web09.2350000.1729038950215872518");
+				console.log("client_id:", "web.web09.2339878.1729643727833032212");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -127,7 +127,7 @@
 					column: column,
 					stack: stack,
 					last_error: lastError,
-					client_id: "web.web09.2350000.1729038950215872518"
+					client_id: "web.web09.2339878.1729643727833032212"
 				},
 				success: function() {
 					if (console && console.log) {
@@ -150,7 +150,7 @@
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-0fd38d82e65eed26de5d465243c7f774.css" rel="stylesheet" id="groupsio-css">
+			<link href="../../../../css/application-111b8509e66f2fa6aded8e6a2590a467.css" rel="stylesheet" id="groupsio-css">
 			<script src="../../../../js/application-9b2c27b802a13063cf8a712fe566f004.js" id="groupsio-js"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>
@@ -175,7 +175,7 @@
 	console.log("FULL PAGE LOAD");
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "b77ab25331fe9739a2c14e17414e61d86c88d088"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "6de56da9b5f3d31d0e6f097a2f35fc04da2568af"}' hx-ext="preload" hx-boost="false">
 			
 				<script>
 					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -494,6 +494,31 @@ function showAutocompleteModal(modalName) {
 		console.log("Forced reload");
 		location.reload();
 	});
+
+	function ShowBackButton(label) {
+		var logoElement = document.getElementById("logo");
+		if (logoElement) {
+			logoElement.innerHTML = `
+				<span style="color:#fff;margin-top:14px;margin-left:12px;float:left !important">
+				<a onclick="goBack()" style="color:#fff">
+					<i class="fa-fw fa-solid fa-chevron-left fa-lg"></i>
+				</a>&nbsp;` + label + "</span>";
+		}
+	}
+
+	function HideBackButton() {
+		var logoElement = document.getElementById("logo");
+		if (logoElement) {
+			logoElement.innerHTML = `
+				<a href="https://groups.io" class="navbar-left">
+					<img src="../../../../img/org.1/mainlogo.png" height="50" alt="Groups.io">
+				</a>`;
+		}
+	}
+
+	function goBack() {
+		history.back();
+	}
 
 	// submitEvent acts like .submit(), except it is compatible with the app, by using events instead.
 	function submitEvent(ele) {
