@@ -102,7 +102,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.web08.2340659.1729643728474169613");
+				console.log("client_id:", "web.web08.894961.1730248580949388182");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -127,7 +127,7 @@
 					column: column,
 					stack: stack,
 					last_error: lastError,
-					client_id: "web.web08.2340659.1729643728474169613"
+					client_id: "web.web08.894961.1730248580949388182"
 				},
 				success: function() {
 					if (console && console.log) {
@@ -150,7 +150,7 @@
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-111b8509e66f2fa6aded8e6a2590a467.css" rel="stylesheet" id="groupsio-css">
+			<link href="../../../../css/application-6630163a3be19b6cee26ce35342d0d92.css" rel="stylesheet" id="groupsio-css">
 			<script src="../../../../js/application-9b2c27b802a13063cf8a712fe566f004.js" id="groupsio-js"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>
@@ -176,7 +176,7 @@
 	console.log("FULL PAGE LOAD");
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "6de56da9b5f3d31d0e6f097a2f35fc04da2568af"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "c36d92b8d54e8c4f23e9329b0fc5209343aae5f7"}' hx-ext="preload" hx-boost="false">
 			
 				<script>
 					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -499,11 +499,15 @@ function showAutocompleteModal(modalName) {
 	function ShowBackButton(label) {
 		var logoElement = document.getElementById("logo");
 		if (logoElement) {
-			logoElement.innerHTML = `
-				<span style="color:#fff;margin-top:14px;margin-left:12px;float:left !important">
+			html = `
+				<span style="color:#fff;margin-top:14px;margin-left:12px;float:left !important; height:36px;">
 				<a onclick="goBack()" style="color:#fff">
 					<i class="fa-fw fa-solid fa-chevron-left fa-lg"></i>
-				</a>&nbsp;` + label + "</span>";
+				</a></span>`;
+			if (label != "") {
+				html += `<div style="position:absolute;left:50%;transform:translateX(-50%);text-align:center;color:#ecf0f1;margin-top:5px;"><h4>` + label + `</h4></div>`;
+			}
+			logoElement.innerHTML = html;
 		}
 	}
 
@@ -686,7 +690,7 @@ function showAutocompleteModal(modalName) {
 						
 
 
-	<a id="sidebar-home" title="Group Home" href="https://groups.io/g/MTFHRT" class="list-group-item sidebar-item">
+	<a title="Group Home" href="https://groups.io/g/MTFHRT" class="list-group-item sidebar-item">
 		<i class="fa-fw fa fa-home fa-lg"></i>
 		Home
 		
@@ -884,7 +888,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 				
 			</div>
 		</div>
-		<div class="col-sm-3 hidden-xs">
+		<div class="col-sm-3 hidden-xs" style="padding-right:0px">
 			<form class="form-inline pull-right" method="get" action="https://groups.io/g/MTFHRT/wikisearch">
 				
 				
@@ -1071,7 +1075,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 			</div>
 			<section class="drawer drawer-left" id="drawer-name" data-drawer-target>
 				<div class="drawer-overlay" data-drawer-close tabindex="-1"></div>
-				<div class="drawer-wrapper">
+				<div class="drawer-wrapper drawer-wrapper-top">
 					<div class="drawer-header">
 						<div class="drawer-title">
 							<i class="fa-fw fa-regular fa-bars fa-3x"></i>
@@ -1087,7 +1091,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 							
 
 
-	<a id="sidebar-home" title="Group Home" href="https://groups.io/g/MTFHRT" class="list-group-item sidebar-item">
+	<a title="Group Home" href="https://groups.io/g/MTFHRT" class="list-group-item sidebar-item">
 		<i class="fa-fw fa fa-home fa-lg"></i>
 		Home
 		
