@@ -1,4 +1,4 @@
-name: DIYHRT.cafe
+name: HRTCafe.net
 
 on:
   workflow_dispatch:
@@ -26,7 +26,7 @@ jobs:
         run: |
           rm -rf diyhrt.cafe
           rm -rf hrtcafe.net
-          wget -mkpKEH --limit-rate 10m --random-wait --user-agent="github.com/soapingtime/diyhrt" --domains=hrtcafe.net https://hrtcafe.net || true
+          wget -rk --limit-rate 10m --random-wait --user-agent="github.com/soapingtime/diyhrt" --domains=hrtcafe.net https://hrtcafe.net || true
       - name: commit changes
         if: ${{ success() }}
         uses: EndBug/add-and-commit@v9
