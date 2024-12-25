@@ -2790,6 +2790,21 @@ body {
 	margin-left: 225px;
 }
 
+.manuallistitem.dropdown-indicator:after {
+	left: 400px;
+}
+
+.manualmaincontent {
+	margin-left: 445px;
+}
+
+#manualsidebar {
+	padding-right: 0px;
+	position: fixed;
+	max-width: 440px;
+	width: 100%;
+	top: calc(60px + env(safe-area-inset-top));
+}
 .btn-xs {
 	font-size:12px !important;
 }
@@ -3061,10 +3076,10 @@ body {
 }
 
 #groupsidebar {
-	padding-right:0px;
-	position:fixed;
-	max-width:220px;
-	width:100%;
+	padding-right: 0px;
+	position: fixed;
+	max-width: 220px;
+	width: 100%;
 	top: calc(60px + env(safe-area-inset-top));
 }
 
