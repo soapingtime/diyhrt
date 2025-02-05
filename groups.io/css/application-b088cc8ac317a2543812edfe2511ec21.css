@@ -3050,6 +3050,19 @@ body {
 	border-color:rgb(204,204,204);
 }
 
+.robohelp-important {
+	color: #d9534f;
+	font-weight: bold;
+}
+
+.robohelp-callout {
+	font-weight: bold;
+}
+
+.robohelp-reltopics-list {
+	list-style-type: disc;
+}
+
 .scrollbar {
 	overflow-y: auto;
 	max-height: calc(100vh - 61px);
@@ -6008,6 +6021,11 @@ body.dark-mode .alert-danger {
 	border-color: rgb(44, 11, 14);
 	color: rgb(234, 134, 143);
 }
+
+body.dark-mode .robohelp-important {
+	color: rgb(234, 134, 143);
+}
+
 
 /* Badge */
 body.dark-mode .badge {
