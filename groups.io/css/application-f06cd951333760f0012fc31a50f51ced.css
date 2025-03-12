@@ -3710,6 +3710,82 @@ table.table-fixed {
 	top: 0px;
 }
 
+/* thinking indicator for /ask feature */
+.thinking-indicator {
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	border-radius: 6px;
+	background-color: rgb(233, 233, 233);
+	max-width: fit-content;
+	margin: 20px 0;
+	color: #333;
+}
+
+.spinner {
+	margin-right: 10px;
+	color: #2f6fa7;
+	animation: spin 1.2s linear infinite;
+}
+
+.dots {
+	display: inline-block;
+	position: relative;
+	width: 40px;
+	height: 10px;
+	margin-left: 5px;
+}
+
+.dots span {
+	position: absolute;
+	width: 6px;
+	height: 6px;
+	background-color: #2f6fa7;
+	border-radius: 50%;
+	animation: dots 1.5s infinite ease-in-out;
+}
+
+.dots span:nth-child(1) {
+	left: 0px;
+	animation-delay: 0s;
+}
+
+.dots span:nth-child(2) {
+	left: 12px;
+	animation-delay: 0.2s;
+}
+
+.dots span:nth-child(3) {
+	left: 24px;
+	animation-delay: 0.4s;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes dots {
+
+	0%,
+	80%,
+	100% {
+		transform: scale(0.8);
+		opacity: 0.5;
+	}
+
+	40% {
+		transform: scale(1.2);
+		opacity: 1;
+	}
+}
+
+
 @media screen and (max-width: 515px) {
 	.Xmce-window {
 		max-width: 320px !important;
@@ -4635,6 +4711,7 @@ body.app .navbar-fixed-top {
 	border-radius: 10px;
 	word-break: break-word;
 }
+
 
 .chat-message.received .chat-message-content {
 	background-color: rgb(233, 233, 233);
@@ -6401,6 +6478,7 @@ body.dark-mode .chat-button-color {
 }
 
 body.dark-mode .chat-message.received .chat-message-content,
+body.dark-mode .chat-message.received .thinking-indicator,
 body.dark-mode .chat-message.date .chat-message-content,
 body.dark-mode .chat-timestamp-received,
 body.dark-mode .chat-emoji-box {
@@ -6600,3 +6678,15 @@ body.dark-mode .attachment-box:hover .attachment-image {
 body.dark-mode .dropzone {
 	border-color: var(--dark-mode-divider);
 }
+
+/* Override for lists within chat-message-content */
+body.dark-mode .chat-message-content ul,
+body.dark-mode .chat-message-content ol,
+body.dark-mode .chat-message-content h1,
+body.dark-mode .chat-message-content h2,
+body.dark-mode .chat-message-content h3,
+body.dark-mode .chat-message-content h4,
+body.dark-mode .chat-message-content h5 {
+	color: inherit;
+}
+
