@@ -5750,6 +5750,7 @@ body.app .navbar-fixed-top {
 	background-color: var(--light-mode-highlight-color);
 	border-color: var(--light-mode-divider);
 	border-bottom-width:0px;
+	padding-left:5px;
 }
 
 .panel-default .panel-footer {
