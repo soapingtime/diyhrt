@@ -6691,3 +6691,72 @@ body.dark-mode .chat-message-content h5 {
 	color: inherit;
 }
 
+/* Group Analytics Chart Styling */
+.analytics-chart-tooltip {
+	background: rgba(0, 0, 0, 0.8) !important;
+	color: white !important;
+	border: 1px solid var(--light-mode-divider) !important;
+	position: absolute;
+	padding: 8px;
+	border-radius: 4px;
+	font-size: 12px;
+	pointer-events: none;
+	z-index: 1000;
+}
+
+body.dark-mode .analytics-chart-tooltip {
+	background: var(--dark-mode-primary-color) !important;
+	color: var(--dark-mode-text-color) !important;
+	border-color: var(--dark-mode-divider) !important;
+}
+
+/* Analytics page specific panel styling for dark mode */
+.analytics-page body.dark-mode .panel {
+	background-color: var(--dark-mode-primary-color);
+	border-color: var(--dark-mode-divider);
+}
+
+.analytics-page body.dark-mode .panel-body {
+	background-color: var(--dark-mode-primary-color);
+	color: var(--dark-mode-text-color);
+}
+
+.analytics-page body.dark-mode .panel-heading {
+	background-color: var(--dark-mode-highlight-color);
+	border-color: var(--dark-mode-divider);
+	color: var(--dark-mode-text-color);
+}
+
+/* Analytics page button styling for dark mode */
+.analytics-page body.dark-mode .btn-secondary {
+	background-color: var(--dark-mode-highlight-color);
+	border-color: var(--dark-mode-divider);
+	color: var(--dark-mode-text-color);
+}
+
+.analytics-page body.dark-mode .btn-secondary:hover {
+	background-color: var(--dark-mode-primary-color);
+	border-color: var(--dark-mode-divider);
+	color: var(--dark-mode-text-color);
+}
+
+.analytics-page body.dark-mode .btn-secondary:focus {
+	background-color: var(--dark-mode-highlight-color);
+	border-color: var(--dark-mode-divider);
+	color: var(--dark-mode-text-color);
+	box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
+}
+
+/* Analytics SVG chart elements for dark mode */
+.analytics-page body.dark-mode svg text {
+	fill: var(--dark-mode-text-color) !important;
+}
+
+.analytics-page body.dark-mode svg .tick line {
+	stroke: var(--dark-mode-divider) !important;
+}
+
+.analytics-page body.dark-mode svg .domain {
+	stroke: var(--dark-mode-divider) !important;
+}
+
