@@ -2738,6 +2738,13 @@ body {
 	padding-right: 5px;
 }
 
+.panel-success>.panel-heading {
+	background-color: #419641;
+	border-color: #419641;
+	color: #fff;
+}
+
+
 @media (max-width: 992px) {
 
 	/* adjust margins for narrow screens */
