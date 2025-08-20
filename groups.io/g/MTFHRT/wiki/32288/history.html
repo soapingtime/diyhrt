@@ -102,7 +102,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.web08.523001.1755045834031501553");
+				console.log("client_id:", "web.web09.1731763.1755650421210220846");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -127,7 +127,7 @@
 					column: column,
 					stack: stack,
 					last_error: lastError,
-					client_id: "web.web08.523001.1755045834031501553"
+					client_id: "web.web09.1731763.1755650421210220846"
 				},
 				success: function() {
 					if (console && console.log) {
@@ -160,7 +160,34 @@
 				
 
 
-  
+
+<link rel="stylesheet" type="text/css" href="../../../../css/cookieconsent-3.1.0.min.css" />
+<script src="../../../../js/cookieconsent-3.1.0.min.js"></script>
+<script>
+  window.addEventListener("load", function(){
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#d9edf7",
+        "text": "#31708f"
+      },
+      "button": {
+        "background": "#56cbdb",
+        "text": "#ffffff"
+      }
+    },
+    "cookie": {
+        "domain": ".{{.Org.Domain}}"
+    },
+    "content": {
+      "message": "Our site uses cookies so that we can remember you and understand how you and other visitors use our site, to improve your browsing experience and help us improve our site. By continuing to use our website, you agree to our use of such cookies.",
+      "dismiss": "I Agree",
+      "href": "https://groups.io/static/cookie_policy"
+    }
+  })});
+</script>
+
+
 			
 			
 
@@ -171,7 +198,7 @@
 	console.log("FULL PAGE LOAD");
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "d6253948203270656d79e951705bb31a237d510b"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "ea9ef05ae469b929e940605e7a17a9563adaba4f"}' hx-ext="preload" hx-boost="false">
 			
 				<script>
 					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
