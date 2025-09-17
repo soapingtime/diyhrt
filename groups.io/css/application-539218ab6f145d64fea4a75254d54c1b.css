@@ -2469,6 +2469,63 @@ th {
 	font-weight: normal;
 }
 
+/* profile configs */
+.about-grid dt {
+	width: 180px;
+	white-space: normal;
+}
+
+.about-grid dd {
+	margin-left: 200px;
+}
+
+@media (max-width: 768px) {
+	.about-grid dt {
+		float: none;
+		width: auto;
+		font-weight: 600;
+	}
+
+	.about-grid dd {
+		margin-left: 0;
+		margin-bottom: 10px;
+	}
+}
+
+.chip {
+	display: inline-block;
+	padding: 2px 8px;
+	border: 1px solid #ddd;
+	border-radius: 16px;
+	margin: 2px 4px;
+}
+
+.github-card {
+	border: 1px solid #e5e5e5;
+	border-radius: 4px;
+	padding: 12px;
+}
+
+.github-card img {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	margin-right: 10px;
+}
+
+.m0 {
+	margin: 0
+}
+
+.text-muted-small {
+	color: #999;
+	font-size: 12px
+}
+
+.about-img {
+	max-width: 320px
+}
+
 @media (min-width: 768px) {
 	.modal-dialog {
 		margin-top: calc(30px + env(safe-area-inset-top))
@@ -3226,6 +3283,31 @@ table.table-fixed {
 	width: 100%;
 }
 
+.table-wrap {
+	overflow: auto;
+	position: relative;
+}
+
+.table-wrap {
+	overflow: auto;
+	position: relative;
+}
+
+/* Sticky header + first col */
+.table-fixed-sticky thead th {
+	position: sticky;
+	top: 0;
+	z-index: 2;
+	background: #fff;
+}
+
+.table-fixed-sticky tbody th,
+.sticky-col {
+	position: sticky;
+	left: 0;
+	z-index: 1;
+	background: #fff;
+}
 
 /* spacing used for buttons that may wrap to the next line */
 
@@ -6779,5 +6861,9 @@ body.dark-mode .analytics-chart-tooltip {
 
 .analytics-page body.dark-mode svg .domain {
 	stroke: var(--dark-mode-divider) !important;
+}
+
+body.dark-mode code {
+	background-color: var(--dark-mode-primary-color) !important;
 }
 
