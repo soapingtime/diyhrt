@@ -6867,3 +6867,150 @@ body.dark-mode code {
 	background-color: var(--dark-mode-primary-color) !important;
 }
 
+/* ============================================
+   Image Lightbox Styles
+   ============================================ */
+
+/* Inline image hover effect with download icon */
+.lightbox-image {
+	position: relative;
+	cursor: pointer !important;
+	transition: opacity 0.2s ease;
+}
+
+.lightbox-image:hover {
+	opacity: 0.9;
+}
+
+/* Wrapper for inline images to add download icon on hover */
+.lightbox-image::after {
+	content: "\f019"; /* Font Awesome download icon */
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	position: absolute;
+	bottom: 8px;
+	right: 8px;
+	background-color: rgba(0, 0, 0, 0.6);
+	color: white;
+	padding: 6px 8px;
+	border-radius: 3px;
+	font-size: 12px;
+	opacity: 0;
+	transition: opacity 0.2s ease;
+	pointer-events: none;
+}
+
+.lightbox-image:hover::after {
+	opacity: 1;
+}
+
+/* Lightbox navigation buttons */
+.lightbox-nav {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 10;
+	background-color: rgba(0, 0, 0, 0.5) !important;
+	border: none !important;
+	color: white !important;
+	padding: 15px 12px;
+	font-size: 20px;
+	transition: background-color 0.2s ease;
+}
+
+.lightbox-nav:hover {
+	background-color: rgba(0, 0, 0, 0.7) !important;
+	color: white !important;
+}
+
+.lightbox-nav:focus {
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(66, 139, 202, 0.5);
+}
+
+.lightbox-nav-prev {
+	left: 10px;
+}
+
+.lightbox-nav-next {
+	right: 10px;
+}
+
+/* Lightbox modal customizations */
+#imageLightbox .modal-dialog {
+	max-width: 90vw;
+	width: auto;
+	margin: 30px auto;
+}
+
+#imageLightbox .modal-body {
+	padding: 20px;
+	min-height: 300px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#imageLightbox #lightboxImage {
+	max-width: 100%;
+	max-height: 70vh;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+}
+
+#imageLightbox #lightboxCounter {
+	color: #666;
+	font-size: 14px;
+}
+
+/* Dark mode adjustments for lightbox */
+body.dark-mode #imageLightbox .modal-content {
+	background-color: var(--dark-mode-primary-color);
+	color: var(--dark-mode-text-color);
+}
+
+body.dark-mode #imageLightbox .modal-header {
+	border-bottom-color: var(--dark-mode-divider);
+}
+
+body.dark-mode #imageLightbox .modal-footer {
+	border-top-color: var(--dark-mode-divider);
+}
+
+body.dark-mode #imageLightbox #lightboxCounter {
+	color: var(--dark-mode-light-text-color);
+}
+
+body.dark-mode #imageLightbox #lightboxTextContent {
+	background-color: var(--dark-mode-highlight-color) !important;
+	color: var(--dark-mode-text-color);
+}
+
+/* Attachment lightbox styling */
+.lightbox-attachment {
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.lightbox-attachment:hover {
+	text-decoration: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	#imageLightbox .modal-dialog {
+		max-width: 100%;
+		margin: 10px;
+	}
+
+	#imageLightbox #lightboxImage {
+		max-height: 60vh;
+	}
+
+	.lightbox-nav {
+		padding: 10px 8px;
+		font-size: 16px;
+	}
+}
+
