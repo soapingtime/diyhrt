@@ -102,7 +102,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.web08.828727.1760488826687856309");
+				console.log("client_id:", "web.web08.211683.1761093725945470448");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -127,7 +127,7 @@
 					column: column,
 					stack: stack,
 					last_error: lastError,
-					client_id: "web.web08.828727.1760488826687856309"
+					client_id: "web.web08.211683.1761093725945470448"
 				},
 				success: function() {
 					if (console && console.log) {
@@ -198,7 +198,7 @@
 	console.log("FULL PAGE LOAD");
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "3cb141f13f0daf41d44aeef2df354f3b381d8b9a"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "084a141191da1f3e5bb5d57ab4f8bf00531c5d6b"}' hx-ext="preload" hx-boost="false">
 			
 				<script>
 					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -711,7 +711,72 @@ function showAutocompleteModal(modalName) {
 		document.removeEventListener('keydown', keydownFunc);
 	}
 	document.body.addEventListener("htmx:historyCacheMiss", removeDrawerCloseFunc, {once: true});
+
+	// Check for passkey enrollment prompt after cross-device authentication
+	$(function() {
+		if (sessionStorage.getItem('passkeyPromptAfterCDA') === 'true') {
+			console.log('Passkey CDA flag detected, showing enrollment modal');
+
+			// Show the modal
+			$('#passkeyEnrollmentModal').modal('show');
+
+			// Clear the flag when modal is dismissed
+			$('#passkeyEnrollmentModal').on('hidden.bs.modal', function() {
+				console.log('Modal dismissed, clearing flag');
+				sessionStorage.removeItem('passkeyPromptAfterCDA');
+			});
+
+			// Set up enrollment button handler
+			var enrollBtn = document.getElementById('enrollLocalPasskeyBtn');
+			if (enrollBtn) {
+				enrollBtn.addEventListener('click', function() {
+					console.log('Enrollment button clicked');
+					// Redirect to settings page where they can add a passkey
+					sessionStorage.removeItem('passkeyPromptAfterCDA');
+					window.location.href = 'https://groups.io/settings/security';
+				});
+			}
+		}
+	});
 </script>
+<!-- Passkey Enrollment Modal -->
+<div class="modal fade webauthn-only" id="passkeyEnrollmentModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">
+					<i class="fa fa-fingerprint"></i>
+					Add a Passkey to This Device
+				</h4>
+			</div>
+			<div class="modal-body">
+				<p>
+					You logged in using a passkey from another device. For faster access next time, add a passkey to this device.
+				</p>
+				<p>
+					<strong>Benefits:</strong>
+				</p>
+				<ul>
+					<li>Faster login with just your fingerprint or face</li>
+					<li>No need to use your phone each time</li>
+					<li>Works even when offline</li>
+				</ul>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					Maybe Later
+				</button>
+				<button type="button" class="btn btn-primary" id="enrollLocalPasskeyBtn">
+					<i class="fa fa-plus"></i>
+					Add Passkey Now
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
 <!-- Modal Dialog for Keyboard Shortcuts -->
 <div class="modal fade" id="shortcutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
