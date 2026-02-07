@@ -1,0 +1,45 @@
+/* Hover References Popup Styling */
+
+.reference-hover-box {
+    margin-top: 5px;
+    position: absolute;
+    z-index: 9999;
+    background-color: var(--background-color, #ffffff);
+    color: var(--font-color, #333333);
+    border: 1px solid var(--code-border-color, #ccc);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 8px 24px rgba(0, 0, 0, 0.1);
+    /* Deeper shadow */
+    padding: 8px;
+    border-radius: 4px;
+    max-width: 400px;
+    font-size: 0.9em;
+    line-height: 1.4;
+    pointer-events: auto;
+    /* Allow interaction with the box */
+
+    /* Ensure it handles overflow or long text gracefully */
+    word-wrap: break-word;
+}
+
+/* Dark mode support if variables are set */
+html[data-theme='dark'] .reference-hover-box {
+    background-color: var(--background-color, #222);
+    /* Fallback to dark grey */
+    border-color: var(--code-border-color, #444);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Match link styles to article content links */
+.reference-hover-box a {
+    color: var(--link-color);
+    text-decoration: none;
+    background-image: linear-gradient(var(--link-underline-color) 0%, var(--link-underline-color) 100%);
+    background-repeat: repeat-x;
+    background-position: 0 100%;
+    background-size: 1px 1px;
+    word-break: break-all;
+}
+
+.reference-hover-box a:hover {
+    background-image: linear-gradient(var(--link-underline-color-hover) 0%, var(--link-underline-color-hover) 100%);
+}
