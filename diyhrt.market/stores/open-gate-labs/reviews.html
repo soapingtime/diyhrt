@@ -25,6 +25,8 @@
         <title>Open Gate Labs - DIYHRT.Market</title>
 
         
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
         <meta property="og:site_name" content="DIYHRT.Market" />
 
         
@@ -133,7 +135,7 @@
             5/5
         </span>
 
-        <span class="text-decoration-underline text-primary">14 reviews</span>
+        <span class="text-decoration-underline text-primary">20 reviews</span>
     </a>
 
     <li
@@ -200,7 +202,7 @@
         <div class="col-lg-8">
             <h4>Leave a Review</h4>
             <form method="POST">
-                <input type="hidden" name="csrfmiddlewaretoken" value="ifQGQpC3bMGI9tHdgwyoLkNaw6dccCuex1o5mYGhb0POB3UkK9TS55UE4DhfPtMB">
+                <input type="hidden" name="csrfmiddlewaretoken" value="sT2lZ6Lim5pra5qGQHvvM0ZFTinG8rhM5ytvnXIKiRV1RDk6Eohme0BSsQvFEjcP">
                 <div class="mb-3"><label class="visually-hidden" for="id_name">Name</label><input type="text" name="name" maxlength="128" class="form-control form-control-sm" placeholder="Name" aria-describedby="id_name_helptext" id="id_name"><div class="form-text">Your Name (Optional)</div>
 </div><div class="mb-3"><label class="visually-hidden" for="id_country">Country</label><select name="country" class="form-select form-select-sm" aria-describedby="id_country_helptext" id="id_country">
   <option value="" selected>---------</option>
@@ -707,13 +709,248 @@
 </div><div class="mb-3"><label class="visually-hidden" for="id_experience_rating">Experience rating</label><input type="number" name="experience_rating" min="0" class="form-control form-control-sm" placeholder="Experience rating" required aria-describedby="id_experience_rating_helptext" id="id_experience_rating"><div class="form-text">Rate your experience on a scale of 1 to 5.</div>
 </div><div class="mb-3"><label class="visually-hidden" for="id_comment">Comment</label><textarea name="comment" cols="40" rows="10" class="form-control form-control-sm" placeholder="Comment" aria-describedby="id_comment_helptext" id="id_comment">
 </textarea><div class="form-text">Share your experience! (Optional)</div>
-</div>
+</div><div class="mb-3"><label class="visually-hidden" for="id_turnstile">Security Check</label><div class="cf-turnstile" data-sitekey="0x4AAAAAACYKx1vyAXIT6jyX" data-response-field-name="turnstile"></div></div>
 
                 <button class="btn btn-primary w-100">Submit</button>
             </form>
             <hr />
 
             <h4>Reviews</h4>
+            
+                <div class="card my-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <strong>
+                                    <div>
+                                        
+                                            <span
+                                                class="fi fi-us"
+                                                alt="United States of America"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                data-bs-title="United States of America"></span>
+                                        
+
+                                        gwen
+
+                                        <span class="text-warning">
+                                            <i class="fa-solid fa-star"></i>
+                                            5/5
+                                        </span>
+                                    </div>
+                                </strong>
+
+                                <small class="text-muted">Feb. 6, 2026</small>
+                            </div>
+                        </div>
+
+                        
+                            <div class="col-auto">
+                                <div class="card-body">
+                                    my goats. i’ve placed three different orders and they’ve all been perfect. the first time they gave me a sticker! and the most recent time when i got three vials they gave me handy vial holder things. would wholeheartedly recommend
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+                <div class="card my-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <strong>
+                                    <div>
+                                        
+                                            <span
+                                                class="fi fi-us"
+                                                alt="United States of America"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                data-bs-title="United States of America"></span>
+                                        
+
+                                        Anonymous
+
+                                        <span class="text-warning">
+                                            <i class="fa-solid fa-star"></i>
+                                            5/5
+                                        </span>
+                                    </div>
+                                </strong>
+
+                                <small class="text-muted">Feb. 4, 2026</small>
+                            </div>
+                        </div>
+
+                        
+                            <div class="col-auto">
+                                <div class="card-body">
+                                    Just got my order in the mail today. It took 10 days from ordering. Thank you
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+                <div class="card my-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <strong>
+                                    <div>
+                                        
+                                            <span
+                                                class="fi fi-us"
+                                                alt="United States of America"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                data-bs-title="United States of America"></span>
+                                        
+
+                                        Aelia
+
+                                        <span class="text-warning">
+                                            <i class="fa-solid fa-star"></i>
+                                            5/5
+                                        </span>
+                                    </div>
+                                </strong>
+
+                                <small class="text-muted">Feb. 1, 2026</small>
+                            </div>
+                        </div>
+
+                        
+                            <div class="col-auto">
+                                <div class="card-body">
+                                    Just bought EE from their webpage and had some issues with the crypto payment. Their support team was awesome!
+
+Within a day they were able to confirm my order was all set, despite me having misspelled my email. They have a great walkthrough on their webpage on how to pay, can&#x27;t recommend them enough!
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+                <div class="card my-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <strong>
+                                    <div>
+                                        
+                                            <span
+                                                class="fi fi-lk"
+                                                alt="Sri Lanka"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                data-bs-title="Sri Lanka"></span>
+                                        
+
+                                        Alan
+
+                                        <span class="text-warning">
+                                            <i class="fa-solid fa-star"></i>
+                                            5/5
+                                        </span>
+                                    </div>
+                                </strong>
+
+                                <small class="text-muted">Jan. 29, 2026</small>
+                            </div>
+                        </div>
+
+                        
+                            <div class="col-auto">
+                                <div class="card-body">
+                                    QUICK AND RELIABLE!!!
+
+I placed the order on 16th Jan and it came in less than 2 weeks on the 29th, amazing service and would buy the next Vial from here for sure in the future!
+
+Now my bestie can finally transition &lt;3 TYSMMMMMM
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+                <div class="card my-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <strong>
+                                    <div>
+                                        
+                                            <span
+                                                class="fi fi-mx"
+                                                alt="Mexico"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                data-bs-title="Mexico"></span>
+                                        
+
+                                        Jardín
+
+                                        <span class="text-warning">
+                                            <i class="fa-solid fa-star"></i>
+                                            5/5
+                                        </span>
+                                    </div>
+                                </strong>
+
+                                <small class="text-muted">Jan. 17, 2026</small>
+                            </div>
+                        </div>
+
+                        
+                            <div class="col-auto">
+                                <div class="card-body">
+                                    Todo bien, fue fácil de ordenar, el paquete llegó sin problemas en 10 dias 
+Me hice análisis a los 3 meses y todo salió bien
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+                <div class="card my-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <strong>
+                                    <div>
+                                        
+                                            <span
+                                                class="fi fi-ca"
+                                                alt="Canada"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                data-bs-title="Canada"></span>
+                                        
+
+                                        Willow
+
+                                        <span class="text-warning">
+                                            <i class="fa-solid fa-star"></i>
+                                            5/5
+                                        </span>
+                                    </div>
+                                </strong>
+
+                                <small class="text-muted">Jan. 6, 2026</small>
+                            </div>
+                        </div>
+
+                        
+                            <div class="col-auto">
+                                <div class="card-body">
+                                    Bought a vial of estradiol cypionate, it came quite quick and was easy for a first time purchaser. Inanna would be proud
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
             
                 <div class="card my-3">
                     <div class="row">
@@ -1292,5 +1529,5 @@ Will be ordering again
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
         </script>
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c76449f695023f2',t:'MTc2OTk5OTQ0MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9caff74a2a4b889a',t:'MTc3MDYwNDQ0OA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

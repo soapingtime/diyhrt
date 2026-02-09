@@ -25,6 +25,8 @@
         <title>AstroVials - DIYHRT.Market</title>
 
         
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
         <meta property="og:site_name" content="DIYHRT.Market" />
 
         
@@ -133,7 +135,7 @@
             4.8/5
         </span>
 
-        <span class="text-decoration-underline text-primary">46 reviews</span>
+        <span class="text-decoration-underline text-primary">55 reviews</span>
     </a>
 
     <li
@@ -200,7 +202,7 @@
         <div class="col-lg-8">
             <h4>Leave a Review</h4>
             <form method="POST">
-                <input type="hidden" name="csrfmiddlewaretoken" value="dR1axF9aqc4UlJd4oVeqspnX101zSqhYsDzz3edoqqd0NjqbSyzUMaurzx5Cvhzl">
+                <input type="hidden" name="csrfmiddlewaretoken" value="Pk8UX67nkfSyNd4Rwa2jhAS7uKBRt75BsZz4lX4Pg1o8uLYhkROaJAuk3iJQZZ0E">
                 <div class="mb-3"><label class="visually-hidden" for="id_name">Name</label><input type="text" name="name" maxlength="128" class="form-control form-control-sm" placeholder="Name" aria-describedby="id_name_helptext" id="id_name"><div class="form-text">Your Name (Optional)</div>
 </div><div class="mb-3"><label class="visually-hidden" for="id_country">Country</label><select name="country" class="form-select form-select-sm" aria-describedby="id_country_helptext" id="id_country">
   <option value="" selected>---------</option>
@@ -707,13 +709,349 @@
 </div><div class="mb-3"><label class="visually-hidden" for="id_experience_rating">Experience rating</label><input type="number" name="experience_rating" min="0" class="form-control form-control-sm" placeholder="Experience rating" required aria-describedby="id_experience_rating_helptext" id="id_experience_rating"><div class="form-text">Rate your experience on a scale of 1 to 5.</div>
 </div><div class="mb-3"><label class="visually-hidden" for="id_comment">Comment</label><textarea name="comment" cols="40" rows="10" class="form-control form-control-sm" placeholder="Comment" aria-describedby="id_comment_helptext" id="id_comment">
 </textarea><div class="form-text">Share your experience! (Optional)</div>
-</div>
+</div><div class="mb-3"><label class="visually-hidden" for="id_turnstile">Security Check</label><div class="cf-turnstile" data-sitekey="0x4AAAAAACYKx1vyAXIT6jyX" data-response-field-name="turnstile"></div></div>
 
                 <button class="btn btn-primary w-100">Submit</button>
             </form>
             <hr />
 
             <h4>Reviews</h4>
+            
+                <div class="card my-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <strong>
+                                    <div>
+                                        
+                                            <span
+                                                class="fi fi-ie"
+                                                alt="Ireland"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                data-bs-title="Ireland"></span>
+                                        
+
+                                        Amy
+
+                                        <span class="text-warning">
+                                            <i class="fa-solid fa-star"></i>
+                                            4/5
+                                        </span>
+                                    </div>
+                                </strong>
+
+                                <small class="text-muted">Feb. 6, 2026</small>
+                            </div>
+                        </div>
+
+                        
+                            <div class="col-auto">
+                                <div class="card-body">
+                                    Quick and easy delivery, and high quality as a whole, super happy with it, comes in nice packaging with bubble wrap keeping it securely in place.
+Only issue of note is that the website is taken down entirely for holidays, meaning you cannot access any product information, the frequently asked questions or place any orders at those times.
+Orders being down is entirely reasonable since everyone needs a holiday! But it would be nice to be able to access the pages for their information and catalogue.
+
+Overall a huge recommend to anyone looking to do injections, especially in Europe.
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+                <div class="card my-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <strong>
+                                    <div>
+                                        
+                                            <span
+                                                class="fi fi-fr"
+                                                alt="France"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                data-bs-title="France"></span>
+                                        
+
+                                        Anonymous
+
+                                        <span class="text-warning">
+                                            <i class="fa-solid fa-star"></i>
+                                            5/5
+                                        </span>
+                                    </div>
+                                </strong>
+
+                                <small class="text-muted">Feb. 5, 2026</small>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="card my-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <strong>
+                                    <div>
+                                        
+                                            <span
+                                                class="fi fi-gb"
+                                                alt="United Kingdom"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                data-bs-title="United Kingdom"></span>
+                                        
+
+                                        clara
+
+                                        <span class="text-warning">
+                                            <i class="fa-solid fa-star"></i>
+                                            5/5
+                                        </span>
+                                    </div>
+                                </strong>
+
+                                <small class="text-muted">Feb. 4, 2026</small>
+                            </div>
+                        </div>
+
+                        
+                            <div class="col-auto">
+                                <div class="card-body">
+                                    came very quick and was a reasonable price
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+                <div class="card my-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <strong>
+                                    <div>
+                                        
+                                            <span
+                                                class="fi fi-ru"
+                                                alt="Russia"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                data-bs-title="Russia"></span>
+                                        
+
+                                        sonya
+
+                                        <span class="text-warning">
+                                            <i class="fa-solid fa-star"></i>
+                                            5/5
+                                        </span>
+                                    </div>
+                                </strong>
+
+                                <small class="text-muted">Jan. 27, 2026</small>
+                            </div>
+                        </div>
+
+                        
+                            <div class="col-auto">
+                                <div class="card-body">
+                                    I had to wait 4 months, but the very fact of delivery to Russia is already a magic, so okay, everything is fine. The packaging is high quality, as is everything in general :3
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+                <div class="card my-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <strong>
+                                    <div>
+                                        
+                                            <span
+                                                class="fi fi-am"
+                                                alt="Armenia"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                data-bs-title="Armenia"></span>
+                                        
+
+                                        E
+
+                                        <span class="text-warning">
+                                            <i class="fa-solid fa-star"></i>
+                                            5/5
+                                        </span>
+                                    </div>
+                                </strong>
+
+                                <small class="text-muted">Jan. 18, 2026</small>
+                            </div>
+                        </div>
+
+                        
+                            <div class="col-auto">
+                                <div class="card-body">
+                                    Ordered in may got within 2 weeks and the vial was slightly yellow and no dust or anything and im still using and theres no discoloration, i also did blood tests and everything is normal !!
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+                <div class="card my-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <strong>
+                                    <div>
+                                        
+                                            <span
+                                                class="fi fi-cz"
+                                                alt="Czechia"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                data-bs-title="Czechia"></span>
+                                        
+
+                                        Min-ho
+
+                                        <span class="text-warning">
+                                            <i class="fa-solid fa-star"></i>
+                                            5/5
+                                        </span>
+                                    </div>
+                                </strong>
+
+                                <small class="text-muted">Jan. 17, 2026</small>
+                            </div>
+                        </div>
+
+                        
+                            <div class="col-auto">
+                                <div class="card-body">
+                                    Quick shipping in bit over a week, pay attention to the la psote tracking tho as there&#x27;s no package arrival notification email. Really nice discreet packaging plus the og vial label was masked with a perfume label and put in a small perfume box.
+The crypto payment might be a lil bit confusing. Personally I recommend apps like Revolut for ease of use.
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+                <div class="card my-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <strong>
+                                    <div>
+                                        
+                                            <span
+                                                class="fi fi-ie"
+                                                alt="Ireland"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                data-bs-title="Ireland"></span>
+                                        
+
+                                        Anonymous
+
+                                        <span class="text-warning">
+                                            <i class="fa-solid fa-star"></i>
+                                            5/5
+                                        </span>
+                                    </div>
+                                </strong>
+
+                                <small class="text-muted">Jan. 16, 2026</small>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            
+                <div class="card my-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <strong>
+                                    <div>
+                                        
+                                            <span
+                                                class="fi fi-ma"
+                                                alt="Morocco"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                data-bs-title="Morocco"></span>
+                                        
+
+                                        Meriem
+
+                                        <span class="text-warning">
+                                            <i class="fa-solid fa-star"></i>
+                                            5/5
+                                        </span>
+                                    </div>
+                                </strong>
+
+                                <small class="text-muted">Jan. 16, 2026</small>
+                            </div>
+                        </div>
+
+                        
+                            <div class="col-auto">
+                                <div class="card-body">
+                                    Discreetly packaged as beauty product, wrapped in protective shipping film, been using it for half a year and the results are amazing.
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+            
+                <div class="card my-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <strong>
+                                    <div>
+                                        
+                                            <span
+                                                class="fi fi-de"
+                                                alt="Germany"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                data-bs-title="Germany"></span>
+                                        
+
+                                        Anonymous
+
+                                        <span class="text-warning">
+                                            <i class="fa-solid fa-star"></i>
+                                            5/5
+                                        </span>
+                                    </div>
+                                </strong>
+
+                                <small class="text-muted">Dec. 19, 2025</small>
+                            </div>
+                        </div>
+
+                        
+                            <div class="col-auto">
+                                <div class="card-body">
+                                    Ordered a vial of EEn on the 8th, arrived in a small package on the 16th, payment was simple and quick and the vial came disguised as a skincare oil, tracking was fine too
+Will definitely be ordering here again when i eventually run out
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
             
                 <div class="card my-3">
                     <div class="row">
@@ -2509,5 +2847,5 @@ Highly recommend!
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
         </script>
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c76444e1e1823f2',t:'MTc2OTk5OTQyOA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9caff7278bf1889a',t:'MTc3MDYwNDQ0Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

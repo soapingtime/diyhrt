@@ -25,6 +25,8 @@
         <title>Vanna Pharma - DIYHRT.Market</title>
 
         
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
         <meta property="og:site_name" content="DIYHRT.Market" />
 
         
@@ -152,7 +154,7 @@
         class="list-group-item d-flex justify-content-between"
         style="border-left-width: 0.2rem; border-left-color: #F3C600;">
         <span>Category:</span>
-        <span>Homebrewers</span>
+        <span>Inactive Homebrewers</span>
     </li>
 
     <li
@@ -212,7 +214,7 @@
         <div class="col-lg-8">
             <h4>Leave a Review</h4>
             <form method="POST">
-                <input type="hidden" name="csrfmiddlewaretoken" value="VPGJQ3N6TF3WcBDK5rcKMYR1ECDZCKpaaBe8mCRkTTc2EbQRz4xe6JYvc9H2fBHx">
+                <input type="hidden" name="csrfmiddlewaretoken" value="eMs8kVAGAWTOqtH0Utxq8QwcXZGtu41mRrTiIMx8wIpo71BqIajhAQ8pwxOs0WWp">
                 <div class="mb-3"><label class="visually-hidden" for="id_name">Name</label><input type="text" name="name" maxlength="128" class="form-control form-control-sm" placeholder="Name" aria-describedby="id_name_helptext" id="id_name"><div class="form-text">Your Name (Optional)</div>
 </div><div class="mb-3"><label class="visually-hidden" for="id_country">Country</label><select name="country" class="form-select form-select-sm" aria-describedby="id_country_helptext" id="id_country">
   <option value="" selected>---------</option>
@@ -719,7 +721,7 @@
 </div><div class="mb-3"><label class="visually-hidden" for="id_experience_rating">Experience rating</label><input type="number" name="experience_rating" min="0" class="form-control form-control-sm" placeholder="Experience rating" required aria-describedby="id_experience_rating_helptext" id="id_experience_rating"><div class="form-text">Rate your experience on a scale of 1 to 5.</div>
 </div><div class="mb-3"><label class="visually-hidden" for="id_comment">Comment</label><textarea name="comment" cols="40" rows="10" class="form-control form-control-sm" placeholder="Comment" aria-describedby="id_comment_helptext" id="id_comment">
 </textarea><div class="form-text">Share your experience! (Optional)</div>
-</div>
+</div><div class="mb-3"><label class="visually-hidden" for="id_turnstile">Security Check</label><div class="cf-turnstile" data-sitekey="0x4AAAAAACYKx1vyAXIT6jyX" data-response-field-name="turnstile"></div></div>
 
                 <button class="btn btn-primary w-100">Submit</button>
             </form>
@@ -1175,5 +1177,5 @@ Products arrived in standard, plain bag-style packaging. [Sensitive information 
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
         </script>
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c7644e9ddf623f2',t:'MTc2OTk5OTQ1Mw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9caff8252853889a',t:'MTc3MDYwNDQ4Mw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
