@@ -125,8 +125,82 @@
       const isInReferenceList = referenceLists.some(list => list.contains(link));
       if (isInReferenceList) return;
 
-      // We only care if the link HAS an href and it's in our map
+      // We only care if the link HAS an href
       if (rawHref && !rawHref.startsWith('#')) {
+        
+        // FIRST: Check if this link should show a hover box based on parentheses
+        // Check if the link itself contains parentheses with a year (e.g. "(2005)" or "(2005a)" or "(Aly, 2020)")
+        // We allow other text inside the parens, but it MUST contain a year-like number.
+        const yearParensRegex = /\([^)]*\b\d{4}[a-z]?\b[^)]*\)/i;
+        const textHasParens = link.textContent.includes('(') || link.textContent.includes(')');
+        const textMatchingParensYear = yearParensRegex.test(link.textContent);
+
+        // Check if enclosed in parentheses by walking siblings
+        let isEnclosed = false;
+        // We only scan if:
+        // 1. The text itself doesn't contain matching parens (if it does, we already know if it's valid or not)
+        // OR
+        // 2. The text doesn't contain parens at all (so we look for surrounding ones)
+
+        if (!textMatchingParensYear && !textHasParens) {
+          // If text has parens but didn't match yearParensRegex, it's invalid (e.g. "Kuhl (Citation)")
+          // So we only scan if text does NOT have parens.
+
+          let openParenCount = 0;
+          let foundOpen = false;
+
+          let curr = link.previousSibling;
+          let scans = 0;
+          const MAX_SCANS = 100; // Reasonable lookbehind limit
+
+          while (curr && scans < MAX_SCANS) {
+            if (curr.nodeType === 3) { // Text node
+              const txt = curr.textContent;
+              // Count parens from right to left
+              for (let i = txt.length - 1; i >= 0; i--) {
+                const c = txt[i];
+                if (c === ')') openParenCount--;
+                else if (c === '(') openParenCount++;
+
+                if (openParenCount > 0) {
+                  foundOpen = true;
+                  break;
+                }
+              }
+            } else if (curr.nodeType === 1) { // Element node
+              const tagName = curr.tagName;
+              // Stop at block boundaries
+              if (/^(DIV|P|BODY|MAIN|SECTION|BLOCKQUOTE|UL|OL|LI|TABLE|BR|HR|H[1-6])$/.test(tagName)) {
+                break;
+              }
+              // Check text content of inline elements
+              const txt = curr.textContent;
+              for (let i = txt.length - 1; i >= 0; i--) {
+                const c = txt[i];
+                if (c === ')') openParenCount--;
+                else if (c === '(') openParenCount++;
+
+                if (openParenCount > 0) {
+                  foundOpen = true;
+                  break;
+                }
+              }
+            }
+
+            if (foundOpen) break;
+            curr = curr.previousSibling;
+            scans++;
+          }
+
+          if (foundOpen) {
+            isEnclosed = true;
+          }
+        }
+
+        // Only proceed if link has parentheses (in text or structurally enclosed)
+        if (!textMatchingParensYear && !isEnclosed) return;
+
+        // SECOND: Try to find matching reference in urlMap
         const exactHref = normalizeRefUrl(rawHref);
         const baseHref = exactHref.split('#')[0];
 
@@ -135,90 +209,24 @@
           bestMatchHTML = urlMap.get(baseHref);
         }
 
-        // Fallback for unmatched links (e.g. Wiki links, or refs without date/year)
-        // User requested to show just the URL, but ONLY if it looks like a ref (in parentheses)
+
+        // THIRD: Fallback for unmatched links - show the URL itself
         if (!bestMatchHTML) {
-          // Check if the link itself contains parentheses with a year (e.g. "(2005)" or "(2005a)" or "(Aly, 2020)")
-          // We allow other text inside the parens, but it MUST contain a year-like number.
-          const yearParensRegex = /\([^)]*\b\d{4}[a-z]?\b[^)]*\)/i;
-          const textHasParens = link.textContent.includes('(') || link.textContent.includes(')');
-          const textMatchingParensYear = yearParensRegex.test(link.textContent);
-
-          // Check if enclosed in parentheses or brackets by walking siblings
-          let isEnclosed = false;
-          // We only scan if:
-          // 1. The text itself doesn't contain matching parens (if it does, we already know if it's valid or not)
-          // OR
-          // 2. The text doesn't contain parens at all (so we look for surrounding ones)
-
-          if (!textMatchingParensYear && !textHasParens) {
-            // If text has parens but didn't match yearParensRegex, it's invalid (e.g. "Kuhl (Citation)")
-            // So we only scan if text does NOT have parens.
-
-            let openParenCount = 0;
-            let openBracketCount = 0;
-            let foundOpen = false;
-
-            let curr = link.previousSibling;
-            let scans = 0;
-            const MAX_SCANS = 100; // Reasonable lookbehind limit
-
-            while (curr && scans < MAX_SCANS) {
-              if (curr.nodeType === 3) { // Text node
-                const txt = curr.textContent;
-                // Count parens from right to left
-                for (let i = txt.length - 1; i >= 0; i--) {
-                  const c = txt[i];
-                  if (c === ')') openParenCount--;
-                  else if (c === '(') openParenCount++;
-                  else if (c === ']') openBracketCount--;
-                  else if (c === '[') openBracketCount++;
-
-                  if (openParenCount > 0 || openBracketCount > 0) {
-                    foundOpen = true;
-                    break;
-                  }
-                }
-              } else if (curr.nodeType === 1) { // Element node
-                const tagName = curr.tagName;
-                // Stop at block boundaries
-                if (/^(DIV|P|BODY|MAIN|SECTION|BLOCKQUOTE|UL|OL|LI|TABLE|BR|HR|H[1-6])$/.test(tagName)) {
-                  break;
-                }
-                // Check text content of inline elements
-                const txt = curr.textContent;
-                for (let i = txt.length - 1; i >= 0; i--) {
-                  const c = txt[i];
-                  if (c === ')') openParenCount--;
-                  else if (c === '(') openParenCount++;
-                  else if (c === ']') openBracketCount--;
-                  else if (c === '[') openBracketCount++;
-
-                  if (openParenCount > 0 || openBracketCount > 0) {
-                    foundOpen = true;
-                    break;
-                  }
-                }
-              }
-
-              if (foundOpen) break;
-              curr = curr.previousSibling;
-              scans++;
-            }
-
-            if (foundOpen) {
-              isEnclosed = true;
-            }
+          // Exception: Skip if link text starts with lowercase (e.g. "(see here)" or "(more info)")
+          // These are likely general parenthetical links, not citations
+          const linkText = link.textContent.trim();
+          const firstChar = linkText.charAt(0);
+          if (firstChar && firstChar === firstChar.toLowerCase() && firstChar !== firstChar.toUpperCase()) {
+            return; // Skip lowercase-starting unmatched links
           }
-
-          if (textMatchingParensYear || isEnclosed) {
-            let displayUrl = rawHref;
-            if (rawHref.startsWith('/')) {
-              displayUrl = 'https://transfemscience.org' + rawHref;
-            }
-            bestMatchHTML = `<div class="fallback-url-content"><a href="${rawHref}" target="_blank">${displayUrl}</a></div>`;
+          
+          let displayUrl = rawHref;
+          if (rawHref.startsWith('/')) {
+            displayUrl = 'https://transfemscience.org' + rawHref;
           }
+          bestMatchHTML = `<div class="fallback-url-content"><a href="${rawHref}" target="_blank">${displayUrl}</a></div>`;
         }
+
 
         if (bestMatchHTML) {
 
