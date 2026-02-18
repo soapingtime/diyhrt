@@ -102,7 +102,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app01-g2.1664996.1770772020546016396");
+				console.log("client_id:", "web.app02-g2.541169.1771376467950174617");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -117,6 +117,30 @@
 				lastError = errorMessage;
 				return;
 			}
+			var ignoreMessages = ["ResizeObserver loop limit exceeded",
+				"TypeError: can't redefine non-configurable property \"userAgent\"",
+				"TypeError: can't redefine non-configurable property \"getChannelData\"",
+				"ReferenceError: tinymce is not defined",
+				"Uncaught ReferenceError: timeoutId is not defined",
+				"ReferenceError: Can't find variable: tinymce"];
+			for (var i = 0; i < ignoreMessages.length; i++) {
+				if (errorMessage === ignoreMessages[i]) {
+					lastError = errorMessage;
+					return;
+				}
+			}
+			if (errorUrl.indexOf("safari-extension:") === 0 || errorUrl.indexOf("moz-extension:") === 0 || errorUrl.indexOf("chrome-extension:") === 0) {
+				lastError = errorMessage;
+				return;
+			}
+			if (errorUrl.indexOf("googletagmanager.com") !== -1 || errorUrl.indexOf("socialsearch.com") !== -1) {
+				lastError = errorMessage;
+				return;
+			}
+			if (errorLine === 0 || errorLine === 1) {
+				lastError = errorMessage;
+				return;
+			}
 			jQuery.ajax({
 				type: 'POST',
 				url: '/jsclienterror',
@@ -127,7 +151,7 @@
 					column: column,
 					stack: stack,
 					last_error: lastError,
-					client_id: "web.app01-g2.1664996.1770772020546016396"
+					client_id: "web.app02-g2.541169.1771376467950174617"
 				},
 				success: function() {
 					if (console && console.log) {
@@ -199,7 +223,7 @@
 	console.log("FULL PAGE LOAD");
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "6e84307f94f20e9766aa3671c71667feb9295e12"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "15c43965d17c17bad0c1b2328546089a18c59d15"}' hx-ext="preload" hx-boost="false">
 			
 				<script>
 					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
