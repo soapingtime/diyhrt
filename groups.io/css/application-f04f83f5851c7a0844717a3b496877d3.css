@@ -2806,6 +2806,10 @@ body {
 	scroll-margin-top: 60px;
 }
 
+#manual .panel[id] {
+	scroll-margin-top: 70px;
+}
+
 .groupmaincontent {
 	margin-left: 235px;
 }
@@ -3947,6 +3951,11 @@ table.table-fixed {
 	content: counters(item, ".") " ";
 	counter-increment: item;
 	color: #000;
+}
+
+.wikidisplay h1[id], .wikidisplay h2[id], .wikidisplay h3[id],
+.wikidisplay h4[id], .wikidisplay h5[id], .wikidisplay h6[id] {
+	scroll-margin-top: 70px;
 }
 
 .wikidisplay a {
