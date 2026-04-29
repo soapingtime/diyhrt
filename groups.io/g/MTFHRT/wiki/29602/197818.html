@@ -6,8 +6,9 @@
 			<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			
-				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 			
+			<meta name="theme-color" content="#2f6fa7">
 			<meta name="pinterest" content="nopin" />
 			<meta name="pinterest" content="nohover" />
 			
@@ -86,6 +87,45 @@
 	var pushSubToken;
 	var ignoreErrors = false;
 	var lastError = "";
+
+	// Auto-hide the fixed app top navbar on reading-heavy pages. The
+	// navbar tracks scroll delta 1:1 in both directions: scrolling down
+	// slides it off at the same pixel rate as the page; scrolling up —
+	// even one pixel — starts bringing it back at the same rate. When
+	// the user is at the very top, it's always fully visible. Opt-in
+	// per page; xs only. Bottom tab bar is untouched.
+	function EnableTopbarAutoHide() {
+		if (document.documentElement.clientWidth > 767) return;
+		var body = document.body;
+		body.classList.add('auto-hide-topbar');
+		// Measure the actual headerbar height so notched devices (iOS)
+		// hide the full bar including the safe-area-inset-top padding,
+		// not just the 50px content row. Fall back to 50 if the
+		// element isn't found for any reason.
+		var headerEl = document.getElementById('headerbar');
+		var navHeight = headerEl ? headerEl.offsetHeight : 50;
+		var offset = 0;
+		var lastY = window.scrollY;
+		function onScroll() {
+			var y = window.scrollY;
+			var dy = y - lastY;
+			lastY = y;
+			if (y <= 0) {
+				offset = 0;
+			} else {
+				offset -= dy;
+				if (offset > 0) offset = 0;
+				if (offset < -navHeight) offset = -navHeight;
+			}
+			body.style.setProperty('--topbar-offset', offset + 'px');
+		}
+		window.addEventListener('scroll', onScroll, { passive: true });
+		gioDestroy(function() {
+			window.removeEventListener('scroll', onScroll);
+			body.classList.remove('auto-hide-topbar');
+			body.style.removeProperty('--topbar-offset');
+		});
+	}
 	
 		window.onerror = function(errorMessage, errorUrl, errorLine, errorColumn, errorObj) {
 			let column;
@@ -102,7 +142,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app01-g2.8471188.1776820360288497151");
+				console.log("client_id:", "web.app01-g2.790470.1777426193240673009");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -151,7 +191,7 @@
 					column: column,
 					stack: stack,
 					last_error: lastError,
-					client_id: "web.app01-g2.8471188.1776820360288497151"
+					client_id: "web.app01-g2.790470.1777426193240673009"
 				},
 				success: function() {
 					if (console && console.log) {
@@ -174,7 +214,7 @@
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-f04f83f5851c7a0844717a3b496877d3.css" rel="stylesheet" id="groupsio-css">
+			<link href="../../../../css/application-24dcf155f8cf9ca30214ea64f62961b4.css" rel="stylesheet" id="groupsio-css">
 			<script src="../../../../js/application-7800e976860b357df405a3ea22aa72b1.js" id="groupsio-js"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>MTFHRT@groups.io | Wiki</title>
@@ -221,9 +261,51 @@
 	htmx.config.historyCacheSize = 0;
 	htmx.config.defaultSettleDelay = 0;
 	console.log("FULL PAGE LOAD");
+
+	// Short fade-in on #maincontent-refresh after every HTMX swap — adds zero latency
+	// because it runs AFTER the new content has arrived. We listen to afterRequest
+	// (fires once per HTMX request) rather than afterSwap (fires once per swapped
+	// element, including every hx-swap-oob badge — which would cancel the animation).
+	// Listen on document because this script runs in <head> before <body> exists.
+	document.addEventListener('htmx:afterRequest', function(evt) {
+		if (!evt.detail || !evt.detail.successful) return;
+		var refresh = document.getElementById('maincontent-refresh');
+		if (!refresh) return;
+		refresh.classList.remove('gio-fade-in');
+		// force reflow so removing then adding re-starts the animation each time
+		void refresh.offsetWidth;
+		refresh.classList.add('gio-fade-in');
+	});
+
+	// Top-of-viewport progress bar shown while an HTMX request is in flight.
+	// Provides immediate visual feedback for taps even before content arrives.
+	document.addEventListener('htmx:beforeRequest', function() {
+		var bar = document.getElementById('gio-progress-bar');
+		if (bar) bar.classList.add('active');
+	});
+	document.addEventListener('htmx:afterRequest', function() {
+		var bar = document.getElementById('gio-progress-bar');
+		if (bar) bar.classList.remove('active');
+	});
+
+	// Haptic feedback on mobile-native chrome taps: bottom-nav tabs, back
+	// chevron, and the navbar overflow action slot. Uses the shared helpers
+	// from qtutils/appfunctions.qtpl — they no-op on non-Capacitor runtimes,
+	// so this is safe on the plain web too.
+	document.addEventListener('click', function(ev) {
+		if (typeof hapticsSelectionChanged !== 'function') return;
+		var target = ev.target;
+		if (!target || !target.closest) return;
+		if (target.closest('.mobilesidebar-item') ||
+			target.closest('#logo a') ||
+			target.closest('#header-action-slot a')) {
+			hapticsSelectionChanged();
+		}
+	}, true);
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "b6bf5273f75920ed951f70f381c6d7e3177d7469"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "ca86cf933a8828e8bf670199572b45bc66bd1319"}' hx-ext="preload" hx-boost="false">
+			<div id="gio-progress-bar" aria-hidden="true"></div>
 			
 				<script>
 					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -583,18 +665,128 @@ function showAutocompleteModal(modalName) {
 		location.reload();
 	});
 
-	function ShowBackButton(label) {
+	function ShowBackButton(label, url, subtitle) {
 		var logoElement = document.getElementById("logo");
-		if (logoElement) {
-			html = `
-				<span style="color:#fff;margin-top:14px;margin-left:12px;float:left !important; height:36px;">
-				<a onclick="goBack()" style="color:#fff">
-					<i class="fa-fw fa-solid fa-chevron-left fa-lg"></i>
-				</a></span>`;
-			if (label != "") {
-				html += `<div style="position:absolute;left:50%;transform:translateX(-50%);text-align:center;color:#ecf0f1;margin-top:5px;"><h4>` + label + `</h4></div>`;
+		if (!logoElement) {
+			return;
+		}
+		logoElement.innerHTML = '';
+
+		var span = document.createElement('span');
+		span.style.cssText = "color:#fff;margin-top:14px;margin-left:12px;float:left !important;height:36px;";
+		var a = document.createElement('a');
+		a.style.color = '#fff';
+		if (url) {
+			a.href = url;
+			// HTMX-boost only when the target is still inside the same group — then the
+			// bottom nav (which sits outside #maincontent-refresh) is the same layout and
+			// can stay put. Cross-context targets (e.g. /groups) need a full page load so
+			// the bottom nav actually switches.
+			if (/\/g\//.test(url)) {
+				a.setAttribute('hx-boost', 'true');
+				a.setAttribute('hx-target', '#maincontent-refresh');
+				a.setAttribute('hx-push-url', 'true');
+				a.setAttribute('hx-history', 'false');
+				// Reset window scroll to the top after the swap, otherwise the
+				// user lands on the previous page at whatever Y they were at on
+				// the current one — typically mid-page, behind the fixed
+				// navbar/notch in the iOS app.
+				a.setAttribute('hx-on::after-request', 'window.scrollTo({top:0, behavior:"instant"})');
+				if (window.htmx) {
+					htmx.process(a);
+				}
 			}
-			logoElement.innerHTML = html;
+		} else {
+			a.onclick = goBack;
+			a.style.cursor = 'pointer';
+		}
+		var icon = document.createElement('i');
+		icon.className = 'fa-fw fa-solid fa-chevron-left fa-lg';
+		a.appendChild(icon);
+		span.appendChild(a);
+		logoElement.appendChild(span);
+
+		if (label) {
+			var titleDiv = document.createElement('div');
+			// The navbar in the iOS app gets padding-top equal to the safe-area
+			// inset, so the outer box can be taller than the visible content
+			// strip. Centering at 50% of the outer box lands the title inside
+			// the notch — offset the center down by half the inset so the
+			// title sits in the visible strip. On non-app contexts
+			// env(safe-area-inset-top) is 0 and this is a no-op.
+			titleDiv.style.cssText = "position:absolute;left:50%;top:calc(50% + env(safe-area-inset-top) / 2);transform:translate(-50%,-50%);text-align:center;color:#ecf0f1;max-width:60%;overflow:hidden;";
+			var h4 = document.createElement('h4');
+			h4.style.cssText = "margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.1;";
+			h4.textContent = label;
+			titleDiv.appendChild(h4);
+			if (subtitle) {
+				var sub = document.createElement('div');
+				sub.style.cssText = "font-size:11px;line-height:1.2;margin-top:1px;opacity:0.85;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;";
+				sub.textContent = subtitle;
+				titleDiv.appendChild(sub);
+			}
+			logoElement.appendChild(titleDiv);
+		}
+	}
+
+	// ShowNavbarTitle sets a centered title (and optional subtitle) in the
+	// mobile navbar without any back arrow — used on top-level tab pages
+	// (/feed, /groups) where there's nowhere to go back to.
+	function ShowNavbarTitle(label, subtitle) {
+		var logoElement = document.getElementById("logo");
+		if (!logoElement) {
+			return;
+		}
+		logoElement.innerHTML = '';
+		if (label) {
+			var titleDiv = document.createElement('div');
+			titleDiv.style.cssText = "position:absolute;left:50%;top:calc(50% + env(safe-area-inset-top) / 2);transform:translate(-50%,-50%);text-align:center;color:#ecf0f1;max-width:70%;overflow:hidden;";
+			var h4 = document.createElement('h4');
+			h4.style.cssText = "margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.1;";
+			h4.textContent = label;
+			titleDiv.appendChild(h4);
+			if (subtitle) {
+				var sub = document.createElement('div');
+				sub.style.cssText = "font-size:11px;line-height:1.2;margin-top:1px;opacity:0.85;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;";
+				sub.textContent = subtitle;
+				titleDiv.appendChild(sub);
+			}
+			logoElement.appendChild(titleDiv);
+		}
+	}
+
+	// ShowHeaderAction adds an icon button (e.g. settings cog) to the mobile navbar,
+	// to the left of the profile icon. modalTarget is optional — if given, clicking
+	// opens that Bootstrap modal. ariaLabel is for accessibility.
+	function ShowHeaderAction(iconClass, modalTarget, ariaLabel) {
+		var slot = document.getElementById("header-action-slot");
+		if (!slot) {
+			return;
+		}
+		slot.innerHTML = '';
+		var a = document.createElement('a');
+		a.href = '#';
+		a.className = 'navbar-action-xs';
+		if (ariaLabel) {
+			a.setAttribute('aria-label', ariaLabel);
+		}
+		if (modalTarget) {
+			a.setAttribute('data-toggle', 'modal');
+			a.setAttribute('data-target', modalTarget);
+		}
+		var icon = document.createElement('i');
+		icon.className = iconClass;
+		a.appendChild(icon);
+		slot.appendChild(a);
+		slot.style.display = '';
+	}
+
+	function HideHeaderAction() {
+		var slot = document.getElementById("header-action-slot");
+		if (slot) {
+			slot.innerHTML = '';
+			slot.style.display = 'none';
+			slot.style.float = 'left';
 		}
 	}
 
@@ -611,6 +803,90 @@ function showAutocompleteModal(modalName) {
 	function goBack() {
 		history.back();
 	}
+
+	// --- Native date/time picker helpers -----------------------------------
+	// On touch devices we swap flatpickr-wrapped <input type="text"> fields
+	// for native <input type="date"> / type="time" so iOS / Android bring up
+	// their OS pickers (wheel, spinner, Material dialog). On pointer
+	// devices we leave the flatpickr popover in place, since Chrome's
+	// default date popover looks out of place. Both helpers are global so
+	// every page with a date/time input can call them the same way.
+	window.__isTouchPicker = function() {
+		return window.matchMedia && window.matchMedia('(any-pointer: coarse)').matches;
+	};
+	// Fallback formats if data.User is nil on this page (logged out, etc).
+	window.__userDateFmt = "M/D/YYYY";
+	window.__userTimeFmt = "h:mmA";
+	// Hybrid native picker: the field is shown to the user as a plain
+	// type=text input holding the date/time formatted per the user's
+	// Groups.io preference (e.g., "19/04/2026" for an International
+	// user). When the user taps the field, we briefly swap the input's
+	// type to 'date' or 'time' so the OS brings up its native picker
+	// (iOS wheel, Android calendar/spinner). When the user finishes
+	// picking and blurs the field, we swap back to text and reformat
+	// the value in the user's chosen format. The server sees the
+	// user-format value on submit, same as with flatpickr.
+	//
+	// `kind` is 'date' or 'time'. `onHumanChange(humanStr, momentObj)`
+	// fires whenever the user picks a new value, with the value already
+	// in the user's format.
+	window.useNativePicker = function(id, kind, onHumanChange) {
+		var input = document.getElementById(id);
+		if (!input) return null;
+		var userFmt = kind === 'time' ? window.__userTimeFmt : window.__userDateFmt;
+		var isoFmt = kind === 'time' ? 'HH:mm' : 'YYYY-MM-DD';
+		// Page loads with input type=text holding a user-format value —
+		// leave it as is until the user actually taps.
+		function toPicker() {
+			if (input.type !== kind) {
+				var m = moment(input.value, userFmt);
+				input.type = kind;
+				input.value = m.isValid() ? m.format(isoFmt) : '';
+			}
+		}
+		function toDisplay() {
+			if (input.type === kind) {
+				var m = moment(input.value, isoFmt);
+				input.type = 'text';
+				input.value = m.isValid() ? m.format(userFmt) : '';
+			}
+		}
+		// pointerdown fires before focus/click so we can swap the type
+		// in time for the browser's default tap-handling to open the
+		// correct native picker. Fall back to 'focus' for keyboard users.
+		input.addEventListener('pointerdown', toPicker);
+		input.addEventListener('focus', toPicker);
+		input.addEventListener('change', function() {
+			if (input.type === kind) {
+				var m = moment(input.value, isoFmt);
+				if (m.isValid() && onHumanChange) {
+					onHumanChange(m.format(userFmt), m);
+				}
+			}
+		});
+		input.addEventListener('blur', toDisplay);
+		// Make sure the server always sees the user-format value.
+		var form = input.closest('form');
+		if (form) form.addEventListener('submit', toDisplay);
+		return input;
+	};
+	// Set a field's value as a user-format string, whether the field is a
+	// flatpickr-wrapped text input (desktop) or a native type=date/time
+	// input (touch). Used by onChange handlers that update sibling fields.
+	window.setFieldHuman = function(id, humanStr, kind) {
+		var input = document.getElementById(id);
+		if (!input) return;
+		if (input._flatpickr) {
+			input._flatpickr.setDate(humanStr);
+		} else if (input.type === 'date' || input.type === 'time') {
+			var userFmt = kind === 'time' ? window.__userTimeFmt : window.__userDateFmt;
+			var isoFmt = kind === 'time' ? 'HH:mm' : 'YYYY-MM-DD';
+			var m = moment(humanStr, userFmt);
+			if (m.isValid()) input.value = m.format(isoFmt);
+		} else {
+			input.value = humanStr;
+		}
+	};
 
 	// submitEvent acts like .submit(), except it is compatible with the app, by using events instead.
 	function submitEvent(ele) {
@@ -1028,6 +1304,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 
 
+	<div class="wiki-breadcrumb-wrap">
 	
 		
 
@@ -1103,6 +1380,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 	</div>
 
 	
+	</div>
 
 	
 	<div class="row" style="margin-bottom:20px;">
@@ -1215,7 +1493,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 <h2 id="Equipment">Equipment</h2>
 <h3 id="Necessary">Necessary</h3>
 <p>The only necessary equipment is cheap ($7 - $15) pocket 0.001 g (1 mg) scales (or DIY balance scales you can make from a long narrow wooden plank, 2 small nails and 2 syringes, one of them with 0.5 ml water as a precise weight).</p>
-<p>If you buy ready-to-use scales then they must look exactly like this:<br/><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13908/354x254.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1776820960&Signature=XqJ06slZIE1UwgmYGLWucb4hju8%3D" align="right" loading="lazy" class="myimg-responsive"/><span style="text-decoration: underline"><a href="https://www.ebay.com/itm/363747240371" target="_blank" rel="nofollow noopener">https://www.ebay.com/itm/363747240371</a></span><br/><a href="https://www.aliexpress.com/item/4000586480263.html" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">https://www.aliexpress.com/item/4000586480263.html</span></a></p>
+<p>If you buy ready-to-use scales then they must look exactly like this:<br/><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13908/354x254.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1777426793&Signature=42TtYPn3Pa1IElr1hjKYRqwuV08%3D" align="right" loading="lazy" class="myimg-responsive"/><span style="text-decoration: underline"><a href="https://www.ebay.com/itm/363747240371" target="_blank" rel="nofollow noopener">https://www.ebay.com/itm/363747240371</a></span><br/><a href="https://www.aliexpress.com/item/4000586480263.html" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">https://www.aliexpress.com/item/4000586480263.html</span></a></p>
 <p>Newer models are not suitable because they attempt to appear more precise and stable by ignoring small weight changes.</p>
 <p>Search for other sellers:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=scale+0.001&amp;_sacat=0&amp;_blrs=recall_filtering&amp;LH_BIN=1&amp;_sop=15&amp;_ipg=120&amp;_oac=1" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">https://www.ebay.com/sch/i.html?_nkw=scale+0.001&amp;_sacat=0&amp;_blrs=recall_filtering&amp;LH_BIN=1&amp;_sop=15&amp;_ipg=120&amp;_oac=1</span></a></p>
 <p><a href="https://www.ebay.com/sch/i.html?_nkw=scale+digital+diamond&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_blrs=recall_filtering&amp;_ipg=120&amp;_oac=1" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">https://www.ebay.com/sch/i.html?_nkw=scale+digital+diamond&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_blrs=recall_filtering&amp;_ipg=120&amp;_oac=1</span></a></p>
@@ -1231,10 +1509,10 @@ function createAlert(msg, isError, autoClose, noClose) {
 <p>Unnecessary: beaker, mixer/stirrer, room with controlled airflow, depyrogenation. My technology: terminal heat sterilization (after the vials are sealed); measure and mix in each vial separately, so no glassware to wash with water  or collecting dust (skin flakes and <a href="https://en.wikipedia.org/wiki/House_dust_mite" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">mites</span></a>) if never washed. Water - bacteria - pyrogens. Don&#39;t try to improve this technology: it protects you from mistakes and unexpected problems.</p>
 <h2 id="Other-raw-materials-and-expendables">Other raw materials and expendables</h2>
 <h3 id="Vials2C-stoppers2C-caps">Vials, stoppers, caps</h3>
-<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13965/s-l300.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1776820960&Signature=33ukGVYAsqQcqHv2T5pzldybnmI%3D" align="right" loading="lazy" class="myimg-responsive"/>Buy 10 clear glass vials 10 ml each with 20 mm grey (butyl rubber) stoppers and aluminium caps. Caps may be bare aluminium or painted, with plastic tops or all-metal. Screw-on and all-plastic caps are not suitable. Stoppers must have this shape:<br/><a href="https://www.ebay.com/itm/185908326110" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">https://www.ebay.com/itm/185908326110</span></a><br/><a href="https://www.aliexpress.us/item/2251832717628622.html" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">https://www.aliexpress.us/item/2251832717628622.html</span></a><br/>Flat septa are not suitable instead of stoppers. Search:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1</span></a></p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13965/s-l300.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1777426793&Signature=rCIQP0eLtU%2F6SXJs%2BDoxlsqcmjI%3D" align="right" loading="lazy" class="myimg-responsive"/>Buy 10 clear glass vials 10 ml each with 20 mm grey (butyl rubber) stoppers and aluminium caps. Caps may be bare aluminium or painted, with plastic tops or all-metal. Screw-on and all-plastic caps are not suitable. Stoppers must have this shape:<br/><a href="https://www.ebay.com/itm/185908326110" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">https://www.ebay.com/itm/185908326110</span></a><br/><a href="https://www.aliexpress.us/item/2251832717628622.html" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">https://www.aliexpress.us/item/2251832717628622.html</span></a><br/>Flat septa are not suitable instead of stoppers. Search:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1</span></a></p>
 <p><a href="https://www.aliexpress.com/wholesale?SearchText=vial+10ml+stopper+cap" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">https://www.aliexpress.com/wholesale?SearchText=vial+10ml+stopper+cap</span></a></p>
 <p>After you remove central part of the cap, most of the cap must remain and hold the rubber stopper at place. Caps must <strong>not</strong> have tear-off weak place on one side like this:</p>
-<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13909/cap-tear-off.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1776820960&Signature=b1GM4WWgkAmlP%2F85mrDSIKOAs5o%3D" loading="lazy" class="myimg-responsive"/></p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13909/cap-tear-off.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1777426793&Signature=iJ56ogsf9FtX2PMYXivmBMyM2Ls%3D" loading="lazy" class="myimg-responsive"/></p>
 <p>In EU you can buy <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/VIC010-001NS" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">vials</span></a>, stoppers <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22STG20-%200001%22" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">1</span></a> or <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/STR20-0001" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">2</span></a>, <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22BKMA%2020-GO%22" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">caps</span></a>, <span style="text-decoration: underline"><a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22BA%200020%22" target="_blank" rel="nofollow noopener">benzyl alcohol</a></span> and <span style="text-decoration: underline"><a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22MCT%201L%22" target="_blank" rel="nofollow noopener">MCT oil</a></span> in one shop, or (cheaper) <a href="https://www.glas-shop.com/glasprodukte/injektionsflascheninfusionsflaschen/injektionsflaschenklarglas5100ml/injektionsflasche-klarglas-10ml.php" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">vials</span></a>+<span style="text-decoration: underline"><a href="https://www.glas-shop.com/verschluesse2/verschluesse-fuer-injektionsflaschen/injektionsstopfeneinzeln20mmrotausbrombutyl.php" target="_blank" rel="nofollow noopener">stoppers</a></span>+<span style="text-decoration: underline"><a href="https://www.glas-shop.com/verschluesse2/verschluesse-fuer-injektionsflaschen/boerdelkappe-2025-x-74-mm-mittel-abriss-gruen.php" target="_blank" rel="nofollow noopener">caps</a></span>, or <span style="text-decoration: underline"><a href="https://www.amazon.de/-/en/Mikikit-Clear-Glass-Bottle-Transparent/dp/B09TPLQQRB/" target="_blank" rel="nofollow noopener">here</a></span>, or <a href="https://www.amazon.es/gp/product/B09TFPB6SR/" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">here</span></a>, or <span style="text-decoration: underline"><a href="https://www.amazon.de/-/en/H566EJW15X19NTIP4/dp/B09TFPB6SR/" target="_blank" rel="nofollow noopener">here</a></span>. In UK <span style="text-decoration: underline"><a href="https://www.ebay.co.uk/itm/333152620103" target="_blank" rel="nofollow noopener">here</a></span> or <a href="https://www.amazon.co.uk/Mikikit-10ml-Clear-Glass-Bottle/dp/B09TFPB6SR/" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">here</span></a>. In USA <span style="text-decoration: underline"><a href="https://www.medical-and-lab-supplies.com/vials/open/rls-10ml-tubular-clear-glass-serum-vials-qty-1.html" target="_blank" rel="nofollow noopener">vials</a></span>+<span style="text-decoration: underline"><a href="https://www.medical-and-lab-supplies.com/lab-supplies/butyl-rubber-stoppers-for-vials-20mm-gray.html" target="_blank" rel="nofollow noopener">stoppers</a></span>+<span style="text-decoration: underline"><a href="https://www.medical-and-lab-supplies.com/lab-supplies/20mm-standard-aluminum-seal-please-click-to-view-all-colors.html" target="_blank" rel="nofollow noopener">caps</a></span> (<span style="text-decoration: underline"><a href="https://www.medical-and-lab-supplies.com/usp-oils/mct-60-40-caprylic-c8-capric-c10-oil.html" target="_blank" rel="nofollow noopener">oil</a></span>, <a href="https://www.medical-and-lab-supplies.com/chemicals-solvents/benzyl-alcohol-usp.html" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">BA</span></a>, <span style="text-decoration: underline"><a href="https://www.medical-and-lab-supplies.com/medical-supplies/syringes-and-needles/diabetic-syringes/aimsco-maxicomfort-diabetic-insulin-syringes.html" target="_blank" rel="nofollow noopener">syringes</a></span>) or <span style="text-decoration: underline"><a href="https://lemelange.com/unsterilevialwide10ml20mm.aspx" target="_blank" rel="nofollow noopener">vials</a></span>+<a href="https://lemelange.com/20-mm-vial-stoppers-grey.aspx" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">stoppers</span></a>+<span style="text-decoration: underline"><a href="https://lemelange.com/20mmaluminumringwithcentertearout.aspx" target="_blank" rel="nofollow noopener">caps</a></span> or <a href="https://qcvialz.com/vial-samples/316-10ml-clear-shorty-serum-vials-iso-10r-24x45mm-sample-pack-of-10.html" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">vials</span></a>+<a href="https://qcvialz.com/vial-stopper-samples/319-20mm-round-bottom-vial-stopper-sample-pack-of-10.html" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">stoppers</span></a>+<span style="text-decoration: underline"><a href="https://qcvialz.com/superior-flip-cap-vial-seals/482-light-blue-20mm-superior-flip-cap-vial-seals-pack-of-10pc.html" target="_blank" rel="nofollow noopener">caps</a></span> or <span style="text-decoration: underline"><a href="https://www.gpzmedlab.com/store/p/110-10-ML-Unsealed-Clear-Vial.aspx" target="_blank" rel="nofollow noopener">vials</a></span>+<span style="text-decoration: underline"><a href="https://www.gpzmedlab.com/store/p/38-Grey-Butyl-Stopper.aspx" target="_blank" rel="nofollow noopener">stoppers</a></span>+<a href="https://www.gpzmedlab.com/store/p/102-Aluminum-Seal-Center-Tear-Out.aspx" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">caps</span></a> (<span style="text-decoration: underline"><a href="https://www.gpzmedlab.com/easy-touch-1-cc-insulin-syringe-with-28-g-x-1-2-needle-100-count.aspx" target="_blank" rel="nofollow noopener">syringes</a></span>) or <a href="https://www.premiumvials.com/10ml-glass-bottle-with-lid-transparent-vial-b-10pcs/" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">here</span></a> or sealed vials(<span style="text-decoration: underline"><a href="https://www.ebay.com/sch/257835/i.html?_dkr=1&amp;iconV2Request=true&amp;_blrs=recall_filtering&amp;_ssn=texlabsupplyinternational&amp;_oac=1&amp;_ipg=240&amp;_fcid=1&amp;LH_BIN=1&amp;_sop=15" target="_blank" rel="nofollow noopener">1</a></span> <a href="https://www.amazon.com/10ml-Sterile-Vial-Blue-Flip/dp/B07JD49TK2/" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">2</span></a> <a href="https://www.amazon.com/Biocomma-Aluminum-Caps%EF%BC%8CPenicillin-Transparent-Borosilicate/dp/B09W5HM7R6/" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">3</span></a> <a href="https://www.amazon.com/Empty-Borosillicate-Sealed-Sterile-Serum/dp/B005DIPY32/" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">4</span></a> <a href="https://www.amazon.com/5-10ml-Empty-Sealed-Sterile-Vials/dp/B009CC0KMA/" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">5</span></a> <a href="https://www.amazon.com/Molded-Sterile-Clear-Vials-Black/dp/B07KVCL4YF/" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">6</span></a>)+<a href="https://www.amazon.com/20MM-13MM-Single-Seals-Eco-Green/dp/B094Q5VVTH/" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">new caps</span></a>. In Canada <span style="text-decoration: underline"><a href="https://canadianmedhealthsupplies.ca/collections/10ml-vials-clear/products/10ml-vial-22mm-x-50mm-clear?variant=8081524817966" target="_blank" rel="nofollow noopener">vials</a></span>+<a href="https://canadianmedhealthsupplies.ca/collections/all-rubber-stoppers/products/20mm-rubber-stopper-grey?variant=8081553915950" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">stoppers</span></a>+<span style="text-decoration: underline"><a href="https://canadianmedhealthsupplies.ca/collections/20mm-flip-off-cap-flip-off/products/20mm-white-flip-off-cap-flip-off" target="_blank" rel="nofollow noopener">caps</a></span> (<a href="https://canadianmedhealthsupplies.ca/collections/solvents/products/benzyl-alcohol" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">BA</span></a>). In Mexico <a href="https://varienvases.mx/products/antibiotico-10ml-con-tapon-y-casquillo?variant=42526677467355" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">here</span></a>.</p>
 <p>If you are paranoid and believe incompetent or deceitful slander about this guide then you can buy washed sealed sterile empty vials from <a href="https://www.ebay.com/sch/257835/i.html?_dkr=1&amp;iconV2Request=true&amp;_blrs=recall_filtering&amp;_ssn=texlabsupplyinternational&amp;_oac=1&amp;_ipg=240&amp;_fcid=1&amp;LH_BIN=1&amp;_sop=15" target="_blank" rel="nofollow noopener"><span style="text-decoration: underline">USA</span></a> or <span style="text-decoration: underline"><a href="https://www.ebay.co.uk/itm/333152620103" target="_blank" rel="nofollow noopener">UK</a></span> and buy <span style="text-decoration: underline"><a href="https://www.amazon.com/20MM-13MM-Single-Seals-Eco-Green/dp/B094Q5VVTH/" target="_blank" rel="nofollow noopener">new caps</a></span> or carefully unbend crimped caps with a small flat screwdriver. Really it&#39;d not improve &#34;safety&#34;. But in USA and UK these vials are cheaper if you want fast shipping.</p>
 <h3 id="Oil">Oil</h3>
@@ -1247,7 +1525,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 <h2 id="Mix">Mix</h2>
 <p>(See below for an alternate way without a funnel).</p>
 <p>Make a small funnel from a piece of foil (the thicker foil the better; shinier side inside), hold it folded with a small piece of sticky tape. If you have only thin foil then perhaps strengthen it by wide sticky tape on another side (or try to strip the outer paint from a few different beer or soft drink aluminium cans with nail polish remover, then cut a clean can with scissors). May be use something conical to wrap the foil around before cutting off unneeded parts. The hole at the pointy end of the funnel must be slightly (not much) smaller than the opening in the vial. Use this funnel to weigh up estradiol enanthate powder and to pour the powder into a vial. The funnel I&#39;m using at the center, unfolded piece of foil from my previous funnel at the left, a funnel in a vial at the right:</p>
-<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13910/cone.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1776820960&Signature=U1ZwiLKYEQzZekqNLgj1ueklSkM%3D" loading="lazy" class="myimg-responsive"/></p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13910/cone.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1777426793&Signature=2aD7WXOHKaaHtdNe4Irump8ceHw%3D" loading="lazy" class="myimg-responsive"/></p>
 <p>Two recipes I can recommend:</p>
 <p>1) 500 mg = 0.5 g of estradiol enanthate (density 1.1 g/cm<sup><small>3</small></sup>),<br/>benzyl alcohol (preservative - antibacterial) 0.2 ml,<br/>MCT oil 10-0.2-0.5/1.1= 9.35 ml.</p>
 <p>2) 0.5 g of estradiol enanthate,<br/>MCT oil 10-0.5/1.1= 9.55 ml.</p>
@@ -1360,6 +1638,13 @@ function createAlert(msg, isError, autoClose, noClose) {
 <script>
 	contentLoaded(  false  , function() {
 		UpdateSidebar("wiki");
+		if (document.documentElement.clientWidth <= 992) {
+			
+				ShowBackButton("Ultimate DIY", "https://groups.io/g/MTFHRT/wiki", "Wiki");
+			
+			ShowHeaderAction("fa fa-search fa-lg", "#searchModal", "Search");
+		}
+		EnableTopbarAutoHide();
 	});
 </script>
 
@@ -1372,6 +1657,19 @@ function createAlert(msg, isError, autoClose, noClose) {
 		<div id="mobileSidebarSub" class="col-xs-12 hidden-md hidden-lg">
 			<div class="navbar navbar-default navbar-fixed-bottom">
 				<div class="container" style="display: flex; justify-content: space-around;">
+					
+					
+	
+	<div id="mobilesidebar-groups" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center;" hx-get="https://groups.io/groups"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-history="false" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
+		<div style="display: inline-block; position: relative;">
+			<div style="position: relative;display: inline-block;">
+			<i class="fa-fw fa-light fa-users fa-2x"></i>
+			
+			</div><br>
+			<span style="font-size:12px;">Groups</span>
+		</div>
+	</div>
+
 					
 						
 	
@@ -1622,6 +1920,14 @@ function createAlert(msg, isError, autoClose, noClose) {
 	});
 	function UpdateSidebar(id) {
 		console.log(id + " was clicked");
+		if (typeof HideHeaderAction === 'function') {
+			HideHeaderAction();
+		}
+		// restore mobile bottom nav in case a previous page (e.g. /post) hid it
+		var mobSidebar = document.getElementById("mobileSidebar");
+		if (mobSidebar) mobSidebar.style.display = '';
+		var mainContent = document.getElementById("maincontent");
+		if (mainContent) mainContent.style.bottom = '';
 		var sidebarItems = document.querySelectorAll('.mobilesidebar-item');
 		sidebarItems.forEach(function(item) {
 			var iElement = item.getElementsByTagName('div')[0].getElementsByTagName('i')[0];

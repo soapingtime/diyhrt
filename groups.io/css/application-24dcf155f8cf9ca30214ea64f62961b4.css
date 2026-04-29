@@ -2533,7 +2533,41 @@ th {
 }
 
 a.button-link {
-	padding: 8px 12px;
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	/* Match the 30px height of adjacent .btn-sm controls (Topics/Filter)
+	   so they baseline-align in the sort row. */
+	height: 30px;
+	padding: 0 12px;
+	border-radius: 15px;
+	background: #f2f5f9;
+	color: #337ab7;
+	font-size: 13px;
+	line-height: 1;
+	white-space: nowrap;
+	text-decoration: none;
+	/* On /messages this sits next to a taller (.form-control, 37px)
+	   Msg# input. Bootstrap's form-inline gives .form-control
+	   vertical-align: middle, but inline-flex defaults to baseline,
+	   leaving the button visually offset. Match middle alignment so
+	   the controls share a center line regardless of height. */
+	vertical-align: middle;
+}
+a.button-link:hover,
+a.button-link:focus {
+	background: #e5ebf3;
+	color: #337ab7;
+	text-decoration: none;
+}
+body.dark-mode a.button-link {
+	background: var(--dark-mode-primary-color);
+	color: var(--dark-mode-text-color);
+}
+body.dark-mode a.button-link:hover,
+body.dark-mode a.button-link:focus {
+	background: var(--dark-mode-highlight-color);
+	color: var(--dark-mode-text-color);
 }
 
 .button-link-group a.button-link {
@@ -2689,6 +2723,98 @@ body.dark-mode .list-group-item.active:hover {
 	background-color: #2f6fa7;
 }
 
+/* global: no grey iOS tap-highlight flash, no 300ms double-tap delay */
+html {
+	-webkit-tap-highlight-color: transparent;
+}
+a, button, input, select, textarea, .btn, .mobilesidebar-item, .grouphome-tile {
+	touch-action: manipulation;
+}
+
+/* bottom-sheet style Bootstrap modals on mobile — slide up from the bottom edge
+   instead of the default fade/zoom-from-center */
+@media (max-width: 767px) {
+	.modal.fade .modal-dialog {
+		transform: translate(0, 100%);
+		transition: transform 220ms cubic-bezier(0.2, 0, 0.2, 1);
+	}
+	.modal.in .modal-dialog {
+		transform: translate(0, 0);
+	}
+	.modal-dialog {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: 0;
+		width: 100%;
+		max-width: 100%;
+	}
+	.modal-content {
+		border-radius: 12px 12px 0 0;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+}
+
+/* HTMX loading indicator — thin sliding bar at very top while a request is in flight */
+#gio-progress-bar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 3px;
+	background: linear-gradient(90deg, rgba(74, 144, 226, 0) 0%, rgba(74, 144, 226, 1) 50%, rgba(74, 144, 226, 0) 100%);
+	background-size: 40% 100%;
+	background-repeat: no-repeat;
+	z-index: 2000;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 120ms ease-out;
+}
+#gio-progress-bar.active {
+	opacity: 1;
+	animation: gio-progress-slide 1.1s linear infinite;
+}
+@keyframes gio-progress-slide {
+	0%   { background-position: -40% 0; }
+	100% { background-position: 140% 0; }
+}
+
+/* page-transition fade-in on HTMX partial swaps (mobile/tablet only) */
+@media (max-width: 992px) {
+	#maincontent-refresh.gio-fade-in {
+		animation: maincontent-fade-in 140ms ease-out;
+	}
+	@keyframes maincontent-fade-in {
+		from { opacity: 0.35; }
+		to   { opacity: 1; }
+	}
+}
+
+/* wiki: hide breadcrumb row on xs (search still available via header action) */
+@media (max-width: 767px) {
+	.wiki-breadcrumb-wrap > .breadcrumb-row { display: none !important; }
+}
+
+/* prevent iOS zoom when focusing inputs (font-size must be >=16px) */
+@media (max-width: 767px) {
+	input[type="text"],
+	input[type="email"],
+	input[type="password"],
+	input[type="search"],
+	input[type="tel"],
+	input[type="url"],
+	input[type="number"],
+	input[type="date"],
+	input[type="datetime-local"],
+	input[type="time"],
+	select,
+	textarea {
+		font-size: 16px;
+	}
+}
+
 body:not(.dark-mode) .groupmaincontent ul.dropdown-menu a,
 body:not(.dark-mode) .panel-default>.panel-heading a {
 	color: #333 !important;
@@ -2752,6 +2878,67 @@ body {
 	padding-bottom: 50px;
 }
 
+/* Mobile navbar right-side action icons (search/settings gear + user
+   profile). Force flex-centering so Font Awesome glyphs with different
+   intrinsic baselines (fa-cog vs fa-user vs fa-search) all land on the
+   same vertical line. Without this they look slightly misaligned. */
+.navbar-actions-xs {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.navbar-action-xs {
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+	height: 50px;
+	padding: 0 16px !important;
+	color: #fff;
+	line-height: 1;
+}
+.navbar-action-xs i {
+	line-height: 1;
+	vertical-align: middle;
+}
+
+/* Auto-hide top navbar on reading pages (topic/message/messages/wiki).
+   Pages opt in by calling EnableTopbarAutoHide() on xs, which sets
+   .auto-hide-topbar on body and drives --topbar-offset with the live
+   scroll delta so the navbar slides 1:1 with the page. */
+@media (max-width: 767px) {
+	body.auto-hide-topbar #headerbar {
+		transform: translateY(var(--topbar-offset, 0px));
+	}
+}
+
+/* /post page only: normalize the left/right body margin to a single
+   value (12px) on phone widths. Keyed off body.post-page set by
+   grouppost.qtpl's contentLoaded so other pages are untouched. */
+@media (max-width: 767px) {
+	body.post-page #maincontent-column {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+	body.post-page #maincontent-column .panel-body {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+/* Group home page: slightly wider body margin (10px) than the rest of
+   the app so the dense text blocks (description, recent topics, tile
+   grid) don't hug the edges. Hero image still bleeds to the edge via
+   the matching -10px negative margin override below. */
+@media (max-width: 767px) {
+	body.grouphome-page #maincontent-column {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	body.grouphome-page .grouphome-hero {
+		margin-left: -10px;
+		margin-right: -10px;
+	}
+}
+
 .breadcrumb-row {
 	background-color: rgb(245, 245, 245);
 	margin-left: 0px !important;
@@ -2802,12 +2989,16 @@ body {
 }
 
 
+/* The navbar takes up 60px of content plus the iOS safe-area inset (notch)
+   in app mode. Scroll-margin values used by HTMX scroll-into-view / anchor
+   navigation need to include the inset or the scrolled-to content lands
+   behind the notch when you navigate back from a topic to the topics list. */
 #maincontent-refresh {
-	scroll-margin-top: 60px;
+	scroll-margin-top: calc(60px + env(safe-area-inset-top));
 }
 
 #manual .panel[id] {
-	scroll-margin-top: 70px;
+	scroll-margin-top: calc(70px + env(safe-area-inset-top));
 }
 
 .groupmaincontent {
@@ -4348,9 +4539,961 @@ table.table-fixed {
 	max-height: 100%;
 }
 
+/* Desktop group-home section cards: each h4-led block (Group
+   Information / Settings / Email Addresses / Integrations / Top
+   Hashtags / Archived Messages / Subscription) sits in a subtle card
+   so the page reads as grouped sections instead of one long flow. */
+.grouphome-card {
+	background: #fff;
+	border: 1px solid #e5e8ec;
+	border-radius: 8px;
+	padding: 16px 20px;
+	margin-bottom: 16px;
+}
+.grouphome-card > h4:first-child {
+	margin-top: 0;
+	margin-bottom: 12px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
+	font-weight: 600;
+}
+body.dark-mode .grouphome-card {
+	background: var(--dark-mode-primary-color);
+	border-color: var(--dark-mode-divider);
+}
+body.dark-mode .grouphome-card > h4:first-child {
+	border-bottom-color: var(--dark-mode-divider);
+}
+
+/* Inside each card: tighten the list typography, soften the icon
+   colour (icons are decoration, not emphasis), and add subtle row
+   spacing so items read as distinct entries instead of a wall. */
+.grouphome-card ul.list-unstyled {
+	margin-bottom: 0;
+}
+.grouphome-card ul.list-unstyled > li {
+	padding: 6px 0;
+	line-height: 1.5;
+}
+.grouphome-card ul.list-unstyled > li + li {
+	border-top: 1px solid #f0f2f5;
+}
+.grouphome-card ul.list-unstyled > li > i.fa-fw {
+	color: #8891a0;
+	margin-right: 6px;
+}
+body.dark-mode .grouphome-card ul.list-unstyled > li + li {
+	border-top-color: var(--dark-mode-divider);
+}
+body.dark-mode .grouphome-card ul.list-unstyled > li > i.fa-fw {
+	color: #7a8390;
+}
+
+/* Group Email Addresses: two-column label/value grid so long emails
+   don't wrap under their labels. Labels are muted; values are the
+   actionable mailto links. */
+.grouphome-email-list {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	column-gap: 14px;
+	row-gap: 8px;
+	margin: 0;
+}
+.grouphome-email-list dt {
+	color: #6b7380;
+	font-weight: 500;
+	align-self: baseline;
+	white-space: nowrap;
+}
+.grouphome-email-list dd {
+	margin: 0;
+	word-break: break-all;
+}
+body.dark-mode .grouphome-email-list dt {
+	color: var(--dark-mode-light-text-color, #98a1ae);
+}
+
+/* Top Hashtags: flex-wrap grid of chips with the thread count baked
+   in as a subtle secondary number inside each chip. Replaces the old
+   vertical list-per-row layout. */
+.grouphome-tags-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+.grouphome-tag-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 4px 10px;
+	border-radius: 14px;
+	font-size: 13px;
+	line-height: 1.3;
+	text-decoration: none;
+}
+.grouphome-tag-chip:hover,
+.grouphome-tag-chip:focus {
+	filter: brightness(0.92);
+	text-decoration: none;
+}
+.grouphome-tag-count {
+	font-size: 11px;
+	font-weight: 600;
+	opacity: 0.85;
+	padding: 1px 6px;
+	background: rgba(0, 0, 0, 0.22);
+	border-radius: 10px;
+}
+
 .grouphome-center {
 	display: block;
 	margin: auto;
+}
+
+/* Group home mobile cover hero: shallow 3:1 banner that bleeds
+   edge-to-edge under the fixed navbar. Blurred-background sandwich
+   (cover + contain layers) means any aspect-ratio upload shows in
+   full without letterbox bars. Mobile only — desktop uses the original
+   centred .grouphome-fit image markup. */
+.grouphome-hero {
+	/* Bleed edge-to-edge on xs: counter the maincontent column's 5px
+	   horizontal padding and cross the 5px gap that #maincontent
+	   leaves under the fixed navbar so the image sits flush. */
+	margin-left: -5px;
+	margin-right: -5px;
+	margin-top: -5px;
+	position: relative;
+	width: auto;
+	aspect-ratio: 3 / 1;
+	overflow: hidden;
+	background: #222;
+	margin-bottom: 14px;
+}
+.grouphome-hero-bg {
+	/* Blurred, oversized copy behind the main cover photo — fills any
+	   gap left by `object-fit: contain` without stark letterbox bars.
+	   scale 1.1 hides the blur's fuzzy edges from the container clip. */
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	filter: blur(24px) saturate(1.1);
+	transform: scale(1.1);
+	display: block;
+}
+.grouphome-hero-img {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	display: block;
+}
+
+/* group home mobile compact stats row: single-line member/topic/date
+   summary between the hero and the tiles. */
+.grouphome-stats {
+	font-size: 13px;
+	color: #707070;
+	padding: 0 4px 10px;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0;
+}
+.grouphome-stat {
+	white-space: nowrap;
+}
+.grouphome-stat i {
+	margin-right: 3px;
+}
+.grouphome-stat-sep {
+	color: #c8c8c8;
+	margin: 0 6px;
+}
+body.dark-mode .grouphome-stats {
+	color: var(--dark-mode-light-text-color);
+}
+body.dark-mode .grouphome-stat-sep {
+	color: #555;
+}
+
+/* group home mobile hashtag chips: compact chip row, no counts. */
+.grouphome-hashtags {
+	margin: 14px 0 18px;
+}
+.grouphome-hashtags-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	font-size: 13px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: #555;
+	margin-bottom: 6px;
+	padding: 0 4px;
+}
+.grouphome-hashtags-head a {
+	font-size: 12px;
+	font-weight: 400;
+	text-transform: none;
+	letter-spacing: 0;
+}
+.grouphome-hashtag-chip {
+	display: inline-block;
+	margin: 4px 4px 0 0;
+	padding: 4px 10px;
+	font-size: 13px;
+	border-radius: 14px;
+}
+body.dark-mode .grouphome-hashtags-head {
+	color: var(--dark-mode-light-text-color);
+}
+
+/* group home mobile tile grid: 4 compact square tiles per row.
+   Overrides Bootstrap's .row negative margin to match the tighter
+   per-tile column padding used below. */
+.grouphome-tiles {
+	margin: 12px -4px 18px;
+}
+
+/* group home mobile list (alternate layout; not currently rendered but
+   retained for easy toggling from the tile grid). */
+.grouphome-list {
+	margin: 12px 0 18px;
+	background: #fff;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+body.dark-mode .grouphome-list {
+	background: var(--dark-mode-primary-color);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.grouphome-row {
+	display: flex;
+	align-items: center;
+	padding: 13px 14px;
+	color: #333;
+	text-decoration: none !important;
+	border-top: 1px solid #eee;
+	min-height: 48px;
+}
+.grouphome-row:first-child {
+	border-top: 0;
+}
+.grouphome-row:hover,
+.grouphome-row:focus,
+.grouphome-row:active {
+	background: #f2f5f9;
+	color: #333;
+}
+body.dark-mode .grouphome-row {
+	color: var(--dark-mode-text-color);
+	border-top-color: var(--dark-mode-divider);
+}
+body.dark-mode .grouphome-row:hover,
+body.dark-mode .grouphome-row:focus,
+body.dark-mode .grouphome-row:active {
+	background: var(--dark-mode-highlight-color);
+	color: var(--dark-mode-text-color);
+}
+.grouphome-row-icon {
+	font-size: 18px;
+	color: #337ab7;
+	margin-right: 14px;
+	width: 22px;
+	text-align: center;
+}
+body.dark-mode .grouphome-row-icon {
+	color: #8cb4df;
+}
+.grouphome-row-label {
+	flex: 1;
+	font-size: 16px;
+	font-weight: 500;
+}
+.grouphome-row-badge {
+	background: #d9534f;
+	color: #fff;
+	padding: 1px 8px;
+	border-radius: 10px;
+	font-size: 12px;
+	font-weight: 700;
+	margin-left: 8px;
+	min-width: 20px;
+	text-align: center;
+}
+.grouphome-row-chevron {
+	font-size: 12px;
+	color: #c0c4ca;
+	margin-left: 10px;
+}
+body.dark-mode .grouphome-row-chevron {
+	color: #5a5e65;
+}
+
+/* Ensure no content hides behind the fixed bottom nav on the group
+   home. The global #maincontent-column has padding-bottom:100px, but
+   grouphome's body-height JS can reduce available space; add a little
+   breathing room here on xs so the last visible element clears the
+   nav + safe-area inset comfortably. */
+@media (max-width: 767px) {
+	#maincontent-column {
+		padding-bottom: calc(110px + env(safe-area-inset-bottom));
+	}
+}
+
+.grouphome-tile-col {
+	padding-left: 4px;
+	padding-right: 4px;
+	margin-bottom: 8px;
+}
+
+.grouphome-tile {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 10px 4px;
+	text-align: center;
+	background-color: #f5f5f5;
+	color: #333;
+	border-radius: 8px;
+	text-decoration: none;
+	position: relative;
+	min-height: 74px;
+}
+
+.grouphome-tile:hover,
+.grouphome-tile:focus,
+.grouphome-tile:active {
+	background-color: #e8e8e8;
+	color: #333;
+	text-decoration: none;
+}
+
+.grouphome-tile i {
+	font-size: 20px;
+	display: block;
+	margin-bottom: 6px;
+	color: #337ab7;
+}
+
+body.dark-mode .grouphome-tile i {
+	color: #8cb4df;
+}
+
+.grouphome-tile-label {
+	font-size: 12px;
+	display: block;
+	line-height: 1.2;
+}
+
+.grouphome-tile-badge {
+	position: absolute;
+	top: 4px;
+	right: 6px;
+	background-color: #d9534f;
+	color: #fff;
+	padding: 1px 6px;
+	border-radius: 10px;
+	font-size: 11px;
+	font-weight: bold;
+	min-width: 18px;
+}
+
+body.dark-mode .grouphome-tile {
+	background-color: var(--dark-mode-primary-color);
+	color: var(--dark-mode-text-color);
+}
+
+body.dark-mode .grouphome-tile:hover,
+body.dark-mode .grouphome-tile:focus,
+body.dark-mode .grouphome-tile:active {
+	background-color: var(--dark-mode-highlight-color);
+	color: var(--dark-mode-text-color);
+}
+
+/* Group home description: clamp long descriptions with a fade-out
+   gradient and a "Show more" toggle. JS unhides the button only when
+   the content actually overflows the clamp. */
+.grouphome-desc-wrap {
+	position: relative;
+	margin-bottom: 12px;
+}
+.grouphome-desc {
+	position: relative;
+}
+.grouphome-desc.clipped {
+	max-height: 160px;
+	overflow: hidden;
+}
+.grouphome-desc.clipped::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 48px;
+	pointer-events: none;
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+}
+body.dark-mode .grouphome-desc.clipped::after {
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--dark-mode-body-color));
+}
+.grouphome-desc.expanded {
+	max-height: none;
+	overflow: visible;
+}
+.grouphome-desc.expanded::after {
+	display: none;
+}
+.grouphome-desc-toggle {
+	background: none;
+	border: 0;
+	padding: 4px 0;
+	color: #337ab7;
+	font-weight: 500;
+	cursor: pointer;
+}
+.grouphome-desc-toggle[hidden] {
+	display: none;
+}
+body.dark-mode .grouphome-desc-toggle {
+	color: #8cb4df;
+}
+.grouphome-desc-toggle .grouphome-desc-less,
+.grouphome-desc.expanded ~ .grouphome-desc-toggle .grouphome-desc-more {
+	display: none;
+}
+.grouphome-desc.expanded ~ .grouphome-desc-toggle .grouphome-desc-less {
+	display: inline;
+}
+
+/* Recent Topics list on the group home page. Compact rows with the
+   subject on the left and a short relative-time tag on the right. */
+.grouphome-recent {
+	margin-top: 16px;
+	margin-bottom: 16px;
+}
+.grouphome-recent-head {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	margin-bottom: 6px;
+}
+.grouphome-recent-title {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 600;
+}
+.grouphome-recent-title i {
+	margin-right: 6px;
+	color: #337ab7;
+}
+body.dark-mode .grouphome-recent-title i {
+	color: #8cb4df;
+}
+.grouphome-recent-link {
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+.grouphome-recent-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.grouphome-recent-item {
+	display: flex;
+	align-items: baseline;
+	gap: 10px;
+	padding: 8px 0;
+	border-top: 1px solid #eee;
+}
+.grouphome-recent-item:first-child {
+	border-top: 0;
+}
+body.dark-mode .grouphome-recent-item {
+	border-top-color: var(--dark-mode-divider);
+}
+.grouphome-recent-subject {
+	flex: 1 1 auto;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.grouphome-recent-meta {
+	flex: 0 0 auto;
+	font-size: 12px;
+	color: #777;
+	white-space: nowrap;
+}
+body.dark-mode .grouphome-recent-meta {
+	color: var(--dark-mode-muted-color, #999);
+}
+
+/* /groups mobile layout: compact list with page title, filter, and
+   sort dropdown at the top. Desktop still renders the striped table. */
+.groupslist-mobheader {
+	padding: 8px 0 10px;
+}
+.groupslist-mobtitle {
+	margin: 0 0 10px;
+	font-size: 20px;
+	font-weight: 600;
+	color: #333;
+}
+body.dark-mode .groupslist-mobtitle {
+	color: var(--dark-mode-text-color);
+}
+.groupslist-mobctrls {
+	display: flex;
+	gap: 8px;
+	align-items: stretch;
+}
+.groupslist-mobfilter {
+	position: relative;
+	flex: 1;
+}
+.groupslist-mobfilter-icon {
+	position: absolute;
+	top: 8px;
+	left: 10px;
+	color: #999;
+	pointer-events: none;
+}
+.groupslist-mobfilter input {
+	padding-left: 28px;
+}
+.groupslist-mobsort .btn {
+	white-space: nowrap;
+}
+
+/* Mobile-only row overrides for the groups table. */
+@media (max-width: 767px) {
+	#records.table-striped > tbody > tr > td,
+	#records.table-striped > tbody > tr > th,
+	#records.table-striped > tbody > tr {
+		background-color: transparent;
+	}
+	#records > tbody > tr > td.groupslist-mobcell {
+		border-top: 1px solid #eee;
+		padding: 10px 0;
+	}
+	#records > tbody > tr:first-child > td.groupslist-mobcell {
+		border-top: 0;
+	}
+	body.dark-mode #records > tbody > tr > td.groupslist-mobcell {
+		border-top-color: var(--dark-mode-divider, #2b2b2b);
+	}
+}
+
+.groupslist-mobcell {
+	white-space: normal;
+}
+.groupslist-mobrow {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+}
+.groupslist-mobicon-wrap {
+	position: relative;
+	flex: 0 0 56px;
+}
+.groupslist-mobicon {
+	width: 56px;
+	height: 56px;
+	display: block;
+}
+.groupslist-mobunread {
+	position: absolute;
+	top: -4px;
+	right: -4px;
+	background: #d9534f;
+	color: #fff;
+	padding: 1px 6px;
+	border-radius: 10px;
+	font-size: 11px;
+	font-weight: bold;
+	min-width: 18px;
+	text-align: center;
+	line-height: 16px;
+}
+.groupslist-mobbody {
+	flex: 1;
+	min-width: 0;
+}
+.groupslist-mobtitle {
+	font-size: 16px;
+	line-height: 1.25;
+	margin-bottom: 2px;
+}
+.groupslist-mobrole {
+	font-size: 10px;
+	margin-left: 4px;
+	vertical-align: 2px;
+}
+.groupslist-moblock {
+	margin-left: 6px;
+	color: #999;
+}
+.groupslist-mobdesc {
+	font-size: 12px;
+	color: #666;
+	line-height: 1.35;
+	margin: 2px 0 4px;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+body.dark-mode .groupslist-mobdesc {
+	color: var(--dark-mode-light-text-color);
+}
+.groupslist-mobmeta {
+	font-size: 12px;
+	color: #888;
+}
+.groupslist-mobmeta-sep {
+	margin: 0 6px;
+	color: #ccc;
+}
+.groupslist-mobpending-row {
+	margin-top: 6px;
+}
+.groupslist-mobpending {
+	display: inline-block;
+	margin-right: 4px;
+}
+
+/* /post page: sender user-chip on the left, "# Add Tags" button on
+   the right. Subject line below takes the full width. */
+.grouppost-sender-row {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	gap: 6px;
+	width: 100%;
+}
+.grouppost-sender-row .dropdown {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+.grouppost-sender-row .dropdown .user-chip {
+	max-width: 100%;
+}
+.grouppost-sender-row .grouppost-tags-btn {
+	flex: 0 0 auto;
+}
+
+/* Rounded corners on the TinyMCE editor wrapper so it feels like a
+   contained card instead of a bare rectangle. overflow:hidden keeps
+   the toolbar's own corners clipped to the outer radius. */
+.tox.tox-tinymce {
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+/* On xs, tighten the gap between the Subject row and the editor. */
+@media (max-width: 767px) {
+	#postform .form-group + .tox.tox-tinymce {
+		margin-top: 0;
+	}
+	#postform .form-group {
+		margin-bottom: 8px;
+	}
+}
+
+/* Shared user-identity chip. Used as the "From" selector on
+   /post and /reply, the sender dropdown on /pendingmsg, and
+   similar user-identity dropdowns elsewhere. Reads as a tappable
+   control rather than an underlined link. */
+.user-chip {
+	display: inline-flex;
+	align-items: center;
+	padding: 4px 12px 4px 4px;
+	border: 1px solid #ccc;
+	border-radius: 20px;
+	background: #fff;
+	color: #333;
+	text-decoration: none;
+	max-width: 100%;
+}
+.user-chip:hover,
+.user-chip:focus,
+.user-chip:active {
+	background: #f2f5f9;
+	color: #333;
+	text-decoration: none;
+	border-color: #b8bdc4;
+}
+body.dark-mode .user-chip {
+	background: var(--dark-mode-primary-color);
+	color: var(--dark-mode-text-color);
+	border-color: var(--dark-mode-divider);
+}
+body.dark-mode .user-chip:hover,
+body.dark-mode .user-chip:focus {
+	background: var(--dark-mode-highlight-color);
+	color: var(--dark-mode-text-color);
+}
+.user-chip-inner {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	min-width: 0;
+}
+.user-chip-avatar {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	flex: 0 0 32px;
+}
+.user-chip-avatar-icon {
+	font-size: 28px;
+	color: #b8bdc4;
+	line-height: 1;
+}
+.user-chip-name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 220px;
+}
+/* Non-interactive version: same avatar + name typography, but no
+   border/background/hover. Used where a user is being displayed but
+   has no associated dropdown. */
+.user-chip-static {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	min-width: 0;
+}
+
+/* /messages sticky-wiki alert: on xs, the multi-line wiki preview is
+   collapsed behind a "📌 Pinned" chip that expands on tap. Desktop
+   unchanged. */
+.stickywiki-toggle {
+	background: none;
+	border: none;
+	padding: 0;
+	color: #337ab7;
+	font-weight: 500;
+	cursor: pointer;
+}
+.stickywiki-toggle i {
+	margin-right: 4px;
+}
+.stickywiki-toggle-caret {
+	transition: transform 0.15s ease;
+}
+.stickywiki-alert.open .stickywiki-toggle-caret {
+	transform: rotate(180deg);
+}
+body.dark-mode .stickywiki-toggle {
+	color: #8cb4df;
+}
+@media (max-width: 767px) {
+	.stickywiki-alert {
+		padding: 10px 28px 10px 14px;
+	}
+	.stickywiki-alert #stickywiki,
+	.stickywiki-alert #readmorelink {
+		display: none;
+	}
+	.stickywiki-alert.open #stickywiki,
+	.stickywiki-alert.open #readmorelink {
+		display: block;
+		margin-top: 8px;
+	}
+}
+
+/* /messages expanded view: hide subject-row on xs when the subject
+   matches the previous message (thread continuation). */
+.expanded-subject-dup {
+	display: none;
+}
+@media (min-width: 768px) {
+	.expanded-subject-dup {
+		display: block;
+	}
+}
+
+/* Footer strip at the bottom of an expanded-message card. Stretches
+   to the card edges via negative margin; adds rounded bottom corners. */
+.expanded-message-footer {
+	margin-left: -10px;
+	margin-right: -10px;
+	margin-bottom: -10px;
+	padding: 4px 10px 2px;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+/* Reply / Like / More buttons under each message. Desktop shows icon
+   + label; xs hides the label to keep the row compact. min-height of
+   44px keeps the tap target comfortable on phones. All three buttons
+   share the same inline-flex layout so they baseline-align. */
+.msg-action {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	min-height: 44px;
+	padding: 0 4px;
+	line-height: 1;
+}
+.msg-action-count {
+	font-size: 12px;
+	opacity: 0.75;
+}
+/* Align the More dropdown with the other action buttons, but only on
+   the variant that's actually visible at each breakpoint — overriding
+   `display` on the hidden variant would break the wide/narrow swap. */
+@media (min-width: 768px) {
+	.msg-more-drop.dropdown-wide {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		min-height: 44px;
+		padding: 0 4px;
+		line-height: 1;
+	}
+}
+@media (max-width: 767px) {
+	.msg-action-label {
+		display: none;
+	}
+	.msg-action i {
+		font-size: 18px;
+	}
+	.msg-more-drop.dropdown-narrow {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		padding: 0 4px;
+		line-height: 1;
+		/* font-size: 0 hides the button's text label on xs while
+		   the icon, explicitly sized below, stays visible. The
+		   dropdown template renders the label inline and we can't
+		   easily wrap it in its own span to hidden-xs it. */
+		font-size: 0;
+	}
+	.msg-more-drop.dropdown-narrow i {
+		font-size: 18px;
+	}
+}
+
+/* /message single-message page: on mobile, indent the subject header
+   so it aligns with the user chip and body inside the card below,
+   instead of hugging the viewport edge. */
+@media (max-width: 767px) {
+	.groupmessage-subject {
+		padding-left: 11px;
+	}
+}
+
+
+/* /messages expanded view: layout for subject row. Date/link float
+   right on the subject row; the sender user-chip sits on its own
+   row below, left-aligned. */
+.expanded-subject-row {
+	display: flex;
+	align-items: baseline;
+	gap: 8px;
+}
+.expanded-subject-row .subject {
+	flex: 1 1 auto;
+	min-width: 0;
+	order: 1;
+}
+.expanded-subject-meta {
+	flex: 0 0 auto;
+	text-align: right;
+	white-space: nowrap;
+	order: 2;
+}
+.expanded-sender-row {
+	margin-top: 6px;
+}
+/* On pages that omit the in-card subject (/topic, /message), the
+   per-message meta (date + permalink) floats right in the sender row
+   so the user-chip keeps the left edge. */
+.expanded-sender-col {
+	display: flex;
+	align-items: baseline;
+	gap: 8px;
+}
+.expanded-sender-col .dropdown,
+.expanded-sender-col .user-chip-static {
+	flex: 1 1 auto;
+	min-width: 0;
+	order: 1;
+}
+.expanded-sender-meta {
+	flex: 0 0 auto;
+	text-align: right;
+	white-space: nowrap;
+	order: 2;
+}
+
+/* Bold the subject on mobile so it's easy to spot vs the message body. */
+@media (max-width: 767px) {
+	.subject,
+	body.dark-mode .subject {
+		font-weight: 600;
+	}
+}
+
+/* Message-subject hashtag pills: let them wrap under the subject on
+   xs instead of overflowing horizontally. */
+@media (max-width: 767px) {
+	.subject {
+		display: inline;
+	}
+	.subject .hashtag-position,
+	.subject .hashtag-btn {
+		display: inline-block;
+		margin-top: 4px;
+	}
+}
+
+/* /post page: moderator posting options. Always visible on desktop;
+   on xs, collapsed behind a "Posting options" toggle so the page
+   isn't cluttered for the common composer. */
+.grouppost-options-toggle {
+	display: none;
+	background: none;
+	border: none;
+	padding: 8px 0;
+	color: #337ab7;
+	font-weight: 500;
+	cursor: pointer;
+}
+.grouppost-options-toggle i {
+	margin-right: 4px;
+}
+.grouppost-options-caret {
+	transition: transform 0.15s ease;
+}
+.grouppost-options.open .grouppost-options-caret {
+	transform: rotate(180deg);
+}
+body.dark-mode .grouppost-options-toggle {
+	color: #8cb4df;
+}
+@media (max-width: 767px) {
+	.grouppost-options-toggle {
+		display: inline-flex;
+		align-items: center;
+	}
+	.grouppost-options:not(.open) .grouppost-options-body {
+		display: none;
+	}
 }
 
 /* database table */
@@ -4577,6 +5720,39 @@ body.app .navbar-fixed-top {
 	object-fit: cover;
 }
 
+/* On phones, when an attachment row contains any image, switch to a
+   responsive 2-column flex grid with taller cells so photos are
+   actually viewable instead of cramped 150x100 thumbnails. Two
+   images split 50/50; three or more wrap into rows of two (a lone
+   third item stays at 50% width instead of stretching). */
+@media (max-width: 767px) {
+	.attachment-row:has(.attachment-image) {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px;
+		margin-left: 0;
+		margin-right: 0;
+	}
+	/* Bootstrap 3's .row clearfix pseudo-elements become zero-width
+	   flex items that offset the first child by one gap. Suppress
+	   them so the grid aligns at the row's left edge. */
+	.attachment-row:has(.attachment-image)::before,
+	.attachment-row:has(.attachment-image)::after {
+		display: none;
+	}
+	.attachment-row:has(.attachment-image) > a {
+		flex: 1 1 calc(50% - 4px);
+		min-width: 0;
+		padding: 0;
+		display: block;
+	}
+	.attachment-row:has(.attachment-image) > a > .attachment-box {
+		width: 100%;
+		height: 180px;
+		margin: 0;
+	}
+}
+
 .attachment-box:hover .attachment-icon,
 .attachment-box:hover .attachment-image {
 	opacity: 0;
@@ -4730,7 +5906,13 @@ body.app .navbar-fixed-top {
 		margin-right: -5px;
 	}
 
-	.col-xs-12,
+	/* Bring every Bootstrap column to the same 5px gutter as col-xs-12
+	   so side-by-side halves (e.g., Start Date + Start Time) line up
+	   with the full-width fields above and below them. Without this,
+	   col-xs-6 inherits Bootstrap's default 15px padding and the half-
+	   width inputs get inset 10px further than their siblings. */
+	.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6,
+	.col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12,
 	.narrow-padding {
 		padding-left: 5px;
 		padding-right: 5px;
@@ -4760,7 +5942,7 @@ body.app .navbar-fixed-top {
 	}
 
 	#chat-container {
-		height: calc(100% - 40px);
+		height: 100%;
 	}
 }
 
@@ -4783,6 +5965,138 @@ body.app .navbar-fixed-top {
 	align-items: center;
 }
 
+/* chat video thumbnails are wrapped in an <a> that opens the video modal;
+   the default underline on the anchor shows up as a stray underscore next
+   to the image since the anchor only contains whitespace + an <img>. */
+a.video-link, a.video-link:hover, a.video-link:focus {
+	text-decoration: none;
+}
+
+/* File attachment card in the composer preview (before sending) and in
+   delivered messages (after). Both use the same inner layout: icon on the
+   left, filename + size stacked in the middle, download chevron on the
+   right for delivered ones. */
+.thumbnail.chat-preview-file {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px 12px;
+	min-width: 220px;
+	max-width: 320px;
+	background: #f5f5f5;
+	border-radius: 10px;
+}
+.chat-preview-file-icon {
+	font-size: 26px;
+	color: #337ab7;
+	flex-shrink: 0;
+}
+.chat-preview-file-meta {
+	flex: 1;
+	min-width: 0;
+}
+.chat-preview-file-name {
+	font-size: 14px;
+	font-weight: 500;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.chat-preview-file-size {
+	font-size: 12px;
+	color: #888;
+}
+
+/* In-message version: link, so it needs to override default anchor styling
+   and provide a pressed/hover state. */
+a.chat-file-card {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px 12px;
+	min-width: 0;
+	max-width: 100%;
+	background: rgba(0, 0, 0, 0.06);
+	border-radius: 10px;
+	text-decoration: none !important;
+	color: inherit;
+}
+
+/* Wrapper span around chat media is inline by default, which lets a
+   flex child (e.g. .chat-file-card with a long filename) overflow its
+   parent bubble. Make it a block with max-width:100% so the card's
+   own max-width:100% actually constrains to the bubble. */
+[id^="msgpayload-"] {
+	display: block;
+	max-width: 100%;
+	min-width: 0;
+}
+a.chat-file-card:hover,
+a.chat-file-card:focus {
+	background: rgba(0, 0, 0, 0.10);
+	text-decoration: none !important;
+}
+.chat-message.sent a.chat-file-card {
+	background: rgba(255, 255, 255, 0.15);
+	color: #fff;
+}
+.chat-message.sent a.chat-file-card:hover,
+.chat-message.sent a.chat-file-card:focus {
+	background: rgba(255, 255, 255, 0.22);
+}
+.chat-file-card-icon {
+	font-size: 26px;
+	color: inherit;
+	flex-shrink: 0;
+}
+.chat-file-card-meta {
+	flex: 1;
+	min-width: 0;
+}
+.chat-file-card-name {
+	font-size: 14px;
+	font-weight: 500;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.chat-file-card-size {
+	font-size: 12px;
+	opacity: 0.7;
+}
+.chat-file-card-action {
+	font-size: 16px;
+	opacity: 0.6;
+	flex-shrink: 0;
+}
+body.dark-mode .thumbnail.chat-preview-file {
+	background: #2b2b2b;
+	color: #e9ecef;
+}
+body.dark-mode a.chat-file-card {
+	background: rgba(255, 255, 255, 0.08);
+}
+body.dark-mode a.chat-file-card:hover,
+body.dark-mode a.chat-file-card:focus {
+	background: rgba(255, 255, 255, 0.14);
+}
+
+/* video in chat reply preview: thumbnail with a play-icon overlay so the user
+   can tell at a glance they've attached a video instead of an image. */
+.thumbnail.chat-preview-video {
+	position: relative;
+}
+.chat-preview-video-play {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 42px;
+	color: rgba(255, 255, 255, 0.9);
+	text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+	pointer-events: none;
+}
+
 .chat-form {
 	display: flex;
 	padding: 10px;
@@ -4797,6 +6111,251 @@ body.app .navbar-fixed-top {
 .chat-message-content-wrapper {
 	display: flex;
 	flex-direction: row;
+	max-width: 100%;
+	min-width: 0;
+}
+
+/* Chat video viewer. Edge-to-edge black on mobile (iOS-photos feel),
+   aspect-fit and centered on desktop. Replaces the Bootstrap-default
+   modal chrome so a portrait video inside a square-ish dialog no
+   longer leaves empty white margins or gets clipped off-screen. */
+.modal.video-modal {
+	padding: 0 !important;
+}
+.modal.video-modal.in {
+	display: flex !important;
+}
+.video-modal-dialog {
+	margin: 0 auto;
+	width: 100%;
+	max-width: 100vw;
+	/* dvh tracks the iOS URL-bar collapse; plain vh leaves the viewer
+	   taller than visible and clips the bottom of the video. */
+	height: 100dvh;
+	padding: 0;
+	pointer-events: auto;
+}
+.video-modal-content {
+	background: #000;
+	border: none;
+	border-radius: 0;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	box-shadow: none;
+	position: relative;
+}
+.video-modal-body {
+	flex: 1 1 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	min-height: 0;
+	background: #000;
+}
+.video-modal-player {
+	width: 100%;
+	height: 100%;
+	max-height: 100%;
+	max-width: 100%;
+	object-fit: contain;
+	background: #000;
+	outline: none;
+}
+/* Floating circular close button in the top-right corner. 44px tap
+   target meets the iOS HIG minimum; safe-area-inset keeps it below
+   notches and the iOS status bar. */
+.video-modal-close {
+	position: absolute;
+	top: calc(12px + env(safe-area-inset-top));
+	right: calc(12px + env(safe-area-inset-right));
+	width: 44px;
+	height: 44px;
+	border: none;
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.55);
+	color: #fff;
+	font-size: 18px;
+	line-height: 1;
+	cursor: pointer;
+	z-index: 10;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0.9;
+	transition: opacity 0.15s, background-color 0.15s;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+.video-modal-close:hover,
+.video-modal-close:focus {
+	opacity: 1;
+	background: rgba(0, 0, 0, 0.75);
+	color: #fff;
+	outline: none;
+}
+/* Bottom metadata strip: sender · time  [Download] */
+.video-modal-meta {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+	background: rgba(0, 0, 0, 0.72);
+	color: rgba(255, 255, 255, 0.92);
+	font-size: 13px;
+	flex-shrink: 0;
+}
+.video-modal-meta-info {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.video-modal-meta-sender {
+	font-weight: 600;
+}
+.video-modal-meta-sep {
+	opacity: 0.6;
+	margin: 0 4px;
+}
+.video-modal-meta-date {
+	opacity: 0.85;
+}
+.video-modal-download {
+	border: none;
+	background: rgba(255, 255, 255, 0.14);
+	color: #fff;
+	border-radius: 6px;
+	padding: 8px 12px;
+	font-size: 13px;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	flex-shrink: 0;
+	cursor: pointer;
+	transition: background-color 0.15s;
+	min-height: 36px;
+}
+.video-modal-download:hover,
+.video-modal-download:focus {
+	background: rgba(255, 255, 255, 0.24);
+	color: #fff;
+	outline: none;
+}
+
+/* Desktop: centred viewer with rounded corners, not fullscreen.
+   Dimensions are set inline by JS on `loadedmetadata` to match the
+   video's natural aspect ratio — otherwise a portrait clip in a
+   fixed-size box leaves black bars on either side. Caps below apply
+   before metadata loads or as an upper bound if JS can't size. */
+@media (min-width: 768px) {
+	.modal.video-modal.in {
+		align-items: center;
+		justify-content: center;
+	}
+	.video-modal-dialog {
+		width: auto;
+		max-width: 95vw;
+		height: auto;
+		max-height: 95dvh;
+		margin: 0 auto;
+	}
+	.video-modal-content {
+		width: auto;
+		height: auto;
+		max-width: min(960px, 95vw);
+		max-height: min(720px, 95dvh);
+		border-radius: 12px;
+		overflow: hidden;
+	}
+	.video-modal-body {
+		min-height: 0;
+	}
+}
+
+/* Audio voice-message bubble. A subtle translucent container holds
+   the play button and a waveform. Colours adapt to the surrounding
+   chat-message context (received / sent / dark mode) so the controls
+   always contrast with the bubble behind them. Waveform bars use
+   currentColor so a single `color` override per context retints them.
+   Lives in the main stylesheet (not an ExtraHeader <style>) so the
+   rules are still present after HTMX partial swaps into /chat/. */
+.audio-waveform-container {
+	background-color: rgba(0, 0, 0, 0.05);
+	border-radius: 18px;
+	padding: 6px 12px 6px 6px;
+	color: #6b6b6b;
+}
+.dark-mode .audio-waveform-container {
+	background-color: rgba(255, 255, 255, 0.08);
+	color: #bfbfbf;
+}
+/* Sent (blue) bubble: the default blue button would vanish into the
+   bubble. Flip the palette — white pill button with a blue play icon,
+   translucent-white waveform bars. */
+.chat-message.sent .audio-waveform-container {
+	background-color: rgba(255, 255, 255, 0.15);
+	color: rgba(255, 255, 255, 0.85);
+}
+.audio-waveform {
+	border-radius: 4px;
+	height: 36px;
+}
+/* Clip duration shown to the right of the waveform. Inherits `color`
+   from the container (retinted per bubble context), so contrast stays
+   correct on sent/received/dark bubbles. */
+.audio-duration {
+	font-size: 12px;
+	font-variant-numeric: tabular-nums;
+	opacity: 0.8;
+	flex-shrink: 0;
+}
+.audio-play-button {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	border: none;
+	background-color: #337ab7;
+	color: #fff;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 13px;
+	flex-shrink: 0;
+	transition: background-color 0.2s;
+}
+/* The fa-play glyph has whitespace to its right inside the bounding
+   box, so flex-centring leaves the triangle visually shifted left.
+   Nudge it right for optical centring. Undone when the icon class
+   switches to fa-pause (symmetric glyph). */
+.audio-play-button .fa-play {
+	transform: translateX(1px);
+}
+.audio-play-button:hover {
+	background-color: #2a6496;
+}
+.audio-play-button:active {
+	background-color: #1f4e78;
+}
+.dark-mode .audio-play-button {
+	background-color: #4a90e2;
+}
+.dark-mode .audio-play-button:hover {
+	background-color: #3a7bc8;
+}
+.chat-message.sent .audio-play-button {
+	background-color: #fff;
+	color: #337ab7;
+}
+.chat-message.sent .audio-play-button:hover {
+	background-color: #eef3f8;
+}
+.chat-message.sent .audio-play-button:active {
+	background-color: #dde7f2;
 }
 
 .chat-message {
@@ -4813,6 +6372,8 @@ body.app .navbar-fixed-top {
 	padding: 5px;
 	border-radius: 10px;
 	word-break: break-word;
+	max-width: 100%;
+	min-width: 0;
 }
 
 
@@ -4852,6 +6413,154 @@ body.app .navbar-fixed-top {
 
 .chat-message.emojimargin {
 	margin-bottom: 30px;
+}
+
+/* Typing indicator: strip above the composer that shows "X is typing…"
+   with three pulsing dots. Rendered once per user; automatically removes
+   itself after the typing event stops arriving. */
+.chat-typing-indicator {
+	padding: 4px 12px;
+	font-size: 12px;
+	color: #888;
+	background: transparent;
+}
+.chat-typing-row {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 2px 0;
+}
+.chat-typing-name {
+	font-style: italic;
+}
+.chat-typing-dots {
+	display: inline-flex;
+	gap: 3px;
+	align-items: center;
+}
+.chat-typing-dots span {
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	background: #888;
+	opacity: 0.35;
+	animation: chat-typing-bounce 1.2s infinite ease-in-out both;
+}
+.chat-typing-dots span:nth-child(2) { animation-delay: 0.15s; }
+.chat-typing-dots span:nth-child(3) { animation-delay: 0.30s; }
+@keyframes chat-typing-bounce {
+	0%, 80%, 100% { transform: translateY(0); opacity: 0.35; }
+	40%           { transform: translateY(-3px); opacity: 1; }
+}
+
+/* Emoji picker: anchored above the composer. Kept compact on mobile so it
+   doesn't swallow the chat history, and wide-open on desktop. */
+#chat-emoji-picker {
+	position: absolute;
+	bottom: 60px;
+	left: 8px;
+	right: 8px;
+	max-height: 260px;
+	overflow-y: auto;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+	padding: 8px;
+	z-index: 20;
+}
+@media (min-width: 768px) {
+	#chat-emoji-picker {
+		left: auto;
+		right: 10px;
+		width: 340px;
+	}
+}
+.emoji-picker-label {
+	font-size: 11px;
+	text-transform: uppercase;
+	color: #888;
+	letter-spacing: 0.04em;
+	margin: 6px 2px 4px;
+}
+.emoji-picker-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+	gap: 2px;
+}
+.emoji-picker-btn {
+	background: transparent;
+	border: 0;
+	padding: 4px;
+	font-size: 22px;
+	line-height: 1;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.emoji-picker-btn:hover,
+.emoji-picker-btn:focus {
+	background: #eef3fa;
+	outline: none;
+}
+body.dark-mode #chat-emoji-picker {
+	background: #2b2b2b;
+	border-color: #444;
+}
+body.dark-mode .emoji-picker-btn:hover,
+body.dark-mode .emoji-picker-btn:focus {
+	background: #3b4657;
+}
+
+/* Swipe-to-reply indicator: a small reply arrow revealed in the message
+   gutter as the bubble slides left during a horizontal swipe. Goes solid
+   blue once the user has swiped far enough to trigger the reply. */
+.chat-swipe-reply-hint {
+	position: absolute;
+	right: 8px;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 18px;
+	color: #999;
+	opacity: 0;
+	pointer-events: none;
+	transition: color 100ms ease;
+}
+.chat-swipe-reply-hint.armed {
+	color: #337ab7;
+}
+
+/* Grouped: this message follows another message from the same user within
+   the group-gap window. Tighten spacing and hide the repeated header
+   (avatar/username) and trailing timestamp so a run of messages reads as a
+   single cluster instead of a stack of isolated bubbles. */
+.chat-message.grouped {
+	margin-bottom: 2px;
+}
+/* A grouped message that also has tapbacks still needs the full 30px gutter
+   so the tapback chip doesn't overlap the next bubble in the group. */
+.chat-message.grouped.emojimargin {
+	margin-bottom: 30px;
+}
+/* File-card bubbles have a solid-color card that starts right at the bubble's
+   top edge, so any incoming tapback from the message above visually sits
+   on top of the card. Give them a little top margin to push them clear.
+   :has() is widely supported in current browsers; it no-ops where it isn't. */
+.chat-message:has(a.chat-file-card) {
+	margin-top: 6px;
+}
+.chat-message.emojimargin + .chat-message:has(a.chat-file-card) {
+	margin-top: 14px;
+}
+.chat-message.grouped .chat-profile-picture-wrapper {
+	visibility: hidden;
+}
+.chat-message.received.grouped .chat-message-content > span[id^="msguser-"],
+.chat-message.sent.grouped .chat-message-content > span[id^="msguser-"] {
+	display: none;
+}
+.chat-message.grouped .chat-timestamp-sent,
+.chat-message.grouped .chat-timestamp-received {
+	display: none;
 }
 
 .chat-profile-picture {
@@ -4954,11 +6663,117 @@ body.app .navbar-fixed-top {
 
 #chat-username-popup {
 	position: absolute;
-	max-height: 200px;
+	max-height: 240px;
 	overflow-y: auto;
 	bottom: 50px;
-	left: 80px;
+	left: 10px;
+	right: 10px;
 	z-index: 1000;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+	padding: 4px;
+}
+@media (min-width: 768px) {
+	#chat-username-popup {
+		right: auto;
+		width: 360px;
+	}
+}
+body.dark-mode #chat-username-popup {
+	background: #2b2b2b;
+	border-color: #444;
+}
+.chat-mention-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 6px 8px;
+	border: 0 !important;
+	border-radius: 6px;
+	background: transparent !important;
+}
+.chat-mention-item:hover,
+.chat-mention-item:focus,
+.chat-mention-item.active {
+	background: #eef3fa !important;
+	color: inherit !important;
+}
+body.dark-mode .chat-mention-item:hover,
+body.dark-mode .chat-mention-item:focus,
+body.dark-mode .chat-mention-item.active {
+	background: #3b4657 !important;
+}
+.chat-mention-avatar {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background: #eee;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	flex-shrink: 0;
+	color: #888;
+}
+.chat-mention-avatar img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+body.dark-mode .chat-mention-avatar {
+	background: #3b4657;
+	color: #aaa;
+}
+.chat-mention-names {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	flex: 1;
+}
+.chat-mention-display {
+	font-size: 14px;
+	font-weight: 500;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.chat-mention-handle {
+	font-size: 12px;
+	color: #888;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.chat-mention-item mark {
+	background: #fff3a8;
+	color: inherit;
+	padding: 0;
+}
+body.dark-mode .chat-mention-item mark {
+	background: #5d5518;
+	color: #fff3a8;
+}
+
+/* Mention pill shown inside delivered messages when the author typed an
+   @handle that matches a known chat member. Not a link — just a colored
+   badge to help the mention stand out visually. */
+.chat-mention-pill {
+	display: inline-block;
+	padding: 1px 6px;
+	border-radius: 10px;
+	background: rgba(51, 122, 183, 0.15);
+	color: #2b669a;
+	font-weight: 500;
+}
+.chat-message.sent .chat-mention-pill {
+	background: rgba(255, 255, 255, 0.25);
+	color: #fff;
+}
+body.dark-mode .chat-mention-pill {
+	background: rgba(100, 160, 220, 0.22);
+	color: #8cb4df;
 }
 
 .chat-reply-bubble-them {
@@ -5139,6 +6954,14 @@ body.app .navbar-fixed-top {
 	padding: 0 40px;
 	/* Padding added */
 	padding-top: env(safe-area-inset-top);
+	/* Own horizontal gestures so the swipe handler can drive image paging;
+	   vertical pan and pinch-zoom still go through to the browser. */
+	touch-action: pan-y pinch-zoom;
+}
+.viewer-image-container img#currentImage {
+	-webkit-user-drag: none;
+	user-select: none;
+	will-change: transform;
 }
 
 .viewer-arrow {
@@ -5906,6 +7729,186 @@ thead {
 
 .feed-border {
 	border-bottom: 1px solid #eee;
+}
+
+/* /feed mobile heading. */
+.feed-mobtitle {
+	margin: 8px 0 12px;
+	font-size: 20px;
+	font-weight: 600;
+	color: #333;
+}
+body.dark-mode .feed-mobtitle {
+	color: var(--dark-mode-text-color);
+}
+
+/* /feed stories bar: horizontal-scrolling row of group circles. Only
+   rendered when the user has 3+ active groups. */
+.feed-group-circles {
+	overflow-x: auto;
+	white-space: nowrap;
+	padding: 6px 0 10px;
+	-webkit-overflow-scrolling: touch;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+.feed-group-circles::-webkit-scrollbar {
+	display: none;
+}
+.feed-group-circle {
+	display: inline-block;
+	width: 76px;
+	margin: 0 4px;
+	text-align: center;
+	vertical-align: top;
+	text-decoration: none;
+	color: inherit;
+}
+.feed-group-circle-iconwrap {
+	position: relative;
+	display: inline-block;
+	margin-bottom: 4px;
+}
+.feed-group-circle-img {
+	width: 56px;
+	height: 56px;
+	display: block;
+}
+.feed-group-circle-unread .feed-group-circle-img {
+	box-shadow: 0 0 0 2px #fff, 0 0 0 4px #337ab7;
+}
+body.dark-mode .feed-group-circle-unread .feed-group-circle-img {
+	box-shadow: 0 0 0 2px var(--dark-mode-bg), 0 0 0 4px #8cb4df;
+}
+.feed-group-circle-badge {
+	position: absolute;
+	top: -2px;
+	right: -2px;
+	background: #d9534f;
+	color: #fff;
+	padding: 1px 6px;
+	border-radius: 10px;
+	font-size: 11px;
+	font-weight: bold;
+	min-width: 18px;
+	text-align: center;
+	line-height: 16px;
+	border: 2px solid #fff;
+}
+body.dark-mode .feed-group-circle-badge {
+	border-color: var(--dark-mode-bg);
+}
+.feed-group-circle-label {
+	font-size: 11px;
+	line-height: 1.2;
+	height: 28px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	word-break: break-word;
+}
+
+/* /feed section headers: icon + title + VIEW ALL link. Replaces the
+   ad-hoc feed-border + inline-styled <span>s used previously. */
+.feed-section-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	padding: 10px 0 6px;
+	border-bottom: 1px solid #eee;
+	margin-top: 8px;
+}
+body.dark-mode .feed-section-header {
+	border-bottom-color: var(--dark-mode-divider);
+}
+.feed-section-title {
+	margin: 0;
+	font-size: 15px;
+	font-weight: 600;
+	color: #333;
+}
+body.dark-mode .feed-section-title {
+	color: var(--dark-mode-text-color);
+}
+.feed-section-title i {
+	color: #337ab7;
+	margin-right: 6px;
+	width: 18px;
+	text-align: center;
+}
+body.dark-mode .feed-section-title i {
+	color: #8cb4df;
+}
+.feed-section-link {
+	font-size: 11px;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+/* /feed topic rows: let hashtags wrap under the date instead of
+   being hidden on xs. */
+.feed-topic-meta {
+	white-space: normal;
+	text-align: right;
+	vertical-align: top;
+}
+.feed-topic-meta-inner {
+	font-size: 12px;
+	text-align: right;
+	white-space: nowrap;
+}
+.feed-topic-tags {
+	margin-top: 4px;
+	white-space: normal;
+}
+.feed-topic-tags .hashtag-position {
+	margin-left: 4px;
+	margin-top: 2px;
+	display: inline-block;
+}
+
+/* /feed empty state shown when the user has no groups with recent
+   activity. */
+.feed-empty {
+	text-align: center;
+	padding: 40px 20px;
+}
+.feed-empty-icon {
+	font-size: 48px;
+	color: #c0c4ca;
+	margin-bottom: 16px;
+}
+body.dark-mode .feed-empty-icon {
+	color: #5a5e65;
+}
+.feed-empty-title {
+	margin: 0 0 8px;
+	font-size: 18px;
+	font-weight: 600;
+}
+.feed-empty-body {
+	color: #888;
+	margin-bottom: 20px;
+}
+
+/* /feed "Other updates" row on xs: small uppercase kind label in
+   front of each item so users can distinguish subgroup / wiki /
+   database at a glance. */
+.feed-other-kind {
+	display: inline-block;
+	font-size: 10px;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: #888;
+	letter-spacing: 0.5px;
+	margin-right: 6px;
+	min-width: 58px;
+}
+body.dark-mode .feed-other-kind {
+	color: var(--dark-mode-light-text-color);
 }
 
 
@@ -7026,5 +9029,325 @@ body.dark-mode #imageLightbox #lightboxTextContent {
 		padding: 10px 8px;
 		font-size: 16px;
 	}
+}
+
+/* =========================================================================
+   Native-feel polish (applies at all widths). These rules sit at the end of
+   the stylesheet so they override Bootstrap defaults by source order without
+   needing !important.
+   ========================================================================= */
+
+/* 1. Brand-tinted native form controls. One-liner that colors checkboxes,
+      radios, and range sliders with the brand blue — no JS, no custom
+      components, no markup changes. */
+input[type="checkbox"],
+input[type="radio"],
+input[type="range"] {
+	accent-color: #337ab7;
+}
+
+/* 2. Selection highlight picks up the brand tint instead of the OS default.
+      Subtle enough to stay legible over any background. */
+::selection {
+	background-color: rgba(51, 122, 183, 0.25);
+	color: inherit;
+}
+::-moz-selection {
+	background-color: rgba(51, 122, 183, 0.25);
+	color: inherit;
+}
+
+/* 3. Softer form-input treatment. Gentle radius, thin border, no inner
+      shadow. Keeping Bootstrap's default height/padding so inputs line up
+      with adjacent input-group addons, buttons, and inline labels. Focus
+      ring only for keyboard users via :focus-visible — touch and
+      click-focus stay quiet. */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="url"],
+input[type="search"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+select,
+textarea,
+.form-control {
+	border-radius: 10px;
+	border: 1px solid #d6d9de;
+	box-shadow: none;
+	transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+/* Native date/time inputs on mobile add an inline glyph and extra user-
+   agent padding, which makes them taller than sibling text inputs that use
+   Bootstrap's .form-control. Force them to the same box model so a native
+   <input type=date> lines up with a flatpickr-wrapped <input type=text>.
+   iOS also defaults date/time inputs to centered text; align left to match
+   the rest of the form. */
+input[type="date"].form-control,
+input[type="time"].form-control,
+input[type="datetime-local"].form-control {
+	height: 34px;
+	padding: 6px 12px;
+	line-height: 1.42857143;
+	box-sizing: border-box;
+	text-align: left;
+	-webkit-appearance: none;
+	appearance: none;
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+input[type="datetime-local"]:focus,
+select:focus,
+textarea:focus,
+.form-control:focus {
+	outline: none;
+	box-shadow: none;
+	border-color: #337ab7;
+}
+/* Keyboard-only focus gets a visible accent ring. */
+input[type="text"]:focus-visible,
+input[type="email"]:focus-visible,
+input[type="password"]:focus-visible,
+input[type="number"]:focus-visible,
+input[type="tel"]:focus-visible,
+input[type="url"]:focus-visible,
+input[type="search"]:focus-visible,
+input[type="date"]:focus-visible,
+input[type="time"]:focus-visible,
+input[type="datetime-local"]:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.form-control:focus-visible {
+	box-shadow: 0 0 0 3px rgba(51, 122, 183, 0.25);
+	border-color: #337ab7;
+}
+body.dark-mode input[type="text"],
+body.dark-mode input[type="email"],
+body.dark-mode input[type="password"],
+body.dark-mode input[type="number"],
+body.dark-mode input[type="tel"],
+body.dark-mode input[type="url"],
+body.dark-mode input[type="search"],
+body.dark-mode select,
+body.dark-mode textarea,
+body.dark-mode .form-control {
+	border-color: var(--dark-mode-divider);
+	box-shadow: none;
+}
+
+/* 4. Strip underlines from chrome links. Message/user content stays
+      underlined via a higher-specificity selector in the ChatMessage /
+      archive CSS; here we just quiet the navigation, pagination, and badge
+      links that otherwise look very 2010-web. */
+.pagination a,
+.pagination a:hover,
+.pagination a:focus,
+.breadcrumb a,
+.breadcrumb a:hover,
+.breadcrumb a:focus,
+.scroll-breadcrumb a,
+.scroll-breadcrumb a:hover,
+.scroll-breadcrumb a:focus,
+.label a,
+.label a:hover,
+.badge a,
+.badge a:hover,
+.nav a,
+.nav a:hover,
+.list-group-item,
+.list-group-item:hover,
+.list-group-item:focus,
+.dropdown-menu a,
+.dropdown-menu a:hover,
+.dropdown-menu a:focus,
+.navbar a,
+.navbar a:hover,
+.navbar a:focus,
+.thread-attribution a,
+.thread-attribution a:hover,
+.button-link,
+.button-link:hover,
+.button-link:focus {
+	text-decoration: none;
+}
+
+/* 5. Soft-card treatment for Bootstrap panels and wells. Replaces the
+      default 1px-border-on-white look with a rounded, borderless surface
+      and a very subtle shadow so cards feel like lifted surfaces rather
+      than framework chrome. */
+.panel,
+.panel-default,
+.well,
+.well-sm,
+.well-lg {
+	border: 0;
+	border-radius: 12px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 6px rgba(0, 0, 0, 0.04);
+	overflow: hidden;
+}
+.well,
+.well-sm,
+.well-lg {
+	background-color: var(--light-mode-primary-color);
+}
+body.dark-mode .panel,
+body.dark-mode .panel-default,
+body.dark-mode .well,
+body.dark-mode .well-sm,
+body.dark-mode .well-lg {
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 1px 6px rgba(0, 0, 0, 0.35);
+	background-color: var(--dark-mode-primary-color);
+}
+
+/* 6. Panel heading → uppercase section label instead of the chunky gray
+      bar. Matches the 16px body-label weight so the heading feels like a
+      peer of the content it groups, and uses flex so any right-side
+      chevron (collapsable panels) stays vertically centered with the
+      text. Horizontal padding matches the panel-body below so the label
+      and the form fields line up on the same left edge. */
+.panel-default > .panel-heading {
+	background: transparent;
+	border: 0 !important;
+	padding: 16px 18px;
+	font-size: 15px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: #555;
+	line-height: 1.4;
+}
+.panel-default > .panel-heading .panel-title,
+.panel-default > .panel-heading h1,
+.panel-default > .panel-heading h2,
+.panel-default > .panel-heading h3,
+.panel-default > .panel-heading h4 {
+	font-size: inherit;
+	font-weight: inherit;
+	text-transform: inherit;
+	letter-spacing: inherit;
+	color: inherit;
+	line-height: inherit;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.panel-default > .panel-heading .panel-title > a,
+.panel-default > .panel-heading .panel-title > a:hover,
+.panel-default > .panel-heading .panel-title > a:focus {
+	color: inherit;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+/* Collapsable chevron was using float:right which conflicts with the
+   flex layout above. Let flex place it at the end instead. */
+.panel-collapsable .panel-title > a:after,
+.panel-collapsable .panel-title > a.collapsed:after {
+	float: none;
+	margin-left: auto;
+}
+/* Match the panel-body's horizontal padding so the heading text and the
+   form content beneath it line up. Bootstrap collapsible panels wrap the
+   body in .panel-collapse, so we use a descendant selector to catch both
+   the flat and collapsible layouts. */
+.panel-default .panel-body {
+	padding: 8px 18px 16px;
+}
+@media (max-width: 767px) {
+	/* Tighten the card's horizontal gutter on phones so forms have room
+	   to breathe edge-to-edge. Heading padding-left is adjusted to match
+	   so the uppercase label still lines up with the form content. */
+	.panel-default .panel-body {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+	.panel-default > .panel-heading {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+	/* The event-name row uses a flex container with an inline 5px right
+	   margin on #nameform to separate it from the "Add Tags" button. On
+	   a phone that margin makes the input end 5px short of the date/time
+	   row below it, creating a visible misalignment. Zero it out on xs. */
+	#nameform {
+		margin-right: 0 !important;
+	}
+}
+body.dark-mode .panel-default > .panel-heading {
+	color: var(--dark-mode-light-text-color);
+}
+/* Keep success/warning/danger panel heads colored — they rely on the
+   contrasting background to signal state, and the flex layout above
+   shouldn't force uppercase/tracking on them. */
+.panel-success > .panel-heading,
+.panel-warning > .panel-heading,
+.panel-danger > .panel-heading,
+.panel-info > .panel-heading {
+	text-transform: none;
+	letter-spacing: normal;
+	font-size: inherit;
+	font-weight: inherit;
+	padding: 10px 15px;
+	display: block;
+}
+
+/* 8. Empty-state helper. Use on any "no X to display" block as:
+      <div class="empty-state">
+         <i class="fa fa-inbox empty-state-icon"></i>
+         <div class="empty-state-title">No topics yet</div>
+         <div class="empty-state-text">Start one to break the ice.</div>
+         <a class="btn btn-primary empty-state-cta" href="...">New Topic</a>
+      </div>
+      Works at any width. */
+.empty-state {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding: 40px 20px;
+	color: var(--light-mode-light-text-color);
+}
+.empty-state-icon {
+	font-size: 48px;
+	color: #c4c8cc;
+	margin-bottom: 14px;
+}
+.empty-state-title {
+	font-size: 17px;
+	font-weight: 600;
+	color: var(--light-mode-text-color);
+	margin-bottom: 4px;
+}
+.empty-state-text {
+	font-size: 14px;
+	max-width: 320px;
+	margin-bottom: 16px;
+	line-height: 1.4;
+}
+.empty-state-cta {
+	min-width: 160px;
+}
+body.dark-mode .empty-state {
+	color: var(--dark-mode-light-text-color);
+}
+body.dark-mode .empty-state-icon {
+	color: #4a4d51;
+}
+body.dark-mode .empty-state-title {
+	color: var(--dark-mode-text-color);
 }
 
