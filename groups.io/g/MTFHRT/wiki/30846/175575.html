@@ -142,7 +142,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app01-g2.789967.1777426185990677692");
+				console.log("client_id:", "web.app02-g2.2369475.1778030530527480157");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -191,7 +191,7 @@
 					column: column,
 					stack: stack,
 					last_error: lastError,
-					client_id: "web.app01-g2.789967.1777426185990677692"
+					client_id: "web.app02-g2.2369475.1778030530527480157"
 				},
 				success: function() {
 					if (console && console.log) {
@@ -214,7 +214,7 @@
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-24dcf155f8cf9ca30214ea64f62961b4.css" rel="stylesheet" id="groupsio-css">
+			<link href="../../../../css/application-7da9b99746ec1cef6913b4e3fec7162c.css" rel="stylesheet" id="groupsio-css">
 			<script src="../../../../js/application-7800e976860b357df405a3ea22aa72b1.js" id="groupsio-js"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>MTFHRT@groups.io | Wiki</title>
@@ -304,7 +304,7 @@
 	}, true);
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "ca86cf933a8828e8bf670199572b45bc66bd1319"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "210897eaa3752cee32d30cb5ef00b0bd9135036b"}' hx-ext="preload" hx-boost="false">
 			<div id="gio-progress-bar" aria-hidden="true"></div>
 			
 				<script>
@@ -321,7 +321,7 @@
 							<img src="../../../../orgimg/org.1/mainlogo.png%3Fv=1411358049715440694" height="50" alt="Groups.io">
 						</a>
 							
-								<ul class="nav navbar-nav hidden-xs">
+								<ul class="nav navbar-nav hidden-xs hidden-sm">
 									<li>
 										<a href="https://groups.io/search">
 											Find or Create a Group
@@ -665,96 +665,6 @@ function showAutocompleteModal(modalName) {
 		location.reload();
 	});
 
-	function ShowBackButton(label, url, subtitle) {
-		var logoElement = document.getElementById("logo");
-		if (!logoElement) {
-			return;
-		}
-		logoElement.innerHTML = '';
-
-		var span = document.createElement('span');
-		span.style.cssText = "color:#fff;margin-top:14px;margin-left:12px;float:left !important;height:36px;";
-		var a = document.createElement('a');
-		a.style.color = '#fff';
-		if (url) {
-			a.href = url;
-			// HTMX-boost only when the target is still inside the same group — then the
-			// bottom nav (which sits outside #maincontent-refresh) is the same layout and
-			// can stay put. Cross-context targets (e.g. /groups) need a full page load so
-			// the bottom nav actually switches.
-			if (/\/g\//.test(url)) {
-				a.setAttribute('hx-boost', 'true');
-				a.setAttribute('hx-target', '#maincontent-refresh');
-				a.setAttribute('hx-push-url', 'true');
-				a.setAttribute('hx-history', 'false');
-				// Reset window scroll to the top after the swap, otherwise the
-				// user lands on the previous page at whatever Y they were at on
-				// the current one — typically mid-page, behind the fixed
-				// navbar/notch in the iOS app.
-				a.setAttribute('hx-on::after-request', 'window.scrollTo({top:0, behavior:"instant"})');
-				if (window.htmx) {
-					htmx.process(a);
-				}
-			}
-		} else {
-			a.onclick = goBack;
-			a.style.cursor = 'pointer';
-		}
-		var icon = document.createElement('i');
-		icon.className = 'fa-fw fa-solid fa-chevron-left fa-lg';
-		a.appendChild(icon);
-		span.appendChild(a);
-		logoElement.appendChild(span);
-
-		if (label) {
-			var titleDiv = document.createElement('div');
-			// The navbar in the iOS app gets padding-top equal to the safe-area
-			// inset, so the outer box can be taller than the visible content
-			// strip. Centering at 50% of the outer box lands the title inside
-			// the notch — offset the center down by half the inset so the
-			// title sits in the visible strip. On non-app contexts
-			// env(safe-area-inset-top) is 0 and this is a no-op.
-			titleDiv.style.cssText = "position:absolute;left:50%;top:calc(50% + env(safe-area-inset-top) / 2);transform:translate(-50%,-50%);text-align:center;color:#ecf0f1;max-width:60%;overflow:hidden;";
-			var h4 = document.createElement('h4');
-			h4.style.cssText = "margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.1;";
-			h4.textContent = label;
-			titleDiv.appendChild(h4);
-			if (subtitle) {
-				var sub = document.createElement('div');
-				sub.style.cssText = "font-size:11px;line-height:1.2;margin-top:1px;opacity:0.85;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;";
-				sub.textContent = subtitle;
-				titleDiv.appendChild(sub);
-			}
-			logoElement.appendChild(titleDiv);
-		}
-	}
-
-	// ShowNavbarTitle sets a centered title (and optional subtitle) in the
-	// mobile navbar without any back arrow — used on top-level tab pages
-	// (/feed, /groups) where there's nowhere to go back to.
-	function ShowNavbarTitle(label, subtitle) {
-		var logoElement = document.getElementById("logo");
-		if (!logoElement) {
-			return;
-		}
-		logoElement.innerHTML = '';
-		if (label) {
-			var titleDiv = document.createElement('div');
-			titleDiv.style.cssText = "position:absolute;left:50%;top:calc(50% + env(safe-area-inset-top) / 2);transform:translate(-50%,-50%);text-align:center;color:#ecf0f1;max-width:70%;overflow:hidden;";
-			var h4 = document.createElement('h4');
-			h4.style.cssText = "margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.1;";
-			h4.textContent = label;
-			titleDiv.appendChild(h4);
-			if (subtitle) {
-				var sub = document.createElement('div');
-				sub.style.cssText = "font-size:11px;line-height:1.2;margin-top:1px;opacity:0.85;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;";
-				sub.textContent = subtitle;
-				titleDiv.appendChild(sub);
-			}
-			logoElement.appendChild(titleDiv);
-		}
-	}
-
 	// ShowHeaderAction adds an icon button (e.g. settings cog) to the mobile navbar,
 	// to the left of the profile icon. modalTarget is optional — if given, clicking
 	// opens that Bootstrap modal. ariaLabel is for accessibility.
@@ -787,16 +697,6 @@ function showAutocompleteModal(modalName) {
 			slot.innerHTML = '';
 			slot.style.display = 'none';
 			slot.style.float = 'left';
-		}
-	}
-
-	function HideBackButton() {
-		var logoElement = document.getElementById("logo");
-		if (logoElement) {
-			logoElement.innerHTML = `
-				<a href="https://groups.io" class="navbar-left">
-					<img src="../../../../orgimg/org.1/mainlogo.png%3Fv=1411358049715440694" height="50" alt="Groups.io">
-				</a>`;
 		}
 	}
 
@@ -1471,9 +1371,6 @@ function createAlert(msg, isError, autoClose, noClose) {
 	contentLoaded(  false  , function() {
 		UpdateSidebar("wiki");
 		if (document.documentElement.clientWidth <= 992) {
-			
-				ShowBackButton("Home", "https://groups.io/g/MTFHRT/wiki", "Wiki");
-			
 			ShowHeaderAction("fa fa-search fa-lg", "#searchModal", "Search");
 		}
 		EnableTopbarAutoHide();
@@ -1492,15 +1389,18 @@ function createAlert(msg, isError, autoClose, noClose) {
 					
 					
 	
-	<div id="mobilesidebar-groups" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center;" hx-get="https://groups.io/groups"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-history="false" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
-		<div style="display: inline-block; position: relative;">
-			<div style="position: relative;display: inline-block;">
-			<i class="fa-fw fa-light fa-users fa-2x"></i>
-			
-			</div><br>
-			<span style="font-size:12px;">Groups</span>
-		</div>
-	</div>
+	
+		
+		<a id="mobilesidebar-groups" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center; color: inherit; text-decoration: none;" href="https://groups.io/groups" hx-boost="false">
+			<div style="display: inline-block; position: relative;">
+				<div style="position: relative;display: inline-block;">
+				<i class="fa-fw fa-light fa-users fa-2x"></i>
+				
+				</div><br>
+				<span style="font-size:12px;">Groups</span>
+			</div>
+		</a>
+	
 
 					
 						

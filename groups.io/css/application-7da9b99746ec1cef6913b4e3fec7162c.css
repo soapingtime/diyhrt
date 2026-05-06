@@ -4651,10 +4651,11 @@ body.dark-mode .grouphome-email-list dt {
 }
 
 /* Group home mobile cover hero: shallow 3:1 banner that bleeds
-   edge-to-edge under the fixed navbar. Blurred-background sandwich
-   (cover + contain layers) means any aspect-ratio upload shows in
-   full without letterbox bars. Mobile only — desktop uses the original
-   centred .grouphome-fit image markup. */
+   edge-to-edge under the fixed navbar. The cover image is rendered
+   at object-fit: contain so the full photo shows without cropping;
+   off-aspect uploads letterbox with the page background. Mobile
+   only — desktop uses the original centred .grouphome-fit image
+   markup. */
 .grouphome-hero {
 	/* Bleed edge-to-edge on xs: counter the maincontent column's 5px
 	   horizontal padding and cross the 5px gap that #maincontent
@@ -4666,21 +4667,7 @@ body.dark-mode .grouphome-email-list dt {
 	width: auto;
 	aspect-ratio: 3 / 1;
 	overflow: hidden;
-	background: #222;
 	margin-bottom: 14px;
-}
-.grouphome-hero-bg {
-	/* Blurred, oversized copy behind the main cover photo — fills any
-	   gap left by `object-fit: contain` without stark letterbox bars.
-	   scale 1.1 hides the blur's fuzzy edges from the container clip. */
-	position: absolute;
-	inset: 0;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	filter: blur(24px) saturate(1.1);
-	transform: scale(1.1);
-	display: block;
 }
 .grouphome-hero-img {
 	position: relative;
