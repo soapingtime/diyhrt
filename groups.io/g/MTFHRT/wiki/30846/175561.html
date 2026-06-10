@@ -142,7 +142,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app01-g2.2584906.1780453632612106143");
+				console.log("client_id:", "web.app01-g2.3341281.1781056720821717808");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -191,7 +191,7 @@
 					column: column,
 					stack: stack,
 					last_error: lastError,
-					client_id: "web.app01-g2.2584906.1780453632612106143"
+					client_id: "web.app01-g2.3341281.1781056720821717808"
 				},
 				success: function() {
 					if (console && console.log) {
@@ -214,8 +214,8 @@
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-d476d9b5906d76f7e0f5ba4ff61d087b.css" rel="stylesheet" id="groupsio-css">
-			<script src="../../../../js/application-15247c9d555392d216d00124398e9106.js" id="groupsio-js"></script>
+			<link href="../../../../css/application-0f8175f2b2e1dd8489be75dd28b3455c.css" rel="stylesheet" id="groupsio-css">
+			<script src="../../../../js/application-29b5bce21a876e9bab9c2d4773df5b7d.js" id="groupsio-js"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>MTFHRT@groups.io | Wiki</title>
 			
@@ -304,7 +304,7 @@
 	}, true);
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "e1f4c28d50b88e59f5b4ade6dea7fbcc18b85cb1"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "d238ca71e647984d7e8bff10ae66660e678eef08"}' hx-ext="preload" hx-boost="false">
 			<div id="gio-progress-bar" aria-hidden="true"></div>
 			
 				<script>
@@ -1185,6 +1185,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 		  $newPanel = $alerttemplate.clone();
         }
 	}
+	$newPanel.removeClass("template");
 	$newPanel.find(".flashmsg").html(msg);
 	if (autoClose == true) {
 		$("#alertdiv").append($newPanel.fadeTo(2000, 500).slideUp(500, function(){
