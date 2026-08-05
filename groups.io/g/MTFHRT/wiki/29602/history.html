@@ -142,7 +142,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app02-g2.864137.1785287757393644460");
+				console.log("client_id:", "web.app01-g2.11560539.1785892465557092678");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -191,7 +191,7 @@
 					column: column,
 					stack: stack,
 					last_error: lastError,
-					client_id: "web.app02-g2.864137.1785287757393644460"
+					client_id: "web.app01-g2.11560539.1785892465557092678"
 				},
 				success: function() {
 					if (console && console.log) {
@@ -214,7 +214,7 @@
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-e9631c7e0a82bf7633bf947938bc643f.css" rel="stylesheet" id="groupsio-css">
+			<link href="../../../../css/application-ca49cc20a2a910b847ccd0044ae58c3a.css" rel="stylesheet" id="groupsio-css">
 			<script src="../../../../js/application-29b5bce21a876e9bab9c2d4773df5b7d.js" id="groupsio-js"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>MTFHRT@groups.io | Wiki</title>
@@ -303,7 +303,7 @@
 	}, true);
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "667baedfedd49b1b4843cc4890644142c3872387"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "c6b1ad9427210347e3912c7433ac14845fb9c363"}' hx-ext="preload" hx-boost="false">
 			<div id="gio-progress-bar" aria-hidden="true"></div>
 			
 				<script>
@@ -869,6 +869,15 @@ function showAutocompleteModal(modalName) {
 			$('#shortcutModal').modal('show');
 			return;
 		}
+		// Pressing the chord above delivers a keydown for each key in it:
+		// Control, then Shift, then '?'. Without this guard the first two fall
+		// through to the hide below, so re-pressing the chord while the modal is
+		// open starts a hide that the '?' a moment later interrupts with a show.
+		// Bootstrap 3 tracks only its most recent backdrop element, so each such
+		// overlap strands the previous one in the DOM as an undismissable mask.
+		if (event.key === 'Control' || event.key === 'Shift' || event.key === 'Alt' || event.key === 'Meta') {
+			return;
+		}
 		$('#shortcutModal').modal('hide');
 
 		if (event.key.toLowerCase() === 'g') {
@@ -1092,13 +1101,17 @@ function showAutocompleteModal(modalName) {
 		<div style="padding-bottom:5px;">
 			<a href="https://groups.io/static/about">
 				About
-			</a> &middot;
-			<a href="https://groups.io/static/features">
-				Features
-			</a> &middot;
-			<a href="https://groups.io/static/pricing">
-				Pricing
 			</a>
+			
+			
+				&middot;
+				<a href="https://groups.io/static/features">
+					Features
+				</a> &middot;
+				<a href="https://groups.io/static/pricing">
+					Pricing
+				</a>
+			
 		</div>
 		<div style="padding-bottom:5px;">
 			<a href="https://groups.io/home">
@@ -1137,21 +1150,25 @@ function showAutocompleteModal(modalName) {
 	<div id="alertdiv"></div>
 	<div class="noticetemplate template">
 		<div class="alert alert-success alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">
-					&times;
-				</span>
-			</button>
+			
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">
+						&times;
+					</span>
+				</button>
+			
 			<span class="flashmsg"></span>
 		</div>
 	</div>
 	<div class="alerttemplate template">
 		<div class="alert alert-danger alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">
-					&times;
-				</span>
-			</button>
+			
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">
+						&times;
+					</span>
+				</button>
+			
 			<span class="flashmsg"></span>
 		</div>
 	</div>
@@ -1246,8 +1263,41 @@ function createAlert(msg, isError, autoClose, noClose) {
 							
 								<tr>
 									<td>
-										<input type=checkbox name="dataid" id="255224" value="255224" onclick="countChecked('255224')"
+										<input type=checkbox name="dataid" id="256279" value="256279" onclick="countChecked('256279')"
                          checked>
+
+										
+  
+	
+		
+			<a href="https://groups.io/g/MTFHRT/profile/@Lena">Lena</a>
+		
+  
+
+									</td>
+									<td>
+										<a href="256279.html">
+											
+												
+													Updated page
+												
+											
+										</a>
+									</td>
+									<td>
+										
+<script id="timedispwdataupdated256279">
+	$('#timedispwdataupdated256279').replaceWith(DisplayShortTime(1785383840650008178, false
+		));
+</script>
+
+									</td>
+								</tr>
+							
+								<tr>
+									<td>
+										<input type=checkbox name="dataid" id="255224" value="255224" onclick="countChecked('255224')"
+                        >
 
 										
   
@@ -8057,7 +8107,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="175308.html">
+										<a href="175308">
 											
 												
 													Updated page
@@ -10268,7 +10318,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="167700">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/167700">
 											
 												
 													Updated page
@@ -10301,7 +10351,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="167699">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/167699">
 											
 												
 													Updated page
@@ -10367,7 +10417,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="167382">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/167382">
 											
 												
 													Updated page
@@ -10433,7 +10483,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="166032">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/166032">
 											
 												
 													Updated page
@@ -10499,7 +10549,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="165985">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/165985">
 											
 												
 													Updated page
@@ -10532,7 +10582,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="165976">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/165976">
 											
 												
 													Updated page
@@ -10598,7 +10648,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="165882">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/165882">
 											
 												
 													Updated page
@@ -10664,7 +10714,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="165844">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/165844">
 											
 												
 													Updated page
@@ -10697,7 +10747,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="165842">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/165842">
 											
 												
 													Updated page
@@ -10763,7 +10813,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="165830">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/165830">
 											
 												
 													Updated page
@@ -10829,7 +10879,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="165530">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/165530">
 											
 												
 													Updated page
@@ -10895,7 +10945,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="165469">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/165469">
 											
 												
 													Updated page
@@ -10928,7 +10978,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="165467">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/165467">
 											
 												
 													Updated page
@@ -10994,7 +11044,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="165250">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/165250">
 											
 												
 													Updated page
@@ -11060,7 +11110,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="165198">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/165198">
 											
 												
 													Updated page
@@ -11126,7 +11176,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="164998">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/164998">
 											
 												
 													Updated page
@@ -11159,7 +11209,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="164997">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/164997">
 											
 												
 													Updated page
@@ -11225,7 +11275,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="164928">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/164928">
 											
 												
 													Updated page
@@ -11291,7 +11341,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="164898">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/164898">
 											
 												
 													Updated page
@@ -11324,7 +11374,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="164856">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/164856">
 											
 												
 													Updated page
@@ -11390,7 +11440,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="164835">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/164835">
 											
 												
 													Updated page
@@ -11456,7 +11506,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="164741">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/164741">
 											
 												
 													Updated page
@@ -11522,7 +11572,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="164525">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/164525">
 											
 												
 													Updated page
@@ -11588,7 +11638,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="164491">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/164491">
 											
 												
 													Updated page
@@ -11621,7 +11671,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="164409">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/164409">
 											
 												
 													Updated page
@@ -11687,7 +11737,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="164382">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/164382">
 											
 												
 													Updated page
@@ -11753,7 +11803,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="164260">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/164260">
 											
 												
 													Updated page
@@ -11819,7 +11869,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="164250">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/164250">
 											
 												
 													Updated page
@@ -11852,7 +11902,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="164061">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/164061">
 											
 												
 													Updated page
@@ -11918,7 +11968,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="163831">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/163831">
 											
 												
 													Updated page
@@ -11984,7 +12034,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="163688">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/163688">
 											
 												
 													Updated page
@@ -12017,7 +12067,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="163687">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/163687">
 											
 												
 													Updated page
@@ -12083,7 +12133,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="163574">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/163574">
 											
 												
 													Updated page
@@ -12149,7 +12199,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="163490">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/163490">
 											
 												
 													Updated page
@@ -12215,7 +12265,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="163475">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/163475">
 											
 												
 													Updated page
@@ -12248,7 +12298,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="163359">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/163359">
 											
 												
 													Updated page
@@ -12314,7 +12364,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="163334">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/163334">
 											
 												
 													Updated page
@@ -12380,7 +12430,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a href="163322">
+										<a href="https://groups.io/g/MTFHRT/wiki/29602/163322">
 											
 												
 													Updated page
@@ -12609,14 +12659,17 @@ function countChecked(id) {
 									<i class="fa-fw fal fa-envelope fa-lg"></i>
 									About
 								</a>
-								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/features">
-									<i class="fa-fw far fa-tasks fa-lg"></i>
-									Features
-								</a>
-								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/pricing">
-									<i class="fa-fw fa fa-dollar-sign fa-lg"></i>
-									Pricing
-								</a>
+								
+								
+									<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/features">
+										<i class="fa-fw far fa-tasks fa-lg"></i>
+										Features
+									</a>
+									<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/pricing">
+										<i class="fa-fw fa fa-dollar-sign fa-lg"></i>
+										Pricing
+									</a>
+								
 								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/changelog">
 									<i class="fa-fw fa fa-history fa-lg"></i>
 									Changelog

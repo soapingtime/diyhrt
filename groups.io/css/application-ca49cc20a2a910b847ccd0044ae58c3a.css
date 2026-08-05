@@ -2925,7 +2925,12 @@ a, button, input, select, textarea, .btn, .mobilesidebar-item, .grouphome-tile {
 		transform: translate(0, 100%);
 		transition: transform 220ms cubic-bezier(0.2, 0, 0.2, 1);
 	}
-	.modal.in .modal-dialog {
+	/* .in is Bootstrap 3's shown-state class and .show is Bootstrap 5's. Both
+	   are listed because this file ships in both bundles, and matching only
+	   one leaves the sheet parked at translate(0, 100%) -- a dialog-height
+	   below the screen, with nothing but the backdrop visible. */
+	.modal.in .modal-dialog,
+	.modal.show .modal-dialog {
 		transform: translate(0, 0);
 	}
 	.modal-dialog {
@@ -2969,7 +2974,7 @@ a, button, input, select, textarea, .btn, .mobilesidebar-item, .grouphome-tile {
 }
 
 /* page-transition fade-in on HTMX partial swaps (mobile/tablet only) */
-@media (max-width: 992px) {
+@media (max-width: 991.98px) {
 	#maincontent-refresh.gio-fade-in {
 		animation: maincontent-fade-in 140ms ease-out;
 	}
@@ -3521,7 +3526,11 @@ body {
 	/*white-space: normal !important;*/
 }
 
-@media screen and (max-width: 992px) {
+/* Stops one pixel short of 992 so this narrow-screen regime complements
+   Bootstrap's desktop regime rather than overlapping it. Bootstrap hides the
+   fixed mobile nav from min-width 992 up; at exactly 992 an inclusive
+   max-width here hid #groupsidebar too, leaving no navigation at all. */
+@media screen and (max-width: 991.98px) {
 
 	/*
 	.groupmaincontent {
@@ -6012,7 +6021,7 @@ body.app .navbar-fixed-top {
 	font-size: 17px;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 991.98px) {
 	/* adjust margins for narrow screens */
 	.container,
 	.container-fluid {
@@ -6241,7 +6250,8 @@ body.dark-mode a.chat-file-card:focus {
 .modal.video-modal {
 	padding: 0 !important;
 }
-.modal.video-modal.in {
+.modal.video-modal.in,
+.modal.video-modal.show {
 	display: flex !important;
 }
 .video-modal-dialog {
@@ -6371,7 +6381,8 @@ body.dark-mode a.chat-file-card:focus {
    fixed-size box leaves black bars on either side. Caps below apply
    before metadata loads or as an upper bound if JS can't size. */
 @media (min-width: 768px) {
-	.modal.video-modal.in {
+	.modal.video-modal.in,
+	.modal.video-modal.show {
 		align-items: center;
 		justify-content: center;
 	}

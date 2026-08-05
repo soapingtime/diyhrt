@@ -142,7 +142,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app01-g2.865275.1785287758586728829");
+				console.log("client_id:", "web.app02-g2.11538544.1785892466471168480");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -191,7 +191,7 @@
 					column: column,
 					stack: stack,
 					last_error: lastError,
-					client_id: "web.app01-g2.865275.1785287758586728829"
+					client_id: "web.app02-g2.11538544.1785892466471168480"
 				},
 				success: function() {
 					if (console && console.log) {
@@ -214,7 +214,7 @@
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-e9631c7e0a82bf7633bf947938bc643f.css" rel="stylesheet" id="groupsio-css">
+			<link href="../../../../css/application-ca49cc20a2a910b847ccd0044ae58c3a.css" rel="stylesheet" id="groupsio-css">
 			<script src="../../../../js/application-29b5bce21a876e9bab9c2d4773df5b7d.js" id="groupsio-js"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>MTFHRT@groups.io | Wiki</title>
@@ -304,7 +304,7 @@
 	}, true);
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "667baedfedd49b1b4843cc4890644142c3872387"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "c6b1ad9427210347e3912c7433ac14845fb9c363"}' hx-ext="preload" hx-boost="false">
 			<div id="gio-progress-bar" aria-hidden="true"></div>
 			
 				<script>
@@ -870,6 +870,15 @@ function showAutocompleteModal(modalName) {
 			$('#shortcutModal').modal('show');
 			return;
 		}
+		// Pressing the chord above delivers a keydown for each key in it:
+		// Control, then Shift, then '?'. Without this guard the first two fall
+		// through to the hide below, so re-pressing the chord while the modal is
+		// open starts a hide that the '?' a moment later interrupts with a show.
+		// Bootstrap 3 tracks only its most recent backdrop element, so each such
+		// overlap strands the previous one in the DOM as an undismissable mask.
+		if (event.key === 'Control' || event.key === 'Shift' || event.key === 'Alt' || event.key === 'Meta') {
+			return;
+		}
 		$('#shortcutModal').modal('hide');
 
 		if (event.key.toLowerCase() === 'g') {
@@ -1093,13 +1102,17 @@ function showAutocompleteModal(modalName) {
 		<div style="padding-bottom:5px;">
 			<a href="https://groups.io/static/about">
 				About
-			</a> &middot;
-			<a href="https://groups.io/static/features">
-				Features
-			</a> &middot;
-			<a href="https://groups.io/static/pricing">
-				Pricing
 			</a>
+			
+			
+				&middot;
+				<a href="https://groups.io/static/features">
+					Features
+				</a> &middot;
+				<a href="https://groups.io/static/pricing">
+					Pricing
+				</a>
+			
 		</div>
 		<div style="padding-bottom:5px;">
 			<a href="https://groups.io/home">
@@ -1138,21 +1151,25 @@ function showAutocompleteModal(modalName) {
 	<div id="alertdiv"></div>
 	<div class="noticetemplate template">
 		<div class="alert alert-success alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">
-					&times;
-				</span>
-			</button>
+			
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">
+						&times;
+					</span>
+				</button>
+			
 			<span class="flashmsg"></span>
 		</div>
 	</div>
 	<div class="alerttemplate template">
 		<div class="alert alert-danger alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">
-					&times;
-				</span>
-			</button>
+			
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">
+						&times;
+					</span>
+				</button>
+			
 			<span class="flashmsg"></span>
 		</div>
 	</div>
@@ -1518,14 +1535,17 @@ function createAlert(msg, isError, autoClose, noClose) {
 									<i class="fa-fw fal fa-envelope fa-lg"></i>
 									About
 								</a>
-								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/features">
-									<i class="fa-fw far fa-tasks fa-lg"></i>
-									Features
-								</a>
-								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/pricing">
-									<i class="fa-fw fa fa-dollar-sign fa-lg"></i>
-									Pricing
-								</a>
+								
+								
+									<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/features">
+										<i class="fa-fw far fa-tasks fa-lg"></i>
+										Features
+									</a>
+									<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/static/pricing">
+										<i class="fa-fw fa fa-dollar-sign fa-lg"></i>
+										Pricing
+									</a>
+								
 								<a class="noborderitem list-group-item sidebar-item" href="https://groups.io/changelog">
 									<i class="fa-fw fa fa-history fa-lg"></i>
 									Changelog
