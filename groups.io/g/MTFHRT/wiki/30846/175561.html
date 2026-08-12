@@ -142,7 +142,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app01-g2.11560603.1785892466271789769");
+				console.log("client_id:", "web.app02-g2.1157748.1786495719591874178");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -191,7 +191,7 @@
 					column: column,
 					stack: stack,
 					last_error: lastError,
-					client_id: "web.app01-g2.11560603.1785892466271789769"
+					client_id: "web.app02-g2.1157748.1786495719591874178"
 				},
 				success: function() {
 					if (console && console.log) {
@@ -304,12 +304,24 @@
 	}, true);
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "c6b1ad9427210347e3912c7433ac14845fb9c363"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "882298a3aa1774e09d3f88fdd14b0eb7e3b5dd3b"}' hx-ext="preload" hx-boost="false">
 			<div id="gio-progress-bar" aria-hidden="true"></div>
 			
 				<script>
-					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-						document.body.classList.add('dark-mode');
+					if (window.matchMedia) {
+						var darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+						if (darkModeQuery.matches) {
+							document.body.classList.add('dark-mode');
+						}
+						var darkModeChanged = function(e) {
+							document.body.classList.toggle('dark-mode', e.matches);
+						};
+						if (darkModeQuery.addEventListener) {
+							darkModeQuery.addEventListener('change', darkModeChanged);
+						} else if (darkModeQuery.addListener) {
+							// Safari before 14 has no addEventListener on MediaQueryList
+							darkModeQuery.addListener(darkModeChanged);
+						}
 					}
 				</script>
 			
