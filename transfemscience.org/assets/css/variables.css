@@ -27,7 +27,7 @@
 
 /* Light mode */
 :root {
-  --site-logo: url(https://transfemscience.org/assets/images/branding/logo.png);
+  --site-logo: url(../images/branding/logo.png);
   --site-title-color: rgb(39, 38, 43);
   --font-color: rgb(92, 89, 98);
   --background-color: rgb(255, 255, 255);
@@ -83,7 +83,7 @@
 /* Dark mode */
 @media only screen {
   [data-theme="dark"] {
-    --site-logo: url(https://transfemscience.org/assets/images/branding/logo-dark.png);
+    --site-logo: url(../images/branding/logo-dark.png);
     --site-title-color: rgb(245, 246, 250);
     --font-color: rgb(230, 225, 232);
     /* --background-color: rgb(39, 38, 43); */
