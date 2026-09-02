@@ -127,6 +127,37 @@
 		});
 	}
 	
+				var gioBundleReported = false;
+		function gioReport(fields) {
+			try {
+				var pairs = [];
+				for (var k in fields) {
+					if (fields[k] !== undefined && fields[k] !== null) {
+						pairs.push(encodeURIComponent(k) + '=' + encodeURIComponent(fields[k]));
+					}
+				}
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', '/jsclienterror', true);
+				xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+				xhr.send(pairs.join('&'));
+			} catch (e) {}
+		}
+		// The report cannot depend on the application bundle: when the bundle
+		// is what failed to load, a jQuery transport has nothing to stand on.
+		// The script tag's onerror stores the src if it fires before this
+		// script runs.
+		window.__gioBundleFailed = function(src) {
+			if (gioBundleReported) return;
+			gioBundleReported = true;
+			gioReport({
+				msg: "bundle-load-failure",
+				url: src,
+				client_id: "web.app01-g2.839079.1788312834072872107"
+			});
+		};
+		if (window.__gioBundleErr) {
+			window.__gioBundleFailed(window.__gioBundleErr);
+		}
 		window.onerror = function(errorMessage, errorUrl, errorLine, errorColumn, errorObj) {
 			let column;
 			let stack;
@@ -142,7 +173,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app02-g2.814556.1787704275999162122");
+				console.log("client_id:", "web.app01-g2.839079.1788312834072872107");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -154,6 +185,15 @@
 			}
 			if (ignoreErrors == true) {
 				console.log("cookies, disabled, ignoring");
+				lastError = errorMessage;
+				return;
+			}
+						// With the bundle absent, every reference to a bundle global and
+			// every style-injection into the missing sheet throws; the
+			// bundle-load-failure report already carries the cause, so the
+			// cascade is noise.
+			if ((typeof jQuery === 'undefined' || typeof htmx === 'undefined') &&
+				(errorMessage.indexOf("is not defined") !== -1 || errorMessage.indexOf("Can't find variable") !== -1 || errorMessage.indexOf("insertRule") !== -1)) {
 				lastError = errorMessage;
 				return;
 			}
@@ -181,31 +221,16 @@
 				lastError = errorMessage;
 				return;
 			}
-			jQuery.ajax({
-				type: 'POST',
-				url: '/jsclienterror',
-				data: {
-					msg: errorMessage,
-					url: errorUrl,
-					line: errorLine,
-					column: column,
-					stack: stack,
-					last_error: lastError,
-					client_id: "web.app02-g2.814556.1787704275999162122"
-				},
-				success: function() {
-					if (console && console.log) {
-						console.log('JS error report successful.');
-					}
-					lastError = errorMessage;
-				},
-				error: function() {
-					if (console && console.error) {
-						console.error('JS error report submission failed!');
-					}
-					lastError = errorMessage;
-				}
+			gioReport({
+				msg: errorMessage,
+				url: errorUrl,
+				line: errorLine,
+				column: column,
+				stack: stack,
+				last_error: lastError,
+				client_id: "web.app01-g2.839079.1788312834072872107"
 			});
+			lastError = errorMessage;
 			return true;
 		}
 	
@@ -214,8 +239,8 @@
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-ca49cc20a2a910b847ccd0044ae58c3a.css" rel="stylesheet" id="groupsio-css">
-			<script src="../../../../js/application-29b5bce21a876e9bab9c2d4773df5b7d.js" id="groupsio-js"></script>
+			<link href="../../../../css/application-26d344bf7991b0bf56fd7526148f1a3f.css" rel="stylesheet" id="groupsio-css">
+			<script src="../../../../js/application-adb146a1cc8f0d0e2e0a7c9856e1aa0b.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>MTFHRT@groups.io | Wiki</title>
 			
@@ -304,7 +329,7 @@
 	}, true);
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "40e9dba3cfeb4556bfbe2fbfe2ba769573d97888"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "9db662cf252f9cfb742fbc04cd2960ad26c43bea"}' hx-ext="preload" hx-boost="false">
 			<div id="gio-progress-bar" aria-hidden="true"></div>
 			
 				<script>
@@ -1237,6 +1262,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 	
 		
 
+	
 	<div class="row breadcrumb-row" style="margin-bottom: 10px">
 		<div class="col-xs-12 col-sm-9">
 			<span class="hidden-sm hidden-md hidden-lg pull-right" style="padding:8px 15px;"><a data-toggle="modal" data-target="#searchModal"><i class="fa fa-search"></i></a></span>
@@ -1272,17 +1298,20 @@ function createAlert(msg, isError, autoClose, noClose) {
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">
-						<span aria-hidden="true">
-							&times;
-						</span>
-						<span class="sr-only">
-							Close
-						</span>
-					</button>
+					
+	<button type="button" class="close" data-dismiss="modal">
+		<span aria-hidden="true">
+			&times;
+		</span>
+		<span class="sr-only">
+			Close
+		</span>
+	</button>
+
 					<h4 class="modal-title" id="searchModalLabel">
 						Search
 					</h4>
+					
 				</div>
 				<form class="form-horizontal" method="get" action="https://groups.io/g/MTFHRT/wikisearch">
 					
