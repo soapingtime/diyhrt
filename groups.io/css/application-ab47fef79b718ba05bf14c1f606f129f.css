@@ -9779,6 +9779,25 @@ blockquote {
 	padding: 10px 20px;
 }
 
+/* BS3 styled a blockquote's attribution element itself (footer, small):
+ * block, 80% grey text with a leading dash. BS5 keys the same design on
+ * .blockquote-footer, which raw markup does not carry, so the home page's
+ * success-story attributions ran as full-size body text. */
+blockquote footer,
+blockquote small,
+blockquote .small {
+	display: block;
+	font-size: 80%;
+	line-height: 1.42857143;
+	color: #777;
+}
+
+blockquote footer::before,
+blockquote small::before,
+blockquote .small::before {
+	content: "\2014 \00A0";
+}
+
 .well-sm {
 	padding: 9px;
 }
@@ -9934,13 +9953,13 @@ a.thumbnail.active {
 .modal {
 	--bs-modal-width: 600px;
 }
-/* BS3 kept the dialog full width with 10px side margins until its 768px
- * breakpoint; BS5 caps and centres it from 576px, so with the 600px cap a
- * dialog on a 576-640px viewport would otherwise run edge to edge. */
+/* BS5 caps and centres the dialog from 576px. Below 768px groupsio.css's
+ * bottom-sheet rules own the dialog (fixed to the bottom edge, full width,
+ * no margin), so only the cap is lifted here; a side margin on that
+ * full-width sheet would push it past the viewport by the margin. */
 @media (min-width: 576px) and (max-width: 767.98px) {
 	.modal-dialog {
 		max-width: none;
-		margin: 10px;
 	}
 }
 @media (min-width: 992px) {
@@ -10024,6 +10043,22 @@ h4, h5, h6 {
 	margin: 0;
 }
 
+/* groupsio.css also pins every anchor in a default panel heading, not only
+ * the title's: body:not(.dark-mode) .panel-default>.panel-heading a, and the
+ * dark-mode rule with its :hover/:focus. The editor's "Markdown Guide" link
+ * sits in its card header outside any .card-title and drew link-blue.
+ * !important as the app's rule is, so body.dark-mode a:hover (0,2,2) does
+ * not repaint it after a click. */
+body:not(.dark-mode) .card > .card-header:not([class*="text-bg-"]) a {
+	color: inherit !important;
+}
+
+body.dark-mode .card > .card-header:not([class*="text-bg-"]) a,
+body.dark-mode .card > .card-header:not([class*="text-bg-"]) a:hover,
+body.dark-mode .card > .card-header:not([class*="text-bg-"]) a:focus {
+	color: inherit !important;
+}
+
 /* Mirror of the soft-card heading design (groupsio.css section 6, keyed
  * on .panel-default > .panel-heading, which the BS5 card classes miss). */
 .card > .card-header {
@@ -10055,6 +10090,25 @@ h4, h5, h6 {
 	justify-content: space-between;
 }
 
+/* BS3's .panel-footer box (padding: 10px 15px, a 1px top border, 3px
+ * bottom radii) with the app's tinted surface: .panel-default .panel-footer
+ * keys background and border on the highlight/divider variables, light and
+ * dark. PanelFooterStart emits card-footer, which BS5 paints with a
+ * translucent stock surface and 5px radii. */
+.card > .card-footer {
+	padding: 10px 15px;
+	background-color: var(--light-mode-highlight-color);
+	border-top: 1px solid var(--light-mode-divider);
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+
+body.dark-mode .card > .card-footer {
+	background-color: var(--dark-mode-highlight-color);
+	color: var(--dark-mode-text-color);
+	border-color: var(--dark-mode-divider);
+}
+
 /* groupsio.css keys the soft-card heading on .panel-default, so BS3's
  * variant panels kept plain colored heads (and it resets them explicitly
  * at "Keep success/warning/danger panel heads colored"). The mirror above
@@ -10071,9 +10125,16 @@ h4, h5, h6 {
 }
 
 .card > .card-header:is(.text-bg-primary, .text-bg-success, .text-bg-info,
-	.text-bg-warning, .text-bg-danger) .card-title {
+	.text-bg-warning, .text-bg-danger) .card-title,
+.card > .card-header:is(.text-bg-primary, .text-bg-success, .text-bg-info,
+	.text-bg-warning, .text-bg-danger) :is(h1, h2, h3, h4) {
 	display: block;
 	margin: 0;
+	/* BS3's heading weight and line-height (h1-h6: 500, 1.1), which a
+	 * .panel-title in a contextual heading kept; the default-header mirror
+	 * above sets both to inherit, which resolves to the body's 400/1.6. */
+	font-weight: 500;
+	line-height: 1.1;
 }
 
 /* The contextual heading palette. BS5's text-bg-* is a solid brand fill
@@ -10277,6 +10338,24 @@ h4, h5, h6 {
 
 .dropzone.dropzone-multiple .dz-image {
 	margin-right: 0.625rem;
+	border-radius: 0.15625rem;
+}
+
+/* The multi-file variant's own message box (4rem 2rem at a 10px root, so
+ * 40px 20px); the .dropzone .dz-message compensation above is (0,2,0) and
+ * loses to this (0,3,0) selector, so the reply editor's attachment modals
+ * drew a box 24px taller than their BS3 twins. */
+.dropzone.dropzone-multiple .dz-message {
+	padding: 2.5rem 1.25rem;
+	border-radius: 0.234375rem;
+}
+
+.dropzone .dz-preview-single .dz-preview-img {
+	border-radius: 0.234375rem;
+}
+
+.dropzone-area {
+	border-radius: 0.15625rem;
 }
 
 .navbar-vertical .dropdown-indicator {
@@ -10286,6 +10365,77 @@ h4, h5, h6 {
 .dropdown-indicator:after {
 	height: 0.5rem;
 	width: 0.5rem;
+}
+
+/* Bootstrap 3 styled a bare <pre> as a box (bootstrap.css pre: 9.5px
+ * padding, #f5f5f5 fill, 1px #ccc border, 4px radius, 13px text, broken
+ * long words); Bootstrap 5 keeps only the margin and overflow, so the raw
+ * message source on grouporiginal ran as flush plain text. groupsio.css's
+ * dark-mode pre rule loads after Bootstrap and keeps winning as before. */
+pre {
+	padding: 9.5px;
+	margin: 0 0 10px;
+	font-size: 13px;
+	line-height: 1.42857143;
+	color: #333;
+	word-break: break-all;
+	word-wrap: break-word;
+	background-color: #f5f5f5;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+/* BS3's .bg-<state> utilities were the pale state tints (bootstrap.css:
+ * #dff0d8, #d9edf7, #fcf8e3, #f2dede) for highlighting inline content;
+ * BS5's are solid theme fills, !important, so the API changelog's
+ * added/removed highlights turned loud. Progress bars and badges take the
+ * solid fill by the sweep table (progress-bar-<v> → bg-<v>) and are left
+ * to BS5. */
+.bg-success:not(.progress-bar):not(.badge) {
+	background-color: #dff0d8 !important;
+}
+
+.bg-info:not(.progress-bar):not(.badge) {
+	background-color: #d9edf7 !important;
+}
+
+.bg-warning:not(.progress-bar):not(.badge) {
+	background-color: #fcf8e3 !important;
+}
+
+.bg-danger:not(.progress-bar):not(.badge) {
+	background-color: #f2dede !important;
+}
+
+/* Font Awesome's .fa-xs collapses the icon's line box to 0.08em, so the
+ * sort glyph in a sortable table header always painted past its box; BS5's
+ * table-sm rows are 2px shorter than BS3's table-condensed rows, which
+ * moves that overflow onto a stripe boundary, visible as tick marks in
+ * dark mode on the groups list. A full line box keeps the glyph inside. */
+.table th .fa-xs {
+	line-height: 1;
+}
+
+/* Bootstrap 3 drew a bare code element as a rose pill (bootstrap.css:
+ * 2px 4px padding, 90% size, #c7254e on #f9f2f4, 4px radius) and reset it
+ * inside pre; Bootstrap 5 keeps only a colour. groupsio.css's dark-mode
+ * code rule sets the background !important and keeps winning. The
+ * accepted-invite page wraps the member's address in code. */
+code {
+	padding: 2px 4px;
+	font-size: 90%;
+	color: #c7254e;
+	background-color: #f9f2f4;
+	border-radius: 4px;
+}
+
+pre code {
+	padding: 0;
+	font-size: inherit;
+	color: inherit;
+	white-space: pre-wrap;
+	background-color: transparent;
+	border-radius: 0;
 }
 
 /* BS3 button text metrics on every variant: 14px at the 1.42 line-height,
@@ -10319,6 +10469,30 @@ h4, h5, h6 {
 	padding: 1px 5px;
 	line-height: 1.5;
 	border-radius: 3px;
+}
+
+/* BS3 pinned a disabled button's hover to its resting colours per variant
+ * at (0,3,0) (.btn-danger.disabled:hover, .btn-danger[disabled]:hover,
+ * fieldset[disabled] .btn-danger:hover). BS5's .btn:disabled is (0,2,0),
+ * which ties groupsio.css's .btn-<variant>:hover and loses on order, so a
+ * disabled button took the hover shade (require2fa's Unsubscribe button
+ * under styleparity's forced hover). */
+.btn.disabled:hover,
+.btn:disabled:hover,
+fieldset:disabled .btn:hover {
+	color: var(--bs-btn-disabled-color);
+	background-color: var(--bs-btn-disabled-bg);
+	border-color: var(--bs-btn-disabled-border-color);
+}
+
+/* A badge that is also a button (messagelib's subject hashtag pills carry
+ * badge, btn and btn-xs together): in bootstrap.css .label came after the
+ * button rules, so its padding and line-height: 1 won and the pill stood
+ * 20px tall. Under BS5 the .btn-xs mirror above wins instead and the pill
+ * grows to 26px. Restore the label's values at higher specificity. */
+.badge.btn {
+	padding: 0.2em 0.6em 0.3em;
+	line-height: 1;
 }
 
 /* The app's btn-default is light grey (#ccc, dark text; groupsio.css:808);
@@ -10390,6 +10564,56 @@ a {
 a:hover,
 a:focus {
 	text-decoration: underline;
+}
+
+/* BS3's a:hover/a:focus colour (#23527c, bootstrap.css) beat the app's
+ * bare a { color } by specificity, so every plain link darkened on hover.
+ * BS5 carries the hover colour only in --bs-link-hover-color-rgb, which
+ * groupsio.css's literal a { color } never reads, so no link darkened at
+ * all. Keep the (0,1,1) specificity BS3 had: component rules such as
+ * .btn:hover still win, and :where() keeps the light-mode guard weightless
+ * so body.dark-mode a keeps winning in dark mode as it did under BS3. */
+:where(body:not(.dark-mode)) a:hover,
+:where(body:not(.dark-mode)) a:focus {
+	color: #23527c;
+}
+
+/* BS5's reboot strips colour and hover underline from an anchor with
+ * neither href nor class (a:not([href]):not([class]) at (0,2,1)), which
+ * beats the app's bare a { color } and body.dark-mode a. BS3 had no such
+ * rule, so the phone search-icon triggers in the breadcrumb components
+ * and on the activity page drew link-blue; mirror the app's link colours
+ * for that shape, light and dark, at rest and on hover. */
+a:not([href]):not([class]) {
+	color: #2f6fa7;
+}
+
+a:not([href]):not([class]):hover,
+a:not([href]):not([class]):focus {
+	color: #23527c;
+	text-decoration: underline;
+}
+
+body.dark-mode a:not([href]):not([class]) {
+	color: #7da8d4;
+}
+
+body.dark-mode a:not([href]):not([class]):hover,
+body.dark-mode a:not([href]):not([class]):focus {
+	color: #4a7ca3;
+}
+
+/* bootstrap.css's own .panel-title > a { color: inherit } (unscoped, and
+ * later in the file than a:hover, so it held on hover too) gave a raw
+ * collapsable panel's toggle the heading colour. groupsio.css pins only
+ * .panel-default > .panel-heading a, so a heading with no panel-default
+ * ancestor (the logged-out home page's FAQ accordion) drew link-blue.
+ * Same weightless light-mode guard as the link colour above: under BS3
+ * body.dark-mode a won this tie by order. */
+:where(body:not(.dark-mode)) .panel-title > a,
+:where(body:not(.dark-mode)) .panel-title > a:hover,
+:where(body:not(.dark-mode)) .panel-title > a:focus {
+	color: inherit;
 }
 
 a.list-group-item:hover,
@@ -10538,6 +10762,14 @@ a.badge:focus {
 	--bs-table-border-color: #ddd;
 }
 
+.table > thead > tr > .table-highlight-background-color {
+	--bs-table-bg: var(--light-mode-highlight-color);
+}
+
+body.dark-mode .table > thead > tr > .table-highlight-background-color {
+	--bs-table-bg: var(--dark-mode-highlight-color);
+}
+
 .table > :not(caption) > * > * {
 	border-color: #ddd;
 }
@@ -10608,6 +10840,22 @@ button.list-group-item {
 .col-xs-9 {
 	width: 75%;
 	padding: 0 0.9375rem;
+}
+
+/* groupsio.css tightens the grid to a 5px gutter below 992px (.container
+ * and .row at 5px, "adjust margins for narrow screens"), but keys the
+ * column half on the BS3 names .col-xs-1 … .col-xs-12, which the sweep
+ * turns into bare .col-N; only the .row half still matches. Without this
+ * mirror a converted column keeps BS5's 12px padding inside a 5px-margined
+ * row, 7px a side wider than its BS3 twin, and its text wraps a line
+ * earlier on a phone (grouppollresponses' thumbnail cards). Columns that
+ * carried no -xs- class under BS3 kept 15px there and are left alone. */
+@media (max-width: 991.98px) {
+	.col-1, .col-2, .col-3, .col-4, .col-5, .col-6,
+	.col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+		padding-left: 5px;
+		padding-right: 5px;
+	}
 }
 
 /* BS3 responsive/print hiding utilities still present in shared markup
@@ -10722,7 +10970,12 @@ button.list-group-item {
  * app's margin-bottom, link colors, active color, and dark-mode variants key
  * on .breadcrumb in groupsio.css and apply as-is. */
 .breadcrumb {
-	padding: 0.5rem 0.9375rem;
+	/* Padding through BS5's own variables, not a declaration: the app's
+	 * .scroll-breadcrumb zeroes the side padding at (0,1,0) and won under
+	 * BS3 by order, but a declaration here loads last and beat it, so the
+	 * scrolling crumb trail sat 15px further right than its BS3 twin. */
+	--bs-breadcrumb-padding-y: 0.5rem;
+	--bs-breadcrumb-padding-x: 0.9375rem;
 	background-color: #f5f5f5;
 	border-radius: 0.25rem;
 	--bs-breadcrumb-divider-color: #ccc;
@@ -10942,8 +11195,16 @@ label {
  * groupsio.css's convention (section 3): quiet on click, the app's ring for
  * keyboard users. :checked is declared last so a focused checked control
  * keeps the brand border. */
+.form-check-input {
+	border-color: #d6d9de;
+}
+
+body:not(.dark-mode) .form-check-input:not(:checked):hover {
+	border-color: #337ab7;
+}
+
 .form-check-input:focus {
-	border-color: var(--bs-border-color);
+	border-color: #d6d9de;
 	box-shadow: none;
 }
 
@@ -11177,6 +11438,12 @@ body.dark-mode .card {
  * text colour. */
 body.dark-mode .card > .card-header {
 	color: var(--dark-mode-light-text-color);
+	/* groupsio.css's earlier body.dark-mode .panel-default .panel-heading
+	 * rule also gave the heading the highlight background (a band above
+	 * the body); the colour above came from its later > rule. Without the
+	 * background every default card header merged into its body in dark
+	 * mode, on every converted page since wave 1. */
+	background-color: var(--dark-mode-highlight-color);
 }
 
 /* groupsio.css's dark-mode label palette: every label takes the reverse
@@ -11191,6 +11458,15 @@ body.dark-mode .badge.text-bg-primary {
 }
 body.dark-mode .badge.text-bg-info {
 	background-color: #3da8c0 !important;
+}
+
+/* The same groupsio.css rule (body.dark-mode .label, (0,2,1)) gave every
+ * hashtag pill dark text on its pastel fill; the pills now carry badge, so
+ * it matches nothing and they took the dark-mode link colour, invisible on
+ * the teal and blue fills. :where() keeps BS3's specificity so the rule
+ * still wins only by order, as it did over body.dark-mode .hashtag-btn. */
+body.dark-mode .badge:where([class*="hashtag-label-"]) {
+	color: var(--dark-mode-reverse-text-color);
 }
 
 /* The BS5 accordion carries its own variables, so it does not follow the

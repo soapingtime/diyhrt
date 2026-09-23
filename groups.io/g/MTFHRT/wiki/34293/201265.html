@@ -152,7 +152,7 @@
 			gioReport({
 				msg: "bundle-load-failure",
 				url: src,
-				client_id: "web.app01-g2.1774112.1789523495385593161"
+				client_id: "web.app01-g2.1040160.1790128638543047306"
 			});
 		};
 		if (window.__gioBundleErr) {
@@ -173,7 +173,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app01-g2.1774112.1789523495385593161");
+				console.log("client_id:", "web.app01-g2.1040160.1790128638543047306");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -228,7 +228,7 @@
 				column: column,
 				stack: stack,
 				last_error: lastError,
-				client_id: "web.app01-g2.1774112.1789523495385593161"
+				client_id: "web.app01-g2.1040160.1790128638543047306"
 			});
 			lastError = errorMessage;
 			return true;
@@ -239,8 +239,8 @@
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-bs5-b512a06705177e1db2c42c9eb339c36a.css" rel="stylesheet" id="groupsio-css">
-			<script src="../../../../js/application-bs5-c16d4980043b6020f21de2d46d113a60.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
+			<link href="../../../../css/application-ab47fef79b718ba05bf14c1f606f129f.css" rel="stylesheet" id="groupsio-css">
+			<script src="../../../../js/application-c16d4980043b6020f21de2d46d113a60.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>MTFHRT@groups.io | Wiki</title>
 			
@@ -329,7 +329,7 @@
 	}, true);
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "0c02b558ead8899f8d98c5371d11c18d5acc60bf", "Accept-Bundle": "bs5"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "50877c05ac31c275a458e97f29d7dfd21253e665"}' hx-ext="preload" hx-boost="false">
 			<div id="gio-progress-bar" aria-hidden="true"></div>
 			
 				<script>
@@ -1186,17 +1186,13 @@ function showAutocompleteModal(modalName) {
 	<div id="alertdiv"></div>
 	<div class="noticetemplate template">
 		<div class="alert alert-success alert-dismissible" role="alert">
-			
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-			
 			<span class="flashmsg"></span>
 		</div>
 	</div>
 	<div class="alerttemplate template">
 		<div class="alert alert-danger alert-dismissible" role="alert">
-			
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-			
 			<span class="flashmsg"></span>
 		</div>
 	</div>
@@ -1254,7 +1250,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 	
 	<div class="row breadcrumb-row" style="margin-bottom: 10px">
-		<div class="col-12 col-md-9">
+		<div class="col-12 col-md-9 ps-0">
 			<span class="d-md-none float-end" style="padding:8px 15px;"><a data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></a></span>
 			<div class="breadcrumb-container">
 				
@@ -1273,11 +1269,9 @@ function createAlert(msg, isError, autoClose, noClose) {
 				
 				<div class="input-group">
 					<input id="searchbox" type="text" class="form-control" placeholder="Search" title="Search" name="q" size="20" style="height:37px">
-					
 						<button class="btn btn-primary" type="submit" style="height:37px;" aria-label="Search">
 							<span class="fa fa-search"></span>
 						</button>
-					
 				</div>
 			</form>
 		</div>
@@ -1288,7 +1282,6 @@ function createAlert(msg, isError, autoClose, noClose) {
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					
 					<h4 class="modal-title" id="searchModalLabel">
 						Search
 					</h4>
