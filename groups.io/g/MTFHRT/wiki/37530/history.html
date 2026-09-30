@@ -152,7 +152,7 @@
 			gioReport({
 				msg: "bundle-load-failure",
 				url: src,
-				client_id: "web.app02-g2.1039697.1790128636570650901"
+				client_id: "web.app02-g2.1848608.1790735633072799718"
 			});
 		};
 		if (window.__gioBundleErr) {
@@ -173,7 +173,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app02-g2.1039697.1790128636570650901");
+				console.log("client_id:", "web.app02-g2.1848608.1790735633072799718");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -228,7 +228,7 @@
 				column: column,
 				stack: stack,
 				last_error: lastError,
-				client_id: "web.app02-g2.1039697.1790128636570650901"
+				client_id: "web.app02-g2.1848608.1790735633072799718"
 			});
 			lastError = errorMessage;
 			return true;
@@ -239,7 +239,7 @@
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-ab47fef79b718ba05bf14c1f606f129f.css" rel="stylesheet" id="groupsio-css">
+			<link href="../../../../css/application-07b87eb5d00416f24d1d9fb6b4e4ed02.css" rel="stylesheet" id="groupsio-css">
 			<script src="../../../../js/application-c16d4980043b6020f21de2d46d113a60.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>MTFHRT@groups.io | Wiki</title>
@@ -312,6 +312,19 @@
 		if (bar) bar.classList.remove('active');
 	});
 
+	// Bootstrap appends an open tooltip to <body>, outside the content HTMX
+	// replaces, so clicking a boosted link while its tooltip shows would leave
+	// the tooltip stranded on the new page. Dispose of the open tooltips
+	// whose triggers are about to be swapped out.
+	document.addEventListener('htmx:beforeSwap', function(evt) {
+		var target = evt.detail && evt.detail.target;
+		if (!target || typeof bootstrap === 'undefined') return;
+		target.querySelectorAll('[aria-describedby^="tooltip"]').forEach(function(el) {
+			var tip = bootstrap.Tooltip.getInstance(el);
+			if (tip) tip.dispose();
+		});
+	});
+
 	// Haptic feedback on mobile-native chrome taps: bottom-nav tabs, back
 	// chevron, and the navbar overflow action slot. Uses the shared helpers
 	// from qtutils/appfunctions.qtpl — they no-op on non-Capacitor runtimes,
@@ -328,7 +341,7 @@
 	}, true);
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "50877c05ac31c275a458e97f29d7dfd21253e665"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "1be2039477ed00a200350323d56d4459ad0a4582"}' hx-ext="preload" hx-boost="false">
 			<div id="gio-progress-bar" aria-hidden="true"></div>
 			
 				<script>

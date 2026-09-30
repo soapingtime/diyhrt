@@ -3764,7 +3764,8 @@ table.table-fixed {
 }
 
 .hashtag-label-white {
-	background-color: #fff;
+	--hashtag-bg: #fff;
+	background-color: var(--hashtag-bg);
 	border-color: #ccc;
 }
 
@@ -3776,171 +3777,213 @@ table.table-fixed {
 }
 
 .hashtag-label-green-lantern {
-	background-color: #61b16c;
+	--hashtag-bg: #61b16c;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-cucumber {
-	background-color: #91d09a;
+	--hashtag-bg: #91d09a;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-cerulean-blue {
-	background-color: #4191d6;
+	--hashtag-bg: #4191d6;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-bluejean {
-	background-color: #8ec2ee;
+	--hashtag-bg: #8ec2ee;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-capri-blue {
-	background-color: #88ddf7;
+	--hashtag-bg: #88ddf7;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-aquamute {
-	background-color: #60d2b8;
+	--hashtag-bg: #60d2b8;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-emerald-green {
-	background-color: #11adb1;
+	--hashtag-bg: #11adb1;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-apricot {
-	background-color: #fe904b;
+	--hashtag-bg: #fe904b;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-orange {
-	background-color: #faa849;
+	--hashtag-bg: #faa849;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-yellow {
-	background-color: #fecd0f;
+	--hashtag-bg: #fecd0f;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-cherry-blossom {
-	background-color: #f96ab0;
+	--hashtag-bg: #f96ab0;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-peony {
-	background-color: #fb9bc4;
+	--hashtag-bg: #fb9bc4;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-tomato {
-	background-color: #f85347;
+	--hashtag-bg: #f85347;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-melon {
-	background-color: #fa8287;
+	--hashtag-bg: #fa8287;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-orchid {
-	background-color: #df6cca;
+	--hashtag-bg: #df6cca;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-pink {
-	background-color: #f39de4;
+	--hashtag-bg: #f39de4;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-lilac {
-	background-color: #9f8cd5;
+	--hashtag-bg: #9f8cd5;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-purple {
-	background-color: #837fd5;
+	--hashtag-bg: #837fd5;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-dark-grey {
-	background-color: #4c4c4c;
+	--hashtag-bg: #4c4c4c;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-light-grey {
-	background-color: #8c8c8c;
+	--hashtag-bg: #8c8c8c;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-military {
-	background-color: #938953;
+	--hashtag-bg: #938953;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-light-brown {
-	background-color: #c4bd97;
+	--hashtag-bg: #c4bd97;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-moss-green {
-	background-color: #93ad59;
+	--hashtag-bg: #93ad59;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-grey-blue {
-	background-color: #83adb5;
+	--hashtag-bg: #83adb5;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-green-sage {
-	background-color: #9fc4ac;
+	--hashtag-bg: #9fc4ac;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-sage {
-	background-color: #89bfbd;
+	--hashtag-bg: #89bfbd;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-blush {
-	background-color: #ee836f;
+	--hashtag-bg: #ee836f;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-mustard {
-	background-color: #cb9228;
+	--hashtag-bg: #cb9228;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-mulbery {
-	background-color: #d55d75;
+	--hashtag-bg: #d55d75;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-dusty-mauve {
-	background-color: #655251;
+	--hashtag-bg: #655251;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-dark-orange {
-	background-color: #e76239;
+	--hashtag-bg: #e76239;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-burnt-yellow {
-	background-color: #dab71f;
+	--hashtag-bg: #dab71f;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-antique-pink {
-	background-color: #e5b9b7;
+	--hashtag-bg: #e5b9b7;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-lips {
-	background-color: #c97586;
+	--hashtag-bg: #c97586;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-terracotta {
-	background-color: #a7605f;
+	--hashtag-bg: #a7605f;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-cloudy-blue {
-	background-color: #6381b4;
+	--hashtag-bg: #6381b4;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-purple-grey {
-	background-color: #8593ab;
+	--hashtag-bg: #8593ab;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-light-lilac {
-	background-color: #ccc1d9;
+	--hashtag-bg: #ccc1d9;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-grape {
-	background-color: #5e3c58;
+	--hashtag-bg: #5e3c58;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-purple-blue {
-	background-color: #4853a1;
+	--hashtag-bg: #4853a1;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-sky {
-	background-color: #9cc7df;
+	--hashtag-bg: #9cc7df;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-beige {
-	background-color: #dcc39c;
+	--hashtag-bg: #dcc39c;
+	background-color: var(--hashtag-bg);
 }
 
 .hashtag-box-white {
@@ -8145,6 +8188,9 @@ body.dark-mode .feed-section-title i {
 	margin-left: 4px;
 	margin-top: 2px;
 	display: inline-block;
+	/* Match the topic list's pills; the badge's 0.75em would otherwise
+	   scale down from the 12px meta column. */
+	font-size: 12px;
 }
 
 /* /feed empty state shown when the user has no groups with recent
@@ -8343,6 +8389,7 @@ body.dark-mode input[type="file"],
 body.dark-mode textarea,
 body.dark-mode input[type="password"] {
 	background-color: var(--dark-mode-input-color);
+	color: var(--dark-mode-text-color);
 }
 
 body.dark-mode .Xmce-widget,
@@ -9666,6 +9713,14 @@ body.dark-mode .empty-state-title {
  * is retuned instead.
  */
 
+/* BS5's reboot turns on smooth scrolling for the whole document; BS3 had
+ * none. With it on, the browser's scroll restoration on Back animates up the
+ * page being left while htmx fetches the history entry, so returning from an
+ * expanded topic crawls up the messages before the topic list appears. */
+:root {
+	scroll-behavior: auto;
+}
+
 /* BS3 navbars carry no vertical padding and declare min-height: 50px;
  * BS5's .5rem paddings make the bar 66px, sliding content (body
  * padding-top: 60px) underneath it. Zeroing the padding is what restores
@@ -10493,6 +10548,33 @@ fieldset:disabled .btn:hover {
 .badge.btn {
 	padding: 0.2em 0.6em 0.3em;
 	line-height: 1;
+}
+
+/* Hashtag pills keep their colours on hover, focus and while their menu is
+ * open. BS3's .btn:hover changed only the text colour; BS5's state rules
+ * repaint the background from --bs-btn-hover-bg (transparent on a bare .btn)
+ * and the text from the body colour, so the pill vanished into the page. The
+ * anchor pills (a.badge) likewise took BS5's link-hover colour where BS3's
+ * a.label:hover kept white text. */
+.btn.hashtag-btn:is(:hover, :focus-visible, :active, .show),
+a.badge[class*="hashtag-label-"]:hover,
+a.badge[class*="hashtag-label-"]:focus {
+	background-color: var(--hashtag-bg);
+	border-color: transparent;
+	color: #fff;
+}
+
+.btn.hashtag-btn.hashtag-label-white:is(:hover, :focus-visible, :active, .show),
+a.badge.hashtag-label-white:hover,
+a.badge.hashtag-label-white:focus {
+	border-color: #ccc;
+	color: #333;
+}
+
+body.dark-mode .btn.hashtag-btn:is(:hover, :focus-visible, :active, .show),
+body.dark-mode a.badge[class*="hashtag-label-"]:hover,
+body.dark-mode a.badge[class*="hashtag-label-"]:focus {
+	color: var(--dark-mode-reverse-text-color);
 }
 
 /* The app's btn-default is light grey (#ccc, dark text; groupsio.css:808);
