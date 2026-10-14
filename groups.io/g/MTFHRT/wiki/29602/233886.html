@@ -6,6 +6,7 @@
 			<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			
+			
 				<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 			
 			<meta name="theme-color" content="#2f6fa7">
@@ -152,7 +153,7 @@
 			gioReport({
 				msg: "bundle-load-failure",
 				url: src,
-				client_id: "web.app01-g2.27104.1791341424808734154"
+				client_id: "web.app01-g2.1186532.1791944251914183330"
 			});
 		};
 		if (window.__gioBundleErr) {
@@ -173,7 +174,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app01-g2.27104.1791341424808734154");
+				console.log("client_id:", "web.app01-g2.1186532.1791944251914183330");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -228,7 +229,7 @@
 				column: column,
 				stack: stack,
 				last_error: lastError,
-				client_id: "web.app01-g2.27104.1791341424808734154"
+				client_id: "web.app01-g2.1186532.1791944251914183330"
 			});
 			lastError = errorMessage;
 			return true;
@@ -239,10 +240,10 @@
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-07b87eb5d00416f24d1d9fb6b4e4ed02.css" rel="stylesheet" id="groupsio-css">
-			<script src="../../../../js/application-c16d4980043b6020f21de2d46d113a60.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
+			<link href="../../../../css/application-faf38b3f5b1a250db46e4f728787b251.css" rel="stylesheet" id="groupsio-css">
+			<script src="../../../../js/application-35e32ae82e031022fd4bf6938772adce.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
 			<script src="../../../../js/run_prettify.js"></script>
-			<title>MTFHRT@groups.io | Wiki</title>
+			<title>MTFHRT@groups.io | Wiki | Ultimate DIY</title>
 			
 
 			
@@ -261,17 +262,20 @@
         "text": "#31708f"
       },
       "button": {
-        "background": "#56cbdb",
+        "background": "#1b7a9a",
         "text": "#ffffff"
       }
     },
     "cookie": {
-        "domain": ".{{.Org.Domain}}"
+        "domain": ".groups.io"
     },
     "content": {
       "message": "Our site uses cookies so that we can remember you and understand how you and other visitors use our site, to improve your browsing experience and help us improve our site. By continuing to use our website, you agree to our use of such cookies.",
       "dismiss": "I Agree",
       "href": "https://groups.io/static/cookie_policy"
+    },
+    "elements": {
+      "dismiss": '<a role=button tabindex="0" class="cc-btn cc-dismiss">{{dismiss}}</a>'
     }
   })});
 </script>
@@ -342,7 +346,10 @@
 	}, true);
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "6ca133c8f3d6d40b53850ad6bc57e64517359ef7"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "c2c3bbf4a048fc38b058cc219f52ea0a108c2b4d"}' hx-ext="preload" hx-boost="false">
+			<a id="skip-link" class="skip-link visually-hidden-focusable" href="233886.html#maincontent">Skip to main content</a>
+			
+			<div id="page-announcer" class="visually-hidden" role="status"></div>
 			<div id="gio-progress-bar" aria-hidden="true"></div>
 			
 				<script>
@@ -382,7 +389,7 @@
 							
 							<ul class="nav navbar-nav float-end d-md-none" style="margin-top:5px;margin-bottom:5px;">
 								<li>
-									<a href="233886.html#" data-bs-toggle="modal" data-bs-target="#mobileAccount" class="nav-link">
+									<a href="233886.html#" data-bs-toggle="modal" data-bs-target="#mobileAccount" class="nav-link" aria-label="Menu">
 										<i class="fa-fw fa fa-bars fa-lg"></i>
 									</a>
 								</li>
@@ -477,7 +484,7 @@
 							</ul>
 					</div>
 				</div>
-				<div class="modal fade" id="mobileAccount" role="dialog">
+				<div class="modal fade" id="mobileAccount" tabindex="-1" role="dialog" aria-label="Menu">
 					<div class="modal-dialog" style="margin-top:50px;">
 						<div class="modal-content">
 							<div class="modal-body">
@@ -586,12 +593,13 @@ var groupnavigatorData = [
 
 
 <!-- Modal Dialog for Autocomplete -->
-<div class="modal fade" id="groupnavigatorModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade" id="groupnavigatorModal" tabindex="-1" role="dialog" aria-label="Go to group..." aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <input type="text" class="form-control" id="groupnavigatorInput" placeholder="Go to group..." style="margin-bottom:10px">
-        <div id="groupnavigatorContainer" class="autocompleteResults" style="max-height:250px; overflow-y: auto;"></div>
+        <input type="text" class="form-control" id="groupnavigatorInput" placeholder="Go to group..." aria-label="Go to group..." role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="groupnavigatorContainer" autocomplete="off" style="margin-bottom:10px">
+        <div id="groupnavigatorContainer" class="autocompleteResults" role="listbox" aria-label="Go to group..." style="max-height:250px; overflow-y: auto;"></div>
+        <div id="groupnavigatorStatus" class="visually-hidden" role="status" data-results-label="results"></div>
 		<div class="text-center" style="margin-top:10px; font-size:12px;"><i class="fa-sharp fa-arrow-up-arrow-down"></i> to navigate&nbsp;&nbsp;&nbsp;<i class="fa-sharp fa-arrow-turn-down-left"></i> to use&nbsp;&nbsp;&nbsp;<strong>esc</strong> to dismiss</div>
       </div>
     </div>
@@ -619,9 +627,18 @@ function highlightSubstring(str, substring) {
 function highlightSelectedItem(modalName) {
   var listContainer = document.getElementById(modalName + 'Container');
   var items = document.getElementsByClassName(modalName + '-list-item');
+  var input = document.getElementById(modalName + 'Input');
   Array.from(items).forEach(function(item, idx) {
     item.className = idx === selectedIndex ? modalName + '-list-item autocomplete-list-item btn-primary no-hover' : modalName + '-list-item autocomplete-list-item no-hover'; // Apply btn-primary class to the selected item
+    item.setAttribute('aria-selected', idx === selectedIndex ? 'true' : 'false');
   });
+  // Point the combobox at the highlighted option, so screen readers
+  // announce it as the arrow keys move.
+  if (selectedIndex >= 0 && selectedIndex < items.length) {
+    input.setAttribute('aria-activedescendant', items[selectedIndex].id);
+  } else {
+    input.removeAttribute('aria-activedescendant');
+  }
   if (items.length > 0 && selectedIndex >= 0) {
     var selectedItem = items[selectedIndex];
     var containerTop = listContainer.scrollTop;
@@ -644,11 +661,16 @@ function populateList(modalName, data) {
   var input = document.getElementById(modalName+'Input').value;
   var listContainer = document.getElementById(modalName+'Container');
   listContainer.innerHTML = '';
+  var count = 0;
   data.forEach(function(item) {
     if (item.name.toLowerCase().includes(input.toLowerCase())) {
       var div = document.createElement('div');
       div.innerHTML = highlightSubstring(item.name, input);
       div.className = modalName+'-list-item autocomplete-list-item no-hover'; // Apply no-hover class
+      div.id = modalName + 'Option' + count;
+      div.setAttribute('role', 'option');
+      div.setAttribute('aria-selected', 'false');
+      count++;
       div.addEventListener('click', function() {
         // Navigate to the specified URL when a list item is clicked
         window.location.href = item.url;
@@ -664,6 +686,9 @@ function populateList(modalName, data) {
       listContainer.appendChild(div);
     }
   });
+  document.getElementById(modalName + 'Input').setAttribute('aria-expanded', count > 0 ? 'true' : 'false');
+  var status = document.getElementById(modalName + 'Status');
+  status.textContent = count + ' ' + status.getAttribute('data-results-label');
   highlightSelectedItem(modalName);
 }
 
@@ -680,6 +705,7 @@ function InitAutocomplete(modalName, data) {
 	document.getElementById(modalName + 'Input').addEventListener('input', function() {
 		populateList(modalName, data);
 		selectedIndex = 0;
+		highlightSelectedItem(modalName);
 	});
 
 	// Event listener for arrow keys and enter key
@@ -739,6 +765,10 @@ function showAutocompleteModal(modalName) {
 		a.appendChild(icon);
 		slot.appendChild(a);
 		slot.style.display = '';
+		var bar = document.getElementById("headerbar");
+		if (bar) {
+			bar.classList.add('has-header-action');
+		}
 	}
 
 	function HideHeaderAction() {
@@ -747,6 +777,10 @@ function showAutocompleteModal(modalName) {
 			slot.innerHTML = '';
 			slot.style.display = 'none';
 			slot.style.float = 'left';
+		}
+		var bar = document.getElementById("headerbar");
+		if (bar) {
+			bar.classList.remove('has-header-action');
 		}
 	}
 
@@ -879,11 +913,15 @@ function showAutocompleteModal(modalName) {
 				console.log("Ignoring infinite scroll event");
 				return;
 			}
+			// Removed here rather than registered with {once: true}, which
+			// would discard the listener on the ignored swaps above.
+			document.body.removeEventListener("htmx:beforeSwap", internalGioDestroy);
+			document.body.removeEventListener("htmx:historyCacheMiss", internalGioDestroy);
 			console.log("Calling destroy callback");
 			eventCB(evt);
 		}
-		document.body.addEventListener("htmx:beforeSwap", internalGioDestroy, {once: true});
-		document.body.addEventListener("htmx:historyCacheMiss", internalGioDestroy, {once: true});
+		document.body.addEventListener("htmx:beforeSwap", internalGioDestroy);
+		document.body.addEventListener("htmx:historyCacheMiss", internalGioDestroy);
 	}
 			
 	var drawerCloseFunc = function(evt) {
@@ -901,11 +939,8 @@ function showAutocompleteModal(modalName) {
 	document.body.addEventListener('htmx:historyCacheMiss', drawerCloseFunc);
 
 	var keydownFunc = function(event) {
-		var tagName = event.target.tagName.toLowerCase();
+		var tagName = (event.target.tagName || "").toLowerCase();
 		if (tagName === 'input' || tagName === 'textarea' || event.target.isContentEditable) {
-			if (event.key === 'Escape') {
-				event.target.blur();
-			}
 			return;
 		}
 		// check if the viewimages viewer is up
@@ -929,12 +964,14 @@ function showAutocompleteModal(modalName) {
 		if (event.key === 'Control' || event.key === 'Shift' || event.key === 'Alt' || event.key === 'Meta') {
 			return;
 		}
-		$('#shortcutModal').modal('hide');
+		// The shortcuts modal closes on Escape, which Bootstrap handles; Tab
+		// and other keys stay inside it.
 
 		if (event.key.toLowerCase() === 'g') {
 			// For Windows and Linux
 			if (event.ctrlKey) {
 				event.preventDefault();
+				$('#shortcutModal').modal('hide');
 				showAutocompleteModal("groupnavigator");
 				return;
 			}
@@ -1069,7 +1106,7 @@ function showAutocompleteModal(modalName) {
 	<div id="mainrow" class=""  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-history="false" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
 		<div id="groupsidebar" class="scrollbar hidden-print">
 			<div class="scrollbar-content">
-				<div id="accordion" role="tablist" aria-multiselectable="true" style="margin-bottom:20px;">
+				<div id="accordion" role="navigation" aria-label="Sidebar" style="margin-bottom:20px;">
 					<div class="list-group noborderlist" style="border:0;margin-bottom:0px">
 						
 	<a title="Group Home" href="https://groups.io/g/MTFHRT" class="list-group-item sidebar-item">
@@ -1143,7 +1180,7 @@ function showAutocompleteModal(modalName) {
 					</div>
 				</div>
 				
-	<div class="text-center" style="font-size:13px;margin-bottom:30px">
+	<div class="text-center" style="font-size:13px;line-height:25px;margin-bottom:30px">
 		<div style="padding-bottom:10px;">
 			<strong>ctrl</strong> + <strong>shift</strong> + <strong>?</strong> for shortcuts
 		</div>
@@ -1174,7 +1211,7 @@ function showAutocompleteModal(modalName) {
 			</a>
 		</div>
 		<div style="padding-bottom:5px;">
-			<a href="https://groups.io/helpcenter" target="_blank">
+			<a href="https://groups.io/helpcenter" style="display:inline-block;padding:4px 0;" target="_blank">
 				Help
 			</a>
 		</div>
@@ -1185,9 +1222,12 @@ function showAutocompleteModal(modalName) {
 
 			</div>
 		</div>
-		<div id="maincontent" class="groupmaincontent">
+		<div id="maincontent" class="groupmaincontent" role="main">
 			<div id="maincontent-refresh">
 				<div id="maincontent-column" class="col-xs-12 maincontent-column">
+					
+<h1 class="visually-hidden" tabindex="-1">MTFHRT@groups.io | Wiki | Ultimate DIY</h1>
+
 					
 	
 	
@@ -1227,7 +1267,67 @@ function dismiss() {
 var $alerttemplate = $(".alerttemplate");
 var $alertnoclosetemplate = $(".alertnoclosetemplate");
 var $noticetemplate = $(".noticetemplate");
+
+// alertText holds translated messages for alerts raised by shared scripts
+// (the editor and the ajax retry helper) that have no translator of their own.
+var alertText = {
+	draftSaveError: "There was an error saving the draft.",
+	retryAutomatically: "We will retry automatically.",
+	retryCountdown: "We will retry again in %s seconds.",
+	retryNow: "Retry now",
+	sessionExpired: "Your login has expired, so your changes are not being saved. Do not close or reload this page. \u003ca href=\"/login\" target=\"_blank\" rel=\"noopener\">Log in again in a new tab\u003c/a>, then return here to send your message.",
+	uploadFailed: "Failed to upload %s",
+	imageUploadFailed: "1 image failed to upload. Please try again.",
+	imagesUploadFailed: "%s images failed to upload. Please try again.",
+	uploadLoginExpired: "Your login has expired, so this file was not uploaded. Log in again in a new tab, then try again.",
+	loginExpired: "Your login has expired, so your change was not saved. \u003ca href=\"%s\">Log in again\u003c/a>, then try again.",
+	changeNotSaved: "Your change was not saved. Please try again.",
+	voteNotSaved: "Your vote was not saved. Please try again."
+};
+
+// alertRequestFailed shows a persistent error alert for a failed background
+// request. A 401 means the login has expired, so the alert links to the
+// login page, which returns to this page afterwards. Otherwise failedMsg
+// is shown.
+function alertRequestFailed(xhr, failedMsg) {
+	if (xhr && xhr.status === 401) {
+		var loginURL = "/login?r=" + encodeURIComponent(window.location.href);
+		return createAlert(alertText.loginExpired.replace("%s", $("<div>").text(loginURL).html()), true, false);
+	}
+	return createAlert(failedMsg, true, false);
+}
+
+// alertReturnFocus moves focus back to where it was before it entered a
+// closing alert, or to the page heading if that element is gone, so focus
+// is never dropped onto the page body.
+function alertReturnFocus(returnTo) {
+	if (returnTo && returnTo !== document.body && document.body.contains(returnTo)) {
+		// A rich-text editor lives in an iframe; focus the editor itself
+		// so the caret comes back with it.
+		if (returnTo.tagName === 'IFRAME' && window.tinymce && tinymce.get) {
+			var editors = tinymce.get();
+			for (var i = 0; i < editors.length; i++) {
+				var container = editors[i].getContainer && editors[i].getContainer();
+				if (container && container.contains(returnTo)) {
+					editors[i].focus();
+					return;
+				}
+			}
+		}
+		returnTo.focus();
+		return;
+	}
+	var heading = document.querySelector('#maincontent-column h1[tabindex="-1"]') || document.querySelector('h1[tabindex="-1"]');
+	if (heading) {
+		heading.focus();
+	}
+}
+
+// createAlert shows msg in #alertdiv. Error alerts stay until dismissed.
+// An autoClose notice closes after 10 seconds, but waits while the pointer
+// is over it or keyboard focus is inside it.
 function createAlert(msg, isError, autoClose, noClose) {
+	var $newPanel;
 	if (isError == false) {
 		$newPanel = $noticetemplate.clone();
 	} else {
@@ -1239,14 +1339,83 @@ function createAlert(msg, isError, autoClose, noClose) {
 	}
 	$newPanel.removeClass("template");
 	$newPanel.find(".flashmsg").html(msg);
-	if (autoClose == true) {
-		$("#alertdiv").append($newPanel.fadeTo(2000, 500).slideUp(500, function(){
-		    $newPanel.slideUp(500);
-		    $newPanel.remove();
-		}));  	
-	} else {
-		$("#alertdiv").append($newPanel.fadeIn());
+	var panel = $newPanel[0];
+
+	// Remember where focus came from so closing the alert can return it.
+	// Focus arriving from an iframe (the rich-text editor) or from script
+	// has no relatedTarget, so start with the element focused when the
+	// alert was raised.
+	var returnTo = document.activeElement;
+	var hovered = false;
+	var focused = false;
+	panel.addEventListener('focusin', function(e) {
+		if (!focused && e.relatedTarget && !panel.contains(e.relatedTarget)) {
+			returnTo = e.relatedTarget;
+		}
+		focused = true;
+	});
+	// Bootstrap removes the inner .alert before firing closed.bs.alert on
+	// it, so that event never reaches the wrapper; listen on the .alert.
+	var alertEl = panel.querySelector('.alert');
+	var hadFocus = false;
+	if (alertEl) {
+		alertEl.addEventListener('close.bs.alert', function() {
+			hadFocus = panel.contains(document.activeElement);
+		});
+		alertEl.addEventListener('closed.bs.alert', function() {
+			$newPanel.remove();
+			if (hadFocus) {
+				alertReturnFocus(returnTo);
+			}
+		});
 	}
+
+	// closeAlert removes the alert without dropping keyboard focus.
+	$newPanel.closeAlert = function() {
+		var focusInside = panel.contains(document.activeElement);
+		$newPanel.remove();
+		if (focusInside) {
+			alertReturnFocus(returnTo);
+		}
+	};
+
+	if (autoClose == true && isError == false) {
+		var closeTimer = null;
+		var scheduleClose = function() {
+			clearTimeout(closeTimer);
+			closeTimer = setTimeout(function() {
+				if (hovered || focused || !panel.isConnected) {
+					return;
+				}
+				$newPanel.slideUp(500, $newPanel.closeAlert);
+			}, 10000);
+		};
+		panel.addEventListener('mouseenter', function() {
+			hovered = true;
+			clearTimeout(closeTimer);
+		});
+		panel.addEventListener('mouseleave', function() {
+			hovered = false;
+			scheduleClose();
+		});
+		panel.addEventListener('focusin', function() {
+			clearTimeout(closeTimer);
+		});
+		panel.addEventListener('focusout', function(e) {
+			if (!panel.contains(e.relatedTarget)) {
+				focused = false;
+				scheduleClose();
+			}
+		});
+		scheduleClose();
+	} else {
+		panel.addEventListener('focusout', function(e) {
+			if (!panel.contains(e.relatedTarget)) {
+				focused = false;
+			}
+		});
+	}
+	$("#alertdiv").append($newPanel.fadeIn());
     return $newPanel;
 }
 
@@ -1264,7 +1433,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 	
 	<div class="row breadcrumb-row" style="margin-bottom: 10px">
 		<div class="col-12 col-md-9 ps-0">
-			<span class="d-md-none float-end" style="padding:8px 15px;"><a data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></a></span>
+			<span class="d-md-none float-end" style="padding:8px 15px;"><button type="button" class="btn btn-link p-0 border-0 align-baseline" data-bs-toggle="modal" data-bs-target="#searchModal" aria-label="Search"><i class="fa fa-search"></i></button></span>
 			<div class="breadcrumb-container">
 				
 					<ol class="breadcrumb scroll-breadcrumb">
@@ -1281,7 +1450,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 				
 				
 				<div class="input-group">
-					<input id="searchbox" type="text" class="form-control" placeholder="Search" title="Search" name="q" size="20" style="height:37px">
+					<input id="searchbox" type="text" class="form-control" placeholder="Search" title="Search" aria-label="Search" name="q" size="20" style="height:37px">
 						<button class="btn btn-primary" type="submit" style="height:37px;" aria-label="Search">
 							<span class="fa fa-search"></span>
 						</button>
@@ -1338,7 +1507,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 						Pages
 						<span class="caret"></span>
 					</button>
-					<ul class="dropdown-menu" role="menu">
+					<ul class="dropdown-menu">
 						
 							<li>
 								<a class="dropdown-item" href="../37530.html">
@@ -1378,6 +1547,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 			
 				<div class="float-end">
 					<a href="history.html">
+						<span class="visually-hidden">Page history, last edited</span>
 						
 <script id="timedispupdated233886">
 	$('#timedispupdated233886').replaceWith(DisplayShortTime(1770798843310132951, false
@@ -1386,6 +1556,10 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 					</a>
 				</div>
+				
+				<h2 class="wiki-page-title">
+					Ultimate DIY
+				</h2>
 			
 		</div>
 	</div>
@@ -1440,7 +1614,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 <h2 id="Equipment">Equipment</h2>
 <h3 id="Necessary">Necessary</h3>
 <p>The only necessary equipment is cheap ($7 - $15) pocket 0.001 g (1 mg) scales (or DIY balance scales you can make from a long narrow wooden plank, 2 small nails and 2 syringes, one of them with 0.5 ml water as a precise weight).</p>
-<p>If you buy ready-to-use scales then they must have upper limit 10-50 g (not more), for example looking exactly like this:<br/><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13908/354x254.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1791342024&Signature=aBwDkscwnYxuagG92pwYehjLUWE%3D" align="right" loading="lazy" class="myimg-responsive"/><a href="https://www.amazon.com/dp/B0CHWGJYVW/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.amazon.com/dp/B0CHWGJYVW/</span></a><br/><a href="https://www.ebay.com/itm/395490215457" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.ebay.com/itm/395490215457</span></a><br/><a href="https://www.aliexpress.com/item/948604321.html" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.aliexpress.com/item/948604321.html</span></a></p>
+<p>If you buy ready-to-use scales then they must have upper limit 10-50 g (not more), for example looking exactly like this:<br/><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13908/354x254.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1791944851&Signature=Belo5vP3bWYZBnSIfy3byLVblO4%3D" align="right" loading="lazy" class="myimg-responsive"/><a href="https://www.amazon.com/dp/B0CHWGJYVW/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.amazon.com/dp/B0CHWGJYVW/</span></a><br/><a href="https://www.ebay.com/itm/395490215457" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.ebay.com/itm/395490215457</span></a><br/><a href="https://www.aliexpress.com/item/948604321.html" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.aliexpress.com/item/948604321.html</span></a></p>
 <p>Models with upper limit more than 50 g are not suitable because they <a href="https://groups.io/g/MTFHRT/message/11288" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">attempt</span></a> to appear more precise and stable by ignoring small weight changes.</p>
 <p>Search for other sellers:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=scale+0.001&amp;_sacat=0&amp;_blrs=recall_filtering&amp;LH_BIN=1&amp;_sop=15&amp;_ipg=120&amp;_oac=1" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.ebay.com/sch/i.html?_nkw=scale+0.001&amp;_sacat=0&amp;_blrs=recall_filtering&amp;LH_BIN=1&amp;_sop=15&amp;_ipg=120&amp;_oac=1</span></a></p>
 <p><a href="https://www.ebay.com/sch/i.html?_nkw=scale+digital+diamond&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_blrs=recall_filtering&amp;_ipg=120&amp;_oac=1" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.ebay.com/sch/i.html?_nkw=scale+digital+diamond&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_blrs=recall_filtering&amp;_ipg=120&amp;_oac=1</span></a></p>
@@ -1458,10 +1632,10 @@ function createAlert(msg, isError, autoClose, noClose) {
 <p>Unnecessary: beaker, mixer/stirrer, room with controlled airflow, depyrogenation. My technology: terminal heat sterilization (after the vials are sealed); measure and mix in each vial separately, so no glassware to wash with water  or collecting dust (skin flakes and <a href="https://en.wikipedia.org/wiki/House_dust_mite" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">mites</span></a>) if never washed. Water - bacteria - pyrogens. Hormone powders are sold not sterile, so any cleaning / sterilization efforts before terminal heat sterilization are futile. Don&#39;t try to improve this technology: it protects you from mistakes and unexpected problems.</p>
 <h2 id="Other-raw-materials-and-expendables">Other raw materials and expendables</h2>
 <h3 id="Vials2C-stoppers2C-caps">Vials, stoppers, caps</h3>
-<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13965/s-l300.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1791342024&Signature=xp2AlNEsHmeOiibmYIYM4iFs0%2Fo%3D" align="right" loading="lazy" class="myimg-responsive"/>Buy 10 clear glass vials 10 ml each with 20 mm grey or red (butyl rubber, not translucent silicone) stoppers and aluminium caps. Caps may be bare aluminium or painted, with plastic tops or all-metal. Screw-on and all-plastic caps are not suitable. Stoppers must have this shape:<br/><a href="https://www.aliexpress.com/item/33024594919.html" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.aliexpress.com/item/33024594919.html</span></a><span style="text-decoration: underline"></span> (grey plug)<br/><a href="https://a.aliexpress.com/_EHf2JEs" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://a.aliexpress.com/_EHf2JEs</span></a> (10 ml)<br/><a href="https://www.ebay.com/itm/155864019917" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.ebay.com/itm/155864019917</span></a><br/>Flat septa are not suitable instead of stoppers. Search:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1</span></a></p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13965/s-l300.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1791944851&Signature=RtNrR6AFAnDikO%2BV6WKZ5LJsKTU%3D" align="right" loading="lazy" class="myimg-responsive"/>Buy 10 clear glass vials 10 ml each with 20 mm grey or red (butyl rubber, not translucent silicone) stoppers and aluminium caps. Caps may be bare aluminium or painted, with plastic tops or all-metal. Screw-on and all-plastic caps are not suitable. Stoppers must have this shape:<br/><a href="https://www.aliexpress.com/item/33024594919.html" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.aliexpress.com/item/33024594919.html</span></a><span style="text-decoration: underline"></span> (grey plug)<br/><a href="https://a.aliexpress.com/_EHf2JEs" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://a.aliexpress.com/_EHf2JEs</span></a> (10 ml)<br/><a href="https://www.ebay.com/itm/155864019917" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.ebay.com/itm/155864019917</span></a><br/>Flat septa are not suitable instead of stoppers. Search:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1</span></a></p>
 <p><a href="https://www.aliexpress.com/wholesale?SearchText=vial+10ml+stopper+cap" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.aliexpress.com/wholesale?SearchText=vial+10ml+stopper+cap</span></a></p>
 <p>After you remove central part of the cap, most of the cap must remain and hold the rubber stopper at place. Caps must <strong>not</strong> have tear-off weak place on one side like this:</p>
-<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13909/cap-tear-off.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1791342024&Signature=iDjvH%2BU5VacMMWWouWmrss2oW8w%3D" loading="lazy" class="myimg-responsive"/></p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13909/cap-tear-off.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1791944851&Signature=75S7cDbzMKRiUVxUz71Fvfh1xnI%3D" loading="lazy" class="myimg-responsive"/></p>
 <p>In EU you can buy <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/VIC010-001NS" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">vials</span></a>, stoppers <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22STG20-%200001%22" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">1</span></a> or <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/STR20-0001" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">2</span></a>, <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22BKMA%2020-GO%22" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">caps</span></a>, <span style="text-decoration: underline"><a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22BA%200020%22" rel="nofollow noopener" target="_blank">benzyl alcohol</a></span> and <span style="text-decoration: underline"><a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22MCT%201L%22" rel="nofollow noopener" target="_blank">MCT oil</a></span> in one shop, or (cheaper) <a href="https://www.glas-shop.com/glasprodukte/injektionsflascheninfusionsflaschen/injektionsflaschenklarglas5100ml/injektionsflasche-klarglas-10ml.php" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">vials</span></a>+<span style="text-decoration: underline"><a href="https://www.glas-shop.com/verschluesse2/verschluesse-fuer-injektionsflaschen/injektionsstopfeneinzeln20mmrotausbrombutyl.php" rel="nofollow noopener" target="_blank">stoppers</a></span>+<span style="text-decoration: underline"><a href="https://www.glas-shop.com/verschluesse2/verschluesse-fuer-injektionsflaschen/boerdelkappe-2025-x-74-mm-mittel-abriss-gruen.php" rel="nofollow noopener" target="_blank">caps</a></span>, or <span style="text-decoration: underline"><a href="https://www.amazon.de/-/en/Mikikit-Clear-Glass-Bottle-Transparent/dp/B09TPLQQRB/" rel="nofollow noopener" target="_blank">here</a></span>, or <a href="https://www.amazon.es/gp/product/B09TFPB6SR/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">here</span></a>, or <span style="text-decoration: underline"><a href="https://www.amazon.de/-/en/H566EJW15X19NTIP4/dp/B09TFPB6SR/" rel="nofollow noopener" target="_blank">here</a></span>. In UK <span style="text-decoration: underline"><a href="https://www.ebay.co.uk/itm/333152620103" rel="nofollow noopener" target="_blank">here</a></span> or <a href="https://www.amazon.co.uk/Mikikit-10ml-Clear-Glass-Bottle/dp/B09TFPB6SR/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">here</span></a>. In USA <span style="text-decoration: underline"><a href="https://www.medical-and-lab-supplies.com/vials/open/rls-10ml-tubular-clear-glass-serum-vials-qty-1.html" rel="nofollow noopener" target="_blank">vials</a></span>+<span style="text-decoration: underline"><a href="https://www.medical-and-lab-supplies.com/lab-supplies/butyl-rubber-stoppers-for-vials-20mm-gray.html" rel="nofollow noopener" target="_blank">stoppers</a></span>+<span style="text-decoration: underline"><a href="https://www.medical-and-lab-supplies.com/lab-supplies/20mm-standard-aluminum-seal-please-click-to-view-all-colors.html" rel="nofollow noopener" target="_blank">caps</a></span> (<span style="text-decoration: underline"><a href="https://www.medical-and-lab-supplies.com/usp-oils/mct-60-40-caprylic-c8-capric-c10-oil.html" rel="nofollow noopener" target="_blank">oil</a></span>, <a href="https://www.medical-and-lab-supplies.com/chemicals-solvents/benzyl-alcohol-usp.html" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">BA</span></a>, <span style="text-decoration: underline"><a href="https://www.medical-and-lab-supplies.com/medical-supplies/syringes-and-needles/diabetic-syringes/aimsco-maxicomfort-diabetic-insulin-syringes.html" rel="nofollow noopener" target="_blank">syringes</a></span>) or <span style="text-decoration: underline"><a href="https://lemelange.com/unsterilevialwide10ml20mm.aspx" rel="nofollow noopener" target="_blank">vials</a></span>+<a href="https://lemelange.com/20-mm-vial-stoppers-grey.aspx" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">stoppers</span></a>+<span style="text-decoration: underline"><a href="https://lemelange.com/20mmaluminumringwithcentertearout.aspx" rel="nofollow noopener" target="_blank">caps</a></span> or <a href="https://qcvialz.com/vial-samples/316-10ml-clear-shorty-serum-vials-iso-10r-24x45mm-sample-pack-of-10.html" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">vials</span></a>+<a href="https://qcvialz.com/vial-stopper-samples/319-20mm-round-bottom-vial-stopper-sample-pack-of-10.html" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">stoppers</span></a>+<span style="text-decoration: underline"><a href="https://qcvialz.com/superior-flip-cap-vial-seals/482-light-blue-20mm-superior-flip-cap-vial-seals-pack-of-10pc.html" rel="nofollow noopener" target="_blank">caps</a></span> or <span style="text-decoration: underline"><a href="https://www.gpzmedlab.com/store/p/110-10-ML-Unsealed-Clear-Vial.aspx" rel="nofollow noopener" target="_blank">vials</a></span>+<span style="text-decoration: underline"><a href="https://www.gpzmedlab.com/store/p/38-Grey-Butyl-Stopper.aspx" rel="nofollow noopener" target="_blank">stoppers</a></span>+<a href="https://www.gpzmedlab.com/store/p/102-Aluminum-Seal-Center-Tear-Out.aspx" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">caps</span></a> (<span style="text-decoration: underline"><a href="https://www.gpzmedlab.com/easy-touch-1-cc-insulin-syringe-with-28-g-x-1-2-needle-100-count.aspx" rel="nofollow noopener" target="_blank">syringes</a></span>) or <a href="https://www.premiumvials.com/10ml-glass-bottle-with-lid-transparent-vial-b-10pcs/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">here</span></a> or sealed vials(<span style="text-decoration: underline"><a href="https://www.ebay.com/sch/257835/i.html?_dkr=1&amp;iconV2Request=true&amp;_blrs=recall_filtering&amp;_ssn=texlabsupplyinternational&amp;_oac=1&amp;_ipg=240&amp;_fcid=1&amp;LH_BIN=1&amp;_sop=15" rel="nofollow noopener" target="_blank">1</a></span> <a href="https://www.amazon.com/10ml-Sterile-Vial-Blue-Flip/dp/B07JD49TK2/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">2</span></a> <a href="https://www.amazon.com/Biocomma-Aluminum-Caps%EF%BC%8CPenicillin-Transparent-Borosilicate/dp/B09W5HM7R6/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">3</span></a> <a href="https://www.amazon.com/Empty-Borosillicate-Sealed-Sterile-Serum/dp/B005DIPY32/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">4</span></a> <a href="https://www.amazon.com/5-10ml-Empty-Sealed-Sterile-Vials/dp/B009CC0KMA/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">5</span></a> <a href="https://www.amazon.com/Molded-Sterile-Clear-Vials-Black/dp/B07KVCL4YF/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">6</span></a>)+<a href="https://www.amazon.com/20MM-13MM-Single-Seals-Eco-Green/dp/B094Q5VVTH/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">new caps</span></a>. In Canada <span style="text-decoration: underline"><a href="https://canadianmedhealthsupplies.ca/collections/10ml-vials-clear/products/10ml-vial-22mm-x-50mm-clear?variant=8081524817966" rel="nofollow noopener" target="_blank">vials</a></span>+<a href="https://canadianmedhealthsupplies.ca/collections/all-rubber-stoppers/products/20mm-rubber-stopper-grey?variant=8081553915950" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">stoppers</span></a>+<span style="text-decoration: underline"><a href="https://canadianmedhealthsupplies.ca/collections/20mm-flip-off-cap-flip-off/products/20mm-white-flip-off-cap-flip-off" rel="nofollow noopener" target="_blank">caps</a></span> (<a href="https://canadianmedhealthsupplies.ca/collections/solvents/products/benzyl-alcohol" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">BA</span></a>). In Mexico <a href="https://varienvases.mx/products/antibiotico-10ml-con-tapon-y-casquillo?variant=42526677467355" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">here</span></a>. In Turkey <a href="https://www.perakendesise.com/flakon-takim-renksiz-cam-sise-15ml-3015" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">here</span></a>.</p>
 <p>If you are paranoid and believe incompetent <a href="https://issuepedia.org/Sufficiently_advanced_incompetence_is_indistinguishable_from_malice" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">or</span></a> deceitful slander about this guide then you can buy washed sealed sterile empty vials from USA (<a href="https://www.amazon.com/dp/B091MJLN5X/?th=1" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">1</span></a> <a href="https://www.amazon.com/10ml-Sterile-Vial-Blue-Flip/dp/B07JD49TK2/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline"></span><span style="text-decoration: underline">2</span></a> <a href="https://www.medical-and-lab-supplies.com/vials/sealed-sterile-vials.html?cat=2157" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">3</span></a>) or <span style="text-decoration: underline"><a href="https://www.ebay.co.uk/itm/333152620103" rel="nofollow noopener" target="_blank">UK</a></span> or <a href="https://www.amazon.de/s?k=sterile+vial&amp;language=en" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">EU</span></a> and buy <span style="text-decoration: underline"><a href="https://www.amazon.com/20MM-13MM-Single-Seals-Eco-Green/dp/B094Q5VVTH/" rel="nofollow noopener" target="_blank">new caps</a></span> or carefully unbend crimped caps with a small flat screwdriver. Really it&#39;d not improve &#34;safety&#34;. But in USA and UK these vials are cheaper if you want fast shipping.</p>
 <h3 id="Oil">Oil</h3>
@@ -1474,9 +1648,9 @@ function createAlert(msg, isError, autoClose, noClose) {
 <h2 id="Mix">Mix</h2>
 <p>(See below for an alternate way without a funnel).</p>
 <p>Make a small funnel from a piece of foil (the thicker foil the better; shinier side inside), hold it folded with a small piece of sticky tape. If you have only thin foil then perhaps strengthen it by wide sticky tape on another side (or try to strip the outer paint from a few different beer or soft drink aluminium cans with nail polish remover, then cut a clean can with scissors). May be use something conical to wrap the foil around before cutting off unneeded parts. The hole at the pointy end of the funnel must be slightly (not much) smaller than the opening in the vial. Use this funnel to weigh up estradiol enanthate powder and to pour the powder into a vial. The funnel I&#39;m using at the center, unfolded piece of foil from my previous funnel at the left, a funnel in a vial at the right:</p>
-<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13910/cone.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1791342024&Signature=OEM1JtVsZV2tfTAcpmIaDZ%2Fl%2BQs%3D" loading="lazy" class="myimg-responsive"/></p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13910/cone.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1791944851&Signature=6Xm5jMfRgfXSC7upXnyQvWPOoCU%3D" loading="lazy" class="myimg-responsive"/></p>
 <p>Or for more sturdy and convenient funnel you can <a href="https://www.aliexpress.com/w/wholesale-copper-foil-sheet.html?sortType=price_asc" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">mail-order</span></a> (check several pages of search results) copper or brass foil sheet 100x100 or 100x500 mm, thickness 0.04mm (copper) or 0.02mm (brass). Aliexpress app is more convenient for search than website. Cut off a corner (seen at the center bottom of the photo below) of a 100x100mm square, roll into a cone (the cut corner inside), hold with a piece of sticky tape:</p>
-<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/18320/copper.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1791342024&Signature=wCQWZtf%2FrSM1y7PI7GpVHiM9XJQ%3D" loading="lazy" class="myimg-responsive"/></p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/18320/copper.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1791944851&Signature=V5KP47siEkDOMQJtn%2F9WjGRKfXg%3D" loading="lazy" class="myimg-responsive"/></p>
 <p>Two recipes I can recommend:</p>
 <p>1) 500 mg = 0.5 g of estradiol enanthate (density 1.1 g/cm<sup><small>3</small></sup>),<br/>benzyl alcohol (preservative - antibacterial) 0.2 ml,<br/>MCT oil 10-0.2-0.5/1.1= 9.35 ml.</p>
 <p>2) 0.5 g of estradiol enanthate,<br/>MCT oil 10-0.5/1.1= 9.55 ml. This recipe is only for few people who tried the recipe 1 and got allergy to benzyl alcohol.</p>
@@ -1628,7 +1802,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 	
 		
 	
-	<div id="mobilesidebar-archives" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center;" hx-get="https://groups.io/g/MTFHRT/topics?sidebar=true"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-history="false" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
+	<div id="mobilesidebar-archives" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center;" role="link" tabindex="0" hx-trigger="click, keyup[key=='Enter']" hx-get="https://groups.io/g/MTFHRT/topics?sidebar=true"  hx-boost="true" hx-target="#maincontent-refresh" hx-push-url="true" hx-history="false" hx-on::after-request="document.getElementById('maincontent').scrollTo({top: 0, behavior: 'instant'})" >
 		<div style="display: inline-block; position: relative;">
 			<div style="position: relative;display: inline-block;">
 			<i class="fa-fw fa-light fa-comments fa-2x"></i>
@@ -1645,7 +1819,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 	
 
 					
-					<div style="flex: 1; text-align: center;margin-top:10px" data-drawer-trigger aria-controls="drawer-name" aria-expanded="false">
+					<div style="flex: 1; text-align: center;margin-top:10px" data-drawer-trigger role="button" tabindex="0" aria-controls="drawer-name" aria-expanded="false">
 						<i class="fa-fw fa-light fa-bars fa-2x"></i><br>
 						<span style="font-size:12px;">More</span>
 					</div>
@@ -1772,12 +1946,13 @@ function createAlert(msg, isError, autoClose, noClose) {
 	</div>
 
 <!-- Modal Dialog for Autocomplete -->
-<div class="modal fade" id="quickActionsModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade" id="quickActionsModal" tabindex="-1" role="dialog" aria-label="Go to page..." aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <input type="text" class="form-control" id="quickActionsInput" placeholder="Go to page..." style="margin-bottom:10px">
-        <div id="quickActionsContainer" class="autocompleteResults" style="max-height:250px; overflow-y: auto;"></div>
+        <input type="text" class="form-control" id="quickActionsInput" placeholder="Go to page..." aria-label="Go to page..." role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="quickActionsContainer" autocomplete="off" style="margin-bottom:10px">
+        <div id="quickActionsContainer" class="autocompleteResults" role="listbox" aria-label="Go to page..." style="max-height:250px; overflow-y: auto;"></div>
+        <div id="quickActionsStatus" class="visually-hidden" role="status" data-results-label="results"></div>
 		<div class="text-center" style="margin-top:10px; font-size:12px;"><i class="fa-sharp fa-arrow-up-arrow-down"></i> to navigate&nbsp;&nbsp;&nbsp;<i class="fa-sharp fa-arrow-turn-down-left"></i> to use&nbsp;&nbsp;&nbsp;<strong>esc</strong> to dismiss</div>
       </div>
     </div>
@@ -1844,7 +2019,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 	InitAutocomplete("quickActions", quickActionsData);
 
 	document.addEventListener('keydown', function(event) {
-		var tagName = event.target.tagName.toLowerCase();
+		var tagName = (event.target.tagName || "").toLowerCase();
 		if (tagName === 'input' || tagName === 'textarea' || event.target.isContentEditable) {
 			return;
 		}
@@ -1884,7 +2059,11 @@ function createAlert(msg, isError, autoClose, noClose) {
 		if (mainContent) mainContent.style.bottom = '';
 		var sidebarItems = document.querySelectorAll('.mobilesidebar-item');
 		sidebarItems.forEach(function(item) {
-			var iElement = item.getElementsByTagName('div')[0].getElementsByTagName('i')[0];
+			// Message bodies can contain pasted copies of this markup; skip items without an icon.
+			var iElement = item.querySelector('div i');
+			if (!iElement) {
+				return;
+			}
 			if (item.id == "mobilesidebar-" + id) {
 				console.log("making solid " + id)
 				iElement.classList.add('fa-solid');
@@ -1900,6 +2079,14 @@ function createAlert(msg, isError, autoClose, noClose) {
 			if (item.id == "sidebar-" + id) {
 				console.log("making active " + id)
 				item.classList.add('active');
+				// A boosted link from outside the sidebar (e.g. Export on the
+				// topics page) doesn't redraw the sidebar, so open any
+				// collapsed menus around the item to show the selection.
+				var menu = item.parentElement ? item.parentElement.closest('.collapse:not(.show)') : null;
+				while (menu) {
+					bootstrap.Collapse.getOrCreateInstance(menu, {toggle: false}).show();
+					menu = menu.parentElement ? menu.parentElement.closest('.collapse:not(.show)') : null;
+				}
 			} else {
 				item.classList.remove('active');
 			}
@@ -1909,6 +2096,553 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 
 			</div>
+<script>
+	// Pages without a sidebar layout have no #maincontent; their whole
+	// content container is the main region and the skip link's target.
+	if (!document.getElementById('maincontent')) {
+		document.getElementById('content').setAttribute('role', 'main');
+		document.getElementById('skip-link').setAttribute('href', '#content');
+	}
+</script>
+<script>
+	// Site-wide accessibility behaviour. The page-level parts run on load and
+	// again after every HTMX swap; the listeners are installed once per
+	// document (an HTMX history miss re-runs this script into the same one).
+
+	// isShown reports whether an element takes up space on the page, the
+	// test Bootstrap itself uses before returning focus to a trigger.
+	function a11yIsShown(el) {
+		return el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
+	}
+
+	// a11yLinkDescription adds id to el's aria-describedby.
+	function a11yLinkDescription(el, id) {
+		var ids = (el.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean);
+		if (ids.indexOf(id) === -1) {
+			ids.push(id);
+			el.setAttribute('aria-describedby', ids.join(' '));
+		}
+	}
+
+	// a11yIdCounter only ever increases. No initializer: this script runs
+	// again when HTMX restores a page from history, after that page's
+	// content has been enhanced, and resetting the counter would reissue
+	// ids. Ids already in the page, such as ones in content restored from
+	// the history cache after a reload, are skipped.
+	var a11yIdCounter;
+	function a11yEnsureID(el, prefix) {
+		if (!el.id) {
+			var id;
+			do {
+				a11yIdCounter = (a11yIdCounter || 0) + 1;
+				id = prefix + '-' + a11yIdCounter;
+			} while (document.getElementById(id));
+			el.id = id;
+		}
+		return el.id;
+	}
+
+	// a11yFeedbackFor finds the .invalid-feedback that belongs to an
+	// .is-invalid element: a following sibling (BS5 shows the feedback only
+	// after an .is-invalid sibling), else a direct child of its parent.
+	function a11yFeedbackFor(el) {
+		for (var sib = el.nextElementSibling; sib; sib = sib.nextElementSibling) {
+			if (sib.classList.contains('invalid-feedback')) {
+				return sib;
+			}
+		}
+		if (el.parentElement) {
+			return el.parentElement.querySelector(':scope > .invalid-feedback');
+		}
+		return null;
+	}
+
+	var a11yControlSelector = 'input:not([type="hidden"]), select, textarea';
+
+	// a11yEnhance fixes up the markup inside root.
+	// a11yQueryAll returns the elements under root that match selector,
+	// root included: an element HTMX inserts is enhanced as a whole.
+	function a11yQueryAll(root, selector) {
+		var found = Array.prototype.slice.call(root.querySelectorAll(selector));
+		if (root.matches && root.matches(selector)) {
+			found.unshift(root);
+		}
+		return found;
+	}
+
+	function a11yEnhance(root) {
+		// Form errors: each invalid control says it is invalid and is
+		// described by its error message. The .is-invalid class sits on the
+		// control, or on a wrapper such as an .input-group.
+		a11yQueryAll(root, '.is-invalid').forEach(function(el) {
+			var control = el.matches(a11yControlSelector) ? el : el.querySelector(a11yControlSelector);
+			if (!control) {
+				return;
+			}
+			control.setAttribute('aria-invalid', 'true');
+			var feedback = a11yFeedbackFor(el);
+			if (feedback) {
+				a11yLinkDescription(control, a11yEnsureID(feedback, 'invalid-feedback'));
+			}
+		});
+
+		// Help text: a .form-text that follows a form group's only control
+		// describes it. Groups with several controls are left alone, since
+		// the help can't be tied to one of them.
+		a11yQueryAll(root, '.form-text').forEach(function(help) {
+			var group = help.parentElement;
+			if (!group) {
+				return;
+			}
+			var controls = group.querySelectorAll(a11yControlSelector);
+			if (controls.length !== 1) {
+				return;
+			}
+			var control = controls[0];
+			if (control.hasAttribute('aria-describedby') && control.getAttribute('aria-invalid') !== 'true') {
+				return;
+			}
+			// The help must come after the control (or its input group).
+			var anchor = control.closest('.input-group') || control;
+			if (!(anchor.compareDocumentPosition(help) & Node.DOCUMENT_POSITION_FOLLOWING)) {
+				return;
+			}
+			a11yLinkDescription(control, a11yEnsureID(help, 'form-text'));
+		});
+
+		// Font Awesome draws its glyphs as private-use characters, which
+		// screen readers read out or which end up in a control's name, so
+		// icons are hidden from them. An icon that carries a name, or holds
+		// visually hidden text, is kept; so is an icon that is the only
+		// content of an unnamed control, which would otherwise have no name.
+		a11yQueryAll(root, 'i[class*="fa-"]:not([aria-hidden]):not([aria-label]):not([role]):not([title]):not([data-bs-original-title])').forEach(function(icon) {
+			if (icon.querySelector('.visually-hidden, .sr-only')) {
+				return;
+			}
+			var control = icon.closest('a, button, [role="button"], [role="link"]');
+			var unlabelled = control && !control.hasAttribute('aria-label') && !control.hasAttribute('aria-labelledby') && !control.hasAttribute('title');
+			if (unlabelled && control.textContent.trim() === '' && !control.querySelector('img[alt]:not([alt=""])')) {
+				return;
+			}
+			// A control whose text is shown only at some widths (d-none
+			// d-md-inline) has no name where it is hidden, so the text
+			// becomes its label at every width.
+			if (unlabelled && control.querySelector('[class*="d-none"]')) {
+				control.setAttribute('aria-label', control.textContent.replace(/\s+/g, ' ').trim());
+			}
+			icon.setAttribute('aria-hidden', 'true');
+		});
+
+		// Dropzone drop areas open the file chooser only for a mouse. Where a
+		// page has no .dz-choose button, the drop area's message becomes a
+		// button; the role="button" key handler below clicks it, and Dropzone
+		// opens the chooser for a click on its message.
+		a11yQueryAll(root, 'form.dropzone').forEach(function(form) {
+			if (form.querySelector('.dz-choose')) {
+				return;
+			}
+			var message = form.querySelector('.dz-message');
+			if (message && !message.hasAttribute('role')) {
+				message.setAttribute('role', 'button');
+				message.setAttribute('tabindex', '0');
+			}
+		});
+
+		// Upload progress bars (Dropzone forms, the file input plugin) have
+		// no name of their own. Other progress bars are left to their pages,
+		// which know what they measure.
+		a11yQueryAll(root, '[role="progressbar"]:not([aria-label]):not([aria-labelledby]):not([title])').forEach(function(bar) {
+			if (bar.closest('form.dropzone, .dropzone, .file-input')) {
+				bar.setAttribute('aria-label', "Upload progress");
+			}
+		});
+
+		// A rich-text editor stands in for its textarea, so it carries the
+		// textarea's error state.
+		a11yQueryAll(root, 'textarea').forEach(function(textarea) {
+			a11ySyncEditor(textarea);
+		});
+
+		// The sidebars mark the current page with .active; say so to screen
+		// readers as well.
+		document.querySelectorAll('.sidebar-item').forEach(function(item) {
+			if (item.classList.contains('active')) {
+				item.setAttribute('aria-current', 'page');
+			} else {
+				item.removeAttribute('aria-current');
+			}
+		});
+	}
+
+	// a11yEditorFor returns the TinyMCE editor that replaces a textarea, if
+	// there is one. TinyMCE hides the textarea, so it takes focus instead.
+	function a11yEditorFor(el) {
+		if (el.tagName !== 'TEXTAREA' || !el.id || typeof tinymce === 'undefined') {
+			return null;
+		}
+		return tinymce.get(el.id);
+	}
+
+	// a11ySyncEditor copies a textarea's aria-invalid and aria-describedby
+	// to the TinyMCE editor that replaces it, once the editor is ready. The
+	// iframe takes both. The editing body inside it, which is what has focus,
+	// can't refer to ids in the page, so it takes aria-invalid and the
+	// described text itself.
+	function a11ySyncEditor(textarea) {
+		var editor = a11yEditorFor(textarea);
+		if (!editor || !editor.initialized) {
+			return;
+		}
+		var frame = document.getElementById(editor.id + '_ifr');
+		var body = editor.getBody();
+		var invalid = textarea.getAttribute('aria-invalid') === 'true';
+		var describedby = textarea.getAttribute('aria-describedby') || '';
+		var description = describedby.split(/\s+/).map(function(id) {
+			var el = id ? document.getElementById(id) : null;
+			return el ? el.textContent.replace(/\s+/g, ' ').trim() : '';
+		}).filter(Boolean).join(' ');
+		[frame, body].forEach(function(el) {
+			if (!el) {
+				return;
+			}
+			if (invalid) {
+				el.setAttribute('aria-invalid', 'true');
+			} else {
+				el.removeAttribute('aria-invalid');
+			}
+		});
+		if (frame) {
+			if (describedby) {
+				frame.setAttribute('aria-describedby', describedby);
+			} else {
+				frame.removeAttribute('aria-describedby');
+			}
+		}
+		if (body) {
+			if (description) {
+				body.setAttribute('aria-description', description);
+			} else {
+				body.removeAttribute('aria-description');
+			}
+		}
+	}
+
+	// a11yFocusFirstError moves focus to the first invalid control shown in
+	// root, so after a failed submit the user lands on the problem.
+	function a11yFocusFirstError(root) {
+		var invalid = Array.prototype.find.call(root.querySelectorAll('.is-invalid'), function(el) {
+			return a11yIsShown(el) || a11yEditorFor(el);
+		});
+		if (!invalid) {
+			return false;
+		}
+		var control = invalid.matches(a11yControlSelector) ? invalid : invalid.querySelector(a11yControlSelector);
+		if (!control) {
+			return false;
+		}
+		var editor = a11yEditorFor(control);
+		if (editor) {
+			if (editor.initialized) {
+				editor.focus();
+			} else {
+				editor.on('init', function() {
+					editor.focus();
+				});
+			}
+			return true;
+		}
+		control.focus();
+		return document.activeElement === control;
+	}
+
+	// a11yAnnounce speaks text through the page announcer. Clearing it
+	// first makes a repeat of the same text announce again.
+	function a11yAnnounce(text) {
+		var announcer = document.getElementById('page-announcer');
+		if (!announcer || !text) {
+			return;
+		}
+		announcer.textContent = '';
+		setTimeout(function() {
+			announcer.textContent = text;
+		}, 100);
+	}
+
+	function a11yOnLoad() {
+		a11yEnhance(document);
+		a11yFocusFirstError(document);
+	}
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', a11yOnLoad, {once: true});
+	} else {
+		a11yOnLoad();
+	}
+
+	if (!window.gioA11yListeners) {
+		window.gioA11yListeners = true;
+
+		// Whether focus was on the page body, or inside the content about to
+		// be replaced, when an HTMX swap into #maincontent-refresh began.
+		var a11yFocusLost = false;
+		document.addEventListener('htmx:beforeSwap', function(evt) {
+			var target = evt.detail && evt.detail.target;
+			if (!target || target.id !== 'maincontent-refresh') {
+				return;
+			}
+			var active = document.activeElement;
+			a11yFocusLost = !active || active === document.body || target.contains(active);
+		});
+
+		// htmx fires htmx:load on every element a swap inserts, whatever
+		// the swap style. htmx:afterSettle only fires on the swap target,
+		// so rows that infinite scroll adds after it (hx-swap="afterend")
+		// are only reached here. The page itself was enhanced on load.
+		document.addEventListener('htmx:load', function(evt) {
+			var el = evt.target;
+			if (el === document.body || !el.isConnected || !el.querySelectorAll) {
+				return;
+			}
+			a11yEnhance(el);
+		});
+
+		// After a swap: fix up the markup page scripts added. A form
+		// submission that came back with errors moves focus to the first of
+		// them, even though HTMX has put focus back on the submit button. A swap of the main content
+		// is a page navigation, so announce the new page's title (and the
+		// result count of a paged list). When the swap took focus away (an
+		// in-content link), move focus to the new page's heading; when a
+		// control outside the content (the sidebar) made the request it keeps
+		// focus. Page scripts run first (their contentLoaded listeners are on
+		// body), so if one placed focus itself it is left there.
+		document.addEventListener('htmx:afterSettle', function(evt) {
+			var target = evt.detail && evt.detail.target;
+			if (!target) {
+				return;
+			}
+			if (!target.isConnected) {
+				// An outerHTML swap replaced the target; htmx fires
+				// afterSettle on each element that took its place.
+				target = evt.target;
+				if (!target.isConnected || !target.querySelectorAll) {
+					return;
+				}
+			}
+			// Enhance again now that page scripts, which run on
+			// afterSettle at the body, have added their own markup.
+			if (evt.target.isConnected && evt.target.querySelectorAll) {
+				a11yEnhance(evt.target);
+			}
+			// htmx fires afterSettle on the swap target and then on each
+			// out-of-band element; those only need their markup fixed up.
+			if (evt.target !== target) {
+				return;
+			}
+			var requestElt = evt.detail.requestConfig && evt.detail.requestConfig.elt;
+			var fromForm = !!requestElt && (requestElt.tagName === 'FORM' || !!requestElt.form);
+			var focusedError = false;
+			if (fromForm || document.activeElement === document.body) {
+				focusedError = a11yFocusFirstError(target);
+			}
+			if (target.id !== 'maincontent-refresh') {
+				return;
+			}
+			var heading = target.querySelector('h1');
+			var title = heading ? heading.textContent.trim() : document.title;
+			// The pager's count, or a page's own result message (marked
+			// data-a11y-count) when there is nothing to page.
+			var count = Array.prototype.find.call(target.querySelectorAll('.page-count, [data-a11y-count]'), function(el) {
+				return a11yIsShown(el);
+			});
+			// A swap that stays on the same page and announces its own result
+			// marks its content with data-a11y-no-announce.
+			if (!target.querySelector('[data-a11y-no-announce]')) {
+				a11yAnnounce(count ? title + '. ' + count.textContent.replace(/\s+/g, ' ').trim() : title);
+			}
+			var active = document.activeElement;
+			if (!focusedError && a11yFocusLost && (!active || active === document.body) && heading) {
+				heading.focus({preventScroll: true});
+			}
+			a11yFocusLost = false;
+		});
+
+		// Going back or forward restores a page from HTMX's history cache
+		// without a swap, so announce its title as a swap would.
+		document.addEventListener('htmx:historyRestore', function() {
+			var content = document.getElementById('maincontent-refresh');
+			var heading = content ? content.querySelector('h1') : null;
+			a11yAnnounce(heading ? heading.textContent.trim() : document.title);
+		});
+
+		// An element given role="button" that isn't a <button> (collapse
+		// toggles kept as anchors, clickable divs) must answer the keys a
+		// button does: Space, and Enter where the browser doesn't already
+		// turn it into a click (it does for links). Handlers that act on
+		// these keys themselves, such as the drawer triggers, prevent the
+		// default and are left alone.
+		document.addEventListener('keydown', function(evt) {
+			if ((evt.key !== ' ' && evt.key !== 'Enter') || evt.defaultPrevented) {
+				return;
+			}
+			var el = evt.target;
+			if (!el.matches || !el.matches('[role="button"]:not(button):not(input):not(textarea):not(select)')) {
+				return;
+			}
+			if (evt.key === 'Enter' && el.matches('a[href]')) {
+				return;
+			}
+			evt.preventDefault();
+			el.click();
+		});
+
+		// Return focus when a modal closes. Bootstrap does this only for a
+		// modal opened by a data-bs-toggle trigger that is still shown when
+		// it closes; a modal opened from script, or from a menu item that
+		// was hidden as the modal opened, would leave focus on the page
+		// body. The element to return to is the trigger, or whatever had
+		// focus when the modal opened; a hidden menu item gives way to its
+		// menu's toggle, and a drawer item to the drawer's trigger.
+		document.addEventListener('show.bs.modal', function(evt) {
+			var modal = evt.target;
+			var from = evt.relatedTarget || document.activeElement;
+			if (!from || from === document.body || modal.contains(from)) {
+				modal.gioReturnFocus = null;
+				return;
+			}
+			var menu = from.closest('.dropdown-menu');
+			if (menu && menu.parentElement) {
+				var toggle = menu.parentElement.querySelector('[data-bs-toggle="dropdown"]');
+				if (toggle) {
+					from = toggle;
+				}
+			}
+			var drawer = from.closest('[data-drawer-target]');
+			if (drawer) {
+				var drawerTrigger = drawer.drawerTrigger || document.querySelector('[aria-controls="' + drawer.id + '"]');
+				if (drawerTrigger) {
+					from = drawerTrigger;
+				}
+			}
+			modal.gioReturnFocus = from;
+		});
+		document.addEventListener('hidden.bs.modal', function(evt) {
+			var modal = evt.target;
+			var to = modal.gioReturnFocus;
+			modal.gioReturnFocus = null;
+			if (!to || !to.isConnected || !a11yIsShown(to)) {
+				return;
+			}
+			// Leave focus alone if something else took it meanwhile, such as
+			// a second modal or Bootstrap's own return to the trigger.
+			var active = document.activeElement;
+			if (active && active !== document.body && !modal.contains(active)) {
+				return;
+			}
+			to.focus();
+		});
+
+		// Tooltips are hoverable and dismissible (WCAG 1.4.13). Bootstrap
+		// hides a tooltip as soon as the pointer leaves its trigger, so it
+		// can't be moved onto the tooltip, and it ignores Escape. These
+		// listeners sit on the document so every tooltip on every page,
+		// however it was created, gets the same behaviour.
+		var a11yTooltipForceHide = false;
+		var a11yTooltipHideDelay = 300;
+
+		// a11yHideTooltip hides the tooltip of trigger without the hover
+		// checks below.
+		function a11yHideTooltip(trigger) {
+			var tip = bootstrap.Tooltip.getInstance(trigger);
+			if (!tip) {
+				return;
+			}
+			a11yTooltipForceHide = true;
+			try {
+				tip.hide();
+			} finally {
+				a11yTooltipForceHide = false;
+			}
+		}
+
+		// a11yKeepTooltip keeps a tooltip open while the pointer is over it,
+		// and hides it once the pointer leaves for anywhere but its trigger.
+		function a11yKeepTooltip(trigger, tipEl) {
+			if (tipEl.gioHoverWatched) {
+				return;
+			}
+			tipEl.gioHoverWatched = true;
+			tipEl.addEventListener('mouseleave', function(evt) {
+				tipEl.gioHoverWatched = false;
+				if (evt.relatedTarget && trigger.contains(evt.relatedTarget)) {
+					return;
+				}
+				a11yHideTooltip(trigger);
+			}, {once: true});
+		}
+
+		document.addEventListener('hide.bs.tooltip', function(evt) {
+			if (a11yTooltipForceHide || typeof bootstrap === 'undefined') {
+				return;
+			}
+			var trigger = evt.target;
+			var tip = bootstrap.Tooltip.getInstance(trigger);
+			var tipEl = tip && tip.tip;
+			if (!tipEl || !tipEl.isConnected) {
+				return;
+			}
+			if (tipEl.matches(':hover')) {
+				evt.preventDefault();
+				a11yKeepTooltip(trigger, tipEl);
+				return;
+			}
+			// A hide while the pointer is still on the trigger was asked
+			// for by the page or by focus leaving; let it happen.
+			if (trigger.matches(':hover')) {
+				return;
+			}
+			// The pointer has left the trigger. Give it a moment to cross
+			// the gap onto the tooltip before hiding.
+			evt.preventDefault();
+			if (trigger.gioHidePending) {
+				return;
+			}
+			trigger.gioHidePending = true;
+			setTimeout(function() {
+				trigger.gioHidePending = false;
+				if (!tipEl.isConnected) {
+					return;
+				}
+				if (tipEl.matches(':hover')) {
+					a11yKeepTooltip(trigger, tipEl);
+					return;
+				}
+				if (trigger.matches(':hover')) {
+					return;
+				}
+				a11yHideTooltip(trigger);
+			}, a11yTooltipHideDelay);
+		});
+
+		// Escape hides every open tooltip and leaves focus where it is. When
+		// it hid one, the key goes no further, so the same press doesn't
+		// also close the modal or menu the tooltip sits in.
+		window.addEventListener('keydown', function(evt) {
+			if (evt.key !== 'Escape' || typeof bootstrap === 'undefined') {
+				return;
+			}
+			var hidden = false;
+			document.querySelectorAll('.tooltip.show[id]').forEach(function(tipEl) {
+				var trigger = document.querySelector('[aria-describedby~="' + tipEl.id + '"]');
+				if (trigger && bootstrap.Tooltip.getInstance(trigger)) {
+					a11yHideTooltip(trigger);
+					hidden = true;
+				}
+			});
+			if (hidden) {
+				evt.stopPropagation();
+			}
+		}, true);
+	}
+</script>
 			
 				<div id="scroll-top-outer">
 					<div id="scroll-top" class="scroll-top-wrapper hidden-xs">
@@ -1947,9 +2681,15 @@ function createAlert(msg, isError, autoClose, noClose) {
 				// Create a new "i" element
 				let newElement = document.createElement('i');
 				newElement.classList.add('fa-solid', 'fa-command');
-				
+				newElement.setAttribute('aria-hidden', 'true');
+				// The icon has no text, so screen readers get the key's name
+				let keyName = document.createElement('span');
+				keyName.className = 'visually-hidden';
+				keyName.textContent = "command";
+
 				// Replace the old "strong" element with the new "i" element
 				element.parentNode.replaceChild(newElement, element);
+				newElement.after(keyName);
 			}
 		});
 	}

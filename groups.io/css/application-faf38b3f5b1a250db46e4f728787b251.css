@@ -2148,8 +2148,11 @@ video::-webkit-media-text-track-display {
 }
 
 .dropdown-colorselector>.dropdown-menu>li>.color-btn.selected:after {
-  content: "\e013";
-  font-family: 'Glyphicons Halflings';
+  content: "\f00c";
+  /* The check is decoration; the swatch's aria-current says it is selected. */
+  content: "\f00c" / "";
+  font-family: 'Font Awesome 6 Pro';
+  font-weight: 900;
   display: inline-block;
   font-size: 11px;
   color: #FFF;
@@ -2216,7 +2219,11 @@ video::-webkit-media-text-track-display {
  * https://github.com/lipis/bootstrap-social
  */
 
-.btn-social{position:relative;padding-left:44px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.btn-social>:first-child{position:absolute;left:0;top:0;bottom:0;width:32px;line-height:34px;font-size:1.6em;text-align:center;border-right:1px solid rgba(0,0,0,0.2)}
+/* Labels wrap rather than truncate, and the icon column is sized in rem so
+ * it grows with enlarged text instead of overlapping the label (WCAG 1.4.4,
+ * 1.4.12). At the default 16px root these match the original 44px, 32px and
+ * 34px. */
+.btn-social{position:relative;padding-left:2.75rem;text-align:left;white-space:normal;overflow-wrap:break-word}.btn-social>:first-child{position:absolute;left:0;top:0;bottom:0;width:2rem;line-height:2.125rem;font-size:1.6em;text-align:center;border-right:1px solid rgba(0,0,0,0.2)}
 .btn-social.btn-lg{padding-left:61px}.btn-social.btn-lg :first-child{line-height:45px;width:45px;font-size:1.8em}
 .btn-social.btn-sm{padding-left:38px}.btn-social.btn-sm :first-child{line-height:28px;width:28px;font-size:1.4em}
 .btn-social.btn-xs{padding-left:30px}.btn-social.btn-xs :first-child{line-height:20px;width:20px;font-size:1.2em}
@@ -2730,7 +2737,7 @@ th {
 	}
 }
 
-a.button-link {
+:is(a, button).button-link {
 	display: inline-flex;
 	align-items: center;
 	gap: 4px;
@@ -2752,24 +2759,31 @@ a.button-link {
 	   the controls share a center line regardless of height. */
 	vertical-align: middle;
 }
-a.button-link:hover,
-a.button-link:focus {
+:is(a, button).button-link:hover,
+:is(a, button).button-link:focus {
 	background: #e5ebf3;
 	color: #337ab7;
 	text-decoration: none;
 }
-body.dark-mode a.button-link {
+body.dark-mode :is(a, button).button-link {
 	background: var(--dark-mode-primary-color);
 	color: var(--dark-mode-text-color);
 }
-body.dark-mode a.button-link:hover,
-body.dark-mode a.button-link:focus {
+body.dark-mode :is(a, button).button-link:hover,
+body.dark-mode :is(a, button).button-link:focus {
 	background: var(--dark-mode-highlight-color);
 	color: var(--dark-mode-text-color);
 }
 
-.button-link-group a.button-link {
+.button-link-group :is(a, button).button-link {
 	padding-right: 15px;
+}
+
+/* A <button> drawn as the same pill as the anchor. */
+button.button-link {
+	border: 0;
+	font-family: inherit;
+	cursor: pointer;
 }
 
 /* otherwise selects extend to the entire width, which is too wide */
@@ -3777,7 +3791,7 @@ table.table-fixed {
 }
 
 .hashtag-label-green-lantern {
-	--hashtag-bg: #61b16c;
+	--hashtag-bg: #348543;
 	background-color: var(--hashtag-bg);
 }
 
@@ -3787,7 +3801,7 @@ table.table-fixed {
 }
 
 .hashtag-label-cerulean-blue {
-	--hashtag-bg: #4191d6;
+	--hashtag-bg: #277abe;
 	background-color: var(--hashtag-bg);
 }
 
@@ -3807,7 +3821,7 @@ table.table-fixed {
 }
 
 .hashtag-label-emerald-green {
-	--hashtag-bg: #11adb1;
+	--hashtag-bg: #068387;
 	background-color: var(--hashtag-bg);
 }
 
@@ -3827,7 +3841,7 @@ table.table-fixed {
 }
 
 .hashtag-label-cherry-blossom {
-	--hashtag-bg: #f96ab0;
+	--hashtag-bg: #cb3f88;
 	background-color: var(--hashtag-bg);
 }
 
@@ -3837,7 +3851,7 @@ table.table-fixed {
 }
 
 .hashtag-label-tomato {
-	--hashtag-bg: #f85347;
+	--hashtag-bg: #dc362e;
 	background-color: var(--hashtag-bg);
 }
 
@@ -3847,7 +3861,7 @@ table.table-fixed {
 }
 
 .hashtag-label-orchid {
-	--hashtag-bg: #df6cca;
+	--hashtag-bg: #ba49a7;
 	background-color: var(--hashtag-bg);
 }
 
@@ -3857,12 +3871,12 @@ table.table-fixed {
 }
 
 .hashtag-label-lilac {
-	--hashtag-bg: #9f8cd5;
+	--hashtag-bg: #7e6ab0;
 	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-purple {
-	--hashtag-bg: #837fd5;
+	--hashtag-bg: #716cc0;
 	background-color: var(--hashtag-bg);
 }
 
@@ -3872,12 +3886,12 @@ table.table-fixed {
 }
 
 .hashtag-label-light-grey {
-	--hashtag-bg: #8c8c8c;
+	--hashtag-bg: #757575;
 	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-military {
-	--hashtag-bg: #938953;
+	--hashtag-bg: #807640;
 	background-color: var(--hashtag-bg);
 }
 
@@ -3907,17 +3921,17 @@ table.table-fixed {
 }
 
 .hashtag-label-blush {
-	--hashtag-bg: #ee836f;
+	--hashtag-bg: #bd5745;
 	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-mustard {
-	--hashtag-bg: #cb9228;
+	--hashtag-bg: #9c6d05;
 	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-mulbery {
-	--hashtag-bg: #d55d75;
+	--hashtag-bg: #c44d67;
 	background-color: var(--hashtag-bg);
 }
 
@@ -3927,7 +3941,7 @@ table.table-fixed {
 }
 
 .hashtag-label-dark-orange {
-	--hashtag-bg: #e76239;
+	--hashtag-bg: #cd4a1e;
 	background-color: var(--hashtag-bg);
 }
 
@@ -3942,7 +3956,7 @@ table.table-fixed {
 }
 
 .hashtag-label-lips {
-	--hashtag-bg: #c97586;
+	--hashtag-bg: #ae5d6f;
 	background-color: var(--hashtag-bg);
 }
 
@@ -3952,12 +3966,12 @@ table.table-fixed {
 }
 
 .hashtag-label-cloudy-blue {
-	--hashtag-bg: #6381b4;
+	--hashtag-bg: #5976a9;
 	background-color: var(--hashtag-bg);
 }
 
 .hashtag-label-purple-grey {
-	--hashtag-bg: #8593ab;
+	--hashtag-bg: #69768d;
 	background-color: var(--hashtag-bg);
 }
 
@@ -3986,14 +4000,17 @@ table.table-fixed {
 	background-color: var(--hashtag-bg);
 }
 
+/* The deeper hashtag colours carry white text and use the same shaded
+   fills as the hashtag pills (4.55:1 or better); the light colours keep
+   dark text. */
 .hashtag-box-white {
 	background-color: #fff !important;
 	border-color: #ccc;
 }
 
 .hashtag-box-green-lantern {
-	color: #333 !important;
-	background-color: #61b16c !important;
+	color: #fff !important;
+	background-color: #348543 !important;
 }
 
 .hashtag-box-cucumber {
@@ -4002,8 +4019,8 @@ table.table-fixed {
 }
 
 .hashtag-box-cerulean-blue {
-	color: #333 !important;
-	background-color: #4191d6 !important;
+	color: #fff !important;
+	background-color: #277abe !important;
 }
 
 .hashtag-box-bluejean {
@@ -4022,8 +4039,8 @@ table.table-fixed {
 }
 
 .hashtag-box-emerald-green {
-	color: #333 !important;
-	background-color: #11adb1 !important;
+	color: #fff !important;
+	background-color: #068387 !important;
 }
 
 .hashtag-box-apricot {
@@ -4042,8 +4059,8 @@ table.table-fixed {
 }
 
 .hashtag-box-cherry-blossom {
-	color: #333 !important;
-	background-color: #f96ab0 !important;
+	color: #fff !important;
+	background-color: #cb3f88 !important;
 }
 
 .hashtag-box-peony {
@@ -4052,8 +4069,8 @@ table.table-fixed {
 }
 
 .hashtag-box-tomato {
-	color: #333 !important;
-	background-color: #f85347 !important;
+	color: #fff !important;
+	background-color: #dc362e !important;
 }
 
 .hashtag-box-melon {
@@ -4062,8 +4079,8 @@ table.table-fixed {
 }
 
 .hashtag-box-orchid {
-	color: #333 !important;
-	background-color: #df6cca !important;
+	color: #fff !important;
+	background-color: #ba49a7 !important;
 }
 
 .hashtag-box-pink {
@@ -4072,28 +4089,28 @@ table.table-fixed {
 }
 
 .hashtag-box-lilac {
-	color: #333 !important;
-	background-color: #9f8cd5 !important;
+	color: #fff !important;
+	background-color: #7e6ab0 !important;
 }
 
 .hashtag-box-purple {
-	color: #333 !important;
-	background-color: #837fd5 !important;
+	color: #fff !important;
+	background-color: #716cc0 !important;
 }
 
 .hashtag-box-dark-grey {
-	color: #eee !important;
+	color: #fff !important;
 	background-color: #4c4c4c !important;
 }
 
 .hashtag-box-light-grey {
-	color: #333 !important;
-	background-color: #8c8c8c !important;
+	color: #fff !important;
+	background-color: #757575 !important;
 }
 
 .hashtag-box-military {
-	color: #333 !important;
-	background-color: #938953 !important;
+	color: #fff !important;
+	background-color: #807640 !important;
 }
 
 .hashtag-box-light-brown {
@@ -4122,28 +4139,28 @@ table.table-fixed {
 }
 
 .hashtag-box-blush {
-	color: #333 !important;
-	background-color: #ee836f !important;
+	color: #fff !important;
+	background-color: #bd5745 !important;
 }
 
 .hashtag-box-mustard {
-	color: #333 !important;
-	background-color: #cb9228 !important;
+	color: #fff !important;
+	background-color: #9c6d05 !important;
 }
 
 .hashtag-box-mulbery {
-	color: #333 !important;
-	background-color: #d55d75 !important;
+	color: #fff !important;
+	background-color: #c44d67 !important;
 }
 
 .hashtag-box-dusty-mauve {
-	color: #eee !important;
+	color: #fff !important;
 	background-color: #655251 !important;
 }
 
 .hashtag-box-dark-orange {
-	color: #333 !important;
-	background-color: #e76239 !important;
+	color: #fff !important;
+	background-color: #cd4a1e !important;
 }
 
 .hashtag-box-burnt-yellow {
@@ -4157,23 +4174,23 @@ table.table-fixed {
 }
 
 .hashtag-box-lips {
-	color: #333 !important;
-	background-color: #c97586 !important;
+	color: #fff !important;
+	background-color: #ae5d6f !important;
 }
 
 .hashtag-box-terracotta {
-	color: #eee !important;
+	color: #fff !important;
 	background-color: #a7605f !important;
 }
 
 .hashtag-box-cloudy-blue {
-	color: #333 !important;
-	background-color: #6381b4 !important;
+	color: #fff !important;
+	background-color: #5976a9 !important;
 }
 
 .hashtag-box-purple-grey {
-	color: #333 !important;
-	background-color: #8593ab !important;
+	color: #fff !important;
+	background-color: #69768d !important;
 }
 
 .hashtag-box-light-lilac {
@@ -4182,12 +4199,12 @@ table.table-fixed {
 }
 
 .hashtag-box-grape {
-	color: #eee !important;
+	color: #fff !important;
 	background-color: #5e3c58 !important;
 }
 
 .hashtag-box-purple-blue {
-	color: #eee !important;
+	color: #fff !important;
 	background-color: #4853a1 !important;
 }
 
@@ -4502,6 +4519,9 @@ table.table-fixed {
 .help-block {
 	margin-top: 0px;
 	margin-bottom: 0px;
+	/* hints quote group addresses; a long one breaks rather than
+	   running past a narrow panel (1.4.12) */
+	overflow-wrap: break-word;
 }
 .radio .help-block {
 	padding-left: 20px;
@@ -4620,9 +4640,10 @@ table.table-fixed {
 .fc-v-event .fc-seats-badge {
 	align-self: flex-start;
 }
-/* In list view the row background is the page background, so use the standard badge colors */
+/* In list view the row background is the page background, so use the standard badge colors
+   (#666 keeps the white text at 5.7:1) */
 .fc-list-table .fc-seats-badge {
-	background-color: #777;
+	background-color: #666;
 	color: #fff;
 }
 
@@ -4632,14 +4653,15 @@ table.table-fixed {
 }
 
 .panel-collapsable a:after {
-	font-family: 'Glyphicons Halflings';
-	content: "\e114";
+	font-family: 'Font Awesome 6 Pro';
+	font-weight: 900;
+	content: "\f078";
 	float: right;
 	color: grey;
 }
 
 .panel-collapsable a.collapsed:after {
-	content: "\e080";
+	content: "\f054";
 }
 
 /* feed page */
@@ -5329,6 +5351,13 @@ body.dark-mode .grouphome-recent-item {
 }
 body.dark-mode .grouphome-recent-meta {
 	color: var(--dark-mode-muted-color, #999);
+}
+
+/* /groups table: the group name column wraps (long addresses break
+   anywhere) so the table fits from 768px up without the page scrolling
+   sideways (1.4.10). The other columns stay on one line. */
+.groupslist-namecell {
+	overflow-wrap: anywhere;
 }
 
 /* /groups mobile layout: compact list with page title, filter, and
@@ -6620,21 +6649,36 @@ body.dark-mode a.chat-file-card:focus {
 }
 
 
-/* Ask answer-bubble actions: icon-only links beside the bubble, labels
-   provided by tooltips. nowrap keeps them from stacking in the flex row. */
+/* Ask answer-bubble actions: icon-only buttons beside the bubble, named by
+   aria-label and shown by tooltips. nowrap keeps them from stacking in the
+   flex row. */
 .chat-message-actions {
 	align-self: flex-start;
 	white-space: nowrap;
 	padding: 5px 0 0 8px;
 }
 
-.chat-message-actions a {
+.chat-message-actions a,
+.chat-message-actions .ask-action {
 	color: #999;
 	margin-right: 8px;
 }
 
-.chat-message-actions a:hover {
+.chat-message-actions .ask-action {
+	padding: 0;
+	border: 0;
+	background: none;
+}
+
+.chat-message-actions a:hover,
+.chat-message-actions .ask-action:hover {
 	color: #337ab7;
+}
+
+/* Ask keeps the question field focusable but read-only while an answer is
+   generated; dim it the way a disabled field would look. */
+#chat-message-input[aria-disabled="true"] {
+	opacity: 0.65;
 }
 
 /* Bubble content is markdown-rendered: without this, the final paragraph's
@@ -6689,6 +6733,11 @@ body.dark-mode a.chat-file-card:focus {
 	font-size: 12px;
 	color: #888;
 	background: transparent;
+}
+/* The region stays rendered while empty so screen readers announce the
+   typing line when it is added; it takes no space until then. */
+.chat-typing-indicator:empty {
+	padding: 0;
 }
 .chat-typing-row {
 	display: flex;
@@ -6766,7 +6815,15 @@ body.dark-mode a.chat-file-card:focus {
 .emoji-picker-btn:hover,
 .emoji-picker-btn:focus {
 	background: #eef3fa;
+}
+/* The fill alone is 1.1:1; keyboard focus also takes the focus ring
+   (groupsio-bs5.css defines --gio-focus-ring-color, light and dark). */
+.emoji-picker-btn:focus:not(:focus-visible) {
 	outline: none;
+}
+.emoji-picker-btn:focus-visible {
+	outline: 2px solid var(--gio-focus-ring-color, #2a6496);
+	outline-offset: -2px;
 }
 body.dark-mode #chat-emoji-picker {
 	background: #2b2b2b;
@@ -6820,13 +6877,22 @@ body.dark-mode .emoji-picker-btn:focus {
 .chat-message.grouped .chat-profile-picture-wrapper {
 	visibility: hidden;
 }
+/* The repeated sender and time are hidden from sight only, so screen
+   readers still hear who sent each message and when (same rules as
+   Bootstrap's .visually-hidden). */
 .chat-message.received.grouped .chat-message-content > span[id^="msguser-"],
-.chat-message.sent.grouped .chat-message-content > span[id^="msguser-"] {
-	display: none;
-}
+.chat-message.sent.grouped .chat-message-content > span[id^="msguser-"],
 .chat-message.grouped .chat-timestamp-sent,
 .chat-message.grouped .chat-timestamp-received {
-	display: none;
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	padding: 0 !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	clip: rect(0, 0, 0, 0) !important;
+	white-space: nowrap !important;
+	border: 0 !important;
 }
 
 .chat-profile-picture {
@@ -6896,6 +6962,23 @@ body.dark-mode .emoji-picker-btn:focus {
 	justify-content: center;
 	align-items: flex-start;
 	z-index: 1000;
+	padding: 0;
+	border: 0;
+	background: none;
+}
+
+.chat-connection-status {
+	padding: 6px 12px;
+	font-size: 14px;
+	background-color: #fcf8e3;
+	color: #6b5326;
+}
+.chat-connection-status.chat-send-error {
+	background-color: #f8d7da;
+	color: #842029;
+}
+.chat-connection-status:empty {
+	padding: 0;
 }
 
 #chat-unread-badge {
@@ -7292,6 +7375,20 @@ body.dark-mode .chat-mention-pill {
 	border: 2px solid #FFF;
 }
 
+/* The viewer's controls are buttons that look like bare icons. */
+.viewer-button {
+	background: none;
+	border: 0;
+	padding: 0;
+	color: #FFF;
+	cursor: pointer;
+}
+
+.viewer-button:focus-visible {
+	outline: 2px solid #FFF;
+	outline-offset: 4px;
+}
+
 /* chat image grid */
 .image-grid {
 	width: 280px;
@@ -7471,6 +7568,12 @@ body.dark-mode .chat-mention-pill {
 
 .large-tooltip + .tooltip .tooltip-inner {
 	min-width: 400px !important;
+}
+
+/* Moderator note tooltips keep the note's line breaks. */
+.moderator-notes-tooltip .tooltip-inner {
+	max-width: 320px;
+	white-space: pre-line;
 }
 
 .hashtag-position {
@@ -8104,7 +8207,8 @@ body.dark-mode .feed-group-circle-unread .feed-group-circle-img {
 	position: absolute;
 	top: -2px;
 	right: -2px;
-	background: #d9534f;
+	/* #cd4845 keeps the white count at 4.6:1 */
+	background: #cd4845;
 	color: #fff;
 	padding: 1px 6px;
 	border-radius: 10px;
@@ -8225,7 +8329,7 @@ body.dark-mode .feed-empty-icon {
 	font-size: 10px;
 	font-weight: 600;
 	text-transform: uppercase;
-	color: #888;
+	color: #666;
 	letter-spacing: 0.5px;
 	margin-right: 6px;
 	min-width: 58px;
@@ -8969,6 +9073,14 @@ body.dark-mode .received .chat-emoji-box {
 body.dark-mode #chat-unread-counter i {
 	color: rgb(200, 200, 200) !important;
 }
+body.dark-mode .chat-connection-status {
+	background-color: #332701;
+	color: #ffda6a;
+}
+body.dark-mode .chat-connection-status.chat-send-error {
+	background-color: #2c0b0e;
+	color: #ea868f;
+}
 
 body.dark-mode .expanded-message {
 	border-style: none;
@@ -9044,6 +9156,15 @@ body.dark-mode .popover.top>.arrow:after {
 
 body.dark-mode .fc-list-event:hover * {
 	background-color: var(--dark-mode-body-color) !important;
+}
+
+/* List-view day headers: an opaque shade and a lighter link colour keep
+   the date links at 5.2:1 (FullCalendar's translucent grey left 3.1:1) */
+body.dark-mode .fc-theme-standard .fc-list-day-cushion {
+	background-color: var(--dark-mode-highlight-color);
+}
+body.dark-mode .fc-list-day-cushion a {
+	color: #8cb4df;
 }
 
 body.dark-mode .list-group-item-nohover:hover {
@@ -9709,7 +9830,7 @@ body.dark-mode .empty-state-title {
  * Bootstrap 5 parity overrides. Loaded only in the bs5 bundle, after
  * groupsio.css. The app CSS and body padding (60px) were designed around
  * Bootstrap 3 metrics; these rules restore them where Bootstrap 5 differs
- * (docs/specs/bootstrap5-migration.md). Delete at BS3 removal if the design
+ * (docs/specs/archive/bootstrap5-migration.md). Delete at BS3 removal if the design
  * is retuned instead.
  */
 
@@ -10405,14 +10526,6 @@ body.dark-mode .card > .card-footer {
 	border-radius: 0.234375rem;
 }
 
-.dropzone .dz-preview-single .dz-preview-img {
-	border-radius: 0.234375rem;
-}
-
-.dropzone-area {
-	border-radius: 0.15625rem;
-}
-
 .navbar-vertical .dropdown-indicator {
 	padding-right: 0.625rem !important;
 }
@@ -10571,9 +10684,16 @@ a.badge.hashtag-label-white:focus {
 	color: #333;
 }
 
-body.dark-mode .btn.hashtag-btn:is(:hover, :focus-visible, :active, .show),
-body.dark-mode a.badge[class*="hashtag-label-"]:hover,
-body.dark-mode a.badge[class*="hashtag-label-"]:focus {
+/* Dark mode: the deeper hashtag fills keep their white text. The generic
+ * dark-mode link and hashtag-box colours would otherwise put light grey
+ * or link blue on them (1.8:1 to 3.4:1). */
+body.dark-mode :is(.badge, .hashtag-btn)[class*="hashtag-label-"]:not(:is(.hashtag-label-cucumber, .hashtag-label-bluejean, .hashtag-label-capri-blue, .hashtag-label-aquamute, .hashtag-label-apricot, .hashtag-label-orange, .hashtag-label-yellow, .hashtag-label-peony, .hashtag-label-melon, .hashtag-label-pink, .hashtag-label-light-brown, .hashtag-label-moss-green, .hashtag-label-grey-blue, .hashtag-label-green-sage, .hashtag-label-sage, .hashtag-label-burnt-yellow, .hashtag-label-antique-pink, .hashtag-label-light-lilac, .hashtag-label-sky, .hashtag-label-beige, .hashtag-label-white)),
+body.dark-mode :is(.badge, .hashtag-btn)[class*="hashtag-label-"]:not(:is(.hashtag-label-cucumber, .hashtag-label-bluejean, .hashtag-label-capri-blue, .hashtag-label-aquamute, .hashtag-label-apricot, .hashtag-label-orange, .hashtag-label-yellow, .hashtag-label-peony, .hashtag-label-melon, .hashtag-label-pink, .hashtag-label-light-brown, .hashtag-label-moss-green, .hashtag-label-grey-blue, .hashtag-label-green-sage, .hashtag-label-sage, .hashtag-label-burnt-yellow, .hashtag-label-antique-pink, .hashtag-label-light-lilac, .hashtag-label-sky, .hashtag-label-beige, .hashtag-label-white)):is(:hover, :focus, :focus-visible, :active, .show) {
+	color: #fff;
+}
+
+body.dark-mode .btn.hashtag-btn:is(.hashtag-label-cucumber, .hashtag-label-bluejean, .hashtag-label-capri-blue, .hashtag-label-aquamute, .hashtag-label-apricot, .hashtag-label-orange, .hashtag-label-yellow, .hashtag-label-peony, .hashtag-label-melon, .hashtag-label-pink, .hashtag-label-light-brown, .hashtag-label-moss-green, .hashtag-label-grey-blue, .hashtag-label-green-sage, .hashtag-label-sage, .hashtag-label-burnt-yellow, .hashtag-label-antique-pink, .hashtag-label-light-lilac, .hashtag-label-sky, .hashtag-label-beige):is(:hover, :focus-visible, :active, .show),
+body.dark-mode a.badge:is(.hashtag-label-cucumber, .hashtag-label-bluejean, .hashtag-label-capri-blue, .hashtag-label-aquamute, .hashtag-label-apricot, .hashtag-label-orange, .hashtag-label-yellow, .hashtag-label-peony, .hashtag-label-melon, .hashtag-label-pink, .hashtag-label-light-brown, .hashtag-label-moss-green, .hashtag-label-grey-blue, .hashtag-label-green-sage, .hashtag-label-sage, .hashtag-label-burnt-yellow, .hashtag-label-antique-pink, .hashtag-label-light-lilac, .hashtag-label-sky, .hashtag-label-beige):is(:hover, :focus) {
 	color: var(--dark-mode-reverse-text-color);
 }
 
@@ -10910,20 +11030,6 @@ button.list-group-item {
 	}
 }
 
-/* No live consumer: the keyboard-shortcuts modal that needed this now
- * emits col-3/col-9 under BS5, and the remaining col-xs-3/9 sites are on
- * unconverted pages, which load the BS3 bundle instead. Retained as a
- * safety net for pages that convert without branching their -xs- columns. */
-.col-xs-3 {
-	width: 25%;
-	padding: 0 0.9375rem;
-}
-
-.col-xs-9 {
-	width: 75%;
-	padding: 0 0.9375rem;
-}
-
 /* groupsio.css tightens the grid to a 5px gutter below 992px (.container
  * and .row at 5px, "adjust margins for narrow screens"), but keys the
  * column half on the BS3 names .col-xs-1 … .col-xs-12, which the sweep
@@ -11041,9 +11147,7 @@ button.list-group-item {
  * chat composer's "+" menu, the wiki "..." menu) grew a caret they never
  * had. Toggles that want a caret keep their span, styled above. */
 .dropdown-toggle::after,
-.dropup .dropdown-toggle::after,
-.dropend .dropdown-toggle::after,
-.dropstart .dropdown-toggle::before {
+.dropup .dropdown-toggle::after {
 	display: none;
 }
 
@@ -11070,13 +11174,21 @@ button.list-group-item {
  * inline-block. A BS5 .breadcrumb-item has no display of its own and relies on
  * the list being flex, so the override left the crumbs stacking one per line.
  * inline-flex rather than flex to keep the inline-block box the app asked for.
- * !important to reach past the app's own. nowrap because the app
- * scrolls .breadcrumb-container horizontally: under BS3 the crumbs stayed on
- * one line and the container clipped and scrolled them; a wrapping flex row
- * would stack them instead. */
+ * !important to reach past the app's own. The row wraps so a trail wider
+ * than a phone moves its later crumbs, the current page among them, onto
+ * a second line where they stay in view (1.4.10). A one-line row that
+ * scrolled sideways left the current page off-screen, and its crumbs
+ * shrank until their text ran into each other. */
 .breadcrumb.scroll-breadcrumb {
 	display: inline-flex !important;
-	flex-wrap: nowrap;
+	flex-wrap: wrap;
+}
+
+/* .breadcrumb-container sets nowrap for the whole trail; a single crumb
+ * wider than the screen wraps its own text instead of overflowing. */
+.breadcrumb.scroll-breadcrumb > .breadcrumb-item {
+	white-space: normal;
+	overflow-wrap: anywhere;
 }
 
 /* BS3 dropdown metrics: #333 links with 3px 20px padding, #f5f5f5
@@ -11115,7 +11227,7 @@ button.list-group-item {
 
 /* BS3 structural styles for raw .checkbox/.radio wrappers not yet converted
  * to the form-check component; the migration keeps some raw leftovers
- * (docs/specs/bootstrap5-migration.md), which have no styling in BS5. */
+ * (docs/specs/archive/bootstrap5-migration.md), which have no styling in BS5. */
 .checkbox,
 .radio {
 	position: relative;
@@ -11319,55 +11431,6 @@ body:not(.dark-mode) .form-check-input:not(:checked):hover {
 	border-radius: 0.25rem;
 }
 
-/* BS3's Glyphicons Halflings font, which Bootstrap 5 dropped. groupsio.css
- * draws the collapsable-panel chevron from it (content "\e114"/"\e080") and
- * bootstrap-colorselector.css the selected-swatch check ("\e013"); without the
- * face both render as a missing-glyph box. Same src set BS3 declared, minus
- * the IE-only eot/svg entries, whose browsers cannot run this bundle anyway.
- * The /fonts/ route serves content/web/bootstrap/fonts under both bundles. */
-@font-face {
-	font-family: 'Glyphicons Halflings';
-	src: url(../fonts/glyphicons-halflings-regular.woff2) format('woff2'), url(../fonts/glyphicons-halflings-regular.woff) format('woff'), url(../fonts/glyphicons-halflings-regular.ttf) format('truetype');
-}
-
-/* The icon markup the bundled bootstrap-fileinput still emits names
- * Glyphicons: the zoom dialog's prev/next arrows, header toggles and
- * close, the browse/remove/cancel/upload buttons and the per-file action
- * and status icons. BS3 drew each from .glyphicon plus a per-icon ::before
- * codepoint; BS5 has neither, so every one of those buttons rendered
- * empty. BS3's base rule and the codepoints for exactly the icons the
- * plugin emits. */
-.glyphicon {
-	position: relative;
-	top: 1px;
-	display: inline-block;
-	font-family: 'Glyphicons Halflings';
-	font-style: normal;
-	font-weight: 400;
-	line-height: 1;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-.glyphicon-remove::before { content: "\e014"; }
-.glyphicon-zoom-in::before { content: "\e015"; }
-.glyphicon-trash::before { content: "\e020"; }
-.glyphicon-file::before { content: "\e022"; }
-.glyphicon-download::before { content: "\e026"; }
-.glyphicon-upload::before { content: "\e027"; }
-.glyphicon-repeat::before { content: "\e030"; }
-.glyphicon-move::before { content: "\e068"; }
-.glyphicon-plus-sign::before { content: "\e081"; }
-.glyphicon-ok-sign::before { content: "\e084"; }
-.glyphicon-ban-circle::before { content: "\e090"; }
-.glyphicon-resize-full::before { content: "\e096"; }
-.glyphicon-exclamation-sign::before { content: "\e101"; }
-.glyphicon-folder-open::before { content: "\e118"; }
-.glyphicon-resize-vertical::before { content: "\e119"; }
-.glyphicon-fullscreen::before { content: "\e140"; }
-.glyphicon-hourglass::before { content: "\231b"; }
-.glyphicon-triangle-right::before { content: "\e250"; }
-.glyphicon-triangle-left::before { content: "\e251"; }
-
 /* The plugin's zoom-dialog close button also carries BS5's .btn-close
  * name, which shrinks it to a 1em box and paints its own SVG cross over
  * the glyph. Give it back the button box its three siblings have. */
@@ -11476,14 +11539,6 @@ p {
 	--bs-btn-active-border-color: #ac2925;
 }
 
-/* BS3 img-responsive, still emitted by shared components (e.g. the
- * member-data image columns); BS5 renamed it img-fluid. */
-.img-responsive {
-	display: block;
-	max-width: 100%;
-	height: auto;
-}
-
 /* Dark mode. The app's dark rules in groupsio.css key on the BS3 class
  * names (.panel-*, .close, .form-control) and set body color/background
  * as properties, never the BS5 variables — but BS5 component var chains
@@ -11547,7 +11602,7 @@ body.dark-mode .badge.text-bg-info {
  * it matches nothing and they took the dark-mode link colour, invisible on
  * the teal and blue fills. :where() keeps BS3's specificity so the rule
  * still wins only by order, as it did over body.dark-mode .hashtag-btn. */
-body.dark-mode .badge:where([class*="hashtag-label-"]) {
+body.dark-mode :is(.badge, .hashtag-btn):where(.hashtag-label-cucumber, .hashtag-label-bluejean, .hashtag-label-capri-blue, .hashtag-label-aquamute, .hashtag-label-apricot, .hashtag-label-orange, .hashtag-label-yellow, .hashtag-label-peony, .hashtag-label-melon, .hashtag-label-pink, .hashtag-label-light-brown, .hashtag-label-moss-green, .hashtag-label-grey-blue, .hashtag-label-green-sage, .hashtag-label-sage, .hashtag-label-burnt-yellow, .hashtag-label-antique-pink, .hashtag-label-light-lilac, .hashtag-label-sky, .hashtag-label-beige) {
 	color: var(--dark-mode-reverse-text-color);
 }
 
@@ -11635,5 +11690,810 @@ body.dark-mode .form-select:focus {
 	:where(.col-form-label) {
 		text-align: right;
 	}
+}
+
+/* WCAG 2.1 AA contrast (1.4.1, 1.4.3). The rules above reproduce the
+ * Bootstrap 3 palette the app was built on, and several of its fills fail
+ * the 4.5:1 text minimum with the white text they carry: info 2.1:1,
+ * warning 2.6:1, success 3.7:1, danger 4.0:1, the grey count badge 4.5:1.
+ * This section, which loads last, moves each fill to an AA-passing shade
+ * of the same hue, or gives a light fill dark text where no shade of the
+ * hue carries white. Ratios in the comments are against the text colour
+ * the element carries. */
+:root {
+	--bs-success-rgb: 39, 135, 43; /* #27872b, 4.6:1 white */
+	--bs-info-rgb: 91, 192, 222; /* #5bc0de, the BS3 cyan, 8.1:1 dark text */
+	--bs-danger-rgb: 205, 72, 69; /* #cd4845, 4.6:1 white */
+	--bs-secondary-rgb: 108, 108, 108; /* #6c6c6c, 5.3:1 white */
+}
+
+:where(.badge) {
+	background-color: #6c6c6c;
+}
+
+/* Warning stays amber and info stays the BS3 cyan; neither carries white
+ * at 4.5:1, so they take dark text instead (#1c1c1d on #f0ad4e, 8.7:1;
+ * on #5bc0de, 8.1:1). Dark mode already gave both dark text. */
+.badge.text-bg-warning,
+.badge.text-bg-info {
+	color: #1c1c1d !important;
+}
+
+.card > .card-header.text-bg-success {
+	background-color: #308631 !important;
+}
+
+.btn-success {
+	--bs-btn-bg: #308631;
+	--bs-btn-border-color: #308631;
+	--bs-btn-hover-bg: #15711a;
+	--bs-btn-hover-border-color: #15711a;
+	--bs-btn-active-bg: #15711a;
+	--bs-btn-active-border-color: #15711a;
+	background-color: var(--bs-btn-bg);
+	border-color: var(--bs-btn-border-color);
+}
+
+/* The info button keeps the BS3 cyan with dark text, 8.1:1, and darkens
+ * slightly on hover, 6.6:1. In dark mode groupsio.css's hover (#308a9e)
+ * was 4.3:1 under the same dark text; it lightens instead, 7.2:1. */
+.btn-info {
+	--bs-btn-color: #1c1c1d;
+	--bs-btn-hover-color: #1c1c1d;
+	--bs-btn-active-color: #1c1c1d;
+	--bs-btn-bg: #5bc0de;
+	--bs-btn-border-color: #5bc0de;
+	--bs-btn-hover-bg: #46adca;
+	--bs-btn-hover-border-color: #46adca;
+	--bs-btn-active-bg: #46adca;
+	--bs-btn-active-border-color: #46adca;
+	background-color: var(--bs-btn-bg);
+	border-color: var(--bs-btn-border-color);
+	color: #1c1c1d;
+}
+
+.btn-info:is(:hover, :focus, :active) {
+	color: #1c1c1d;
+}
+
+body.dark-mode .btn-info:is(:hover, :focus, :active) {
+	background-color: #4fb6cf;
+	border-color: #4fb6cf;
+	/* Beats groupsio.css's body.dark-mode a:hover on anchor buttons. */
+	color: var(--dark-mode-reverse-text-color);
+}
+
+/* groupsio.css's orange warning button (rgb(245, 128, 62)) with dark text,
+ * 6.5:1; its #d67f0c hover, 5.6:1. */
+.btn-warning {
+	--bs-btn-color: #1c1c1d;
+	--bs-btn-hover-color: #1c1c1d;
+	--bs-btn-active-color: #1c1c1d;
+	color: #1c1c1d;
+}
+
+.btn-danger {
+	--bs-btn-bg: #cd4845;
+	--bs-btn-border-color: #cd4845;
+	--bs-btn-hover-bg: #b53031;
+	--bs-btn-hover-border-color: #b53031;
+	--bs-btn-active-bg: #b53031;
+	--bs-btn-active-border-color: #b53031;
+	background-color: var(--bs-btn-bg);
+	border-color: var(--bs-btn-border-color);
+}
+
+.btn-success:hover,
+.btn-info:hover,
+.btn-danger:hover {
+	background-color: var(--bs-btn-hover-bg);
+	border-color: var(--bs-btn-hover-border-color);
+}
+
+/* Hashtag colours fall in two groups. The light fills carry dark text
+ * (5.1:1 or better); the deeper fills are shaded in groupsio.css just far
+ * enough to carry the white text that every other hashtag keeps (4.55:1
+ * or better). models.Color.GetTextColor makes the same split for calendar
+ * events and member labels, so a colour reads the same everywhere. */
+:is(.hashtag-btn, .badge):is(.hashtag-label-cucumber, .hashtag-label-bluejean, .hashtag-label-capri-blue, .hashtag-label-aquamute, .hashtag-label-apricot, .hashtag-label-orange, .hashtag-label-yellow, .hashtag-label-peony, .hashtag-label-melon, .hashtag-label-pink, .hashtag-label-light-brown, .hashtag-label-moss-green, .hashtag-label-grey-blue, .hashtag-label-green-sage, .hashtag-label-sage, .hashtag-label-burnt-yellow, .hashtag-label-antique-pink, .hashtag-label-light-lilac, .hashtag-label-sky, .hashtag-label-beige),
+.btn.hashtag-btn:is(.hashtag-label-cucumber, .hashtag-label-bluejean, .hashtag-label-capri-blue, .hashtag-label-aquamute, .hashtag-label-apricot, .hashtag-label-orange, .hashtag-label-yellow, .hashtag-label-peony, .hashtag-label-melon, .hashtag-label-pink, .hashtag-label-light-brown, .hashtag-label-moss-green, .hashtag-label-grey-blue, .hashtag-label-green-sage, .hashtag-label-sage, .hashtag-label-burnt-yellow, .hashtag-label-antique-pink, .hashtag-label-light-lilac, .hashtag-label-sky, .hashtag-label-beige):is(:hover, :focus-visible, :active, .show),
+a.badge:is(.hashtag-label-cucumber, .hashtag-label-bluejean, .hashtag-label-capri-blue, .hashtag-label-aquamute, .hashtag-label-apricot, .hashtag-label-orange, .hashtag-label-yellow, .hashtag-label-peony, .hashtag-label-melon, .hashtag-label-pink, .hashtag-label-light-brown, .hashtag-label-moss-green, .hashtag-label-grey-blue, .hashtag-label-green-sage, .hashtag-label-sage, .hashtag-label-burnt-yellow, .hashtag-label-antique-pink, .hashtag-label-light-lilac, .hashtag-label-sky, .hashtag-label-beige):is(:hover, :focus) {
+	color: #1c1c1d;
+}
+
+/* The count inside a group-home hashtag chip darkened the chip under white
+ * text; under dark text it lightens it instead. */
+.grouphome-tag-chip:not(.hashtag-label-dark-grey) .grouphome-tag-count {
+	background: rgba(255, 255, 255, 0.45);
+	opacity: 1;
+}
+
+/* #777 secondary text is 4.5:1 on white only at large sizes. */
+.grouphome-recent-meta {
+	color: #6c6c6c;
+}
+
+:is(a, button).button-link {
+	color: #2a6496;
+}
+
+/* FullCalendar fades the neighbouring months' day numbers to 30% opacity,
+ * 1.5:1; grey keeps them distinct from the current month's link blue. */
+.fc .fc-day-other .fc-daygrid-day-top {
+	opacity: 1;
+}
+
+.fc .fc-day-other .fc-daygrid-day-number {
+	color: #6c6c6c;
+}
+
+body.dark-mode .fc .fc-day-other .fc-daygrid-day-number {
+	color: #999;
+}
+
+/* Links in running text are told apart from it by colour alone (2.4:1
+ * against #333 body text, 1.4.1 asks for 3:1 or a non-colour cue), so a
+ * link inside a paragraph, alert, help text, plain list, like count,
+ * chat byline or activity sentence is semibold at rest and underlined on
+ * hover and focus. Component links carry a class and are left alone. A
+ * list row's "Started by" or "By" author link sits in grey metadata text
+ * (1.1:1 against it in the topic list), so it is semibold too; .byline
+ * marks such author lines. The feed card's "Subscription:" delivery link
+ * sits inline after its label the same way. */
+:is(p, .lead, .alert, .flashmsg, .form-text, .help-block, dd, blockquote, small, ul:not([class]) > li) a:not([class]),
+.likestats a,
+.chat-byline a,
+.thread-attribution a,
+.byline a,
+a.feed-subscription-link,
+.alert a.alert-link,
+a.activitylink {
+	text-decoration: none;
+	font-weight: 600;
+}
+
+:is(:is(p, .lead, .alert, .flashmsg, .form-text, .help-block, dd, blockquote, small, ul:not([class]) > li) a:not([class]),
+.likestats a,
+.chat-byline a,
+.thread-attribution a,
+.byline a,
+a.feed-subscription-link,
+.alert a.alert-link,
+a.activitylink):is(:hover, :focus) {
+	text-decoration: underline;
+}
+
+/* The skip link (base.qtpl) is hidden until focused, then shows above the
+ * fixed navbar. */
+.skip-link:focus {
+	position: fixed;
+	top: 8px;
+	left: 8px;
+	z-index: 2000;
+	padding: 8px 16px;
+	background-color: #fff;
+	color: #2a6496;
+	border: 2px solid #2a6496;
+	border-radius: 4px;
+}
+
+/* Link blue is 4.4:1 on the info and success alert tints; BS3's hover blue
+ * carries 6.6:1 on both. */
+:where(body:not(.dark-mode)) .alert a:not(.btn):not(.alert-link) {
+	color: #23527c;
+}
+
+/* BS3 blockquote attribution, #777; the grey that passes on white. */
+blockquote footer {
+	color: #6c6c6c;
+}
+
+/* The cookie banner fades its link to 80% opacity, 2.4:1 on the banner. */
+.cc-window .cc-link {
+	opacity: 1;
+}
+
+/* Dark mode, same standard. Dark-mode badges carry the reverse (near-black)
+ * text colour, so their fills go lighter rather than darker; dark-mode
+ * buttons carry light text, so theirs go darker. */
+:root {
+	--dark-mode-light-text-color: #aaa; /* 4.8:1 on the #3a3b3c highlight */
+}
+
+body.dark-mode {
+	--bs-success-rgb: 92, 184, 92; /* #5cb85c, 6.9:1 reverse text */
+	--bs-danger-rgb: 229, 115, 115; /* #e57373, 5.7:1 reverse text */
+}
+
+body.dark-mode .text-danger {
+	color: #f28b82 !important; /* 6.3:1 on the dark card */
+}
+
+body.dark-mode .text-success {
+	color: #81c784 !important; /* 7.5:1 */
+}
+
+body.dark-mode .btn-primary {
+	--bs-btn-bg: #286090;
+	--bs-btn-border-color: #286090;
+	background-color: #286090; /* 4.9:1 */
+	border-color: #286090;
+}
+
+body.dark-mode .btn-primary:hover,
+body.dark-mode .btn-primary:focus,
+body.dark-mode .btn-primary:active {
+	background-color: #204d74;
+	border-color: #204d74;
+}
+
+body.dark-mode .btn-success {
+	--bs-btn-bg: #1b5e20;
+	--bs-btn-border-color: #1b5e20;
+	background-color: #1b5e20; /* 5.8:1 */
+	border-color: #1b5e20;
+}
+
+body.dark-mode .btn-success:hover,
+body.dark-mode .btn-success:focus,
+body.dark-mode .btn-success:active {
+	background-color: #144a18;
+	border-color: #144a18;
+}
+
+body.dark-mode .btn-danger {
+	--bs-btn-bg: #b52b27;
+	--bs-btn-border-color: #b52b27;
+	background-color: #b52b27; /* 4.6:1 */
+	border-color: #b52b27;
+}
+
+body.dark-mode .btn-danger:hover,
+body.dark-mode .btn-danger:focus,
+body.dark-mode .btn-danger:active {
+	background-color: #9a2420;
+	border-color: #9a2420;
+}
+
+body.dark-mode .alert a:not(.btn):not(.alert-link) {
+	color: #9ec5e8; /* 6.3:1 on the dark success tint */
+}
+
+/* The database table's sticky header and first columns are painted white
+ * so rows scroll under them; in dark mode that left light-blue sort links
+ * at 2.5:1 and light row numbers at 1.4:1. They take the dark highlight
+ * instead (#7da8d4 links 4.5:1, #dbdde1 text 8.3:1). Odd and hovered rows
+ * still paint their own colour over the first columns. */
+body.dark-mode .table-fixed-sticky thead th,
+body.dark-mode .table-fixed-sticky tbody th,
+body.dark-mode .table-fixed-sticky .sticky-col {
+	background: var(--dark-mode-highlight-color);
+}
+
+/* The current page number is the dark-mode text colour on #337ab7, 3.4:1;
+ * on the dark-mode primary button blue it is 4.9:1. */
+body.dark-mode .pagination > .active > :is(a, span) {
+	background-color: #286090;
+}
+
+/* A .btn-link (poll "See Results", the chats list member count) reads
+ * the light-mode link blue, 2.8:1 on the dark card and 2.1:1 on a hovered
+ * row; it takes the dark-mode link colour, 6.0:1 and 4.5:1. */
+body.dark-mode .btn-link {
+	--bs-btn-color: #7da8d4;
+	--bs-btn-hover-color: #9ec5e8; /* 6.2:1 on a hovered row */
+	--bs-btn-active-color: #9ec5e8;
+}
+
+/* .text-primary (an RSVP's "Not Attending") is #337ab7, 3.3:1 on the dark
+ * card; the dark-mode link colour is 6.0:1. */
+body.dark-mode .text-primary {
+	color: #7da8d4 !important;
+}
+
+/* The album header sets white text over a darkened cover photo; the
+ * owner's name took the link colour (1.7:1 over the overlay in dark mode)
+ * and stays white, semibold to mark it as a link, underlined on hover. */
+.album-header .album-owner a,
+body.dark-mode .album-header .album-owner a {
+	color: #fff;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.album-header .album-owner a:is(:hover, :focus) {
+	text-decoration: underline;
+}
+
+/* WCAG 2.1 AA focus visibility (2.4.7, 1.4.11). Keyboard focus needs an
+ * indicator with 3:1 against what surrounds it. The app's ring colour is
+ * the link blue #2a6496 (6.3:1 on white); in dark mode it is #9ec5e8
+ * (10:1 on the dark page). */
+:root {
+	--gio-focus-ring-color: #2a6496;
+}
+
+body.dark-mode {
+	--gio-focus-ring-color: #9ec5e8;
+}
+
+/* The top navbar's links and toggles took BS5's blue glow on a blue bar,
+ * 1.03:1; a white outline carries 5:1 or better on the bar in both modes.
+ * Inset, so the fixed bar's edge doesn't clip it. The white menus that
+ * drop from the bar keep the menu's own focus style. */
+.navbar-head a:not(.dropdown-item):focus-visible,
+.navbar-head button:not(.dropdown-item):focus-visible {
+	outline: 2px solid #fff;
+	outline-offset: -2px;
+	box-shadow: none;
+}
+
+/* A .btn without a colour variant (the chat composer's .chat-button-color
+ * buttons, hashtag pills) has no --bs-btn-focus-shadow-rgb, so BS5's ring
+ * resolves to nothing. The variants keep their own ring. */
+.btn:not(:is(.btn-primary, .btn-secondary, .btn-success, .btn-info, .btn-warning, .btn-danger, .btn-light, .btn-dark, .btn-link, [class*="btn-outline-"])):focus-visible {
+	outline: 2px solid var(--gio-focus-ring-color);
+	outline-offset: 2px;
+}
+
+/* BS5 draws every button's focus ring from --bs-btn-focus-box-shadow, the
+ * variant's own colour at half strength: 1.2:1 to 2.9:1 against the page,
+ * light or dark, for every variant. A white inner ring inside a solid ring
+ * in the focus colour reads on any button colour and gives 3:1 or better
+ * against the page (WCAG 1.4.11). Setting the variable covers each state
+ * BS5 draws it in (focus, checked, active, open dropdown toggle). */
+.btn {
+	--bs-btn-focus-box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--gio-focus-ring-color);
+}
+
+/* A .btn-file is a span dressed as a button over a transparent file input;
+ * the input takes focus, so the span shows it. */
+.btn-file:focus-within {
+	outline: 2px solid var(--gio-focus-ring-color);
+	outline-offset: 2px;
+}
+
+/* Photo and album tiles are links over a background image; the tile around
+ * the link shows its focus. */
+.photos-square:focus-within {
+	outline: 3px solid var(--gio-focus-ring-color);
+	outline-offset: 2px;
+}
+
+/* The checkbox and radio ring above is the brand blue at 25%, 1.4:1. */
+.form-check-input:focus-visible {
+	outline: 2px solid var(--gio-focus-ring-color);
+	outline-offset: 2px;
+	box-shadow: none;
+}
+
+/* TinyMCE marks a focused toolbar button with a #dee0e2 fill, 1.3:1 on
+ * the toolbar, and the editing area shows no focus at all. Inset rings,
+ * since the toolbar clips anything outside its buttons. body raises the
+ * rules above TinyMCE's skin, which loads after this sheet. */
+body .tox .tox-tbtn:focus,
+body .tox .tox-split-button:focus {
+	box-shadow: inset 0 0 0 2px var(--gio-focus-ring-color);
+}
+
+body .tox.tox-tinymce:focus-within,
+body .tox.tox-tinymce.gio-editor-focus {
+	border-color: var(--gio-focus-ring-color);
+	box-shadow: 0 0 0 1px var(--gio-focus-ring-color);
+}
+
+/* flatpickr moves focus through the days with the arrow keys and marks the
+ * focused day with a #e6e6e6 fill, 1.2:1. body lifts the rule over
+ * flatpickr's own .flatpickr-day.nextMonthDay:focus { outline: 0 }. */
+body .flatpickr-calendar .flatpickr-day:focus {
+	outline: 2px solid var(--gio-focus-ring-color);
+	outline-offset: -2px;
+}
+
+/* The dropdown component's Link variant is a button drawn as a link. */
+.dropdown-link-toggle {
+	background: none;
+	border: 0;
+	padding: 0;
+	font: inherit;
+	color: var(--bs-link-color);
+}
+
+body.dark-mode .dropdown-link-toggle {
+	color: #7da8d4;
+}
+
+.dropdown-link-toggle:focus-visible {
+	outline: 2px solid var(--gio-focus-ring-color);
+	outline-offset: 2px;
+}
+
+/* The hashtag gallery's light cards carry dark text (5.1:1 or better);
+ * the deeper cards keep the white text groupsio.css gives them on their
+ * shaded fills. */
+.hashtag-btn:is(.hashtag-box-cucumber, .hashtag-box-bluejean, .hashtag-box-capri-blue, .hashtag-box-aquamute, .hashtag-box-apricot, .hashtag-box-orange, .hashtag-box-yellow, .hashtag-box-peony, .hashtag-box-melon, .hashtag-box-pink, .hashtag-box-light-brown, .hashtag-box-moss-green, .hashtag-box-grey-blue, .hashtag-box-green-sage, .hashtag-box-sage, .hashtag-box-burnt-yellow, .hashtag-box-antique-pink, .hashtag-box-light-lilac, .hashtag-box-sky, .hashtag-box-beige) {
+	color: #1c1c1d !important;
+}
+
+/* Chat bubbles. A received bubble (#e9e9e9) carries its timestamp in
+ * #989696, 2.4:1; #595959 is 5.9:1. A sent bubble's #e0e7f3 text is 3.7:1
+ * on its #337ab7; white text is 4.6:1. (The read-only chat view's sent
+ * bubble is #2b669a, where #e0e7f3 is already 4.8:1.) */
+.chat-timestamp-received {
+	color: #595959;
+}
+
+body.dark-mode .chat-timestamp-received {
+	color: #b0b0b0; /* 6.9:1 on the dark bubble */
+}
+
+.chat-message.sent .chat-message-content,
+.chat-message.sent .chat-message-content a {
+	color: #fff;
+}
+
+/* A sender name takes the sender's profile colour, several of which are
+ * too light for the grey bubble (#61b16c, 2.2:1). The name's lightness is
+ * capped so every colour keeps its hue at 4.5:1 or better; on the dark
+ * received bubble it is raised instead (reply quotes stay light in dark
+ * mode). The name's <strong> inherits the colour from the inline style on
+ * its wrapper. */
+.chat-message-content div[style*="color"] > strong {
+	color: oklch(from currentColor min(l, 0.47) c h);
+}
+
+body.dark-mode .chat-message.received .chat-message-content div[style*="color"]:not(.chat-reply-bubble-them > div, .chat-reply-bubble-us > div) > strong {
+	color: oklch(from currentColor max(l, 0.75) c h);
+}
+
+/* The month strip of the calendar-page date badge: #333 on the red fill
+ * is 3.0:1; white on the same red deepened only as far as it needs is
+ * 4.6:1. */
+.calendar-date .calendar-month {
+	background-color: #dd2d50;
+	color: #fff;
+}
+
+/* /groups on phones: the meta line's #888 is 3.5:1 on white, and the
+ * unread count's white on #d9534f is 4.0:1. */
+.groupslist-mobmeta {
+	color: #6c6c6c;
+}
+
+body.dark-mode .groupslist-mobmeta {
+	color: var(--dark-mode-light-text-color);
+}
+
+.groupslist-mobunread {
+	background: #cd4845;
+}
+
+/* Visually hidden text is absolutely positioned; inside an unpositioned
+ * .table-responsive it escapes the wrapper's overflow clipping and widens
+ * the page, which then scrolls sideways at 320px (1.4.10). */
+.table-responsive {
+	position: relative;
+}
+
+/* The phone navbar's page title takes the dark-mode heading colour,
+ * #dbdde1, 3.9:1 on the blue bar; white is 5.3:1. */
+body.dark-mode #logo-mobile :is(h1, h2, h3, h4, h5, h6) {
+	color: #fff;
+}
+
+/* The chat message box sets no text colour, so in dark mode its text and
+ * placeholder stay black on the dark input (1.2:1). */
+body.dark-mode #chat-message-input {
+	color: var(--dark-mode-text-color);
+}
+
+body.dark-mode #chat-message-input::placeholder {
+	color: #aaa;
+}
+
+/* A chat message's actions button is visually hidden until focused, then
+ * shows over the bubble in link blue, which the sent bubble's own blue
+ * leaves unreadable (1.1:1); it takes a solid plate of its own. The
+ * selector outranks BS5's .btn:focus-visible, which would otherwise paint
+ * the .btn-link's transparent hover background over the plate. */
+.btn.chat-message-actions:is(:focus, :focus-visible) {
+	background-color: #fff;
+	color: #2a6496;
+}
+
+body.dark-mode .btn.chat-message-actions:is(:focus, :focus-visible) {
+	background-color: var(--dark-mode-body-color);
+	color: #9ec5e8;
+}
+
+/* The colour selector toggle is an 18px-high swatch; 2.5.8 asks for a
+ * 24px target. */
+.dropdown-colorselector .dropdown-toggle {
+	min-height: 24px;
+	min-width: 24px;
+}
+
+/* bootstrap-fileinput's "Drag image here" drop-zone title is #aaa on the
+ * zone's #fafafa (2.2:1); the zone stays light in dark mode too. */
+.file-drop-zone-title {
+	color: #6c6c6c;
+}
+
+/* ===== Reflow and hover content (WCAG 1.4.10, 1.4.13) ===== */
+
+/* The phone header's page title (components/backbutton.qtpl) sits between
+ * the back chevron on the left and the action icons on the right, and wraps
+ * onto a second line rather than being cut off and running under the
+ * icons. The right inset clears the account icon, and the optional page
+ * action (search, settings) when there is one. */
+.navbar-mobile-title {
+	position: absolute;
+	left: 44px;
+	right: 64px;
+	top: env(safe-area-inset-top);
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	/* When enlarged or spaced-out text is taller than the bar, it starts at
+	 * the top and anything that does not fit is cut at the bottom, inside
+	 * the bar, rather than losing the first line off the top and pushing the
+	 * subtitle out onto the page. */
+	justify-content: safe center;
+	text-align: center;
+	color: #ecf0f1;
+	overflow: hidden;
+}
+
+.navbar-mobile-title > * {
+	flex-shrink: 0;
+}
+
+/* ShowHeaderAction marks the bar when it adds a page action, so the title
+ * also clears that icon. A class set by the script, rather than
+ * :has(#header-action-slot:empty), because iOS Safari does not always
+ * re-match :has() when the slot is filled after the page loads, leaving
+ * the title running under the icon. */
+#headerbar.has-header-action .navbar-mobile-title {
+	right: 112px;
+}
+
+/* A title with no chevron beside it (NavbarTitle) can start further left. */
+.navbar-mobile-title.navbar-mobile-title-only {
+	left: 16px;
+}
+
+.navbar-mobile-title h4 {
+	margin: 0;
+	font-size: 1rem;
+	line-height: 1.1;
+	overflow-wrap: anywhere;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+	overflow: hidden;
+}
+
+.navbar-mobile-subtitle {
+	font-size: 11px;
+	line-height: 1.2;
+	margin-top: 1px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* Two title lines plus the subtitle just fill the 50px bar. With wider
+ * line spacing (WCAG 1.4.12) they would not, so a title with a subtitle
+ * under it keeps to as many whole lines as fit in two lines' normal
+ * height: two normally, one when the lines are spaced out. Pages whose
+ * header title can be cut short also show it in full in the content
+ * (.topic-subject-heading, .chat-subject-heading, .wiki-page-title). */
+.navbar-mobile-title h4:has(+ .navbar-mobile-subtitle) {
+	max-height: round(down, 2.25rem, 1lh);
+}
+
+/* The topic subject heading (groupthread.qtpl). On phones it is the only
+ * place a subject too long for the header's two lines appears in full,
+ * so it shows there too, at a size that suits the narrow column. */
+.topic-subject-heading {
+	font-size: 1.125rem;
+	margin: 0.625rem 0;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+@media (max-width: 767.98px) {
+	.topic-subject-heading {
+		font-size: 1rem;
+		margin: 0 0 0.5rem;
+		padding: 0;
+		overflow-wrap: anywhere;
+	}
+}
+
+/* The subject on the single-message page (groupmessage.qtpl) is an h2 for
+ * the heading outline but keeps the h4 size and margins it had. */
+.groupmessage-subject h2 {
+	font-size: 1.125rem;
+	margin: 0.625rem 0;
+}
+
+/* The chat's name above its messages (groupchat.qtpl), shown below lg
+ * where the breadcrumb leaves it out. */
+.chat-subject-heading {
+	flex: none;
+	font-size: 1rem;
+	margin: 0;
+	padding: 6px 10px 0;
+	overflow-wrap: anywhere;
+}
+
+/* A wiki page's title heading (groupwiki.qtpl): shown on phones, where the
+ * breadcrumb carrying the title is hidden, and kept for screen readers
+ * only at md and up. */
+.wiki-page-title {
+	font-size: 1.25rem;
+	overflow-wrap: anywhere;
+}
+
+@media (min-width: 768px) {
+	.wiki-page-title {
+		position: absolute !important;
+		width: 1px !important;
+		height: 1px !important;
+		padding: 0 !important;
+		margin: -1px !important;
+		overflow: hidden !important;
+		clip: rect(0, 0, 0, 0) !important;
+		white-space: nowrap !important;
+		border: 0 !important;
+	}
+}
+
+/* A count badge's spoken suffix (<span class="visually-hidden"> messages)
+ * is absolutely positioned. Inside a one-line, clipped link (the group
+ * home's recent topics) with no positioned ancestor, it escaped the clip
+ * at the end of a long subject and widened the page. Positioning the badge
+ * keeps the suffix inside it. Zero specificity, so badges positioned by
+ * their own rules keep their placement. */
+:where(.badge:has(> .visually-hidden)) {
+	position: relative;
+}
+
+/* On a very short viewport (a 1280x1024 window at 400% zoom is 320x256 CSS
+ * px) the fixed header and fixed bottom tab bar would cover over half the
+ * screen. There they scroll with the page instead, and the content column
+ * joins the page flow so the tab bar lands after it. Phones in their
+ * normal orientations are taller than this and keep the fixed bars. */
+@media screen and (max-width: 991.98px) and (max-height: 300px) {
+	#body {
+		padding-top: 0;
+	}
+
+	/* Relative rather than static: the title is positioned against the
+	 * header. The phone action icons reach a few px past the right edge,
+	 * which a fixed header hid; clipping keeps them from adding a
+	 * horizontal scroll. */
+	#headerbar.fixed-top {
+		position: relative;
+		overflow-x: clip;
+	}
+
+	body.auto-hide-topbar #headerbar {
+		transform: none;
+	}
+
+	#maincontent {
+		position: static;
+	}
+
+	/* The row's negative margins were hidden while the content column
+	 * was positioned against the viewport; in the flow they would add a
+	 * horizontal scroll. */
+	#mainrow {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	#maincontent-column {
+		padding-bottom: 0;
+	}
+
+	#mobileSidebar .navbar.fixed-bottom {
+		position: static;
+	}
+}
+
+/* ===== Phone tab bar, feed tiles and remaining dark-mode colours ===== */
+
+/* Below lg the header (55px) and the bottom tab bar (88px) are fixed over
+ * a page that scrolls as a whole, so a link reached by Tab near the
+ * bottom could sit entirely behind the tab bar. Scroll padding keeps the
+ * focused element clear of both bars. The short-viewport layout above
+ * puts the bars back in the flow, so it needs none. */
+@media screen and (max-width: 991.98px) and (min-height: 300.02px) {
+	html {
+		scroll-padding-top: 60px;
+		scroll-padding-bottom: 96px;
+	}
+}
+
+/* A feed photo tile's link wrapped block content inline, which left it
+ * 0x0 with nowhere to draw the focus ring; it fills the tile instead. */
+.feed-square > .feed-tile-link {
+	display: block;
+	position: absolute;
+	inset: 0;
+}
+
+/* groupsio.css's body.dark-mode a (0,1,2) beat the social login
+ * buttons' own colours: the email-link button was 2.3:1 and Facebook
+ * 2.74:1. Their own text colours carry 19.4:1 and 6.8:1. */
+body.dark-mode a.btn-reddit,
+body.dark-mode a.btn-reddit:is(:hover, :focus) {
+	color: #000;
+}
+
+body.dark-mode a.btn-facebook,
+body.dark-mode a.btn-facebook:is(:hover, :focus) {
+	color: #fff;
+}
+
+/* Quote attributions on the logged-out home page: #6c6c6c is 2.85:1 on
+ * the dark page; #a8a8a8 is 6.3:1. */
+body.dark-mode blockquote footer {
+	color: #a8a8a8;
+}
+
+/* Group statistics lines (site search, subgroup lists): the green is
+ * 4.6:1 on white but 3.2:1 on the dark page; the lighter green is 6.0:1. */
+.group-stats {
+	color: #398439;
+}
+
+body.dark-mode .group-stats {
+	color: #5cb85c;
+}
+
+/* Map and chart hover content (WCAG 1.4.13)
+ *
+ * Analytics chart tooltips can be pointed at: they take pointer events
+ * while shown, and the chart script hides them a moment after the pointer
+ * leaves both the chart and the tooltip, or at once on Escape. Hidden
+ * tooltips take no pointer events so they never block the page. Chart
+ * marks are focusable so keyboard users reach the same values. */
+.analytics-chart-tooltip {
+	position: absolute;
+	z-index: 1000;
+	padding: 8px;
+	border-radius: 4px;
+	background: rgba(0, 0, 0, 0.8);
+	color: #fff;
+	font-size: 12px;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+.analytics-chart-tooltip.analytics-chart-tooltip-visible {
+	visibility: visible;
+	pointer-events: auto;
+}
+
+#maincontent svg [tabindex]:focus-visible {
+	outline: 2px solid var(--gio-focus-ring-color);
+	outline-offset: 2px;
+}
+
+/* Status badges that are links (the P, M, NP, A ... badges on Your Groups)
+ * were 23x18 px and touched each other; WCAG 2.5.8 asks for 24x24 targets
+ * or enough space around them. */
+a[data-bs-toggle="tooltip"]:has(> .badge) {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 24px;
+	min-height: 24px;
 }
 
