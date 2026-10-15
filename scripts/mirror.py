@@ -79,7 +79,7 @@ class Assets:
         parts = urlsplit(url)
         duplicate_host = '/' + urlsplit(self.origin).netloc + '/'
         if parts.netloc == urlsplit(self.origin).netloc and parts.path.startswith(duplicate_host):
-            parts = parts._replace(path='/' + parts.path[len(duplicate_host):])
+            parts = parts._replace(path='/' + parts.path[len(duplicate_host) :])
         if parts.scheme not in ('http', 'https'):
             return value
         fragment = '#' + parts.fragment if parts.fragment else ''
@@ -133,7 +133,9 @@ class Assets:
                     strings = [t for t in token.arguments if t.type == 'string']
                     if strings:
                         if custom_property:
-                            self.custom_urls.setdefault(custom_property, urljoin(base, strings[0].value))
+                            self.custom_urls.setdefault(
+                                custom_property, urljoin(base, strings[0].value)
+                            )
                         value = self.asset(strings[0].value, base, source)
                         strings[0].value = value
                         escaped = tinycss2.serializer.serialize_string_value(value)
@@ -212,13 +214,23 @@ class Assets:
                 tag.decompose()
         if urlsplit(self.origin).hostname == 'diyhrt.wiki':
             for tag in soup.select('script[src]'):
-                if urlsplit(tag['src']).path.endswith('/age-check.js') or tag['src'] == 'age-check.js':
+                if (
+                    urlsplit(tag['src']).path.endswith('/age-check.js')
+                    or tag['src'] == 'age-check.js'
+                ):
                     tag.decompose()
         for tag in soup.select('link[href]'):
             rel = set(tag.get('rel', []))
             if rel & {'manifest', 'preconnect', 'dns-prefetch'}:
                 tag.decompose()
-            elif rel & {'stylesheet', 'icon', 'apple-touch-icon', 'mask-icon', 'preload', 'modulepreload'}:
+            elif rel & {
+                'stylesheet',
+                'icon',
+                'apple-touch-icon',
+                'mask-icon',
+                'preload',
+                'modulepreload',
+            }:
                 tag['href'] = self.asset(tag['href'], base, path, stylesheet='stylesheet' in rel)
                 tag.attrs.pop('integrity', None)
                 tag.attrs.pop('crossorigin', None)
@@ -293,18 +305,30 @@ class Assets:
                 self.html(path)
 
 
-def mirror(host, urls, reject, output=None, headers=(), static=False, level=None, ignore_robots=False):
+def mirror(
+    host, urls, reject, output=None, headers=(), static=False, level=None, ignore_robots=False
+):
     if not host or '/' in host or host.startswith('.'):
         raise ValueError('Expected a hostname')
     origin = 'https://' + host + '/'
     destination = Path(output or host)
     with tempfile.TemporaryDirectory(prefix='.diyhrt-', dir=destination.parent) as temp:
         command = [
-            'wget', '--mirror', '--page-requisites', '--convert-links',
-            '--adjust-extension', '--backup-converted', '--no-parent',
-            '--limit-rate=10m', '--wait=1', '--random-wait',
-            '--timeout=60', '--tries=3', '--user-agent=' + USER_AGENT,
-            '--domains=' + host, '--directory-prefix=' + temp,
+            'wget',
+            '--mirror',
+            '--page-requisites',
+            '--convert-links',
+            '--adjust-extension',
+            '--backup-converted',
+            '--no-parent',
+            '--limit-rate=10m',
+            '--wait=1',
+            '--random-wait',
+            '--timeout=60',
+            '--tries=3',
+            '--user-agent=' + USER_AGENT,
+            '--domains=' + host,
+            '--directory-prefix=' + temp,
         ]
         version = subprocess.run(['wget', '--version'], capture_output=True, text=True, check=True)
         if 'Wget2' in version.stdout:
@@ -347,13 +371,20 @@ def main():
     parser.add_argument('--level', type=int)
     parser.add_argument('--ignore-robots', action='store_true')
     parser.add_argument(
-        '--static', action='store_true',
+        '--static',
+        action='store_true',
         help='preserve server-rendered content without live app scripts or controls',
     )
     args = parser.parse_args()
     mirror(
-        args.host, args.urls, args.reject, args.output, args.header, args.static,
-        args.level, args.ignore_robots,
+        args.host,
+        args.urls,
+        args.reject,
+        args.output,
+        args.header,
+        args.static,
+        args.level,
+        args.ignore_robots,
     )
 
 

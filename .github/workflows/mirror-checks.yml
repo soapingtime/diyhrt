@@ -4,12 +4,10 @@ on:
   pull_request:
     paths:
       - 'scripts/**'
-      - 'replay/**'
       - '.github/workflows/**'
   push:
     paths:
       - 'scripts/**'
-      - 'replay/**'
       - '.github/workflows/**'
 
 jobs:
@@ -17,12 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: install JavaScript parser
+        run: npm ci --prefix scripts
       - name: install dependencies
         run: pip install -r scripts/browser-requirements.txt
       - name: test local asset capture and failed downloads

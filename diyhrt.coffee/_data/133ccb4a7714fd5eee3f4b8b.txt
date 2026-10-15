@@ -1,0 +1,91 @@
+1:"$Sreact.fragment"
+3:I[9766,[],""]
+4:I[8924,[],""]
+6:I[4431,[],"OutletBoundary"]
+8:I[5278,[],"AsyncMetadataOutlet"]
+a:I[4431,[],"ViewportBoundary"]
+c:I[4431,[],"MetadataBoundary"]
+d:"$Sreact.suspense"
+f:I[9294,["2619","static/chunks/2619-3c9e02e22d10480a.js","8720","static/chunks/8720-d7f67a5726cf715d.js","1395","static/chunks/1395-16a226fc3a08a79d.js","3809","static/chunks/3809-625307301839ad3d.js","4312","static/chunks/4312-7c58cc778411aae8.js","7177","static/chunks/app/layout-a3ce83e34cb159e5.js"],"ThemeProvider"]
+10:I[9679,["2619","static/chunks/2619-3c9e02e22d10480a.js","8720","static/chunks/8720-d7f67a5726cf715d.js","1395","static/chunks/1395-16a226fc3a08a79d.js","3809","static/chunks/3809-625307301839ad3d.js","4312","static/chunks/4312-7c58cc778411aae8.js","7177","static/chunks/app/layout-a3ce83e34cb159e5.js"],"AccessibilityProvider"]
+11:I[3728,["2619","static/chunks/2619-3c9e02e22d10480a.js","8720","static/chunks/8720-d7f67a5726cf715d.js","1395","static/chunks/1395-16a226fc3a08a79d.js","3809","static/chunks/3809-625307301839ad3d.js","4312","static/chunks/4312-7c58cc778411aae8.js","7177","static/chunks/app/layout-a3ce83e34cb159e5.js"],"default"]
+12:I[9567,["2619","static/chunks/2619-3c9e02e22d10480a.js","8039","static/chunks/app/error-7bc18e14508a51dd.js"],"default"]
+13:I[2619,["2619","static/chunks/2619-3c9e02e22d10480a.js","4345","static/chunks/app/not-found-df423c16c0451d7b.js"],""]
+17:I[9702,["2619","static/chunks/2619-3c9e02e22d10480a.js","8720","static/chunks/8720-d7f67a5726cf715d.js","1395","static/chunks/1395-16a226fc3a08a79d.js","3809","static/chunks/3809-625307301839ad3d.js","4312","static/chunks/4312-7c58cc778411aae8.js","7177","static/chunks/app/layout-a3ce83e34cb159e5.js"],"default"]
+0:{"b":"WrIYByTDoWYaqJzkwzXtc","f":[[["",{"children":["whats-new",{"children":["__PAGE__",{}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/diyhrt.coffee/_next/static/css/510aaae8c6a96291.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","link","1",{"rel":"stylesheet","href":"/diyhrt.coffee/_next/static/css/46168ad2eee39a9b.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],"$L2"]}],{"children":["whats-new",["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L5",null,["$","$L6",null,{"children":["$L7",["$","$L8",null,{"promise":"$@9"}]]}]]}],{},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","Ut1bALyCSzYFPmy5BgPIKv",{"children":[["$","$La",null,{"children":"$Lb"}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],["$","$Lc","Ut1bALyCSzYFPmy5BgPIKm",{"children":["$","div",null,{"hidden":true,"children":["$","$d",null,{"fallback":null,"children":"$Le"}]}]}]]}],false]],"S":false}
+2:["$","html",null,{"lang":"en","className":"__variable_1ae0f2 __variable_aa62b7","suppressHydrationWarning":true,"children":["$","body",null,{"className":"relative flex min-h-dvh flex-col bg-bg text-text","children":[["$","script",null,{"suppressHydrationWarning":true,"dangerouslySetInnerHTML":{"__html":"(function(){try{var ok=['midnight','summer','turquoise','crimson','sakura','green','paper'];var m=document.cookie.match(/(?:^|;\\s*)diystock_theme=([^;]+)/);var t=m?decodeURIComponent(m[1]):localStorage.getItem('diystock:theme');document.documentElement.setAttribute('data-theme',ok.indexOf(t)>=0?t:'midnight');}catch(_){document.documentElement.setAttribute('data-theme','midnight');}})();"}}],["$","script",null,{"suppressHydrationWarning":true,"dangerouslySetInnerHTML":{"__html":"(function(){try{var p=JSON.parse(localStorage.getItem('diystock:a11y')||'{}');var e=document.documentElement;if(p.reduceMotion)e.setAttribute('data-a11y-motion','reduce');if(p.readableFont)e.setAttribute('data-a11y-font','readable');if(p.highContrast)e.setAttribute('data-a11y-contrast','high');}catch(_){}})();"}}],["$","script",null,{"suppressHydrationWarning":true,"dangerouslySetInnerHTML":{"__html":"(function(){try{var c=localStorage.getItem('diystock:sidebar:collapsed')==='1';document.documentElement.style.setProperty('--sidebar-w',c?'60px':'220px');}catch(e){}})();"}}],["$","div",null,{"aria-hidden":true,"data-bg-gif":true,"className":"pointer-events-none fixed inset-0 -z-30","style":{"backgroundImage":"var(--bg-gif)","backgroundSize":"cover","backgroundPosition":"center","imageRendering":"var(--bg-rendering, pixelated)","filter":"blur(var(--bg-blur, 6px)) saturate(1.05) brightness(0.9)","opacity":"var(--bg-opacity, 0.55)"}}],["$","div",null,{"aria-hidden":true,"data-bg-wash":true,"className":"pointer-events-none fixed inset-0 -z-20","style":{"background":"var(--header-tint)","mixBlendMode":"color","opacity":"var(--bg-wash-opacity, 0.35)"}}],["$","div",null,{"aria-hidden":true,"data-bg-dim":true,"className":"pointer-events-none fixed inset-0 -z-10","style":{"background":"rgb(var(--c-bg) / var(--bg-dim-alpha, 0.55))"}}],["$","$Lf",null,{"children":["$","$L10",null,{"children":["$","$L11",null,{"isForum":false,"isHidden":false,"children":["$","$L3",null,{"parallelRouterKey":"children","error":"$12","errorStyles":[],"errorScripts":[],"template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","section",null,{"className":"ereb-box overflow-hidden","children":[["$","div",null,{"className":"ereb-section-title","children":"// error · 404"}],["$","div",null,{"className":"relative px-6 py-16 text-center sm:py-20","children":[["$","div",null,{"aria-hidden":true,"className":"pointer-events-none absolute inset-0 opacity-[0.06]","style":{"backgroundImage":"repeating-linear-gradient(0deg, #fff 0 1px, transparent 1px 7px)"}}],["$","h1",null,{"className":"relative font-mix text-6xl text-fg text-glow-pink sm:text-7xl","style":{"letterSpacing":"8px"},"children":["LOST",["$","span",null,{"className":"text-pink","children":"??"}]]}],["$","p",null,{"className":"relative mt-6 font-mix text-xs uppercase tracking-ereb-wide text-muted","children":["this page wandered off somewhere"," ",["$","span",null,{"className":"text-pink normal-case","children":"(╥﹏╥)"}]]}],["$","p",null,{"className":"relative mt-2 font-mix text-[10px] uppercase tracking-ereb text-muted/70","children":"maybe a shop went out of stock... permanently"}],["$","div",null,{"className":"relative mt-9 flex flex-wrap items-center justify-center gap-3","children":[["$","$L13",null,{"href":"/diyhrt.coffee/","className":"ereb-btn-primary","children":[["$","i",null,{"className":"hn hn-home","aria-hidden":true}],"go home"]}],["$","$L13",null,{"href":"/diyhrt.coffee/start/","className":"ereb-btn","children":[["$","i",null,{"className":"hn hn-book-solid","aria-hidden":true}],"start guide"]}]]}],["$","p",null,{"className":"relative mt-6 font-mix text-[10px] uppercase tracking-ereb text-muted/60","children":["or try"," ",["$","$L13",null,{"href":"/diyhrt.coffee/availability/","className":"text-pink hover:underline","children":"availability"}]," · ","$L14"," · ","$L15"]}]]}]]}],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}]}],"$L16"]}]}]
+14:["$","$L13",null,{"href":"/diyhrt.coffee/faq/","className":"text-pink hover:underline","children":"faq"}]
+15:["$","$L13",null,{"href":"/diyhrt.coffee/contact/","className":"text-pink hover:underline","children":"contact"}]
+16:["$","$L17",null,{}]
+b:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#151515"}]]
+7:null
+18:I[622,[],"IconMark"]
+9:{"metadata":[["$","title","0",{"children":"what's new · diyhrt"}],["$","meta","1",{"name":"description","content":"everything shipped on diyhrt — new features, fixes, and shop changes. the sidebar pings you when something new lands."}],["$","link","2",{"rel":"alternate","type":"application/rss+xml","title":"diyhrt restocks","href":"/diyhrt.coffee/_data/efc79691667377b13de85bd9.rss"}],["$","link","3",{"rel":"icon","href":"/diyhrt.coffee/_data/b647b07971b0abe830132389.png","type":"image/png","sizes":"128x128"}],["$","link","4",{"rel":"apple-touch-icon","href":"/diyhrt.coffee/_data/b647b07971b0abe830132389.png","type":"image/png","sizes":"128x128"}],["$","$L18","5",{}]],"error":null,"digest":"$undefined"}
+e:"$9:metadata"
+19:I[9352,["1395","static/chunks/1395-16a226fc3a08a79d.js","4689","static/chunks/4689-31d8f66e9e6ea2c7.js","3529","static/chunks/app/whats-new/page-d8fee580d847cff7.js"],"default"]
+1a:T43c,-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+hey everyone,
+
+i've got some news, and i'd rather just say it plainly.
+
+between the drama of the last few days and how little time i have these days, i can't keep running diyhrt.coffee the way it deserves. so i'm stepping down, and handing the site over to two of my admins and closest friends, n2x and phi.
+
+i trust them with it completely. nothing changes for you: the tracker, the alerts, the forum and the discord all keep running. if you need something from now on, they're who to go to.
+
+thank you, genuinely, to everyone who used the site, reported stock, tested things, sent kind messages or just hung around. building this with you has meant a lot to me.
+
+please be kind to them. they're taking this on during a rough time.
+
+look after each other ♡
+
+- - Akira
+-----BEGIN PGP SIGNATURE-----
+
+iJEEARYKADkWIQQzqp4gxtX6V7BWxIjmCO3t1fuezwUCaspI6RsUgAAAAAAEAA5t
+YW51MiwyLjUrMS4xMiwyLDEACgkQ5gjt7dX7ns/HCQEAlpL1n96xs4JaViWdnFIY
+23JrzdhyJuLxDIPkuK0wjWYA/2qBMtQugnwlOST6Qtk/3pcSn1uvOSyVdaRPTM6H
+j/EN
+=rtXK
+-----END PGP SIGNATURE-----1b:T581,hi everyone, this one isn't a fun update.
+
+a group from soyjak.st has started a "raid" campaign against DIY HRT. they've named a bunch of sites and vendors, including this one, and they're openly talking about trying to find out who runs them, getting alt accounts into our discord to collect what people post, and trying to get sites taken down.
+
+what's going on on our end:
+- the site is fine. there's no sign of any breach and nothing about any of you has been posted anywhere
+- we've tightened a lot of things up behind the scenes
+- the discord is locked down for now while we sort things out. announcements and stock alerts are still there and alerts go out like normal, the chat channels are hidden until it's over
+- general chat was cleared and will reopen once things calm down
+
+what you can do:
+- don't share anything that could identify you, on the site, on discord, or anywhere else
+- be careful with DMs from people you don't know, especially new accounts asking where you live, what you order or who runs things
+- don't click random links
+- don't engage with them or go into their threads. attention is exactly what they want
+- if you see anything about the site or its members posted somewhere, send it to me through the contact form or simplex, and please don't repost it
+
+the stock tracker, alerts and everything else keep running as normal.
+
+stay safe and look out for each other ♡
+
+- Akira1c:T5d2,hiii so this one's a big one, we're calling it 2.0
+
+pretty much every page got redone. home, catalog, availability, vendors, stats, uptime, reviews, verified, canary, the start guide, faq, resources, settings, all of it. same look you're used to, just cleaner and a lot easier to read, with proper charts instead of walls of numbers. the catalog sorts things by what they actually are now (valerate, enanthate, cypionate, gels, progesterone etc) instead of whatever each shop decided to call it, and the in stock section on the home page actually shows you what's in stock at a glance
+
+the e2 calculator got rebuilt from scratch. you can stack as many injections/patches/whatever as you want, tweak each one, and save your regimens to slots so you don't have to punch everything back in every time. the model is the same one estrannai.se uses so the numbers line up with theirs
+
+new stuff:
+- rss feed for restocks, grab the link from the bottom of settings. no account needed and you can filter it by region or shop
+- PawSnax is on the tracker (US only). they're tagged returning since they're not exactly new to this
+- reviews page is completely redone, way easier to find what people actually said about a shop
+
+fixes:
+- a vendor shutting down or getting suspended doesn't count as downtime on the uptime page anymore
+- bunch of smaller layout stuff
+
+if something looks broken or weird after the update, tell me through the contact form or the discord and i'll fix it
+
+stay safe!
+
+- Akira5:["$","$L19",null,{"initial":[{"id":4,"title":"changes","body":"$1a","kind":"update","published":true,"createdAt":"2026-10-10T14:17:46.700185Z","updatedAt":"2026-10-10T14:17:46.700185Z"},{"id":3,"title":"heads up: raiders","body":"$1b","kind":"update","published":true,"createdAt":"2026-10-09T09:37:22.860677Z","updatedAt":"2026-10-09T09:37:22.860677Z"},{"id":2,"title":"diyhrt 2.0","body":"$1c","kind":"feature","linkUrl":"/settings#rss","linkLabel":"rss feed","published":true,"createdAt":"2026-10-08T23:28:54.579954Z","updatedAt":"2026-10-08T23:28:54.579954Z"},{"id":1,"title":"astrovials","body":"so, we've recieved multiple reports and questions about the popular vendor 'AstroVials' being unreachable lately. \n\nto put it into perspective, we have no news apart from what we know from users and the fact that rose has not responded to any of our contact attempts at this moment\n\ni would urge people to be cautious and patient, to see what will happen later\ndepending on the timeframe, we may mark them as closed if the downtime continues for an extended period of time\n\nif anyone has any news about them or about their orders, feel free to send me a dm via the forms/simplex/discord\n\nstay safe!\n\n- Akira","kind":"update","published":true,"createdAt":"2026-09-20T20:36:16.34681Z","updatedAt":"2026-09-20T20:39:07.092915Z"}],"activity":[{"month":"2026-05","feature":24,"fix":0,"update":12},{"month":"2026-06","feature":6,"fix":1,"update":0},{"month":"2026-07","feature":1,"fix":0,"update":2},{"month":"2026-08","feature":8,"fix":0,"update":0},{"month":"2026-09","feature":8,"fix":1,"update":5},{"month":"2026-10","feature":10,"fix":0,"update":3}]}]

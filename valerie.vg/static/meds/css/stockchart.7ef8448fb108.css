@@ -1,0 +1,22 @@
+/* Price history chart — give it room when the legend stacks with multiple stores */
+#price-chart {
+    min-height: 350px;
+}
+
+/* Mini stock-chart — coloured state cells below each listing card */
+
+.stock-chart {
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.stock-chart tr td.day {
+    height: 1.4rem;
+    border-right: 1px solid var(--bs-card-bg, #fff);
+    transition: opacity 0.15s ease;
+    cursor: default;
+}
+
+.stock-chart tr td.day:hover {
+    opacity: 0.7;
+}

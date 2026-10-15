@@ -71,7 +71,8 @@ class MirrorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             page = root / 'index.html'
-            page.write_text('''<html><head>
+            page.write_text(
+                '''<html><head>
                 <link rel="stylesheet" href="REMOTEstyle.css" integrity="old">
                 <link rel="preconnect" href="https://example.com">
                 <script src="REMOTEapp.js" integrity="old"></script>
@@ -80,7 +81,8 @@ class MirrorTests(unittest.TestCase):
                 <img src="REMOTEimage.png" srcset="REMOTEimage.png 1x, REMOTEimage.png 2x">
                 <a href="https://example.com/next#heading">next</a>
                 <a href="https://elsewhere.test/">external</a>
-                </body></html>'''.replace('REMOTE', self.url))
+                </body></html>'''.replace('REMOTE', self.url)
+            )
             (root / 'next.html').write_text('<html><head></head><body>next</body></html>')
             Assets(root, 'https://example.com/', wait=0).run()
             soup = BeautifulSoup(page.read_text(), 'html.parser')
@@ -110,7 +112,10 @@ class MirrorTests(unittest.TestCase):
             asset = root / 'image.png?v=1'
             asset.write_bytes(b'image')
             assets = Assets(root, 'https://example.com/', wait=0)
-            self.assertEqual(assets.asset('/image.png?v=1', assets.origin, root / 'index.html'), 'image.png%3Fv%3D1')
+            self.assertEqual(
+                assets.asset('/image.png?v=1', assets.origin, root / 'index.html'),
+                'image.png%3Fv%3D1',
+            )
 
     def test_static_app_preserves_content_and_document_relative_background(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -135,7 +140,11 @@ class MirrorTests(unittest.TestCase):
     def test_unavailable_image_becomes_a_link_instead_of_a_remote_request(self):
         with tempfile.TemporaryDirectory() as temp:
             page = Path(temp) / 'index.html'
-            page.write_text('<html><head></head><body><img src="' + self.url + 'gone.png" alt="Original diagram"></body></html>')
+            page.write_text(
+                '<html><head></head><body><img src="'
+                + self.url
+                + 'gone.png" alt="Original diagram"></body></html>'
+            )
             Assets(temp, 'https://example.com/', wait=0).run()
             soup = BeautifulSoup(page.read_text(), 'html.parser')
             self.assertIsNone(soup.img)

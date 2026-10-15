@@ -1,38 +1,1650 @@
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>valerie.vg archive</title>
-    <script src="../replay/ui.js"></script>
-    <style>
-        html, body { height: 100%; margin: 0; }
-        body { display: flex; flex-direction: column; }
-        #archive { display: flex; flex: 1; min-height: 0; }
-        replay-web-page { display: block; flex: 1; min-height: 0; }
-    </style>
+
+<html data-bs-theme="auto" lang="en">
+<head><meta content="default-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; connect-src 'self'; frame-src 'self'; form-action 'self'; base-uri 'self'" http-equiv="Content-Security-Policy"/><script>window.__mirror={"original": "https://valerie.vg/", "root": "/valerie.vg/", "origins": {"https://valerie.vg": "/valerie.vg/"}};</script><script src="/valerie.vg/_mirror/resources.js"></script><script src="/valerie.vg/_mirror/runtime.js"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
+<script>
+            (function(){var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-bs-theme',t);else if(window.matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.setAttribute('data-bs-theme','dark');else document.documentElement.setAttribute('data-bs-theme','light')})()
+        </script>
+<script src="/valerie.vg/static/js/theme.fc14c8d511c2.js"></script>
+<link href="/valerie.vg/static/css/style.a569bda6492a.css" rel="stylesheet"/>
+<link href="/valerie.vg/static/css/bootstrap-table.min.a87c99eaabbd.css" rel="stylesheet"/>
+<link href="/valerie.vg/static/flags/css/flag-icons.min.1342d240060c.css" rel="stylesheet"/>
+<link href="/valerie.vg/_data/5391d495278550d6cb8c01fc.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/valerie.vg/_data/fadeab2e6995f84add3a3631.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/valerie.vg/_data/cacdafdde5526cd392b44780.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="/valerie.vg/_data/136580c32f19c5be9f101a1e.webmanifest" rel="manifest"/>
+<link color="#5bbad5" href="/valerie.vg/_data/a94115f9d5bb44b86a531349.svg" rel="mask-icon"/>
+<link href="/valerie.vg/_data/a0c4b03ea0439e8be3f26e32.ico" rel="shortcut icon"/>
+<meta content="Valerie" name="apple-mobile-web-app-title"/>
+<meta content="Valerie" name="application-name"/>
+<meta content="#1a2023" name="msapplication-TileColor"/>
+<meta content="/static/favicon/browserconfig.6c88caa94655.xml?v=3" name="msapplication-config"/>
+<meta content="#f8f9fa" media="(prefers-color-scheme: light)" name="theme-color"/>
+<meta content="#1a2023" media="(prefers-color-scheme: dark)" name="theme-color"/>
+<title>Home - Valerie</title>
+<meta content="Valerie is a community-driven project to provide accurate and up-to-date information to the trans DIY community about the sourcing of hormones. In our view, DIY is an unfortunate but inevitable consequence of a transphobic medical system that does not trust trans people to know who they are. We do not aim to give advice or opinions about how to use these medications, only the best possible information on sourcing while occasionally sign posting useful information or studies that may not be well circulated so that you can make well-informed decisions about your own body." name="description"/>
+<meta content="Valerie" property="og:site_name"/>
 </head>
 <body>
-    <div id="archive"></div>
-    <script>
-        (async () => {
-            const source = 'snapshot.wacz?v=f9d1baadb63f4fa4b603f3a3078af979be997bb609851744fe6544a51725c686';
-            const viewer = document.createElement('replay-web-page');
-            viewer.setAttribute('source', source);
-            viewer.setAttribute('url', 'https://valerie.vg/');
-            viewer.setAttribute('replayBase', '../replay/');
-            viewer.setAttribute('embed', 'replayonly');
-            viewer.setAttribute('deepLink', '');
-            const response = await fetch(source, { method: 'HEAD' });
-            if (response.headers.get('Accept-Ranges') !== 'bytes') {
-                viewer.setAttribute('loading', 'eager');
-            }
-            document.getElementById('archive').append(viewer);
-        })().catch(() => {
-            document.getElementById('archive').textContent =
-                'Serve this folder with python -m http.server and open http://localhost:8000.';
-        });
-    </script>
-    <noscript>Use ReplayWeb.page to open the downloaded archive.</noscript>
+<main>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top mb-4">
+<div class="container">
+<a class="navbar-brand py-0" href="/valerie.vg/">
+<img alt="Valerie" height="40" src="/valerie.vg/static/img/valerie_logo_160_centred.049a9424eff9.webp"/>
+</a>
+<button aria-controls="navbarOffcanvas" aria-label="Toggle navigation" class="navbar-toggler border-0" data-bs-target="#navbarOffcanvas" data-bs-toggle="offcanvas" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div aria-label="Navigation" class="offcanvas offcanvas-end text-bg-dark" id="navbarOffcanvas" tabindex="-1">
+<div class="offcanvas-header">
+<a class="navbar-brand py-0" href="/valerie.vg/">
+<img alt="Valerie" height="36" src="/valerie.vg/static/img/valerie_logo_160_centred.049a9424eff9.webp"/>
+</a>
+<button aria-label="Close" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" type="button"></button>
+</div>
+<div class="offcanvas-body">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item"><a class="nav-link" href="/valerie.vg/resources/">Resources</a></li>
+<li class="nav-item"><a class="nav-link" href="/valerie.vg/qr-codes/">QR Codes</a></li>
+<li class="nav-item">
+<a class="nav-link" href="/valerie.vg/transfem-hrt-guide/">Guide</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/valerie.vg/rebrand/">Rebrand FAQ</a>
+</li>
+</ul>
+<form action="/valerie.vg/meds/products/" class="d-flex my-2 my-lg-0 me-lg-2" method="GET" role="search">
+<input aria-label="Search" class="form-control form-control-sm" name="q" placeholder="Search..." type="search"/>
+</form>
+<div aria-label="Theme switcher" class="btn-group w-100 d-lg-none my-2" role="group">
+<button class="btn btn-outline-light" data-bs-theme-value="light" onclick="setThemePreference('light')" type="button">
+<i class="fa-solid fa-sun me-1"></i> Light
+                                </button>
+<button class="btn btn-outline-light" data-bs-theme-value="dark" onclick="setThemePreference('dark')" type="button">
+<i class="fa-solid fa-moon me-1"></i> Dark
+                                </button>
+<button class="btn btn-outline-light" data-bs-theme-value="auto" onclick="setThemePreference('auto')" type="button">
+<i class="fa-solid fa-circle-half-stroke me-1"></i> Auto
+                                </button>
+</div>
+<div class="d-flex flex-column flex-lg-row align-items-lg-center gap-2">
+<div class="dropdown d-none d-lg-block">
+<button aria-expanded="false" aria-label="Toggle theme" class="btn btn-outline-light border-0" data-bs-toggle="dropdown" type="button">
+<i class="fa-solid fa-circle-half-stroke" id="theme-toggle-icon"></i>
+</button>
+<ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+<li>
+<button aria-pressed="false" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" onclick="setThemePreference('light')" type="button">
+<i class="fa-solid fa-sun me-2"></i> Light
+                                            </button>
+</li>
+<li>
+<button aria-pressed="false" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" onclick="setThemePreference('dark')" type="button">
+<i class="fa-solid fa-moon me-2"></i> Dark
+                                            </button>
+</li>
+<li><hr class="dropdown-divider"/></li>
+<li>
+<button aria-pressed="false" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" onclick="setThemePreference('auto')" type="button">
+<i class="fa-solid fa-circle-half-stroke me-2"></i> Auto
+                                            </button>
+</li>
+</ul>
+</div>
+<a class="btn btn-outline-light" href="/valerie.vg/login/">Login</a>
+<a class="btn btn-outline-light" href="/valerie.vg/register/">Register</a>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<div class="container">
+</div>
+<div class="container">
+<div class="alert alert-warning" role="alert">
+<p>Some of Hera HRT's Estradiol Enanthate vials sold in May 2026 appear to have have had a dosage issue. There is no safety risk, but you may be underdosed if you're using one of these vials. Follow <a href="https://bsky.app/profile/valerie.vg/post/3mxadfy2to22n">our thread on Bluesky</a> for more information and updates.</p>
+                Posted on Oct. 6, 2026
+        </div>
+<div class="row">
+<div class="col-md-4 col-lg-3">
+<div class="list-group mb-3">
+<a class="list-group-item">
+<strong>Estradiol</strong>
+</a>
+<a class="list-group-item list-group-item-action" href="/valerie.vg/meds/groups/estradiol-pills/">
+<i class="fa-solid fa-pills"></i> Estradiol Pills
+        </a>
+<a class="list-group-item list-group-item-action" href="/valerie.vg/meds/groups/estradiol-patches/">
+<i class="fa-solid fa-note-sticky"></i> Estradiol Patches
+        </a>
+<a class="list-group-item list-group-item-action" href="/valerie.vg/meds/groups/estradiol-injections/">
+<i class="fa-solid fa-syringe"></i> Estradiol Injections
+        </a>
+<a class="list-group-item list-group-item-action" href="/valerie.vg/meds/groups/estradiol-gels/">
+<i class="fa-solid fa-spray-can-sparkles"></i> Estradiol Gels
+        </a>
+<a class="list-group-item list-group-item-action" href="/valerie.vg/meds/groups/estradiol-sprays/">
+<i class="fa-solid fa-spray-can"></i> Estradiol Sprays
+        </a>
+<a class="list-group-item">
+<strong>Anti-Androgens</strong>
+</a>
+<a class="list-group-item list-group-item-action" href="/valerie.vg/meds/groups/spironolactone/">
+<i class="fa-solid fa-pills"></i> Spironolactone
+        </a>
+<a class="list-group-item list-group-item-action" href="/valerie.vg/meds/groups/cyproterone/">
+<i class="fa-solid fa-pills"></i> Cyproterone
+        </a>
+<a class="list-group-item list-group-item-action" href="/valerie.vg/meds/groups/bicalutamide/">
+<i class="fa-solid fa-pills"></i> Bicalutamide
+        </a>
+<a class="list-group-item">
+<strong>5-Alpha Reductase Inhibitors</strong>
+</a>
+<a class="list-group-item list-group-item-action" href="/valerie.vg/meds/groups/finasteride/">
+<i class="fa-solid fa-pills"></i> Finasteride
+        </a>
+<a class="list-group-item list-group-item-action" href="/valerie.vg/meds/groups/dutasteride/">
+<i class="fa-solid fa-pills"></i> Dutasteride
+        </a>
+<a class="list-group-item">
+<strong>Hair Regrowth</strong>
+</a>
+<a class="list-group-item list-group-item-action" href="/valerie.vg/meds/groups/combination-minoxidil/">
+<i class="fa-solid fa-eye-dropper"></i> Combination Minoxidil
+        </a>
+<a class="list-group-item list-group-item-action" href="/valerie.vg/meds/groups/minoxidil-2/">
+<i class="fa-solid fa-eye-dropper"></i> Minoxidil 2%
+        </a>
+<a class="list-group-item list-group-item-action" href="/valerie.vg/meds/groups/minoxidil-5/">
+<i class="fa-solid fa-eye-dropper"></i> Minoxidil 5%
+        </a>
+<a class="list-group-item list-group-item-action" href="/valerie.vg/meds/groups/minoxidil-10/">
+<i class="fa-solid fa-eye-dropper"></i> Minoxidil 10%
+        </a>
+<a class="list-group-item">
+<strong>Miscellaneous</strong>
+</a>
+<a class="list-group-item list-group-item-action" href="/valerie.vg/meds/groups/progesterone/">
+<i class="fa-solid fa-pills"></i> Progesterone
+        </a>
+</div>
+<div class="accordion">
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button aria-controls="collapseOne" aria-expanded="true" class="accordion-button" data-bs-target="#site-updates-14-10-2026" data-bs-toggle="collapse" type="button">
+                    14/10/2026
+                </button>
+</h2>
+<div class="accordion-collapse collapse show" data-bs-parent="#site-updates" id="site-updates-14-10-2026">
+<div class="accordion-body p-0">
+<ul class="list-group list-group-flush">
+<li class="list-group-item border-left-thin-info">
+<div class="w-100 d-flex justify-content-between">
+<span>
+<a href="/valerie.vg/stores/astrovials/">AstroVials</a>
+
+
+    Service status updated from Closed to Active
+
+
+
+                                            </span>
+<small class="text-secondary">
+                                                23:18
+                                            </small>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button aria-controls="collapseOne" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#site-updates-23-09-2026" data-bs-toggle="collapse" type="button">
+                    23/09/2026
+                </button>
+</h2>
+<div class="accordion-collapse collapse" data-bs-parent="#site-updates" id="site-updates-23-09-2026">
+<div class="accordion-body p-0">
+<ul class="list-group list-group-flush">
+<li class="list-group-item border-left-thin-success">
+<div class="w-100 d-flex justify-content-between">
+<span>Added 4 listings at 
+    <a href="/valerie.vg/stores/hera-hrt/">Hera HRT</a>
+</span>
+<small class="text-secondary text-end">
+                                                    19:05 - 19:08
+                                                </small>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button aria-controls="collapseOne" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#site-updates-21-09-2026" data-bs-toggle="collapse" type="button">
+                    21/09/2026
+                </button>
+</h2>
+<div class="accordion-collapse collapse" data-bs-parent="#site-updates" id="site-updates-21-09-2026">
+<div class="accordion-body p-0">
+<ul class="list-group list-group-flush">
+<li class="list-group-item border-left-thin-info">
+<div class="w-100 d-flex justify-content-between">
+<span>
+<a href="/valerie.vg/stores/astrovials/">AstroVials</a>
+
+
+    Service status updated from Suspended to Closed
+
+
+
+                                            </span>
+<small class="text-secondary">
+                                                22:16
+                                            </small>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button aria-controls="collapseOne" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#site-updates-19-09-2026" data-bs-toggle="collapse" type="button">
+                    19/09/2026
+                </button>
+</h2>
+<div class="accordion-collapse collapse" data-bs-parent="#site-updates" id="site-updates-19-09-2026">
+<div class="accordion-body p-0">
+<ul class="list-group list-group-flush">
+<li class="list-group-item border-left-thin-info">
+<div class="w-100 d-flex justify-content-between">
+<span>
+<a href="/valerie.vg/stores/astrovials/">AstroVials</a>
+
+
+    Service status updated from Active to Suspended
+
+
+
+                                            </span>
+<small class="text-secondary">
+                                                13:02
+                                            </small>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button aria-controls="collapseOne" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#site-updates-09-09-2026" data-bs-toggle="collapse" type="button">
+                    09/09/2026
+                </button>
+</h2>
+<div class="accordion-collapse collapse" data-bs-parent="#site-updates" id="site-updates-09-09-2026">
+<div class="accordion-body p-0">
+<ul class="list-group list-group-flush">
+<li class="list-group-item border-left-thin-info">
+<div class="w-100 d-flex justify-content-between">
+<span>
+<a href="/valerie.vg/stores/celestial-hrt/">Celestial HRT</a>
+
+
+    Service status updated from Active to Closed
+
+
+
+                                            </span>
+<small class="text-secondary">
+                                                11:28
+                                            </small>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button aria-controls="collapseOne" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#site-updates-01-09-2026" data-bs-toggle="collapse" type="button">
+                    01/09/2026
+                </button>
+</h2>
+<div class="accordion-collapse collapse" data-bs-parent="#site-updates" id="site-updates-01-09-2026">
+<div class="accordion-body p-0">
+<ul class="list-group list-group-flush">
+<li class="list-group-item border-left-thin-success">
+<div class="w-100 d-flex justify-content-between">
+<span>Added 4 listings at 
+    <a href="/valerie.vg/stores/proleta-hrt/">Proleta HRT</a>
+</span>
+<small class="text-secondary text-end">
+                                                    03:57 - 03:59
+                                                </small>
+</div>
+</li>
+<li class="list-group-item border-left-thin-success">
+<div class="w-100 d-flex justify-content-between">
+<span>
+                                                
+    Added 
+    <a href="/valerie.vg/stores/proleta-hrt/">Proleta HRT</a>
+</span>
+<small class="text-secondary">
+                                                03:44
+                                            </small>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button aria-controls="collapseOne" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#site-updates-31-08-2026" data-bs-toggle="collapse" type="button">
+                    31/08/2026
+                </button>
+</h2>
+<div class="accordion-collapse collapse" data-bs-parent="#site-updates" id="site-updates-31-08-2026">
+<div class="accordion-body p-0">
+<ul class="list-group list-group-flush">
+<li class="list-group-item border-left-thin-success">
+<div class="w-100 d-flex justify-content-between">
+<span>Added 1 listings at 
+    <a href="/valerie.vg/stores/pawsnax/">Pawsnax</a>
+</span>
+<small class="text-secondary text-end">
+                                                    01:29 - 01:29
+                                                </small>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button aria-controls="collapseOne" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#site-updates-19-08-2026" data-bs-toggle="collapse" type="button">
+                    19/08/2026
+                </button>
+</h2>
+<div class="accordion-collapse collapse" data-bs-parent="#site-updates" id="site-updates-19-08-2026">
+<div class="accordion-body p-0">
+<ul class="list-group list-group-flush">
+<li class="list-group-item border-left-thin-success">
+<div class="w-100 d-flex justify-content-between">
+<span>Added 1 listings at 
+    <a href="/valerie.vg/stores/serapharma/">Serapharma</a>
+</span>
+<small class="text-secondary text-end">
+                                                    03:09 - 03:09
+                                                </small>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="accordion-item">
+<h2 class="accordion-header">
+<button aria-controls="collapseOne" aria-expanded="true" class="accordion-button collapsed" data-bs-target="#site-updates-17-08-2026" data-bs-toggle="collapse" type="button">
+                    17/08/2026
+                </button>
+</h2>
+<div class="accordion-collapse collapse" data-bs-parent="#site-updates" id="site-updates-17-08-2026">
+<div class="accordion-body p-0">
+<ul class="list-group list-group-flush">
+<li class="list-group-item border-left-thin-info">
+<div class="w-100 d-flex justify-content-between">
+<span>
+<a href="/valerie.vg/stores/felicitas/">Felicitas</a>
+
+
+    Service status updated from Closed to Active
+
+
+
+                                            </span>
+<small class="text-secondary">
+                                                20:24
+                                            </small>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-8 col-lg-9">
+<hr class="d-md-none"/>
+<p>Follow us on <a href="https://bsky.app/profile/valerie.vg">Bluesky</a>.</p>
+<p>Bookmark our <a href="http://hrtcafepwnxncgj7nic37nb2hrypks5pqj4czzoasj5y7cihdi2gteyd.onion/">Tor backup</a>.</p>
+<hr class=""/>
+<h5>Pharmacies</h5>
+<div class="list-group">
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/4nrx-pharmacy-uk/" style="--store-color: #31D4FF;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">4NRX Pharmacy UK</h6>
+<p class="mb-1">Hong Kong based on Online Pharmacy, operating for over 20 years.</p>
+<p class="mb-0"><span class="text-success">
+
+    Active
+
+    
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> Hong Kong
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> United Kingdom
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bank Transfer">
+<i class="fa-solid fa-money-bill-transfer ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Visa">
+<i class="fa-brands fa-cc-visa ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/aipctshop/" style="--store-color: #044E7F;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">Aipctshop</h6>
+<p class="mb-1">A reliable online pharmacy operating out of India.</p>
+<p class="mb-0"><span class="text-success">
+
+    Active
+
+    
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> India
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> Worldwide
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="eCheck">
+<i class="fa-solid fa-money-check ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="American Express">
+<i class="fa-brands fa-cc-amex ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Mastercard">
+<i class="fa-brands fa-cc-mastercard ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Visa">
+<i class="fa-brands fa-cc-visa ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Ethereum (ETH)">
+<i class="fa-brands fa-ethereum ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Litecoin">
+<i class="fa-solid fa-litecoin-sign ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Other Cryptocurrencies">
+<i class="fa-solid fa-coins ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/dashpct/" style="--store-color: #743bad;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">DashPCT</h6>
+<p class="mb-1">An indian-based online pharmacy</p>
+<p class="mb-0"><span class="text-success">
+
+    Active
+
+    
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> India
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> Worldwide
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bank Transfer">
+<i class="fa-solid fa-money-bill-transfer ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Ethereum (ETH)">
+<i class="fa-brands fa-ethereum ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Litecoin">
+<i class="fa-solid fa-litecoin-sign ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Monero (XMR)">
+<i class="fa-brands fa-monero ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Other Cryptocurrencies">
+<i class="fa-solid fa-coins ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/inhouse-pharmacy/" style="--store-color: #EC008B;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">Inhouse Pharmacy</h6>
+<p class="mb-1">Vanuatu-based online pharmacy, operating for over 20 years</p>
+<p class="mb-0"><span class="text-success">
+
+    Active
+
+    
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> Vanuatu
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> US, AU, UK + EU periphery
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bank Transfer">
+<i class="fa-solid fa-money-bill-transfer ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="American Express">
+<i class="fa-brands fa-cc-amex ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/rxaisle/" style="--store-color: #4E9911;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">RxAisle</h6>
+<p class="mb-1">Turkey-based Online Pharmacy.</p>
+<p class="mb-0"><span class="text-danger" data-bs-placement="top" data-bs-toggle="tooltip" title="No longer a reliable provider, issues reported with scams and lack of payment methods.">
+
+    Closed
+
+    
+        <small><i class="fa-solid fa-circle-info"></i></small>
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> Türkiye
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> Worldwide
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="American Express">
+<i class="fa-brands fa-cc-amex ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Mastercard">
+<i class="fa-brands fa-cc-mastercard ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Visa">
+<i class="fa-brands fa-cc-visa ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/silhouette-beauty/" style="--store-color: #CBBD97;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">Silhouette Beauty</h6>
+<p class="mb-1">Small online pharmacy based in Portugal, previously Aphrodites.</p>
+<p class="mb-0"><span class="text-success">
+
+    Active
+
+    
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> Portugal
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> Worldwide
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/united-pharmacies-nl/" style="--store-color: #F17300;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">United Pharmacies NL</h6>
+<p class="mb-1">Hong Kong-based online pharmacy, operating for over 20 years.</p>
+<p class="mb-0"><span class="text-danger" data-bs-placement="top" data-bs-toggle="tooltip" title="Store has closed permanently following persistent customs issues">
+
+    Closed
+
+    
+        <small><i class="fa-solid fa-circle-info"></i></small>
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> Hong Kong
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> Netherlands
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bank Transfer">
+<i class="fa-solid fa-money-bill-transfer ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/united-pharmacies-uk/" style="--store-color: #18B2CB;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">United Pharmacies UK</h6>
+<p class="mb-1">Hong Kong based online pharmacy, operating for over 20 years</p>
+<p class="mb-0"><span class="text-success">
+
+    Active
+
+    
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> Hong Kong
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> United Kingdom
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bank Transfer">
+<i class="fa-solid fa-money-bill-transfer ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Mastercard">
+<i class="fa-brands fa-cc-mastercard ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Visa">
+<i class="fa-brands fa-cc-visa ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/united-pharmacies-us/" style="--store-color: #0D7581;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">United Pharmacies US</h6>
+<p class="mb-1">Hong Kong-based online pharmacy operating for over 20 years.</p>
+<p class="mb-0"><span class="text-success">
+
+    Active
+
+    
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> Hong Kong
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> United States of America
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bank Transfer">
+<i class="fa-solid fa-money-bill-transfer ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+</div>
+<h5 class="mt-3">Homebrewers</h5>
+<div class="list-group">
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/astrovials/" style="--store-color: #8D36BF;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">AstroVials</h6>
+<p class="mb-1">A France-based homebrewer</p>
+<p class="mb-0"><span class="text-success">
+
+    Active
+
+    
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> France
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> Worldwide
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Ethereum (ETH)">
+<i class="fa-brands fa-ethereum ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Litecoin">
+<i class="fa-solid fa-litecoin-sign ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Monero (XMR)">
+<i class="fa-brands fa-monero ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Other Cryptocurrencies">
+<i class="fa-solid fa-coins ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/calyx-labs/" style="--store-color: #FFEF5C;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">Calyx Labs</h6>
+<p class="mb-1">A Canadian-based homebrewer</p>
+<p class="mb-0"><span class="text-success">
+
+    Active
+
+    
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> Canada
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> Canada
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Litecoin">
+<i class="fa-solid fa-litecoin-sign ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Monero (XMR)">
+<i class="fa-brands fa-monero ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Other Cryptocurrencies">
+<i class="fa-solid fa-coins ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/estrapen/" style="--store-color: #8EACE2;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">EstraPen</h6>
+<p class="mb-1">A homebrewer shipping from within the EU</p>
+<p class="mb-0"><span class="text-success">
+
+    Active
+
+    
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> EU
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> Worldwide
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Ethereum (ETH)">
+<i class="fa-brands fa-ethereum ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Litecoin">
+<i class="fa-solid fa-litecoin-sign ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Monero (XMR)">
+<i class="fa-brands fa-monero ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Other Cryptocurrencies">
+<i class="fa-solid fa-coins ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/felicitas/" style="--store-color: #FF0000;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">Felicitas</h6>
+<p class="mb-1">A Germany-based homebrewer</p>
+<p class="mb-0"><span class="text-success">
+
+    Active
+
+    
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> Germany
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> European Union
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Litecoin">
+<i class="fa-solid fa-litecoin-sign ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Monero (XMR)">
+<i class="fa-brands fa-monero ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Other Cryptocurrencies">
+<i class="fa-solid fa-coins ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/hera-hrt/" style="--store-color: #ABABAB;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">Hera HRT</h6>
+<p class="mb-1">US-based homebrewer</p>
+<p class="mb-0"><span class="text-success">
+
+    Active
+
+    
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> United States of America
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> US/UK/Canada
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Ethereum (ETH)">
+<i class="fa-brands fa-ethereum ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Litecoin">
+<i class="fa-solid fa-litecoin-sign ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Monero (XMR)">
+<i class="fa-brands fa-monero ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Other Cryptocurrencies">
+<i class="fa-solid fa-coins ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/otokonoko-pharmacy/" style="--store-color: #FCA8FF;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">Otokonoko Pharmacy</h6>
+<p class="mb-1">A Brazil-based homebrewer. Trusted but there are concerns about their manufacturing process.</p>
+<p class="mb-0"><span class="text-success">
+
+    Active
+
+    
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> Brazil
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> Worldwide
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Ethereum (ETH)">
+<i class="fa-brands fa-ethereum ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Litecoin">
+<i class="fa-solid fa-litecoin-sign ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Monero (XMR)">
+<i class="fa-brands fa-monero ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Other Cryptocurrencies">
+<i class="fa-solid fa-coins ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/pawsnax/" style="--store-color: #472a6e;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">Pawsnax</h6>
+<p class="mb-1">A US-based homebrewer</p>
+<p class="mb-0"><span class="text-success">
+
+    Active
+
+    
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> United States of America
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> United States of America
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Litecoin">
+<i class="fa-solid fa-litecoin-sign ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Monero (XMR)">
+<i class="fa-brands fa-monero ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/proleta-hrt/" style="--store-color: #62bae3;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">Proleta HRT</h6>
+<p class="mb-1">EU-based homebrewer</p>
+<p class="mb-0"><span class="text-success">
+
+    Active
+
+    
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> EU
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> EU + UK
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Litecoin">
+<i class="fa-solid fa-litecoin-sign ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Monero (XMR)">
+<i class="fa-brands fa-monero ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/serapharma/" style="--store-color: #C34878;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">Serapharma</h6>
+<p class="mb-1">A Germany based homebrewer</p>
+<p class="mb-0"><span class="text-success">
+
+    Active
+
+    
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> Germany
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> EU
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Litecoin">
+<i class="fa-solid fa-litecoin-sign ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Monero (XMR)">
+<i class="fa-brands fa-monero ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Other Cryptocurrencies">
+<i class="fa-solid fa-coins ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/symphony-labs/" style="--store-color: #D2CEFF;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">Symphony Labs</h6>
+<p class="mb-1">A homebrewer shipping within the US, the UK and the EU</p>
+<p class="mb-0"><span class="text-success">
+
+    Active
+
+    
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> US + UK
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> US + Worldwide
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Ethereum (ETH)">
+<i class="fa-brands fa-ethereum ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Litecoin">
+<i class="fa-solid fa-litecoin-sign ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Monero (XMR)">
+<i class="fa-brands fa-monero ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Other Cryptocurrencies">
+<i class="fa-solid fa-coins ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+</div>
+<h5 class="mt-3">Mutual Aid</h5>
+<div class="list-group">
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/allie-s-hrt/" style="--store-color: #740144;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">Allie's HRT</h6>
+<p class="mb-1">A mutual aid organisation operating in the US</p>
+<p class="mb-0"><span class="text-danger" data-bs-placement="top" data-bs-toggle="tooltip" title="Closed permanently due to personal circumstances">
+
+    Closed
+
+    
+        <small><i class="fa-solid fa-circle-info"></i></small>
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> United States of America
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> Worldwide
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Ethereum (ETH)">
+<i class="fa-brands fa-ethereum ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Litecoin">
+<i class="fa-solid fa-litecoin-sign ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Monero (XMR)">
+<i class="fa-brands fa-monero ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Other Cryptocurrencies">
+<i class="fa-solid fa-coins ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+</div>
+<h5 class="mt-3">Inactive Homebrewers</h5>
+<div class="list-group">
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/celestial-hrt/" style="--store-color: #9A74FF;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">Celestial HRT</h6>
+<p class="mb-1">A Sweden-based homebrewer</p>
+<p class="mb-0"><span class="text-danger" data-bs-placement="top" data-bs-toggle="tooltip" title="Closed suddenly without explanation, no concerns about any product they shipped">
+
+    Closed
+
+    
+        <small><i class="fa-solid fa-circle-info"></i></small>
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> Sweden
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> EU
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Litecoin">
+<i class="fa-solid fa-litecoin-sign ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Monero (XMR)">
+<i class="fa-brands fa-monero ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Other Cryptocurrencies">
+<i class="fa-solid fa-coins ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/girlpotion/" style="--store-color: #A46497;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">Girlpotion</h6>
+<p class="mb-1">A reputable Swedish homebrewer</p>
+<p class="mb-0"><span class="text-danger" data-bs-placement="top" data-bs-toggle="tooltip" title="For the moment, Girlpotion should be considered closed and not coming back.">
+
+    Closed
+
+    
+        <small><i class="fa-solid fa-circle-info"></i></small>
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> Sweden
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> European Union
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Litecoin">
+<i class="fa-solid fa-litecoin-sign ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Monero (XMR)">
+<i class="fa-brands fa-monero ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Other Cryptocurrencies">
+<i class="fa-solid fa-coins ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/vanna-pharma/" style="--store-color: #F3C600;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">Vanna Pharma</h6>
+<p class="mb-1">A reliable UK-based homebrewer.</p>
+<p class="mb-0"><span class="text-danger" data-bs-placement="top" data-bs-toggle="tooltip" title="Vanna remains trustworthy and in good standing, but they've been out of stock for a long time and there's no indication they'll be restocking any time soon.">
+
+    Closed
+
+    
+        <small><i class="fa-solid fa-circle-info"></i></small>
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> United Kingdom
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> United Kingdom
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Ethereum (ETH)">
+<i class="fa-brands fa-ethereum ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Litecoin">
+<i class="fa-solid fa-litecoin-sign ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Monero (XMR)">
+<i class="fa-brands fa-monero ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Other Cryptocurrencies">
+<i class="fa-solid fa-coins ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action store-accent-left" href="/valerie.vg/stores/voix-celeste/" style="--store-color: #1A98D0;">
+<div class="row">
+<div class="col-sm-9">
+<h6 class="mt-1 mt-sm-0 mb-1">Voix Céleste</h6>
+<p class="mb-1">A homebrew team based in the Netherlands and Germany.</p>
+<p class="mb-0"><span class="text-danger">
+
+    Closed
+
+    
+</span>
+</p>
+</div>
+<div class="col-sm-3 text-sm-end">
+<p class="mb-0">
+<i class="text-secondary">Ships from:</i> Germany
+                    </p>
+<p class="mb-0">
+<i class="text-secondary">Ships to:</i> Europe
+                    </p>
+<p class="mb-0">
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Bitcoin (BTC)">
+<i class="fa-brands fa-bitcoin ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Ethereum (ETH)">
+<i class="fa-brands fa-ethereum ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Litecoin">
+<i class="fa-solid fa-litecoin-sign ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Monero (XMR)">
+<i class="fa-brands fa-monero ms-1"></i>
+</span>
+<span data-bs-placement="top" data-bs-toggle="tooltip" title="Other Cryptocurrencies">
+<i class="fa-solid fa-coins ms-1"></i>
+</span>
+</p>
+</div>
+</div>
+</a>
+</div>
+<hr class=""/>
+<h5>Recent Changes</h5>
+<div class="table-responsive">
+<div class="list-group list-group-striped">
+<a class="list-group-item list-group-item-action py-1 store-accent-left border-right-status-danger" href="/valerie.vg/meds/products/calyx-labs-estradiol-valerate/" style="--store-color: #FFEF5C;">
+<div class="row">
+<div class="col-sm-7">
+<span>Calyx Labs Estradiol Valerate</span><br/>
+<span class="d-none d-sm-inline store-color-text" style="--store-color: #FFEF5C;">Calyx Labs</span>
+<span class="d-inline d-sm-none store-color-text" style="--store-color: #FFEF5C;">Calyx Labs</span>
+</div>
+<div class="col-sm">
+                                        CA$95.00<br/>
+<span class="text-secondary d-none d-sm-inline">CA$0.24 per mg</span>
+</div>
+<div class="col-sm text-sm-end">
+<span class="d-inline d-sm-none">Out of Stock<br/></span>
+<span class="text-secondary">15/10/26 04:58</span>
+<span class="text-danger d-none d-sm-inline"><br/>Out of Stock</span>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action py-1 store-accent-left border-right-status-success" href="/valerie.vg/meds/products/estogel-estradiol-0-06-gel/" style="--store-color: #EC008B;">
+<div class="row">
+<div class="col-sm-7">
+<span>Estogel (Estradiol 0.06%) Gel</span><br/>
+<span class="d-none d-sm-inline store-color-text" style="--store-color: #EC008B;">Inhouse Pharmacy</span>
+<span class="d-inline d-sm-none store-color-text" style="--store-color: #EC008B;">Inhouse Pharmacy</span>
+</div>
+<div class="col-sm">
+                                        $40.80<br/>
+<span class="text-secondary d-none d-sm-inline">$0.85 per mg</span>
+</div>
+<div class="col-sm text-sm-end">
+<span class="d-inline d-sm-none">In Stock<br/></span>
+<span class="text-secondary">15/10/26 01:31</span>
+<span class="text-success d-none d-sm-inline"><br/>In Stock</span>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action py-1 store-accent-left border-right-status-success" href="/valerie.vg/meds/products/progesterone-utrogestan-100mg-x30/" style="--store-color: #EC008B;">
+<div class="row">
+<div class="col-sm-7">
+<span>Progesterone (Utrogestan) 100mg</span><br/>
+<span class="d-none d-sm-inline store-color-text" style="--store-color: #EC008B;">Inhouse Pharmacy</span>
+<span class="d-inline d-sm-none store-color-text" style="--store-color: #EC008B;">Inhouse Pharmacy</span>
+</div>
+<div class="col-sm">
+                                        $32.70<br/>
+<span class="text-secondary d-none d-sm-inline">$1.09 per pill</span>
+</div>
+<div class="col-sm text-sm-end">
+<span class="d-inline d-sm-none">In Stock<br/></span>
+<span class="text-secondary">14/10/26 23:32</span>
+<span class="text-success d-none d-sm-inline"><br/>In Stock</span>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action py-1 store-accent-left border-right-status-danger" href="/valerie.vg/meds/products/estogel-estradiol-0-06-gel/" style="--store-color: #EC008B;">
+<div class="row">
+<div class="col-sm-7">
+<span>Estogel (Estradiol 0.06%) Gel</span><br/>
+<span class="d-none d-sm-inline store-color-text" style="--store-color: #EC008B;">Inhouse Pharmacy</span>
+<span class="d-inline d-sm-none store-color-text" style="--store-color: #EC008B;">Inhouse Pharmacy</span>
+</div>
+<div class="col-sm">
+                                        $40.80<br/>
+<span class="text-secondary d-none d-sm-inline">$0.85 per mg</span>
+</div>
+<div class="col-sm text-sm-end">
+<span class="d-inline d-sm-none">Out of Stock<br/></span>
+<span class="text-secondary">14/10/26 23:31</span>
+<span class="text-danger d-none d-sm-inline"><br/>Out of Stock</span>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action py-1 store-accent-left border-right-status-danger" href="/valerie.vg/meds/products/astrovials-estradiol-enanthate-castor-oil/" style="--store-color: #8D36BF;">
+<div class="row">
+<div class="col-sm-7">
+<span>AstroVials Estradiol Enanthate (Castor Oil)</span><br/>
+<span class="d-none d-sm-inline store-color-text" style="--store-color: #8D36BF;">AstroVials</span>
+<span class="d-inline d-sm-none store-color-text" style="--store-color: #8D36BF;">AstroVials</span>
+</div>
+<div class="col-sm">
+                                        €56.00<br/>
+<span class="text-secondary d-none d-sm-inline">€0.14 per mg</span>
+</div>
+<div class="col-sm text-sm-end">
+<span class="d-inline d-sm-none">Delisted from our site<br/></span>
+<span class="text-secondary">14/10/26 23:16</span>
+<span class="text-danger d-none d-sm-inline"><br/>Delisted from our site</span>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action py-1 store-accent-left border-right-status-danger" href="/valerie.vg/meds/products/astrovials-estradiol-enanthate/" style="--store-color: #8D36BF;">
+<div class="row">
+<div class="col-sm-7">
+<span>AstroVials Estradiol Enanthate (MCT Oil)</span><br/>
+<span class="d-none d-sm-inline store-color-text" style="--store-color: #8D36BF;">AstroVials</span>
+<span class="d-inline d-sm-none store-color-text" style="--store-color: #8D36BF;">AstroVials</span>
+</div>
+<div class="col-sm">
+                                        €50.00<br/>
+<span class="text-secondary d-none d-sm-inline">€0.12 per mg</span>
+</div>
+<div class="col-sm text-sm-end">
+<span class="d-inline d-sm-none">Delisted from our site<br/></span>
+<span class="text-secondary">14/10/26 23:16</span>
+<span class="text-danger d-none d-sm-inline"><br/>Delisted from our site</span>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action py-1 store-accent-left border-right-status-danger" href="/valerie.vg/meds/products/astrovials-estradiol-enanthate-castor-oil/" style="--store-color: #8D36BF;">
+<div class="row">
+<div class="col-sm-7">
+<span>AstroVials Estradiol Enanthate (Castor Oil)</span><br/>
+<span class="d-none d-sm-inline store-color-text" style="--store-color: #8D36BF;">AstroVials</span>
+<span class="d-inline d-sm-none store-color-text" style="--store-color: #8D36BF;">AstroVials</span>
+</div>
+<div class="col-sm">
+                                        €56.00<br/>
+<span class="text-secondary d-none d-sm-inline">€0.14 per mg</span>
+</div>
+<div class="col-sm text-sm-end">
+<span class="d-inline d-sm-none">Out of Stock<br/></span>
+<span class="text-secondary">14/10/26 23:15</span>
+<span class="text-danger d-none d-sm-inline"><br/>Out of Stock</span>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action py-1 store-accent-left border-right-status-danger" href="/valerie.vg/meds/products/astrovials-estradiol-undecylate/" style="--store-color: #8D36BF;">
+<div class="row">
+<div class="col-sm-7">
+<span>AstroVials Estradiol Undecylate</span><br/>
+<span class="d-none d-sm-inline store-color-text" style="--store-color: #8D36BF;">AstroVials</span>
+<span class="d-inline d-sm-none store-color-text" style="--store-color: #8D36BF;">AstroVials</span>
+</div>
+<div class="col-sm">
+                                        €100.00<br/>
+<span class="text-secondary d-none d-sm-inline">€0.16 per mg</span>
+</div>
+<div class="col-sm text-sm-end">
+<span class="d-inline d-sm-none">Out of Stock<br/></span>
+<span class="text-secondary">14/10/26 23:15</span>
+<span class="text-danger d-none d-sm-inline"><br/>Out of Stock</span>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action py-1 store-accent-left border-right-status-danger" href="/valerie.vg/meds/products/astrovials-estradiol-valerate/" style="--store-color: #8D36BF;">
+<div class="row">
+<div class="col-sm-7">
+<span>AstroVials Estradiol Valerate</span><br/>
+<span class="d-none d-sm-inline store-color-text" style="--store-color: #8D36BF;">AstroVials</span>
+<span class="d-inline d-sm-none store-color-text" style="--store-color: #8D36BF;">AstroVials</span>
+</div>
+<div class="col-sm">
+                                        €40.00<br/>
+<span class="text-secondary d-none d-sm-inline">€0.10 per mg</span>
+</div>
+<div class="col-sm text-sm-end">
+<span class="d-inline d-sm-none">Out of Stock<br/></span>
+<span class="text-secondary">14/10/26 23:15</span>
+<span class="text-danger d-none d-sm-inline"><br/>Out of Stock</span>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action py-1 store-accent-left border-right-status-danger" href="/valerie.vg/meds/products/astrovials-estradiol-enanthate/" style="--store-color: #8D36BF;">
+<div class="row">
+<div class="col-sm-7">
+<span>AstroVials Estradiol Enanthate (MCT Oil)</span><br/>
+<span class="d-none d-sm-inline store-color-text" style="--store-color: #8D36BF;">AstroVials</span>
+<span class="d-inline d-sm-none store-color-text" style="--store-color: #8D36BF;">AstroVials</span>
+</div>
+<div class="col-sm">
+                                        €50.00<br/>
+<span class="text-secondary d-none d-sm-inline">€0.12 per mg</span>
+</div>
+<div class="col-sm text-sm-end">
+<span class="d-inline d-sm-none">Out of Stock<br/></span>
+<span class="text-secondary">14/10/26 23:15</span>
+<span class="text-danger d-none d-sm-inline"><br/>Out of Stock</span>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action py-1 store-accent-left border-right-status-success" href="/valerie.vg/meds/products/progesterone-progestan-100mg-x30/" style="--store-color: #EC008B;">
+<div class="row">
+<div class="col-sm-7">
+<span>Progesterone (Progestan) 100mg</span><br/>
+<span class="d-none d-sm-inline store-color-text" style="--store-color: #EC008B;">Inhouse Pharmacy</span>
+<span class="d-inline d-sm-none store-color-text" style="--store-color: #EC008B;">Inhouse Pharmacy</span>
+</div>
+<div class="col-sm">
+                                        $21.00<br/>
+<span class="text-secondary d-none d-sm-inline">$0.70 per pill</span>
+</div>
+<div class="col-sm text-sm-end">
+<span class="d-inline d-sm-none">In Stock<br/></span>
+<span class="text-secondary">14/10/26 21:32</span>
+<span class="text-success d-none d-sm-inline"><br/>In Stock</span>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action py-1 store-accent-left border-right-status-success" href="/valerie.vg/meds/products/estogel-estradiol-0-06-gel/" style="--store-color: #EC008B;">
+<div class="row">
+<div class="col-sm-7">
+<span>Estogel (Estradiol 0.06%) Gel</span><br/>
+<span class="d-none d-sm-inline store-color-text" style="--store-color: #EC008B;">Inhouse Pharmacy</span>
+<span class="d-inline d-sm-none store-color-text" style="--store-color: #EC008B;">Inhouse Pharmacy</span>
+</div>
+<div class="col-sm">
+                                        $40.80<br/>
+<span class="text-secondary d-none d-sm-inline">$0.85 per mg</span>
+</div>
+<div class="col-sm text-sm-end">
+<span class="d-inline d-sm-none">In Stock<br/></span>
+<span class="text-secondary">14/10/26 21:31</span>
+<span class="text-success d-none d-sm-inline"><br/>In Stock</span>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action py-1 store-accent-left border-right-status-danger" href="/valerie.vg/meds/products/otokonoko-estradiol-valerate-10ml-40mg-ml/" style="--store-color: #FCA8FF;">
+<div class="row">
+<div class="col-sm-7">
+<span>Otokonoko Estradiol Valerate</span><br/>
+<span class="d-none d-sm-inline store-color-text" style="--store-color: #FCA8FF;">Otokonoko Pharmacy</span>
+<span class="d-inline d-sm-none store-color-text" style="--store-color: #FCA8FF;">Otokonoko Pharmacy</span>
+</div>
+<div class="col-sm">
+                                        $65.00<br/>
+<span class="text-secondary d-none d-sm-inline">$0.16 per mg</span>
+</div>
+<div class="col-sm text-sm-end">
+<span class="d-inline d-sm-none">Out of Stock<br/></span>
+<span class="text-secondary">14/10/26 21:12</span>
+<span class="text-danger d-none d-sm-inline"><br/>Out of Stock</span>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action py-1 store-accent-left border-right-status-danger" href="/valerie.vg/meds/products/proleta-hrt-estradiol-enanthate-10ml/" style="--store-color: #62bae3;">
+<div class="row">
+<div class="col-sm-7">
+<span>Proleta HRT Estradiol Enanthate 10ml</span><br/>
+<span class="d-none d-sm-inline store-color-text" style="--store-color: #62bae3;">Proleta HRT</span>
+<span class="d-inline d-sm-none store-color-text" style="--store-color: #62bae3;">Proleta HRT</span>
+</div>
+<div class="col-sm">
+                                        €55.00<br/>
+<span class="text-secondary d-none d-sm-inline">€0.14 per mg</span>
+</div>
+<div class="col-sm text-sm-end">
+<span class="d-inline d-sm-none">Out of Stock<br/></span>
+<span class="text-secondary">14/10/26 19:58</span>
+<span class="text-danger d-none d-sm-inline"><br/>Out of Stock</span>
+</div>
+</div>
+</a>
+<a class="list-group-item list-group-item-action py-1 store-accent-left border-right-status-danger" href="/valerie.vg/meds/products/proleta-hrt-estradiol-enanthate-5ml/" style="--store-color: #62bae3;">
+<div class="row">
+<div class="col-sm-7">
+<span>Proleta HRT Estradiol Enanthate 5ml</span><br/>
+<span class="d-none d-sm-inline store-color-text" style="--store-color: #62bae3;">Proleta HRT</span>
+<span class="d-inline d-sm-none store-color-text" style="--store-color: #62bae3;">Proleta HRT</span>
+</div>
+<div class="col-sm">
+                                        €30.00<br/>
+<span class="text-secondary d-none d-sm-inline">€0.15 per mg</span>
+</div>
+<div class="col-sm text-sm-end">
+<span class="d-inline d-sm-none">Out of Stock<br/></span>
+<span class="text-secondary">14/10/26 18:38</span>
+<span class="text-danger d-none d-sm-inline"><br/>Out of Stock</span>
+</div>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<div class="container">
+<footer class="row align-items-center my-4 border-top g-3 text-center">
+<div class="col-md text-md-start">
+<span class="text-muted">Valerie 2022-2026</span>
+</div>
+<div class="col-md-auto">
+<a class="text-secondary text-decoration-none" href="/valerie.vg/">
+<img src="/valerie.vg/static/img/spectral.edede32dd6d4.webp" style="height: 2rem;"/>
+</a>
+</div>
+<div class="col-md text-md-end">
+<ul class="nav justify-content-center justify-content-md-end">
+<li class="nav-item"><a class="nav-link px-2 text-muted" href="/valerie.vg/about/">About</a></li>
+<li class="nav-item"><a class="nav-link px-2 text-muted" href="/valerie.vg/resources/">Resources</a></li>
+<li class="nav-item"><a class="nav-link px-2 text-muted" href="/valerie.vg/data-privacy/">Data Privacy</a></li>
+<li class="nav-item">
+<a class="nav-link px-2 text-muted" href="https://bsky.app/profile/valerie.vg">Bluesky</a>
+</li>
+</ul>
+</div>
+</footer>
+</div>
+<script src="/valerie.vg/static/js/bootstrap.bundle.min.fe96f9dd3617.js"></script>
+<script src="/valerie.vg/static/js/jquery-3.7.1.min.2c872dbe60f4.js"></script>
+<script src="/valerie.vg/static/js/bootstrap-table.min.c741730cab4c.js"></script>
+<script src="/valerie.vg/static/fontawesomefree/js/all.min.d293c4f1799b.js"></script>
+<script>
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+        </script>
 </body>
 </html>

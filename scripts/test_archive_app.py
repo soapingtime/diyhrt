@@ -10,29 +10,46 @@ import tempfile
 import threading
 import unittest
 from unittest.mock import patch
-import zipfile
+import io
 
-from warcio.archiveiterator import ArchiveIterator
+from warcio.statusandheaders import StatusAndHeaders
+from warcio.warcwriter import WARCWriter
 
 from archive_app import Capture
 
 
 class AppArchiveTests(unittest.TestCase):
-    def test_identical_assets_round_trip_through_warc_revisits(self):
+    def test_identical_assets_import_from_warc_revisits(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            capture = Capture(root / 'raw', 'example.com')
-            capture.record(capture.origin, b'<html><head></head><body>Fixture</body></html>', 200, 'text/html')
-            capture.record(capture.origin + 'a.png', b'identical asset', 200, 'image/png')
-            capture.record(capture.origin + 'b.png', b'identical asset', 200, 'image/png')
-            capture.package(root / 'output')
+            source = root / 'fixture.warc.gz'
+            with source.open('wb') as stream:
+                writer = WARCWriter(stream, gzip=True)
+                headers = StatusAndHeaders(
+                    '200 OK', [('Content-Type', 'image/png')], protocol='HTTP/1.1'
+                )
+                first = writer.create_warc_record(
+                    'https://example.com/a.png',
+                    'response',
+                    payload=io.BytesIO(b'identical asset'),
+                    http_headers=headers,
+                )
+                writer.write_record(first)
+                revisit = writer.create_revisit_record(
+                    'https://example.com/b.png',
+                    first.rec_headers.get_header('WARC-Payload-Digest'),
+                    'https://example.com/a.png',
+                    first.rec_headers.get_header('WARC-Date'),
+                    http_headers=headers,
+                )
+                writer.write_record(revisit)
             restored = Capture(root / 'restored', 'example.com')
-            restored.import_warc(capture.directory / 'snapshot.warc.gz')
-            self.assertEqual(len(restored.responses), 3)
-            item = restored.responses[capture.origin + 'b.png']
+            restored.import_warc(source)
+            self.assertEqual(len(restored.responses), 2)
+            item = restored.responses['https://example.com/b.png']
             self.assertEqual((restored.directory / item['file']).read_bytes(), b'identical asset')
 
-    def test_replay_removes_collectors_and_preserves_content(self):
+    def test_document_removes_collectors_and_preserves_content(self):
         with tempfile.TemporaryDirectory() as temp:
             capture = Capture(temp, 'valerie.vg')
             body = b'''<html><head><title>Product</title></head><body>
@@ -68,11 +85,19 @@ class AppArchiveTests(unittest.TestCase):
             thread.start()
             origin = 'http://127.0.0.1:' + str(server.server_port) + '/'
             try:
-                result = subprocess.run([
-                    os.environ.get('DIYHRT_WGET', 'wget'), '--mirror', '--page-requisites',
-                    '--no-parent', '--warc-file=' + str(root / 'crawl'),
-                    '--directory-prefix=' + str(root / 'download'), origin + 'index.html',
-                ], capture_output=True, text=True)
+                result = subprocess.run(
+                    [
+                        os.environ.get('DIYHRT_WGET', 'wget'),
+                        '--mirror',
+                        '--page-requisites',
+                        '--no-parent',
+                        '--warc-file=' + str(root / 'crawl'),
+                        '--directory-prefix=' + str(root / 'download'),
+                        origin + 'index.html',
+                    ],
+                    capture_output=True,
+                    text=True,
+                )
                 self.assertIn(result.returncode, (0, 8), result.stderr)
             finally:
                 server.shutdown()
@@ -92,7 +117,8 @@ class AppArchiveTests(unittest.TestCase):
             capture.record(
                 capture.origin + 'css/main.css',
                 b'@import "nested.css"; @font-face { src: url(../font.woff2); }',
-                200, 'text/css',
+                200,
+                'text/css',
             )
             replies = {
                 capture.origin + 'css/nested.css': (b'p { color: red; }', 'text/css'),
@@ -116,37 +142,37 @@ class AppArchiveTests(unittest.TestCase):
             capture.record(
                 capture.origin,
                 b'<html><head><script src="/missing.js"></script></head></html>',
-                200, 'text/html',
+                200,
+                'text/html',
             )
             capture.record(capture.origin + 'missing.js', b'not found', 404, 'text/plain')
             with self.assertRaisesRegex(RuntimeError, 'Required asset unavailable'):
                 capture.complete_assets()
 
-    def test_wacz_contains_pages_api_responses_and_utc_dates(self):
+    def test_export_contains_pages_api_responses_and_utc_dates(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             capture = Capture(root / 'raw', 'diyhrt.coffee')
             capture.record(
                 capture.origin,
                 b'<html><head><title>Fixture</title></head><body>Archived content</body></html>',
-                200, 'text/html', timestamp='2026-10-15T03:00:00-04:00',
+                200,
+                'text/html',
+                timestamp='2026-10-15T03:00:00-04:00',
             )
             capture.record(
-                capture.origin + 'api/v1/me', b'{"error":"unauthenticated"}',
-                401, 'application/json',
+                capture.origin + 'api/v1/me',
+                b'{"error":"unauthenticated"}',
+                401,
+                'application/json',
             )
-            capture.package(root / 'output')
-            with zipfile.ZipFile(root / 'output' / 'snapshot.wacz') as archive:
-                pages = archive.read('pages/pages.jsonl').decode().splitlines()
-                self.assertEqual(json.loads(pages[1])['url'], capture.origin)
-                self.assertEqual(json.loads(pages[1])['ts'], '2026-10-15T07:00:00Z')
-            with (capture.directory / 'snapshot.warc.gz').open('rb') as stream:
-                records = list(ArchiveIterator(stream))
-                self.assertEqual(len(records), 2)
-                self.assertEqual(records[1].http_headers.get_statuscode(), '401')
+            capture.export(root / 'output')
+            self.assertEqual(capture.pages[capture.origin]['ts'], '2026-10-15T07:00:00Z')
             manifest = json.loads((root / 'output' / 'archive.json').read_text())
-            self.assertEqual(manifest['responses'], 2)
-            self.assertIn('snapshot.wacz?v=', (root / 'output' / 'index.html').read_text())
+            self.assertEqual(len(manifest['responses']), 2)
+            self.assertEqual(manifest['responses'][capture.origin + 'api/v1/me']['status'], 401)
+            self.assertIn('Archived content', (root / 'output' / 'index.html').read_text())
+            self.assertNotIn('replay-web-page', (root / 'output' / 'index.html').read_text())
 
 
 if __name__ == '__main__':
