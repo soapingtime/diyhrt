@@ -8,15 +8,11 @@
     <style>
         html, body { height: 100%; margin: 0; }
         body { display: flex; flex-direction: column; }
-        p { margin: 0; padding: 8px; font: 16px sans-serif; }
         #archive { display: flex; flex: 1; min-height: 0; }
         replay-web-page { display: block; flex: 1; min-height: 0; }
     </style>
 </head>
 <body>
-    <p>Archived 2026-10-15. <a href="snapshot.wacz">Download archive</a> ·
-       <a href="https://valerie.vg/" target="_blank" rel="noopener noreferrer">Original site</a> ·
-       <a href="../index.html">All sites</a></p>
     <div id="archive"></div>
     <script>
         (async () => {
@@ -25,6 +21,7 @@
             viewer.setAttribute('source', source);
             viewer.setAttribute('url', 'https://valerie.vg/');
             viewer.setAttribute('replayBase', '../replay/');
+            viewer.setAttribute('embed', 'replayonly');
             viewer.setAttribute('deepLink', '');
             const response = await fetch(source, { method: 'HEAD' });
             if (response.headers.get('Accept-Ranges') !== 'bytes') {

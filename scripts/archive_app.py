@@ -84,15 +84,11 @@ VIEWER = """<!DOCTYPE html>
     <style>
         html, body {{ height: 100%; margin: 0; }}
         body {{ display: flex; flex-direction: column; }}
-        p {{ margin: 0; padding: 8px; font: 16px sans-serif; }}
         #archive {{ display: flex; flex: 1; min-height: 0; }}
         replay-web-page {{ display: block; flex: 1; min-height: 0; }}
     </style>
 </head>
 <body>
-    <p>Archived {date}. <a href="snapshot.wacz">Download archive</a> ·
-       <a href="https://{host}/" target="_blank" rel="noopener noreferrer">Original site</a> ·
-       <a href="../index.html">All sites</a></p>
     <div id="archive"></div>
     <script>
         (async () => {{
@@ -101,6 +97,7 @@ VIEWER = """<!DOCTYPE html>
             viewer.setAttribute('source', source);
             viewer.setAttribute('url', 'https://{host}/');
             viewer.setAttribute('replayBase', '../replay/');
+            viewer.setAttribute('embed', 'replayonly');
             viewer.setAttribute('deepLink', '');
             const response = await fetch(source, {{ method: 'HEAD' }});
             if (response.headers.get('Accept-Ranges') !== 'bytes') {{
