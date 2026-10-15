@@ -12,10 +12,14 @@ jobs:
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.PAT_TOKEN }}
-      - name: download groups.io wiki
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: install dependencies
+        run: pip install -r scripts/requirements.txt
+      - name: download groups.io
         run: |
-          rm -rf groups.io
-          wget -e robots=off --mirror --limit-rate=10m --convert-links --adjust-extension --page-requisites --random-wait --no-parent https://groups.io/g/MTFHRT/wiki/ https://groups.io/g/MTFHRT/topic/80225302/ https://groups.io/g/MTFHRT/topic/79606271/ || true
+          python scripts/mirror.py groups.io https://groups.io/g/MTFHRT/wiki/ https://groups.io/g/MTFHRT/topic/80225302/ https://groups.io/g/MTFHRT/topic/79606271/ --static --ignore-robots
       - name: commit changes
         if: ${{ success() }}
         uses: EndBug/add-and-commit@v9

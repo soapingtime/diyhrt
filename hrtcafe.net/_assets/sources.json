@@ -1,0 +1,262 @@
+[
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/pencil-source-grey.svg?f5d23",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/pencil-source-grey.svg",
+    "original_sha256": "a0d346917c9c1a0112a5f8713ef0e89ba89ba6f5e082b8c396f2b9383b83876b"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/pencil-grey.svg?530f0",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/pencil-grey.svg",
+    "original_sha256": "8b0ccf689168e31e10bed766f3c1665b74d8dbc83aa55ff5b5ec24394f3d550c"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/jquery.tablesorter.styles/images/sort_both.svg?0e440",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki/dc4dd52792ff9769d46d2f061ad52d852812c398/resources/src/jquery.tablesorter.styles/images/sort_both.svg",
+    "original_sha256": "97bc609b5e47b7f61dc6b6149e2149f2af49c647f3b73dff16d866b21c4c5c94"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/jquery.tablesorter.styles/images/sort_up.svg?2ff5c",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki/dc4dd52792ff9769d46d2f061ad52d852812c398/resources/src/jquery.tablesorter.styles/images/sort_up.svg",
+    "original_sha256": "b34ac7dceac4ef8dcbfa2602e8056a7cc69554102052f4ac1727fcdf554b23b1"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/jquery.tablesorter.styles/images/sort_down.svg?4b69e",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki/dc4dd52792ff9769d46d2f061ad52d852812c398/resources/src/jquery.tablesorter.styles/images/sort_down.svg",
+    "original_sha256": "6192135eccafb990830a286741300f87b2d1eccb0feb35c94c39f334f7848d3b"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/mediawiki.icon/images/arrow-collapsed-ltr.svg?40e9a",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki/dc4dd52792ff9769d46d2f061ad52d852812c398/resources/src/mediawiki.icon/images/arrow-collapsed-ltr.svg",
+    "original_sha256": "6d521f4bdb00aee8cae8a8fda4b50ad3ce005244922e0134eadd2e46b9c1d2cc"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/mediawiki.icon/images/arrow-expanded.svg?d0685",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki/dc4dd52792ff9769d46d2f061ad52d852812c398/resources/src/mediawiki.icon/images/arrow-expanded.svg",
+    "original_sha256": "aed007adcab88a0d39ab347004d425f2f43b9fac52342c512c019e097bcae3b4"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/mediawiki.skinning/images/external-ltr.svg?59558",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki/dc4dd52792ff9769d46d2f061ad52d852812c398/resources/src/mediawiki.skinning/images/external-ltr.svg",
+    "original_sha256": "5c10ccd858c0d0cf1e056a202f7149db26222a93d929e4bd3c401bc8cab43428"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/mediawiki.skinning/images/mail.svg?8a79c",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki/dc4dd52792ff9769d46d2f061ad52d852812c398/resources/src/mediawiki.skinning/images/mail.svg",
+    "original_sha256": "c626bb0aa1cebe4976d23ff16acaaecc541409b9b420a97f86912348548aab3c"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/mediawiki.skinning/images/ftp-ltr.svg?c5643",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki/dc4dd52792ff9769d46d2f061ad52d852812c398/resources/src/mediawiki.skinning/images/ftp-ltr.svg",
+    "original_sha256": "4b0d05dc7246943a74e9f8409f50cfb5caf4a06c54924effcf0bd2f489a35839"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/mediawiki.skinning/images/chat-ltr.svg?e0649",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki/dc4dd52792ff9769d46d2f061ad52d852812c398/resources/src/mediawiki.skinning/images/chat-ltr.svg",
+    "original_sha256": "28fab040715252e1b580540836d216f861262a861d765f4e48d9db91c4e3414d"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/mediawiki.skinning/images/audio-ltr.svg?74d04",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki/dc4dd52792ff9769d46d2f061ad52d852812c398/resources/src/mediawiki.skinning/images/audio-ltr.svg",
+    "original_sha256": "547ec91bbf47cd20ab28592edb8bbac7cea3da20e1cf1be8ae05a42e06829774"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/mediawiki.skinning/images/video.svg?a3758",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki/dc4dd52792ff9769d46d2f061ad52d852812c398/resources/src/mediawiki.skinning/images/video.svg",
+    "original_sha256": "91073e7741c8c4a013fee71967209f2f9f0a0f65e52640a0c4dff7f0ed8c903a"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/mediawiki.skinning/images/document-ltr.svg?0bf90",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki/dc4dd52792ff9769d46d2f061ad52d852812c398/resources/src/mediawiki.skinning/images/document-ltr.svg",
+    "original_sha256": "6925ba008fdcc18f005feff154d35f23d48c8dd1e3047c68dae55515e68dde4a"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/search-ltr.svg?402b1",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/search-ltr.svg",
+    "original_sha256": "07891ab82b1142d371596853d004cbd4a878a7a64c13bd380a17b3877c7858ec"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/arrow-down-grey.svg?46d67",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/arrow-down-grey.svg",
+    "original_sha256": "b6333c249251d4a8ba5de9de5498aba358d40d0bec07562b1652ea978f593141"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/cat.svg?31aa0",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/cat.svg",
+    "original_sha256": "212763769b16efc1d19d7ce34603190127da1c1035a5c079141b465365868d14"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/page-misc-grey.svg?806ed",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/page-misc-grey.svg",
+    "original_sha256": "2c263a69bbca815e4a4335d3ecbfc5e580eb88dbe1c1b8efa80aa8e7456a25a3"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/star.svg?2328e",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/star.svg",
+    "original_sha256": "c7e022168f24ebd3b595e208f97ef7a2276a2c886c8f65b8c0624d36de5c0ce8"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/star-filled.svg?6b78d",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/star-filled.svg",
+    "original_sha256": "59a110b19d2704ca00163b81e18d0d036cce4ee3771990a86e726d10490f7dc0"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/star-half-filled.svg?31733",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/star-half-filled.svg",
+    "original_sha256": "c157c1602c4e94cd1c603af905516d9f607df194c3ff12f35a49df45fc6b0ac7"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/clock-grey.svg?48197",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/clock-grey.svg",
+    "original_sha256": "bf4167493954511e2dbb707818902df58ee76396693d250d856690f3c9f4153f"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/talk-grey.svg?b4d04",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/talk-grey.svg",
+    "original_sha256": "6bd4375cb480e7a6a44b2aa305218337d8fc3c9b78e323ac106cce3856e5f825"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/puzzle-grey.svg?ff4a6",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/puzzle-grey.svg",
+    "original_sha256": "9d9288820913239ff851fe668c7d70d74189c02e01bac6d26ccb8637c9f714a5"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/plus-grey.svg?f5373",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/plus-grey.svg",
+    "original_sha256": "6bc1f87c8999db0dc813508f601b26e52a0f157a0e83eaecbbe5114f9c2f8d55"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/brackets-grey.svg?c043f",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/brackets-grey.svg",
+    "original_sha256": "0605e16cf254cb6ac3a4479cfba420d31d5afd2e51f40958492226695f0fbf4a"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/eyeball-grey.svg?f17bd",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/eyeball-grey.svg",
+    "original_sha256": "47a1431d7c137dc2dd46b96178959c1672ffc489db1a34822b7c905b7f094ef4"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/page-grey.svg?a26bc",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/page-grey.svg",
+    "original_sha256": "8914258957d8d8b59b2c25efb6eb3da22c814154d9e349aad175d8c5cab767c3"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/magnify-ltr.svg?d8c9d",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/magnify-ltr.svg",
+    "original_sha256": "ff9b1db235aef4d50b7d63a8158a2d7756da283dbb26289df66dff032bb1661e"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/user-grey.svg?9781b",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/user-grey.svg",
+    "original_sha256": "a157d242cd095e896f8712c9430c6e79a21e3b68ee3c0e03b19dad0a028aa728"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/languages-grey.svg?98f3a",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/languages-grey.svg",
+    "original_sha256": "b93079baaff9ea674e943963ddcdda9e38dd04464378595781d86b4208705fd1"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/user-large-grey.svg?4070b",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/user-large-grey.svg",
+    "original_sha256": "c40aeffba2de294277b91fd6ee5f26c0a55b1c3e1234f6f3f4d6db89a6a7e185"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/menu-large-grey.svg?7b579",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/menu-large-grey.svg",
+    "original_sha256": "7f1908a5ae343b9a7db69b29ff813107cc159d7c058b1562c8560d01c9af0807"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/gear-large-grey.svg?eba28",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/gear-large-grey.svg",
+    "original_sha256": "9491a2c1218c2d92686e85907a68de1dff64e1db91b3c590643e4e8af268217c"
+  },
+  {
+    "original_url": "https://hrtcafe.net/skins/Timeless/resources/images/gear-grey.svg?27b72",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki-skins-Timeless/950b66b27bee56f1401aa130bcede2d858de99d2/resources/images/gear-grey.svg",
+    "original_sha256": "4c7e905f6a4ea97a597034a2eb9807752fc0be7eb4724221b025c0d65a9e31f8"
+  },
+  {
+    "original_url": "https://hrtcafe.net/load.php?lang=en&modules=ext.DarkMode.styles%7Cext.visualEditor.desktopArticleTarget.noscript%7Cjquery.makeCollapsible.styles%7Cjquery.tablesorter.styles%7Cmediawiki.icon%7Cmediawiki.interface.helpers.styles%7Cmediawiki.special.changeslist%7Cmediawiki.special.changeslist.enhanced%2Clegend%7Cskins.timeless&only=styles&skin=timeless",
+    "source_url": "https://web.archive.org/web/20240107011830id_/https://hrtcafe.net/load.php?lang=en&modules=ext.DarkMode.styles%7Cext.visualEditor.desktopArticleTarget.noscript%7Cjquery.makeCollapsible.styles%7Cjquery.tablesorter.styles%7Cmediawiki.icon%7Cmediawiki.interface.helpers.styles%7Cmediawiki.special.changeslist%7Cmediawiki.special.changeslist.enhanced%2Clegend%7Cskins.timeless&only=styles&skin=timeless",
+    "original_sha256": "2e69e97babfa39c68d0b7df58d72b7a1983c1e2324ee3f29e2bdc6836f2a829f"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/ajax/libs/font-awesome/6.5.1/css/all.min.css",
+    "source_url": "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.5.1/css/all.min.css",
+    "original_sha256": "c22cfb6520a7fdbb738632834019acf47c78b1279462c0eb4cb83bae83ecb5a7"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2",
+    "source_url": "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.5.1/webfonts/fa-brands-400.woff2",
+    "original_sha256": "33bc709adb75706b44e269a0a4809fe58aef514c1cf6a4acf5882744dce50c69"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.ttf",
+    "source_url": "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.5.1/webfonts/fa-brands-400.ttf",
+    "original_sha256": "f29fff334747ec7d303bf58131ceddd28d1bfde973e981ce731e2d2bb93cc4e6"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/ajax/libs/font-awesome/6.5.1/webfonts/fa-regular-400.woff2",
+    "source_url": "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.5.1/webfonts/fa-regular-400.woff2",
+    "original_sha256": "398a1f8d508a0f822fe2f8e6a75ba1cd759bfcbccf1f6b49b00da04372559eca"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/ajax/libs/font-awesome/6.5.1/webfonts/fa-regular-400.ttf",
+    "source_url": "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.5.1/webfonts/fa-regular-400.ttf",
+    "original_sha256": "079413b7606191e1a393b467c6a467f3c2ee9bedd8ae7e980a93134758c5f51c"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2",
+    "source_url": "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.5.1/webfonts/fa-solid-900.woff2",
+    "original_sha256": "1fbdfd5b5eeb365202f30b045bf3ba5e64cce0dddf1c58af74a4feb0158a03a2"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.ttf",
+    "source_url": "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.5.1/webfonts/fa-solid-900.ttf",
+    "original_sha256": "f1ce0da12a01f7ec15ae69c4ed54999ea875bd236e62fef58ac4ddbcb39b367a"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/ajax/libs/font-awesome/6.5.1/webfonts/fa-v4compatibility.woff2",
+    "source_url": "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.5.1/webfonts/fa-v4compatibility.woff2",
+    "original_sha256": "ef7d655a2e69d853c7dfdd2b6e41739d18d1274300421c104c574e3f2361c3db"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/src/ajax/libs/font-awesome/6.5.1/webfonts/fa-v4compatibility.ttf",
+    "source_url": "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.5.1/webfonts/fa-v4compatibility.ttf",
+    "original_sha256": "12082fc0a217f4475024d9fe2395d053e66140d0b7b32782c1cf2adc7c1eb1c9"
+  },
+  {
+    "original_url": "https://hrtcafe.net/load.php?lang=en&modules=site.styles&only=styles&skin=timeless",
+    "source_url": "https://web.archive.org/web/20240102113246id_/https://hrtcafe.net/load.php?lang=en&modules=site.styles&only=styles&skin=timeless",
+    "original_sha256": "9e6db4328b6163317ae4e8f56029eb672f7489c619851bb2d1e465e16b534779"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/assets/poweredby_mediawiki_88x31.png",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki/dc4dd52792ff9769d46d2f061ad52d852812c398/resources/assets/poweredby_mediawiki_88x31.png",
+    "original_sha256": "53f60fa7aa028295f56a81117aedf1da7788ea2bbabfcf308b96415a172fb38c"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/assets/poweredby_mediawiki_132x47.png",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki/dc4dd52792ff9769d46d2f061ad52d852812c398/resources/assets/poweredby_mediawiki_132x47.png",
+    "original_sha256": "2410ffb3961be4f0e8f2cf651419cee869a87f39f2c9db9291c2f2e1c4122df5"
+  },
+  {
+    "original_url": "https://hrtcafe.net/resources/assets/poweredby_mediawiki_176x62.png",
+    "source_url": "https://raw.githubusercontent.com/wikimedia/mediawiki/dc4dd52792ff9769d46d2f061ad52d852812c398/resources/assets/poweredby_mediawiki_176x62.png",
+    "original_sha256": "494ba2fa4f0ead7d7de292553d477381d482189b5c32ccee66a9d298e4f26c21"
+  },
+  {
+    "original_url": "https://hrtcafe.net/images/thumb/e/e2/Nuvola_apps_kedit.png/16px-Nuvola_apps_kedit.png",
+    "source_url": "https://web.archive.org/web/20240104080452id_/https://hrtcafe.net/images/thumb/e/e2/Nuvola_apps_kedit.png/16px-Nuvola_apps_kedit.png",
+    "original_sha256": "06da4b9373d717fd8457cee97ca4c389d6d22e45de11efb227aaad830aebc65f"
+  },
+  {
+    "original_url": "https://hrtcafe.net/images/thumb/e/e2/Nuvola_apps_kedit.png/24px-Nuvola_apps_kedit.png",
+    "source_url": "https://web.archive.org/web/20240104080452id_/https://hrtcafe.net/images/thumb/e/e2/Nuvola_apps_kedit.png/24px-Nuvola_apps_kedit.png",
+    "original_sha256": "46e267aa4e1fb93bfba3c147abd99bb92cd8ceab3f64cf70d3e2d04d82cce94d"
+  },
+  {
+    "original_url": "https://hrtcafe.net/images/thumb/e/e2/Nuvola_apps_kedit.png/32px-Nuvola_apps_kedit.png",
+    "source_url": "https://web.archive.org/web/20240104080452id_/https://hrtcafe.net/images/thumb/e/e2/Nuvola_apps_kedit.png/32px-Nuvola_apps_kedit.png",
+    "original_sha256": "22030aa4b32b4162d74ad8bfbf4f120ac064bb71558bd1a766a2edb759531051"
+  }
+]

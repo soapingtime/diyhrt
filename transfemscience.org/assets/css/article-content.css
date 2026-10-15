@@ -340,7 +340,7 @@ code {
 
 @media only screen {
   /* Invert image color dark mode (unless overridden) */
-  html[data-theme='dark'] #article img:not(.no-invert) {
+  html[data-theme="dark"] #article img:not(.no-invert) {
     filter: brightness(0.8) contrast(1.2) invert(100%) hue-rotate(180deg);
   }
 }
@@ -353,7 +353,7 @@ code {
   }
 
   /* Spoiler tag images invert image color dark mode (unless overridden) */
-  html[data-theme='dark'] #article img.spoiler:not(.no-invert) {
+  html[data-theme="dark"] #article img.spoiler:not(.no-invert) {
     filter: blur(30px) brightness(0.8) contrast(1.2) invert(100%) hue-rotate(180deg);
   }
 }
@@ -516,50 +516,50 @@ select, input, textarea {
 }
 
 @media only screen {
-  html[data-theme='dark'] #article .gsc-control-cse,
-  html[data-theme='dark'] #article .gsc-input-box,
-  html[data-theme='dark'] #article .gsc-input,
-  html[data-theme='dark'] #article .gsib_a,
-  html[data-theme='dark'] #article .gsib_b,
-  html[data-theme='dark'] #article .gsc-search-button,
-  html[data-theme='dark'] #article .gsc-result-info-container,
-  html[data-theme='dark'] #article .gsc-result-info,
-  html[data-theme='dark'] #article .gsc-result,
-  html[data-theme='dark'] #article .gsc-cursor-page {
+  html[data-theme="dark"] #article .gsc-control-cse,
+  html[data-theme="dark"] #article .gsc-input-box,
+  html[data-theme="dark"] #article .gsc-input,
+  html[data-theme="dark"] #article .gsib_a,
+  html[data-theme="dark"] #article .gsib_b,
+  html[data-theme="dark"] #article .gsc-search-button,
+  html[data-theme="dark"] #article .gsc-result-info-container,
+  html[data-theme="dark"] #article .gsc-result-info,
+  html[data-theme="dark"] #article .gsc-result,
+  html[data-theme="dark"] #article .gsc-cursor-page {
     background-color: var(--background-color) !important;
   }
 
-  html[data-theme='dark'] #article .gsc-search-button-v2 {
+  html[data-theme="dark"] #article .gsc-search-button-v2 {
     background-color: rgb(129, 83, 237) !important;
   }
 
-  html[data-theme='dark'] #article .gsc-result,
-  html[data-theme='dark'] #article .gsc-control-cse {
+  html[data-theme="dark"] #article .gsc-result,
+  html[data-theme="dark"] #article .gsc-control-cse {
     border-color: var(--background-color) !important;
   }
 
-  html[data-theme='dark'] #article .gsc-input-box {
+  html[data-theme="dark"] #article .gsc-input-box {
     border: solid 1px rgb(180, 180, 180) !important;
   }
 
-  html[data-theme='dark'] #article .gsc-above-wrapper-area {
+  html[data-theme="dark"] #article .gsc-above-wrapper-area {
     border-bottom: solid 1px rgb(180, 180, 180) !important;
   }
 
-  html[data-theme='dark'] #article .gsc-input,
-  html[data-theme='dark'] #article .gsc-result-info,
-  html[data-theme='dark'] #article .gs-snippet,
-  html[data-theme='dark'] #article .gsc-cursor-page,
-  html[data-theme='dark'] #article .gsc-cursor {
+  html[data-theme="dark"] #article .gsc-input,
+  html[data-theme="dark"] #article .gsc-result-info,
+  html[data-theme="dark"] #article .gs-snippet,
+  html[data-theme="dark"] #article .gsc-cursor-page,
+  html[data-theme="dark"] #article .gsc-cursor {
     color: var(--article-font-color) !important;
     fill: var(--article-font-color) !important; /* For gsc-cursor-container-next/previous */
   }
 
-  html[data-theme='dark'] #article .gsc-cursor-current-page {
+  html[data-theme="dark"] #article .gsc-cursor-current-page {
     color: rgb(129, 83, 237) !important;
   }
 
-  html[data-theme='dark'] #article .gs-image {
+  html[data-theme="dark"] #article .gs-image {
     filter: none !important;
   }
 }

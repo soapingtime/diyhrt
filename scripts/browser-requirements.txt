@@ -1,0 +1,4 @@
+-r requirements.txt
+playwright>=1.50,<2
+warcio>=1.7,<2
+wacz==0.6.0

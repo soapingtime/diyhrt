@@ -12,26 +12,18 @@ jobs:
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.PAT_TOKEN }}
-      - name: check for 404
-        run: |
-          url="https://hrtcafe.net"
-          status=$(curl -o /dev/null -s -w "%{http_code}" $url)
-          if [ $status -eq 404 ]; then
-            echo "Got 404. Exiting."
-            curl -H "Content-Type: application/json" -d '{"content": "${{ secrets.DISCORD_USER_ID }} $URL returned 404"}' ${{ secrets.WEBHOOK_URL }}
-            exit 1
-          fi
-      - name: download .cafe
-        if: always()
-        run: |
-          rm -rf diyhrt.cafe
-          rm -rf hrtcafe.net
-          wget -rk --limit-rate 10m --random-wait --user-agent="github.com/soapingtime/diyhrt" --domains=hrtcafe.net https://hrtcafe.net || true
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: install dependencies
+        run: pip install -r scripts/requirements.txt
+      - name: download hrtcafe.net
+        run: python scripts/mirror.py hrtcafe.net --static --level 5
       - name: commit changes
         if: ${{ success() }}
         uses: EndBug/add-and-commit@v9
         with:
-          add: "diyhrt.cafe"
+          add: hrtcafe.net
           pull: "--rebase --autostash ."
-          message: "[automated] update diyhrt.cafe"
+          message: "[automated] update hrtcafe.net"
           default_author: github_actions

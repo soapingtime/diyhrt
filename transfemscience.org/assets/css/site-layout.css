@@ -108,7 +108,7 @@ button:focus {
 }
 
 @media only screen {
-  html[data-theme='dark'] button:focus {
+  html[data-theme="dark"] button:focus {
     outline: 1.5px solid #fff;
   }
 }
@@ -503,11 +503,11 @@ button:active {
 }
 
 @media only screen {
-  html[data-theme='dark'] #theme-button-dark-svg {
+  html[data-theme="dark"] #theme-button-dark-svg {
     display: inline-block;
   }
 
-  html[data-theme='dark'] #theme-button-light-svg {
+  html[data-theme="dark"] #theme-button-light-svg {
     display: none;
   }
 }
