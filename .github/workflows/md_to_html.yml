@@ -7,16 +7,19 @@ on:
     - 'README.md'
     - 'DISCLAIMER.md'
 
+permissions:
+  contents: write
+
 jobs:
   convert:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.PAT_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN || github.token }}
       - uses: actions/setup-python@v4
         with:
-          python-version: pypy-3.7-v7.3.3
+          python-version: '3.12'
       - name: Convert to html
         run: |
           pip install markdown bleach

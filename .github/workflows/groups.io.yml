@@ -5,13 +5,16 @@ on:
   schedule:
     - cron: "0 0 * * 3"
 
+permissions:
+  contents: write
+
 jobs:
   archive:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.PAT_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN || github.token }}
       - uses: actions/setup-python@v4
         with:
           python-version: '3.10'
