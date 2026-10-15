@@ -9,16 +9,35 @@ import subprocess
 import tempfile
 import threading
 import unittest
+from types import SimpleNamespace
 from unittest.mock import patch
 import io
 
 from warcio.statusandheaders import StatusAndHeaders
 from warcio.warcwriter import WARCWriter
 
-from archive_app import Capture
+from archive_app import Capture, is_capture_request
 
 
 class AppArchiveTests(unittest.TestCase):
+    def test_crawl_defers_prefetches_without_dropping_public_data_or_assets(self):
+        def request(url, method='GET', resource='fetch'):
+            return SimpleNamespace(url=url, method=method, resource_type=resource)
+
+        self.assertTrue(is_capture_request(request('https://diyhrt.coffee/api/v1/items')))
+        self.assertTrue(is_capture_request(request('https://diyhrt.coffee/_next/app.js')))
+        self.assertTrue(
+            is_capture_request(request('https://diyhrt.coffee/calculator', resource='document'))
+        )
+        self.assertFalse(is_capture_request(request('https://diyhrt.coffee/?_rsc=random')))
+        self.assertFalse(is_capture_request(request('https://diyhrt.coffee/?_rsc')))
+        self.assertFalse(
+            is_capture_request(request('https://diyhrt.coffee/api/v1/visits', method='POST'))
+        )
+        self.assertFalse(
+            is_capture_request(request('https://diyhrt.coffee/events', resource='eventsource'))
+        )
+
     def test_identical_assets_import_from_warc_revisits(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

@@ -37,6 +37,16 @@ def normalize_url(url):
     return parts._replace(path=parts.path or '/', fragment='').geturl()
 
 
+def is_capture_request(request):
+    # Next prefetches are saved sequentially by coffee_data() after the page crawl.
+    return (
+        request.method == 'GET'
+        and urlsplit(request.url).hostname not in LIVE_SERVICES
+        and request.resource_type != 'eventsource'
+        and not re.search(r'[?&]_rsc(?:=|&|$)', request.url)
+    )
+
+
 class Capture:
     def __init__(self, directory, host):
         self.directory = Path(directory)
@@ -155,6 +165,10 @@ class Capture:
                     payloads[digest] = self.directory / self.responses[url]['file']
 
     def browser(self, executable=None, seeds=None):
+        if self.host == 'diyhrt.coffee':
+            # Anonymous account checks can hang in Chromium; save their real GET responses first.
+            self.request(urljoin(self.origin, 'api/v1/me'))
+            self.request(urljoin(self.origin, 'api/forum/me/account'))
         pending = list(seeds) if seeds is not None else [self.origin] + list(self.pages)
         if seeds is None and self.host == 'diyhrt.coffee':
             pending.append('https://forum.diyhrt.coffee/')
@@ -171,7 +185,7 @@ class Capture:
 
             def serve_cached(route):
                 request = route.request
-                if request.method != 'GET' or urlsplit(request.url).hostname in LIVE_SERVICES:
+                if not is_capture_request(request):
                     route.abort()
                     return
                 cached = self.responses.get(request.url)
@@ -191,7 +205,7 @@ class Capture:
                     route.continue_()
 
             def started(request):
-                if request.resource_type != 'eventsource':
+                if is_capture_request(request):
                     active.add(request)
 
             page.route('**/*', serve_cached)
@@ -204,6 +218,7 @@ class Capture:
                     return
                 kind = response.headers.get('content-type', 'application/octet-stream')
                 if 'text/event-stream' in kind:
+                    active.discard(response.request)
                     return
                 try:
                     body = (
@@ -249,7 +264,10 @@ class Capture:
                     if not active:
                         break
                     if time.monotonic() > deadline:
-                        raise RuntimeError('Page requests did not finish: ' + url)
+                        pending_urls = ', '.join(sorted(request.url for request in active))
+                        raise RuntimeError(
+                            'Page requests did not finish: ' + url + ': ' + pending_urls
+                        )
                 for href in page.locator('a[href]').evaluate_all(
                     '(links) => links.map(a => a.href)'
                 ):
