@@ -38,6 +38,38 @@ class AppArchiveTests(unittest.TestCase):
             is_capture_request(request('https://diyhrt.coffee/events', resource='eventsource'))
         )
 
+    def test_browser_api_reads_reuse_real_anonymous_http_responses(self):
+        class GuestHandler(SimpleHTTPRequestHandler):
+            def log_message(self, *_arguments):
+                pass
+
+            def do_GET(self):
+                self.send_response(401)
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(b'{"user":null}')
+
+        server = ThreadingHTTPServer(('127.0.0.1', 0), GuestHandler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            with tempfile.TemporaryDirectory() as temp:
+                capture = Capture(temp, '127.0.0.1')
+                url = 'http://127.0.0.1:' + str(server.server_port) + '/api/v1/me'
+                record = capture.browser_response(url)
+                self.assertEqual(record['status'], 401)
+                self.assertEqual(
+                    (capture.directory / record['file']).read_bytes(), b'{"user":null}'
+                )
+                with patch.object(
+                    capture.session, 'get', side_effect=AssertionError('Response was already saved')
+                ):
+                    self.assertEqual(capture.browser_response(url), record)
+        finally:
+            server.shutdown()
+            server.server_close()
+            thread.join()
+
     def test_identical_assets_import_from_warc_revisits(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

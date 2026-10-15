@@ -164,11 +164,14 @@ class Capture:
                 if digest and url in self.responses:
                     payloads[digest] = self.directory / self.responses[url]['file']
 
+    def browser_response(self, url):
+        parts = urlsplit(url)
+        if parts.hostname in self.allowed_hosts and parts.path.startswith('/api/'):
+            # Some anonymous API requests hang in Chromium; use the finite HTTP capture path.
+            self.request(url)
+        return self.responses.get(normalize_url(url))
+
     def browser(self, executable=None, seeds=None):
-        if self.host == 'diyhrt.coffee':
-            # Anonymous account checks can hang in Chromium; save their real GET responses first.
-            self.request(urljoin(self.origin, 'api/v1/me'))
-            self.request(urljoin(self.origin, 'api/forum/me/account'))
         pending = list(seeds) if seeds is not None else [self.origin] + list(self.pages)
         if seeds is None and self.host == 'diyhrt.coffee':
             pending.append('https://forum.diyhrt.coffee/')
@@ -188,7 +191,7 @@ class Capture:
                 if not is_capture_request(request):
                     route.abort()
                     return
-                cached = self.responses.get(request.url)
+                cached = self.browser_response(request.url)
                 if cached:
                     headers = {'Content-Type': cached['content_type']}
                     if cached['location']:
