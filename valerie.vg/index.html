@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>valerie.vg archive</title>
+    <script src="../replay/ui.js"></script>
+    <style>
+        html, body { height: 100%; margin: 0; }
+        body { display: flex; flex-direction: column; }
+        p { margin: 0; padding: 8px; font: 16px sans-serif; }
+        #archive { display: flex; flex: 1; min-height: 0; }
+        replay-web-page { display: block; flex: 1; min-height: 0; }
+    </style>
+</head>
+<body>
+    <p>Archived 2026-10-15. <a href="snapshot.wacz">Download archive</a> ·
+       <a href="https://valerie.vg/" target="_blank" rel="noopener noreferrer">Original site</a> ·
+       <a href="../index.html">All sites</a></p>
+    <div id="archive"></div>
+    <script>
+        (async () => {
+            const source = 'snapshot.wacz?v=f9d1baadb63f4fa4b603f3a3078af979be997bb609851744fe6544a51725c686';
+            const viewer = document.createElement('replay-web-page');
+            viewer.setAttribute('source', source);
+            viewer.setAttribute('url', 'https://valerie.vg/');
+            viewer.setAttribute('replayBase', '../replay/');
+            viewer.setAttribute('deepLink', '');
+            const response = await fetch(source, { method: 'HEAD' });
+            if (response.headers.get('Accept-Ranges') !== 'bytes') {
+                viewer.setAttribute('loading', 'eager');
+            }
+            document.getElementById('archive').append(viewer);
+        })().catch(() => {
+            document.getElementById('archive').textContent =
+                'Serve this folder with python -m http.server and open http://localhost:8000.';
+        });
+    </script>
+    <noscript>Use ReplayWeb.page to open the downloaded archive.</noscript>
+</body>
+</html>
