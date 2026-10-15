@@ -2,6 +2,7 @@
 
 const acorn = require('acorn');
 const fs = require('node:fs');
+const stockEdits = require('./stock_js.cjs');
 const input = JSON.parse(fs.readFileSync(0, 'utf8'));
 const mapping = input.mapping;
 const origins = input.origins;
@@ -172,6 +173,7 @@ for (const item of input.items) {
         entry.token.end,
         JSON.stringify(entry.value)
     ]);
+    edits.push(...stockEdits(source, item.origin));
     if (source.includes('hydrateRoot')) {
         walk(acorn.parse(source, { ecmaVersion: 'latest' }), node => {
             if (node.type !== 'CallExpression' || !node.arguments.length) return;

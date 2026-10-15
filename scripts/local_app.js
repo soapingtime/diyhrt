@@ -5,6 +5,18 @@
     const records = config.records;
     const origin = new URL(config.original).origin;
     const fetchFile = window.fetch.bind(window);
+    const NativeSocket = window.WebSocket;
+    const stockPaths = new Set([
+        '/api/v1/shops',
+        '/api/v1/items',
+        '/api/v1/stock/current',
+        '/api/v1/stock/changes'
+    ]);
+    let stockLive = false;
+    let stockSocket;
+    let savedStock;
+    config.stockStatus = connected => (connected && stockLive ? 'watching' : 'archived');
+    config.stockLabel = () => (stockLive ? ' synced' : ' saved');
     const reverse = new Map(
         Object.entries(records)
             .filter(([, record]) => !record.location)
@@ -79,6 +91,27 @@
                 status: 503,
                 headers: { 'Content-Type': 'application/json' }
             });
+        }
+        const original = sourceURL(value);
+        if (stockLive && original.origin === origin && stockPaths.has(original.pathname)) {
+            try {
+                const signal = AbortSignal.timeout(5000);
+                const response = await fetchFile(
+                    config.stockEndpoint + original.pathname + original.search,
+                    {
+                        method,
+                        credentials: 'omit',
+                        cache: 'no-store',
+                        signal: options.signal ? AbortSignal.any([options.signal, signal]) : signal
+                    }
+                );
+                if (!response.ok) throw new Error('Live stock unavailable');
+                return response;
+            } catch (error) {
+                if (options.signal?.aborted) throw error;
+                stockLive = false;
+                stockSocket?.close();
+            }
         }
         const record = recordFor(value);
         if (record) {
@@ -186,7 +219,29 @@
         }
     });
 
-    // A saved snapshot has no live stock pushes; preserve the site's offline state.
+    function savedStockEvents() {
+        if (!savedStock) {
+            savedStock = Promise.all(
+                ['shops', 'stock/current'].map(async endpoint => {
+                    const record = records[origin + '/api/v1/' + endpoint];
+                    if (!record) return [];
+                    return (await fetchFile(record.path)).json();
+                })
+            ).then(([shops, current]) =>
+                shops
+                    .filter(shop => shop.enabled)
+                    .map(shop => ({
+                        type: shop.lastPollOk === false ? 'poll.error' : 'poll.success',
+                        shop: shop.name,
+                        timestamp: shop.lastPollAt || '',
+                        tracked: current.filter(row => row.shopId === shop.id).length,
+                        changed: false
+                    }))
+            );
+        }
+        return savedStock;
+    }
+
     class SnapshotSocket extends EventTarget {
         static CONNECTING = 0;
         static OPEN = 1;
@@ -211,5 +266,75 @@
             throw new DOMException('The archived connection is closed.', 'InvalidStateError');
         }
     }
-    window.WebSocket = SnapshotSocket;
+
+    class StockSocket extends EventTarget {
+        static CONNECTING = 0;
+        static OPEN = 1;
+        static CLOSING = 2;
+        static CLOSED = 3;
+        readyState = StockSocket.CONNECTING;
+        bufferedAmount = 0;
+        protocol = '';
+        extensions = '';
+        binaryType = 'blob';
+        stopped = false;
+
+        constructor(url) {
+            super();
+            this.url = String(url);
+            if (config.stockEndpoint && !window.__mirrorOffline && navigator.onLine) {
+                const endpoint = new URL('/ws', config.stockEndpoint);
+                endpoint.protocol = endpoint.protocol === 'https:' ? 'wss:' : 'ws:';
+                this.socket = new NativeSocket(endpoint.href);
+                this.timeout = setTimeout(() => this.socket.close(), 5000);
+                stockSocket = this.socket;
+                this.socket.onopen = () => {
+                    clearTimeout(this.timeout);
+                    stockLive = true;
+                    this.readyState = StockSocket.OPEN;
+                    this.emit(new Event('open'));
+                };
+                this.socket.onmessage = event =>
+                    this.emit(new MessageEvent('message', { data: event.data }));
+                this.socket.onclose = () => this.fallback();
+            } else {
+                queueMicrotask(() => this.fallback());
+            }
+        }
+
+        emit(event) {
+            this.dispatchEvent(event);
+            this['on' + event.type]?.(event);
+        }
+
+        async fallback() {
+            clearTimeout(this.timeout);
+            stockLive = false;
+            if (this.stopped) return;
+            try {
+                for (const event of await savedStockEvents()) {
+                    if (this.stopped) return;
+                    this.emit(new MessageEvent('message', { data: JSON.stringify(event) }));
+                }
+            } finally {
+                this.readyState = StockSocket.CLOSED;
+                this.emit(new CloseEvent('close', { code: 1000, reason: 'Archived snapshot' }));
+            }
+        }
+
+        close() {
+            clearTimeout(this.timeout);
+            this.stopped = true;
+            this.readyState = StockSocket.CLOSED;
+            this.socket?.close();
+        }
+
+        send(data) {
+            if (this.readyState !== StockSocket.OPEN)
+                throw new DOMException('The stock connection is closed.', 'InvalidStateError');
+            this.socket.send(data);
+        }
+    }
+
+    window.WebSocket = origin === 'https://diyhrt.coffee' ? StockSocket : SnapshotSocket;
 })();

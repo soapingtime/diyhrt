@@ -17,6 +17,7 @@ import tinycss2
 
 
 SCRIPTS = Path(__file__).resolve().parent
+STOCK_ENDPOINT = 'https://stock.cmyksoda.cc'
 
 
 class Export:
@@ -188,12 +189,17 @@ class Export:
         # Streamed suspense fragments must settle before hydration consumes the saved Flight stream.
         if last_flight and soup.body:
             soup.body.append(last_flight.extract())
+        connections = "'self'"
+        if self.capture.host == 'diyhrt.coffee':
+            connections += ' ' + STOCK_ENDPOINT + ' ' + STOCK_ENDPOINT.replace('https:', 'wss:')
         policy = soup.new_tag(
             'meta',
             attrs={
                 'http-equiv': 'Content-Security-Policy',
                 'content': "default-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; "
-                "style-src 'self' 'unsafe-inline'; connect-src 'self'; frame-src 'self'; "
+                "style-src 'self' 'unsafe-inline'; connect-src "
+                + connections
+                + "; frame-src 'self'; "
                 "form-action 'self'; base-uri 'self'",
             },
         )
@@ -205,6 +211,11 @@ class Export:
                     'original': url,
                     'root': self.root,
                     'origins': self.origins,
+                    **(
+                        {'stockEndpoint': STOCK_ENDPOINT}
+                        if self.capture.host == 'diyhrt.coffee'
+                        else {}
+                    ),
                 }
             ).replace('</', '<\\/')
             + ';'

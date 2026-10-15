@@ -37,6 +37,8 @@ def validate(capture, destination, executable=None):
                 options['executable_path'] = executable
             browser = playwright.chromium.launch(**options)
             context = browser.new_context(viewport={'width': 1280, 'height': 900})
+            # Validate the complete saved copy independently of the optional live stock service.
+            context.add_init_script('window.__mirrorOffline = true;')
             page = context.new_page()
 
             def guard(route):
