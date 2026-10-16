@@ -1,0 +1,30 @@
+{
+  "e2eeVersion": 1,
+  "vendored": {
+    "libsodium-sumo.js": "libsodium-sumo@0.8.4 (npm, dist/modules-sumo)",
+    "libsodium-wrappers.js": "libsodium-wrappers-sumo@0.8.4 (npm, dist/modules-sumo)"
+  },
+  "sourceCommit": "7b4e74951a6a39dbf866141983d83e3776821084",
+  "files": {
+    "README.md": {
+      "bytes": 3011,
+      "integrity": "sha384-bnzhN+mkYj5wDFkZCup1WGEuADy8lMo/+UjT5lFpgaSGhjQzIYaJpqxeuKs3+f07",
+      "sha384": "6e7ce137e9a4623e700c59190aea7558612e003cbc94ca3ff948d3e6516981a486863433218689a6ac5eb8ab37f9fd3b"
+    },
+    "e2ee-core.js": {
+      "bytes": 5558,
+      "integrity": "sha384-fmIPNH4BxjF8BNNbpwEC6hdVaPtfW9EZAnUHwkIzr4gtwVigQGnHOuUE7n/vI7ll",
+      "sha384": "7e620f347e01c6317c04d35ba70102ea175568fb5f5bd119027507c24233af882dc158a04069c73ae504ee7fef23b965"
+    },
+    "libsodium-sumo.js": {
+      "bytes": 1197602,
+      "integrity": "sha384-zbeL6Hn9JBT/r7icKJJrBFwNWscitGqTMvif4ceGIsY8g2ZamdXwNhVKnRW0OmFz",
+      "sha384": "cdb78be879fd2414ffafb89c28926b045c0d5ac722b46a9332f89fe1c78622c63c83665a99d5f036154a9d15b43a6173"
+    },
+    "libsodium-wrappers.js": {
+      "bytes": 121445,
+      "integrity": "sha384-UnQ52YkE8p6gkzVM5Bersulk42t21gMp63lHREaSAoj8vYGcwdjIIzZsaXNJ4xiJ",
+      "sha384": "527439d98904f29ea093354ce417abb2e964e36b76d60329eb79474446920288fcbd819cc1d8c823366c697349e31889"
+    }
+  }
+}

@@ -22,7 +22,7 @@
 }
 
 /* Dark mode support if variables are set */
-html[data-theme='dark'] .reference-hover-box {
+html[data-theme="dark"] .reference-hover-box {
     background-color: var(--background-color, #222);
     /* Fallback to dark grey */
     border-color: var(--code-border-color, #444);

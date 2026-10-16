@@ -1,0 +1,32 @@
+name: Publish refreshed archives
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - DIYHRT.coffee
+      - DIYHRT.wiki
+      - groups.io wiki
+      - HRT.coffee
+      - HRTCafe.net
+      - Reddit Wikis
+      - transfemscience.org
+      - Valerie.vg
+      - Convert markdown to html
+    types: [completed]
+
+permissions:
+  pages: write
+
+jobs:
+  publish:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    steps:
+      - name: rebuild GitHub Pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"

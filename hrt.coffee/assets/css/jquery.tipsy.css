@@ -30,7 +30,7 @@
     bottom: -5px;
     left: 5px;
     display: inline-block;
-    content: '';
+    content: "";
     border-right: 5px solid transparent;
     border-top: 5px solid var(--tipsy-background);
     border-bottom: 0 solid var(--tipsy-background);
