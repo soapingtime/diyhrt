@@ -306,7 +306,15 @@ class Assets:
 
 
 def mirror(
-    host, urls, reject, output=None, headers=(), static=False, level=None, ignore_robots=False
+    host,
+    urls,
+    reject,
+    output=None,
+    headers=(),
+    static=False,
+    level=None,
+    ignore_robots=False,
+    require_selector=None,
 ):
     if not host or '/' in host or host.startswith('.'):
         raise ValueError('Expected a hostname')
@@ -348,12 +356,18 @@ def mirror(
             raise RuntimeError('wget failed: ' + str(result.returncode))
         snapshot = Path(temp) / host
         assets = Assets(snapshot, origin, static=static)
-        homepage = assets.local_file(urls[0] if urls else origin)
-        if not homepage:
-            raise RuntimeError('No homepage downloaded; keeping the previous snapshot')
-        document = BeautifulSoup(homepage.read_bytes(), 'html.parser')
-        if not document.body or not document.body.get_text(strip=True):
-            raise RuntimeError('No readable homepage; keeping the previous snapshot')
+        for url in urls or [origin]:
+            page = assets.local_file(url)
+            if not page:
+                raise RuntimeError(
+                    'Seed page not downloaded: ' + url + '; keeping the previous snapshot'
+                )
+            document = BeautifulSoup(page.read_bytes(), 'html.parser')
+            content = document.select_one(require_selector) if require_selector else document.body
+            if content is None or not content.get_text(strip=True):
+                raise RuntimeError(
+                    'Expected content missing: ' + url + '; keeping the previous snapshot'
+                )
         assets.run()
         for path in snapshot.rglob('*.orig'):
             path.unlink()
@@ -371,6 +385,10 @@ def main():
     parser.add_argument('--level', type=int)
     parser.add_argument('--ignore-robots', action='store_true')
     parser.add_argument(
+        '--require-selector',
+        help='require nonempty content matching this CSS selector on every seed page',
+    )
+    parser.add_argument(
         '--static',
         action='store_true',
         help='preserve server-rendered content without live app scripts or controls',
@@ -385,6 +403,7 @@ def main():
         args.static,
         args.level,
         args.ignore_robots,
+        args.require_selector,
     )
 
 

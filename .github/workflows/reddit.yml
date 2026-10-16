@@ -22,7 +22,7 @@ jobs:
         run: pip install -r scripts/requirements.txt
       - name: download reddit
         run: |
-          python scripts/mirror.py old.reddit.com https://old.reddit.com/r/TransDIY/wiki https://old.reddit.com/r/TransDIY/wiki/pharmacies https://old.reddit.com/r/TransSurgeriesWiki/wiki/index/ https://old.reddit.com/r/FTM/wiki --output reddit --header 'Cookie: over18=1' --static --level 1
+          python scripts/mirror.py old.reddit.com https://old.reddit.com/r/TransDIY/wiki https://old.reddit.com/r/TransDIY/wiki/pharmacies https://old.reddit.com/r/TransSurgeriesWiki/wiki/index/ https://old.reddit.com/r/FTM/wiki --output reddit --header 'Cookie: over18=1' --static --level 1 --require-selector '.wiki-page-content .md'
       - name: Commit Changes
         if: ${{ success() }}
         uses: EndBug/add-and-commit@v9

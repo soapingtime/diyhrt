@@ -162,6 +162,59 @@ class MirrorTests(unittest.TestCase):
                     mirror('example.com', [], '', output=str(root))
             self.assertEqual((root / 'index.html').read_text(), 'previous snapshot')
 
+    def test_wiki_capture_requires_content_on_every_seed_page(self):
+        wiki = '<div class="wiki-page-content"><div class="md">Wiki content</div></div>'
+        login = '<h1>Log in to Reddit</h1>'
+        empty = '<div class="wiki-page-content"><div class="md"> </div></div>'
+        cases = [
+            ('blocked', {}, 'Seed page not downloaded'),
+            ('partial', {'wiki.html': wiki}, 'Seed page not downloaded'),
+            ('login', {'wiki.html': login, 'next.html': wiki}, 'Expected content missing'),
+            ('later login', {'wiki.html': wiki, 'next.html': login}, 'Expected content missing'),
+            ('empty wiki', {'wiki.html': wiki, 'next.html': empty}, 'Expected content missing'),
+            ('complete', {'wiki.html': wiki, 'next.html': wiki}, None),
+        ]
+        for name, pages, error in cases:
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp) / 'reddit'
+                root.mkdir()
+                previous = root / 'index.html'
+                previous.write_text('previous snapshot')
+
+                with patch('mirror.subprocess.run') as run:
+                    run.return_value.stdout = 'GNU Wget 1.21.4'
+                    run.return_value.returncode = 8 if error else 0
+
+                    def download(command, **kwargs):
+                        for argument in command:
+                            if argument.startswith('--directory-prefix='):
+                                stage = Path(argument.split('=', 1)[1]) / 'example.com'
+                                stage.mkdir()
+                                for filename, content in pages.items():
+                                    (stage / filename).write_text(
+                                        '<html><head></head><body>' + content + '</body></html>'
+                                    )
+                        return run.return_value
+
+                    run.side_effect = download
+                    arguments = (
+                        'example.com',
+                        ['https://example.com/wiki', 'https://example.com/next'],
+                        '',
+                    )
+                    options = {'output': str(root), 'require_selector': '.wiki-page-content .md'}
+                    if error:
+                        with self.assertRaisesRegex(RuntimeError, error):
+                            mirror(*arguments, **options)
+                        self.assertEqual(previous.read_text(), 'previous snapshot')
+                        self.assertEqual(list(root.iterdir()), [previous])
+                    else:
+                        mirror(*arguments, **options)
+                        self.assertFalse(previous.exists())
+                        for filename in pages:
+                            document = BeautifulSoup((root / filename).read_text(), 'html.parser')
+                            self.assertEqual(document.select_one('.md').get_text(), 'Wiki content')
+
 
 if __name__ == '__main__':
     unittest.main()
