@@ -1,5 +1,7 @@
 ## What is this?
-This an archive of diyhrt.cafe, diyhrt.wiki, valerie.vg (formerly diyhrt.market), diyhrt.coffee, hrt.coffee, transfemscience.org and a few others in case something goes wrong. Websites are updated once weekly.
+This an archive of diyhrt.cafe, diyhrt.wiki, valerie.vg (formerly diyhrt.market), diyhrt.coffee, hrt.coffee, transfemscience.org and a few others in case something goes wrong. Active websites are updated once weekly.
+
+hrtcafe.net is offline. Its last archived copy is preserved, and scheduled updates are disabled until it returns.
 
 ## Accessing this archive
 ### Online, no download required.
