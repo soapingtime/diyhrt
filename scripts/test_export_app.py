@@ -13,6 +13,28 @@ from export_app import Export
 
 
 class ExportTests(unittest.TestCase):
+    def test_excluded_account_links_open_the_original_site(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            capture = Capture(root / 'raw', 'valerie.vg', r'/login(/|$|[?])')
+            capture.record(
+                capture.origin,
+                b'<html><head></head><body><a href="/login?next=/profile#form">Sign in</a>'
+                b'<a href="/meds/products/">Products</a></body></html>',
+                200,
+                'text/html',
+            )
+            capture.record(
+                capture.origin + 'meds/products/',
+                b'<html><head></head><body>Products</body></html>',
+                200,
+                'text/html',
+            )
+            capture.export(root / 'output')
+            soup = BeautifulSoup((root / 'output/index.html').read_text(), 'html.parser')
+            self.assertEqual(soup.a['href'], 'https://valerie.vg/login?next=/profile#form')
+            self.assertEqual(soup.find_all('a')[1]['href'], '/valerie.vg/meds/products/')
+
     def test_javascript_failure_reports_the_parser_error(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

@@ -154,6 +154,14 @@ class Export:
         for tag in soup.select('[src], [href], [poster], [action], object[data]'):
             for attribute in ('src', 'href', 'poster', 'action', 'data'):
                 if tag.get(attribute):
+                    if tag.name == 'a' and attribute == 'href':
+                        target = urljoin(url, tag[attribute])
+                        if (
+                            urlsplit(target).hostname in self.capture.allowed_hosts
+                            and not self.capture.page_allowed(target)
+                        ):
+                            tag[attribute] = target
+                            continue
                     tag[attribute] = self.target(tag[attribute], url)
         for tag in soup.select('[srcset]'):
             if 'data:' not in tag['srcset']:
