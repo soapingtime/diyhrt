@@ -48,10 +48,11 @@ def is_capture_request(request):
 
 
 class Capture:
-    def __init__(self, directory, host):
+    def __init__(self, directory, host, reject=r'/(auth|logout|admin)(/|$)'):
         self.directory = Path(directory)
         self.directory.mkdir(parents=True, exist_ok=True)
         self.host = host
+        self.reject = reject
         self.allowed_hosts = {host}
         if host == 'diyhrt.coffee':
             self.allowed_hosts.add('forum.diyhrt.coffee')
@@ -60,6 +61,14 @@ class Capture:
         self.pages = {}
         self.session = requests.Session()
         self.session.headers['User-Agent'] = USER_AGENT
+
+    def page_allowed(self, url):
+        parts = urlsplit(url)
+        return (
+            parts.hostname in self.allowed_hosts
+            and not re.match(r'/cdn-cgi(?:/|$)', parts.path)
+            and not (self.reject and re.search(self.reject, url))
+        )
 
     def document(self, body):
         soup = BeautifulSoup(body, 'html.parser')
@@ -111,7 +120,7 @@ class Capture:
         if (
             status == 200
             and content_type.startswith('text/html')
-            and urlsplit(url).hostname in self.allowed_hosts
+            and self.page_allowed(url)
             and not re.search(r'[?&]_rsc=', url)
         ):
             soup = BeautifulSoup(body, 'html.parser')
@@ -242,7 +251,7 @@ class Capture:
             page.on('response', response_received)
             while pending:
                 url = pending.pop(0)
-                if url in visited or urlsplit(url).hostname not in self.allowed_hosts:
+                if url in visited or not self.page_allowed(url):
                     continue
                 visited.add(url)
                 previous = self.responses.get(url)
@@ -276,9 +285,7 @@ class Capture:
                 ):
                     parts = urlsplit(href)
                     target = normalize_url(href)
-                    if parts.hostname not in self.allowed_hosts or re.search(
-                        r'/(logout|auth|admin)(/|$)', parts.path
-                    ):
+                    if not self.page_allowed(target):
                         continue
                     if target not in visited and target not in pending:
                         if not Path(parts.path).suffix or parts.path.endswith(('.html', '.htm')):
@@ -408,11 +415,8 @@ class Capture:
                                 urls.append(tag['href'])
                         for tag in soup.select('a[href]'):
                             target = urljoin(url, tag['href'])
-                            if urlsplit(target).hostname in self.allowed_hosts:
-                                if not re.search(
-                                    r'/(logout|auth|admin)(/|$)', urlsplit(target).path
-                                ):
-                                    self.request(urlsplit(target)._replace(fragment='').geturl())
+                            if self.page_allowed(target):
+                                self.request(urlsplit(target)._replace(fragment='').geturl())
                         for tag in soup.select('meta[content]'):
                             name = tag.get('property') or tag.get('name')
                             if name in ('og:image', 'twitter:image'):
@@ -482,7 +486,7 @@ def archive(host, wget, executable, reject):
         result = subprocess.run(command + seeds, check=False)
         if result.returncode not in (0, 8):
             raise RuntimeError('wget failed: ' + str(result.returncode))
-        capture = Capture(root / 'responses', host)
+        capture = Capture(root / 'responses', host, reject)
         capture.import_warc(str(raw) + '.warc.gz')
         if capture.origin not in capture.pages:
             raise RuntimeError('No homepage captured; keeping the previous snapshot')

@@ -13,6 +13,21 @@ from export_app import Export
 
 
 class ExportTests(unittest.TestCase):
+    def test_javascript_failure_reports_the_parser_error(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            capture = Capture(root / 'raw', 'example.com')
+            capture.record(
+                capture.origin,
+                b"<html><head></head><body><script>window.value = 'unfinished</script></body></html>",
+                200,
+                'text/html',
+            )
+            with self.assertRaisesRegex(
+                RuntimeError, r'JavaScript relocation failed:[\s\S]*Unterminated string constant'
+            ):
+                capture.export(root / 'output')
+
     def test_flight_keeps_utf8_text_lengths_and_relocates_split_records(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

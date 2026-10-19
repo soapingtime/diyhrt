@@ -20,6 +20,39 @@ from archive_app import Capture, is_capture_request
 
 
 class AppArchiveTests(unittest.TestCase):
+    def test_page_exclusions_apply_to_discovery_and_asset_completion(self):
+        with tempfile.TemporaryDirectory() as temp:
+            capture = Capture(temp, 'valerie.vg', r'/(login|register|profile)(/|$|[?])')
+            public = capture.origin + 'meds/products/?region=EU'
+            excluded = [
+                capture.origin + 'login?next=/profile',
+                capture.origin + 'register',
+                capture.origin + 'profile/',
+                capture.origin + 'cdn-cgi/challenge-platform/help',
+                'https://developers.cloudflare.com/help/',
+            ]
+            self.assertTrue(capture.page_allowed(public))
+            for url in excluded:
+                self.assertFalse(capture.page_allowed(url), url)
+            links = ''.join('<a href="' + url + '">link</a>' for url in [public] + excluded)
+            capture.record(
+                capture.origin,
+                ('<html><head></head><body>' + links + '</body></html>').encode(),
+                200,
+                'text/html',
+            )
+
+            def fetch(url):
+                self.assertEqual(url, public)
+                capture.record(
+                    url, b'<html><head></head><body>Products</body></html>', 200, 'text/html'
+                )
+
+            with patch.object(capture, 'request', side_effect=fetch) as request:
+                capture.complete_assets()
+            request.assert_called_once_with(public)
+            self.assertEqual(set(capture.pages), {capture.origin, public})
+
     def test_crawl_defers_prefetches_without_dropping_public_data_or_assets(self):
         def request(url, method='GET', resource='fetch'):
             return SimpleNamespace(url=url, method=method, resource_type=resource)

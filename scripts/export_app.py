@@ -301,13 +301,16 @@ class Export:
                 for item in self.javascript
             ],
         }
-        result = subprocess.run(
-            ['node', str(SCRIPTS / 'relocate_js.cjs')],
-            input=json.dumps(payload),
-            text=True,
-            capture_output=True,
-            check=True,
-        )
+        try:
+            result = subprocess.run(
+                ['node', str(SCRIPTS / 'relocate_js.cjs')],
+                input=json.dumps(payload),
+                text=True,
+                capture_output=True,
+                check=True,
+            )
+        except subprocess.CalledProcessError as error:
+            raise RuntimeError('JavaScript relocation failed:\n' + error.stderr.strip()) from error
         for item, text in zip(self.javascript, json.loads(result.stdout), strict=True):
             item['save'](text)
         for path, soup in documents:

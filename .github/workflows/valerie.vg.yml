@@ -28,7 +28,7 @@ jobs:
       - name: install Chromium
         run: python -m playwright install --with-deps chromium
       - name: download valerie.vg
-        run: python scripts/archive_app.py valerie.vg --reject '/(login|logout|register|admin|accounts)(/|$|[?])'
+        run: python scripts/archive_app.py valerie.vg --reject '/(login|logout|register|password-reset|profile|admin|accounts)(/|$|[?])'
       - name: commit changes
         if: ${{ success() }}
         uses: EndBug/add-and-commit@v9
