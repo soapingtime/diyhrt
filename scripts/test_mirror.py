@@ -162,6 +162,52 @@ class MirrorTests(unittest.TestCase):
                     mirror('example.com', [], '', output=str(root))
             self.assertEqual((root / 'index.html').read_text(), 'previous snapshot')
 
+    def test_seed_fragments_require_visible_content(self):
+        cases = [
+            ('navigation', '<nav><a href="/">Home</a></nav>', False),
+            ('empty', '<!-- navigation -->\n<div> </div>', True),
+            ('metadata', '<head><title>Navigation</title></head><script>load()</script>', True),
+            ('empty body', '<html><head><title>Navigation</title></head><body> </body></html>', True),
+        ]
+        for name, fragment, error in cases:
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp) / 'archive'
+                root.mkdir()
+                previous = root / 'index.html'
+                previous.write_text('previous snapshot')
+
+                with patch('mirror.subprocess.run') as run:
+                    run.return_value.stdout = 'GNU Wget 1.21.4'
+                    run.return_value.returncode = 0
+
+                    def download(command, **kwargs):
+                        for argument in command:
+                            if argument.startswith('--directory-prefix='):
+                                stage = Path(argument.split('=', 1)[1]) / 'example.com'
+                                stage.mkdir()
+                                (stage / 'index.html').write_text(
+                                    '<html><head></head><body>Home</body></html>'
+                                )
+                                (stage / 'nav.html').write_text(fragment)
+                        return run.return_value
+
+                    run.side_effect = download
+                    arguments = (
+                        'example.com',
+                        ['https://example.com/', 'https://example.com/nav.html'],
+                        '',
+                    )
+                    if error:
+                        with self.assertRaisesRegex(RuntimeError, 'Expected content missing'):
+                            mirror(*arguments, output=str(root))
+                        self.assertEqual(previous.read_text(), 'previous snapshot')
+                        self.assertEqual(list(root.iterdir()), [previous])
+                    else:
+                        mirror(*arguments, output=str(root))
+                        document = BeautifulSoup((root / 'nav.html').read_text(), 'html.parser')
+                        self.assertEqual(document.a.get_text(), 'Home')
+                        self.assertEqual(document.a['href'], 'index.html')
+
     def test_wiki_capture_requires_content_on_every_seed_page(self):
         wiki = '<div class="wiki-page-content"><div class="md">Wiki content</div></div>'
         login = '<h1>Log in to Reddit</h1>'

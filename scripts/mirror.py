@@ -363,7 +363,12 @@ def mirror(
                     'Seed page not downloaded: ' + url + '; keeping the previous snapshot'
                 )
             document = BeautifulSoup(page.read_bytes(), 'html.parser')
-            content = document.select_one(require_selector) if require_selector else document.body
+            if require_selector:
+                content = document.select_one(require_selector)
+            else:
+                if document.head:
+                    document.head.decompose()
+                content = document.body or document
             if content is None or not content.get_text(strip=True):
                 raise RuntimeError(
                     'Expected content missing: ' + url + '; keeping the previous snapshot'
