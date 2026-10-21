@@ -1,6 +1,6 @@
 body {
   /*font-family: "Lato", sans-serif;*/
-font-family: 'Poppins', sans-serif;
+font-family: "Poppins", sans-serif;
   color:#3f3f3f;
   min-height: 100vh;
   margin: 0;
@@ -64,7 +64,7 @@ li{
   background: linear-gradient(to bottom right, #0f59d1, #630d4e);
   overflow-x: hidden;
   padding-top: 20px;
-  font-family: 'Comfortaa';
+  font-family: "Comfortaa";
   box-shadow:  0px 0px 10px black;
 }
 
@@ -94,7 +94,7 @@ li{
   top:10px;
   float:right;
   text-decoration: none;
-  font-family: 'Comfortaa';
+  font-family: "Comfortaa";
   border-width: 0px;
   width:auto;
   border-radius: 10px;
@@ -108,7 +108,7 @@ li{
   border-width: 0px;
   border-color: #fff;
   margin-left:340px;
-  font-family: 'Comfortaa';
+  font-family: "Comfortaa";
 }
 
 
@@ -119,7 +119,7 @@ li{
   border-radius: 0px 0px 8px 8px;
   text-decoration: none;
   /* font-family: 'Comfortaa'; */
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   width:auto;
   margin-right:18px;
   padding: 16px;
@@ -474,7 +474,7 @@ li{
 
 /* Banner */
 .banner{
-  background-image: url(../images/banner2.png);
+  background-image: url("../images/banner2.png");
   background-position: bottom;
   background-size: cover;
 }
@@ -594,7 +594,7 @@ li{
   padding-left:25px;
   padding-right:25px;
   font-size: 17px;
-  font-family: 'Comfortaa';
+  font-family: "Comfortaa";
 }
 
 .card h3{
@@ -699,7 +699,7 @@ footer img{
   padding-top: 0;
   margin-top: 0;
   font-size: 17px;
-  font-family: 'Comfortaa';
+  font-family: "Comfortaa";
 }
 
 .contact h3{

@@ -1,33 +1,33 @@
 @font-face {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(fonts/inter-400.woff2) format('woff2');
+  src: url("fonts/inter-400.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url(fonts/inter-500.woff2) format('woff2');
+  src: url("fonts/inter-500.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url(fonts/inter-700.woff2) format('woff2');
+  src: url("fonts/inter-700.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 800;
   font-display: swap;
-  src: url(fonts/inter-800.woff2) format('woff2');
+  src: url("fonts/inter-800.woff2") format("woff2");
 }
 
 :root {
@@ -335,7 +335,7 @@ label.collapsible {
 }
 
 label.collapsible::after {
-  content: "\e920";
+  content: "";
   font-family: icomoon;
   transform: rotate(90deg);
   transition: transform 0.2s 0s ease;
@@ -762,16 +762,16 @@ th.supplier-column {
         font-weight:bold;
     }
     table.no_generate tbody tr td:nth-of-type(1)::before {
-        content: 'Name: ';
+        content: "Name: ";
     }
     table.no_generate tbody tr td:nth-of-type(3)::before {
-        content: 'Shipping: ';
+        content: "Shipping: ";
     }
     table.no_generate tbody tr td:nth-of-type(4)::before {
-        content: 'Payment: ';
+        content: "Payment: ";
     }
     table.no_generate tbody tr td:nth-of-type(5)::before {
-        content: 'Notes: ';
+        content: "Notes: ";
     }
     
     /* Changelog */
@@ -795,13 +795,13 @@ th.supplier-column {
         font-weight:bold;
     }
     table#generate_other tbody tr td:nth-of-type(1)::before {
-        content: 'Date: ';
+        content: "Date: ";
     }
     table#generate_other tbody tr td:nth-of-type(2)::before {
-        content: 'Type: ';
+        content: "Type: ";
     }
     table#generate_other tbody tr td:nth-of-type(3)::before {
-        content: 'Note: ';
+        content: "Note: ";
     }
     
     /* Spreadsheets */

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>diyhrt · restocks</title>
+    <link>https://diyhrt.coffee/</link>
+    <description>restocks and sellouts from the diy hrt vendors diyhrt.coffee watches</description>
+    <language>en</language>
+    <ttl>5</ttl>
+    <lastBuildDate>Wed, 07 Oct 2026 06:05:10 +0000</lastBuildDate>
+    <atom:link href="https://diyhrt.coffee/api/v1/feed/stock.rss" rel="self" type="application/rss+xml"></atom:link>
+    <item>
+      <title>back in stock: Estradiol Enanthate · Hera (US)</title>
+      <link>https://herahrt.com/shop/</link>
+      <description>Estradiol Enanthate at Hera, ships to US. $60.00.</description>
+      <guid isPermaLink="false">diyhrt-stock-21647161</guid>
+      <pubDate>Wed, 07 Oct 2026 06:05:10 +0000</pubDate>
+      <category>Hera</category>
+    </item>
+    <item>
+      <title>back in stock: Estradiol Valerate · Hera (US)</title>
+      <link>https://herahrt.com/shop/</link>
+      <description>Estradiol Valerate at Hera, ships to US. $55.00.</description>
+      <guid isPermaLink="false">diyhrt-stock-21647102</guid>
+      <pubDate>Wed, 07 Oct 2026 06:04:40 +0000</pubDate>
+      <category>Hera</category>
+    </item>
+    <item>
+      <title>back in stock: Estradiol Cypionate · Hera (US)</title>
+      <link>https://herahrt.com/shop/</link>
+      <description>Estradiol Cypionate at Hera, ships to US. $65.00.</description>
+      <guid isPermaLink="false">diyhrt-stock-21647103</guid>
+      <pubDate>Wed, 07 Oct 2026 06:04:40 +0000</pubDate>
+      <category>Hera</category>
+    </item>
+    <item>
+      <title>back in stock: Estradiol Undecylate · Hera (US)</title>
+      <link>https://herahrt.com/shop/</link>
+      <description>Estradiol Undecylate at Hera, ships to US. $80.00.</description>
+      <guid isPermaLink="false">diyhrt-stock-21647104</guid>
+      <pubDate>Wed, 07 Oct 2026 06:04:40 +0000</pubDate>
+      <category>Hera</category>
+    </item>
+  </channel>
+</rss>

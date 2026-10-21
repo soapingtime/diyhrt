@@ -1,0 +1,39 @@
+name: DIYHRT.coffee
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 12 * * 4"
+
+permissions:
+  contents: write
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN || github.token }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: install JavaScript parser
+        run: npm ci --prefix scripts
+      - name: install dependencies
+        run: pip install -r scripts/browser-requirements.txt
+      - name: install Chromium
+        run: python -m playwright install --with-deps chromium
+      - name: download diyhrt.coffee
+        run: python scripts/archive_app.py diyhrt.coffee --reject '/(forum|api|auth|signup|login|logout|register)(/|$|[?])'
+      - name: commit changes
+        if: ${{ success() }}
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: diyhrt.coffee
+          pull: "--rebase --autostash ."
+          message: "[automated] update diyhrt.coffee"
+          default_author: github_actions
