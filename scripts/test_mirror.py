@@ -137,6 +137,26 @@ class MirrorTests(unittest.TestCase):
             other = old.replace('groupsiowikiimages', 'another-bucket')
             self.assertEqual(asset_key(other), other)
 
+    def test_unsigned_profile_image_reuses_a_current_signed_link(self):
+        image = 'https://s3-us-west-1.amazonaws.com/groupsiotestprofilephotos/profilephoto.123'
+        fresh = image + '?AWSAccessKeyId=public&Expires=9999999999&Signature=fresh'
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            for name, url in [('index.html', image), ('profile.html', fresh)]:
+                (root / name).write_text(
+                    '<html><head></head><body><img src="' + url + '"></body></html>'
+                )
+            assets = Assets(root, 'https://groups.io/', wait=0)
+            response = requests.Response()
+            response.status_code = 200
+            response.headers['Content-Type'] = 'image/jpeg'
+            response._content = b'profile fixture'
+            response.url = fresh
+            with patch.object(assets.session, 'get', return_value=response) as get:
+                assets.run()
+            get.assert_called_once_with(fresh, timeout=60)
+            self.assertEqual(len(list((root / '_assets').iterdir())), 1)
+
     def test_group_topics_require_every_message(self):
         def page(start, end, total):
             messages = ''.join(

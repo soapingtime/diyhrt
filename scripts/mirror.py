@@ -37,7 +37,7 @@ def asset_key(url):
     parameters = dict(query)
     if (
         parts.hostname == 's3-us-west-1.amazonaws.com'
-        and parts.path.startswith('/groupsiowikiimages/')
+        and parts.path.startswith(('/groupsiowikiimages/', '/groupsiotestprofilephotos/'))
         and {'AWSAccessKeyId', 'Expires', 'Signature'} <= parameters.keys()
         and parameters['Expires'].isdigit()
     ):
@@ -375,7 +375,7 @@ class Assets:
         path.write_text(str(soup), encoding='utf-8')
 
     def run(self):
-        # Revisions share images but carry different expiring download links.
+        # Revisions and profiles share images with different expiring links.
         # Choose the newest signature before a long crawl's early links expire.
         for path in self.directory.rglob('*.html'):
             soup = BeautifulSoup(path.read_bytes(), 'html.parser')
