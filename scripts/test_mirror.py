@@ -137,25 +137,22 @@ class MirrorTests(unittest.TestCase):
             other = old.replace('groupsiowikiimages', 'another-bucket')
             self.assertEqual(asset_key(other), other)
 
-    def test_unsigned_profile_image_reuses_a_current_signed_link(self):
+    def test_profile_image_uses_browser_bytes_after_its_link_expires(self):
         image = 'https://s3-us-west-1.amazonaws.com/groupsiotestprofilephotos/profilephoto.123'
-        fresh = image + '?AWSAccessKeyId=public&Expires=9999999999&Signature=fresh'
+        expired = image + '?AWSAccessKeyId=public&Expires=1&Signature=expired'
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             (root / 'index.html').write_text(
                 '<html><head></head><body><img src="' + image + '"></body></html>'
             )
             assets = Assets(root, 'https://groups.io/', wait=0)
-            assets.remember_signed_url(fresh)
-            response = requests.Response()
-            response.status_code = 200
-            response.headers['Content-Type'] = 'image/jpeg'
-            response._content = b'profile fixture'
-            response.url = fresh
-            with patch.object(assets.session, 'get', return_value=response) as get:
+            assets.save_browser_image(expired, b'profile fixture', 'image/jpeg')
+            with patch.object(assets.session, 'get') as get:
                 assets.run()
-            get.assert_called_once_with(fresh, timeout=60)
+            get.assert_not_called()
             self.assertEqual(len(list((root / '_assets').iterdir())), 1)
+            document = BeautifulSoup((root / 'index.html').read_text(), 'html.parser')
+            self.assertEqual((root / document.img['src']).read_bytes(), b'profile fixture')
 
     def test_group_topics_require_every_message(self):
         def page(start, end, total):

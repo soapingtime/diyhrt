@@ -58,7 +58,16 @@ def browser_session(urls, filename, selector=None, executable=None, images=False
         page = context.new_page()
         pending = list(urls)
         visited = set()
-        resources = []
+        resources = {}
+        if images:
+            def image_response(response):
+                url = response.url
+                key = asset_key(url)
+                content_type = response.headers.get('content-type', '').split(';')[0]
+                if key != url and response.ok and content_type.startswith('image/'):
+                    resources[key] = (url, response.body(), content_type)
+
+            page.on('response', image_response)
         topics = {
             match[1]
             for url in urls
@@ -75,7 +84,6 @@ def browser_session(urls, filename, selector=None, executable=None, images=False
             if images or not selector:
                 page.wait_for_load_state('networkidle')
             if images:
-                resources.extend(page.locator('img[src]').evaluate_all('images => images.map(i => i.src)'))
                 for link in page.locator('a[href]').evaluate_all('links => links.map(a => a.href)'):
                     parts = urlsplit(link)
                     topic = re.search(r'/topic/(?:[^/]+/)?(\d+)', parts.path)
@@ -161,6 +169,23 @@ class Assets:
             previous = self.signed_urls.get(key)
             if previous is None or expires > previous[0]:
                 self.signed_urls[key] = (expires, url)
+
+    def save_browser_image(self, url, data, content_type):
+        key = asset_key(url)
+        if key == url or not data or not content_type.startswith('image/'):
+            raise ValueError('Expected a signed image response')
+        suffix = {
+            'image/jpeg': '.jpg',
+            'image/png': '.png',
+            'image/gif': '.gif',
+            'image/webp': '.webp',
+            'image/svg+xml': '.svg',
+        }.get(content_type, '')
+        digest = hashlib.sha256(key.encode()).hexdigest()[:24]
+        target = self.directory / '_assets' / (digest + suffix)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(data)
+        self.downloads[key] = target
 
     def relative(self, target, source):
         relative = os.path.relpath(target, source.parent).replace(os.sep, '/')
@@ -518,8 +543,8 @@ def mirror(
             )
             assets.session.headers['User-Agent'] = agent
             assets.session.cookies.update(cookies)
-            for url in resources:
-                assets.remember_signed_url(url)
+            for resource in resources.values():
+                assets.save_browser_image(*resource)
         assets.run()
         for path in snapshot.rglob('*.orig'):
             path.unlink()
