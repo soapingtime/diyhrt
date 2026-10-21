@@ -46,7 +46,7 @@ def asset_key(url):
     return url
 
 
-def browser_session(urls, filename, selector=None, executable=None):
+def browser_session(urls, filename, selector=None, executable=None, images=False):
     from playwright.sync_api import sync_playwright
 
     with sync_playwright() as playwright:
@@ -56,12 +56,36 @@ def browser_session(urls, filename, selector=None, executable=None):
         browser = playwright.chromium.launch(**options)
         context = browser.new_context(viewport={'width': 1280, 'height': 900})
         page = context.new_page()
-        for url in urls:
+        pending = list(urls)
+        visited = set()
+        resources = []
+        topics = {
+            match[1]
+            for url in urls
+            if (match := re.search(r'/topic/(?:[^/]+/)?(\d+)', urlsplit(url).path))
+        }
+        while pending:
+            url = pending.pop(0)
+            if url in visited:
+                continue
+            visited.add(url)
             page.goto(url, wait_until='domcontentloaded', timeout=60000)
             if selector:
                 page.locator(selector).first.wait_for(state='attached', timeout=60000)
-            else:
+            if images or not selector:
                 page.wait_for_load_state('networkidle')
+            if images:
+                resources.extend(page.locator('img[src]').evaluate_all('images => images.map(i => i.src)'))
+                for link in page.locator('a[href]').evaluate_all('links => links.map(a => a.href)'):
+                    parts = urlsplit(link)
+                    topic = re.search(r'/topic/(?:[^/]+/)?(\d+)', parts.path)
+                    if (
+                        parts.hostname == urlsplit(url).hostname
+                        and topic and topic[1] in topics
+                        and 'page' in dict(parse_qsl(parts.query))
+                        and link not in visited
+                    ):
+                        pending.append(link)
         agent = page.evaluate('navigator.userAgent')
         cookies = MozillaCookieJar(str(filename))
         for cookie in context.cookies():
@@ -77,7 +101,7 @@ def browser_session(urls, filename, selector=None, executable=None):
             )
         cookies.save(ignore_discard=True, ignore_expires=True)
         browser.close()
-    return agent, cookies
+    return agent, cookies, resources
 
 
 def validate_group_topics(directory):
@@ -129,6 +153,14 @@ class Assets:
         self.stylesheets = set()
         self.static = static
         self.custom_urls = {}
+
+    def remember_signed_url(self, url):
+        key = asset_key(url)
+        if key != url:
+            expires = int(dict(parse_qsl(urlsplit(url).query))['Expires'])
+            previous = self.signed_urls.get(key)
+            if previous is None or expires > previous[0]:
+                self.signed_urls[key] = (expires, url)
 
     def relative(self, target, source):
         relative = os.path.relpath(target, source.parent).replace(os.sep, '/')
@@ -381,12 +413,7 @@ class Assets:
             soup = BeautifulSoup(path.read_bytes(), 'html.parser')
             for tag in soup.select('img[src]'):
                 url = urljoin(self.origin, tag['src'])
-                key = asset_key(url)
-                if key != url:
-                    expires = int(dict(parse_qsl(urlsplit(url).query))['Expires'])
-                    previous = self.signed_urls.get(key)
-                    if previous is None or expires > previous[0]:
-                        self.signed_urls[key] = (expires, url)
+                self.remember_signed_url(url)
         # Rewrite existing CSS before HTML starts fetching nested external styles.
         for path in list(self.directory.rglob('*.css')):
             if '_assets' not in path.relative_to(self.directory).parts:
@@ -421,7 +448,7 @@ def mirror(
         cookies = None
         cookie_file = Path(temp) / 'cookies.txt'
         if browser:
-            agent, cookies = browser_session(
+            agent, cookies, _resources = browser_session(
                 urls or [origin], cookie_file, require_selector, executable
             )
         command = [
@@ -485,6 +512,14 @@ def mirror(
                 )
         if host == 'groups.io':
             validate_group_topics(snapshot)
+        if browser:
+            agent, cookies, resources = browser_session(
+                urls or [origin], cookie_file, require_selector, executable, images=True
+            )
+            assets.session.headers['User-Agent'] = agent
+            assets.session.cookies.update(cookies)
+            for url in resources:
+                assets.remember_signed_url(url)
         assets.run()
         for path in snapshot.rglob('*.orig'):
             path.unlink()

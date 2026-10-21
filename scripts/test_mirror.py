@@ -142,11 +142,11 @@ class MirrorTests(unittest.TestCase):
         fresh = image + '?AWSAccessKeyId=public&Expires=9999999999&Signature=fresh'
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            for name, url in [('index.html', image), ('profile.html', fresh)]:
-                (root / name).write_text(
-                    '<html><head></head><body><img src="' + url + '"></body></html>'
-                )
+            (root / 'index.html').write_text(
+                '<html><head></head><body><img src="' + image + '"></body></html>'
+            )
             assets = Assets(root, 'https://groups.io/', wait=0)
+            assets.remember_signed_url(fresh)
             response = requests.Response()
             response.status_code = 200
             response.headers['Content-Type'] = 'image/jpeg'
