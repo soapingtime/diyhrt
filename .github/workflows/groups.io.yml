@@ -19,7 +19,9 @@ jobs:
         with:
           python-version: '3.10'
       - name: install dependencies
-        run: pip install -r scripts/requirements.txt
+        run: |
+          pip install -r scripts/browser-requirements.txt
+          playwright install --with-deps chromium
       - name: download groups.io
         run: |
           python scripts/mirror.py groups.io \
@@ -27,7 +29,7 @@ jobs:
             https://groups.io/g/MTFHRT/topic/80225302 \
             https://groups.io/g/MTFHRT/topic/79606271 \
             --accept 'https://groups.io/g/MTFHRT/(wiki(/|$)|topic/([^/?]+/)?(80225302|79606271)([?]|$))' \
-            --static --ignore-robots
+            --require-selector .user-content --browser --static --ignore-robots
       - name: commit changes
         if: ${{ success() }}
         uses: EndBug/add-and-commit@v9

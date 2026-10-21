@@ -9,13 +9,14 @@ its fonts, styles, scripts and images. Ordinary external links are not crawled.
 
 import argparse
 import hashlib
+from http.cookiejar import MozillaCookieJar
 import os
 from pathlib import Path
 import re
 import subprocess
 import tempfile
 import time
-from urllib.parse import quote, unquote, urljoin, urlsplit
+from urllib.parse import parse_qsl, quote, unquote, urlencode, urljoin, urlsplit
 
 from bs4 import BeautifulSoup
 import requests
@@ -28,6 +29,81 @@ POLICY = (
     "object-src 'none'; base-uri 'none'; form-action 'none'"
 )
 USER_AGENT = 'Mozilla/5.0 (compatible; DIYHRTArchive/1.0; +https://github.com/soapingtime/diyhrt)'
+
+
+def asset_key(url):
+    parts = urlsplit(url)
+    query = parse_qsl(parts.query, keep_blank_values=True)
+    parameters = dict(query)
+    if (
+        parts.hostname == 's3-us-west-1.amazonaws.com'
+        and parts.path.startswith('/groupsiowikiimages/')
+        and {'AWSAccessKeyId', 'Expires', 'Signature'} <= parameters.keys()
+        and parameters['Expires'].isdigit()
+    ):
+        query = [item for item in query if item[0] not in ('AWSAccessKeyId', 'Expires', 'Signature')]
+        return parts._replace(query=urlencode(query)).geturl()
+    return url
+
+
+def browser_session(urls, filename, selector=None, executable=None):
+    from playwright.sync_api import sync_playwright
+
+    with sync_playwright() as playwright:
+        options = {'headless': True}
+        if executable:
+            options['executable_path'] = executable
+        browser = playwright.chromium.launch(**options)
+        context = browser.new_context(viewport={'width': 1280, 'height': 900})
+        page = context.new_page()
+        for url in urls:
+            page.goto(url, wait_until='domcontentloaded', timeout=60000)
+            if selector:
+                page.locator(selector).first.wait_for(state='attached', timeout=60000)
+            else:
+                page.wait_for_load_state('networkidle')
+        agent = page.evaluate('navigator.userAgent')
+        cookies = MozillaCookieJar(str(filename))
+        for cookie in context.cookies():
+            cookies.set_cookie(
+                requests.cookies.create_cookie(
+                    cookie['name'],
+                    cookie['value'],
+                    domain=cookie['domain'],
+                    path=cookie['path'],
+                    secure=cookie['secure'],
+                    expires=int(cookie['expires']) if cookie['expires'] > 0 else None,
+                )
+            )
+        cookies.save(ignore_discard=True, ignore_expires=True)
+        browser.close()
+    return agent, cookies
+
+
+def validate_group_topics(directory):
+    topics = {}
+    for path in Path(directory).glob('g/*/topic/**/*.html'):
+        relative = '/' + path.relative_to(directory).as_posix()
+        topic = re.search(r'/topic/(?:[^/]+/)?(\d+)', relative)
+        if topic is None:
+            continue
+        document = BeautifulSoup(path.read_bytes(), 'html.parser')
+        total = re.search(r'\b\d+\s*-\s*\d+\s+of\s+(\d+)', document.get_text(' ', strip=True))
+        messages = {tag['id'] for tag in document.select('div[id^=msgbody]')}
+        if total is None or not messages:
+            raise RuntimeError('Topic content missing: ' + relative + '; keeping the previous snapshot')
+        count = int(total[1])
+        previous, saved = topics.setdefault(topic[1], (count, set()))
+        if count != previous:
+            raise RuntimeError('Topic changed during capture: ' + topic[1])
+        saved.update(messages)
+    for topic, (total, messages) in topics.items():
+        if len(messages) != total:
+            raise RuntimeError(
+                'Incomplete topic: ' + topic + '; saved ' + str(len(messages))
+                + ' of ' + str(total) + ' messages; keeping the previous snapshot'
+            )
+        print('Validated groups.io topic ' + topic + ': ' + str(total) + ' messages', flush=True)
 
 
 def publish_snapshot(snapshot, destination, backup):
@@ -49,6 +125,7 @@ class Assets:
         self.session = requests.Session()
         self.session.headers['User-Agent'] = USER_AGENT
         self.downloads = {}
+        self.signed_urls = {}
         self.stylesheets = set()
         self.static = static
         self.custom_urls = {}
@@ -86,10 +163,12 @@ class Assets:
             return value
         fragment = '#' + parts.fragment if parts.fragment else ''
         url = parts._replace(fragment='').geturl()
-        target = self.local_file(url) or self.downloads.get(url)
+        key = asset_key(url)
+        target = self.local_file(url) or self.downloads.get(key)
         if target is None:
             time.sleep(self.wait)
-            response = self.session.get(url, timeout=60)
+            fetch_url = self.signed_urls[key][1] if key in self.signed_urls else url
+            response = self.session.get(fetch_url, timeout=60)
             response.raise_for_status()
             if not response.content:
                 raise ValueError('Empty asset: ' + url)
@@ -103,15 +182,15 @@ class Assets:
                 raise ValueError('Expected an asset, got HTML: ' + url)
             if len(suffix) > 12 or not suffix[1:].isalnum():
                 suffix = ''
-            digest = hashlib.sha256(url.encode()).hexdigest()[:24]
+            digest = hashlib.sha256(key.encode()).hexdigest()[:24]
             target = self.directory / '_assets' / (digest + suffix)
             target.parent.mkdir(parents=True, exist_ok=True)
-            self.downloads[url] = target
+            self.downloads[key] = target
             target.write_bytes(response.content)
             if content_type == 'text/css' or suffix == '.css':
                 self.stylesheets.add(target)
                 target.write_text(self.css(response.text, response.url, target))
-            print('asset:', url, flush=True)
+            print('asset:', key, flush=True)
         if stylesheet and target not in self.stylesheets:
             self.stylesheets.add(target)
             target.write_text(self.css(target.read_text(), url, target))
@@ -296,6 +375,18 @@ class Assets:
         path.write_text(str(soup), encoding='utf-8')
 
     def run(self):
+        # Revisions share images but carry different expiring download links.
+        # Choose the newest signature before a long crawl's early links expire.
+        for path in self.directory.rglob('*.html'):
+            soup = BeautifulSoup(path.read_bytes(), 'html.parser')
+            for tag in soup.select('img[src]'):
+                url = urljoin(self.origin, tag['src'])
+                key = asset_key(url)
+                if key != url:
+                    expires = int(dict(parse_qsl(urlsplit(url).query))['Expires'])
+                    previous = self.signed_urls.get(key)
+                    if previous is None or expires > previous[0]:
+                        self.signed_urls[key] = (expires, url)
         # Rewrite existing CSS before HTML starts fetching nested external styles.
         for path in list(self.directory.rglob('*.css')):
             if '_assets' not in path.relative_to(self.directory).parts:
@@ -318,12 +409,21 @@ def mirror(
     ignore_robots=False,
     require_selector=None,
     accept=None,
+    browser=False,
+    executable=None,
 ):
     if not host or '/' in host or host.startswith('.'):
         raise ValueError('Expected a hostname')
     origin = 'https://' + host + '/'
     destination = Path(output or host)
     with tempfile.TemporaryDirectory(prefix='.diyhrt-', dir=destination.parent) as temp:
+        agent = USER_AGENT
+        cookies = None
+        cookie_file = Path(temp) / 'cookies.txt'
+        if browser:
+            agent, cookies = browser_session(
+                urls or [origin], cookie_file, require_selector, executable
+            )
         command = [
             'wget',
             '--mirror',
@@ -337,13 +437,15 @@ def mirror(
             '--random-wait',
             '--timeout=60',
             '--tries=3',
-            '--user-agent=' + USER_AGENT,
+            '--user-agent=' + agent,
             '--domains=' + host,
             '--directory-prefix=' + temp,
         ]
         version = subprocess.run(['wget', '--version'], capture_output=True, text=True, check=True)
         if 'Wget2' in version.stdout:
             command.append('--max-threads=1')
+        if browser:
+            command.append('--load-cookies=' + str(cookie_file))
         for header in headers:
             command.extend(['--header', header])
         if level is not None:
@@ -361,6 +463,9 @@ def mirror(
             raise RuntimeError('wget failed: ' + str(result.returncode))
         snapshot = Path(temp) / host
         assets = Assets(snapshot, origin, static=static)
+        assets.session.headers['User-Agent'] = agent
+        if cookies is not None:
+            assets.session.cookies.update(cookies)
         for url in urls or [origin]:
             page = assets.local_file(url)
             if not page:
@@ -378,6 +483,8 @@ def mirror(
                 raise RuntimeError(
                     'Expected content missing: ' + url + '; keeping the previous snapshot'
                 )
+        if host == 'groups.io':
+            validate_group_topics(snapshot)
         assets.run()
         for path in snapshot.rglob('*.orig'):
             path.unlink()
@@ -395,6 +502,8 @@ def main():
     parser.add_argument('--header', action='append', default=[])
     parser.add_argument('--level', type=int)
     parser.add_argument('--ignore-robots', action='store_true')
+    parser.add_argument('--browser', action='store_true', help='prepare an anonymous browser session')
+    parser.add_argument('--browser-executable')
     parser.add_argument(
         '--require-selector',
         help='require nonempty content matching this CSS selector on every seed page',
@@ -416,6 +525,8 @@ def main():
         args.ignore_robots,
         args.require_selector,
         args.accept,
+        args.browser,
+        args.browser_executable,
     )
 
 

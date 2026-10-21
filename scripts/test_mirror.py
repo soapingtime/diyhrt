@@ -12,7 +12,7 @@ from urllib.parse import unquote, urlsplit
 from bs4 import BeautifulSoup
 import requests
 
-from mirror import Assets, mirror, publish_snapshot
+from mirror import Assets, asset_key, mirror, publish_snapshot, validate_group_topics
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -105,6 +105,65 @@ class MirrorTests(unittest.TestCase):
             assets = Assets(temp, self.url, wait=0)
             with self.assertRaises(requests.HTTPError):
                 assets.asset('missing.js', self.url, Path(temp) / 'index.html')
+
+    def test_shared_wiki_images_use_the_newest_signed_url_once(self):
+        image = 'https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13908/image.jpg'
+        old = image + '?AWSAccessKeyId=public&Expires=1&Signature=old'
+        fresh = image + '?AWSAccessKeyId=public&Expires=9999999999&Signature=fresh'
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            for name, url in [('index.html', old), ('revision.html', fresh)]:
+                (root / name).write_text(
+                    '<html><head></head><body><img src="' + url + '"></body></html>'
+                )
+            assets = Assets(root, 'https://groups.io/', wait=0)
+            response = requests.Response()
+            response.status_code = 200
+            response.headers['Content-Type'] = 'image/jpeg'
+            response._content = b'image fixture'
+            response.url = fresh
+            with patch.object(assets.session, 'get', return_value=response) as get:
+                assets.run()
+            get.assert_called_once_with(fresh, timeout=60)
+            paths = [
+                BeautifulSoup((root / name).read_text(), 'html.parser').img['src']
+                for name in ['index.html', 'revision.html']
+            ]
+            self.assertEqual(paths[0], paths[1])
+            self.assertEqual((root / paths[0]).read_bytes(), b'image fixture')
+            self.assertEqual(len(list((root / '_assets').iterdir())), 1)
+            self.assertEqual(asset_key(old), image)
+            self.assertEqual(asset_key(old + '&versionId=previous'), image + '?versionId=previous')
+            other = old.replace('groupsiowikiimages', 'another-bucket')
+            self.assertEqual(asset_key(other), other)
+
+    def test_group_topics_require_every_message(self):
+        def page(start, end, total):
+            messages = ''.join(
+                '<div id="msgbody' + str(n) + '">Message</div>'
+                for n in range(start, end + 1)
+            )
+            return (
+                '<html><body>' + str(start) + ' - ' + str(end) + ' of ' + str(total)
+                + messages + '</body></html>'
+            )
+
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            topic = root / 'g' / 'MTFHRT' / 'topic' / 'thread'
+            topic.mkdir(parents=True)
+            (topic / '123.html').write_text(page(1, 20, 32))
+            with self.assertRaisesRegex(RuntimeError, 'Incomplete topic'):
+                validate_group_topics(root)
+            next_page = topic / '123?page=2.html'
+            next_page.write_text('<html><body>JavaScript is required</body></html>')
+            with self.assertRaisesRegex(RuntimeError, 'Topic content missing'):
+                validate_group_topics(root)
+            next_page.write_text(page(21, 32, 33))
+            with self.assertRaisesRegex(RuntimeError, 'Topic changed during capture'):
+                validate_group_topics(root)
+            next_page.write_text(page(21, 32, 32))
+            validate_group_topics(root)
 
     def test_query_filenames_are_escaped_for_static_hosting(self):
         with tempfile.TemporaryDirectory() as temp:
