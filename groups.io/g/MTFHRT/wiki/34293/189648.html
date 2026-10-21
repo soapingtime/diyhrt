@@ -9,7 +9,7 @@
 			
 				<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 			
-			<meta name="theme-color" content="#2f6fa7">
+			<meta name="theme-color" content="#1f4e79">
 			<meta name="pinterest" content="nopin" />
 			<meta name="pinterest" content="nohover" />
 			
@@ -52,7 +52,6 @@
 	};
 </script>
 
-			
 <script>
 	
 		function setPullToRefresh() {}
@@ -153,7 +152,7 @@
 			gioReport({
 				msg: "bundle-load-failure",
 				url: src,
-				client_id: "web.app01-g2.1186368.1791944249628008329"
+				client_id: "web.app01-g2.784439.1792548511281789042"
 			});
 		};
 		if (window.__gioBundleErr) {
@@ -174,7 +173,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app01-g2.1186368.1791944249628008329");
+				console.log("client_id:", "web.app01-g2.784439.1792548511281789042");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -229,7 +228,7 @@
 				column: column,
 				stack: stack,
 				last_error: lastError,
-				client_id: "web.app01-g2.1186368.1791944249628008329"
+				client_id: "web.app01-g2.784439.1792548511281789042"
 			});
 			lastError = errorMessage;
 			return true;
@@ -237,10 +236,9 @@
 	
 </script>
 			
-			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-faf38b3f5b1a250db46e4f728787b251.css" rel="stylesheet" id="groupsio-css">
+			<link href="../../../../css/application-c561a9115460dce982df05454b4b5404.css" rel="stylesheet" id="groupsio-css">
 			<script src="../../../../js/application-35e32ae82e031022fd4bf6938772adce.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>MTFHRT@groups.io | Wiki | steam sterilization</title>
@@ -330,6 +328,17 @@
 		});
 	});
 
+	// The fixed #headerbar covers the top of the viewport, but Popper only
+	// knows about the viewport edge, so a dropup can open with its top items
+	// hidden under the navbar. Count the navbar's height as unavailable so
+	// such menus flip to open downward instead.
+	bootstrap.Dropdown.Default.popperConfig = function(config) {
+		var header = document.getElementById('headerbar');
+		var top = header ? header.getBoundingClientRect().height : 0;
+		config.modifiers.push({name: 'flip', options: {padding: {top: top}}});
+		return config;
+	};
+
 	// Haptic feedback on mobile-native chrome taps: bottom-nav tabs, back
 	// chevron, and the navbar overflow action slot. Uses the shared helpers
 	// from qtutils/appfunctions.qtpl — they no-op on non-Capacitor runtimes,
@@ -344,9 +353,36 @@
 			hapticsSelectionChanged();
 		}
 	}, true);
+
+	// A sortable column header inside a form marked data-sort-keeps-selection, while
+	// rows are selected, submits that form with the new sort, the same way the form's
+	// pager does, so the rows checked on this and other pages stay checked. The
+	// attribute's value is the name of the row checkboxes. With nothing selected,
+	// anywhere else, or when opened in a new tab, it is an ordinary link. This runs
+	// in the capture phase so that the form is submitted instead of HTMX following
+	// the link.
+	document.addEventListener('click', function(ev) {
+		if (ev.button !== 0 || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.altKey) return;
+		var target = ev.target;
+		if (!target || !target.closest) return;
+		var link = target.closest('a[data-sort-p]');
+		if (!link) return;
+		var form = link.closest('form[data-sort-keeps-selection]');
+		if (!form) return;
+		var p = form.querySelector('input[name="p"]');
+		if (!p) return;
+		var rowName = form.getAttribute('data-sort-keeps-selection');
+		var otherIDs = form.querySelector('input[name="otherids"]');
+		var checkedHere = rowName && form.querySelector('input[type="checkbox"][name="' + rowName + '"]:checked');
+		if (!checkedHere && !(otherIDs && otherIDs.value)) return;
+		ev.preventDefault();
+		ev.stopPropagation();
+		p.value = link.getAttribute('data-sort-p');
+		form.submit();
+	}, true);
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "c2c3bbf4a048fc38b058cc219f52ea0a108c2b4d"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "748965f045751d20eb0270de43b14f09256f4e6b"}' hx-ext="preload" hx-boost="false">
 			<a id="skip-link" class="skip-link visually-hidden-focusable" href="189648.html#maincontent">Skip to main content</a>
 			
 			<div id="page-announcer" class="visually-hidden" role="status"></div>
@@ -948,7 +984,6 @@ function showAutocompleteModal(modalName) {
 		if (element && element.classList.contains('visible')) {
 			return;
 		}
-		console.log("HERE: " + event.key + " " + event.ctrlKey + " " + event.shiftKey + " " + event.metaKey);
 		if (event.ctrlKey && event.shiftKey && (event.key === '?' || event.key === '/')) {
 			event.preventDefault(); // Prevent the default action
 			// Show the modal dialog for keyboard shortcuts
@@ -1109,7 +1144,7 @@ function showAutocompleteModal(modalName) {
 				<div id="accordion" role="navigation" aria-label="Sidebar" style="margin-bottom:20px;">
 					<div class="list-group noborderlist" style="border:0;margin-bottom:0px">
 						
-	<a title="Group Home" href="https://groups.io/g/MTFHRT" class="list-group-item sidebar-item">
+	<a title="Group Home" href="https://groups.io/g/MTFHRT" id="sidebar-home" class="list-group-item sidebar-item">
 		<i class="fa-fw fa fa-home fa-lg"></i>
 		Home
 		
@@ -1272,6 +1307,8 @@ var $noticetemplate = $(".noticetemplate");
 // (the editor and the ajax retry helper) that have no translator of their own.
 var alertText = {
 	draftSaveError: "There was an error saving the draft.",
+	draftDeleted: "This draft was deleted in another window, so your changes are not being saved. Copy your text before you leave this page.",
+	drafts: "Drafts",
 	retryAutomatically: "We will retry automatically.",
 	retryCountdown: "We will retry again in %s seconds.",
 	retryNow: "Retry now",
@@ -1664,7 +1701,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 					<div class="drawer-content">
 						<div class="list-group noborderlist">
 							
-	<a title="Group Home" href="https://groups.io/g/MTFHRT" class="list-group-item sidebar-item">
+	<a title="Group Home" href="https://groups.io/g/MTFHRT" id="sidebar-home-mobile" class="list-group-item sidebar-item">
 		<i class="fa-fw fa fa-home fa-lg"></i>
 		Home
 		
@@ -2281,8 +2318,14 @@ function createAlert(msg, isError, autoClose, noClose) {
 			if (!target.querySelector('[data-a11y-no-announce]')) {
 				a11yAnnounce(count ? title + '. ' + count.textContent.replace(/\s+/g, ' ').trim() : title);
 			}
+			// A form that saved without errors re-renders the page, and HTMX
+			// puts focus back on the field that submitted it (matched by id),
+			// which then looks like it is still being edited. Move focus to the
+			// heading instead, as for any other page load.
 			var active = document.activeElement;
-			if (!focusedError && a11yFocusLost && (!active || active === document.body) && heading) {
+			var savedForm = !!requestElt && requestElt.tagName === 'FORM' && evt.detail.requestConfig.verb === 'post';
+			var focusRestored = savedForm && !!active && target.contains(active);
+			if (!focusedError && heading && ((a11yFocusLost && (!active || active === document.body)) || focusRestored)) {
 				heading.focus({preventScroll: true});
 			}
 			a11yFocusLost = false;

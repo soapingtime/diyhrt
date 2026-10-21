@@ -2323,7 +2323,7 @@ video::-webkit-media-text-track-display {
 .cc-floating.cc-theme-classic{padding:1.2em;border-radius:5px}.cc-floating.cc-type-info.cc-theme-classic .cc-compliance{text-align:center;display:inline;-ms-flex:none;flex:none}.cc-theme-classic .cc-btn{border-radius:5px}.cc-theme-classic .cc-btn:last-child{min-width:140px}.cc-floating.cc-type-info.cc-theme-classic .cc-btn{display:inline-block}
 .cc-theme-edgeless.cc-window{padding:0}.cc-floating.cc-theme-edgeless .cc-message{margin:2em 2em 1.5em}.cc-banner.cc-theme-edgeless .cc-btn{margin:0;padding:.8em 1.8em;height:100%}.cc-banner.cc-theme-edgeless .cc-message{margin-left:1em}.cc-floating.cc-theme-edgeless .cc-btn+.cc-btn{margin-left:0}
 .navbar-head {
-	background-color: #337ab7;
+	background-color: var(--gio-topbar);
 	/*
   background-image: -webkit-linear-gradient(top, #337ab7 0%, #265a88 100%);
   background-image: -o-linear-gradient(top, #337ab7 0%, #265a88 100%);
@@ -2333,7 +2333,7 @@ video::-webkit-media-text-track-display {
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   background-repeat: repeat-x;
   */
-  border-color: #245580;
+  border-color: var(--gio-topbar);
 }
 .navbar-head .navbar-brand {
   color: #ecf0f1;
@@ -2437,6 +2437,54 @@ hr {
 	--dark-mode-reverse-text-color: rgb(28, 28, 29);
 	--dark-mode-light-text-color: #999;
 	--dark-mode-divider: rgb(62, 64, 66);
+
+	/* Brand and status palette. Ratios are against the text each colour
+	   carries: white on the fills and the -text shades on their tints. */
+	--gio-brand: #2f6fa7; /* 5.3:1 white; 5.1:1 as text on the page */
+	--gio-brand-rgb: 47, 111, 167;
+	--gio-brand-hover: #245580; /* 7.8:1 white */
+	--gio-link-hover: #23527c;
+	--gio-topbar: #1f4e79; /* 8.7:1 white; the logo's #00a2e5 accent 3.0:1 */
+	--gio-success: #1f7a3d; /* 5.4:1 white */
+	--gio-success-rgb: 31, 122, 61;
+	--gio-success-hover: #18612f; /* 7.5:1 white */
+	--gio-success-text: #19572c; /* 7.7:1 on its tint, 8.6:1 on white */
+	--gio-success-tint: #e9f5ee;
+	--gio-info-text: #1f4e79; /* 7.5:1 on its tint */
+	--gio-info-tint: #e8f0f8;
+	--gio-info-badge: #dbe8f5; /* 7.0:1 under the info text */
+	--gio-warning: rgb(245, 128, 62);
+	--gio-warning-hover: #d67f0c;
+	--gio-warning-text: #7a3e0b; /* 7.5:1 on its tint */
+	--gio-warning-tint: #fdf1e6;
+	--gio-danger: #c62f2f; /* 5.5:1 white */
+	--gio-danger-rgb: 198, 47, 47;
+	--gio-danger-hover: #a32525; /* 7.4:1 white */
+	--gio-danger-text: #8c1d1d; /* 8.0:1 on its tint, 9.1:1 on white */
+	--gio-danger-tint: #fcecec;
+
+	/* Dark-mode fills carry the dark-mode text colour; the tints carry
+	   a pale shade of their own hue (9.6:1 or better) and a brighter
+	   rule. */
+	--dark-mode-brand: #286090; /* 4.9:1 */
+	--dark-mode-brand-hover: #204d74; /* 6.5:1 */
+	--dark-mode-success: #1f6e38; /* 4.6:1 */
+	--dark-mode-success-hover: #185a2d; /* 6.1:1 */
+	--dark-mode-danger: #b0302c; /* 4.7:1 */
+	--dark-mode-danger-hover: #932622; /* 6.1:1 */
+	--dark-mode-info-badge: #24476a; /* 7.7:1 under the info badge tint */
+	--dark-mode-success-text: #bfe3cb;
+	--dark-mode-success-tint: #17301f;
+	--dark-mode-success-rule: #3f9a5c;
+	--dark-mode-info-text: #c4dcf2;
+	--dark-mode-info-tint: #172b40;
+	--dark-mode-info-rule: #5b9bd5;
+	--dark-mode-warning-text: #ffd29a;
+	--dark-mode-warning-tint: #33240f;
+	--dark-mode-warning-rule: rgb(245, 128, 62);
+	--dark-mode-danger-text: #f2b8b8;
+	--dark-mode-danger-tint: #3a1414;
+	--dark-mode-danger-rule: #e05a5a;
 
 	--fc-border-color: #ccc;
 	--fc-page-bg-color: #fff;
@@ -2747,7 +2795,7 @@ th {
 	padding: 0 12px;
 	border-radius: 15px;
 	background: #f2f5f9;
-	color: #337ab7;
+	color: var(--gio-brand);
 	font-size: 13px;
 	line-height: 1;
 	white-space: nowrap;
@@ -2762,7 +2810,7 @@ th {
 :is(a, button).button-link:hover,
 :is(a, button).button-link:focus {
 	background: #e5ebf3;
-	color: #337ab7;
+	color: var(--gio-brand);
 	text-decoration: none;
 }
 body.dark-mode :is(a, button).button-link {
@@ -2923,7 +2971,7 @@ blockquote {
 a,
 .pagination>li>a,
 .pagination>li>span {
-	color: #2f6fa7;
+	color: var(--gio-brand);
 }
 
 /* The current page is the pager's active item. The link colour above
@@ -2936,19 +2984,22 @@ a,
 .pagination>.active>a:focus,
 .pagination>.active>span:focus {
 	color: #fff;
-	background-color: #337ab7;
-	border-color: #337ab7;
+	background-color: var(--gio-brand);
+	border-color: var(--gio-brand);
 	cursor: default;
 }
 
-.navbar-head,
+.navbar-head {
+	background-color: var(--gio-topbar);
+}
+
 .list-group-item.active,
 .list-group-item.active:focus,
 .list-group-item.active:hover,
 body.dark-mode .list-group-item.active,
 body.dark-mode .list-group-item.active:focus,
 body.dark-mode .list-group-item.active:hover {
-	background-color: #2f6fa7;
+	background-color: var(--gio-brand);
 }
 
 /* global: no grey iOS tap-highlight flash, no 300ms double-tap delay */
@@ -3223,8 +3274,8 @@ body {
 }
 
 .panel-success>.panel-heading {
-	background-color: #419641;
-	border-color: #419641;
+	background-color: var(--gio-success);
+	border-color: var(--gio-success);
 	color: #fff;
 }
 
@@ -3308,59 +3359,59 @@ body {
 	font-size: 14px;
 	color: #FFF;
 	/*line-height: 18px;*/
-	border: 1px solid #337ab7;
-	background-color: #337ab7;
+	border: 1px solid var(--gio-brand);
+	background-color: var(--gio-brand);
 	border-radius: 6px;
 	transition: all 0.2s ease 0s;
 }
 
 .btn-primary.active {
-	background-color: #337ab7;
-	border-color: #337ab7;
+	background-color: var(--gio-brand);
+	border-color: var(--gio-brand);
 }
 
 .btn-outline-primary {
 	font-size: 14px;
-	color: #337ab7;
+	color: var(--gio-brand);
 	/*line-height: 15px;*/
-	border: 1px solid #337ab7;
-	background-color: #337ab7;
+	border: 1px solid var(--gio-brand);
+	background-color: var(--gio-brand);
 	border-radius: 6px;
 	background: transparent;
 	transition: all 0.2s ease 0s;
 }
 
 .btn-outline-primary.active {
-	background-color: #337ab7;
-	border-color: #337ab7;
+	background-color: var(--gio-brand);
+	border-color: var(--gio-brand);
 }
 
 .btn-outline-primary:hover {
 	color: #FFF;
-	background: #337ab7;
-	border: 1px solid #337ab7;
+	background: var(--gio-brand);
+	border: 1px solid var(--gio-brand);
 }
 
 .btn-success {
 	font-size: 14px;
 	color: #FFF;
-	background-color: #419641;
+	background-color: var(--gio-success);
 	/*line-height: 15px;*/
-	border: 1px solid #419641;
+	border: 1px solid var(--gio-success);
 	border-radius: 6px;
 	transition: all 0.2s ease 0s;
 }
 
 .btn-success:hover {
-	background-color: #307d30;
-	border: 1px solid #307d30;
+	background-color: var(--gio-success-hover);
+	border: 1px solid var(--gio-success-hover);
 }
 
 .btn-outline-success {
 	font-size: 14px;
-	color: #419641;
+	color: var(--gio-success);
 	/*line-height: 15px;*/
-	border: 1px solid #419641;
+	border: 1px solid var(--gio-success);
 	border-radius: 6px;
 	background: transparent;
 	transition: all 0.2s ease 0s;
@@ -3368,36 +3419,36 @@ body {
 
 .btn-outline-success:hover {
 	color: #FFF;
-	background: #419641;
-	border: 1px solid #419641;
+	background: var(--gio-success);
+	border: 1px solid var(--gio-success);
 }
 
 .btn-outline-success:hover {
 	color: #FFF;
-	background: #419641;
-	border: 1px solid #419641;
+	background: var(--gio-success);
+	border: 1px solid var(--gio-success);
 }
 
 .btn-info {
 	font-size: 14px;
 	color: #FFF;
-	background-color: #5bc0de;
+	background-color: var(--gio-brand);
 	/*line-height: 15px;*/
-	border: 1px solid #5bc0de;
+	border: 1px solid var(--gio-brand);
 	border-radius: 6px;
 	transition: all 0.2s ease 0s;
 }
 
 .btn-info:hover {
-	background-color: #2188a0;
-	border: 1px solid #2188a0;
+	background-color: var(--gio-brand-hover);
+	border: 1px solid var(--gio-brand-hover);
 }
 
 .btn-outline-info {
 	font-size: 14px;
-	color: #5bc0de;
+	color: var(--gio-brand);
 	/*line-height: 15px;*/
-	border: 1px solid #5bc0de;
+	border: 1px solid var(--gio-brand);
 	border-radius: 6px;
 	background: transparent;
 	transition: all 0.2s ease 0s;
@@ -3405,62 +3456,63 @@ body {
 
 .btn-outline-info:hover {
 	color: #FFF;
-	background: #5bc0de;
-	border: 1px solid #5bc0de;
+	background: var(--gio-brand);
+	border: 1px solid var(--gio-brand);
 }
 
 
 .btn-warning {
 	font-size: 14px;
 	color: #FFF;
-	background-color: rgb(245, 128, 62);
+	background-color: var(--gio-warning);
 	/*line-height: 15px;*/
-	border: 1px solid rgb(245, 128, 62);
+	border: 1px solid var(--gio-warning);
 	border-radius: 6px;
 	transition: all 0.2s ease 0s;
 }
 
 .btn-warning:hover {
-	background-color: #d67f0c;
-	border: 1px solid #d67f0c;
+	background-color: var(--gio-warning-hover);
+	border: 1px solid var(--gio-warning-hover);
 }
 
 .btn-outline-warning {
 	font-size: 14px;
-	color: rgb(245, 128, 62);
+	/* The orange itself is 2.6:1 on white, too faint for the label. */
+	color: var(--gio-warning-text);
 	/*line-height: 15px;*/
-	border: 1px solid rgb(245, 128, 62);
+	border: 1px solid var(--gio-warning);
 	border-radius: 6px;
 	background: transparent;
 	transition: all 0.2s ease 0s;
 }
 
 .btn-outline-warning:hover {
-	color: #FFF;
-	background: rgb(245, 128, 62);
-	border: 1px solid rgb(245, 128, 62);
+	color: var(--gio-warning-text);
+	background: var(--gio-warning-tint);
+	border: 1px solid var(--gio-warning);
 }
 
 .btn-danger {
 	font-size: 14px;
 	color: #FFF;
-	background-color: #d9534f;
+	background-color: var(--gio-danger);
 	/*line-height: 15px;*/
-	border: 1px solid #d9534f;
+	border: 1px solid var(--gio-danger);
 	border-radius: 6px;
 	transition: all 0.2s ease 0s;
 }
 
 .btn-danger:hover {
-	background-color: #a0211d;
-	border: 1px solid #a0211d;
+	background-color: var(--gio-danger-hover);
+	border: 1px solid var(--gio-danger-hover);
 }
 
 .btn-outline-danger {
 	font-size: 14px;
-	color: #d9534f;
+	color: var(--gio-danger);
 	/*line-height: 15px;*/
-	border: 1px solid #d9534f;
+	border: 1px solid var(--gio-danger);
 	border-radius: 6px;
 	background: transparent;
 	transition: all 0.2s ease 0s;
@@ -3468,8 +3520,8 @@ body {
 
 .btn-outline-danger:hover {
 	color: #FFF;
-	background: #d9534f;
-	border: 1px solid #d9534f;
+	background: var(--gio-danger);
+	border: 1px solid var(--gio-danger);
 }
 
 .scrolling-wrapper {
@@ -3506,7 +3558,7 @@ body {
 }
 
 .robohelp-important {
-	color: #d9534f;
+	color: var(--gio-danger);
 	font-weight: bold;
 }
 
@@ -4270,7 +4322,7 @@ table.table-fixed {
 
 .spinner {
 	margin-right: 10px;
-	color: #2f6fa7;
+	color: var(--gio-brand);
 	animation: pulse 1.5s ease-in-out infinite;
 }
 
@@ -4286,7 +4338,7 @@ table.table-fixed {
 	position: absolute;
 	width: 6px;
 	height: 6px;
-	background-color: #2f6fa7;
+	background-color: var(--gio-brand);
 	border-radius: 50%;
 	animation: dots 1.5s infinite ease-in-out;
 }
@@ -4530,13 +4582,6 @@ table.table-fixed {
 	padding-left: 20px;
 }
 
-.filetype-text {
-	font-size: .7em;
-	font-weight: 700;
-	font-family: 'Oswald';
-}
-
-
 /* remove extra file upload icon, make placeholder text smaller, for file upload widget */
 
 .kv-file-upload {
@@ -4645,6 +4690,24 @@ table.table-fixed {
 .fc-list-table .fc-seats-badge {
 	background-color: #666;
 	color: #fff;
+}
+/* The group an event belongs to, after its title, on calendars that mix
+   groups. On a coloured event it takes the event's text colour, dimmed; in
+   list view, the muted text colour. */
+.fc-event-group {
+	margin-left: 0.35em;
+	font-weight: normal;
+	opacity: 0.85;
+}
+.fc-event-group::before {
+	content: "\00b7\00a0";
+}
+.fc-list-event-title .fc-event-group {
+	color: var(--light-mode-light-text-color);
+	opacity: 1;
+}
+body.dark-mode .fc-list-event-title .fc-event-group {
+	color: var(--dark-mode-light-text-color);
 }
 
 .F {
@@ -5118,7 +5181,7 @@ body.dark-mode .grouphome-row:active {
 }
 .grouphome-row-icon {
 	font-size: 18px;
-	color: #337ab7;
+	color: var(--gio-brand);
 	margin-right: 14px;
 	width: 22px;
 	text-align: center;
@@ -5132,7 +5195,7 @@ body.dark-mode .grouphome-row-icon {
 	font-weight: 500;
 }
 .grouphome-row-badge {
-	background: #d9534f;
+	background: var(--gio-danger);
 	color: #fff;
 	padding: 1px 8px;
 	border-radius: 10px;
@@ -5195,7 +5258,7 @@ body.dark-mode .grouphome-row-chevron {
 	font-size: 20px;
 	display: block;
 	margin-bottom: 6px;
-	color: #337ab7;
+	color: var(--gio-brand);
 }
 
 body.dark-mode .grouphome-tile i {
@@ -5212,7 +5275,7 @@ body.dark-mode .grouphome-tile i {
 	position: absolute;
 	top: 4px;
 	right: 6px;
-	background-color: #d9534f;
+	background-color: var(--gio-danger);
 	color: #fff;
 	padding: 1px 6px;
 	border-radius: 10px;
@@ -5271,7 +5334,7 @@ body.dark-mode .grouphome-desc.clipped::after {
 	background: none;
 	border: 0;
 	padding: 4px 0;
-	color: #337ab7;
+	color: var(--gio-brand);
 	font-weight: 500;
 	cursor: pointer;
 }
@@ -5308,7 +5371,7 @@ body.dark-mode .grouphome-desc-toggle {
 }
 .grouphome-recent-title i {
 	margin-right: 6px;
-	color: #337ab7;
+	color: var(--gio-brand);
 }
 body.dark-mode .grouphome-recent-title i {
 	color: #8cb4df;
@@ -5437,7 +5500,7 @@ body.dark-mode .groupslist-mobtitle {
 	position: absolute;
 	top: -4px;
 	right: -4px;
-	background: #d9534f;
+	background: var(--gio-danger);
 	color: #fff;
 	padding: 1px 6px;
 	border-radius: 10px;
@@ -5607,7 +5670,7 @@ body.dark-mode .user-chip:focus {
 	background: none;
 	border: none;
 	padding: 0;
-	color: #337ab7;
+	color: var(--gio-brand);
 	font-weight: 500;
 	cursor: pointer;
 }
@@ -5795,7 +5858,7 @@ body.dark-mode .stickywiki-toggle {
 	background: none;
 	border: none;
 	padding: 8px 0;
-	color: #337ab7;
+	color: var(--gio-brand);
 	font-weight: 500;
 	cursor: pointer;
 }
@@ -6258,7 +6321,7 @@ a.video-link, a.video-link:hover, a.video-link:focus {
 }
 .chat-preview-file-icon {
 	font-size: 26px;
-	color: #337ab7;
+	color: var(--gio-brand);
 	flex-shrink: 0;
 }
 .chat-preview-file-meta {
@@ -6590,7 +6653,7 @@ body.dark-mode a.chat-file-card:focus {
 	height: 36px;
 	border-radius: 50%;
 	border: none;
-	background-color: #337ab7;
+	background-color: var(--gio-brand);
 	color: #fff;
 	cursor: pointer;
 	display: flex;
@@ -6621,7 +6684,7 @@ body.dark-mode a.chat-file-card:focus {
 }
 .chat-message.sent .audio-play-button {
 	background-color: #fff;
-	color: #337ab7;
+	color: var(--gio-brand);
 }
 .chat-message.sent .audio-play-button:hover {
 	background-color: #eef3f8;
@@ -6672,7 +6735,7 @@ body.dark-mode a.chat-file-card:focus {
 
 .chat-message-actions a:hover,
 .chat-message-actions .ask-action:hover {
-	color: #337ab7;
+	color: var(--gio-brand);
 }
 
 /* Ask keeps the question field focusable but read-only while an answer is
@@ -6696,7 +6759,7 @@ body.dark-mode a.chat-file-card:focus {
 }
 
 .chat-message.sent .chat-message-content {
-	background-color: #337ab7;
+	background-color: var(--gio-brand);
 	color: rgb(224, 231, 243);
 }
 
@@ -6849,7 +6912,7 @@ body.dark-mode .emoji-picker-btn:focus {
 	transition: color 100ms ease;
 }
 .chat-swipe-reply-hint.armed {
-	color: #337ab7;
+	color: var(--gio-brand);
 }
 
 /* Grouped: this message follows another message from the same user within
@@ -6946,7 +7009,7 @@ body.dark-mode .emoji-picker-btn:focus {
 }
 
 .sent .chat-emoji-box {
-	background-color:#337ab7;
+	background-color:var(--gio-brand);
 }
 
 .chat-emoji {
@@ -6983,7 +7046,7 @@ body.dark-mode .emoji-picker-btn:focus {
 
 #chat-unread-badge {
 	position: absolute;
-	background-color: #337ab7;
+	background-color: var(--gio-brand);
 	top: -13px;
 	/* Adjust the position of the badge */
 	left: 50%;
@@ -7112,7 +7175,7 @@ body.dark-mode .chat-mention-item mark {
 	display: inline-block;
 	padding: 1px 6px;
 	border-radius: 10px;
-	background: rgba(51, 122, 183, 0.15);
+	background: rgba(var(--gio-brand-rgb), 0.15);
 	color: #2b669a;
 	font-weight: 500;
 }
@@ -7485,16 +7548,33 @@ body.dark-mode .chat-mention-pill {
 	display: none;
 }
 
+/* Sidebar highlights are square. Each collapsible menu is its own
+   container, so the list group's first- and last-child corner radius
+   would otherwise round the first and last item of every menu. */
 .list-group-item.sidebar-item {
 	border: none !important;
+	border-radius: 0;
 	padding-top: 8px;
 	padding-bottom: 8px;
 }
 
 .list-group-item.sidebar-section {
 	border: none !important;
+	border-radius: 0;
 	padding-top: 8px;
 	padding-bottom: 8px;
+}
+
+/* The sidebars' nested menus sit in a .panel (BS3 accordion markup), which
+   the soft-card design (section 6) would draw as a white rounded card
+   whose overflow clipping rounds the highlight of the menu's first and
+   last items. In a sidebar it is only structure: flat and unclipped. */
+.list-group .panel,
+body.dark-mode .list-group .panel {
+	background-color: transparent;
+	border-radius: 0;
+	box-shadow: none;
+	overflow: visible;
 }
 
 .list-group-item.sidebar-section:hover {
@@ -7553,7 +7633,7 @@ body.dark-mode .chat-mention-pill {
 }
 
 .autocomplete-list-item:not(.no-hover):hover {
-	background-color: #337ab7;
+	background-color: var(--gio-brand);
 	color: #fff;
 }
 
@@ -7691,6 +7771,222 @@ body.dark-mode .chat-mention-pill {
 	border-top: 0;
 	border-radius: 0 0 4px 4px;
 	font-weight: 700;
+}
+
+/* Event responses: each response is a tinted badge in its status colour,
+   using the palette's tint/text pairs (7.5:1 or better in both themes).
+   The "bg-" in the class names exempts them from the parity sheet's grey
+   dark-mode badge. */
+.rsvp-badge {
+	font-weight: 600;
+}
+
+.rsvp-bg-yes {
+	background-color: var(--gio-success-tint);
+	color: var(--gio-success-text);
+}
+
+.rsvp-bg-no {
+	background-color: var(--gio-danger-tint);
+	color: var(--gio-danger-text);
+}
+
+.rsvp-bg-maybe {
+	background-color: var(--gio-warning-tint);
+	color: var(--gio-warning-text);
+}
+
+.rsvp-bg-waitlist {
+	background-color: var(--gio-info-tint);
+	color: var(--gio-info-text);
+}
+
+body.dark-mode .rsvp-bg-yes {
+	background-color: var(--dark-mode-success-tint);
+	color: var(--dark-mode-success-text);
+}
+
+body.dark-mode .rsvp-bg-no {
+	background-color: var(--dark-mode-danger-tint);
+	color: var(--dark-mode-danger-text);
+}
+
+body.dark-mode .rsvp-bg-maybe {
+	background-color: var(--dark-mode-warning-tint);
+	color: var(--dark-mode-warning-text);
+}
+
+body.dark-mode .rsvp-bg-waitlist {
+	background-color: var(--dark-mode-info-tint);
+	color: var(--dark-mode-info-text);
+}
+
+/* Responses grid cards. The body may shrink below its content's width so
+   long names truncate instead of widening the card. */
+.rsvp-card-body {
+	min-width: 0;
+}
+
+/* A comment shows at most three lines, so one long answer doesn't make its
+   whole row tall; the full text is in the title and in the list view. */
+.rsvp-card-comment {
+	margin-top: 0.25rem;
+	overflow-wrap: anywhere;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	line-clamp: 3;
+	overflow: hidden;
+}
+
+/* Responses list columns. The table is fixed-layout, so the name column gets
+   whatever these leave; on phones the date column is hidden and the
+   response column narrows so the name stays readable. */
+.rsvp-col-response {
+	width: 9.5rem;
+}
+
+.rsvp-col-date {
+	width: 8rem;
+}
+
+/* Holds only the "⋯" menu toggle. */
+.rsvp-col-manage {
+	width: 3rem;
+}
+
+@media (max-width: 767.98px) {
+	.rsvp-col-response {
+		width: 7.5rem;
+	}
+}
+
+/* The per-person "⋯" menu toggle: quiet until hovered or open. */
+.rsvp-menu-toggle {
+	color: var(--light-mode-light-text-color);
+	padding: 0 0.375rem;
+	line-height: 1.5;
+}
+
+.rsvp-menu-toggle:hover,
+.rsvp-menu-toggle:focus-visible,
+.rsvp-menu-toggle[aria-expanded="true"] {
+	color: var(--gio-brand);
+	background-color: var(--light-mode-highlight-color);
+}
+
+body.dark-mode .rsvp-menu-toggle {
+	color: var(--dark-mode-light-text-color);
+}
+
+body.dark-mode .rsvp-menu-toggle:hover,
+body.dark-mode .rsvp-menu-toggle:focus-visible,
+body.dark-mode .rsvp-menu-toggle[aria-expanded="true"] {
+	color: var(--dark-mode-text-color);
+	background-color: var(--dark-mode-highlight-color);
+}
+
+.rsvp-filters {
+	gap: 0.25rem;
+}
+
+/* The count rides on the pill: a quiet grey chip, or a light one on the
+   active (filled) pill. */
+.rsvp-filters .rsvp-filter-count {
+	background-color: rgba(0, 0, 0, 0.08);
+	color: inherit;
+}
+
+.rsvp-filters .nav-link.active .rsvp-filter-count {
+	background-color: rgba(255, 255, 255, 0.25);
+}
+
+body.dark-mode .rsvp-filters .rsvp-filter-count {
+	background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Add/edit event form. The Add Tags button sits beside the name field,
+   level with the input rather than its label. */
+.event-tags-button {
+	margin-top: 2rem;
+}
+
+/* All Day lines up with the middle of the timezone select beside it. */
+.event-allday .form-check {
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+/* Beats .btn's 0.875rem so the toggle reads as the panel title it is. */
+.card-title .event-more-toggle {
+	font-size: inherit;
+	font-weight: inherit;
+	color: inherit;
+	text-decoration: none;
+}
+
+.event-more-toggle .fa-chevron-right {
+	transition: transform 0.15s ease;
+}
+
+.event-more-toggle:not(.collapsed) .fa-chevron-right {
+	transform: rotate(90deg);
+}
+
+/* Event page header: the title column stays beside the date block and the
+   Manage menu wraps below it on narrow screens. */
+.event-header-main {
+	flex: 1 1 0;
+	min-width: 12rem;
+}
+
+/* Event page: the date, place and organizer lines under the event name. */
+.event-facts li {
+	display: flex;
+	gap: 0.5rem;
+	margin-bottom: 0.25rem;
+}
+
+.event-facts li > i {
+	margin-top: 0.25rem;
+}
+
+.event-capacity {
+	height: 6px;
+}
+
+/* The member's current response is disabled (there is nothing to submit),
+   but it must still read as selected rather than unavailable. */
+.event-rsvp-choices .btn {
+	min-width: 8rem;
+}
+
+.event-rsvp-choices .btn.rsvp-current:disabled {
+	opacity: 1;
+}
+
+.event-avatars {
+	display: flex;
+	padding-left: 6px;
+}
+
+.event-avatar {
+	width: 32px;
+	height: 32px;
+	margin-left: -6px;
+	border-radius: 50%;
+	border: 2px solid var(--bs-body-bg);
+	object-fit: cover;
+}
+
+.event-avatar-initial {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--bs-secondary-bg);
+	color: var(--bs-secondary-color);
+	font-size: 0.8rem;
+	font-weight: 600;
 }
 
 .sticky-sidebar {
@@ -8015,15 +8311,15 @@ body.dark-mode .chat-mention-pill {
    focus and while the list is open, the ring only for keyboard focus. */
 .select2-container--default .select2-selection--single:focus {
 	outline: none;
-	border-color: #337ab7;
+	border-color: var(--gio-brand);
 }
 
 .select2-container--default .select2-selection--single:focus-visible {
-	box-shadow: 0 0 0 3px rgba(51, 122, 183, 0.25);
+	box-shadow: 0 0 0 3px rgba(var(--gio-brand-rgb), 0.25);
 }
 
 .select2-container--default.select2-container--open .select2-selection--single {
-	border-color: #337ab7;
+	border-color: var(--gio-brand);
 }
 
 .select2-dropdown {
@@ -8035,7 +8331,7 @@ body.dark-mode .chat-mention-pill {
 }
 
 .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
-	background-color: #337ab7;
+	background-color: var(--gio-brand);
 }
 
 .background-color {
@@ -8198,7 +8494,7 @@ body.dark-mode .feed-mobtitle {
 	display: block;
 }
 .feed-group-circle-unread .feed-group-circle-img {
-	box-shadow: 0 0 0 2px #fff, 0 0 0 4px #337ab7;
+	box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--gio-brand);
 }
 body.dark-mode .feed-group-circle-unread .feed-group-circle-img {
 	box-shadow: 0 0 0 2px var(--dark-mode-bg), 0 0 0 4px #8cb4df;
@@ -8207,8 +8503,7 @@ body.dark-mode .feed-group-circle-unread .feed-group-circle-img {
 	position: absolute;
 	top: -2px;
 	right: -2px;
-	/* #cd4845 keeps the white count at 4.6:1 */
-	background: #cd4845;
+	background: var(--gio-danger);
 	color: #fff;
 	padding: 1px 6px;
 	border-radius: 10px;
@@ -8257,7 +8552,7 @@ body.dark-mode .feed-section-title {
 	color: var(--dark-mode-text-color);
 }
 .feed-section-title i {
-	color: #337ab7;
+	color: var(--gio-brand);
 	margin-right: 6px;
 	width: 18px;
 	text-align: center;
@@ -8473,16 +8768,17 @@ body.dark-mode .form-control {
 }
 
 body.dark-mode .form-control:focus {
-	border-color: #337ab7;
+	border-color: var(--gio-brand);
 	box-shadow: 0 0 5px rgba(98, 0, 238, 0.5);
 }
 
 body.dark-mode .form-control:focus {
-	border-color: #337ab7;
+	border-color: var(--gio-brand);
 	box-shadow: 0 0 5px rgba(98, 0, 238, 0.5);
 }
 
-body.dark-mode .input-group-addon {
+body.dark-mode .input-group-addon,
+body.dark-mode .input-group-text {
 	background-color: #444;
 	border-color: #444;
 	color: var(--dark-mode-text-color);
@@ -8621,28 +8917,28 @@ body.dark-mode .likestats {
 }
 
 body.dark-mode .alert-success {
-	color: #d3e9d4;
-	background-color: #254119;
-	border-color: #254119;
+	color: var(--dark-mode-success-text);
+	background-color: var(--dark-mode-success-tint);
+	border-color: var(--dark-mode-success-rule);
 }
 
 body.dark-mode .alert-info {
-	color: #c0e1f1;
-	background-color: #1b6082;
-	border-color: #1b6082;
+	color: var(--dark-mode-info-text);
+	background-color: var(--dark-mode-info-tint);
+	border-color: var(--dark-mode-info-rule);
 }
 
 
 body.dark-mode .alert-warning {
-	background-color: rgb(51, 39, 1);
-	border-color: rgb(51, 39, 1);
-	color: rgb(255, 218, 106);
+	background-color: var(--dark-mode-warning-tint);
+	border-color: var(--dark-mode-warning-rule);
+	color: var(--dark-mode-warning-text);
 }
 
 body.dark-mode .alert-danger {
-	background-color: rgb(44, 11, 14);
-	border-color: rgb(44, 11, 14);
-	color: rgb(234, 134, 143);
+	background-color: var(--dark-mode-danger-tint);
+	border-color: var(--dark-mode-danger-rule);
+	color: var(--dark-mode-danger-text);
 }
 
 body.dark-mode .robohelp-important {
@@ -8707,8 +9003,8 @@ body.dark-mode .list-group-item.active:hover,
 body.dark-mode .list-group-item.active:focus {
 	/*color: var(--dark-mode-text-color);*/
 	color: #ffffff;
-	background-color: #337ab7;
-	border-color: #5393d1;
+	background-color: var(--gio-brand);
+	border-color: var(--gio-brand);
 }
 
 
@@ -8785,8 +9081,8 @@ body.dark-mode .pagination>.active>span:hover,
 body.dark-mode .pagination>.active>a:focus,
 body.dark-mode .pagination>.active>span:focus {
 	color: var(--dark-mode-text-color);
-	background-color: #337ab7;
-	border-color: #5393d1;
+	background-color: var(--dark-mode-brand);
+	border-color: var(--dark-mode-brand);
 }
 
 body.dark-mode .pagination>.disabled>span,
@@ -8895,74 +9191,130 @@ body.dark-mode .btn-default:active {
 
 /* Primary Button */
 body.dark-mode .btn-primary {
-	background-color: #337ab7;
-	border-color: #337ab7;
+	background-color: var(--dark-mode-brand);
+	border-color: var(--dark-mode-brand);
 	color: var(--dark-mode-text-color);
 }
 
 body.dark-mode .btn-primary:hover,
 body.dark-mode .btn-primary:focus,
 body.dark-mode .btn-primary:active {
-	background-color: #5393d1;
-	border-color: #5393d1;
+	background-color: var(--dark-mode-brand-hover);
+	border-color: var(--dark-mode-brand-hover);
 }
 
 /* Success Button */
 body.dark-mode .btn-success,
 body.dark-mode .panel-success {
-	background-color: #388e3c;
-	border-color: #2e7d32;
+	background-color: var(--dark-mode-success);
+	border-color: var(--dark-mode-success);
 	color: var(--dark-mode-text-color);
 }
 
 body.dark-mode .btn-success:hover,
 body.dark-mode .btn-success:focus,
 body.dark-mode .btn-success:active {
-	background-color: #2e7d32;
-	border-color: #1b5e20;
+	background-color: var(--dark-mode-success-hover);
+	border-color: var(--dark-mode-success-hover);
 }
 
-/* Info Button */
+/* Info Button: the primary button's dark brand blue. */
 body.dark-mode .btn-info,
 body.dark-mode .panel-info {
-	color: var(--dark-mode-reverse-text-color);
-	background-color: #3da8c0;
-	border-color: #3da8c0;
+	color: var(--dark-mode-text-color);
+	background-color: var(--dark-mode-brand);
+	border-color: var(--dark-mode-brand);
 }
 
 body.dark-mode .btn-info:hover,
 body.dark-mode .btn-info:focus,
 body.dark-mode .btn-info:active {
-	background-color: #308a9e;
-	border-color: #308a9e;
+	background-color: var(--dark-mode-brand-hover);
+	border-color: var(--dark-mode-brand-hover);
 }
 
 /* Warning Button */
 body.dark-mode .btn-warning {
-	background-color: rgb(245, 128, 62);
-	border-color: rgb(245, 128, 62);
+	background-color: var(--gio-warning);
+	border-color: var(--gio-warning);
 	color: var(--dark-mode-reverse-text-color);
 }
 
 body.dark-mode .btn-warning:hover,
 body.dark-mode .btn-warning:focus,
 body.dark-mode .btn-warning:active {
-	background-color: rgb(245, 128, 62);
-	border-color: rgb(245, 128, 62);
+	background-color: var(--gio-warning);
+	border-color: var(--gio-warning);
 }
 
 /* Danger Button */
 body.dark-mode .btn-danger {
-	background-color: #d32f2f;
-	border-color: #c62828;
+	background-color: var(--dark-mode-danger);
+	border-color: var(--dark-mode-danger);
 	color: var(--dark-mode-text-color);
 }
 
 body.dark-mode .btn-danger:hover,
 body.dark-mode .btn-danger:focus,
 body.dark-mode .btn-danger:active {
-	background-color: #c62828;
-	border-color: #b71c1c;
+	background-color: var(--dark-mode-danger-hover);
+	border-color: var(--dark-mode-danger-hover);
+}
+
+/* Outline Buttons: the light-mode hues are under 3:1 as text on a dark
+   card, so the label takes its hue's pale dark-mode text shade (8.8:1 or
+   better) and the outline its brighter rule. Hovering fills the button
+   like its solid counterpart. */
+body.dark-mode .btn-outline-success {
+	color: var(--dark-mode-success-text);
+	border-color: var(--dark-mode-success-rule);
+}
+
+body.dark-mode .btn-outline-success:hover,
+body.dark-mode .btn-outline-success:focus,
+body.dark-mode .btn-outline-success:active {
+	color: var(--dark-mode-text-color);
+	background: var(--dark-mode-success);
+	border-color: var(--dark-mode-success);
+}
+
+body.dark-mode .btn-outline-info {
+	color: var(--dark-mode-info-text);
+	border-color: var(--dark-mode-info-rule);
+}
+
+body.dark-mode .btn-outline-info:hover,
+body.dark-mode .btn-outline-info:focus,
+body.dark-mode .btn-outline-info:active {
+	color: var(--dark-mode-text-color);
+	background: var(--dark-mode-brand);
+	border-color: var(--dark-mode-brand);
+}
+
+body.dark-mode .btn-outline-warning {
+	color: var(--dark-mode-warning-text);
+	border-color: var(--dark-mode-warning-rule);
+}
+
+body.dark-mode .btn-outline-warning:hover,
+body.dark-mode .btn-outline-warning:focus,
+body.dark-mode .btn-outline-warning:active {
+	color: var(--dark-mode-reverse-text-color);
+	background: var(--gio-warning);
+	border-color: var(--gio-warning);
+}
+
+body.dark-mode .btn-outline-danger {
+	color: var(--dark-mode-danger-text);
+	border-color: var(--dark-mode-danger-rule);
+}
+
+body.dark-mode .btn-outline-danger:hover,
+body.dark-mode .btn-outline-danger:focus,
+body.dark-mode .btn-outline-danger:active {
+	color: var(--dark-mode-text-color);
+	background: var(--dark-mode-danger);
+	border-color: var(--dark-mode-danger);
 }
 
 /* Dropdown Menus */
@@ -9137,21 +9489,12 @@ body.dark-mode .flatpickr-calendar * {
 }
 
 body.dark-mode .popover {
+	/* Bootstrap draws the arrow from these, not from the box's own colors */
+	--bs-popover-bg: var(--dark-mode-primary-color);
+	--bs-popover-border-color: var(--dark-mode-primary-color);
 	background-color: var(--dark-mode-primary-color) !important;
 	border-bottom-color: var(--dark-mode-primary-color) !important;
 	border: 1px solid var(--dark-mode-primary-color) !important
-}
-
-body.dark-mode .popover-title {
-	background-color: var(--dark-mode-primary-color) !important;
-}
-
-body.dark-mode .popover.bottom>.arrow:after {
-	border-bottom-color: var(--dark-mode-primary-color) !important;
-}
-
-body.dark-mode .popover.top>.arrow:after {
-	border-top-color: var(--dark-mode-primary-color) !important;
 }
 
 body.dark-mode .fc-list-event:hover * {
@@ -9374,28 +9717,6 @@ body.dark-mode code {
 	opacity: 0.9;
 }
 
-/* Wrapper for inline images to add download icon on hover */
-.lightbox-image::after {
-	content: "\f019"; /* Font Awesome download icon */
-	font-family: "Font Awesome 5 Free";
-	font-weight: 900;
-	position: absolute;
-	bottom: 8px;
-	right: 8px;
-	background-color: rgba(0, 0, 0, 0.6);
-	color: white;
-	padding: 6px 8px;
-	border-radius: 3px;
-	font-size: 12px;
-	opacity: 0;
-	transition: opacity 0.2s ease;
-	pointer-events: none;
-}
-
-.lightbox-image:hover::after {
-	opacity: 1;
-}
-
 /* Lightbox navigation buttons */
 .lightbox-nav {
 	position: absolute;
@@ -9518,17 +9839,17 @@ body.dark-mode #imageLightbox #lightboxTextContent {
 input[type="checkbox"],
 input[type="radio"],
 input[type="range"] {
-	accent-color: #337ab7;
+	accent-color: var(--gio-brand);
 }
 
 /* 2. Selection highlight picks up the brand tint instead of the OS default.
       Subtle enough to stay legible over any background. */
 ::selection {
-	background-color: rgba(51, 122, 183, 0.25);
+	background-color: rgba(var(--gio-brand-rgb), 0.25);
 	color: inherit;
 }
 ::-moz-selection {
-	background-color: rgba(51, 122, 183, 0.25);
+	background-color: rgba(var(--gio-brand-rgb), 0.25);
 	color: inherit;
 }
 
@@ -9587,7 +9908,7 @@ textarea:focus,
 .form-control:focus {
 	outline: none;
 	box-shadow: none;
-	border-color: #337ab7;
+	border-color: var(--gio-brand);
 }
 /* Keyboard-only focus gets a visible accent ring. */
 input[type="text"]:focus-visible,
@@ -9603,8 +9924,8 @@ input[type="datetime-local"]:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 .form-control:focus-visible {
-	box-shadow: 0 0 0 3px rgba(51, 122, 183, 0.25);
-	border-color: #337ab7;
+	box-shadow: 0 0 0 3px rgba(var(--gio-brand-rgb), 0.25);
+	border-color: var(--gio-brand);
 }
 body.dark-mode input[type="text"],
 body.dark-mode input[type="email"],
@@ -9684,21 +10005,19 @@ body.dark-mode .well-lg {
 	background-color: var(--dark-mode-primary-color);
 }
 
-/* 6. Panel heading → uppercase section label instead of the chunky gray
-      bar. Matches the 16px body-label weight so the heading feels like a
-      peer of the content it groups, and uses flex so any right-side
-      chevron (collapsable panels) stays vertically centered with the
-      text. Horizontal padding matches the panel-body below so the label
+/* 6. Panel heading → an 18px bold heading in the body text colour
+      instead of the chunky gray bar, so each panel's title outranks the
+      labels and text inside it. Uses flex so any right-side chevron
+      (collapsable panels) stays vertically centered with the text.
+      Horizontal padding matches the panel-body below so the heading
       and the form fields line up on the same left edge. */
 .panel-default > .panel-heading {
 	background: transparent;
 	border: 0 !important;
 	padding: 16px 18px;
-	font-size: 15px;
+	font-size: 18px;
 	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.04em;
-	color: #555;
+	color: #333;
 	line-height: 1.4;
 }
 .panel-default > .panel-heading .panel-title,
@@ -9744,7 +10063,7 @@ body.dark-mode .well-lg {
 @media (max-width: 767px) {
 	/* Tighten the card's horizontal gutter on phones so forms have room
 	   to breathe edge-to-edge. Heading padding-left is adjusted to match
-	   so the uppercase label still lines up with the form content. */
+	   so the heading still lines up with the form content. */
 	.panel-default .panel-body {
 		padding-left: 12px;
 		padding-right: 12px;
@@ -9762,7 +10081,7 @@ body.dark-mode .well-lg {
 	}
 }
 body.dark-mode .panel-default > .panel-heading {
-	color: var(--dark-mode-light-text-color);
+	color: var(--dark-mode-text-color);
 }
 /* Keep success/warning/danger panel heads colored — they rely on the
    contrasting background to signal state, and the flex layout above
@@ -10013,7 +10332,7 @@ blockquote .small::before {
 a.thumbnail:hover,
 a.thumbnail:focus,
 a.thumbnail.active {
-	border-color: #337ab7;
+	border-color: var(--gio-brand);
 }
 
 .thumbnail .caption {
@@ -10154,8 +10473,14 @@ a.thumbnail.active {
 	--bs-progress-bg: #f5f5f5;
 	--bs-progress-border-radius: 4px;
 	--bs-progress-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-	--bs-progress-bar-bg: #337ab7;
+	--bs-progress-bar-bg: var(--gio-brand);
 	margin-bottom: 20px;
+}
+
+/* The light track stayed a near-white band on the dark page; the dark
+ * highlight shows the track on both the page and a card. */
+body.dark-mode .progress {
+	--bs-progress-bg: var(--dark-mode-highlight-color);
 }
 .progress-bar {
 	line-height: 20px;
@@ -10241,11 +10566,9 @@ body.dark-mode .card > .card-header:not([class*="text-bg-"]) a:focus {
 	background: transparent;
 	border: 0 !important;
 	padding: 1rem 1.125rem;
-	font-size: 0.9375rem;
+	font-size: 1.125rem;
 	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.04em;
-	color: #555;
+	color: #333;
 	line-height: 1.4;
 }
 
@@ -10315,45 +10638,41 @@ body.dark-mode .card > .card-footer {
 
 /* The contextual heading palette. BS5's text-bg-* is a solid brand fill
  * for every variant, but that is only what BS3 rendered for primary:
- * groupsio.css overrides success to a darker solid (#419641), and info,
- * warning and danger were BS3's pale tints with dark text. Measured off
- * the BS3 twin, not read off the Bootstrap 3 source, because of that
- * success override. primary needs no rule — text-bg-primary already
- * resolves to #337ab7 through --bs-primary-rgb above.
+ * success is the solid success fill, and info, warning and danger are
+ * the alert tints with their dark text. primary needs no rule —
+ * text-bg-primary already resolves to the brand blue through
+ * --bs-primary-rgb.
  *
  * Note the cards themselves carry no border-* utility: groupsio.css
  * gives every .panel `border: 0` as part of the soft-card design, so a
  * contextual card is borderless and only its head is colored. */
 .card > .card-header.text-bg-success {
-	background-color: #419641 !important;
+	background-color: var(--gio-success) !important;
 	color: #fff !important;
 }
 
 .card > .card-header.text-bg-info {
-	background-color: #d9edf7 !important;
-	color: #31708f !important;
+	background-color: var(--gio-info-tint) !important;
+	color: var(--gio-info-text) !important;
 }
 
 .card > .card-header.text-bg-warning {
-	background-color: #fcf8e3 !important;
-	color: #8a6d3b !important;
+	background-color: var(--gio-warning-tint) !important;
+	color: var(--gio-warning-text) !important;
 }
 
 .card > .card-header.text-bg-danger {
-	background-color: #f2dede !important;
-	color: #a94442 !important;
+	background-color: var(--gio-danger-tint) !important;
+	color: var(--gio-danger-text) !important;
 }
 
 /* A BS3 collapsable panel's toggle lived in .panel-heading, so it picked
- * up the soft-card section-label treatment above; the BS5 accordion has
- * its own header element and does not. Mirror the same typography onto
- * the toggle. Measured: BS3 renders these 15px/700/uppercase with 0.6px
- * tracking. */
+ * up the soft-card heading treatment above; the BS5 accordion has its own
+ * header element and does not. Mirror the same typography onto the
+ * toggle: 18px bold. */
 .accordion-button {
-	font-size: 0.9375rem;
+	font-size: 1.125rem;
 	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.04em;
 }
 
 /* BS5 tints the open header (--bs-accordion-active-bg is a primary
@@ -10398,7 +10717,7 @@ body.dark-mode .card > .card-footer {
 	/* Inset, not the app's usual outset ring: the accordion item clips
 	 * its children (overflow: hidden squares the header corners), so an
 	 * outset ring on a flush-edged full-width button cannot paint. */
-	box-shadow: inset 0 0 0 3px rgba(51, 122, 183, 0.25);
+	box-shadow: inset 0 0 0 3px rgba(var(--gio-brand-rgb), 0.25);
 }
 
 /* The BS5 accordion header is expected to be a heading element, and it
@@ -10553,26 +10872,26 @@ pre {
 	border-radius: 4px;
 }
 
-/* BS3's .bg-<state> utilities were the pale state tints (bootstrap.css:
- * #dff0d8, #d9edf7, #fcf8e3, #f2dede) for highlighting inline content;
- * BS5's are solid theme fills, !important, so the API changelog's
- * added/removed highlights turned loud. Progress bars and badges take the
+/* BS3's .bg-<state> utilities were the pale state tints for highlighting
+ * inline content, which the alert tints continue; BS5's are solid theme
+ * fills, !important, so the API changelog's added/removed highlights
+ * turned loud. Progress bars and badges take the
  * solid fill by the sweep table (progress-bar-<v> → bg-<v>) and are left
  * to BS5. */
 .bg-success:not(.progress-bar):not(.badge) {
-	background-color: #dff0d8 !important;
+	background-color: var(--gio-success-tint) !important;
 }
 
 .bg-info:not(.progress-bar):not(.badge) {
-	background-color: #d9edf7 !important;
+	background-color: var(--gio-info-tint) !important;
 }
 
 .bg-warning:not(.progress-bar):not(.badge) {
-	background-color: #fcf8e3 !important;
+	background-color: var(--gio-warning-tint) !important;
 }
 
 .bg-danger:not(.progress-bar):not(.badge) {
-	background-color: #f2dede !important;
+	background-color: var(--gio-danger-tint) !important;
 }
 
 /* Font Awesome's .fa-xs collapses the icon's line box to 0.08em, so the
@@ -10750,9 +11069,9 @@ body {
  * class selector beats the plain `a` rule). Hover is BS3's compiled
  * a:hover value, which the app never overrode. */
 :root {
-	--bs-link-color: #2f6fa7;
-	--bs-link-color-rgb: 47, 111, 167;
-	--bs-link-hover-color: #23527c;
+	--bs-link-color: var(--gio-brand);
+	--bs-link-color-rgb: var(--gio-brand-rgb);
+	--bs-link-hover-color: var(--gio-link-hover);
 	--bs-link-hover-color-rgb: 35, 82, 124;
 }
 
@@ -10777,7 +11096,7 @@ a:focus {
  * so body.dark-mode a keeps winning in dark mode as it did under BS3. */
 :where(body:not(.dark-mode)) a:hover,
 :where(body:not(.dark-mode)) a:focus {
-	color: #23527c;
+	color: var(--gio-link-hover);
 }
 
 /* BS5's reboot strips colour and hover underline from an anchor with
@@ -10787,12 +11106,12 @@ a:focus {
  * and on the activity page drew link-blue; mirror the app's link colours
  * for that shape, light and dark, at rest and on hover. */
 a:not([href]):not([class]) {
-	color: #2f6fa7;
+	color: var(--gio-brand);
 }
 
 a:not([href]):not([class]):hover,
 a:not([href]):not([class]):focus {
-	color: #23527c;
+	color: var(--gio-link-hover);
 	text-decoration: underline;
 }
 
@@ -10852,31 +11171,44 @@ a.badge:focus {
 	--bs-nav-tabs-border-radius: 0.25rem;
 }
 
+/* The active pill takes the brand blue (Bootstrap's own is #0d6efd), and the
+ * dark-mode brand blue with the dark-mode text colour, 4.9:1, in dark mode. */
+.nav-pills {
+	--bs-nav-pills-link-active-bg: var(--gio-brand);
+}
+
+body.dark-mode .nav-pills {
+	--bs-nav-pills-link-active-bg: var(--dark-mode-brand);
+	--bs-nav-pills-link-active-color: var(--dark-mode-text-color);
+}
+
 /* BS3 pagination palette: #ddd borders, #eee hover, #777 disabled text,
- * BS3-primary active. The link color itself follows --bs-link-color. */
+ * the brand blue active. The link color itself follows --bs-link-color. */
 .pagination {
 	--bs-pagination-border-color: #ddd;
-	--bs-pagination-hover-color: #23527c;
+	--bs-pagination-hover-color: var(--gio-link-hover);
 	--bs-pagination-hover-bg: #eee;
 	--bs-pagination-hover-border-color: #ddd;
-	--bs-pagination-focus-color: #23527c;
+	--bs-pagination-focus-color: var(--gio-link-hover);
 	--bs-pagination-focus-bg: #eee;
 	/* BS5's keyboard focus ring is its own blue; the accordion and the
 	 * app's inputs use the app primary, so the page links do too. */
-	--bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(51, 122, 183, 0.25);
+	--bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(var(--gio-brand-rgb), 0.25);
 	--bs-pagination-disabled-color: #777;
 	--bs-pagination-disabled-bg: #fff;
 	--bs-pagination-disabled-border-color: #ddd;
-	--bs-pagination-active-bg: #337ab7;
-	--bs-pagination-active-border-color: #337ab7;
+	--bs-pagination-active-bg: var(--gio-brand);
+	--bs-pagination-active-border-color: var(--gio-brand);
 }
 
+/* The theme colours feed BS5's text-bg-*, bg-* and border-* utilities.
+ * Info is the brand blue, not a separate cyan. */
 :root {
-	--bs-primary-rgb: 51, 122, 183;
-	--bs-success-rgb: 92, 184, 92;
-	--bs-info-rgb: 91, 192, 222;
+	--bs-primary-rgb: var(--gio-brand-rgb);
+	--bs-success-rgb: var(--gio-success-rgb);
+	--bs-info-rgb: var(--gio-brand-rgb);
 	--bs-warning-rgb: 240, 173, 78;
-	--bs-danger-rgb: 217, 83, 79;
+	--bs-danger-rgb: var(--gio-danger-rgb);
 	--bs-secondary-rgb: 119, 119, 119;
 }
 
@@ -10884,33 +11216,42 @@ a.badge:focus {
  * class colored anything it was put on — including bare spans used as
  * inline highlights. BS5's .alert-<variant> only declares --bs-alert-*
  * variables, which nothing reads unless .alert is also present, so those
- * spans lose their background and text color entirely. Restore the BS3
- * declarations; real .alert blocks get the same values, which is the
- * BS3 palette they had. Dark mode needs no line here — groupsio.css's
- * body.dark-mode .alert-* rules outspecify these and ship in both
- * bundles. */
+ * spans lose their background and text color entirely. The palette is
+ * declared on the variant class: a light tint with a dark text of the
+ * same hue, and the solid colour as the alert's rule. Dark mode needs no
+ * line here — groupsio.css's body.dark-mode .alert-* rules outspecify
+ * these. */
 .alert-success {
-	color: #3c763d;
-	background-color: #dff0d8;
-	border-color: #d6e9c6;
+	color: var(--gio-success-text);
+	background-color: var(--gio-success-tint);
+	border-color: var(--gio-success);
 }
 
 .alert-info {
-	color: #31708f;
-	background-color: #d9edf7;
-	border-color: #bce8f1;
+	color: var(--gio-info-text);
+	background-color: var(--gio-info-tint);
+	border-color: var(--gio-brand);
 }
 
 .alert-warning {
-	color: #8a6d3b;
-	background-color: #fcf8e3;
-	border-color: #faebcc;
+	color: var(--gio-warning-text);
+	background-color: var(--gio-warning-tint);
+	border-color: var(--gio-warning);
 }
 
 .alert-danger {
-	color: #a94442;
-	background-color: #f2dede;
-	border-color: #ebccd1;
+	color: var(--gio-danger-text);
+	background-color: var(--gio-danger-tint);
+	border-color: var(--gio-danger);
+}
+
+/* An alert block is marked by a 4px rule down its left edge instead of
+ * a thin outline. The inline highlight spans carry no .alert, so they
+ * keep just the tint. */
+.alert {
+	border-width: 0 0 0 4px;
+	border-style: solid;
+	border-radius: 6px;
 }
 
 /* BS3 labels were always white-on-color; BS5 bakes dark text onto the
@@ -10922,23 +11263,23 @@ a.badge:focus {
 	color: #fff !important;
 }
 
-/* BS3 text-* utilities used the dark emphasis palette, not the brand
- * palette the rgb variables above feed to text-bg-*; !important matches
- * the BS5 utility rules these must beat. */
+/* The text-* utilities use the alert text shades, not the fills the rgb
+ * variables above feed to text-bg-*; !important matches the BS5 utility
+ * rules these must beat. */
 .text-success {
-	color: #3c763d !important;
+	color: var(--gio-success-text) !important;
 }
 
 .text-info {
-	color: #31708f !important;
+	color: var(--gio-info-text) !important;
 }
 
 .text-warning {
-	color: #8a6d3b !important;
+	color: var(--gio-warning-text) !important;
 }
 
 .text-danger {
-	color: #a94442 !important;
+	color: var(--gio-danger-text) !important;
 }
 
 
@@ -11200,7 +11541,7 @@ button.list-group-item {
 	--bs-dropdown-link-hover-color: #262626;
 	--bs-dropdown-link-hover-bg: #f5f5f5;
 	--bs-dropdown-link-active-color: #fff;
-	--bs-dropdown-link-active-bg: #337ab7;
+	--bs-dropdown-link-active-bg: var(--gio-brand);
 	--bs-dropdown-item-padding-x: 1.25rem;
 	--bs-dropdown-item-padding-y: 0.1875rem;
 }
@@ -11276,14 +11617,14 @@ button.list-group-item {
 	margin-left: 0.625rem;
 }
 
-/* BS3 form controls: 14px #555 text at the 1.42 line-height (the 34px
- * control height falls out) with #999 placeholders; the small variants
- * are 12px. BS5 renders controls at 16px in the body color. The -sm
- * padding override stays off form-select-sm, whose right padding
- * reserves room for the chevron. */
+/* Form controls: typed values in #555 at the 16px body size, so they are
+ * at least as large as their labels and larger than the help text below
+ * them (a 37px control at the 1.42 line-height), with #999 placeholders;
+ * the small variants are 12px. The -sm padding override stays off
+ * form-select-sm, whose right padding reserves room for the chevron. */
 .form-control,
 .form-select {
-	font-size: 0.875rem;
+	font-size: 1rem;
 	line-height: 1.428571429;
 	color: #555;
 }
@@ -11319,12 +11660,12 @@ button.list-group-item {
 .form-select:focus {
 	outline: none;
 	box-shadow: none;
-	border-color: #337ab7;
+	border-color: var(--gio-brand);
 }
 
 .form-select:focus-visible {
-	box-shadow: 0 0 0 3px rgba(51, 122, 183, 0.25);
-	border-color: #337ab7;
+	box-shadow: 0 0 0 3px rgba(var(--gio-brand-rgb), 0.25);
+	border-color: var(--gio-brand);
 }
 
 /* BS3 form-group spacing and help-block hint styling, for raw leftovers
@@ -11333,29 +11674,28 @@ button.list-group-item {
 	margin-bottom: 0.9375rem;
 }
 
-/* The margins are the app's zeroes, not Bootstrap 3's 5px/10px:
- * groupsio.css zeroes them and loads after Bootstrap in the BS3 bundle,
- * so a BS3 page renders no margin here and this sheet, loading last,
- * would otherwise reintroduce spacing the app had removed. */
+/* Help text is the smallest text in a form row, 14px, set 4px below its
+ * control. No bottom margin: the form group's own margin spaces the next
+ * row. */
 .help-block {
 	display: block;
-	margin-top: 0;
+	font-size: 0.875rem;
+	margin-top: 0.25rem;
 	margin-bottom: 0;
 	color: #737373;
 }
 
 /* The FormRow component's BS5 arm emits .form-text where its BS3 arm emitted
- * .help-block, and BS5 shrinks .form-text to .875em in its own muted grey.
+ * .help-block, and BS5 gives .form-text .875em in its own muted grey.
  * Converted pages carry both -- componentized hints and raw leftovers -- so
  * without this the same page renders help text at two sizes in two colours.
- * Match the .help-block above, which is what the BS3 page rendered. The colour
- * comes from groupsio.css, which lists .form-text beside .help-block in its
- * light and dark rules. */
+ * Match the .help-block above. The colour comes from groupsio.css, which
+ * lists .form-text beside .help-block in its light and dark rules. */
 .form-text {
 	display: block;
-	font-size: 1rem;
+	font-size: 0.875rem;
 	line-height: 1.42857143;
-	margin-top: 0;
+	margin-top: 0.25rem;
 }
 
 /* Bootstrap 3's reboot bolds every label; Bootstrap 5 dropped that and its
@@ -11394,7 +11734,7 @@ label {
 }
 
 body:not(.dark-mode) .form-check-input:not(:checked):hover {
-	border-color: #337ab7;
+	border-color: var(--gio-brand);
 }
 
 .form-check-input:focus {
@@ -11403,12 +11743,12 @@ body:not(.dark-mode) .form-check-input:not(:checked):hover {
 }
 
 .form-check-input:focus-visible {
-	box-shadow: 0 0 0 3px rgba(51, 122, 183, 0.25);
+	box-shadow: 0 0 0 3px rgba(var(--gio-brand-rgb), 0.25);
 }
 
 .form-check-input:checked {
-	background-color: #337ab7;
-	border-color: #337ab7;
+	background-color: var(--gio-brand);
+	border-color: var(--gio-brand);
 }
 
 /* The Members page filter menu insets its checkboxes 20px from the menu
@@ -11446,7 +11786,7 @@ body:not(.dark-mode) .form-check-input:not(:checked):hover {
  * control. Converted pages emit is-invalid, but the shared branched templates
  * (tabletemplates' 24 form-group wrappers, the editor wrapper) keep the raw
  * BS3 wrapper in both arms, so the error state needs the BS3 treatment here.
- * Values are BS3's own declarations; groupsio.css never restyled has-error.
+ * The colours are the danger palette; groupsio.css never restyled has-error.
  * The BS5-arm names (form-label, form-text, form-select) are listed beside
  * their BS3 counterparts, the way groupsio.css pairs help-block/form-text. */
 .has-error .control-label,
@@ -11456,18 +11796,18 @@ body:not(.dark-mode) .form-check-input:not(:checked):hover {
 .has-error .checkbox label,
 .has-error .radio label,
 .has-error .form-check-label {
-	color: #a94442;
+	color: var(--gio-danger-text);
 }
 
 .has-error .form-control,
 .has-error .form-select {
-	border-color: #a94442;
+	border-color: var(--gio-danger);
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
 .has-error .form-control:focus,
 .has-error .form-select:focus {
-	border-color: #843534;
+	border-color: var(--gio-danger-hover);
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
 }
 
@@ -11485,37 +11825,44 @@ p {
 	margin-bottom: 0.625rem;
 }
 
-/* BS3 button variant palette (btn-secondary handled above). */
+/* Button variant palette (btn-secondary handled above). Each variant sets
+   its disabled colours too; otherwise a disabled button falls back to
+   Bootstrap's own green, red, yellow or cyan. */
 .btn-primary {
-	--bs-btn-bg: #337ab7;
-	--bs-btn-border-color: #2e6da4;
-	--bs-btn-hover-bg: #286090;
-	--bs-btn-hover-border-color: #204d74;
-	--bs-btn-active-bg: #286090;
-	--bs-btn-active-border-color: #204d74;
-	--bs-btn-disabled-bg: #337ab7;
-	--bs-btn-disabled-border-color: #2e6da4;
+	--bs-btn-bg: var(--gio-brand);
+	--bs-btn-border-color: var(--gio-brand);
+	--bs-btn-hover-bg: var(--gio-brand-hover);
+	--bs-btn-hover-border-color: var(--gio-brand-hover);
+	--bs-btn-active-bg: var(--gio-brand-hover);
+	--bs-btn-active-border-color: var(--gio-brand-hover);
+	--bs-btn-disabled-bg: var(--gio-brand);
+	--bs-btn-disabled-border-color: var(--gio-brand);
 }
 
 .btn-success {
-	--bs-btn-bg: #5cb85c;
-	--bs-btn-border-color: #4cae4c;
-	--bs-btn-hover-bg: #449d44;
-	--bs-btn-hover-border-color: #398439;
-	--bs-btn-active-bg: #449d44;
-	--bs-btn-active-border-color: #398439;
+	--bs-btn-bg: var(--gio-success);
+	--bs-btn-border-color: var(--gio-success);
+	--bs-btn-hover-bg: var(--gio-success-hover);
+	--bs-btn-hover-border-color: var(--gio-success-hover);
+	--bs-btn-active-bg: var(--gio-success-hover);
+	--bs-btn-active-border-color: var(--gio-success-hover);
+	--bs-btn-disabled-bg: var(--gio-success);
+	--bs-btn-disabled-border-color: var(--gio-success);
 }
 
 .btn-info {
 	--bs-btn-color: #fff;
-	--bs-btn-bg: #5bc0de;
-	--bs-btn-border-color: #46b8da;
+	--bs-btn-bg: var(--gio-brand);
+	--bs-btn-border-color: var(--gio-brand);
 	--bs-btn-hover-color: #fff;
-	--bs-btn-hover-bg: #31b0d5;
-	--bs-btn-hover-border-color: #269abc;
+	--bs-btn-hover-bg: var(--gio-brand-hover);
+	--bs-btn-hover-border-color: var(--gio-brand-hover);
 	--bs-btn-active-color: #fff;
-	--bs-btn-active-bg: #31b0d5;
-	--bs-btn-active-border-color: #269abc;
+	--bs-btn-active-bg: var(--gio-brand-hover);
+	--bs-btn-active-border-color: var(--gio-brand-hover);
+	--bs-btn-disabled-color: #fff;
+	--bs-btn-disabled-bg: var(--gio-brand);
+	--bs-btn-disabled-border-color: var(--gio-brand);
 }
 
 .btn-warning {
@@ -11528,15 +11875,20 @@ p {
 	--bs-btn-active-color: #fff;
 	--bs-btn-active-bg: #ec971f;
 	--bs-btn-active-border-color: #d58512;
+	--bs-btn-disabled-color: #1c1c1d;
+	--bs-btn-disabled-bg: var(--gio-warning);
+	--bs-btn-disabled-border-color: var(--gio-warning);
 }
 
 .btn-danger {
-	--bs-btn-bg: #d9534f;
-	--bs-btn-border-color: #d43f3a;
-	--bs-btn-hover-bg: #c9302c;
-	--bs-btn-hover-border-color: #ac2925;
-	--bs-btn-active-bg: #c9302c;
-	--bs-btn-active-border-color: #ac2925;
+	--bs-btn-bg: var(--gio-danger);
+	--bs-btn-border-color: var(--gio-danger);
+	--bs-btn-hover-bg: var(--gio-danger-hover);
+	--bs-btn-hover-border-color: var(--gio-danger-hover);
+	--bs-btn-active-bg: var(--gio-danger-hover);
+	--bs-btn-active-border-color: var(--gio-danger-hover);
+	--bs-btn-disabled-bg: var(--gio-danger);
+	--bs-btn-disabled-border-color: var(--gio-danger);
 }
 
 /* Dark mode. The app's dark rules in groupsio.css key on the BS3 class
@@ -11570,11 +11922,10 @@ body.dark-mode .card {
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 1px 6px rgba(0, 0, 0, 0.35);
 }
 
-/* groupsio.css dims a default panel heading in dark mode to the light text
- * colour (body.dark-mode .panel-default > .panel-heading), not the body
- * text colour. */
+/* A default panel heading in dark mode takes the body text colour, as
+ * groupsio.css gives body.dark-mode .panel-default > .panel-heading. */
 body.dark-mode .card > .card-header {
-	color: var(--dark-mode-light-text-color);
+	color: var(--dark-mode-text-color);
 	/* groupsio.css's earlier body.dark-mode .panel-default .panel-heading
 	 * rule also gave the heading the highlight background (a band above
 	 * the body); the colour above came from its later > rule. Without the
@@ -11584,9 +11935,10 @@ body.dark-mode .card > .card-header {
 }
 
 /* groupsio.css's dark-mode label palette: every label takes the reverse
- * text colour (dark on its fill), primary stays white, and info drops to a
- * deeper cyan. The light-mode white-text rule for info/warning badges above
- * is !important, as are BS5's text-bg-* colours, so these are too. */
+ * text colour (dark on its fill), primary stays white, and info is a deep
+ * brand blue under its pale tint. The light-mode white-text rule for
+ * info/warning badges above is !important, as are BS5's text-bg-*
+ * colours, so these are too. */
 body.dark-mode .badge[class*="text-bg-"] {
 	color: var(--dark-mode-reverse-text-color) !important;
 }
@@ -11594,7 +11946,8 @@ body.dark-mode .badge.text-bg-primary {
 	color: #fff !important;
 }
 body.dark-mode .badge.text-bg-info {
-	background-color: #3da8c0 !important;
+	background-color: var(--dark-mode-info-badge) !important;
+	color: var(--gio-info-badge) !important;
 }
 
 /* The same groupsio.css rule (body.dark-mode .label, (0,2,1)) gave every
@@ -11665,7 +12018,7 @@ body.dark-mode .form-select {
 /* groupsio.css's dark-mode focus for .form-control: the brand border and
  * its glow. */
 body.dark-mode .form-select:focus {
-	border-color: #337ab7;
+	border-color: var(--gio-brand);
 	box-shadow: 0 0 5px rgba(98, 0, 238, 0.5);
 }
 
@@ -11701,9 +12054,9 @@ body.dark-mode .form-select:focus {
  * hue carries white. Ratios in the comments are against the text colour
  * the element carries. */
 :root {
-	--bs-success-rgb: 39, 135, 43; /* #27872b, 4.6:1 white */
-	--bs-info-rgb: 91, 192, 222; /* #5bc0de, the BS3 cyan, 8.1:1 dark text */
-	--bs-danger-rgb: 205, 72, 69; /* #cd4845, 4.6:1 white */
+	--bs-success-rgb: var(--gio-success-rgb); /* 5.4:1 white */
+	--bs-info-rgb: var(--gio-brand-rgb); /* 5.3:1 white */
+	--bs-danger-rgb: var(--gio-danger-rgb); /* 5.5:1 white */
 	--bs-secondary-rgb: 108, 108, 108; /* #6c6c6c, 5.3:1 white */
 }
 
@@ -11711,56 +12064,64 @@ body.dark-mode .form-select:focus {
 	background-color: #6c6c6c;
 }
 
-/* Warning stays amber and info stays the BS3 cyan; neither carries white
- * at 4.5:1, so they take dark text instead (#1c1c1d on #f0ad4e, 8.7:1;
- * on #5bc0de, 8.1:1). Dark mode already gave both dark text. */
-.badge.text-bg-warning,
-.badge.text-bg-info {
+/* Warning stays amber and does not carry white at 4.5:1, so it takes dark
+ * text instead (#1c1c1d on #f0ad4e, 8.7:1). Dark mode already gave it
+ * dark text. */
+.badge.text-bg-warning {
 	color: #1c1c1d !important;
 }
 
+/* The info badge (Mod, Owner) is a pale brand tint under the dark brand
+ * text, 7.0:1, so it reads as part of the brand-blue family rather than
+ * a separate accent. */
+.badge.text-bg-info {
+	background-color: var(--gio-info-badge) !important;
+	color: var(--gio-info-text) !important;
+}
+
 .card > .card-header.text-bg-success {
-	background-color: #308631 !important;
+	background-color: var(--gio-success) !important;
 }
 
 .btn-success {
-	--bs-btn-bg: #308631;
-	--bs-btn-border-color: #308631;
-	--bs-btn-hover-bg: #15711a;
-	--bs-btn-hover-border-color: #15711a;
-	--bs-btn-active-bg: #15711a;
-	--bs-btn-active-border-color: #15711a;
+	--bs-btn-bg: var(--gio-success);
+	--bs-btn-border-color: var(--gio-success);
+	--bs-btn-hover-bg: var(--gio-success-hover);
+	--bs-btn-hover-border-color: var(--gio-success-hover);
+	--bs-btn-active-bg: var(--gio-success-hover);
+	--bs-btn-active-border-color: var(--gio-success-hover);
 	background-color: var(--bs-btn-bg);
 	border-color: var(--bs-btn-border-color);
 }
 
-/* The info button keeps the BS3 cyan with dark text, 8.1:1, and darkens
- * slightly on hover, 6.6:1. In dark mode groupsio.css's hover (#308a9e)
- * was 4.3:1 under the same dark text; it lightens instead, 7.2:1. */
+/* The info button is the brand blue, matching btn-primary: white text,
+ * 5.3:1, and 7.8:1 on hover. In dark mode groupsio.css gives it the dark
+ * primary fill and text, 4.9:1 and 6.5:1 on hover. */
 .btn-info {
-	--bs-btn-color: #1c1c1d;
-	--bs-btn-hover-color: #1c1c1d;
-	--bs-btn-active-color: #1c1c1d;
-	--bs-btn-bg: #5bc0de;
-	--bs-btn-border-color: #5bc0de;
-	--bs-btn-hover-bg: #46adca;
-	--bs-btn-hover-border-color: #46adca;
-	--bs-btn-active-bg: #46adca;
-	--bs-btn-active-border-color: #46adca;
+	--bs-btn-bg: var(--gio-brand);
+	--bs-btn-border-color: var(--gio-brand);
+	--bs-btn-hover-bg: var(--gio-brand-hover);
+	--bs-btn-hover-border-color: var(--gio-brand-hover);
+	--bs-btn-active-bg: var(--gio-brand-hover);
+	--bs-btn-active-border-color: var(--gio-brand-hover);
 	background-color: var(--bs-btn-bg);
 	border-color: var(--bs-btn-border-color);
-	color: #1c1c1d;
+	color: #fff;
 }
 
 .btn-info:is(:hover, :focus, :active) {
-	color: #1c1c1d;
+	color: #fff;
+}
+
+body.dark-mode .btn-info {
+	color: var(--dark-mode-text-color);
 }
 
 body.dark-mode .btn-info:is(:hover, :focus, :active) {
-	background-color: #4fb6cf;
-	border-color: #4fb6cf;
+	background-color: var(--dark-mode-brand-hover);
+	border-color: var(--dark-mode-brand-hover);
 	/* Beats groupsio.css's body.dark-mode a:hover on anchor buttons. */
-	color: var(--dark-mode-reverse-text-color);
+	color: var(--dark-mode-text-color);
 }
 
 /* groupsio.css's orange warning button (rgb(245, 128, 62)) with dark text,
@@ -11773,12 +12134,12 @@ body.dark-mode .btn-info:is(:hover, :focus, :active) {
 }
 
 .btn-danger {
-	--bs-btn-bg: #cd4845;
-	--bs-btn-border-color: #cd4845;
-	--bs-btn-hover-bg: #b53031;
-	--bs-btn-hover-border-color: #b53031;
-	--bs-btn-active-bg: #b53031;
-	--bs-btn-active-border-color: #b53031;
+	--bs-btn-bg: var(--gio-danger);
+	--bs-btn-border-color: var(--gio-danger);
+	--bs-btn-hover-bg: var(--gio-danger-hover);
+	--bs-btn-hover-border-color: var(--gio-danger-hover);
+	--bs-btn-active-bg: var(--gio-danger-hover);
+	--bs-btn-active-border-color: var(--gio-danger-hover);
 	background-color: var(--bs-btn-bg);
 	border-color: var(--bs-btn-border-color);
 }
@@ -11877,10 +12238,10 @@ a.activitylink):is(:hover, :focus) {
 	border-radius: 4px;
 }
 
-/* Link blue is 4.4:1 on the info and success alert tints; BS3's hover blue
- * carries 6.6:1 on both. */
+/* A link in a light alert keeps the brand blue (4.6:1 or better on the
+ * four tints), semibold beside the alert's own text colour. */
 :where(body:not(.dark-mode)) .alert a:not(.btn):not(.alert-link) {
-	color: #23527c;
+	color: var(--gio-brand);
 }
 
 /* BS3 blockquote attribution, #777; the grey that passes on white. */
@@ -11901,8 +12262,9 @@ blockquote footer {
 }
 
 body.dark-mode {
-	--bs-success-rgb: 92, 184, 92; /* #5cb85c, 6.9:1 reverse text */
-	--bs-danger-rgb: 229, 115, 115; /* #e57373, 5.7:1 reverse text */
+	--bs-primary-rgb: 40, 96, 144; /* #286090, 6.6:1 white */
+	--bs-success-rgb: 95, 191, 127; /* #5fbf7f, 7.5:1 reverse text */
+	--bs-danger-rgb: 232, 112, 112; /* #e87070, 5.7:1 reverse text */
 }
 
 body.dark-mode .text-danger {
@@ -11914,49 +12276,49 @@ body.dark-mode .text-success {
 }
 
 body.dark-mode .btn-primary {
-	--bs-btn-bg: #286090;
-	--bs-btn-border-color: #286090;
-	background-color: #286090; /* 4.9:1 */
-	border-color: #286090;
+	--bs-btn-bg: var(--dark-mode-brand);
+	--bs-btn-border-color: var(--dark-mode-brand);
+	background-color: var(--dark-mode-brand); /* 4.9:1 */
+	border-color: var(--dark-mode-brand);
 }
 
 body.dark-mode .btn-primary:hover,
 body.dark-mode .btn-primary:focus,
 body.dark-mode .btn-primary:active {
-	background-color: #204d74;
-	border-color: #204d74;
+	background-color: var(--dark-mode-brand-hover);
+	border-color: var(--dark-mode-brand-hover);
 }
 
 body.dark-mode .btn-success {
-	--bs-btn-bg: #1b5e20;
-	--bs-btn-border-color: #1b5e20;
-	background-color: #1b5e20; /* 5.8:1 */
-	border-color: #1b5e20;
+	--bs-btn-bg: var(--dark-mode-success);
+	--bs-btn-border-color: var(--dark-mode-success);
+	background-color: var(--dark-mode-success); /* 4.6:1 */
+	border-color: var(--dark-mode-success);
 }
 
 body.dark-mode .btn-success:hover,
 body.dark-mode .btn-success:focus,
 body.dark-mode .btn-success:active {
-	background-color: #144a18;
-	border-color: #144a18;
+	background-color: var(--dark-mode-success-hover);
+	border-color: var(--dark-mode-success-hover);
 }
 
 body.dark-mode .btn-danger {
-	--bs-btn-bg: #b52b27;
-	--bs-btn-border-color: #b52b27;
-	background-color: #b52b27; /* 4.6:1 */
-	border-color: #b52b27;
+	--bs-btn-bg: var(--dark-mode-danger);
+	--bs-btn-border-color: var(--dark-mode-danger);
+	background-color: var(--dark-mode-danger); /* 4.7:1 */
+	border-color: var(--dark-mode-danger);
 }
 
 body.dark-mode .btn-danger:hover,
 body.dark-mode .btn-danger:focus,
 body.dark-mode .btn-danger:active {
-	background-color: #9a2420;
-	border-color: #9a2420;
+	background-color: var(--dark-mode-danger-hover);
+	border-color: var(--dark-mode-danger-hover);
 }
 
 body.dark-mode .alert a:not(.btn):not(.alert-link) {
-	color: #9ec5e8; /* 6.3:1 on the dark success tint */
+	color: #9ec5e8; /* 7.8:1 or better on the dark tints */
 }
 
 /* The database table's sticky header and first columns are painted white
@@ -11970,10 +12332,21 @@ body.dark-mode .table-fixed-sticky .sticky-col {
 	background: var(--dark-mode-highlight-color);
 }
 
-/* The current page number is the dark-mode text colour on #337ab7, 3.4:1;
- * on the dark-mode primary button blue it is 4.9:1. */
+/* The current page number carries the dark-mode text colour; on the
+ * dark-mode primary button blue it is 4.9:1. */
 body.dark-mode .pagination > .active > :is(a, span) {
-	background-color: #286090;
+	background-color: var(--dark-mode-brand);
+}
+
+/* The active menu item carries the dark-mode text colour too, 4.9:1 on
+ * the dark brand blue. The item colours mirror groupsio.css's
+ * body.dark-mode .dropdown-menu>li>a rules for items that are buttons
+ * rather than links. */
+body.dark-mode .dropdown-menu {
+	--bs-dropdown-link-active-bg: var(--dark-mode-brand);
+	--bs-dropdown-link-color: var(--dark-mode-text-color);
+	--bs-dropdown-link-hover-color: var(--dark-mode-text-color);
+	--bs-dropdown-link-hover-bg: var(--dark-mode-highlight-color);
 }
 
 /* A .btn-link (poll "See Results", the chats list member count) reads
@@ -11985,8 +12358,8 @@ body.dark-mode .btn-link {
 	--bs-btn-active-color: #9ec5e8;
 }
 
-/* .text-primary (an RSVP's "Not Attending") is #337ab7, 3.3:1 on the dark
- * card; the dark-mode link colour is 6.0:1. */
+/* .text-primary (an RSVP's "Not Attending") is the brand blue, 2.8:1 on
+ * the dark card; the dark-mode link colour is 6.0:1. */
 body.dark-mode .text-primary {
 	color: #7da8d4 !important;
 }
@@ -12116,8 +12489,8 @@ body.dark-mode .dropdown-link-toggle {
 }
 
 /* Chat bubbles. A received bubble (#e9e9e9) carries its timestamp in
- * #989696, 2.4:1; #595959 is 5.9:1. A sent bubble's #e0e7f3 text is 3.7:1
- * on its #337ab7; white text is 4.6:1. (The read-only chat view's sent
+ * #989696, 2.4:1; #595959 is 5.9:1. A sent bubble's #e0e7f3 text is 4.3:1
+ * on its brand blue; white text is 5.3:1. (The read-only chat view's sent
  * bubble is #2b669a, where #e0e7f3 is already 4.8:1.) */
 .chat-timestamp-received {
 	color: #595959;
@@ -12155,7 +12528,7 @@ body.dark-mode .chat-message.received .chat-message-content div[style*="color"]:
 }
 
 /* /groups on phones: the meta line's #888 is 3.5:1 on white, and the
- * unread count's white on #d9534f is 4.0:1. */
+ * unread count's white on the danger red is 5.5:1. */
 .groupslist-mobmeta {
 	color: #6c6c6c;
 }
@@ -12165,7 +12538,7 @@ body.dark-mode .groupslist-mobmeta {
 }
 
 .groupslist-mobunread {
-	background: #cd4845;
+	background: var(--gio-danger);
 }
 
 /* Visually hidden text is absolutely positioned; inside an unpositioned
@@ -12447,10 +12820,11 @@ body.dark-mode blockquote footer {
 	color: #a8a8a8;
 }
 
-/* Group statistics lines (site search, subgroup lists): the green is
- * 4.6:1 on white but 3.2:1 on the dark page; the lighter green is 6.0:1. */
+/* Group statistics lines (site search, subgroup lists): the success green
+ * is 5.4:1 on white but too dark on the dark page; the lighter green is
+ * 6.0:1. */
 .group-stats {
-	color: #398439;
+	color: var(--gio-success);
 }
 
 body.dark-mode .group-stats {
