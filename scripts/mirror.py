@@ -65,7 +65,9 @@ class Assets:
         if not path.resolve().is_relative_to(self.directory):
             return None
         candidates = [Path(str(path) + ('?' + parts.query if parts.query else ''))]
-        if not parts.query:
+        if parts.query:
+            candidates.append(Path(str(path) + '?' + parts.query + '.html'))
+        else:
             candidates.extend([path / 'index.html', Path(str(path) + '.html')])
         for candidate in candidates:
             if candidate.is_file() and candidate.stat().st_size:
@@ -315,6 +317,7 @@ def mirror(
     level=None,
     ignore_robots=False,
     require_selector=None,
+    accept=None,
 ):
     if not host or '/' in host or host.startswith('.'):
         raise ValueError('Expected a hostname')
@@ -349,6 +352,8 @@ def mirror(
             command.extend(['-e', 'robots=off'])
         if reject:
             command.append('--reject-regex=' + reject)
+        if accept:
+            command.append('--accept-regex=' + accept)
         result = subprocess.run(command + (urls or [origin]), check=False)
         # Wget uses 8 for individual HTTP errors, including stale internal links.
         # Other failures (DNS, TLS, disk, etc.) must not replace the last snapshot.
@@ -385,6 +390,7 @@ def main():
     parser.add_argument('host')
     parser.add_argument('urls', nargs='*')
     parser.add_argument('--reject', default='')
+    parser.add_argument('--accept', help='only crawl page URLs matching this regular expression')
     parser.add_argument('--output')
     parser.add_argument('--header', action='append', default=[])
     parser.add_argument('--level', type=int)
@@ -409,6 +415,7 @@ def main():
         args.level,
         args.ignore_robots,
         args.require_selector,
+        args.accept,
     )
 
 

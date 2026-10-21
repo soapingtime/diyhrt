@@ -22,7 +22,12 @@ jobs:
         run: pip install -r scripts/requirements.txt
       - name: download groups.io
         run: |
-          python scripts/mirror.py groups.io https://groups.io/g/MTFHRT/wiki/ https://groups.io/g/MTFHRT/topic/80225302/ https://groups.io/g/MTFHRT/topic/79606271/ --static --ignore-robots
+          python scripts/mirror.py groups.io \
+            https://groups.io/g/MTFHRT/wiki/ \
+            https://groups.io/g/MTFHRT/topic/80225302 \
+            https://groups.io/g/MTFHRT/topic/79606271 \
+            --accept 'https://groups.io/g/MTFHRT/(wiki(/|$)|topic/([^/?]+/)?(80225302|79606271)([?]|$))' \
+            --static --ignore-robots
       - name: commit changes
         if: ${{ success() }}
         uses: EndBug/add-and-commit@v9

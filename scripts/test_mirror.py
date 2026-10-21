@@ -117,6 +117,23 @@ class MirrorTests(unittest.TestCase):
                 'image.png%3Fv%3D1',
             )
 
+    def test_paginated_html_uses_wgets_adjusted_filename(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            page = root / 'index.html'
+            page.write_text(
+                '<html><head></head><body><a href="/topic/123?page=2">Next</a></body></html>'
+            )
+            topic = root / 'topic' / '123?page=2.html'
+            topic.parent.mkdir()
+            topic.write_text('<html><head></head><body>Second page</body></html>')
+            assets = Assets(root, 'https://example.com/', wait=0)
+            self.assertEqual(assets.local_file('https://example.com/topic/123?page=2'), topic)
+            assets.run()
+            soup = BeautifulSoup(page.read_text(), 'html.parser')
+            self.assertEqual(soup.a['href'], 'topic/123%3Fpage%3D2.html')
+            self.assertTrue((root / unquote(soup.a['href'])).is_file())
+
     def test_static_app_preserves_content_and_document_relative_background(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
