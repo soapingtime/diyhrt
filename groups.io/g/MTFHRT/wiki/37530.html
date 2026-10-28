@@ -152,7 +152,7 @@
 			gioReport({
 				msg: "bundle-load-failure",
 				url: src,
-				client_id: "web.app01-g2.784114.1792548507698507974"
+				client_id: "web.app02-g2.11384.1793155311200100406"
 			});
 		};
 		if (window.__gioBundleErr) {
@@ -173,7 +173,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app01-g2.784114.1792548507698507974");
+				console.log("client_id:", "web.app02-g2.11384.1793155311200100406");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -228,7 +228,7 @@
 				column: column,
 				stack: stack,
 				last_error: lastError,
-				client_id: "web.app01-g2.784114.1792548507698507974"
+				client_id: "web.app02-g2.11384.1793155311200100406"
 			});
 			lastError = errorMessage;
 			return true;
@@ -238,7 +238,7 @@
 			
 			<script src="../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../css/application-c561a9115460dce982df05454b4b5404.css" rel="stylesheet" id="groupsio-css">
+			<link href="../../../css/application-407b2445ac13d83908dddf71cc398201.css" rel="stylesheet" id="groupsio-css">
 			<script src="../../../js/application-35e32ae82e031022fd4bf6938772adce.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
 			<script src="../../../js/run_prettify.js"></script>
 			<title>MTFHRT@groups.io | Wiki | Basic Estrogel Guide</title>
@@ -382,7 +382,7 @@
 	}, true);
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "748965f045751d20eb0270de43b14f09256f4e6b"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "69cee38e15cb6be882a3d0725b46c5af12d87c14"}' hx-ext="preload" hx-boost="false">
 			<a id="skip-link" class="skip-link visually-hidden-focusable" href="37530.html#maincontent">Skip to main content</a>
 			
 			<div id="page-announcer" class="visually-hidden" role="status"></div>
@@ -2165,6 +2165,14 @@ function createAlert(msg, isError, autoClose, noClose) {
 		// textarea's error state.
 		a11yQueryAll(root, 'textarea').forEach(function(textarea) {
 			a11ySyncEditor(textarea);
+		});
+
+		// A plain-text editor with no label of its own, such as the body of
+		// a new topic or a reply, is named as the message body.
+		a11yQueryAll(root, 'textarea[id^="editor"]:not([aria-label]):not([aria-labelledby])').forEach(function(textarea) {
+			if (textarea.labels && textarea.labels.length === 0) {
+				textarea.setAttribute('aria-label', "Message body");
+			}
 		});
 
 		// The sidebars mark the current page with .active; say so to screen

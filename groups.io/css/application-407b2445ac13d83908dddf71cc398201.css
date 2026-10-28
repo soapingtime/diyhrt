@@ -2168,6 +2168,11 @@ video::-webkit-media-text-track-display {
   color: #333;
 }
 
+/* Outline the white no-color swatch so it shows against the white menu. */
+.dropdown-colorselector>.dropdown-menu>li>.color-btn[data-value="color_none"] {
+  border: 1px solid #ccc;
+}
+
 .btn-colorselector {
   display: inline-block;
   width: 30px;
@@ -2999,7 +3004,7 @@ a,
 body.dark-mode .list-group-item.active,
 body.dark-mode .list-group-item.active:focus,
 body.dark-mode .list-group-item.active:hover {
-	background-color: var(--gio-brand);
+	background-color: var(--gio-topbar);
 }
 
 /* global: no grey iOS tap-highlight flash, no 300ms double-tap delay */
@@ -8919,25 +8924,25 @@ body.dark-mode .likestats {
 body.dark-mode .alert-success {
 	color: var(--dark-mode-success-text);
 	background-color: var(--dark-mode-success-tint);
-	border-color: var(--dark-mode-success-rule);
+	border-color: color-mix(in srgb, var(--dark-mode-success-rule) 30%, transparent);
 }
 
 body.dark-mode .alert-info {
 	color: var(--dark-mode-info-text);
 	background-color: var(--dark-mode-info-tint);
-	border-color: var(--dark-mode-info-rule);
+	border-color: color-mix(in srgb, var(--dark-mode-info-rule) 30%, transparent);
 }
 
 
 body.dark-mode .alert-warning {
 	background-color: var(--dark-mode-warning-tint);
-	border-color: var(--dark-mode-warning-rule);
+	border-color: color-mix(in srgb, var(--dark-mode-warning-rule) 30%, transparent);
 	color: var(--dark-mode-warning-text);
 }
 
 body.dark-mode .alert-danger {
 	background-color: var(--dark-mode-danger-tint);
-	border-color: var(--dark-mode-danger-rule);
+	border-color: color-mix(in srgb, var(--dark-mode-danger-rule) 30%, transparent);
 	color: var(--dark-mode-danger-text);
 }
 
@@ -9003,8 +9008,8 @@ body.dark-mode .list-group-item.active:hover,
 body.dark-mode .list-group-item.active:focus {
 	/*color: var(--dark-mode-text-color);*/
 	color: #ffffff;
-	background-color: var(--gio-brand);
-	border-color: var(--gio-brand);
+	background-color: var(--gio-topbar);
+	border-color: var(--gio-topbar);
 }
 
 
@@ -11218,38 +11223,37 @@ body.dark-mode .nav-pills {
  * variables, which nothing reads unless .alert is also present, so those
  * spans lose their background and text color entirely. The palette is
  * declared on the variant class: a light tint with a dark text of the
- * same hue, and the solid colour as the alert's rule. Dark mode needs no
- * line here — groupsio.css's body.dark-mode .alert-* rules outspecify
- * these. */
+ * same hue, and a faint mix of the solid colour as its outline. Dark
+ * mode needs no line here — groupsio.css's body.dark-mode .alert-* rules
+ * outspecify these. */
 .alert-success {
 	color: var(--gio-success-text);
 	background-color: var(--gio-success-tint);
-	border-color: var(--gio-success);
+	border-color: color-mix(in srgb, var(--gio-success) 30%, transparent);
 }
 
 .alert-info {
 	color: var(--gio-info-text);
 	background-color: var(--gio-info-tint);
-	border-color: var(--gio-brand);
+	border-color: color-mix(in srgb, var(--gio-brand) 30%, transparent);
 }
 
 .alert-warning {
 	color: var(--gio-warning-text);
 	background-color: var(--gio-warning-tint);
-	border-color: var(--gio-warning);
+	border-color: color-mix(in srgb, var(--gio-warning) 30%, transparent);
 }
 
 .alert-danger {
 	color: var(--gio-danger-text);
 	background-color: var(--gio-danger-tint);
-	border-color: var(--gio-danger);
+	border-color: color-mix(in srgb, var(--gio-danger) 30%, transparent);
 }
 
-/* An alert block is marked by a 4px rule down its left edge instead of
- * a thin outline. The inline highlight spans carry no .alert, so they
- * keep just the tint. */
+/* An alert block is marked by a thin tinted outline. The inline
+ * highlight spans carry no .alert, so they keep just the tint. */
 .alert {
-	border-width: 0 0 0 4px;
+	border-width: 1px;
 	border-style: solid;
 	border-radius: 6px;
 }
