@@ -79,12 +79,15 @@ class Capture:
         self.session = requests.Session()
         self.session.headers['User-Agent'] = USER_AGENT
 
+    def rejected(self, url):
+        return bool(self.reject and re.search(self.reject, url))
+
     def page_allowed(self, url):
         parts = urlsplit(url)
         return (
             parts.hostname in self.allowed_hosts
             and not re.match(r'/cdn-cgi(?:/|$)', parts.path)
-            and not (self.reject and re.search(self.reject, url))
+            and not self.rejected(url)
         )
 
     def document(self, body):
