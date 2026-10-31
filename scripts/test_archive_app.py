@@ -233,6 +233,22 @@ class AppArchiveTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, 'Required asset unavailable'):
                 capture.complete_assets()
 
+    def test_coffee_data_requests_the_current_availability_history(self):
+        with tempfile.TemporaryDirectory() as temp:
+            capture = Capture(temp, 'diyhrt.coffee')
+            asked = []
+
+            def fetch(url, headers=None):
+                asked.append(url)
+                body = b'{"shops": []}' if url.endswith('/api/v1/shops') else b'[]'
+                capture.record(url, body, 200, 'application/json')
+
+            with patch.object(capture, 'request', side_effect=fetch):
+                capture.coffee_data()
+            for window in ('24h', '7d', '30d'):
+                self.assertIn(capture.origin + 'api/v1/availability/history?window=' + window, asked)
+            self.assertFalse([url for url in asked if 'timeline' in url])
+
     def test_export_contains_pages_api_responses_and_utc_dates(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

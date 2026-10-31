@@ -312,9 +312,9 @@ class Capture:
             'whats-new',
             'me',
             'discord/bot-invite',
-            'availability/timeline?window=24h',
-            'availability/timeline?window=7d',
-            'availability/timeline?window=30d',
+            'availability/history?window=24h',
+            'availability/history?window=7d',
+            'availability/history?window=30d',
             'feed/stock.rss?only=restocks',
         ]
         for endpoint in endpoints:
