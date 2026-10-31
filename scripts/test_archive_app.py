@@ -16,7 +16,9 @@ import io
 from warcio.statusandheaders import StatusAndHeaders
 from warcio.warcwriter import WARCWriter
 
-from archive_app import Capture, is_capture_request
+from playwright.sync_api import Error as PlaywrightError
+
+from archive_app import Capture, is_capture_request, scroll_page
 
 
 class AppArchiveTests(unittest.TestCase):
@@ -248,6 +250,37 @@ class AppArchiveTests(unittest.TestCase):
             for window in ('24h', '7d', '30d'):
                 self.assertIn(capture.origin + 'api/v1/availability/history?window=' + window, asked)
             self.assertFalse([url for url in asked if 'timeline' in url])
+
+    def test_scroll_retries_after_a_client_side_redirect_destroys_the_page_context(self):
+        class RedirectingPage:
+            def __init__(self, failures):
+                self.failures = failures
+                self.scrolls = 0
+                self.loads = 0
+
+            def evaluate(self, _script):
+                self.scrolls += 1
+                if self.scrolls <= self.failures:
+                    raise PlaywrightError(
+                        'Page.evaluate: Execution context was destroyed, '
+                        'most likely because of a navigation'
+                    )
+
+            def wait_for_load_state(self, _state):
+                self.loads += 1
+
+        page = RedirectingPage(failures=1)
+        scroll_page(page)
+        self.assertEqual((page.scrolls, page.loads), (2, 1))
+        with self.assertRaises(PlaywrightError):
+            scroll_page(RedirectingPage(failures=3))
+
+        class BrokenPage(RedirectingPage):
+            def evaluate(self, _script):
+                raise PlaywrightError('Page.evaluate: Target closed')
+
+        with self.assertRaises(PlaywrightError):
+            scroll_page(BrokenPage(failures=0))
 
     def test_export_contains_pages_api_responses_and_utc_dates(self):
         with tempfile.TemporaryDirectory() as temp:

@@ -19,7 +19,7 @@ import time
 from urllib.parse import urljoin, urlsplit
 
 from bs4 import BeautifulSoup
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import Error as PlaywrightError, sync_playwright
 import requests
 import tinycss2
 from warcio.archiveiterator import ArchiveIterator
@@ -45,6 +45,23 @@ def is_capture_request(request):
         and request.resource_type != 'eventsource'
         and not re.search(r'[?&]_rsc(?:=|&|$)', request.url)
     )
+
+
+def scroll_page(page):
+    # Client-side redirects (e.g. /settings when signed out) can destroy the page mid-scroll.
+    for attempt in range(3):
+        try:
+            page.evaluate('''async () => {
+                for (let y = 0; y < document.body.scrollHeight; y += 700) {
+                    window.scrollTo(0, y);
+                    await new Promise(resolve => setTimeout(resolve, 40));
+                }
+            }''')
+            return
+        except PlaywrightError as error:
+            if 'Execution context was destroyed' not in str(error) or attempt == 2:
+                raise
+            page.wait_for_load_state('load')
 
 
 class Capture:
@@ -264,12 +281,7 @@ class Capture:
                 response = page.goto(url, wait_until='load', timeout=60000)
                 if response and response.status >= 400 and url in self.pages:
                     raise RuntimeError('A previously captured page failed: ' + url)
-                page.evaluate('''async () => {
-                    for (let y = 0; y < document.body.scrollHeight; y += 700) {
-                        window.scrollTo(0, y);
-                        await new Promise(resolve => setTimeout(resolve, 40));
-                    }
-                }''')
+                scroll_page(page)
                 deadline = time.monotonic() + 60
                 while True:
                     page.wait_for_timeout(300)
