@@ -23,6 +23,7 @@
             .map(([url, record]) => [new URL(record.path, location.href).pathname, url])
     );
     const origins = Object.entries(config.origins).sort((a, b) => b[1].length - a[1].length);
+    const rejected = config.reject ? new RegExp(config.reject) : null;
 
     function sourceURL(value) {
         const url = new URL(value, location.href);
@@ -52,6 +53,15 @@
         url.hash = '';
         if (url.searchParams.has('_rsc')) url.searchParams.set('_rsc', 'archive');
         return records[url.href];
+    }
+
+    // A rejected account page has no copy here; visitors continue on the original site.
+    function accountPage(value) {
+        const url = sourceURL(value);
+        const hash = url.hash;
+        url.hash = '';
+        url.searchParams.delete('_rsc');
+        return rejected?.test(url.href) ? url.href + hash : null;
     }
 
     config.pathname = value => (value == null ? value : sourceURL(value).pathname);
@@ -123,6 +133,13 @@
                 headers: { 'Content-Type': record.type }
             });
         }
+        const account = /[?&]_rsc=/.test(value) && accountPage(value);
+        if (account) {
+            // Next follows a non-Flight reply from another address with a full page load.
+            const response = new Response(null);
+            Object.defineProperty(response, 'url', { value: account });
+            return response;
+        }
         const url = new URL(value, location.href);
         if (url.origin === location.origin && url.pathname.startsWith(config.root)) {
             return fetchFile(input, options);
@@ -179,6 +196,13 @@
                 return;
             const anchor = event.target.closest?.('a[href]');
             if (!anchor || anchor.hasAttribute('download') || anchor.target === '_blank') return;
+            const account = anchor.origin === location.origin && accountPage(anchor.href);
+            if (account) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                location.assign(account);
+                return;
+            }
             const destination = localURL(anchor.href);
             const url = new URL(destination, location.href);
             if (url.origin !== location.origin || !url.pathname.startsWith(config.root)) return;

@@ -5,9 +5,8 @@
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-import re
 import threading
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import urlsplit
 
 from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
@@ -18,26 +17,9 @@ class QuietHandler(SimpleHTTPRequestHandler):
         pass
 
 
-def skipped_prefetch(capture, message):
-    # Next prefetches the account pages that --reject keeps out of the capture.
-    prefix = 'Unrecorded request: '
-    url = message.removeprefix(prefix)
-    return (
-        message.startswith(prefix)
-        and urlsplit(url).hostname in capture.allowed_hosts
-        and bool(re.search(r'[?&]_rsc=', url))
-        and capture.rejected(url)
-    )
-
-
-def skipped_navigation(capture, base, url):
-    # A redirect to a rejected page leaves the mirror's own folder, where no copy exists.
-    path = url.removeprefix(base)
-    return (
-        url.startswith(base + '/')
-        and not path.startswith('/' + capture.host + '/')
-        and capture.rejected(urljoin(capture.origin, path))
-    )
+def skipped_navigation(capture, url):
+    # The replay sends visitors to rejected account pages on the original site.
+    return urlsplit(url).hostname in capture.allowed_hosts and capture.rejected(url)
 
 
 def validate(capture, destination, executable=None):
@@ -68,7 +50,7 @@ def validate(capture, destination, executable=None):
             def guard(route):
                 request = route.request
                 url = request.url
-                if request.is_navigation_request() and skipped_navigation(capture, base, url):
+                if request.is_navigation_request() and skipped_navigation(capture, url):
                     route.fulfill(status=204)
                 elif url.startswith((base + '/', 'data:', 'blob:')):
                     route.continue_()
@@ -79,12 +61,7 @@ def validate(capture, destination, executable=None):
             page.route('**/*', guard)
             page.on('pageerror', lambda exception: error(str(exception)))
             page.on(
-                'console',
-                lambda message: (
-                    error(message.text)
-                    if message.type == 'error' and not skipped_prefetch(capture, message.text)
-                    else None
-                ),
+                'console', lambda message: error(message.text) if message.type == 'error' else None
             )
             page.on(
                 'response',

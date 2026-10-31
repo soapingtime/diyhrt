@@ -219,6 +219,7 @@ class Export:
                     'original': url,
                     'root': self.root,
                     'origins': self.origins,
+                    'reject': self.capture.reject,
                     **(
                         {'stockEndpoint': STOCK_ENDPOINT}
                         if self.capture.host == 'diyhrt.coffee'

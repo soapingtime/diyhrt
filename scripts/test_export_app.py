@@ -35,6 +35,23 @@ class ExportTests(unittest.TestCase):
             self.assertEqual(soup.a['href'], 'https://valerie.vg/login?next=/profile#form')
             self.assertEqual(soup.find_all('a')[1]['href'], '/valerie.vg/meds/products/')
 
+    def test_pages_hand_the_exclusions_to_the_replay(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            capture = Capture(root / 'raw', 'valerie.vg', r'/login(/|$|[?])')
+            capture.record(
+                capture.origin, b'<html><head></head><body>Home</body></html>', 200, 'text/html'
+            )
+            capture.export(root / 'output')
+            soup = BeautifulSoup((root / 'output/index.html').read_text(), 'html.parser')
+            config = next(
+                tag.string
+                for tag in soup.find_all('script')
+                if tag.string and tag.string.startswith('window.__mirror=')
+            )
+            reject = json.loads(config.removeprefix('window.__mirror=').removesuffix(';'))['reject']
+            self.assertEqual(reject, r'/login(/|$|[?])')
+
     def test_javascript_failure_reports_the_parser_error(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
@@ -264,6 +281,9 @@ const window = {__mirror: {mount: (...args) => args}};
 const assert = require('node:assert/strict');
 const vm = require('node:vm');
 const requests = [];
+const errors = [];
+const visits = [];
+const listeners = {};
 const responses = {
     '/diyhrt.coffee/_data/me.json': '{"user":null}',
     '/diyhrt.coffee/_data/route.txt': '0:{"saved":true}\\n',
@@ -271,8 +291,10 @@ const responses = {
 const window = {
     __mirror: {
         original: 'https://diyhrt.coffee/', root: '/diyhrt.coffee/',
-        origins: {'https://diyhrt.coffee': '/diyhrt.coffee/'},
+        origins: {'https://diyhrt.coffee': '/diyhrt.coffee/', 'https://forum.diyhrt.coffee': '/diyhrt.coffee/forum/'},
+        reject: '/(forum|api|auth|signup|login|logout|register)(/|$|[?])',
         records: {
+            'https://diyhrt.coffee/login': {path:'/diyhrt.coffee/login.html',status:200,type:'text/html'},
             'https://diyhrt.coffee/api/v1/me': {path:'/diyhrt.coffee/_data/me.json',status:401,type:'application/json'},
             'https://forum.diyhrt.coffee/login?next=%2Fmessages': {path:'/diyhrt.coffee/forum/_pages/login.html?next=%2Fmessages',status:200,type:'text/html'},
             'https://forum.diyhrt.coffee/messages': {path:'/diyhrt.coffee/forum/_pages/login.html?next=%2Fmessages',status:307,type:'text/html',location:'/login?next=%2Fmessages'},
@@ -280,13 +302,15 @@ const window = {
         },
     },
     fetch: async path => {requests.push(path); return new Response(responses[path]);},
-    addEventListener() {},
+    addEventListener: (type, callback) => {listeners[type] = callback;},
 };
 class Element {setAttribute() {}}
 class XMLHttpRequest {open() {}}
 const context = {window, Element, XMLHttpRequest, URL, Response, Request, Map, EventTarget, DOMException, queueMicrotask,
     document: {readyState: 'complete'},
-    location: {href:'https://mirror.example/diyhrt.coffee/', origin:'https://mirror.example'}, console};
+    location: {href:'https://mirror.example/diyhrt.coffee/', origin:'https://mirror.example',
+        assign: url => visits.push(url)},
+    console: {error: (...message) => errors.push(message.join(' '))}};
 for (const type of ['HTMLImageElement','HTMLScriptElement','HTMLLinkElement','HTMLAnchorElement','HTMLSourceElement','HTMLVideoElement']) context[type] = Element;
 vm.runInNewContext(RUNTIME, context);
 (async () => {
@@ -311,7 +335,40 @@ vm.runInNewContext(RUNTIME, context);
     assert.match(await route.text(), /saved/);
     const action = await window.fetch('/api/v1/reviews', {method:'POST'});
     assert.equal(action.status, 503);
+    for (const [path, original] of [
+        ['/login?_rsc=abc', 'https://diyhrt.coffee/login'],
+        ['/diyhrt.coffee/login.html?_rsc=abc', 'https://diyhrt.coffee/login'],
+        ['/diyhrt.coffee/forum/signup?next=%2Fmessages&_rsc=abc', 'https://forum.diyhrt.coffee/signup?next=%2Fmessages'],
+    ]) {
+        const account = await window.fetch(path);
+        assert.equal(account.url, original);
+        assert.equal(account.headers.get('Content-Type'), null);
+    }
+    for (const path of ['/about?_rsc=abc', '/api/v1/availability/timeline?window=7d']) {
+        assert.equal((await window.fetch(path)).status, 503);
+    }
+    assert.deepEqual(errors, [
+        'Unrecorded request: https://diyhrt.coffee/about?_rsc=abc',
+        'Unrecorded request: https://diyhrt.coffee/api/v1/availability/timeline?window=7d',
+    ]);
     assert.deepEqual(requests, ['/diyhrt.coffee/_data/me.json','/diyhrt.coffee/_data/route.txt']);
+    for (const href of [
+        'https://mirror.example/diyhrt.coffee/login.html#form',
+        'https://mirror.example/login',
+        'https://mirror.example/diyhrt.coffee/forum/',
+        'https://example.com/login',
+    ]) {
+        const anchor = {href, origin: new URL(href).origin, target: '', hasAttribute: () => false};
+        listeners.click({
+            target: {closest: () => anchor}, button: 0,
+            preventDefault() {}, stopImmediatePropagation() {},
+        });
+    }
+    assert.deepEqual(visits, [
+        'https://diyhrt.coffee/login#form',
+        'https://diyhrt.coffee/login',
+        'https://mirror.example/diyhrt.coffee/forum/',
+    ]);
 })().catch(error => {console.error(error); process.exitCode = 1;});
 """.replace('RUNTIME', json.dumps(runtime))
         subprocess.run(['node', '-e', javascript], check=True)
