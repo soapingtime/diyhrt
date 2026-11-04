@@ -2163,6 +2163,17 @@ video::-webkit-media-text-track-display {
   line-height: 30px;
 }
 
+/* Keyboard focus. A solid ring, set off from the swatch, stays visible
+   against every swatch color; a click leaves no ring. */
+.dropdown-colorselector>.dropdown-menu>li>.color-btn:focus {
+  outline: none;
+}
+
+.dropdown-colorselector>.dropdown-menu>li>.color-btn:focus-visible {
+  outline: 2px solid var(--gio-brand, #2f6fa7);
+  outline-offset: 2px;
+}
+
 /* The no-color swatch is white, so the white check is invisible on it. MAF */
 .dropdown-colorselector>.dropdown-menu>li>.color-btn[data-value="color_none"].selected:after {
   color: #333;
@@ -2215,6 +2226,25 @@ video::-webkit-media-text-track-display {
   right: 10px;
 }
 */
+/* The Members page filter shows smaller swatches in rows of a bounded width,
+   so a group using many colors doesn't stretch the filter dropdown across
+   the window. */
+#picker-colorfilter .dropdown-colorselector>.dropdown-menu {
+  max-width: 20rem;
+  padding-left: 0;
+}
+
+#picker-colorfilter .dropdown-colorselector>.dropdown-menu>li,
+#picker-colorfilter .dropdown-colorselector>.dropdown-menu>li>.color-btn {
+  width: 20px;
+  height: 20px;
+}
+
+#picker-colorfilter .dropdown-colorselector>.dropdown-menu>li>.color-btn.selected:after {
+  font-size: 9px;
+  line-height: 20px;
+}
+
 /*
  * Social Buttons for Bootstrap
  *
@@ -3133,7 +3163,42 @@ body:not(.dark-mode) span[id*="likestats"] {
 
 .thread-attribution {
 	font-size:14px;
-	color:#707070;	
+	color:#707070;
+}
+
+/* A topic whose status is Locked (a status hashtag such as #sold) is dimmed
+   in topic lists: a faint row tint, with the subject, excerpt, search byline
+   and date in the metadata grey the Topics list attribution already uses.
+   Hashtag badges and author links keep their colours. The greys keep 4.5:1
+   against the tint in both modes. Striped tables (search results) paint
+   their stripe with an inset box-shadow from --bs-table-bg-type, so the
+   tint is set there too. */
+body:not(.dark-mode) td.finished-topic {
+	background-color: #f8f9fa;
+	--bs-table-bg-type: #f8f9fa !important;
+}
+
+body:not(.dark-mode) td.finished-topic,
+body:not(.dark-mode) td.finished-topic a.subject,
+body:not(.dark-mode) td.finished-topic .subject > a,
+body:not(.dark-mode) td.finished-topic .truncate-one-line,
+body:not(.dark-mode) td.finished-topic .truncate-two-lines,
+body:not(.dark-mode) td.finished-topic .byline {
+	color: #707070 !important;
+}
+
+body.dark-mode td.finished-topic {
+	background-color: rgb(40, 40, 42);
+	--bs-table-bg-type: rgb(40, 40, 42) !important;
+}
+
+body.dark-mode td.finished-topic,
+body.dark-mode td.finished-topic a.subject,
+body.dark-mode td.finished-topic .subject > a,
+body.dark-mode td.finished-topic .truncate-one-line,
+body.dark-mode td.finished-topic .truncate-two-lines,
+body.dark-mode td.finished-topic .byline {
+	color: #999999 !important;
 }
 
 body {
@@ -4492,19 +4557,11 @@ table.table-fixed {
 	}
 }
 
-.toc ol {
-	counter-reset: item
-}
-
+/* The table of contents lists headings as written, without numbering of
+ * its own; authors who want numbered sections number their headings. */
 .toc li {
 	display: block;
 	color: #aaa;
-}
-
-.toc li:before {
-	content: counters(item, ".") " ";
-	counter-increment: item;
-	color: #000;
 }
 
 .wikidisplay h1[id], .wikidisplay h2[id], .wikidisplay h3[id],
@@ -6755,6 +6812,12 @@ body.dark-mode a.chat-file-card:focus {
 	margin-bottom: 0;
 }
 
+/* The creator's opening text, below "Created this chat." in the first
+   message. */
+.chat-start-desc {
+	margin-top: 4px;
+}
+
 .chat-message.received .chat-message-content {
 	background-color: rgb(233, 233, 233);
 }
@@ -7998,6 +8061,49 @@ body.dark-mode .rsvp-filters .rsvp-filter-count {
 	position: -webkit-sticky;
 	position: sticky;
 	top: calc(60px + env(safe-area-inset-top));
+}
+
+/* Database table map view: the map sits above the table on small screens and beside it on large ones */
+.table-map-col {
+	align-self: flex-start;
+	z-index: 3;
+	margin-bottom: 1rem;
+}
+.table-map {
+	width: 100%;
+	height: 40vh;
+	border-radius: var(--bs-border-radius);
+}
+@media (min-width: 992px) {
+	/* short enough to fit below the page header before it sticks */
+	.table-map {
+		height: calc(100vh - 200px - env(safe-area-inset-top));
+		min-height: 400px;
+	}
+}
+/* Google's info window is white in both color schemes, so its text can't inherit the dark-mode color */
+.table-map-info {
+	max-width: 260px;
+	color: #212529;
+}
+.table-map-info-muted {
+	color: #6c757d;
+}
+.table-map-row-flash > td {
+	animation: table-map-row-flash 1.5s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+	.table-map-row-flash > td {
+		animation: none;
+	}
+}
+@keyframes table-map-row-flash {
+	from {
+		background-color: var(--bs-primary-bg-subtle);
+	}
+	to {
+		background-color: transparent;
+	}
 }
 
 /* pulled in from Bootstrap 5 */
@@ -9598,10 +9704,6 @@ body.dark-mode .user-content a span {
 /*  User code typically adjusts link colors by putting a span inside an anchor tag */
 	color: #7da8d4 !important;
 	background-color: transparent !important;
-}
-
-body.dark-mode .toc li:before {
-	color: var(--dark-mode-text-color);
 }
 
 body.dark-mode .attachment-box,
@@ -12459,6 +12561,13 @@ body .tox.tox-tinymce.gio-editor-focus {
 	box-shadow: 0 0 0 1px var(--gio-focus-ring-color);
 }
 
+/* On wider screens the editor's second toolbar row holds the formatting
+ * items and stays hidden until the "More options" button opens it
+ * (editor.qtpl toggles gio-editor-more-open on the editor container). */
+.tox.tox-tinymce:not(.gio-editor-more-open) .tox-toolbar-overlord > .tox-toolbar:nth-child(2) {
+	display: none;
+}
+
 /* flatpickr moves focus through the days with the arrow keys and marks the
  * focused day with a #e6e6e6 fill, 1.2:1. body lifts the rule over
  * flatpickr's own .flatpickr-day.nextMonthDay:focus { outline: 0 }. */
@@ -12666,7 +12775,7 @@ body.dark-mode .btn.chat-message-actions:is(:focus, :focus-visible) {
  * under it keeps to as many whole lines as fit in two lines' normal
  * height: two normally, one when the lines are spaced out. Pages whose
  * header title can be cut short also show it in full in the content
- * (.topic-subject-heading, .chat-subject-heading, .wiki-page-title). */
+ * (.topic-subject-heading, .chat-subject-heading, .wiki-title). */
 .navbar-mobile-title h4:has(+ .navbar-mobile-subtitle) {
 	max-height: round(down, 2.25rem, 1lh);
 }
@@ -12705,28 +12814,6 @@ body.dark-mode .btn.chat-message-actions:is(:focus, :focus-visible) {
 	margin: 0;
 	padding: 6px 10px 0;
 	overflow-wrap: anywhere;
-}
-
-/* A wiki page's title heading (groupwiki.qtpl): shown on phones, where the
- * breadcrumb carrying the title is hidden, and kept for screen readers
- * only at md and up. */
-.wiki-page-title {
-	font-size: 1.25rem;
-	overflow-wrap: anywhere;
-}
-
-@media (min-width: 768px) {
-	.wiki-page-title {
-		position: absolute !important;
-		width: 1px !important;
-		height: 1px !important;
-		padding: 0 !important;
-		margin: -1px !important;
-		overflow: hidden !important;
-		clip: rect(0, 0, 0, 0) !important;
-		white-space: nowrap !important;
-		border: 0 !important;
-	}
 }
 
 /* A count badge's spoken suffix (<span class="visually-hidden"> messages)
@@ -12873,5 +12960,466 @@ a[data-bs-toggle="tooltip"]:has(> .badge) {
 	justify-content: center;
 	min-width: 24px;
 	min-height: 24px;
+}
+
+/* Wiki pages
+ *
+ * Default styles for wiki content (.wikidisplay): the wiki page, its
+ * sidebar and footer, the sticky wiki page above the topic and message
+ * lists, and the wiki editor (TinyMCE's body_class). Selectors stay at
+ * low specificity so inline styles authors set on their own content keep
+ * winning. The wiki-* block classes are what the editor's Insert block
+ * menu and Markdown alerts produce. */
+.wikidisplay {
+	line-height: 1.65;
+	overflow-wrap: break-word;
+}
+
+/* On the wiki page, content wider than the column (a wide table, a long
+ * code line) scrolls sideways rather than widening the page. */
+.wiki-layout .wikidisplay {
+	overflow-x: auto;
+}
+
+/* The sticky wiki page keeps its clipped, tighter preview (groupsio.css
+ * .stickywiki), which its Read more link measures. */
+.stickywiki.wikidisplay {
+	line-height: 20px;
+}
+
+.wikidisplay :is(p, ul, ol, blockquote, dl) {
+	max-width: 72ch;
+}
+
+.wikidisplay p {
+	margin: 0 0 1rem;
+}
+
+.wikidisplay :is(ul, ol) {
+	margin: 0 0 1rem;
+	padding-left: 1.4rem;
+}
+
+.wikidisplay li {
+	margin-bottom: 0.3rem;
+}
+
+.wikidisplay :is(h1, h2, h3, h4) {
+	font-weight: 600;
+	line-height: 1.3;
+	margin: 1.75rem 0 0.75rem;
+}
+
+.wikidisplay h1 {
+	font-size: 1.75rem;
+}
+
+.wikidisplay h2 {
+	font-size: 1.45rem;
+	padding-bottom: 0.35rem;
+	border-bottom: 1px solid var(--light-mode-divider);
+}
+
+.wikidisplay h3 {
+	font-size: 1.2rem;
+}
+
+.wikidisplay h4 {
+	font-size: 1.05rem;
+}
+
+.wikidisplay > :first-child {
+	margin-top: 0;
+}
+
+.wikidisplay code {
+	background: rgba(127, 127, 127, 0.12);
+	padding: 0.1em 0.35em;
+	border-radius: 4px;
+	font-size: 0.9em;
+}
+
+.wikidisplay pre {
+	background: rgba(127, 127, 127, 0.1);
+	border: 1px solid var(--light-mode-divider);
+	border-radius: 6px;
+	padding: 0.75rem 1rem;
+	overflow-x: auto;
+	font-size: 0.875rem;
+}
+
+.wikidisplay pre code {
+	background: none;
+	padding: 0;
+}
+
+.wikidisplay blockquote {
+	border-left: 4px solid var(--light-mode-divider);
+	padding: 0.25rem 0 0.25rem 1rem;
+	margin: 0 0 1rem;
+	color: var(--light-mode-light-text-color);
+}
+
+.wikidisplay hr {
+	margin: 1.5rem 0;
+}
+
+.wikidisplay img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 6px;
+}
+
+.wikidisplay figure {
+	margin: 0 0 1rem;
+}
+
+.wikidisplay figcaption {
+	font-size: 0.875rem;
+	color: var(--light-mode-light-text-color);
+	margin-top: 0.35rem;
+}
+
+/* Tables take Bootstrap's table look without the author adding classes. */
+.wikidisplay table {
+	margin: 0 0 1.25rem;
+	border-collapse: collapse;
+}
+
+.wikidisplay :is(th, td) {
+	border: 1px solid var(--light-mode-divider);
+	padding: 0.45rem 0.7rem;
+	vertical-align: top;
+}
+
+.wikidisplay th {
+	font-weight: 600;
+	background: rgba(127, 127, 127, 0.08);
+}
+
+.wikidisplay tbody tr:nth-child(even) td {
+	background: rgba(127, 127, 127, 0.04);
+}
+
+body.dark-mode .wikidisplay :is(h2, pre, th, td) {
+	border-color: var(--dark-mode-divider);
+}
+
+body.dark-mode .wikidisplay blockquote {
+	border-left-color: var(--dark-mode-divider);
+	color: var(--dark-mode-light-text-color);
+}
+
+body.dark-mode .wikidisplay figcaption {
+	color: var(--dark-mode-light-text-color);
+}
+
+/* Callouts: Note, Tip and Warning boxes. */
+.wikidisplay .wiki-callout {
+	position: relative;
+	max-width: 72ch;
+	border-left: 4px solid;
+	border-radius: 6px;
+	padding: 0.75rem 1rem 0.75rem 2.75rem;
+	margin: 0 0 1.25rem;
+}
+
+.wikidisplay .wiki-callout::before {
+	position: absolute;
+	left: 1rem;
+	top: 0.75rem;
+	font-family: "Font Awesome 6 Pro";
+	font-weight: 900;
+}
+
+.wikidisplay .wiki-callout > :last-child {
+	margin-bottom: 0;
+}
+
+.wikidisplay .wiki-callout-note {
+	border-color: var(--gio-brand);
+	background: var(--gio-info-tint);
+}
+
+.wikidisplay .wiki-callout-note::before {
+	content: "\f05a";
+	color: var(--gio-brand);
+}
+
+.wikidisplay .wiki-callout-tip {
+	border-color: var(--gio-success);
+	background: var(--gio-success-tint);
+}
+
+.wikidisplay .wiki-callout-tip::before {
+	content: "\f0eb";
+	color: var(--gio-success);
+}
+
+.wikidisplay .wiki-callout-warning {
+	border-color: var(--gio-warning);
+	background: var(--gio-warning-tint);
+}
+
+.wikidisplay .wiki-callout-warning::before {
+	content: "\f071";
+	color: var(--gio-warning-hover);
+}
+
+body.dark-mode .wikidisplay .wiki-callout-note {
+	border-color: var(--dark-mode-info-rule);
+	background: var(--dark-mode-info-tint);
+}
+
+body.dark-mode .wikidisplay .wiki-callout-note::before {
+	color: var(--dark-mode-info-rule);
+}
+
+body.dark-mode .wikidisplay .wiki-callout-tip {
+	border-color: var(--dark-mode-success-rule);
+	background: var(--dark-mode-success-tint);
+}
+
+body.dark-mode .wikidisplay .wiki-callout-tip::before {
+	color: var(--dark-mode-success-rule);
+}
+
+body.dark-mode .wikidisplay .wiki-callout-warning {
+	border-color: var(--dark-mode-warning-rule);
+	background: var(--dark-mode-warning-tint);
+}
+
+body.dark-mode .wikidisplay .wiki-callout-warning::before {
+	color: var(--dark-mode-warning-rule);
+}
+
+/* FAQ entries: a question that expands to its answer. */
+.wikidisplay details.wiki-faq {
+	max-width: 72ch;
+	border: 1px solid var(--light-mode-divider);
+	border-radius: 6px;
+	margin: 0 0 0.6rem;
+}
+
+.wikidisplay details.wiki-faq > summary {
+	cursor: pointer;
+	padding: 0.65rem 1rem;
+	font-weight: 600;
+	list-style: none;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.wikidisplay details.wiki-faq > summary::-webkit-details-marker {
+	display: none;
+}
+
+.wikidisplay details.wiki-faq > summary::after {
+	font-family: "Font Awesome 6 Pro";
+	font-weight: 900;
+	content: "\f078";
+	font-size: 0.75rem;
+	transition: transform 0.15s;
+}
+
+.wikidisplay details.wiki-faq[open] > summary::after {
+	transform: rotate(180deg);
+}
+
+.wikidisplay details.wiki-faq > :not(summary) {
+	padding: 0 1rem;
+}
+
+.wikidisplay details.wiki-faq > :last-child {
+	padding-bottom: 0.75rem;
+}
+
+.wikidisplay details.wiki-faq > div > :last-child {
+	margin-bottom: 0;
+}
+
+body.dark-mode .wikidisplay details.wiki-faq {
+	border-color: var(--dark-mode-divider);
+}
+
+/* A link styled as a call-to-action button. */
+.wikidisplay a.wiki-button,
+.wikidisplay a.wiki-button:visited {
+	display: inline-block;
+	background: var(--gio-brand);
+	color: #fff;
+	text-decoration: none;
+	padding: 0.45rem 1rem;
+	border-radius: 6px;
+	font-weight: 600;
+}
+
+.wikidisplay a.wiki-button:is(:hover, :focus) {
+	background: var(--gio-brand-hover);
+	color: #fff;
+}
+
+body.dark-mode .wikidisplay a.wiki-button,
+body.dark-mode .wikidisplay a.wiki-button:visited {
+	background: var(--dark-mode-brand);
+	color: var(--dark-mode-text-color);
+}
+
+body.dark-mode .wikidisplay a.wiki-button:is(:hover, :focus) {
+	background: var(--dark-mode-brand-hover);
+}
+
+/* Two columns side by side, stacked on phones. */
+.wikidisplay .wiki-columns {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1.25rem;
+	margin: 0 0 1.25rem;
+}
+
+.wikidisplay .wiki-columns > div {
+	border: 1px solid var(--light-mode-divider);
+	border-radius: 6px;
+	padding: 0.75rem 1rem;
+	min-width: 0;
+}
+
+.wikidisplay .wiki-columns > div > :first-child {
+	margin-top: 0;
+}
+
+.wikidisplay .wiki-columns > div > :last-child {
+	margin-bottom: 0;
+}
+
+body.dark-mode .wikidisplay .wiki-columns > div {
+	border-color: var(--dark-mode-divider);
+}
+
+@media (max-width: 767.98px) {
+	.wikidisplay .wiki-columns {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* The wiki page layout (groupwiki.qtpl): page list on the left and the
+ * table of contents and sidebar on the right at lg and up. */
+.wiki-title {
+	font-size: 1.75rem;
+	font-weight: 700;
+	margin: 0 0 0.25rem;
+	overflow-wrap: anywhere;
+}
+
+.wiki-updated {
+	font-size: 0.8125rem;
+	color: var(--light-mode-light-text-color);
+}
+
+.wiki-header {
+	margin-bottom: 1.25rem;
+}
+
+body.dark-mode .wiki-updated {
+	color: var(--dark-mode-light-text-color);
+}
+
+.wiki-pagelist {
+	font-size: 0.875rem;
+}
+
+.wiki-pagelist .list-group-item {
+	padding: 0.35rem 0.75rem;
+	border: 0;
+	border-radius: 6px;
+	background: transparent;
+}
+
+.wiki-pagelist .list-group-item.active {
+	background: rgba(var(--gio-brand-rgb), 0.12);
+	color: var(--gio-brand);
+	font-weight: 600;
+}
+
+body.dark-mode .wiki-pagelist .list-group-item {
+	color: var(--dark-mode-text-color);
+}
+
+body.dark-mode .wiki-pagelist .list-group-item.active {
+	background: var(--dark-mode-highlight-color);
+}
+
+.wiki-aside {
+	position: sticky;
+	top: 70px;
+	max-height: calc(100vh - 80px);
+	overflow-y: auto;
+}
+
+.wiki-toc {
+	font-size: 0.875rem;
+	border-left: 2px solid var(--light-mode-divider);
+	padding-left: 0.9rem;
+	margin-bottom: 1rem;
+}
+
+.wiki-toc-title {
+	font-weight: 600;
+	margin-bottom: 0.25rem;
+}
+
+.wiki-toc ol {
+	list-style: none;
+	padding-left: 0.75rem;
+	margin: 0;
+}
+
+.wiki-toc > ol {
+	padding-left: 0;
+}
+
+.wiki-toc a {
+	display: block;
+	padding: 0.15rem 0;
+	text-decoration: none;
+}
+
+body.dark-mode .wiki-toc {
+	border-left-color: var(--dark-mode-divider);
+}
+
+@media (max-width: 991.98px) {
+	.wiki-aside {
+		position: static;
+		max-height: none;
+	}
+}
+
+@media (min-width: 992px) {
+	.wiki-has-toc .wiki-toc-inline {
+		display: none;
+	}
+}
+
+/* Unified group search (groupsearch.qtpl): the wiki, files and events
+   sections beside the message results. */
+.search-section {
+	border: 1px solid var(--bs-border-color);
+	border-radius: 0.375rem;
+	padding: 0.75rem 1rem;
+}
+
+.search-section-title {
+	margin-bottom: 0.5rem;
+}
+
+.search-section-item + .search-section-item {
+	margin-top: 0.5rem;
+}
+
+body.dark-mode .search-section {
+	border-color: var(--dark-mode-divider);
 }
 
