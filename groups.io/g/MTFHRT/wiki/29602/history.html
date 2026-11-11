@@ -152,7 +152,7 @@
 			gioReport({
 				msg: "bundle-load-failure",
 				url: src,
-				client_id: "web.app02-g2.619414.1793762947112772659"
+				client_id: "web.app02-g2.889956.1794367044090275041"
 			});
 		};
 		if (window.__gioBundleErr) {
@@ -173,7 +173,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app02-g2.619414.1793762947112772659");
+				console.log("client_id:", "web.app02-g2.889956.1794367044090275041");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -228,7 +228,7 @@
 				column: column,
 				stack: stack,
 				last_error: lastError,
-				client_id: "web.app02-g2.619414.1793762947112772659"
+				client_id: "web.app02-g2.889956.1794367044090275041"
 			});
 			lastError = errorMessage;
 			return true;
@@ -238,8 +238,8 @@
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-a1a3c10f20774457dcca41ce8ac10267.css" rel="stylesheet" id="groupsio-css">
-			<script src="../../../../js/application-a17ec07328b5daf73577d511f1afba3d.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
+			<link href="../../../../css/application-d97e6c834223c90a9e0d504dfb964aec.css" rel="stylesheet" id="groupsio-css">
+			<script src="../../../../js/application-78aee2383a05aae12aa77f3589120e7f.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>MTFHRT@groups.io | Wiki | Ultimate DIY | History</title>
 			
@@ -286,17 +286,24 @@
 	htmx.config.scrollBehavior = "instant";
 	htmx.config.historyCacheSize = 0;
 	htmx.config.defaultSettleDelay = 0;
+	// A history cache miss puts the response in place of the whole <body>, so
+	// it needs the full page, which the server only sends without HX-Request.
+	htmx.config.historyRestoreAsHxRequest = false;
+	// Only the top-level elements of a response are out-of-band swaps; the
+	// badges BaseBadges and the sidebars write are all top level.
+	htmx.config.allowNestedOobSwaps = false;
 	console.log("FULL PAGE LOAD");
 
-	// Short fade-in on #maincontent-refresh after every HTMX swap — adds zero latency
-	// because it runs AFTER the new content has arrived. We listen to afterRequest
-	// (fires once per HTMX request) rather than afterSwap (fires once per swapped
-	// element, including every hx-swap-oob badge — which would cancel the animation).
+	// Short fade-in on #maincontent-refresh after every HTMX navigation — adds zero
+	// latency because it runs AFTER the new content has arrived. htmx fires
+	// afterSwap on each element it swapped, every hx-swap-oob badge included, so
+	// only the one for #maincontent-refresh itself counts: other requests, such as
+	// infinite scroll appending rows or a dropped stale navigation, leave the page
+	// as it was and must not fade it.
 	// Listen on document because this script runs in <head> before <body> exists.
-	document.addEventListener('htmx:afterRequest', function(evt) {
-		if (!evt.detail || !evt.detail.successful) return;
-		var refresh = document.getElementById('maincontent-refresh');
-		if (!refresh) return;
+	document.addEventListener('htmx:afterSwap', function(evt) {
+		var refresh = evt.target;
+		if (!refresh || refresh.id !== 'maincontent-refresh') return;
 		refresh.classList.remove('gio-fade-in');
 		// force reflow so removing then adding re-starts the animation each time
 		void refresh.offsetWidth;
@@ -305,13 +312,217 @@
 
 	// Top-of-viewport progress bar shown while an HTMX request is in flight.
 	// Provides immediate visual feedback for taps even before content arrives.
-	document.addEventListener('htmx:beforeRequest', function() {
+	// It counts requests, so that one finishing, or being aborted for a newer
+	// one, does not hide the bar while another is still loading. The count
+	// follows each XHR itself: htmx fires htmx:afterRequest on the element that
+	// sent the request, and once a swap has removed that element the event no
+	// longer reaches the document.
+	var gioRequestsInFlight = 0;
+	document.addEventListener('htmx:beforeSend', function(evt) {
 		var bar = document.getElementById('gio-progress-bar');
+		gioRequestsInFlight++;
 		if (bar) bar.classList.add('active');
+		evt.detail.xhr.addEventListener('loadend', function() {
+			gioRequestsInFlight = Math.max(0, gioRequestsInFlight - 1);
+			var bar = document.getElementById('gio-progress-bar');
+			if (bar && gioRequestsInFlight === 0) bar.classList.remove('active');
+		});
 	});
-	document.addEventListener('htmx:afterRequest', function() {
-		var bar = document.getElementById('gio-progress-bar');
-		if (bar) bar.classList.remove('active');
+
+	// An HTMX navigation is a request that swaps #maincontent-refresh. Only the
+	// latest one may swap: an earlier one that answers later, or one that a
+	// history restore overtook, would show a page the user has left. A newer
+	// navigation aborts an earlier one that is only loading a page; one that
+	// sends data, such as a form, is left to finish on the server, and its
+	// response is dropped.
+	var gioNavigationSeq = 0;
+	var gioPendingNavigation = null;
+	function gioIsNavigation(detail) {
+		return !!(detail && detail.target && detail.target.id === 'maincontent-refresh');
+	}
+	function gioIsStaleNavigation(detail) {
+		return !!(detail && detail.xhr && detail.xhr.gioNavigationSeq !== undefined && detail.xhr.gioNavigationSeq !== gioNavigationSeq);
+	}
+	document.addEventListener('htmx:beforeRequest', function(evt) {
+		if (!gioIsNavigation(evt.detail)) return;
+		var pending = gioPendingNavigation;
+		evt.detail.xhr.gioNavigationSeq = ++gioNavigationSeq;
+		gioPendingNavigation = {xhr: evt.detail.xhr, get: evt.detail.requestConfig.verb === 'get'};
+		if (pending && pending.get && pending.xhr.readyState !== XMLHttpRequest.DONE) {
+			pending.xhr.abort();
+		}
+	});
+	document.addEventListener('htmx:historyCacheMiss', function() {
+		gioNavigationSeq++;
+		if (gioPendingNavigation && gioPendingNavigation.get) {
+			gioPendingNavigation.xhr.abort();
+		}
+		gioPendingNavigation = null;
+	});
+	// Capture, so that a stale response is dropped before the page's own
+	// htmx:beforeSwap handlers tear down the page it would have replaced.
+	document.addEventListener('htmx:beforeSwap', function(evt) {
+		if (gioIsStaleNavigation(evt.detail)) {
+			evt.preventDefault();
+			evt.stopPropagation();
+		}
+	}, true);
+
+	// Going back or forward to a page fetches it again, which keeps neither its
+	// scroll position nor the pages infinite scroll had added to it. So the
+	// place on each page, its scroll position and how many pages infinite
+	// scroll loaded, is kept in sessionStorage under its URL as the user
+	// scrolls, and reaching a page through Back or Forward loads that many
+	// pages again, then scrolls back there. While a page is being replaced the
+	// place is frozen, so the scrolling the swap causes is not taken for the
+	// user's.
+	var gioInfiniteLoads = 0;
+	var gioPlaceFrozen = false;
+	function gioPlaceKey() {
+		return 'gio-place:' + location.href;
+	}
+	function gioSavePlace() {
+		if (gioPlaceFrozen) return;
+		var main = document.getElementById('maincontent');
+		var place = {y: window.scrollY, main: main ? main.scrollTop : 0, loads: gioInfiniteLoads};
+		try {
+			sessionStorage.setItem(gioPlaceKey(), JSON.stringify(place));
+		} catch (e) {}
+	}
+	function gioReadPlace() {
+		try {
+			return JSON.parse(sessionStorage.getItem(gioPlaceKey()) || 'null');
+		} catch (e) {
+			return null;
+		}
+	}
+	var gioSavePlaceTimer = null;
+	document.addEventListener('scroll', function() {
+		if (gioSavePlaceTimer) return;
+		gioSavePlaceTimer = setTimeout(function() {
+			gioSavePlaceTimer = null;
+			gioSavePlace();
+		}, 250);
+	}, {capture: true, passive: true});
+	window.addEventListener('pagehide', gioSavePlace);
+	function gioIsInfiniteLoad(detail) {
+		return !!(detail && detail.pathInfo && /[?&]infinite2=1(&|$)/.test(detail.pathInfo.requestPath || ''));
+	}
+	document.addEventListener('htmx:beforeSend', function(evt) {
+		if (!gioIsNavigation(evt.detail)) return;
+		gioSavePlace();
+		gioPlaceFrozen = true;
+		// The XHR ends after htmx has swapped the page and pushed its URL.
+		evt.detail.xhr.addEventListener('loadend', function() {
+			gioPlaceFrozen = false;
+		});
+	});
+	document.addEventListener('htmx:afterSwap', function(evt) {
+		if (gioIsNavigation(evt.detail)) gioInfiniteLoads = 0;
+	});
+	var gioAfterInfiniteLoad = null;
+	document.addEventListener('htmx:afterRequest', function(evt) {
+		if (!gioIsInfiniteLoad(evt.detail) || !evt.detail.successful) return;
+		gioInfiniteLoads++;
+		gioSavePlace();
+		if (gioAfterInfiniteLoad) setTimeout(gioAfterInfiniteLoad, 0);
+	});
+	// gioRestorePlace returns the page to place: it loads as many pages as
+	// infinite scroll had, stopping at the end of the list or if a page does
+	// not come within 10 seconds, then scrolls.
+	function gioRestorePlace(place) {
+		var lastTrigger = null;
+		var timer = null;
+		function scrollBack() {
+			clearTimeout(timer);
+			gioAfterInfiniteLoad = null;
+			window.scrollTo({top: place.y, behavior: 'instant'});
+			var main = document.getElementById('maincontent');
+			if (main) main.scrollTop = place.main;
+			gioPlaceFrozen = false;
+		}
+		function loadNext() {
+			clearTimeout(timer);
+			var triggers = document.querySelectorAll('#maincontent-refresh [hx-trigger^="intersect"]');
+			var trigger = triggers.length ? triggers[triggers.length - 1] : null;
+			if (gioInfiniteLoads >= place.loads || !trigger || trigger === lastTrigger) {
+				scrollBack();
+				return;
+			}
+			lastTrigger = trigger;
+			gioAfterInfiniteLoad = loadNext;
+			timer = setTimeout(scrollBack, 10000);
+			htmx.trigger(trigger, 'intersect');
+		}
+		gioPlaceFrozen = true;
+		gioInfiniteLoads = 0;
+		loadNext();
+	}
+	document.addEventListener('htmx:historyCacheMiss', function() {
+		gioPlaceFrozen = true;
+	});
+	document.addEventListener('htmx:historyRestore', function() {
+		var place = gioReadPlace();
+		gioInfiniteLoads = 0;
+		if (place) {
+			gioRestorePlace(place);
+		} else {
+			gioPlaceFrozen = false;
+		}
+	});
+	// A page loaded in full through Back or Forward, rather than from the
+	// browser's back-forward cache, which keeps the page as it was.
+	(function() {
+		var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+		if (!nav || nav.type !== 'back_forward') return;
+		var place = gioReadPlace();
+		if (!place) return;
+		gioPlaceFrozen = true;
+		window.addEventListener('load', function() {
+			gioRestorePlace(place);
+		});
+	})();
+
+	// A navigation that fails leaves the page as it was, which looks like the
+	// tap did nothing. A page that answers with an error is loaded in full, so
+	// the error page shows. A page that cannot be reached, or does not answer
+	// in 30 seconds, gets an alert with a link to try again. Requests that send
+	// data, which can take longer, such as uploads, have no time limit, and
+	// their failure is reported as a change not saved.
+	document.addEventListener('htmx:beforeSend', function(evt) {
+		if (gioIsNavigation(evt.detail) && evt.detail.requestConfig.verb === 'get') {
+			evt.detail.xhr.timeout = 30000;
+		}
+	});
+	function gioNavigationFailed(detail) {
+		var url = detail.pathInfo.finalRequestPath || detail.pathInfo.requestPath;
+		var isGet = detail.requestConfig.verb === 'get';
+		if (typeof createAlert !== 'function' || typeof alertText === 'undefined') {
+			if (isGet) {
+				window.location.href = url;
+			}
+			return;
+		}
+		if (!isGet) {
+			createAlert(alertText.changeNotSaved, true, false);
+			return;
+		}
+		var link = $('<a>').attr('href', url).text(alertText.retryNow)[0].outerHTML;
+		createAlert(alertText.pageNotLoaded + ' ' + link, true, false);
+	}
+	document.addEventListener('htmx:responseError', function(evt) {
+		if (!gioIsNavigation(evt.detail) || gioIsStaleNavigation(evt.detail)) return;
+		if (evt.detail.requestConfig.verb === 'get') {
+			window.location.href = evt.detail.pathInfo.finalRequestPath || evt.detail.pathInfo.requestPath;
+			return;
+		}
+		gioNavigationFailed(evt.detail);
+	});
+	['htmx:sendError', 'htmx:timeout'].forEach(function(name) {
+		document.addEventListener(name, function(evt) {
+			if (!gioIsNavigation(evt.detail) || gioIsStaleNavigation(evt.detail)) return;
+			gioNavigationFailed(evt.detail);
+		});
 	});
 
 	// Bootstrap appends an open tooltip to <body>, outside the content HTMX
@@ -381,7 +592,8 @@
 	}, true);
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "22dba9665fc8b7e2ce7880ed39592753cf90a389"}' hx-ext="preload" hx-boost="false">
+		
+		<body id="body" class="" hx-headers='{"Accept-Version": "a501e954c19110296b107d084fdf6adf74a02649", "Accept-Context": "group:4415"}' hx-ext="preload" hx-boost="false">
 			<a id="skip-link" class="skip-link visually-hidden-focusable" href="history.html#maincontent">Skip to main content</a>
 			
 			<div id="page-announcer" class="visually-hidden" role="status"></div>
@@ -1161,7 +1373,10 @@ function showAutocompleteModal(modalName) {
 	<a title="Messages" href="https://groups.io/g/MTFHRT/topics?sidebar=true" id="sidebar-archives" class="noborderitem list-group-item sidebar-item sidebar-item-archives"> 
 		<i class="fa-fw fa fa-comments fa-lg"></i>
 		Messages
-		<span id="sidebar-archives-badge" class="badge"></span>
+		
+
+<span id="sidebar-archives-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -1176,7 +1391,10 @@ function showAutocompleteModal(modalName) {
 	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" id="sidebar-hashtags" class="noborderitem list-group-item sidebar-item sidebar-item-hashtags"> 
 		<i class="fa-fw fa fa-hashtag fa-lg"></i>
 		Hashtags
-		<span id="sidebar-hashtags-badge" class="badge"></span>
+		
+
+<span id="sidebar-hashtags-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -1204,7 +1422,10 @@ function showAutocompleteModal(modalName) {
 	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" id="sidebar-wiki" class="noborderitem list-group-item sidebar-item sidebar-item-wiki active"> 
 		<i class="fa-fw fa fa-book fa-lg"></i>
 		Wiki
-		<span id="sidebar-wiki-badge" class="badge"></span>
+		
+
+<span id="sidebar-wiki-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -1298,9 +1519,13 @@ function dismiss() {
     $.get( "/dismissalert");
 }
 
-var $alerttemplate = $(".alerttemplate");
-var $alertnoclosetemplate = $(".alertnoclosetemplate");
-var $noticetemplate = $(".noticetemplate");
+// An HTMX swap inserts the new content before it removes the old, so while
+// this script runs the previous page's templates are still in the document,
+// after these. Take only the first of each, or every alert would be cloned
+// once per template.
+var $alerttemplate = $(".alerttemplate").first();
+var $alertnoclosetemplate = $(".alertnoclosetemplate").first();
+var $noticetemplate = $(".noticetemplate").first();
 
 // alertText holds translated messages for alerts raised by shared scripts
 // (the editor and the ajax retry helper) that have no translator of their own.
@@ -1311,6 +1536,7 @@ var alertText = {
 	retryAutomatically: "We will retry automatically.",
 	retryCountdown: "We will retry again in %s seconds.",
 	retryNow: "Retry now",
+	pageNotLoaded: "This page could not be loaded. Check your connection, then try again.",
 	sessionExpired: "Your login has expired, so your changes are not being saved. Do not close or reload this page. \u003ca href=\"/login\" target=\"_blank\" rel=\"noopener\">Log in again in a new tab\u003c/a>, then return here to send your message.",
 	uploadFailed: "Failed to upload %s",
 	imageUploadFailed: "1 image failed to upload. Please try again.",
@@ -1519,8 +1745,74 @@ function createAlert(msg, isError, autoClose, noClose) {
 							
 								<tr>
 									<td>
-										<input class="form-check-input" type="checkbox" name="dataid" id="267409" value="267409" aria-labelledby="revselect revlink267409 revdate267409" onclick="countChecked('267409')"
+										<input class="form-check-input" type="checkbox" name="dataid" id="295285" value="295285" aria-labelledby="revselect revlink295285 revdate295285" onclick="countChecked('295285')"
                          checked>
+
+										
+  
+	
+		
+			<a href="https://groups.io/g/MTFHRT/profile/@Lena">Lena</a>
+		
+  
+
+									</td>
+									<td>
+										<a id="revlink295285" href="295285.html">
+											
+												
+													Updated page
+												
+											
+										</a>
+									</td>
+									<td id="revdate295285">
+										
+<script id="timedispwdataupdated295285">
+	$('#timedispwdataupdated295285').replaceWith(DisplayShortTime(1794227973644741862, false
+		));
+</script>
+
+									</td>
+								</tr>
+							
+								<tr>
+									<td>
+										<input class="form-check-input" type="checkbox" name="dataid" id="294479" value="294479" aria-labelledby="revselect revlink294479 revdate294479" onclick="countChecked('294479')"
+                        >
+
+										
+  
+	
+		
+			<a href="https://groups.io/g/MTFHRT/profile/@Lena">Lena</a>
+		
+  
+
+									</td>
+									<td>
+										<a id="revlink294479" href="294479.html">
+											
+												
+													Updated page
+												
+											
+										</a>
+									</td>
+									<td id="revdate294479">
+										
+<script id="timedispwdataupdated294479">
+	$('#timedispwdataupdated294479').replaceWith(DisplayShortTime(1794055672907273870, false
+		));
+</script>
+
+									</td>
+								</tr>
+							
+								<tr>
+									<td>
+										<input class="form-check-input" type="checkbox" name="dataid" id="267409" value="267409" aria-labelledby="revselect revlink267409 revdate267409" onclick="countChecked('267409')"
+                        >
 
 										
   
@@ -7175,7 +7467,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink184793" href="https://groups.io/g/MTFHRT/wiki/29602/184793">
+										<a id="revlink184793" href="184793.html">
 											
 												
 													Updated page
@@ -7208,7 +7500,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink184675" href="https://groups.io/g/MTFHRT/wiki/29602/184675">
+										<a id="revlink184675" href="184675.html">
 											
 												
 													Updated page
@@ -7241,7 +7533,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink184356" href="https://groups.io/g/MTFHRT/wiki/29602/184356">
+										<a id="revlink184356" href="184356.html">
 											
 												
 													Updated page
@@ -7274,7 +7566,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink184355" href="https://groups.io/g/MTFHRT/wiki/29602/184355">
+										<a id="revlink184355" href="184355.html">
 											
 												
 													Updated page
@@ -7307,7 +7599,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink184065" href="https://groups.io/g/MTFHRT/wiki/29602/184065">
+										<a id="revlink184065" href="184065.html">
 											
 												
 													Updated page
@@ -7340,7 +7632,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink183064" href="https://groups.io/g/MTFHRT/wiki/29602/183064">
+										<a id="revlink183064" href="183064.html">
 											
 												
 													Updated page
@@ -7373,7 +7665,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink181781" href="https://groups.io/g/MTFHRT/wiki/29602/181781">
+										<a id="revlink181781" href="181781.html">
 											
 												
 													Updated page
@@ -7406,7 +7698,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink181266" href="https://groups.io/g/MTFHRT/wiki/29602/181266">
+										<a id="revlink181266" href="181266.html">
 											
 												
 													Updated page
@@ -7439,7 +7731,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink181092" href="https://groups.io/g/MTFHRT/wiki/29602/181092">
+										<a id="revlink181092" href="181092.html">
 											
 												
 													Updated page
@@ -7472,7 +7764,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink181040" href="https://groups.io/g/MTFHRT/wiki/29602/181040">
+										<a id="revlink181040" href="181040.html">
 											
 												
 													Updated page
@@ -7538,7 +7830,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink179227" href="https://groups.io/g/MTFHRT/wiki/29602/179227">
+										<a id="revlink179227" href="179227.html">
 											
 												
 													Updated page
@@ -7604,7 +7896,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink178517" href="https://groups.io/g/MTFHRT/wiki/29602/178517">
+										<a id="revlink178517" href="178517.html">
 											
 												
 													Updated page
@@ -7637,7 +7929,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink178516" href="https://groups.io/g/MTFHRT/wiki/29602/178516">
+										<a id="revlink178516" href="178516.html">
 											
 												
 													Updated page
@@ -7670,7 +7962,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink178236" href="https://groups.io/g/MTFHRT/wiki/29602/178236">
+										<a id="revlink178236" href="178236.html">
 											
 												
 													Updated page
@@ -7703,7 +7995,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink178199" href="https://groups.io/g/MTFHRT/wiki/29602/178199">
+										<a id="revlink178199" href="178199.html">
 											
 												
 													Updated page
@@ -7736,7 +8028,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink177140" href="https://groups.io/g/MTFHRT/wiki/29602/177140">
+										<a id="revlink177140" href="177140.html">
 											
 												
 													Updated page
@@ -7769,7 +8061,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink177139" href="https://groups.io/g/MTFHRT/wiki/29602/177139">
+										<a id="revlink177139" href="177139.html">
 											
 												
 													Updated page
@@ -7802,7 +8094,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink176939" href="https://groups.io/g/MTFHRT/wiki/29602/176939">
+										<a id="revlink176939" href="176939.html">
 											
 												
 													Updated page
@@ -7835,7 +8127,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink176870" href="https://groups.io/g/MTFHRT/wiki/29602/176870">
+										<a id="revlink176870" href="176870.html">
 											
 												
 													Updated page
@@ -7868,7 +8160,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink176863" href="https://groups.io/g/MTFHRT/wiki/29602/176863">
+										<a id="revlink176863" href="176863.html">
 											
 												
 													Updated page
@@ -7901,7 +8193,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink176862" href="https://groups.io/g/MTFHRT/wiki/29602/176862">
+										<a id="revlink176862" href="176862.html">
 											
 												
 													Updated page
@@ -7934,7 +8226,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink176779" href="https://groups.io/g/MTFHRT/wiki/29602/176779">
+										<a id="revlink176779" href="176779.html">
 											
 												
 													Updated page
@@ -7967,7 +8259,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink176690" href="https://groups.io/g/MTFHRT/wiki/29602/176690">
+										<a id="revlink176690" href="176690.html">
 											
 												
 													Updated page
@@ -8000,7 +8292,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink176633" href="https://groups.io/g/MTFHRT/wiki/29602/176633">
+										<a id="revlink176633" href="176633.html">
 											
 												
 													Updated page
@@ -8033,7 +8325,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink176627" href="https://groups.io/g/MTFHRT/wiki/29602/176627">
+										<a id="revlink176627" href="176627.html">
 											
 												
 													Updated page
@@ -8099,7 +8391,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink175991" href="https://groups.io/g/MTFHRT/wiki/29602/175991">
+										<a id="revlink175991" href="175991.html">
 											
 												
 													Updated page
@@ -8132,7 +8424,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink175930" href="https://groups.io/g/MTFHRT/wiki/29602/175930">
+										<a id="revlink175930" href="175930.html">
 											
 												
 													Updated page
@@ -8165,7 +8457,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink175908" href="https://groups.io/g/MTFHRT/wiki/29602/175908">
+										<a id="revlink175908" href="175908.html">
 											
 												
 													Updated page
@@ -8198,7 +8490,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink175730" href="https://groups.io/g/MTFHRT/wiki/29602/175730">
+										<a id="revlink175730" href="175730.html">
 											
 												
 													Updated page
@@ -8231,7 +8523,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink175689" href="https://groups.io/g/MTFHRT/wiki/29602/175689">
+										<a id="revlink175689" href="175689.html">
 											
 												
 													Updated page
@@ -8264,7 +8556,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink175671" href="https://groups.io/g/MTFHRT/wiki/29602/175671">
+										<a id="revlink175671" href="175671.html">
 											
 												
 													Updated page
@@ -8297,7 +8589,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink175563" href="175563.html">
+										<a id="revlink175563" href="https://groups.io/g/MTFHRT/wiki/29602/175563">
 											
 												
 													Updated page
@@ -8792,7 +9084,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink173385" href="173385.html">
+										<a id="revlink173385" href="https://groups.io/g/MTFHRT/wiki/29602/173385">
 											
 												
 													Updated page
@@ -9287,7 +9579,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink172176" href="172176.html">
+										<a id="revlink172176" href="https://groups.io/g/MTFHRT/wiki/29602/172176">
 											
 												
 													Updated page
@@ -9782,7 +10074,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink171634" href="171634.html">
+										<a id="revlink171634" href="https://groups.io/g/MTFHRT/wiki/29602/171634">
 											
 												
 													Updated page
@@ -10277,7 +10569,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink170117" href="170117.html">
+										<a id="revlink170117" href="https://groups.io/g/MTFHRT/wiki/29602/170117">
 											
 												
 													Updated page
@@ -10607,7 +10899,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink168088" href="168088.html">
+										<a id="revlink168088" href="https://groups.io/g/MTFHRT/wiki/29602/168088">
 											
 												
 													Updated page
@@ -10937,7 +11229,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink165976" href="165976.html">
+										<a id="revlink165976" href="https://groups.io/g/MTFHRT/wiki/29602/165976">
 											
 												
 													Updated page
@@ -11300,7 +11592,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink165469" href="165469.html">
+										<a id="revlink165469" href="https://groups.io/g/MTFHRT/wiki/29602/165469">
 											
 												
 													Updated page
@@ -11762,7 +12054,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink164847" href="164847.html">
+										<a id="revlink164847" href="https://groups.io/g/MTFHRT/wiki/29602/164847">
 											
 												
 													Updated page
@@ -12125,7 +12417,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink164381" href="164381.html">
+										<a id="revlink164381" href="https://groups.io/g/MTFHRT/wiki/29602/164381">
 											
 												
 													Updated page
@@ -12686,7 +12978,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink163335" href="163335.html">
+										<a id="revlink163335" href="https://groups.io/g/MTFHRT/wiki/29602/163335">
 											
 												
 													Updated page
@@ -12885,17 +13177,21 @@ function countChecked(id) {
 					
 	
 	
+	
+	
 		
 		<a id="mobilesidebar-groups" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center; color: inherit; text-decoration: none;" href="https://groups.io/groups" hx-boost="false">
 			<div style="display: inline-block; position: relative;">
 				<div style="position: relative;display: inline-block;">
 				<i class="fa-fw fa-light fa-users fa-2x"></i>
 				
+
 				</div><br>
 				<span style="font-size:12px;">Groups</span>
 			</div>
 		</a>
 	
+
 
 					
 						
@@ -12907,6 +13203,9 @@ function countChecked(id) {
 			<div style="position: relative;display: inline-block;">
 			<i class="fa-fw fa-light fa-comments fa-2x"></i>
 			
+
+<span id="mobilesidebarbadge-archives" class="badge mobilebadge"></span>
+
 			</div><br>
 			<span style="font-size:12px;">Messages</span>
 		</div>
@@ -12959,7 +13258,10 @@ function countChecked(id) {
 	<a title="Messages" href="https://groups.io/g/MTFHRT/topics?sidebar=true" id="sidebar-archives-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-archives"> 
 		<i class="fa-fw fa fa-comments fa-lg"></i>
 		Messages
-		<span id="sidebar-archives-mobile-badge" class="badge"></span>
+		
+
+<span id="sidebar-archives-mobile-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -12974,7 +13276,10 @@ function countChecked(id) {
 	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" id="sidebar-hashtags-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-hashtags"> 
 		<i class="fa-fw fa fa-hashtag fa-lg"></i>
 		Hashtags
-		<span id="sidebar-hashtags-mobile-badge" class="badge"></span>
+		
+
+<span id="sidebar-hashtags-mobile-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -13002,7 +13307,10 @@ function countChecked(id) {
 	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" id="sidebar-wiki-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-wiki active"> 
 		<i class="fa-fw fa fa-book fa-lg"></i>
 		Wiki
-		<span id="sidebar-wiki-mobile-badge" class="badge"></span>
+		
+
+<span id="sidebar-wiki-mobile-badge" class="badge"></span>
+
 	</a>
 
 	

@@ -152,7 +152,7 @@
 			gioReport({
 				msg: "bundle-load-failure",
 				url: src,
-				client_id: "web.app01-g2.619768.1793762951526601425"
+				client_id: "web.app02-g2.890750.1794367050213187637"
 			});
 		};
 		if (window.__gioBundleErr) {
@@ -173,7 +173,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app01-g2.619768.1793762951526601425");
+				console.log("client_id:", "web.app02-g2.890750.1794367050213187637");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -228,7 +228,7 @@
 				column: column,
 				stack: stack,
 				last_error: lastError,
-				client_id: "web.app01-g2.619768.1793762951526601425"
+				client_id: "web.app02-g2.890750.1794367050213187637"
 			});
 			lastError = errorMessage;
 			return true;
@@ -238,8 +238,8 @@
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-a1a3c10f20774457dcca41ce8ac10267.css" rel="stylesheet" id="groupsio-css">
-			<script src="../../../../js/application-a17ec07328b5daf73577d511f1afba3d.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
+			<link href="../../../../css/application-d97e6c834223c90a9e0d504dfb964aec.css" rel="stylesheet" id="groupsio-css">
+			<script src="../../../../js/application-78aee2383a05aae12aa77f3589120e7f.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>MTFHRT@groups.io | Wiki | Ultimate DIY</title>
 			
@@ -287,17 +287,24 @@
 	htmx.config.scrollBehavior = "instant";
 	htmx.config.historyCacheSize = 0;
 	htmx.config.defaultSettleDelay = 0;
+	// A history cache miss puts the response in place of the whole <body>, so
+	// it needs the full page, which the server only sends without HX-Request.
+	htmx.config.historyRestoreAsHxRequest = false;
+	// Only the top-level elements of a response are out-of-band swaps; the
+	// badges BaseBadges and the sidebars write are all top level.
+	htmx.config.allowNestedOobSwaps = false;
 	console.log("FULL PAGE LOAD");
 
-	// Short fade-in on #maincontent-refresh after every HTMX swap — adds zero latency
-	// because it runs AFTER the new content has arrived. We listen to afterRequest
-	// (fires once per HTMX request) rather than afterSwap (fires once per swapped
-	// element, including every hx-swap-oob badge — which would cancel the animation).
+	// Short fade-in on #maincontent-refresh after every HTMX navigation — adds zero
+	// latency because it runs AFTER the new content has arrived. htmx fires
+	// afterSwap on each element it swapped, every hx-swap-oob badge included, so
+	// only the one for #maincontent-refresh itself counts: other requests, such as
+	// infinite scroll appending rows or a dropped stale navigation, leave the page
+	// as it was and must not fade it.
 	// Listen on document because this script runs in <head> before <body> exists.
-	document.addEventListener('htmx:afterRequest', function(evt) {
-		if (!evt.detail || !evt.detail.successful) return;
-		var refresh = document.getElementById('maincontent-refresh');
-		if (!refresh) return;
+	document.addEventListener('htmx:afterSwap', function(evt) {
+		var refresh = evt.target;
+		if (!refresh || refresh.id !== 'maincontent-refresh') return;
 		refresh.classList.remove('gio-fade-in');
 		// force reflow so removing then adding re-starts the animation each time
 		void refresh.offsetWidth;
@@ -306,13 +313,217 @@
 
 	// Top-of-viewport progress bar shown while an HTMX request is in flight.
 	// Provides immediate visual feedback for taps even before content arrives.
-	document.addEventListener('htmx:beforeRequest', function() {
+	// It counts requests, so that one finishing, or being aborted for a newer
+	// one, does not hide the bar while another is still loading. The count
+	// follows each XHR itself: htmx fires htmx:afterRequest on the element that
+	// sent the request, and once a swap has removed that element the event no
+	// longer reaches the document.
+	var gioRequestsInFlight = 0;
+	document.addEventListener('htmx:beforeSend', function(evt) {
 		var bar = document.getElementById('gio-progress-bar');
+		gioRequestsInFlight++;
 		if (bar) bar.classList.add('active');
+		evt.detail.xhr.addEventListener('loadend', function() {
+			gioRequestsInFlight = Math.max(0, gioRequestsInFlight - 1);
+			var bar = document.getElementById('gio-progress-bar');
+			if (bar && gioRequestsInFlight === 0) bar.classList.remove('active');
+		});
 	});
-	document.addEventListener('htmx:afterRequest', function() {
-		var bar = document.getElementById('gio-progress-bar');
-		if (bar) bar.classList.remove('active');
+
+	// An HTMX navigation is a request that swaps #maincontent-refresh. Only the
+	// latest one may swap: an earlier one that answers later, or one that a
+	// history restore overtook, would show a page the user has left. A newer
+	// navigation aborts an earlier one that is only loading a page; one that
+	// sends data, such as a form, is left to finish on the server, and its
+	// response is dropped.
+	var gioNavigationSeq = 0;
+	var gioPendingNavigation = null;
+	function gioIsNavigation(detail) {
+		return !!(detail && detail.target && detail.target.id === 'maincontent-refresh');
+	}
+	function gioIsStaleNavigation(detail) {
+		return !!(detail && detail.xhr && detail.xhr.gioNavigationSeq !== undefined && detail.xhr.gioNavigationSeq !== gioNavigationSeq);
+	}
+	document.addEventListener('htmx:beforeRequest', function(evt) {
+		if (!gioIsNavigation(evt.detail)) return;
+		var pending = gioPendingNavigation;
+		evt.detail.xhr.gioNavigationSeq = ++gioNavigationSeq;
+		gioPendingNavigation = {xhr: evt.detail.xhr, get: evt.detail.requestConfig.verb === 'get'};
+		if (pending && pending.get && pending.xhr.readyState !== XMLHttpRequest.DONE) {
+			pending.xhr.abort();
+		}
+	});
+	document.addEventListener('htmx:historyCacheMiss', function() {
+		gioNavigationSeq++;
+		if (gioPendingNavigation && gioPendingNavigation.get) {
+			gioPendingNavigation.xhr.abort();
+		}
+		gioPendingNavigation = null;
+	});
+	// Capture, so that a stale response is dropped before the page's own
+	// htmx:beforeSwap handlers tear down the page it would have replaced.
+	document.addEventListener('htmx:beforeSwap', function(evt) {
+		if (gioIsStaleNavigation(evt.detail)) {
+			evt.preventDefault();
+			evt.stopPropagation();
+		}
+	}, true);
+
+	// Going back or forward to a page fetches it again, which keeps neither its
+	// scroll position nor the pages infinite scroll had added to it. So the
+	// place on each page, its scroll position and how many pages infinite
+	// scroll loaded, is kept in sessionStorage under its URL as the user
+	// scrolls, and reaching a page through Back or Forward loads that many
+	// pages again, then scrolls back there. While a page is being replaced the
+	// place is frozen, so the scrolling the swap causes is not taken for the
+	// user's.
+	var gioInfiniteLoads = 0;
+	var gioPlaceFrozen = false;
+	function gioPlaceKey() {
+		return 'gio-place:' + location.href;
+	}
+	function gioSavePlace() {
+		if (gioPlaceFrozen) return;
+		var main = document.getElementById('maincontent');
+		var place = {y: window.scrollY, main: main ? main.scrollTop : 0, loads: gioInfiniteLoads};
+		try {
+			sessionStorage.setItem(gioPlaceKey(), JSON.stringify(place));
+		} catch (e) {}
+	}
+	function gioReadPlace() {
+		try {
+			return JSON.parse(sessionStorage.getItem(gioPlaceKey()) || 'null');
+		} catch (e) {
+			return null;
+		}
+	}
+	var gioSavePlaceTimer = null;
+	document.addEventListener('scroll', function() {
+		if (gioSavePlaceTimer) return;
+		gioSavePlaceTimer = setTimeout(function() {
+			gioSavePlaceTimer = null;
+			gioSavePlace();
+		}, 250);
+	}, {capture: true, passive: true});
+	window.addEventListener('pagehide', gioSavePlace);
+	function gioIsInfiniteLoad(detail) {
+		return !!(detail && detail.pathInfo && /[?&]infinite2=1(&|$)/.test(detail.pathInfo.requestPath || ''));
+	}
+	document.addEventListener('htmx:beforeSend', function(evt) {
+		if (!gioIsNavigation(evt.detail)) return;
+		gioSavePlace();
+		gioPlaceFrozen = true;
+		// The XHR ends after htmx has swapped the page and pushed its URL.
+		evt.detail.xhr.addEventListener('loadend', function() {
+			gioPlaceFrozen = false;
+		});
+	});
+	document.addEventListener('htmx:afterSwap', function(evt) {
+		if (gioIsNavigation(evt.detail)) gioInfiniteLoads = 0;
+	});
+	var gioAfterInfiniteLoad = null;
+	document.addEventListener('htmx:afterRequest', function(evt) {
+		if (!gioIsInfiniteLoad(evt.detail) || !evt.detail.successful) return;
+		gioInfiniteLoads++;
+		gioSavePlace();
+		if (gioAfterInfiniteLoad) setTimeout(gioAfterInfiniteLoad, 0);
+	});
+	// gioRestorePlace returns the page to place: it loads as many pages as
+	// infinite scroll had, stopping at the end of the list or if a page does
+	// not come within 10 seconds, then scrolls.
+	function gioRestorePlace(place) {
+		var lastTrigger = null;
+		var timer = null;
+		function scrollBack() {
+			clearTimeout(timer);
+			gioAfterInfiniteLoad = null;
+			window.scrollTo({top: place.y, behavior: 'instant'});
+			var main = document.getElementById('maincontent');
+			if (main) main.scrollTop = place.main;
+			gioPlaceFrozen = false;
+		}
+		function loadNext() {
+			clearTimeout(timer);
+			var triggers = document.querySelectorAll('#maincontent-refresh [hx-trigger^="intersect"]');
+			var trigger = triggers.length ? triggers[triggers.length - 1] : null;
+			if (gioInfiniteLoads >= place.loads || !trigger || trigger === lastTrigger) {
+				scrollBack();
+				return;
+			}
+			lastTrigger = trigger;
+			gioAfterInfiniteLoad = loadNext;
+			timer = setTimeout(scrollBack, 10000);
+			htmx.trigger(trigger, 'intersect');
+		}
+		gioPlaceFrozen = true;
+		gioInfiniteLoads = 0;
+		loadNext();
+	}
+	document.addEventListener('htmx:historyCacheMiss', function() {
+		gioPlaceFrozen = true;
+	});
+	document.addEventListener('htmx:historyRestore', function() {
+		var place = gioReadPlace();
+		gioInfiniteLoads = 0;
+		if (place) {
+			gioRestorePlace(place);
+		} else {
+			gioPlaceFrozen = false;
+		}
+	});
+	// A page loaded in full through Back or Forward, rather than from the
+	// browser's back-forward cache, which keeps the page as it was.
+	(function() {
+		var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+		if (!nav || nav.type !== 'back_forward') return;
+		var place = gioReadPlace();
+		if (!place) return;
+		gioPlaceFrozen = true;
+		window.addEventListener('load', function() {
+			gioRestorePlace(place);
+		});
+	})();
+
+	// A navigation that fails leaves the page as it was, which looks like the
+	// tap did nothing. A page that answers with an error is loaded in full, so
+	// the error page shows. A page that cannot be reached, or does not answer
+	// in 30 seconds, gets an alert with a link to try again. Requests that send
+	// data, which can take longer, such as uploads, have no time limit, and
+	// their failure is reported as a change not saved.
+	document.addEventListener('htmx:beforeSend', function(evt) {
+		if (gioIsNavigation(evt.detail) && evt.detail.requestConfig.verb === 'get') {
+			evt.detail.xhr.timeout = 30000;
+		}
+	});
+	function gioNavigationFailed(detail) {
+		var url = detail.pathInfo.finalRequestPath || detail.pathInfo.requestPath;
+		var isGet = detail.requestConfig.verb === 'get';
+		if (typeof createAlert !== 'function' || typeof alertText === 'undefined') {
+			if (isGet) {
+				window.location.href = url;
+			}
+			return;
+		}
+		if (!isGet) {
+			createAlert(alertText.changeNotSaved, true, false);
+			return;
+		}
+		var link = $('<a>').attr('href', url).text(alertText.retryNow)[0].outerHTML;
+		createAlert(alertText.pageNotLoaded + ' ' + link, true, false);
+	}
+	document.addEventListener('htmx:responseError', function(evt) {
+		if (!gioIsNavigation(evt.detail) || gioIsStaleNavigation(evt.detail)) return;
+		if (evt.detail.requestConfig.verb === 'get') {
+			window.location.href = evt.detail.pathInfo.finalRequestPath || evt.detail.pathInfo.requestPath;
+			return;
+		}
+		gioNavigationFailed(evt.detail);
+	});
+	['htmx:sendError', 'htmx:timeout'].forEach(function(name) {
+		document.addEventListener(name, function(evt) {
+			if (!gioIsNavigation(evt.detail) || gioIsStaleNavigation(evt.detail)) return;
+			gioNavigationFailed(evt.detail);
+		});
 	});
 
 	// Bootstrap appends an open tooltip to <body>, outside the content HTMX
@@ -382,7 +593,8 @@
 	}, true);
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "22dba9665fc8b7e2ce7880ed39592753cf90a389"}' hx-ext="preload" hx-boost="false">
+		
+		<body id="body" class="" hx-headers='{"Accept-Version": "a501e954c19110296b107d084fdf6adf74a02649", "Accept-Context": "group:4415"}' hx-ext="preload" hx-boost="false">
 			<a id="skip-link" class="skip-link visually-hidden-focusable" href="204015.html#maincontent">Skip to main content</a>
 			
 			<div id="page-announcer" class="visually-hidden" role="status"></div>
@@ -1162,7 +1374,10 @@ function showAutocompleteModal(modalName) {
 	<a title="Messages" href="https://groups.io/g/MTFHRT/topics?sidebar=true" id="sidebar-archives" class="noborderitem list-group-item sidebar-item sidebar-item-archives"> 
 		<i class="fa-fw fa fa-comments fa-lg"></i>
 		Messages
-		<span id="sidebar-archives-badge" class="badge"></span>
+		
+
+<span id="sidebar-archives-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -1177,7 +1392,10 @@ function showAutocompleteModal(modalName) {
 	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" id="sidebar-hashtags" class="noborderitem list-group-item sidebar-item sidebar-item-hashtags"> 
 		<i class="fa-fw fa fa-hashtag fa-lg"></i>
 		Hashtags
-		<span id="sidebar-hashtags-badge" class="badge"></span>
+		
+
+<span id="sidebar-hashtags-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -1205,7 +1423,10 @@ function showAutocompleteModal(modalName) {
 	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" id="sidebar-wiki" class="noborderitem list-group-item sidebar-item sidebar-item-wiki active"> 
 		<i class="fa-fw fa fa-book fa-lg"></i>
 		Wiki
-		<span id="sidebar-wiki-badge" class="badge"></span>
+		
+
+<span id="sidebar-wiki-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -1299,9 +1520,13 @@ function dismiss() {
     $.get( "/dismissalert");
 }
 
-var $alerttemplate = $(".alerttemplate");
-var $alertnoclosetemplate = $(".alertnoclosetemplate");
-var $noticetemplate = $(".noticetemplate");
+// An HTMX swap inserts the new content before it removes the old, so while
+// this script runs the previous page's templates are still in the document,
+// after these. Take only the first of each, or every alert would be cloned
+// once per template.
+var $alerttemplate = $(".alerttemplate").first();
+var $alertnoclosetemplate = $(".alertnoclosetemplate").first();
+var $noticetemplate = $(".noticetemplate").first();
 
 // alertText holds translated messages for alerts raised by shared scripts
 // (the editor and the ajax retry helper) that have no translator of their own.
@@ -1312,6 +1537,7 @@ var alertText = {
 	retryAutomatically: "We will retry automatically.",
 	retryCountdown: "We will retry again in %s seconds.",
 	retryNow: "Retry now",
+	pageNotLoaded: "This page could not be loaded. Check your connection, then try again.",
 	sessionExpired: "Your login has expired, so your changes are not being saved. Do not close or reload this page. \u003ca href=\"/login\" target=\"_blank\" rel=\"noopener\">Log in again in a new tab\u003c/a>, then return here to send your message.",
 	uploadFailed: "Failed to upload %s",
 	imageUploadFailed: "1 image failed to upload. Please try again.",
@@ -1704,7 +1930,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 <h2 id="Equipment">Equipment</h2>
 <h3 id="Necessary">Necessary</h3>
 <p>The only necessary equipment is cheap ($7 - $15) pocket 0.001 g (1 mg) scales (or DIY balance scales you can make from a long narrow wooden plank, 2 small nails and 2 syringes, one of them with 0.5 ml water as a precise weight).</p>
-<p>If you buy ready-to-use scales then they must look exactly like this:<br/><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13908/354x254.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1793763551&Signature=14vjyCxa1c7bSbPSTwucoKWgTDA%3D" align="right" loading="lazy" class="myimg-responsive"/><span style="text-decoration: underline"><a href="https://www.ebay.com/itm/363747240371" rel="nofollow noopener" target="_blank">https://www.ebay.com/itm/363747240371</a></span><br/><a href="https://www.aliexpress.com/item/4000586480263.html" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.aliexpress.com/item/4000586480263.html</span></a></p>
+<p>If you buy ready-to-use scales then they must look exactly like this:<br/><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13908/354x254.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1794367650&Signature=0Ku5fkkYb2KUB3FTJrnOmgdqguM%3D" align="right" loading="lazy" class="myimg-responsive"/><span style="text-decoration: underline"><a href="https://www.ebay.com/itm/363747240371" rel="nofollow noopener" target="_blank">https://www.ebay.com/itm/363747240371</a></span><br/><a href="https://www.aliexpress.com/item/4000586480263.html" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.aliexpress.com/item/4000586480263.html</span></a></p>
 <p>Newer models are not suitable because they attempt to appear more precise and stable by ignoring small weight changes.</p>
 <p>Search for other sellers:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=scale+0.001&amp;_sacat=0&amp;_blrs=recall_filtering&amp;LH_BIN=1&amp;_sop=15&amp;_ipg=120&amp;_oac=1" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.ebay.com/sch/i.html?_nkw=scale+0.001&amp;_sacat=0&amp;_blrs=recall_filtering&amp;LH_BIN=1&amp;_sop=15&amp;_ipg=120&amp;_oac=1</span></a></p>
 <p><a href="https://www.ebay.com/sch/i.html?_nkw=scale+digital+diamond&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_blrs=recall_filtering&amp;_ipg=120&amp;_oac=1" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.ebay.com/sch/i.html?_nkw=scale+digital+diamond&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_blrs=recall_filtering&amp;_ipg=120&amp;_oac=1</span></a></p>
@@ -1720,10 +1946,10 @@ function createAlert(msg, isError, autoClose, noClose) {
 <p>Unnecessary: beaker, mixer/stirrer, room with controlled airflow, depyrogenation. My technology: terminal heat sterilization (after the vials are sealed); measure and mix in each vial separately, so no glassware to wash with water  or collecting dust (skin flakes and <a href="https://en.wikipedia.org/wiki/House_dust_mite" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">mites</span></a>) if never washed. Water - bacteria - pyrogens. Hormone powders are sold not sterile, so any cleaning / sterilization efforts before terminal heat sterilization are futile. Don&#39;t try to improve this technology: it protects you from mistakes and unexpected problems.</p>
 <h2 id="Other-raw-materials-and-expendables">Other raw materials and expendables</h2>
 <h3 id="Vials2C-stoppers2C-caps">Vials, stoppers, caps</h3>
-<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13965/s-l300.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1793763551&Signature=nVWNur7UEVNMQOYzQ2zpW4Q74w8%3D" align="right" loading="lazy" class="myimg-responsive"/>Buy 10 clear glass vials 10 ml each with 20 mm grey (butyl rubber) stoppers and aluminium caps. Caps may be bare aluminium or painted, with plastic tops or all-metal. Screw-on and all-plastic caps are not suitable. Stoppers must have this shape:<br/><a href="https://www.ebay.com/itm/185908326110" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.ebay.com/itm/185908326110</span></a><br/><a href="https://www.aliexpress.us/item/2251832717628622.html" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.aliexpress.us/item/2251832717628622.html</span></a><br/>Flat septa are not suitable instead of stoppers. Search:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1</span></a></p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13965/s-l300.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1794367650&Signature=73KstnuFmMTfuTRxwPZ%2FBsLoKcg%3D" align="right" loading="lazy" class="myimg-responsive"/>Buy 10 clear glass vials 10 ml each with 20 mm grey (butyl rubber) stoppers and aluminium caps. Caps may be bare aluminium or painted, with plastic tops or all-metal. Screw-on and all-plastic caps are not suitable. Stoppers must have this shape:<br/><a href="https://www.ebay.com/itm/185908326110" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.ebay.com/itm/185908326110</span></a><br/><a href="https://www.aliexpress.us/item/2251832717628622.html" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.aliexpress.us/item/2251832717628622.html</span></a><br/>Flat septa are not suitable instead of stoppers. Search:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1</span></a></p>
 <p><a href="https://www.aliexpress.com/wholesale?SearchText=vial+10ml+stopper+cap" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">https://www.aliexpress.com/wholesale?SearchText=vial+10ml+stopper+cap</span></a></p>
 <p>After you remove central part of the cap, most of the cap must remain and hold the rubber stopper at place. Caps must <strong>not</strong> have tear-off weak place on one side like this:</p>
-<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13909/cap-tear-off.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1793763551&Signature=%2BXi9d2Q0wzASGbrtxohlbQy3OiU%3D" loading="lazy" class="myimg-responsive"/></p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13909/cap-tear-off.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1794367650&Signature=gK5HsoDbDOAm1EAlNLtfUBA0NKI%3D" loading="lazy" class="myimg-responsive"/></p>
 <p>In EU you can buy <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/VIC010-001NS" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">vials</span></a>, stoppers <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22STG20-%200001%22" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">1</span></a> or <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/STR20-0001" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">2</span></a>, <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22BKMA%2020-GO%22" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">caps</span></a>, <span style="text-decoration: underline"><a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22BA%200020%22" rel="nofollow noopener" target="_blank">benzyl alcohol</a></span> and <span style="text-decoration: underline"><a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22MCT%201L%22" rel="nofollow noopener" target="_blank">MCT oil</a></span> in one shop, or (cheaper) <a href="https://www.glas-shop.com/glasprodukte/injektionsflascheninfusionsflaschen/injektionsflaschenklarglas5100ml/injektionsflasche-klarglas-10ml.php" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">vials</span></a>+<span style="text-decoration: underline"><a href="https://www.glas-shop.com/verschluesse2/verschluesse-fuer-injektionsflaschen/injektionsstopfeneinzeln20mmrotausbrombutyl.php" rel="nofollow noopener" target="_blank">stoppers</a></span>+<span style="text-decoration: underline"><a href="https://www.glas-shop.com/verschluesse2/verschluesse-fuer-injektionsflaschen/boerdelkappe-2025-x-74-mm-mittel-abriss-gruen.php" rel="nofollow noopener" target="_blank">caps</a></span>, or <span style="text-decoration: underline"><a href="https://www.amazon.de/-/en/Mikikit-Clear-Glass-Bottle-Transparent/dp/B09TPLQQRB/" rel="nofollow noopener" target="_blank">here</a></span>, or <a href="https://www.amazon.es/gp/product/B09TFPB6SR/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">here</span></a>, or <span style="text-decoration: underline"><a href="https://www.amazon.de/-/en/H566EJW15X19NTIP4/dp/B09TFPB6SR/" rel="nofollow noopener" target="_blank">here</a></span>. In UK <span style="text-decoration: underline"><a href="https://www.ebay.co.uk/itm/333152620103" rel="nofollow noopener" target="_blank">here</a></span> or <a href="https://www.amazon.co.uk/Mikikit-10ml-Clear-Glass-Bottle/dp/B09TFPB6SR/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">here</span></a>. In USA <span style="text-decoration: underline"><a href="https://www.medical-and-lab-supplies.com/vials/open/rls-10ml-tubular-clear-glass-serum-vials-qty-1.html" rel="nofollow noopener" target="_blank">vials</a></span>+<span style="text-decoration: underline"><a href="https://www.medical-and-lab-supplies.com/lab-supplies/butyl-rubber-stoppers-for-vials-20mm-gray.html" rel="nofollow noopener" target="_blank">stoppers</a></span>+<span style="text-decoration: underline"><a href="https://www.medical-and-lab-supplies.com/lab-supplies/20mm-standard-aluminum-seal-please-click-to-view-all-colors.html" rel="nofollow noopener" target="_blank">caps</a></span> (<span style="text-decoration: underline"><a href="https://www.medical-and-lab-supplies.com/usp-oils/mct-60-40-caprylic-c8-capric-c10-oil.html" rel="nofollow noopener" target="_blank">oil</a></span>, <a href="https://www.medical-and-lab-supplies.com/chemicals-solvents/benzyl-alcohol-usp.html" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">BA</span></a>, <span style="text-decoration: underline"><a href="https://www.medical-and-lab-supplies.com/medical-supplies/syringes-and-needles/diabetic-syringes/aimsco-maxicomfort-diabetic-insulin-syringes.html" rel="nofollow noopener" target="_blank">syringes</a></span>) or <span style="text-decoration: underline"><a href="https://lemelange.com/unsterilevialwide10ml20mm.aspx" rel="nofollow noopener" target="_blank">vials</a></span>+<a href="https://lemelange.com/20-mm-vial-stoppers-grey.aspx" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">stoppers</span></a>+<span style="text-decoration: underline"><a href="https://lemelange.com/20mmaluminumringwithcentertearout.aspx" rel="nofollow noopener" target="_blank">caps</a></span> or <a href="https://qcvialz.com/vial-samples/316-10ml-clear-shorty-serum-vials-iso-10r-24x45mm-sample-pack-of-10.html" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">vials</span></a>+<a href="https://qcvialz.com/vial-stopper-samples/319-20mm-round-bottom-vial-stopper-sample-pack-of-10.html" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">stoppers</span></a>+<span style="text-decoration: underline"><a href="https://qcvialz.com/superior-flip-cap-vial-seals/482-light-blue-20mm-superior-flip-cap-vial-seals-pack-of-10pc.html" rel="nofollow noopener" target="_blank">caps</a></span> or <span style="text-decoration: underline"><a href="https://www.gpzmedlab.com/store/p/110-10-ML-Unsealed-Clear-Vial.aspx" rel="nofollow noopener" target="_blank">vials</a></span>+<span style="text-decoration: underline"><a href="https://www.gpzmedlab.com/store/p/38-Grey-Butyl-Stopper.aspx" rel="nofollow noopener" target="_blank">stoppers</a></span>+<a href="https://www.gpzmedlab.com/store/p/102-Aluminum-Seal-Center-Tear-Out.aspx" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">caps</span></a> (<span style="text-decoration: underline"><a href="https://www.gpzmedlab.com/easy-touch-1-cc-insulin-syringe-with-28-g-x-1-2-needle-100-count.aspx" rel="nofollow noopener" target="_blank">syringes</a></span>) or <a href="https://www.premiumvials.com/10ml-glass-bottle-with-lid-transparent-vial-b-10pcs/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">here</span></a> or sealed vials(<span style="text-decoration: underline"><a href="https://www.ebay.com/sch/257835/i.html?_dkr=1&amp;iconV2Request=true&amp;_blrs=recall_filtering&amp;_ssn=texlabsupplyinternational&amp;_oac=1&amp;_ipg=240&amp;_fcid=1&amp;LH_BIN=1&amp;_sop=15" rel="nofollow noopener" target="_blank">1</a></span> <a href="https://www.amazon.com/10ml-Sterile-Vial-Blue-Flip/dp/B07JD49TK2/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">2</span></a> <a href="https://www.amazon.com/Biocomma-Aluminum-Caps%EF%BC%8CPenicillin-Transparent-Borosilicate/dp/B09W5HM7R6/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">3</span></a> <a href="https://www.amazon.com/Empty-Borosillicate-Sealed-Sterile-Serum/dp/B005DIPY32/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">4</span></a> <a href="https://www.amazon.com/5-10ml-Empty-Sealed-Sterile-Vials/dp/B009CC0KMA/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">5</span></a> <a href="https://www.amazon.com/Molded-Sterile-Clear-Vials-Black/dp/B07KVCL4YF/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">6</span></a>)+<a href="https://www.amazon.com/20MM-13MM-Single-Seals-Eco-Green/dp/B094Q5VVTH/" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">new caps</span></a>. In Canada <span style="text-decoration: underline"><a href="https://canadianmedhealthsupplies.ca/collections/10ml-vials-clear/products/10ml-vial-22mm-x-50mm-clear?variant=8081524817966" rel="nofollow noopener" target="_blank">vials</a></span>+<a href="https://canadianmedhealthsupplies.ca/collections/all-rubber-stoppers/products/20mm-rubber-stopper-grey?variant=8081553915950" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">stoppers</span></a>+<span style="text-decoration: underline"><a href="https://canadianmedhealthsupplies.ca/collections/20mm-flip-off-cap-flip-off/products/20mm-white-flip-off-cap-flip-off" rel="nofollow noopener" target="_blank">caps</a></span> (<a href="https://canadianmedhealthsupplies.ca/collections/solvents/products/benzyl-alcohol" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">BA</span></a>). In Mexico <a href="https://varienvases.mx/products/antibiotico-10ml-con-tapon-y-casquillo?variant=42526677467355" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">here</span></a>.</p>
 <p>If you are paranoid and believe incompetent <a href="https://issuepedia.org/Sufficiently_advanced_incompetence_is_indistinguishable_from_malice" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">or</span></a> deceitful slander about this guide then you can buy washed sealed sterile empty vials from <a href="https://www.ebay.com/sch/257835/i.html?_dkr=1&amp;iconV2Request=true&amp;_blrs=recall_filtering&amp;_ssn=texlabsupplyinternational&amp;_oac=1&amp;_ipg=240&amp;_fcid=1&amp;LH_BIN=1&amp;_sop=15" rel="nofollow noopener" target="_blank"><span style="text-decoration: underline">USA</span></a> or <span style="text-decoration: underline"><a href="https://www.ebay.co.uk/itm/333152620103" rel="nofollow noopener" target="_blank">UK</a></span> and buy <span style="text-decoration: underline"><a href="https://www.amazon.com/20MM-13MM-Single-Seals-Eco-Green/dp/B094Q5VVTH/" rel="nofollow noopener" target="_blank">new caps</a></span> or carefully unbend crimped caps with a small flat screwdriver. Really it&#39;d not improve &#34;safety&#34;. But in USA and UK these vials are cheaper if you want fast shipping.</p>
 <h3 id="Oil">Oil</h3>
@@ -1736,7 +1962,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 <h2 id="Mix">Mix</h2>
 <p>(See below for an alternate way without a funnel).</p>
 <p>Make a small funnel from a piece of foil (the thicker foil the better; shinier side inside), hold it folded with a small piece of sticky tape. If you have only thin foil then perhaps strengthen it by wide sticky tape on another side (or try to strip the outer paint from a few different beer or soft drink aluminium cans with nail polish remover, then cut a clean can with scissors). May be use something conical to wrap the foil around before cutting off unneeded parts. The hole at the pointy end of the funnel must be slightly (not much) smaller than the opening in the vial. Use this funnel to weigh up estradiol enanthate powder and to pour the powder into a vial. The funnel I&#39;m using at the center, unfolded piece of foil from my previous funnel at the left, a funnel in a vial at the right:</p>
-<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13910/cone.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1793763551&Signature=MgNByHkPG9hlwSMZufau33WjVHI%3D" loading="lazy" class="myimg-responsive"/></p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13910/cone.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1794367650&Signature=6h8Tq9gEqF4RidyRJeNwQSrzBRU%3D" loading="lazy" class="myimg-responsive"/></p>
 <p>Two recipes I can recommend:</p>
 <p>1) 500 mg = 0.5 g of estradiol enanthate (density 1.1 g/cm<sup><small>3</small></sup>),<br/>benzyl alcohol (preservative - antibacterial) 0.2 ml,<br/>MCT oil 10-0.2-0.5/1.1= 9.35 ml.</p>
 <p>2) 0.5 g of estradiol enanthate,<br/>MCT oil 10-0.5/1.1= 9.55 ml.</p>
@@ -1894,17 +2120,21 @@ function createAlert(msg, isError, autoClose, noClose) {
 					
 	
 	
+	
+	
 		
 		<a id="mobilesidebar-groups" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center; color: inherit; text-decoration: none;" href="https://groups.io/groups" hx-boost="false">
 			<div style="display: inline-block; position: relative;">
 				<div style="position: relative;display: inline-block;">
 				<i class="fa-fw fa-light fa-users fa-2x"></i>
 				
+
 				</div><br>
 				<span style="font-size:12px;">Groups</span>
 			</div>
 		</a>
 	
+
 
 					
 						
@@ -1916,6 +2146,9 @@ function createAlert(msg, isError, autoClose, noClose) {
 			<div style="position: relative;display: inline-block;">
 			<i class="fa-fw fa-light fa-comments fa-2x"></i>
 			
+
+<span id="mobilesidebarbadge-archives" class="badge mobilebadge"></span>
+
 			</div><br>
 			<span style="font-size:12px;">Messages</span>
 		</div>
@@ -1968,7 +2201,10 @@ function createAlert(msg, isError, autoClose, noClose) {
 	<a title="Messages" href="https://groups.io/g/MTFHRT/topics?sidebar=true" id="sidebar-archives-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-archives"> 
 		<i class="fa-fw fa fa-comments fa-lg"></i>
 		Messages
-		<span id="sidebar-archives-mobile-badge" class="badge"></span>
+		
+
+<span id="sidebar-archives-mobile-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -1983,7 +2219,10 @@ function createAlert(msg, isError, autoClose, noClose) {
 	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" id="sidebar-hashtags-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-hashtags"> 
 		<i class="fa-fw fa fa-hashtag fa-lg"></i>
 		Hashtags
-		<span id="sidebar-hashtags-mobile-badge" class="badge"></span>
+		
+
+<span id="sidebar-hashtags-mobile-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -2011,7 +2250,10 @@ function createAlert(msg, isError, autoClose, noClose) {
 	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" id="sidebar-wiki-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-wiki active"> 
 		<i class="fa-fw fa fa-book fa-lg"></i>
 		Wiki
-		<span id="sidebar-wiki-mobile-badge" class="badge"></span>
+		
+
+<span id="sidebar-wiki-mobile-badge" class="badge"></span>
+
 	</a>
 
 	

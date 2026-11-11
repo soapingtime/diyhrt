@@ -3111,6 +3111,18 @@ a, button, input, select, textarea, .btn, .mobilesidebar-item, .grouphome-tile {
 	}
 }
 
+/* With reduced motion, the progress bar is a still line across the top, and
+   pages appear without fading in. */
+@media (prefers-reduced-motion: reduce) {
+	#gio-progress-bar.active {
+		animation: none;
+		background: rgba(74, 144, 226, 1);
+	}
+	#maincontent-refresh.gio-fade-in {
+		animation: none;
+	}
+}
+
 /* wiki: hide breadcrumb row on xs (search still available via header action) */
 @media (max-width: 767px) {
 	.wiki-breadcrumb-wrap > .breadcrumb-row { display: none !important; }
@@ -4120,6 +4132,13 @@ table.table-fixed {
 .hashtag-label-beige {
 	--hashtag-bg: #dcc39c;
 	background-color: var(--hashtag-bg);
+}
+
+/* On the Hashtags page's gallery cards, the green Status badge sits on the
+   hashtag's own colour and nearly vanishes on the greens and teals, so it
+   gets a white outline there. The list view has no coloured card behind it. */
+div.hashtag .status-badge {
+	border: 1px solid #fff;
 }
 
 /* The deeper hashtag colours carry white text and use the same shaded
@@ -7593,6 +7612,19 @@ body.dark-mode .chat-mention-pill {
 
 .stickywiki>p {
 	margin-bottom: 20px;
+}
+
+/* Cells that open the row when clicked. */
+.clickable-col {
+	cursor: pointer;
+}
+
+/* Links in a colored database column take the cell's text color, which is
+   chosen for contrast against the column color. */
+.database-colored-cell a,
+body.dark-mode .database-colored-cell a {
+	color: inherit;
+	text-decoration: underline;
 }
 
 .database-truncate-cell {

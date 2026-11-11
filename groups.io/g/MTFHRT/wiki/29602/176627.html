@@ -152,7 +152,7 @@
 			gioReport({
 				msg: "bundle-load-failure",
 				url: src,
-				client_id: "web.app02-g2.620331.1793762955440619768"
+				client_id: "web.app02-g2.891723.1794367056804959703"
 			});
 		};
 		if (window.__gioBundleErr) {
@@ -173,7 +173,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app02-g2.620331.1793762955440619768");
+				console.log("client_id:", "web.app02-g2.891723.1794367056804959703");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -228,7 +228,7 @@
 				column: column,
 				stack: stack,
 				last_error: lastError,
-				client_id: "web.app02-g2.620331.1793762955440619768"
+				client_id: "web.app02-g2.891723.1794367056804959703"
 			});
 			lastError = errorMessage;
 			return true;
@@ -238,8 +238,8 @@
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-a1a3c10f20774457dcca41ce8ac10267.css" rel="stylesheet" id="groupsio-css">
-			<script src="../../../../js/application-a17ec07328b5daf73577d511f1afba3d.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
+			<link href="../../../../css/application-d97e6c834223c90a9e0d504dfb964aec.css" rel="stylesheet" id="groupsio-css">
+			<script src="../../../../js/application-78aee2383a05aae12aa77f3589120e7f.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>MTFHRT@groups.io | Wiki | Ultimate DIY</title>
 			
@@ -287,17 +287,24 @@
 	htmx.config.scrollBehavior = "instant";
 	htmx.config.historyCacheSize = 0;
 	htmx.config.defaultSettleDelay = 0;
+	// A history cache miss puts the response in place of the whole <body>, so
+	// it needs the full page, which the server only sends without HX-Request.
+	htmx.config.historyRestoreAsHxRequest = false;
+	// Only the top-level elements of a response are out-of-band swaps; the
+	// badges BaseBadges and the sidebars write are all top level.
+	htmx.config.allowNestedOobSwaps = false;
 	console.log("FULL PAGE LOAD");
 
-	// Short fade-in on #maincontent-refresh after every HTMX swap — adds zero latency
-	// because it runs AFTER the new content has arrived. We listen to afterRequest
-	// (fires once per HTMX request) rather than afterSwap (fires once per swapped
-	// element, including every hx-swap-oob badge — which would cancel the animation).
+	// Short fade-in on #maincontent-refresh after every HTMX navigation — adds zero
+	// latency because it runs AFTER the new content has arrived. htmx fires
+	// afterSwap on each element it swapped, every hx-swap-oob badge included, so
+	// only the one for #maincontent-refresh itself counts: other requests, such as
+	// infinite scroll appending rows or a dropped stale navigation, leave the page
+	// as it was and must not fade it.
 	// Listen on document because this script runs in <head> before <body> exists.
-	document.addEventListener('htmx:afterRequest', function(evt) {
-		if (!evt.detail || !evt.detail.successful) return;
-		var refresh = document.getElementById('maincontent-refresh');
-		if (!refresh) return;
+	document.addEventListener('htmx:afterSwap', function(evt) {
+		var refresh = evt.target;
+		if (!refresh || refresh.id !== 'maincontent-refresh') return;
 		refresh.classList.remove('gio-fade-in');
 		// force reflow so removing then adding re-starts the animation each time
 		void refresh.offsetWidth;
@@ -306,13 +313,217 @@
 
 	// Top-of-viewport progress bar shown while an HTMX request is in flight.
 	// Provides immediate visual feedback for taps even before content arrives.
-	document.addEventListener('htmx:beforeRequest', function() {
+	// It counts requests, so that one finishing, or being aborted for a newer
+	// one, does not hide the bar while another is still loading. The count
+	// follows each XHR itself: htmx fires htmx:afterRequest on the element that
+	// sent the request, and once a swap has removed that element the event no
+	// longer reaches the document.
+	var gioRequestsInFlight = 0;
+	document.addEventListener('htmx:beforeSend', function(evt) {
 		var bar = document.getElementById('gio-progress-bar');
+		gioRequestsInFlight++;
 		if (bar) bar.classList.add('active');
+		evt.detail.xhr.addEventListener('loadend', function() {
+			gioRequestsInFlight = Math.max(0, gioRequestsInFlight - 1);
+			var bar = document.getElementById('gio-progress-bar');
+			if (bar && gioRequestsInFlight === 0) bar.classList.remove('active');
+		});
 	});
-	document.addEventListener('htmx:afterRequest', function() {
-		var bar = document.getElementById('gio-progress-bar');
-		if (bar) bar.classList.remove('active');
+
+	// An HTMX navigation is a request that swaps #maincontent-refresh. Only the
+	// latest one may swap: an earlier one that answers later, or one that a
+	// history restore overtook, would show a page the user has left. A newer
+	// navigation aborts an earlier one that is only loading a page; one that
+	// sends data, such as a form, is left to finish on the server, and its
+	// response is dropped.
+	var gioNavigationSeq = 0;
+	var gioPendingNavigation = null;
+	function gioIsNavigation(detail) {
+		return !!(detail && detail.target && detail.target.id === 'maincontent-refresh');
+	}
+	function gioIsStaleNavigation(detail) {
+		return !!(detail && detail.xhr && detail.xhr.gioNavigationSeq !== undefined && detail.xhr.gioNavigationSeq !== gioNavigationSeq);
+	}
+	document.addEventListener('htmx:beforeRequest', function(evt) {
+		if (!gioIsNavigation(evt.detail)) return;
+		var pending = gioPendingNavigation;
+		evt.detail.xhr.gioNavigationSeq = ++gioNavigationSeq;
+		gioPendingNavigation = {xhr: evt.detail.xhr, get: evt.detail.requestConfig.verb === 'get'};
+		if (pending && pending.get && pending.xhr.readyState !== XMLHttpRequest.DONE) {
+			pending.xhr.abort();
+		}
+	});
+	document.addEventListener('htmx:historyCacheMiss', function() {
+		gioNavigationSeq++;
+		if (gioPendingNavigation && gioPendingNavigation.get) {
+			gioPendingNavigation.xhr.abort();
+		}
+		gioPendingNavigation = null;
+	});
+	// Capture, so that a stale response is dropped before the page's own
+	// htmx:beforeSwap handlers tear down the page it would have replaced.
+	document.addEventListener('htmx:beforeSwap', function(evt) {
+		if (gioIsStaleNavigation(evt.detail)) {
+			evt.preventDefault();
+			evt.stopPropagation();
+		}
+	}, true);
+
+	// Going back or forward to a page fetches it again, which keeps neither its
+	// scroll position nor the pages infinite scroll had added to it. So the
+	// place on each page, its scroll position and how many pages infinite
+	// scroll loaded, is kept in sessionStorage under its URL as the user
+	// scrolls, and reaching a page through Back or Forward loads that many
+	// pages again, then scrolls back there. While a page is being replaced the
+	// place is frozen, so the scrolling the swap causes is not taken for the
+	// user's.
+	var gioInfiniteLoads = 0;
+	var gioPlaceFrozen = false;
+	function gioPlaceKey() {
+		return 'gio-place:' + location.href;
+	}
+	function gioSavePlace() {
+		if (gioPlaceFrozen) return;
+		var main = document.getElementById('maincontent');
+		var place = {y: window.scrollY, main: main ? main.scrollTop : 0, loads: gioInfiniteLoads};
+		try {
+			sessionStorage.setItem(gioPlaceKey(), JSON.stringify(place));
+		} catch (e) {}
+	}
+	function gioReadPlace() {
+		try {
+			return JSON.parse(sessionStorage.getItem(gioPlaceKey()) || 'null');
+		} catch (e) {
+			return null;
+		}
+	}
+	var gioSavePlaceTimer = null;
+	document.addEventListener('scroll', function() {
+		if (gioSavePlaceTimer) return;
+		gioSavePlaceTimer = setTimeout(function() {
+			gioSavePlaceTimer = null;
+			gioSavePlace();
+		}, 250);
+	}, {capture: true, passive: true});
+	window.addEventListener('pagehide', gioSavePlace);
+	function gioIsInfiniteLoad(detail) {
+		return !!(detail && detail.pathInfo && /[?&]infinite2=1(&|$)/.test(detail.pathInfo.requestPath || ''));
+	}
+	document.addEventListener('htmx:beforeSend', function(evt) {
+		if (!gioIsNavigation(evt.detail)) return;
+		gioSavePlace();
+		gioPlaceFrozen = true;
+		// The XHR ends after htmx has swapped the page and pushed its URL.
+		evt.detail.xhr.addEventListener('loadend', function() {
+			gioPlaceFrozen = false;
+		});
+	});
+	document.addEventListener('htmx:afterSwap', function(evt) {
+		if (gioIsNavigation(evt.detail)) gioInfiniteLoads = 0;
+	});
+	var gioAfterInfiniteLoad = null;
+	document.addEventListener('htmx:afterRequest', function(evt) {
+		if (!gioIsInfiniteLoad(evt.detail) || !evt.detail.successful) return;
+		gioInfiniteLoads++;
+		gioSavePlace();
+		if (gioAfterInfiniteLoad) setTimeout(gioAfterInfiniteLoad, 0);
+	});
+	// gioRestorePlace returns the page to place: it loads as many pages as
+	// infinite scroll had, stopping at the end of the list or if a page does
+	// not come within 10 seconds, then scrolls.
+	function gioRestorePlace(place) {
+		var lastTrigger = null;
+		var timer = null;
+		function scrollBack() {
+			clearTimeout(timer);
+			gioAfterInfiniteLoad = null;
+			window.scrollTo({top: place.y, behavior: 'instant'});
+			var main = document.getElementById('maincontent');
+			if (main) main.scrollTop = place.main;
+			gioPlaceFrozen = false;
+		}
+		function loadNext() {
+			clearTimeout(timer);
+			var triggers = document.querySelectorAll('#maincontent-refresh [hx-trigger^="intersect"]');
+			var trigger = triggers.length ? triggers[triggers.length - 1] : null;
+			if (gioInfiniteLoads >= place.loads || !trigger || trigger === lastTrigger) {
+				scrollBack();
+				return;
+			}
+			lastTrigger = trigger;
+			gioAfterInfiniteLoad = loadNext;
+			timer = setTimeout(scrollBack, 10000);
+			htmx.trigger(trigger, 'intersect');
+		}
+		gioPlaceFrozen = true;
+		gioInfiniteLoads = 0;
+		loadNext();
+	}
+	document.addEventListener('htmx:historyCacheMiss', function() {
+		gioPlaceFrozen = true;
+	});
+	document.addEventListener('htmx:historyRestore', function() {
+		var place = gioReadPlace();
+		gioInfiniteLoads = 0;
+		if (place) {
+			gioRestorePlace(place);
+		} else {
+			gioPlaceFrozen = false;
+		}
+	});
+	// A page loaded in full through Back or Forward, rather than from the
+	// browser's back-forward cache, which keeps the page as it was.
+	(function() {
+		var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+		if (!nav || nav.type !== 'back_forward') return;
+		var place = gioReadPlace();
+		if (!place) return;
+		gioPlaceFrozen = true;
+		window.addEventListener('load', function() {
+			gioRestorePlace(place);
+		});
+	})();
+
+	// A navigation that fails leaves the page as it was, which looks like the
+	// tap did nothing. A page that answers with an error is loaded in full, so
+	// the error page shows. A page that cannot be reached, or does not answer
+	// in 30 seconds, gets an alert with a link to try again. Requests that send
+	// data, which can take longer, such as uploads, have no time limit, and
+	// their failure is reported as a change not saved.
+	document.addEventListener('htmx:beforeSend', function(evt) {
+		if (gioIsNavigation(evt.detail) && evt.detail.requestConfig.verb === 'get') {
+			evt.detail.xhr.timeout = 30000;
+		}
+	});
+	function gioNavigationFailed(detail) {
+		var url = detail.pathInfo.finalRequestPath || detail.pathInfo.requestPath;
+		var isGet = detail.requestConfig.verb === 'get';
+		if (typeof createAlert !== 'function' || typeof alertText === 'undefined') {
+			if (isGet) {
+				window.location.href = url;
+			}
+			return;
+		}
+		if (!isGet) {
+			createAlert(alertText.changeNotSaved, true, false);
+			return;
+		}
+		var link = $('<a>').attr('href', url).text(alertText.retryNow)[0].outerHTML;
+		createAlert(alertText.pageNotLoaded + ' ' + link, true, false);
+	}
+	document.addEventListener('htmx:responseError', function(evt) {
+		if (!gioIsNavigation(evt.detail) || gioIsStaleNavigation(evt.detail)) return;
+		if (evt.detail.requestConfig.verb === 'get') {
+			window.location.href = evt.detail.pathInfo.finalRequestPath || evt.detail.pathInfo.requestPath;
+			return;
+		}
+		gioNavigationFailed(evt.detail);
+	});
+	['htmx:sendError', 'htmx:timeout'].forEach(function(name) {
+		document.addEventListener(name, function(evt) {
+			if (!gioIsNavigation(evt.detail) || gioIsStaleNavigation(evt.detail)) return;
+			gioNavigationFailed(evt.detail);
+		});
 	});
 
 	// Bootstrap appends an open tooltip to <body>, outside the content HTMX
@@ -382,8 +593,9 @@
 	}, true);
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "22dba9665fc8b7e2ce7880ed39592753cf90a389"}' hx-ext="preload" hx-boost="false">
-			<a id="skip-link" class="skip-link visually-hidden-focusable" href="175563.html#maincontent">Skip to main content</a>
+		
+		<body id="body" class="" hx-headers='{"Accept-Version": "a501e954c19110296b107d084fdf6adf74a02649", "Accept-Context": "group:4415"}' hx-ext="preload" hx-boost="false">
+			<a id="skip-link" class="skip-link visually-hidden-focusable" href="176627.html#maincontent">Skip to main content</a>
 			
 			<div id="page-announcer" class="visually-hidden" role="status"></div>
 			<div id="gio-progress-bar" aria-hidden="true"></div>
@@ -425,7 +637,7 @@
 							
 							<ul class="nav navbar-nav float-end d-md-none" style="margin-top:5px;margin-bottom:5px;">
 								<li>
-									<a href="175563.html#" data-bs-toggle="modal" data-bs-target="#mobileAccount" class="nav-link" aria-label="Menu">
+									<a href="176627.html#" data-bs-toggle="modal" data-bs-target="#mobileAccount" class="nav-link" aria-label="Menu">
 										<i class="fa-fw fa fa-bars fa-lg"></i>
 									</a>
 								</li>
@@ -433,7 +645,7 @@
 
 							<ul class="nav navbar-nav float-end d-none d-md-flex">
 								<li class="dropdown">
-									<a href="175563.html#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<a href="176627.html#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<i class="fa-fw fa-regular fa-globe"></i>
 										
 											English
@@ -549,7 +761,7 @@
 										</li>
 
 										<li class="dropdown noborderitem list-group-item">
-											<a href="175563.html#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<a href="176627.html#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 												<i class="fa-fw fa-regular fa-globe"></i>
 												
 													English
@@ -1162,7 +1374,10 @@ function showAutocompleteModal(modalName) {
 	<a title="Messages" href="https://groups.io/g/MTFHRT/topics?sidebar=true" id="sidebar-archives" class="noborderitem list-group-item sidebar-item sidebar-item-archives"> 
 		<i class="fa-fw fa fa-comments fa-lg"></i>
 		Messages
-		<span id="sidebar-archives-badge" class="badge"></span>
+		
+
+<span id="sidebar-archives-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -1177,7 +1392,10 @@ function showAutocompleteModal(modalName) {
 	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" id="sidebar-hashtags" class="noborderitem list-group-item sidebar-item sidebar-item-hashtags"> 
 		<i class="fa-fw fa fa-hashtag fa-lg"></i>
 		Hashtags
-		<span id="sidebar-hashtags-badge" class="badge"></span>
+		
+
+<span id="sidebar-hashtags-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -1205,7 +1423,10 @@ function showAutocompleteModal(modalName) {
 	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" id="sidebar-wiki" class="noborderitem list-group-item sidebar-item sidebar-item-wiki active"> 
 		<i class="fa-fw fa fa-book fa-lg"></i>
 		Wiki
-		<span id="sidebar-wiki-badge" class="badge"></span>
+		
+
+<span id="sidebar-wiki-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -1299,9 +1520,13 @@ function dismiss() {
     $.get( "/dismissalert");
 }
 
-var $alerttemplate = $(".alerttemplate");
-var $alertnoclosetemplate = $(".alertnoclosetemplate");
-var $noticetemplate = $(".noticetemplate");
+// An HTMX swap inserts the new content before it removes the old, so while
+// this script runs the previous page's templates are still in the document,
+// after these. Take only the first of each, or every alert would be cloned
+// once per template.
+var $alerttemplate = $(".alerttemplate").first();
+var $alertnoclosetemplate = $(".alertnoclosetemplate").first();
+var $noticetemplate = $(".noticetemplate").first();
 
 // alertText holds translated messages for alerts raised by shared scripts
 // (the editor and the ajax retry helper) that have no translator of their own.
@@ -1312,6 +1537,7 @@ var alertText = {
 	retryAutomatically: "We will retry automatically.",
 	retryCountdown: "We will retry again in %s seconds.",
 	retryNow: "Retry now",
+	pageNotLoaded: "This page could not be loaded. Check your connection, then try again.",
 	sessionExpired: "Your login has expired, so your changes are not being saved. Do not close or reload this page. \u003ca href=\"/login\" target=\"_blank\" rel=\"noopener\">Log in again in a new tab\u003c/a>, then return here to send your message.",
 	uploadFailed: "Failed to upload %s",
 	imageUploadFailed: "1 image failed to upload. Please try again.",
@@ -1634,8 +1860,8 @@ function createAlert(msg, isError, autoClose, noClose) {
 					<div class="wiki-updated">
 						Updated
 						
-<script id="timedispupdated175563">
-	$('#timedispupdated175563').replaceWith(DisplayShortTime(1666757920294338515, false
+<script id="timedispupdated176627">
+	$('#timedispupdated176627').replaceWith(DisplayShortTime(1668432689474696887, false
 		));
 </script>
 
@@ -1665,11 +1891,11 @@ function createAlert(msg, isError, autoClose, noClose) {
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4 class="panel-title">
-      <a class="accordion-toggle" href="175563.html#collapseTOC" rel="nofollow">Contents</a>
+      <a class="accordion-toggle" href="176627.html#collapseTOC" rel="nofollow">Contents</a>
     </h4>
   </div>
   <div id="collapseTOC" class="panel-collapse collapse show">
-    <div class="panel-body" style="padding-left: 0px"><span class="toc"><ol style=""><li><a href="175563.html#Without-gatekeepers" rel="nofollow">Without gatekeepers</a></li><li><a href="175563.html#Be-your-own-endocrinologist" rel="nofollow">Be your own endocrinologist</a></li><li><a href="175563.html#Cook-your-injectable-estradiol-by-yourself" rel="nofollow">Cook your injectable estradiol by yourself</a><ol style=""><li><a href="175563.html#Buy-estradiol-enanthate-powder" rel="nofollow">Buy estradiol enanthate powder</a></li><li><a href="175563.html#Equipment" rel="nofollow">Equipment</a><ol style=""><li><a href="175563.html#Necessary" rel="nofollow">Necessary</a></li><li><a href="175563.html#Optional" rel="nofollow">Optional</a></li><li><a href="175563.html#Unnecessary" rel="nofollow">Unnecessary</a></li></ol></li><li><a href="175563.html#Other-raw-materials-and-expendables" rel="nofollow">Other raw materials and expendables</a><ol style=""><li><a href="175563.html#Vials2C-stoppers2C-caps" rel="nofollow">Vials, stoppers, caps</a></li><li><a href="175563.html#Oil" rel="nofollow">Oil</a></li><li><a href="175563.html#Preservative-28optional29" rel="nofollow">Preservative (optional)</a></li><li><a href="175563.html#Syringes-for-mixing" rel="nofollow">Syringes for mixing</a></li></ol></li><li><a href="175563.html#Mix" rel="nofollow">Mix</a></li><li><a href="175563.html#Sterilize" rel="nofollow">Sterilize</a></li><li><a href="175563.html#Begin-a-new-vial" rel="nofollow">Begin a new vial</a></li><li><a href="175563.html#Keep" rel="nofollow">Keep</a></li><li><a href="175563.html#Total-price" rel="nofollow">Total price</a></li><li><a href="175563.html#Legal" rel="nofollow">Legal</a></li></ol></li><li><a href="175563.html#Inject-yourself" rel="nofollow">Inject yourself</a><ol style=""><li><a href="175563.html#Syringes-for-injections" rel="nofollow">Syringes for injections</a></li><li><a href="175563.html#Needle-fright" rel="nofollow">Needle fright</a></li><li><a href="175563.html#Dosage" rel="nofollow">Dosage</a></li><li><a href="175563.html#How-to-inject" rel="nofollow">How to inject</a></li></ol></li><li><a href="175563.html#22Monitoring22-unnecessary" rel="nofollow">&#34;Monitoring&#34; unnecessary</a></li><li><a href="175563.html#Myths-and-what-not-to-do" rel="nofollow">Myths and what not to do</a></li></ol></span></div></div></div></div></div><p></p>
+    <div class="panel-body" style="padding-left: 0px"><span class="toc"><ol style=""><li><a href="176627.html#Without-gatekeepers" rel="nofollow">Without gatekeepers</a></li><li><a href="176627.html#Be-your-own-endocrinologist" rel="nofollow">Be your own endocrinologist</a></li><li><a href="176627.html#Cook-your-injectable-estradiol-by-yourself" rel="nofollow">Cook your injectable estradiol by yourself</a><ol style=""><li><a href="176627.html#Buy-estradiol-enanthate-powder" rel="nofollow">Buy estradiol enanthate powder</a></li><li><a href="176627.html#Equipment" rel="nofollow">Equipment</a><ol style=""><li><a href="176627.html#Necessary" rel="nofollow">Necessary</a></li><li><a href="176627.html#Optional" rel="nofollow">Optional</a></li><li><a href="176627.html#Unnecessary" rel="nofollow">Unnecessary</a></li></ol></li><li><a href="176627.html#Other-raw-materials-and-expendables" rel="nofollow">Other raw materials and expendables</a><ol style=""><li><a href="176627.html#Vials2C-stoppers2C-caps" rel="nofollow">Vials, stoppers, caps</a></li><li><a href="176627.html#Oil" rel="nofollow">Oil</a></li><li><a href="176627.html#Preservative-28optional29" rel="nofollow">Preservative (optional)</a></li><li><a href="176627.html#Syringes-for-mixing" rel="nofollow">Syringes for mixing</a></li></ol></li><li><a href="176627.html#Mix" rel="nofollow">Mix</a></li><li><a href="176627.html#Sterilize" rel="nofollow">Sterilize</a></li><li><a href="176627.html#Begin-a-new-vial" rel="nofollow">Begin a new vial</a></li><li><a href="176627.html#Keep" rel="nofollow">Keep</a></li><li><a href="176627.html#Total-price" rel="nofollow">Total price</a></li><li><a href="176627.html#Legal" rel="nofollow">Legal</a></li></ol></li><li><a href="176627.html#Inject-yourself" rel="nofollow">Inject yourself</a><ol style=""><li><a href="176627.html#Syringes-for-injections" rel="nofollow">Syringes for injections</a></li><li><a href="176627.html#Needle-fright" rel="nofollow">Needle fright</a></li><li><a href="176627.html#Dosage" rel="nofollow">Dosage</a></li><li><a href="176627.html#How-to-inject" rel="nofollow">How to inject</a></li></ol></li><li><a href="176627.html#22Monitoring22-unnecessary" rel="nofollow">&#34;Monitoring&#34; unnecessary</a></li><li><a href="176627.html#Myths-and-what-not-to-do" rel="nofollow">Myths and what not to do</a></li></ol></span></div></div></div></div></div><p></p>
 <h1 id="Without-gatekeepers">Without gatekeepers</h1>
 <p>Endocrinologists usually require a letter/referral from gatekeepers: psychotherapists, psychologists, sexologists or psychiatrists. Not because endocrinologists care for you, but because they care for themselves: they fear that you regret and sue them for causing you bodily harm. There isn&#39;t a medical examination, blood or psychological test able to prove or disprove presence or absence of transsexualism in each separate person. Statistics is meaningless when the question is whether you&#39;ll regret social transition or not. So, gatekeepers make appearances of &#34;examination&#34; and stall you for long time while milking you (or insurance/taxpayers) for money.</p>
 <p>Medical professionals routinely make mistakes in both directions: approve crazy people and unnecessarily delay transsexuals who&#39;ll not regret.</p>
@@ -1694,15 +1920,15 @@ function createAlert(msg, isError, autoClose, noClose) {
 <p>If you are attentive and diligent then you can make injectable estradiol by yourself (for yourself only) as I described below. If you are afraid or unsure then you&#39;ll be able to buy ready-to-use vials <a href="http://lena.kiev.ua/EV/" rel="nofollow noopener" target="_blank">from me</a> after I return to Kiev - depends on the war. I have over 3300 satisfied customers. I lost count how many times I was called lifesaver, fairy godmother, angel, godsend, saint.</p>
 <h2 id="Buy-estradiol-enanthate-powder">Buy estradiol enanthate powder</h2>
 <p>Don&#39;t buy estradiol valerate because it&#39;s inferior: requires injections every 5 days and either lower concentration (more oil to inject) or addition of a solvent (benzyl benzoate) which costs money and sometimes causes allergy. Both estradiol valerate and estradiol enanthate are converted to the same estradiol in blood, <a href="https://doi.org/10.1097/00008571-200307000-00008" rel="nofollow noopener" target="_blank">spleen</a> and lymph nodes (in leukocytes: by carboxylesterase 1 <a href="http://dx.doi.org/10.1136/jcp.2010.084657" rel="nofollow noopener" target="_blank">in</a> monocytes and macrophages and carboxylesterase 2 <a href="https://pubmed.ncbi.nlm.nih.gov/27149931/" rel="nofollow noopener" target="_blank">in</a> plasma cells). Estradiol enanthate is absorbed into blood slower, that gives more stable blood estradiol level and allows longer time between injections.</p>
-<p>Most of substances used by Western pharmaceutical manufacturers comes from chemical factories in China. There are vendors in China selling the same substances to anybody (private persons too), no questions asked. Testosterone is a controlled substance, estradiol isn&#39;t. Such vendors are not manufacturers of estradiol powder, just resellers/traders/retail. You&#39;ll never know who was the manufacturer (perhaps <a href="http://www.xianle.com/template/producten.html" rel="nofollow noopener" target="_blank">1</a> <a href="http://www.xypharm.com/product_en/typeid/2.html" rel="nofollow noopener" target="_blank">2</a> <a href="http://www.junyepharm.com/product_en/typeid/4.html" rel="nofollow noopener" target="_blank">3</a>).</p>
+<p>Most of substances used by Western pharmaceutical manufacturers comes from chemical factories in China. There are vendors in China selling the same substances to anybody (private persons too), no questions asked. Testosterone is a controlled substance, estradiol isn&#39;t. Such vendors are not manufacturers of estradiol powder, just resellers/traders/retail. You&#39;ll never know who was the manufacturer (perhaps <a href="http://www.xianle.com/template/producten.html" rel="nofollow noopener" target="_blank">1</a> <a href="http://www.xypharm.com/product_en/typeid/2.html" rel="nofollow noopener" target="_blank">2</a> <a href="http://www.junyepharm.com/product_en/typeid/4.html" rel="nofollow noopener" target="_blank">3</a> <a href="http://en.norchem.cn/product/" rel="nofollow noopener" target="_blank">4</a> <a href="http://www.sjchem.cn/products-en/typeid/1.html" rel="nofollow noopener" target="_blank">5</a>).</p>
 <p>Currently I advise cheaper (for EEn powder quantities 20 g or less) vendor <a href="https://www.dragonordnance.io/goods?code=08101305637" rel="nofollow noopener" target="_blank">DragonOrdnance</a> shipping from China. EEn powder from him was tested, it&#39;s the real thing. Also, he has multiple testimonials for anabolics and testosterone on bodybuilder forums. Shipping $50. &#34;Stealth shipping&#34; means that there may be (or not) also something else in the parcel besides the hidden bag with EEn powder, don&#39;t throw out anything. Descriptions on the parcel and on the bag inside are lies to fool Customs. Order 5, 10 or 20 g, and also 100 ml (minimal order) of <a href="https://www.dragonordnance.io/goods?code=11524742447" rel="nofollow noopener" target="_blank">MCT oil</a> and 100 ml of <a href="https://www.dragonordnance.io/goods?code=11224739544" rel="nofollow noopener" target="_blank">benzyl alcohol</a>. How to distinguish: the alcohol has an odor. Try coupon code: TransDIY<br/>If you haven&#39;t crypto then you can buy LTC (Litecoin) or BTC (Bitcoin) directly to the vendor&#39;s wallet address using for example <a href="https://paybis.com/buy-litecoin/" rel="nofollow noopener" target="_blank">Paybis</a> (or if in USA then you can use <a href="https://newsroom.paypal-corp.com/2022-06-07-PayPal-Users-Can-Now-Transfer-Send-and-Receive-Bitcoin-Ethereum-Bitcoin-Cash-and-Litecoin" rel="nofollow noopener" target="_blank">Paypal</a> or CashApp). Or you can pay with a card or local bank transfer via <a href="https://wise.com/" rel="nofollow noopener" target="_blank">TransferWise</a> (more fees).</p>
 <p>A similar vendor <a href="https://www.purplepandalabs.io/goods?code=220731224635688" rel="nofollow noopener" target="_blank">PurplePanda</a> has higher prices for <a href="https://www.purplepandalabs.io/goods?code=180302165726618" rel="nofollow noopener" target="_blank">MCT oil</a> and <a href="https://www.purplepandalabs.io/goods?code=201707182030041" rel="nofollow noopener" target="_blank">benzyl alcohol</a>, and minimal order $100 (+ same $50 shipping).</p>
-<p>If you have mild needle phobia and more money then you can buy 10 or 20 g of longer-acting (3-4 weeks) estradiol undecylate CAS 3571-53-7 from <a href="https://hbldbiotech.en.made-in-china.com/contact-info.html" rel="nofollow noopener" target="_blank">hbldbiotech.en.made-in-china.com</a> or <a href="https://hhd-pharm.en.made-in-china.com/contact-info.html" rel="nofollow noopener" target="_blank">hhd-pharm.en.made-in-china.com</a>. I bought 1 kg EV from <a href="https://hbldbiotech.en.made-in-china.com/product/fdIAjtZoAGWq/China-Estradiol-Enanthate-CAS-4956-37-0-Large-Particle-or-Powder.html" rel="nofollow noopener" target="_blank">Hbldbiotech</a> and 1 kg EEn from <a href="https://aoksbio.en.made-in-china.com/product/gdnfPERUILkb/China-99-Purity-Oestradiol-17-Heptanoate-Powder-CAS-4956-37-0-with-Safe-Delivery-and-Good-Price.html" rel="nofollow noopener" target="_blank">Aoksbio</a>, got the real thing. But few of those who bought 10-20 g EEn from them are dissatisfied: lost parcels, refused by Customs, not EEn at all (dissolves in water or doesn&#39;t dissolve in MCT oil). I<span class="visitedlinks">f the website redirects to the vendor&#39;s home page then use a VPN or proxy, for example a free browser extension <a href="https://browsec.com/en/" rel="nofollow noopener" target="_blank">browsec</a>, country in the free list for example Netherlands. T</span>here are other vendors there, but it&#39;s a gamble: some sellers send unrelated white powder (not a hormone at all). Don&#39;t use a dishonest vendor &#34;Vanz&#34; (their another company name is &#34;Wuhan Yiruo&#34;) and spammers &#34;Faithful&#34;, &#34;Luoxing&#34;, &#34;Jiangsu Aimi&#34;, &#34;Hebei Mingyi&#34;, &#34;Xian Shunyi&#34;, &#34;Jinlan pharm&#34;/royalpharms. Elsewhere I saw negative reviews about: &#34;Wison&#34;. Don&#39;t use sellers touting anabolics etc. for bodybuilders on their main page: you don&#39;t want to get testosterone instead of estradiol. &#34;Gzbiocar&#34; seems suspicious for me. Salespeople on made-in-china use nicknames or European-sounding aliases, same was on Alibaba. You&#39;ll see a real Chinese name only if you pay via Western Union. Vendors&#39; pages are full of mistakes and lies, including photos of manufacturing plants (they manufacture few substances if any but sell hundreds), numbers, prices and minimal order (MOQ). <a href="https://membercenter.made-in-china.com/join/" rel="nofollow noopener" target="_blank">Register</a> (type zeros instead of phone number and &#34;private person&#34; instead of company name) and <strong>after</strong> that use the &#34;Get Latest Price&#34; link (if you want EEn), tell them your requirement &#34;Estradiol Enanthate (Estradiol Heptanoate) CAS 4956-37-0, I prefer powder with large particle size (not micronized)&#34; and ask for price for quantity 20 g with the cheapest shipping. If the vendor answers with &#34;FOB&#34; price then that means not including shipping, ask again for cheapest shipping fee. Don&#39;t ask for CoA (certificate of analysis), it&#39;d be fake. Really you&#39;ll get slightly better than 98% purity according to USP and <a href="https://digicollections.net/phint/pdf/b/6.1.144.Estradiol-valerate-(Estradioli-valeras).pdf" rel="nofollow noopener" target="_blank">similar</a> standards for pharmaceuticals for humans, there isn&#39;t estradiol powder with any worse purity (manufacturers of veterinarian pharmaceuticals get the same purity); better purity (&#34;reference standard&#34;) is used only for calibration of measuring equipment and costs for example €353 for 100 mg. Cheapest shipping gives also least chances of problems with Customs. The (separate) &#34;forwarding&#34; company they use knows what to lie on the Customs declaration; you may find also papers about an unrelated benign substance like vitamin C - also to fool Customs. Ignore offers/requests to communicate via Whatsapp or other messengers (never give them your number/nickname), don&#39;t reply to emails, reply to the vendor <strong>only</strong> via <a href="https://membercenter.made-in-china.com/message/index.html" rel="nofollow noopener" target="_blank">https://membercenter.made-in-china.com/message/index.html</a> . Vendors offer several payment options, some vendors take payment via Alibaba (allows to pay with card and takes 3% fee). &#34;Aoksbio&#34; accepts Western Union, Bitcoin and SWIFT (wire/bank transfer), same total price for 10 and 20 g, so order 20 g. If you pay with bank transfer then &#34;Aoksbio&#34; may ask for your ID with the same name as in your bank account (if other payment options then ID is not required). If Western Union (WU) then you tell &#34;Aoksbio&#34; the 10-digit number WU gives you and sender name you gave to WU. If the vendor ignores your requirement and sends you micronized powder then it&#39;s suitable but more difficult to work with because clings to everything.</p>
+<p>If you have mild needle phobia and more money then you can buy 10 or 20 g of longer-acting (3-4 weeks) estradiol undecylate CAS 3571-53-7 from <a href="https://hbldbiotech.en.made-in-china.com/product/QOFteibPETVs/China-Estradiol-Undecylate-CAS-3571-53-7-Large-Particle-or-Powder-in-Stock.html" rel="nofollow noopener" target="_blank">hbldbiotech</a> or <a href="https://hhd-pharm.en.made-in-china.com/contact-info.html" rel="nofollow noopener" target="_blank">hhd-pharm</a> or may be <a href="https://www.made-in-china.com/requestSample/prod_hQFYNkzEhJcC_DbcJSVLlYfig.html" rel="nofollow noopener" target="_blank">Demeikai</a>. I bought 1 kg EV from <a href="https://hbldbiotech.en.made-in-china.com/product/fdIAjtZoAGWq/China-Estradiol-Enanthate-CAS-4956-37-0-Large-Particle-or-Powder.html" rel="nofollow noopener" target="_blank">Hbldbiotech</a> and 1 kg EEn from <a href="https://aoksbio.en.made-in-china.com/product/gdnfPERUILkb/China-99-Purity-Oestradiol-17-Heptanoate-Powder-CAS-4956-37-0-with-Safe-Delivery-and-Good-Price.html" rel="nofollow noopener" target="_blank">Aoksbio</a>, got the real thing. But few of those many who bought 10-20 g EEn from them are dissatisfied: lost parcels, refused by Customs, not EEn at all (dissolves in water or doesn&#39;t dissolve in MCT oil). I<span class="visitedlinks">f the website redirects to the vendor&#39;s home page then use a VPN or proxy, for example a free browser extension <a href="https://browsec.com/en/" rel="nofollow noopener" target="_blank">browsec</a>, country in the free list for example Netherlands. T</span>here are other vendors there, but it&#39;s a gamble: some sellers send unrelated white powder (not a hormone at all). Don&#39;t use a dishonest vendor &#34;Vanz&#34; (their another company name is &#34;Wuhan Yiruo&#34;) and spammers &#34;Faithful&#34;, &#34;Luoxing&#34;, &#34;Jiangsu Aimi&#34;, &#34;Hebei Mingyi&#34;, &#34;Xian Shunyi&#34;, &#34;Jinlan pharm&#34;/royalpharms. Elsewhere I saw negative reviews about: &#34;Wison&#34;. Don&#39;t use sellers touting anabolics etc. for bodybuilders on their main page: you don&#39;t want to get testosterone instead of estradiol. &#34;Gzbiocar&#34; seems suspicious for me. Salespeople on made-in-china use nicknames or European-sounding aliases, same was on Alibaba. You&#39;ll see a real Chinese name only if you pay via Western Union. Vendors&#39; pages are full of mistakes and lies, including photos of manufacturing plants (they manufacture few substances if any but sell hundreds), numbers, prices and minimal order (MOQ). <a href="https://membercenter.made-in-china.com/join/" rel="nofollow noopener" target="_blank">Register</a> (type zeros instead of phone number and &#34;private person&#34; instead of company name) and <strong>after</strong> that use the &#34;Get Latest Price&#34; link (if you want EEn), tell them your requirement &#34;Estradiol Enanthate (Estradiol Heptanoate) CAS 4956-37-0, I prefer powder with large particle size (not micronized)&#34; and ask for price for quantity 20 g with the cheapest shipping. If the vendor answers with &#34;FOB&#34; price then that means not including shipping, ask again for cheapest shipping fee. Don&#39;t ask for CoA (certificate of analysis), it&#39;d be fake. Really you&#39;ll get slightly better than 98% purity according to USP and <a href="https://digicollections.net/phint/pdf/b/6.1.144.Estradiol-valerate-(Estradioli-valeras).pdf" rel="nofollow noopener" target="_blank">similar</a> standards for pharmaceuticals for humans, there isn&#39;t estradiol powder with any worse purity (manufacturers of veterinarian pharmaceuticals get the same purity); better purity (&#34;reference standard&#34;) is used only for calibration of measuring equipment and costs for example €353 for 100 mg. Cheapest shipping gives also least chances of problems with Customs. The (separate) &#34;forwarding&#34; company they use knows what to lie on the Customs declaration; you may find also papers about an unrelated benign substance like vitamin C - also to fool Customs. Ignore offers/requests to communicate via Whatsapp or other messengers (never give them your number/nickname), don&#39;t reply to emails, reply to the vendor <strong>only</strong> via <a href="https://membercenter.made-in-china.com/message/index.html" rel="nofollow noopener" target="_blank">https://membercenter.made-in-china.com/message/index.html</a> . Vendors offer several payment options, some vendors take payment via Alibaba (allows to pay with card and takes 3% fee). &#34;Aoksbio&#34; accepts Western Union, Bitcoin and SWIFT (wire/bank transfer), same total price for 10 and 20 g, so order 20 g. If you pay with bank transfer then &#34;Aoksbio&#34; may ask for your ID with the same name as in your bank account (if other payment options then ID is not required). If Western Union (WU) then you tell &#34;Aoksbio&#34; the 10-digit number WU gives you and sender name you gave to WU. If the vendor ignores your requirement and sends you micronized powder then it&#39;s suitable but more difficult to work with because clings to everything.</p>
 <p>Please <a href="https://groups.io/g/MTFHRT/join" rel="nofollow noopener" target="_blank">join</a> this [MTFHRT] group (you must both &#34;confirm&#34; your email address with the link you&#39;ll be emailed and email an intro about yourself to moderators) and post prices and your experiences in detail, ask questions.</p>
 <h2 id="Equipment">Equipment</h2>
 <h3 id="Necessary">Necessary</h3>
 <p>The only necessary equipment is cheap ($7 - $15) pocket 0.001 g (1 mg) scales (or DIY balance scales you can make from a long narrow wooden plank, 2 small nails and 2 syringes, one of them with 0.5 ml water as a precise weight).</p>
-<p>If you buy ready-to-use scales then they must look exactly like this:<br/><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13908/354x254.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1793763555&Signature=IZAxk59cyvovA1DjAQDGuhqas9o%3D" align="right" loading="lazy" class="myimg-responsive"/><a href="https://www.ebay.com/itm/363747240371" rel="nofollow noopener" target="_blank">https://www.ebay.com/itm/363747240371</a><br/><a href="https://www.aliexpress.com/item/4000586480263.html" rel="nofollow noopener" target="_blank">https://www.aliexpress.com/item/4000586480263.html</a></p>
+<p>If you buy ready-to-use scales then they must look exactly like this:<br/><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13908/354x254.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1794367656&Signature=iZTCbITHJcrJx%2FpQGoL%2BrY90IfA%3D" align="right" loading="lazy" class="myimg-responsive"/><a href="https://www.ebay.com/itm/363747240371" rel="nofollow noopener" target="_blank">https://www.ebay.com/itm/363747240371</a><br/><a href="https://www.aliexpress.com/item/4000586480263.html" rel="nofollow noopener" target="_blank">https://www.aliexpress.com/item/4000586480263.html</a></p>
 <p>Newer models are not suitable because they attempt to appear more precise and stable by ignoring small weight changes.</p>
 <p>Search for other sellers:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=scale+0.001&amp;_sacat=0&amp;_blrs=recall_filtering&amp;LH_BIN=1&amp;_sop=15&amp;_ipg=120&amp;_oac=1" rel="nofollow noopener" target="_blank">https://www.ebay.com/sch/i.html?_nkw=scale+0.001&amp;_sacat=0&amp;_blrs=recall_filtering&amp;LH_BIN=1&amp;_sop=15&amp;_ipg=120&amp;_oac=1</a></p>
 <p><a href="https://www.ebay.com/sch/i.html?_nkw=scale+digital+diamond&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_blrs=recall_filtering&amp;_ipg=120&amp;_oac=1" rel="nofollow noopener" target="_blank">https://www.ebay.com/sch/i.html?_nkw=scale+digital+diamond&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_blrs=recall_filtering&amp;_ipg=120&amp;_oac=1</a></p>
@@ -1712,16 +1938,16 @@ function createAlert(msg, isError, autoClose, noClose) {
 <h3 id="Optional">Optional</h3>
 <p>The vials are designed to be sealed with rubber stoppers and aluminium caps using a tool (crimper, $36). But you can crimp a cap without a crimper: by hand using a piece of metal like a spoon handle.</p>
 <p>You can buy a 129°C autoclave for $170, but it&#39;s not really necessary as you make vials for yourself only. 121°C was necessary for obsolete reusable syringes with fresh blood of another patient because hepatitis B virus can survive 100°C for short time if in blood. You are not dealing with fresh blood, so 100°C (water boiling in a pot) is enough. I use an autoclave just for customers&#39; peace of mind. At first I sold kits with EV powder, solvent, preservative and instructions how to mix and sterilize in a pot, multiple people including myself sterilized at 100°C, never a problem. If you live at significant altitude (like in Denver &#34;mile high city&#34;) then likely you already have a pressure cooker. I advise against dry heat sterilizers and ovens because of too uneven temperature, too much can burst a vial. Bead sterilizers not suitable.</p>
-<p>American &#34;homebrewing&#34; bodybuilders were afraid that their anabolics would be &#34;inactivated&#34; during heat sterilization, so they started the filtering fad: they assumed (wrong) that 0.2 μm filtering sterilizes. Filtering is <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2896367/" rel="nofollow noopener" target="_blank"><strong>not</strong></a> a reliable sterilization. I can understand filtering for intravenous infusions liters per day (in ICU), but for our subcutaneous injections 1 ml/month filtering doesn&#39;t make sense. There were multiple complaints that some EV ampules made by pharmaceutical factories in India are fake. I think not deliberately fake but just incompetent technologists and managers: they mixed in a tank in an air-conditioned cold (to limit bacteria) room without solvent for not enough time, then undissolved powder got stuck in a filter. If you are paranoid and insist on following the filtering fad then wait several days until every last clump of powder finishes dissolving in a vial, then use a PVDF or PTFE 0.22 μm syringe filter (not hydrophilic, better 25 or 33 mm), a 10 ml Luer Lock syringe and optionally a homemade filtering rig, I made mine (for paranoid customers, I don&#39;t filter what I inject into myself) from 4 stacks of books, a piece of plywood/MDF with a hole for the syringe, a wide wooden plank/board, a 6 L (1.5 gallon) plastic bottle with water as a weight, the plank slightly tilted and leaning on a wall for stability. And anyway sterilize the sealed vial you filtered into at 100°C <strong>after</strong> filtering!</p>
+<p>American &#34;homebrewing&#34; bodybuilders were afraid that their anabolics would be &#34;inactivated&#34; during heat sterilization, so they started the filtering fad: they assumed (wrong) that 0.2 μm filtering sterilizes. Filtering is <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2896367/" rel="nofollow noopener" target="_blank"><strong>not</strong></a> a reliable sterilization. I can understand filtering for intravenous infusions liters per day (in ICU), but for our subcutaneous injections 1 ml/month filtering doesn&#39;t make sense. There were multiple complaints that some EV ampules made by pharmaceutical factories in India are fake. I think not deliberately fake but just incompetent technologists and managers: they mixed in a tank in an air-conditioned cold (to limit bacteria) room without solvent for not enough time, then undissolved powder got stuck in a filter. If you are paranoid and insist on following the filtering fad then wait several days until every last clump of powder finishes dissolving in a vial, then use a PTFE 0.22 μm syringe filter (not hydrophilic, better 25 or 33 mm), a 10 ml Luer Lock syringe and optionally a homemade filtering rig, I made mine (for paranoid customers, I don&#39;t filter what I inject into myself) from 4 stacks of books, a piece of plywood/MDF with a hole for the syringe, a wide wooden plank/board, a 6 L (1.5 gallon) plastic bottle with water as a weight, the plank slightly tilted and leaning on a wall for stability. And anyway sterilize the sealed vial you filtered into at 100°C <strong>after</strong> filtering!</p>
 <h3 id="Unnecessary">Unnecessary</h3>
 <p>Unnecessary: beaker, mixer/stirrer, room with controlled airflow, depyrogenation. My technology: terminal heat sterilization (after the vials are sealed); measure and mix in each vial separately, so no glassware to wash with water  or collecting dust (skin flakes and <a href="https://en.wikipedia.org/wiki/House_dust_mite" rel="nofollow noopener" target="_blank">mites</a>) if never washed. Water - bacteria - pyrogens. Don&#39;t try to improve this technology: it protects you from mistakes and unexpected problems.</p>
 <h2 id="Other-raw-materials-and-expendables">Other raw materials and expendables</h2>
 <h3 id="Vials2C-stoppers2C-caps">Vials, stoppers, caps</h3>
-<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13965/s-l300.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1793763555&Signature=qq%2FSOcCvmAQdYtvPcU%2Bl2XaF2M4%3D" align="right" loading="lazy" class="myimg-responsive"/>Buy 10 clear glass vials 10 ml each with 20 mm grey (butyl rubber) stoppers and aluminium caps. Caps may be bare aluminium or painted, with plastic tops or all-metal. Screw-on and all-plastic caps are not suitable. Stoppers must have this shape:<br/><a href="https://www.ebay.com/itm/223836409810" rel="nofollow noopener" target="_blank">https://www.ebay.com/itm/223836409810</a><br/><a href="https://www.aliexpress.com/item/33024594919.html" rel="nofollow noopener" target="_blank">https://www.aliexpress.com/item/33024594919.html</a><br/>Flat septa are not suitable instead of stoppers. Search:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1" rel="nofollow noopener" target="_blank">https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1</a></p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13965/s-l300.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1794367656&Signature=gWoIrwnhOYQ5Ov2kIYCIcXsJQj4%3D" align="right" loading="lazy" class="myimg-responsive"/>Buy 10 clear glass vials 10 ml each with 20 mm grey (butyl rubber) stoppers and aluminium caps. Caps may be bare aluminium or painted, with plastic tops or all-metal. Screw-on and all-plastic caps are not suitable. Stoppers must have this shape:<br/><a href="https://www.ebay.com/itm/223836409810" rel="nofollow noopener" target="_blank">https://www.ebay.com/itm/223836409810</a><br/><a href="https://www.aliexpress.com/item/33024594919.html" rel="nofollow noopener" target="_blank">https://www.aliexpress.com/item/33024594919.html</a><br/>Flat septa are not suitable instead of stoppers. Search:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1" rel="nofollow noopener" target="_blank">https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1</a></p>
 <p><a href="https://www.aliexpress.com/wholesale?SearchText=vials+10ml+stoppers+caps" rel="nofollow noopener" target="_blank">https://www.aliexpress.com/wholesale?SearchText=vials+10ml+stoppers+caps</a></p>
 <p>After you remove central part of the cap, most of the cap must remain and hold the rubber stopper at place. Caps must <strong>not</strong> have tear-off weak place on one side like this:</p>
-<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13909/cap-tear-off.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1793763555&Signature=gYOqNC6%2BffuzoKH%2BgHZ%2BC3uGp%2FI%3D" loading="lazy" class="myimg-responsive"/></p>
-<p>In Europe you can buy <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22VIC10%20000%22" rel="nofollow noopener" target="_blank">vials</a>, <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22STG%20000%22" rel="nofollow noopener" target="_blank">stoppers</a>, <a href="https://lab-supply-shop.com/epages/171448.sf/de_DE/?ObjectPath=/Shops/171448/Products/%22BKMA%20000%22" rel="nofollow noopener" target="_blank">caps</a>, <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22BA%20000%22" rel="nofollow noopener" target="_blank">benzyl alcohol</a> and <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22MCT%201L%22" rel="nofollow noopener" target="_blank">MCT oil</a> in one shop.</p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13909/cap-tear-off.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1794367656&Signature=w7HcJG7f7s7bXQFgZxj%2BPUn%2FJF4%3D" loading="lazy" class="myimg-responsive"/></p>
+<p>In Europe you can buy <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22VIC10%20000%22" rel="nofollow noopener" target="_blank">vials</a>, <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22STG%20000%22" rel="nofollow noopener" target="_blank">stoppers</a>, <a href="https://lab-supply-shop.com/epages/171448.sf/de_DE/?ObjectPath=/Shops/171448/Products/%22BKMA%20000%22" rel="nofollow noopener" target="_blank">caps</a>, <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22BA%20000%22" rel="nofollow noopener" target="_blank">benzyl alcohol</a> and <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22MCT%201L%22" rel="nofollow noopener" target="_blank">MCT oil</a> in one shop. In USA <a href="https://www.gpzmedlab.com/store/p/110-10-ML-Unsealed-Clear-Vial.aspx" rel="nofollow noopener" target="_blank">vials</a>+<a href="https://www.gpzmedlab.com/store/p/38-Grey-Butyl-Stopper.aspx" rel="nofollow noopener" target="_blank">stoppers</a>+<a href="https://www.gpzmedlab.com/store/p/102-Aluminum-Seal-Center-Tear-Out.aspx" rel="nofollow noopener" target="_blank">caps</a> or <a href="https://www.premiumvials.com/10ml-glass-bottle-with-lid-transparent-vial-b-10pcs/" rel="nofollow noopener" target="_blank">here</a>.</p>
 <h3 id="Oil">Oil</h3>
 <p>MCT oil (liquid, not powder, not in capsules, without flavor added) - cheapest bottle you can find, in a local sports nutrition store or mail-order. It&#39;s the only ingredient with somewhat limited shelf life: roughly 5 years as rumored though bottles are usually marked with arbitrary shelf life 2 years. You&#39;ll use up 10 ml per year. In USA you can mail-order a 2 oz (60 ml) sample bottle <a href="https://www.ebay.com/sch/i.html?_nkw=mct+oil&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_fcid=1&amp;_blrs=recall_filtering&amp;_ipg=240" rel="nofollow noopener" target="_blank">on eBay</a> for $6 including shipping. Check prices also on Amazon. In local stores smallest bottle can be 400 ml, roughly $13. MCT oil is marketed as a food supplement to be taken 15 ml/day, taken orally is rapidly absorbed. You&#39;ll inject 500 times less, so any purity is okay (it&#39;s really all the same purity despite some dishonest sellers&#39; claims).</p>
 <h3 id="Preservative-28optional29">Preservative (optional)</h3>
@@ -1732,7 +1958,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 <h2 id="Mix">Mix</h2>
 <p>(See below for an alternate way without a funnel).</p>
 <p>Make a small funnel from a piece of foil (the thicker foil the better; shinier side inside), hold it folded with a small piece of sticky tape. If you have only thin foil then perhaps strengthen it by wide sticky tape on another side (or try to strip the outer paint from a few different beer or soft drink aluminium cans with nail polish remover, then cut a clean can with scissors). May be use something conical to wrap the foil around before cutting off unneeded parts. The hole at the pointy end of the funnel must be slightly (not much) smaller than the opening in the vial. Use this funnel to weigh up estradiol enanthate powder and to pour the powder into a vial. The funnel I&#39;m using at the center, unfolded piece of foil from my previous funnel at the left, a funnel in a vial at the right:</p>
-<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13910/cone.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1793763555&Signature=aXo2r5CxwkUW5tEGTJvq%2BE1q7SQ%3D" loading="lazy" class="myimg-responsive"/></p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13910/cone.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1794367656&Signature=w51lTzlsDZNO1%2FbUTg2wQYcb5PU%3D" loading="lazy" class="myimg-responsive"/></p>
 <p>Two recipes I can recommend:</p>
 <p>1) 500 mg = 0.5 g of estradiol enanthate (density 1.1 g/cm<sup><small>3</small></sup>),<br/>benzyl alcohol (preservative - antibacterial) 0.2 ml,<br/>MCT oil 10-0.2-0.5/1.1= 9.35 ml.</p>
 <p>2) 0.5 g of estradiol enanthate,<br/>MCT oil 10-0.5/1.1= 9.55 ml.</p>
@@ -1750,6 +1976,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 <p>For estradiol undecylate (EU, melting point 105-110°C): recipes (60 mg/ml):<br/>1. EU 0.6 g, benzyl alcohol 0.2 ml, MCT oil 10-0.2-0.6/1.07= 9.25 ml or<br/>2. (for allergics) EU 0.6 g, MCT oil 10-0.6/1.07= 9.45 ml.<br/>Inject 0.83 ml monthly or 0.62 ml every 3 weeks.</p>
 <h2 id="Sterilize">Sterilize</h2>
 <p>For sterilization put the sealed vial into a pot with tap water, <strong>after</strong> that boil the water, keep the water boiling for 30 min, turn off the heat, wait until the water cools off. The cap darkens - that doesn&#39;t matter. If you already have any pressure cooker then use it instead of a pot, else a pot is enough!</p>
+<p>If you sterilize more than one vial at a time then tie them together with cotton thread, put then into the pot upright and pour tap water up to about 1/3 of vial height.</p>
 <p>During sterilization the powder finishes dissolving. Shake up the vial (ignore tiny bubbles).</p>
 <p>Wash off limescale (calcium carbonate from heated tap water) from the vial with cloth wet with vinegar.</p>
 <p>Let the vial to dry, handwrite &#34;estradiol enanthate 50 mg/ml&#34; in small letters on paper in 3 lines, cut that out (the smaller label the better) and glue it onto the vial with a piece of transparent sticky tape just slightly larger than the label.</p>
@@ -1835,7 +2062,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 						
 						<nav class="wiki-toc d-none d-lg-block d-print-none" aria-labelledby="wiki-toc-title">
 							<div id="wiki-toc-title" class="wiki-toc-title">Contents</div>
-							<ol style="max-width: 720px"><li><a href="175563.html#Without-gatekeepers" rel="nofollow">Without gatekeepers</a></li><li><a href="175563.html#Be-your-own-endocrinologist" rel="nofollow">Be your own endocrinologist</a></li><li><a href="175563.html#Cook-your-injectable-estradiol-by-yourself" rel="nofollow">Cook your injectable estradiol by yourself</a><ol style="max-width: 720px"><li><a href="175563.html#Buy-estradiol-enanthate-powder" rel="nofollow">Buy estradiol enanthate powder</a></li><li><a href="175563.html#Equipment" rel="nofollow">Equipment</a><ol style="max-width: 720px"><li><a href="175563.html#Necessary" rel="nofollow">Necessary</a></li><li><a href="175563.html#Optional" rel="nofollow">Optional</a></li><li><a href="175563.html#Unnecessary" rel="nofollow">Unnecessary</a></li></ol></li><li><a href="175563.html#Other-raw-materials-and-expendables" rel="nofollow">Other raw materials and expendables</a><ol style="max-width: 720px"><li><a href="175563.html#Vials2C-stoppers2C-caps" rel="nofollow">Vials, stoppers, caps</a></li><li><a href="175563.html#Oil" rel="nofollow">Oil</a></li><li><a href="175563.html#Preservative-28optional29" rel="nofollow">Preservative (optional)</a></li><li><a href="175563.html#Syringes-for-mixing" rel="nofollow">Syringes for mixing</a></li></ol></li><li><a href="175563.html#Mix" rel="nofollow">Mix</a></li><li><a href="175563.html#Sterilize" rel="nofollow">Sterilize</a></li><li><a href="175563.html#Begin-a-new-vial" rel="nofollow">Begin a new vial</a></li><li><a href="175563.html#Keep" rel="nofollow">Keep</a></li><li><a href="175563.html#Total-price" rel="nofollow">Total price</a></li><li><a href="175563.html#Legal" rel="nofollow">Legal</a></li></ol></li><li><a href="175563.html#Inject-yourself" rel="nofollow">Inject yourself</a><ol style="max-width: 720px"><li><a href="175563.html#Syringes-for-injections" rel="nofollow">Syringes for injections</a></li><li><a href="175563.html#Needle-fright" rel="nofollow">Needle fright</a></li><li><a href="175563.html#Dosage" rel="nofollow">Dosage</a></li><li><a href="175563.html#How-to-inject" rel="nofollow">How to inject</a></li></ol></li><li><a href="175563.html#22Monitoring22-unnecessary" rel="nofollow">&#34;Monitoring&#34; unnecessary</a></li><li><a href="175563.html#Myths-and-what-not-to-do" rel="nofollow">Myths and what not to do</a></li></ol>
+							<ol style="max-width: 720px"><li><a href="176627.html#Without-gatekeepers" rel="nofollow">Without gatekeepers</a></li><li><a href="176627.html#Be-your-own-endocrinologist" rel="nofollow">Be your own endocrinologist</a></li><li><a href="176627.html#Cook-your-injectable-estradiol-by-yourself" rel="nofollow">Cook your injectable estradiol by yourself</a><ol style="max-width: 720px"><li><a href="176627.html#Buy-estradiol-enanthate-powder" rel="nofollow">Buy estradiol enanthate powder</a></li><li><a href="176627.html#Equipment" rel="nofollow">Equipment</a><ol style="max-width: 720px"><li><a href="176627.html#Necessary" rel="nofollow">Necessary</a></li><li><a href="176627.html#Optional" rel="nofollow">Optional</a></li><li><a href="176627.html#Unnecessary" rel="nofollow">Unnecessary</a></li></ol></li><li><a href="176627.html#Other-raw-materials-and-expendables" rel="nofollow">Other raw materials and expendables</a><ol style="max-width: 720px"><li><a href="176627.html#Vials2C-stoppers2C-caps" rel="nofollow">Vials, stoppers, caps</a></li><li><a href="176627.html#Oil" rel="nofollow">Oil</a></li><li><a href="176627.html#Preservative-28optional29" rel="nofollow">Preservative (optional)</a></li><li><a href="176627.html#Syringes-for-mixing" rel="nofollow">Syringes for mixing</a></li></ol></li><li><a href="176627.html#Mix" rel="nofollow">Mix</a></li><li><a href="176627.html#Sterilize" rel="nofollow">Sterilize</a></li><li><a href="176627.html#Begin-a-new-vial" rel="nofollow">Begin a new vial</a></li><li><a href="176627.html#Keep" rel="nofollow">Keep</a></li><li><a href="176627.html#Total-price" rel="nofollow">Total price</a></li><li><a href="176627.html#Legal" rel="nofollow">Legal</a></li></ol></li><li><a href="176627.html#Inject-yourself" rel="nofollow">Inject yourself</a><ol style="max-width: 720px"><li><a href="176627.html#Syringes-for-injections" rel="nofollow">Syringes for injections</a></li><li><a href="176627.html#Needle-fright" rel="nofollow">Needle fright</a></li><li><a href="176627.html#Dosage" rel="nofollow">Dosage</a></li><li><a href="176627.html#How-to-inject" rel="nofollow">How to inject</a></li></ol></li><li><a href="176627.html#22Monitoring22-unnecessary" rel="nofollow">&#34;Monitoring&#34; unnecessary</a></li><li><a href="176627.html#Myths-and-what-not-to-do" rel="nofollow">Myths and what not to do</a></li></ol>
 						</nav>
 					
 					
@@ -1884,17 +2111,21 @@ function createAlert(msg, isError, autoClose, noClose) {
 					
 	
 	
+	
+	
 		
 		<a id="mobilesidebar-groups" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center; color: inherit; text-decoration: none;" href="https://groups.io/groups" hx-boost="false">
 			<div style="display: inline-block; position: relative;">
 				<div style="position: relative;display: inline-block;">
 				<i class="fa-fw fa-light fa-users fa-2x"></i>
 				
+
 				</div><br>
 				<span style="font-size:12px;">Groups</span>
 			</div>
 		</a>
 	
+
 
 					
 						
@@ -1906,6 +2137,9 @@ function createAlert(msg, isError, autoClose, noClose) {
 			<div style="position: relative;display: inline-block;">
 			<i class="fa-fw fa-light fa-comments fa-2x"></i>
 			
+
+<span id="mobilesidebarbadge-archives" class="badge mobilebadge"></span>
+
 			</div><br>
 			<span style="font-size:12px;">Messages</span>
 		</div>
@@ -1958,7 +2192,10 @@ function createAlert(msg, isError, autoClose, noClose) {
 	<a title="Messages" href="https://groups.io/g/MTFHRT/topics?sidebar=true" id="sidebar-archives-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-archives"> 
 		<i class="fa-fw fa fa-comments fa-lg"></i>
 		Messages
-		<span id="sidebar-archives-mobile-badge" class="badge"></span>
+		
+
+<span id="sidebar-archives-mobile-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -1973,7 +2210,10 @@ function createAlert(msg, isError, autoClose, noClose) {
 	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" id="sidebar-hashtags-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-hashtags"> 
 		<i class="fa-fw fa fa-hashtag fa-lg"></i>
 		Hashtags
-		<span id="sidebar-hashtags-mobile-badge" class="badge"></span>
+		
+
+<span id="sidebar-hashtags-mobile-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -2001,7 +2241,10 @@ function createAlert(msg, isError, autoClose, noClose) {
 	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" id="sidebar-wiki-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-wiki active"> 
 		<i class="fa-fw fa fa-book fa-lg"></i>
 		Wiki
-		<span id="sidebar-wiki-mobile-badge" class="badge"></span>
+		
+
+<span id="sidebar-wiki-mobile-badge" class="badge"></span>
+
 	</a>
 
 	

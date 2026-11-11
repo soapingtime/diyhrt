@@ -152,7 +152,7 @@
 			gioReport({
 				msg: "bundle-load-failure",
 				url: src,
-				client_id: "web.app02-g2.619524.1793762947959294970"
+				client_id: "web.app02-g2.890093.1794367045249729253"
 			});
 		};
 		if (window.__gioBundleErr) {
@@ -173,7 +173,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app02-g2.619524.1793762947959294970");
+				console.log("client_id:", "web.app02-g2.890093.1794367045249729253");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -228,7 +228,7 @@
 				column: column,
 				stack: stack,
 				last_error: lastError,
-				client_id: "web.app02-g2.619524.1793762947959294970"
+				client_id: "web.app02-g2.890093.1794367045249729253"
 			});
 			lastError = errorMessage;
 			return true;
@@ -238,8 +238,8 @@
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-a1a3c10f20774457dcca41ce8ac10267.css" rel="stylesheet" id="groupsio-css">
-			<script src="../../../../js/application-a17ec07328b5daf73577d511f1afba3d.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
+			<link href="../../../../css/application-d97e6c834223c90a9e0d504dfb964aec.css" rel="stylesheet" id="groupsio-css">
+			<script src="../../../../js/application-78aee2383a05aae12aa77f3589120e7f.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>MTFHRT@groups.io | Wiki | steam sterilization</title>
 			
@@ -287,17 +287,24 @@
 	htmx.config.scrollBehavior = "instant";
 	htmx.config.historyCacheSize = 0;
 	htmx.config.defaultSettleDelay = 0;
+	// A history cache miss puts the response in place of the whole <body>, so
+	// it needs the full page, which the server only sends without HX-Request.
+	htmx.config.historyRestoreAsHxRequest = false;
+	// Only the top-level elements of a response are out-of-band swaps; the
+	// badges BaseBadges and the sidebars write are all top level.
+	htmx.config.allowNestedOobSwaps = false;
 	console.log("FULL PAGE LOAD");
 
-	// Short fade-in on #maincontent-refresh after every HTMX swap — adds zero latency
-	// because it runs AFTER the new content has arrived. We listen to afterRequest
-	// (fires once per HTMX request) rather than afterSwap (fires once per swapped
-	// element, including every hx-swap-oob badge — which would cancel the animation).
+	// Short fade-in on #maincontent-refresh after every HTMX navigation — adds zero
+	// latency because it runs AFTER the new content has arrived. htmx fires
+	// afterSwap on each element it swapped, every hx-swap-oob badge included, so
+	// only the one for #maincontent-refresh itself counts: other requests, such as
+	// infinite scroll appending rows or a dropped stale navigation, leave the page
+	// as it was and must not fade it.
 	// Listen on document because this script runs in <head> before <body> exists.
-	document.addEventListener('htmx:afterRequest', function(evt) {
-		if (!evt.detail || !evt.detail.successful) return;
-		var refresh = document.getElementById('maincontent-refresh');
-		if (!refresh) return;
+	document.addEventListener('htmx:afterSwap', function(evt) {
+		var refresh = evt.target;
+		if (!refresh || refresh.id !== 'maincontent-refresh') return;
 		refresh.classList.remove('gio-fade-in');
 		// force reflow so removing then adding re-starts the animation each time
 		void refresh.offsetWidth;
@@ -306,13 +313,217 @@
 
 	// Top-of-viewport progress bar shown while an HTMX request is in flight.
 	// Provides immediate visual feedback for taps even before content arrives.
-	document.addEventListener('htmx:beforeRequest', function() {
+	// It counts requests, so that one finishing, or being aborted for a newer
+	// one, does not hide the bar while another is still loading. The count
+	// follows each XHR itself: htmx fires htmx:afterRequest on the element that
+	// sent the request, and once a swap has removed that element the event no
+	// longer reaches the document.
+	var gioRequestsInFlight = 0;
+	document.addEventListener('htmx:beforeSend', function(evt) {
 		var bar = document.getElementById('gio-progress-bar');
+		gioRequestsInFlight++;
 		if (bar) bar.classList.add('active');
+		evt.detail.xhr.addEventListener('loadend', function() {
+			gioRequestsInFlight = Math.max(0, gioRequestsInFlight - 1);
+			var bar = document.getElementById('gio-progress-bar');
+			if (bar && gioRequestsInFlight === 0) bar.classList.remove('active');
+		});
 	});
-	document.addEventListener('htmx:afterRequest', function() {
-		var bar = document.getElementById('gio-progress-bar');
-		if (bar) bar.classList.remove('active');
+
+	// An HTMX navigation is a request that swaps #maincontent-refresh. Only the
+	// latest one may swap: an earlier one that answers later, or one that a
+	// history restore overtook, would show a page the user has left. A newer
+	// navigation aborts an earlier one that is only loading a page; one that
+	// sends data, such as a form, is left to finish on the server, and its
+	// response is dropped.
+	var gioNavigationSeq = 0;
+	var gioPendingNavigation = null;
+	function gioIsNavigation(detail) {
+		return !!(detail && detail.target && detail.target.id === 'maincontent-refresh');
+	}
+	function gioIsStaleNavigation(detail) {
+		return !!(detail && detail.xhr && detail.xhr.gioNavigationSeq !== undefined && detail.xhr.gioNavigationSeq !== gioNavigationSeq);
+	}
+	document.addEventListener('htmx:beforeRequest', function(evt) {
+		if (!gioIsNavigation(evt.detail)) return;
+		var pending = gioPendingNavigation;
+		evt.detail.xhr.gioNavigationSeq = ++gioNavigationSeq;
+		gioPendingNavigation = {xhr: evt.detail.xhr, get: evt.detail.requestConfig.verb === 'get'};
+		if (pending && pending.get && pending.xhr.readyState !== XMLHttpRequest.DONE) {
+			pending.xhr.abort();
+		}
+	});
+	document.addEventListener('htmx:historyCacheMiss', function() {
+		gioNavigationSeq++;
+		if (gioPendingNavigation && gioPendingNavigation.get) {
+			gioPendingNavigation.xhr.abort();
+		}
+		gioPendingNavigation = null;
+	});
+	// Capture, so that a stale response is dropped before the page's own
+	// htmx:beforeSwap handlers tear down the page it would have replaced.
+	document.addEventListener('htmx:beforeSwap', function(evt) {
+		if (gioIsStaleNavigation(evt.detail)) {
+			evt.preventDefault();
+			evt.stopPropagation();
+		}
+	}, true);
+
+	// Going back or forward to a page fetches it again, which keeps neither its
+	// scroll position nor the pages infinite scroll had added to it. So the
+	// place on each page, its scroll position and how many pages infinite
+	// scroll loaded, is kept in sessionStorage under its URL as the user
+	// scrolls, and reaching a page through Back or Forward loads that many
+	// pages again, then scrolls back there. While a page is being replaced the
+	// place is frozen, so the scrolling the swap causes is not taken for the
+	// user's.
+	var gioInfiniteLoads = 0;
+	var gioPlaceFrozen = false;
+	function gioPlaceKey() {
+		return 'gio-place:' + location.href;
+	}
+	function gioSavePlace() {
+		if (gioPlaceFrozen) return;
+		var main = document.getElementById('maincontent');
+		var place = {y: window.scrollY, main: main ? main.scrollTop : 0, loads: gioInfiniteLoads};
+		try {
+			sessionStorage.setItem(gioPlaceKey(), JSON.stringify(place));
+		} catch (e) {}
+	}
+	function gioReadPlace() {
+		try {
+			return JSON.parse(sessionStorage.getItem(gioPlaceKey()) || 'null');
+		} catch (e) {
+			return null;
+		}
+	}
+	var gioSavePlaceTimer = null;
+	document.addEventListener('scroll', function() {
+		if (gioSavePlaceTimer) return;
+		gioSavePlaceTimer = setTimeout(function() {
+			gioSavePlaceTimer = null;
+			gioSavePlace();
+		}, 250);
+	}, {capture: true, passive: true});
+	window.addEventListener('pagehide', gioSavePlace);
+	function gioIsInfiniteLoad(detail) {
+		return !!(detail && detail.pathInfo && /[?&]infinite2=1(&|$)/.test(detail.pathInfo.requestPath || ''));
+	}
+	document.addEventListener('htmx:beforeSend', function(evt) {
+		if (!gioIsNavigation(evt.detail)) return;
+		gioSavePlace();
+		gioPlaceFrozen = true;
+		// The XHR ends after htmx has swapped the page and pushed its URL.
+		evt.detail.xhr.addEventListener('loadend', function() {
+			gioPlaceFrozen = false;
+		});
+	});
+	document.addEventListener('htmx:afterSwap', function(evt) {
+		if (gioIsNavigation(evt.detail)) gioInfiniteLoads = 0;
+	});
+	var gioAfterInfiniteLoad = null;
+	document.addEventListener('htmx:afterRequest', function(evt) {
+		if (!gioIsInfiniteLoad(evt.detail) || !evt.detail.successful) return;
+		gioInfiniteLoads++;
+		gioSavePlace();
+		if (gioAfterInfiniteLoad) setTimeout(gioAfterInfiniteLoad, 0);
+	});
+	// gioRestorePlace returns the page to place: it loads as many pages as
+	// infinite scroll had, stopping at the end of the list or if a page does
+	// not come within 10 seconds, then scrolls.
+	function gioRestorePlace(place) {
+		var lastTrigger = null;
+		var timer = null;
+		function scrollBack() {
+			clearTimeout(timer);
+			gioAfterInfiniteLoad = null;
+			window.scrollTo({top: place.y, behavior: 'instant'});
+			var main = document.getElementById('maincontent');
+			if (main) main.scrollTop = place.main;
+			gioPlaceFrozen = false;
+		}
+		function loadNext() {
+			clearTimeout(timer);
+			var triggers = document.querySelectorAll('#maincontent-refresh [hx-trigger^="intersect"]');
+			var trigger = triggers.length ? triggers[triggers.length - 1] : null;
+			if (gioInfiniteLoads >= place.loads || !trigger || trigger === lastTrigger) {
+				scrollBack();
+				return;
+			}
+			lastTrigger = trigger;
+			gioAfterInfiniteLoad = loadNext;
+			timer = setTimeout(scrollBack, 10000);
+			htmx.trigger(trigger, 'intersect');
+		}
+		gioPlaceFrozen = true;
+		gioInfiniteLoads = 0;
+		loadNext();
+	}
+	document.addEventListener('htmx:historyCacheMiss', function() {
+		gioPlaceFrozen = true;
+	});
+	document.addEventListener('htmx:historyRestore', function() {
+		var place = gioReadPlace();
+		gioInfiniteLoads = 0;
+		if (place) {
+			gioRestorePlace(place);
+		} else {
+			gioPlaceFrozen = false;
+		}
+	});
+	// A page loaded in full through Back or Forward, rather than from the
+	// browser's back-forward cache, which keeps the page as it was.
+	(function() {
+		var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+		if (!nav || nav.type !== 'back_forward') return;
+		var place = gioReadPlace();
+		if (!place) return;
+		gioPlaceFrozen = true;
+		window.addEventListener('load', function() {
+			gioRestorePlace(place);
+		});
+	})();
+
+	// A navigation that fails leaves the page as it was, which looks like the
+	// tap did nothing. A page that answers with an error is loaded in full, so
+	// the error page shows. A page that cannot be reached, or does not answer
+	// in 30 seconds, gets an alert with a link to try again. Requests that send
+	// data, which can take longer, such as uploads, have no time limit, and
+	// their failure is reported as a change not saved.
+	document.addEventListener('htmx:beforeSend', function(evt) {
+		if (gioIsNavigation(evt.detail) && evt.detail.requestConfig.verb === 'get') {
+			evt.detail.xhr.timeout = 30000;
+		}
+	});
+	function gioNavigationFailed(detail) {
+		var url = detail.pathInfo.finalRequestPath || detail.pathInfo.requestPath;
+		var isGet = detail.requestConfig.verb === 'get';
+		if (typeof createAlert !== 'function' || typeof alertText === 'undefined') {
+			if (isGet) {
+				window.location.href = url;
+			}
+			return;
+		}
+		if (!isGet) {
+			createAlert(alertText.changeNotSaved, true, false);
+			return;
+		}
+		var link = $('<a>').attr('href', url).text(alertText.retryNow)[0].outerHTML;
+		createAlert(alertText.pageNotLoaded + ' ' + link, true, false);
+	}
+	document.addEventListener('htmx:responseError', function(evt) {
+		if (!gioIsNavigation(evt.detail) || gioIsStaleNavigation(evt.detail)) return;
+		if (evt.detail.requestConfig.verb === 'get') {
+			window.location.href = evt.detail.pathInfo.finalRequestPath || evt.detail.pathInfo.requestPath;
+			return;
+		}
+		gioNavigationFailed(evt.detail);
+	});
+	['htmx:sendError', 'htmx:timeout'].forEach(function(name) {
+		document.addEventListener(name, function(evt) {
+			if (!gioIsNavigation(evt.detail) || gioIsStaleNavigation(evt.detail)) return;
+			gioNavigationFailed(evt.detail);
+		});
 	});
 
 	// Bootstrap appends an open tooltip to <body>, outside the content HTMX
@@ -382,7 +593,8 @@
 	}, true);
 </script>
 		</head>
-		<body id="body" class="" hx-headers='{"Accept-Version": "22dba9665fc8b7e2ce7880ed39592753cf90a389"}' hx-ext="preload" hx-boost="false">
+		
+		<body id="body" class="" hx-headers='{"Accept-Version": "a501e954c19110296b107d084fdf6adf74a02649", "Accept-Context": "group:4415"}' hx-ext="preload" hx-boost="false">
 			<a id="skip-link" class="skip-link visually-hidden-focusable" href="201262.html#maincontent">Skip to main content</a>
 			
 			<div id="page-announcer" class="visually-hidden" role="status"></div>
@@ -1162,7 +1374,10 @@ function showAutocompleteModal(modalName) {
 	<a title="Messages" href="https://groups.io/g/MTFHRT/topics?sidebar=true" id="sidebar-archives" class="noborderitem list-group-item sidebar-item sidebar-item-archives"> 
 		<i class="fa-fw fa fa-comments fa-lg"></i>
 		Messages
-		<span id="sidebar-archives-badge" class="badge"></span>
+		
+
+<span id="sidebar-archives-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -1177,7 +1392,10 @@ function showAutocompleteModal(modalName) {
 	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" id="sidebar-hashtags" class="noborderitem list-group-item sidebar-item sidebar-item-hashtags"> 
 		<i class="fa-fw fa fa-hashtag fa-lg"></i>
 		Hashtags
-		<span id="sidebar-hashtags-badge" class="badge"></span>
+		
+
+<span id="sidebar-hashtags-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -1205,7 +1423,10 @@ function showAutocompleteModal(modalName) {
 	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" id="sidebar-wiki" class="noborderitem list-group-item sidebar-item sidebar-item-wiki active"> 
 		<i class="fa-fw fa fa-book fa-lg"></i>
 		Wiki
-		<span id="sidebar-wiki-badge" class="badge"></span>
+		
+
+<span id="sidebar-wiki-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -1299,9 +1520,13 @@ function dismiss() {
     $.get( "/dismissalert");
 }
 
-var $alerttemplate = $(".alerttemplate");
-var $alertnoclosetemplate = $(".alertnoclosetemplate");
-var $noticetemplate = $(".noticetemplate");
+// An HTMX swap inserts the new content before it removes the old, so while
+// this script runs the previous page's templates are still in the document,
+// after these. Take only the first of each, or every alert would be cloned
+// once per template.
+var $alerttemplate = $(".alerttemplate").first();
+var $alertnoclosetemplate = $(".alertnoclosetemplate").first();
+var $noticetemplate = $(".noticetemplate").first();
 
 // alertText holds translated messages for alerts raised by shared scripts
 // (the editor and the ajax retry helper) that have no translator of their own.
@@ -1312,6 +1537,7 @@ var alertText = {
 	retryAutomatically: "We will retry automatically.",
 	retryCountdown: "We will retry again in %s seconds.",
 	retryNow: "Retry now",
+	pageNotLoaded: "This page could not be loaded. Check your connection, then try again.",
 	sessionExpired: "Your login has expired, so your changes are not being saved. Do not close or reload this page. \u003ca href=\"/login\" target=\"_blank\" rel=\"noopener\">Log in again in a new tab\u003c/a>, then return here to send your message.",
 	uploadFailed: "Failed to upload %s",
 	imageUploadFailed: "1 image failed to upload. Please try again.",
@@ -1709,17 +1935,21 @@ function createAlert(msg, isError, autoClose, noClose) {
 					
 	
 	
+	
+	
 		
 		<a id="mobilesidebar-groups" class="mobilesidebar-item" style="margin-top:10px; padding-bottom:20px; flex: 1; text-align: center; color: inherit; text-decoration: none;" href="https://groups.io/groups" hx-boost="false">
 			<div style="display: inline-block; position: relative;">
 				<div style="position: relative;display: inline-block;">
 				<i class="fa-fw fa-light fa-users fa-2x"></i>
 				
+
 				</div><br>
 				<span style="font-size:12px;">Groups</span>
 			</div>
 		</a>
 	
+
 
 					
 						
@@ -1731,6 +1961,9 @@ function createAlert(msg, isError, autoClose, noClose) {
 			<div style="position: relative;display: inline-block;">
 			<i class="fa-fw fa-light fa-comments fa-2x"></i>
 			
+
+<span id="mobilesidebarbadge-archives" class="badge mobilebadge"></span>
+
 			</div><br>
 			<span style="font-size:12px;">Messages</span>
 		</div>
@@ -1783,7 +2016,10 @@ function createAlert(msg, isError, autoClose, noClose) {
 	<a title="Messages" href="https://groups.io/g/MTFHRT/topics?sidebar=true" id="sidebar-archives-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-archives"> 
 		<i class="fa-fw fa fa-comments fa-lg"></i>
 		Messages
-		<span id="sidebar-archives-mobile-badge" class="badge"></span>
+		
+
+<span id="sidebar-archives-mobile-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -1798,7 +2034,10 @@ function createAlert(msg, isError, autoClose, noClose) {
 	<a title="Hashtags" href="https://groups.io/g/MTFHRT/hashtags" id="sidebar-hashtags-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-hashtags"> 
 		<i class="fa-fw fa fa-hashtag fa-lg"></i>
 		Hashtags
-		<span id="sidebar-hashtags-mobile-badge" class="badge"></span>
+		
+
+<span id="sidebar-hashtags-mobile-badge" class="badge"></span>
+
 	</a>
 
 	
@@ -1826,7 +2065,10 @@ function createAlert(msg, isError, autoClose, noClose) {
 	<a title="Wiki" href="https://groups.io/g/MTFHRT/wiki" id="sidebar-wiki-mobile" class="noborderitem list-group-item sidebar-item sidebar-item-wiki active"> 
 		<i class="fa-fw fa fa-book fa-lg"></i>
 		Wiki
-		<span id="sidebar-wiki-mobile-badge" class="badge"></span>
+		
+
+<span id="sidebar-wiki-mobile-badge" class="badge"></span>
+
 	</a>
 
 	
