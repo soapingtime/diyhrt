@@ -3076,6 +3076,72 @@ a, button, input, select, textarea, .btn, .mobilesidebar-item, .grouphome-tile {
 	}
 }
 
+/* Dropdown menus as bottom sheets on phones, like native action sheets.
+   base.qtpl adds .dropdown-sheet when a menu opens (and takes it away if the
+   menu can't sit at the bottom of the screen), and .dropdown-sheet-in to
+   slide it up. The !important rules beat the position Popper writes into
+   the menu's style attribute. */
+@media (max-width: 767.98px) {
+	.dropdown-menu.dropdown-sheet {
+		position: fixed !important;
+		inset: auto 0 0 0 !important;
+		transform: none !important;
+		margin: 0 !important;
+		width: auto !important;
+		min-width: 0 !important;
+		max-width: none !important;
+		max-height: 75vh;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		z-index: 1061;
+		border: 0;
+		border-radius: 12px 12px 0 0;
+		padding: 20px 0 calc(8px + env(safe-area-inset-bottom));
+		box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.2);
+		--bs-dropdown-item-padding-y: 0.75rem;
+		--bs-dropdown-item-padding-x: 1.25rem;
+		--bs-dropdown-header-padding-y: 0.5rem;
+	}
+	/* grab handle */
+	.dropdown-menu.dropdown-sheet::before {
+		content: "";
+		position: absolute;
+		top: 7px;
+		left: 50%;
+		width: 36px;
+		height: 5px;
+		margin-left: -18px;
+		border-radius: 3px;
+		background-color: rgba(0, 0, 0, 0.2);
+	}
+	body.dark-mode .dropdown-menu.dropdown-sheet::before {
+		background-color: rgba(255, 255, 255, 0.3);
+	}
+	.dropdown-menu.dropdown-sheet-in {
+		animation: dropdown-sheet-up 220ms cubic-bezier(0.2, 0, 0.2, 1);
+	}
+	.dropdown-sheet-backdrop {
+		position: fixed;
+		inset: 0;
+		z-index: 1060;
+		background-color: rgba(0, 0, 0, 0.4);
+		touch-action: none;
+		animation: dropdown-sheet-fade 220ms ease-out;
+	}
+	@keyframes dropdown-sheet-up {
+		from { translate: 0 100%; }
+	}
+	@keyframes dropdown-sheet-fade {
+		from { opacity: 0; }
+	}
+}
+@media (max-width: 767.98px) and (prefers-reduced-motion: reduce) {
+	.dropdown-menu.dropdown-sheet-in,
+	.dropdown-sheet-backdrop {
+		animation: none;
+	}
+}
+
 /* HTMX loading indicator — thin sliding bar at very top while a request is in flight */
 #gio-progress-bar {
 	position: fixed;
@@ -6100,6 +6166,57 @@ body.app .navbar-fixed-top {
 	/*padding-bottom: max(20px, env(safe-area-inset-bottom));*/
 }
 
+/* In the app, a long press on the header or the bottom tabs does nothing,
+   as in a native app, instead of opening a link preview or selecting the
+   labels. Text fields in the header (search) stay selectable. */
+body.app #headerbar,
+body.app #mobileSidebar .navbar.fixed-bottom {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+body.app #headerbar input,
+body.app #headerbar textarea {
+	-webkit-user-select: text;
+	user-select: text;
+}
+
+/* In the app, a labelled checkbox (the form-check components in
+   qtutils/checkbox.qtpl) is drawn as an on/off switch, as native settings
+   are: Bootstrap's .form-switch look, a little larger. Checkboxes in a
+   row of inline options, in tables, which select rows, and in dropdown
+   menus, which pick several filters, stay checkboxes. */
+body.app .form-check:not(.form-check-inline):not(table .form-check):not(.dropdown-menu .form-check):has(> .form-check-input[type="checkbox"]) {
+	padding-left: 3.25em;
+}
+body.app .form-check:not(.form-check-inline):not(table .form-check):not(.dropdown-menu .form-check) > .form-check-input[type="checkbox"] {
+	--gio-switch-knob: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3.25' fill='%23fff'/%3e%3c/svg%3e");
+	width: 2.5em;
+	height: 1.5em;
+	margin-top: 0;
+	margin-left: -3.25em;
+	border-radius: 1.5em;
+	background-color: rgba(120, 120, 128, 0.32);
+	background-image: var(--gio-switch-knob);
+	background-position: left center;
+	background-size: contain;
+	border-color: transparent;
+	transition: background-position 0.15s ease-in-out, background-color 0.15s ease-in-out;
+}
+body.app .form-check:not(.form-check-inline):not(table .form-check):not(.dropdown-menu .form-check) > .form-check-input[type="checkbox"]:checked {
+	background-color: var(--gio-brand);
+	background-image: var(--gio-switch-knob);
+	background-position: right center;
+}
+body.app .form-check:not(.form-check-inline):not(table .form-check):not(.dropdown-menu .form-check) > .form-check-input[type="checkbox"] + .form-check-label {
+	line-height: 1.5em;
+}
+@media (prefers-reduced-motion: reduce) {
+	body.app .form-check-input[type="checkbox"] {
+		transition: none;
+	}
+}
+
 /* attachment display */
 .attachment-box {
 	border: 1px solid #f5f5f5;
@@ -6280,6 +6397,34 @@ body.app .navbar-fixed-top {
 	margin: 0px 0px 0px 0px;
 	padding: 0px 0px 0px 0px;
 	outline: 0;
+}
+
+/* Folders in the Files Move dialog: choosing one highlights it. */
+.tree li button.movetarget {
+	padding: 0 .35em;
+	border-radius: var(--bs-border-radius-sm);
+	color: inherit;
+	font-weight: 700;
+}
+
+.tree li button.movetarget:hover:not(:disabled) {
+	background: var(--bs-tertiary-bg);
+}
+
+.tree li button.movetarget:focus-visible {
+	outline: 2px solid var(--bs-primary);
+	outline-offset: 1px;
+}
+
+.tree li button.movetarget.active,
+.tree li button.movetarget.active:hover:not(:disabled) {
+	background: var(--bs-primary);
+	color: #fff;
+}
+
+.tree li button.movetarget:disabled {
+	opacity: .55;
+	cursor: not-allowed;
 }
 
 .maincontent-column {
@@ -10284,6 +10429,34 @@ body.dark-mode .empty-state-title {
 	color: var(--dark-mode-text-color);
 }
 
+/* Login code entry: six boxes that fill in the login code input */
+.logincode-boxes {
+	display: flex;
+	gap: 8px;
+}
+.logincode-boxes .logincode-box {
+	flex: 0 1 3rem;
+	min-width: 0;
+	height: 3.5rem;
+	padding: 0;
+	font-size: 1.75rem;
+	font-weight: 600;
+	text-align: center;
+}
+/* Bootstrap's invalid icon has no room in a one-digit box; the red border
+   and the message below are enough. */
+.logincode-boxes .logincode-box.is-invalid {
+	background-image: none;
+	padding: 0;
+}
+
+/* Links to install the app are pointless inside the installed web app */
+@media (display-mode: standalone) {
+	.hide-in-installed-app {
+		display: none !important;
+	}
+}
+
 /*
  * Bootstrap 5 parity overrides. Loaded only in the bs5 bundle, after
  * groupsio.css. The app CSS and body padding (60px) were designed around
@@ -11935,6 +12108,20 @@ body:not(.dark-mode) .form-check-input:not(:checked):hover {
 .has-error .radio label,
 .has-error .form-check-label {
 	color: var(--gio-danger-text);
+}
+
+/* groupsio.css colours help text with !important body:not(.dark-mode) and
+ * body.dark-mode .help-block rules, which outrank the rule above, so a field's
+ * error message rendered in the muted help colour and only the red border
+ * showed. These match them, with the dark-mode danger text colour there. */
+body:not(.dark-mode) .has-error .help-block,
+body:not(.dark-mode) .has-error .form-text {
+	color: var(--gio-danger-text) !important;
+}
+
+body.dark-mode .has-error .help-block,
+body.dark-mode .has-error .form-text {
+	color: var(--dark-mode-danger-text) !important;
 }
 
 .has-error .form-control,

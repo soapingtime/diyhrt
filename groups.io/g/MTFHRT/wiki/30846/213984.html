@@ -28,6 +28,19 @@
 			<link rel="icon" type="image/png" sizes="96x96" href="../../../../orgimg/org.1/favicons/favicon-96x96.png%3Fv=1411358049715440694">
 			<link rel="icon" type="image/png" sizes="16x16" href="../../../../orgimg/org.1/favicons/favicon-16x16.png%3Fv=1411358049715440694">
 			<link rel="manifest" href="../../../../orgimg/org.1/favicons/manifest.json%3Fv=1411358049715440694">
+			
+				
+				
+				
+				<script>
+					// The browser offers installing the site once per page load; keep the
+					// offer for the Install button on /app, which may be reached later.
+					window.addEventListener("beforeinstallprompt", function(e) {
+						window.gioInstallPrompt = e;
+						document.dispatchEvent(new Event("gio:installable"));
+					});
+				</script>
+			
 			<meta name="msapplication-TileColor" content="#ffffff">
 			<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 			
@@ -152,7 +165,7 @@
 			gioReport({
 				msg: "bundle-load-failure",
 				url: src,
-				client_id: "web.app01-g2.889857.1794367044711762165"
+				client_id: "web.app02-g2.4457302.1794977330890209726"
 			});
 		};
 		if (window.__gioBundleErr) {
@@ -173,7 +186,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app01-g2.889857.1794367044711762165");
+				console.log("client_id:", "web.app02-g2.4457302.1794977330890209726");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -228,7 +241,7 @@
 				column: column,
 				stack: stack,
 				last_error: lastError,
-				client_id: "web.app01-g2.889857.1794367044711762165"
+				client_id: "web.app02-g2.4457302.1794977330890209726"
 			});
 			lastError = errorMessage;
 			return true;
@@ -238,8 +251,8 @@
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-d97e6c834223c90a9e0d504dfb964aec.css" rel="stylesheet" id="groupsio-css">
-			<script src="../../../../js/application-78aee2383a05aae12aa77f3589120e7f.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
+			<link href="../../../../css/application-df47ed7c9de4594f5da8a2a6a58e9674.css" rel="stylesheet" id="groupsio-css">
+			<script src="../../../../js/application-40ac8ffb23613d6c0b3d3fbada2e0e67.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>MTFHRT@groups.io | Wiki | Home</title>
 			
@@ -550,6 +563,76 @@
 		return config;
 	};
 
+	// On phones a dropdown menu opens as a sheet from the bottom of the
+	// screen over a dimmed backdrop, like a native action sheet (the
+	// dropdown-sheet rules in groupsio.css). A menu that can't be shown
+	// that way stays a popover: one inside a transformed ancestor (an
+	// open modal's dialog), where position: fixed is relative to that
+	// ancestor rather than the screen, or inside a stacking context that
+	// puts it under the backdrop or the bottom tabs. Rather than predict
+	// those, the sheet is checked once it is laid out, before it paints.
+	var dropdownSheetQuery = window.matchMedia('(max-width: 767.98px)');
+	function dropdownMenuFor(toggle) {
+		for (var el = toggle.nextElementSibling; el; el = el.nextElementSibling) {
+			if (el.classList.contains('dropdown-menu')) return el;
+		}
+		return toggle.parentNode ? toggle.parentNode.querySelector('.dropdown-menu') : null;
+	}
+	function removeDropdownSheetBackdrops() {
+		document.querySelectorAll('.dropdown-sheet-backdrop').forEach(function(el) {
+			el.remove();
+		});
+	}
+	function dropdownSheetFits(menu) {
+		var rect = menu.getBoundingClientRect();
+		if (rect.left > 1 || rect.right < window.innerWidth - 1 || rect.bottom < window.innerHeight - 1) {
+			return false;
+		}
+		var top = document.elementFromPoint(rect.left + rect.width / 2, rect.top + Math.min(rect.height, 60) / 2);
+		var bottom = document.elementFromPoint(rect.left + rect.width / 2, rect.bottom - 5);
+		return menu.contains(top) && menu.contains(bottom);
+	}
+	document.addEventListener('show.bs.dropdown', function(ev) {
+		if (!dropdownSheetQuery.matches) return;
+		var toggle = ev.target;
+		var menu = dropdownMenuFor(toggle);
+		if (!menu) return;
+		menu.classList.add('dropdown-sheet');
+		var backdrop = document.createElement('div');
+		backdrop.className = 'dropdown-sheet-backdrop';
+		// Menus with data-bs-auto-close="inside" or "false" ignore outside
+		// clicks, but a tap on the backdrop always dismisses the sheet.
+		backdrop.addEventListener('click', function() {
+			var dropdown = bootstrap.Dropdown.getInstance(toggle);
+			if (dropdown) dropdown.hide();
+			removeDropdownSheetBackdrops();
+		});
+		document.body.appendChild(backdrop);
+	});
+	document.addEventListener('shown.bs.dropdown', function(ev) {
+		var menu = dropdownMenuFor(ev.target);
+		if (!menu || !menu.classList.contains('dropdown-sheet')) return;
+		if (dropdownSheetFits(menu)) {
+			// The slide-up starts only now: it moves the sheet off screen,
+			// which dropdownSheetFits would read as not fitting.
+			menu.classList.add('dropdown-sheet-in');
+		} else {
+			menu.classList.remove('dropdown-sheet');
+			removeDropdownSheetBackdrops();
+		}
+	});
+	document.addEventListener('hidden.bs.dropdown', function(ev) {
+		var menu = dropdownMenuFor(ev.target);
+		if (menu) menu.classList.remove('dropdown-sheet', 'dropdown-sheet-in');
+		removeDropdownSheetBackdrops();
+	});
+	// An HTMX swap can remove an open menu without its hidden event.
+	document.addEventListener('htmx:afterSettle', function() {
+		if (!document.querySelector('.dropdown-menu.dropdown-sheet.show')) {
+			removeDropdownSheetBackdrops();
+		}
+	});
+
 	// Haptic feedback on mobile-native chrome taps: bottom-nav tabs, back
 	// chevron, and the navbar overflow action slot. Uses the shared helpers
 	// from qtutils/appfunctions.qtpl — they no-op on non-Capacitor runtimes,
@@ -594,7 +677,7 @@
 </script>
 		</head>
 		
-		<body id="body" class="" hx-headers='{"Accept-Version": "a501e954c19110296b107d084fdf6adf74a02649", "Accept-Context": "group:4415"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "8a2b6a0fdfc66d1b9ec1d5c8cf09f007cb11d9d9", "Accept-Context": "group:4415"}' hx-ext="preload" hx-boost="false">
 			<a id="skip-link" class="skip-link visually-hidden-focusable" href="213984.html#maincontent">Skip to main content</a>
 			
 			<div id="page-announcer" class="visually-hidden" role="status"></div>
@@ -1470,6 +1553,14 @@ function showAutocompleteModal(modalName) {
 			<a href="https://groups.io/helpcenter" style="display:inline-block;padding:4px 0;" target="_blank">
 				Help
 			</a>
+			
+				<span class="hide-in-installed-app">
+					&middot;
+					<a href="https://groups.io/app" style="display:inline-block;padding:4px 0;">
+						Get the App
+					</a>
+				</span>
+			
 		</div>
 		<div style="padding-bottom:5px;">
 			&copy; 2026 Groups.io

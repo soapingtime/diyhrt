@@ -1079,6 +1079,8 @@ var FullCalendar=function(e){"use strict";var t,n,r,i,s,o,a,l,c,d={},u=[],h=/aci
         return (labelText !== "" && title !== "") ? labelText + ": " + title : (labelText || title);
       };
       $markupA.attr("role", "button").attr("aria-label", captionText(this.$select.find("option:selected").text()));
+      // the selected colour's name, shown on hover as the swatches in the menu do
+      $markupA.attr("title", $.trim(this.$select.find("option:selected").text()));
 
       // create an li-tag for every option of the select
       $("option", this.$select).each(function() {
@@ -1126,7 +1128,7 @@ var FullCalendar=function(e){"use strict";var t,n,r,i,s,o,a,l,c,d={},u=[],h=/aci
         $(this).next().find("ul").find("li").find("a[data-color='" + color + "']").addClass("selected").attr("aria-current", "true");
 
         $(this).next().find(".btn-colorselector").css("background-color", color);
-        $(this).next().find(".dropdown-toggle").attr("aria-label", captionText(title));
+        $(this).next().find(".dropdown-toggle").attr("aria-label", captionText(title)).attr("title", $.trim(title));
         
         callback(value, color, title);
       });
@@ -2729,6 +2731,64 @@ $.ajaxPrefilter(function (opts, originalOpts, jqXHR) {
 		}
 	});
 })();
+
+;
+// Remembering a member's last choice in a form, in this browser only.
+//
+// Choices are kept in localStorage under "groupsio.remember." + key. Keys name the choice and the group it belongs
+// to, such as "copyDest.123.files", so a folder chosen in one group isn't offered in another. Storage can be
+// unavailable or full (private browsing, quotas), so failures are ignored and the form keeps its usual default.
+//
+// Don't remember choices that act on other people, such as Notify Members: a box left checked from an earlier visit
+// could email the whole group without the member meaning to.
+
+var gioRememberPrefix = "groupsio.remember.";
+
+// rememberChoice stores value as the last choice for key.
+function rememberChoice(key, value) {
+	try {
+		localStorage.setItem(gioRememberPrefix + key, String(value));
+	} catch (_) {
+		// optional preference
+	}
+}
+
+// recallChoice returns the last choice stored for key, or null if there isn't one.
+function recallChoice(key) {
+	try {
+		return localStorage.getItem(gioRememberPrefix + key);
+	} catch (_) {
+		return null;
+	}
+}
+
+// rememberSelect selects the option of select last remembered for key, if it is still offered, and remembers the
+// chosen option when the select's form is submitted, so a choice made in a dialog that was cancelled isn't kept.
+// Options whose values are in skip, such as "new", are never restored or remembered. A restored choice fires a
+// change event, so anything that depends on the select updates.
+function rememberSelect(select, key, skip) {
+	if (!select) {
+		return;
+	}
+	skip = skip || [];
+	var last = recallChoice(key);
+	if (last !== null && skip.indexOf(last) < 0 && last != select.value) {
+		var offered = Array.prototype.some.call(select.options, function(option) {
+			return option.value == last && !option.disabled;
+		});
+		if (offered) {
+			select.value = last;
+			select.dispatchEvent(new Event("change"));
+		}
+	}
+	if (select.form) {
+		select.form.addEventListener("submit", function() {
+			if (skip.indexOf(select.value) < 0) {
+				rememberChoice(key, select.value);
+			}
+		});
+	}
+}
 
 ;
 // copyAttachmentsLoad fetches the copy dialog's content from url and shows the dialog. It uses fetch rather than
@@ -8592,5 +8652,5 @@ var htmx = (function() {
 ;
 
 function jsBundleVersion() {
-	return "78aee2383a05aae12aa77f3589120e7f";
+	return "40ac8ffb23613d6c0b3d3fbada2e0e67";
 }
