@@ -6,6 +6,14 @@
 			<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			
+			<script>
+				try {
+					if (localStorage.getItem('sidebarHidden') == '1') {
+						document.documentElement.classList.add('sidebar-hidden');
+					}
+				} catch (e) {}
+			</script>
+			
 			
 				<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 			
@@ -165,7 +173,7 @@
 			gioReport({
 				msg: "bundle-load-failure",
 				url: src,
-				client_id: "web.app01-g2.4459987.1794977346974251182"
+				client_id: "web.app02-g2.9311100.1795585567113521005"
 			});
 		};
 		if (window.__gioBundleErr) {
@@ -186,7 +194,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app01-g2.4459987.1794977346974251182");
+				console.log("client_id:", "web.app02-g2.9311100.1795585567113521005");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -241,7 +249,7 @@
 				column: column,
 				stack: stack,
 				last_error: lastError,
-				client_id: "web.app01-g2.4459987.1794977346974251182"
+				client_id: "web.app02-g2.9311100.1795585567113521005"
 			});
 			lastError = errorMessage;
 			return true;
@@ -251,7 +259,7 @@
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-df47ed7c9de4594f5da8a2a6a58e9674.css" rel="stylesheet" id="groupsio-css">
+			<link href="../../../../css/application-f5a5770abdbb1f6729eb4c4b060a34bc.css" rel="stylesheet" id="groupsio-css">
 			<script src="../../../../js/application-40ac8ffb23613d6c0b3d3fbada2e0e67.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>MTFHRT@groups.io | Wiki | Ultimate DIY</title>
@@ -677,7 +685,7 @@
 </script>
 		</head>
 		
-		<body id="body" class="" hx-headers='{"Accept-Version": "8a2b6a0fdfc66d1b9ec1d5c8cf09f007cb11d9d9", "Accept-Context": "group:4415"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "3a8c4a6c86c37dfdacd0ae79724a4f02280493db", "Accept-Context": "group:4415"}' hx-ext="preload" hx-boost="false">
 			<a id="skip-link" class="skip-link visually-hidden-focusable" href="187847.html#maincontent">Skip to main content</a>
 			
 			<div id="page-announcer" class="visually-hidden" role="status"></div>
@@ -1297,6 +1305,19 @@ function showAutocompleteModal(modalName) {
 		// The shortcuts modal closes on Escape, which Bootstrap handles; Tab
 		// and other keys stay inside it.
 
+		// Cmd-B on a Mac, Ctrl-B elsewhere, hides or shows the desktop
+		// sidebar. It is left to the browser where there is no sidebar toggle
+		// on screen (pages without a sidebar, and narrow screens).
+		if (event.key.toLowerCase() === 'b' && !event.shiftKey && !event.altKey) {
+			var isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+			var sidebarToggle = document.getElementById('sidebar-toggle');
+			if ((isMac ? event.metaKey : event.ctrlKey) && sidebarToggle && sidebarToggle.offsetParent !== null) {
+				event.preventDefault();
+				sidebarToggle.click();
+				return;
+			}
+		}
+
 		if (event.key.toLowerCase() === 'g') {
 			// For Windows and Linux
 			if (event.ctrlKey) {
@@ -1421,6 +1442,10 @@ function showAutocompleteModal(modalName) {
 		<div class="row">
 			<div class="col-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>shift</strong> + <strong>f</strong>&nbsp;&nbsp;:</div>
 			<div class="col-9" style="margin-left: -23px;">Find</div>
+		</div>
+		<div class="row">
+			<div class="col-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>b</strong>&nbsp;&nbsp;:</div>
+			<div class="col-9" style="margin-left: -23px;">Show or hide the sidebar</div>
 		</div>
 		<div class="row">
 			<div class="col-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>/</strong>&nbsp;&nbsp;:</div>
@@ -1857,46 +1882,48 @@ function createAlert(msg, isError, autoClose, noClose) {
 	<div class="row wiki-layout wiki-has-toc">
 		
 			
-			<nav class="col-lg-2 d-none d-lg-block d-print-none" aria-label="Wiki pages">
-				
-				<div id="wiki-pagelist" class="list-group wiki-pagelist">
+			<nav id="wiki-pagelist-col" class="col-lg-2 d-none d-print-none" aria-label="Wiki pages">
+				<div class="wiki-pagelist-sticky">
 					
+					<div id="wiki-pagelist" class="list-group wiki-pagelist">
 						
-						<a class="list-group-item list-group-item-action" href="../30846.html">
 							
-								<i class="fa fa-home" aria-hidden="true"></i>
-							
-							Home
-						</a>
-					
+							<a class="list-group-item list-group-item-action" href="../30846.html">
+								
+									<i class="fa fa-home" aria-hidden="true"></i>
+								
+								Home
+							</a>
 						
-						<a class="list-group-item list-group-item-action" href="../37530.html">
 							
-							Basic Estrogel Guide
-						</a>
-					
+							<a class="list-group-item list-group-item-action" href="../37530.html">
+								
+								Basic Estrogel Guide
+							</a>
 						
-						<a class="list-group-item list-group-item-action" href="../32288.html">
 							
-							How to measure melting point of most organic powders using typical household items.
-						</a>
-					
+							<a class="list-group-item list-group-item-action" href="../32288.html">
+								
+								How to measure melting point of most organic powders using typical household items.
+							</a>
 						
-						<a class="list-group-item list-group-item-action" href="../34293.html">
 							
-							steam sterilization
-						</a>
-					
+							<a class="list-group-item list-group-item-action" href="../34293.html">
+								
+								steam sterilization
+							</a>
 						
-						<a class="list-group-item list-group-item-action active" aria-current="page" href="../29602.html">
 							
-							Ultimate DIY
-						</a>
-					
+							<a class="list-group-item list-group-item-action active" aria-current="page" href="../29602.html">
+								
+								Ultimate DIY
+							</a>
+						
+					</div>
 				</div>
 			</nav>
 		
-		<div class="col-12 col-lg-7">
+		<div class="col-12 col-lg">
 			<div class="wiki-header">
 				<div class="d-flex justify-content-between align-items-start gap-2">
 					
@@ -1905,12 +1932,22 @@ function createAlert(msg, isError, autoClose, noClose) {
 						</h2>
 					
 					<span class="d-print-none text-nowrap">
-						<div class="btn-group d-lg-none">
+						<div class="btn-group">
 							<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 								Pages
 								<span class="caret"></span>
 							</button>
-							<ul class="dropdown-menu dropdown-menu-end">
+							<ul class="dropdown-menu dropdown-menu-end wiki-pages-menu">
+								
+									<li class="d-none d-lg-block">
+										<button type="button" id="wiki-pagelist-toggle" class="dropdown-item" aria-controls="wiki-pagelist-col" aria-expanded="false">
+											<i class="fa fa-columns" aria-hidden="true"></i>
+											<span class="wiki-pagelist-show">Show page list</span>
+											<span class="wiki-pagelist-hide d-none">Hide page list</span>
+										</button>
+									</li>
+									<li class="d-none d-lg-block"><hr class="dropdown-divider"></li>
+								
 								
 									<li>
 										<a class="dropdown-item" href="../30846.html">
@@ -2019,7 +2056,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 <h2 id="Equipment">Equipment</h2>
 <h3 id="Necessary">Necessary</h3>
 <p>The only necessary equipment is cheap ($7 - $15) pocket 0.001 g (1 mg) scales (or DIY balance scales you can make from a long narrow wooden plank, 2 small nails and 2 syringes, one of them with 0.5 ml water as a precise weight).</p>
-<p>If you buy ready-to-use scales then they must look exactly like this:<br/><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13908/354x254.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1794977947&Signature=d%2Brm6seuxtgumbAFZOKfUBbGh5o%3D" align="right" loading="lazy" class="myimg-responsive"/><a href="https://www.ebay.com/itm/363747240371" rel="nofollow noopener" target="_blank">https://www.ebay.com/itm/363747240371</a><br/><a href="https://www.aliexpress.com/item/4000586480263.html" rel="nofollow noopener" target="_blank">https://www.aliexpress.com/item/4000586480263.html</a></p>
+<p>If you buy ready-to-use scales then they must look exactly like this:<br/><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13908/354x254.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1795586167&Signature=NX9L9J7rfp86qHje5sd8%2FIhdm%2Fg%3D" align="right" loading="lazy" class="myimg-responsive"/><a href="https://www.ebay.com/itm/363747240371" rel="nofollow noopener" target="_blank">https://www.ebay.com/itm/363747240371</a><br/><a href="https://www.aliexpress.com/item/4000586480263.html" rel="nofollow noopener" target="_blank">https://www.aliexpress.com/item/4000586480263.html</a></p>
 <p>Newer models are not suitable because they attempt to appear more precise and stable by ignoring small weight changes.</p>
 <p>Search for other sellers:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=scale+0.001&amp;_sacat=0&amp;_blrs=recall_filtering&amp;LH_BIN=1&amp;_sop=15&amp;_ipg=120&amp;_oac=1" rel="nofollow noopener" target="_blank">https://www.ebay.com/sch/i.html?_nkw=scale+0.001&amp;_sacat=0&amp;_blrs=recall_filtering&amp;LH_BIN=1&amp;_sop=15&amp;_ipg=120&amp;_oac=1</a></p>
 <p><a href="https://www.ebay.com/sch/i.html?_nkw=scale+digital+diamond&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_blrs=recall_filtering&amp;_ipg=120&amp;_oac=1" rel="nofollow noopener" target="_blank">https://www.ebay.com/sch/i.html?_nkw=scale+digital+diamond&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_blrs=recall_filtering&amp;_ipg=120&amp;_oac=1</a></p>
@@ -2034,10 +2071,10 @@ function createAlert(msg, isError, autoClose, noClose) {
 <p>Unnecessary: beaker, mixer/stirrer, room with controlled airflow, depyrogenation. My technology: terminal heat sterilization (after the vials are sealed); measure and mix in each vial separately, so no glassware to wash with water  or collecting dust (skin flakes and <a href="https://en.wikipedia.org/wiki/House_dust_mite" rel="nofollow noopener" target="_blank">mites</a>) if never washed. Water - bacteria - pyrogens. Don&#39;t try to improve this technology: it protects you from mistakes and unexpected problems.</p>
 <h2 id="Other-raw-materials-and-expendables">Other raw materials and expendables</h2>
 <h3 id="Vials2C-stoppers2C-caps">Vials, stoppers, caps</h3>
-<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13965/s-l300.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1794977947&Signature=hdQM6dIU%2BtbdzyUX30CvhRpCQzI%3D" align="right" loading="lazy" class="myimg-responsive"/>Buy 10 clear glass vials 10 ml each with 20 mm grey (butyl rubber) stoppers and aluminium caps. Caps may be bare aluminium or painted, with plastic tops or all-metal. Screw-on and all-plastic caps are not suitable. Stoppers must have this shape:<br/><a href="https://www.ebay.com/itm/185908326110" rel="nofollow noopener" target="_blank">https://www.ebay.com/itm/185908326110</a><br/><a href="https://www.aliexpress.us/item/2251832717628622.html" rel="nofollow noopener" target="_blank">https://www.aliexpress.us/item/2251832717628622.html</a><br/>Flat septa are not suitable instead of stoppers. Search:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1" rel="nofollow noopener" target="_blank">https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1</a></p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13965/s-l300.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1795586167&Signature=AV1ULoEcw6z2jzKgGfr26nOZtf0%3D" align="right" loading="lazy" class="myimg-responsive"/>Buy 10 clear glass vials 10 ml each with 20 mm grey (butyl rubber) stoppers and aluminium caps. Caps may be bare aluminium or painted, with plastic tops or all-metal. Screw-on and all-plastic caps are not suitable. Stoppers must have this shape:<br/><a href="https://www.ebay.com/itm/185908326110" rel="nofollow noopener" target="_blank">https://www.ebay.com/itm/185908326110</a><br/><a href="https://www.aliexpress.us/item/2251832717628622.html" rel="nofollow noopener" target="_blank">https://www.aliexpress.us/item/2251832717628622.html</a><br/>Flat septa are not suitable instead of stoppers. Search:<br/><a href="https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1" rel="nofollow noopener" target="_blank">https://www.ebay.com/sch/i.html?_nkw=vial+10ml+stopper+cap&amp;_sacat=0&amp;LH_TitleDesc=0&amp;LH_BIN=1&amp;_sop=15&amp;_oac=1</a></p>
 <p><a href="https://www.aliexpress.com/wholesale?SearchText=vials+10ml+stoppers+caps" rel="nofollow noopener" target="_blank">https://www.aliexpress.com/wholesale?SearchText=vials+10ml+stoppers+caps</a></p>
 <p>After you remove central part of the cap, most of the cap must remain and hold the rubber stopper at place. Caps must <strong>not</strong> have tear-off weak place on one side like this:</p>
-<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13909/cap-tear-off.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1794977947&Signature=B6vF864SRQZMvJK0X5qgIhzHT%2F8%3D" loading="lazy" class="myimg-responsive"/></p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13909/cap-tear-off.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1795586167&Signature=WkemWtFo8jTLOckeq98exFAyTVw%3D" loading="lazy" class="myimg-responsive"/></p>
 <p>In Europe you can buy <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/VIC010-001NS" rel="nofollow noopener" target="_blank">vials</a>, stoppers <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22STG20-%200001%22" rel="nofollow noopener" target="_blank">1</a> or <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/STR20-0001" rel="nofollow noopener" target="_blank">2</a>,  <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22BKMA%2020-GO%22" rel="nofollow noopener" target="_blank">caps</a>, <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22BA%200020%22" rel="nofollow noopener" target="_blank">benzyl alcohol</a> and <a href="https://lab-supply-shop.com/epages/171448.sf/en_GB/?ObjectPath=/Shops/171448/Products/%22MCT%201L%22" rel="nofollow noopener" target="_blank">MCT oil</a> in one shop, or <a href="https://www.glas-shop.com/glasprodukte/injektionsflascheninfusionsflaschen/injektionsflaschenklarglas5100ml/injektionsflasche-klarglas-10ml.php" rel="nofollow noopener" target="_blank">vials</a>+<a href="https://www.glas-shop.com/verschluesse2/verschluesse-fuer-injektionsflaschen/injektionsstopfeneinzeln20mmrotausbrombutyl.php" rel="nofollow noopener" target="_blank">stoppers</a>+<a href="https://www.glas-shop.com/verschluesse2/verschluesse-fuer-injektionsflaschen/boerdelkappe-2025-x-74-mm-mittel-abriss-gruen.php" rel="nofollow noopener" target="_blank">caps</a>. In USA <a href="https://www.medical-and-lab-supplies.com/vials/open/rls-10ml-tubular-clear-glass-serum-vials-qty-1.html" rel="nofollow noopener" target="_blank">vials</a>+<a href="https://www.medical-and-lab-supplies.com/lab-supplies/butyl-rubber-stoppers-for-vials-20mm-gray.html" rel="nofollow noopener" target="_blank">stoppers</a>+<a href="https://www.medical-and-lab-supplies.com/lab-supplies/20mm-standard-aluminum-seal-please-click-to-view-all-colors.html" rel="nofollow noopener" target="_blank">caps</a> (<a href="https://www.medical-and-lab-supplies.com/usp-oils/mct-60-40-caprylic-c8-capric-c10-oil.html" rel="nofollow noopener" target="_blank">oil</a>, <a href="https://www.medical-and-lab-supplies.com/chemicals-solvents/benzyl-alcohol-usp.html" rel="nofollow noopener" target="_blank">BA</a>, <a href="https://www.medical-and-lab-supplies.com/medical-supplies/syringes-and-needles/diabetic-syringes/aimsco-maxicomfort-diabetic-insulin-syringes.html" rel="nofollow noopener" target="_blank">syringes</a>) or <a href="https://lemelange.com/unsterilevialwide10ml20mm.aspx" rel="nofollow noopener" target="_blank">vials</a>+<a href="https://lemelange.com/20-mm-vial-stoppers-grey.aspx" rel="nofollow noopener" target="_blank">stoppers</a>+<a href="https://lemelange.com/20mmaluminumringwithcentertearout.aspx" rel="nofollow noopener" target="_blank">caps</a> or <a href="https://qcvialz.com/vial-samples/316-10ml-clear-shorty-serum-vials-iso-10r-24x45mm-sample-pack-of-10.html" rel="nofollow noopener" target="_blank">vials</a>+<a href="https://qcvialz.com/vial-stopper-samples/319-20mm-round-bottom-vial-stopper-sample-pack-of-10.html" rel="nofollow noopener" target="_blank">stoppers</a>+<a href="https://qcvialz.com/superior-flip-cap-vial-seals/482-light-blue-20mm-superior-flip-cap-vial-seals-pack-of-10pc.html" rel="nofollow noopener" target="_blank">caps</a> or <a href="https://www.gpzmedlab.com/store/p/110-10-ML-Unsealed-Clear-Vial.aspx" rel="nofollow noopener" target="_blank">vials</a>+<a href="https://www.gpzmedlab.com/store/p/38-Grey-Butyl-Stopper.aspx" rel="nofollow noopener" target="_blank">stoppers</a>+<a href="https://www.gpzmedlab.com/store/p/102-Aluminum-Seal-Center-Tear-Out.aspx" rel="nofollow noopener" target="_blank">caps</a> (<a href="https://www.gpzmedlab.com/easy-touch-1-cc-insulin-syringe-with-28-g-x-1-2-needle-100-count.aspx" rel="nofollow noopener" target="_blank">syringes</a>) or <a href="https://www.premiumvials.com/10ml-glass-bottle-with-lid-transparent-vial-b-10pcs/" rel="nofollow noopener" target="_blank">here</a>. In Canada <a href="https://canadianmedhealthsupplies.ca/collections/10ml-vials-clear/products/10ml-vial-22mm-x-50mm-clear?variant=8081524817966" rel="nofollow noopener" target="_blank">vials</a>+<a href="https://canadianmedhealthsupplies.ca/collections/all-rubber-stoppers/products/20mm-rubber-stopper-grey?variant=8081553915950" rel="nofollow noopener" target="_blank">stoppers</a>+<a href="https://canadianmedhealthsupplies.ca/collections/20mm-flip-off-cap-flip-off/products/20mm-white-flip-off-cap-flip-off" rel="nofollow noopener" target="_blank">caps</a> (<a href="https://canadianmedhealthsupplies.ca/collections/solvents/products/benzyl-alcohol" rel="nofollow noopener" target="_blank">BA</a>).</p>
 <p>If you are paranoid and believe incompetent or deceitful slander about this guide then you can buy washed sealed sterile empty vials on <a href="https://www.ebay.com/sch/i.html?_nkw=vial+10ml+sterile&amp;_sacat=0&amp;LH_BIN=1&amp;_sop=15&amp;_blrs=recall_filtering&amp;_ipg=240" rel="nofollow noopener" target="_blank">eBay</a> or <a href="https://www.amazon.com/Depyrogenated-Sterile-Clear-Borosillicate-Glass/dp/B077KFKKJM/" rel="nofollow noopener" target="_blank">Amazon</a> and buy new caps or carefully unbend crimped caps with a small flat screwdriver. Really it&#39;d not improve &#34;safety&#34;, just waste of money following prejudices.</p>
 <h3 id="Oil">Oil</h3>
@@ -2050,7 +2087,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 <h2 id="Mix">Mix</h2>
 <p>(See below for an alternate way without a funnel).</p>
 <p>Make a small funnel from a piece of foil (the thicker foil the better; shinier side inside), hold it folded with a small piece of sticky tape. If you have only thin foil then perhaps strengthen it by wide sticky tape on another side (or try to strip the outer paint from a few different beer or soft drink aluminium cans with nail polish remover, then cut a clean can with scissors). May be use something conical to wrap the foil around before cutting off unneeded parts. The hole at the pointy end of the funnel must be slightly (not much) smaller than the opening in the vial. Use this funnel to weigh up estradiol enanthate powder and to pour the powder into a vial. The funnel I&#39;m using at the center, unfolded piece of foil from my previous funnel at the left, a funnel in a vial at the right:</p>
-<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13910/cone.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1794977947&Signature=ZrtuI0qGANQ74hI0UZJh5QCoGVQ%3D" loading="lazy" class="myimg-responsive"/></p>
+<p><img src="https://s3-us-west-1.amazonaws.com/groupsiowikiimages/4415/13910/cone.jpg?AWSAccessKeyId=AKIAJECNKOVMCCU3ATNQ&Expires=1795586167&Signature=PsxOwcwHZJs9DzUNfhQp4k%2F6MwI%3D" loading="lazy" class="myimg-responsive"/></p>
 <p>Two recipes I can recommend:</p>
 <p>1) 500 mg = 0.5 g of estradiol enanthate (density 1.1 g/cm<sup><small>3</small></sup>),<br/>benzyl alcohol (preservative - antibacterial) 0.2 ml,<br/>MCT oil 10-0.2-0.5/1.1= 9.35 ml.</p>
 <p>2) 0.5 g of estradiol enanthate,<br/>MCT oil 10-0.5/1.1= 9.55 ml.</p>
@@ -2182,6 +2219,30 @@ function createAlert(msg, isError, autoClose, noClose) {
 					var noMatch = q != '' && item.textContent.toLowerCase().indexOf(q) == -1;
 					item.classList.toggle('d-none', noMatch);
 				});
+			});
+		}
+		// The page list column is off by default; the toggle in the Pages
+		// dropdown shows or hides it and the choice is remembered.
+		var pageListCol = document.getElementById('wiki-pagelist-col');
+		var pageListToggle = document.getElementById('wiki-pagelist-toggle');
+		if (pageListCol && pageListToggle) {
+			var setPageList = function(show) {
+				pageListCol.classList.toggle('d-lg-block', show);
+				pageListToggle.setAttribute('aria-expanded', show ? 'true' : 'false');
+				pageListToggle.querySelector('.wiki-pagelist-show').classList.toggle('d-none', show);
+				pageListToggle.querySelector('.wiki-pagelist-hide').classList.toggle('d-none', !show);
+			};
+			var stored = null;
+			try {
+				stored = localStorage.getItem('wikiPageList');
+			} catch (e) {}
+			setPageList(stored == 'show');
+			pageListToggle.addEventListener('click', function() {
+				var show = !pageListCol.classList.contains('d-lg-block');
+				setPageList(show);
+				try {
+					localStorage.setItem('wikiPageList', show ? 'show' : 'hide');
+				} catch (e) {}
 			});
 		}
 		UpdateSidebar("wiki");
@@ -2539,6 +2600,40 @@ function createAlert(msg, isError, autoClose, noClose) {
 		document.getElementById('content').setAttribute('role', 'main');
 		document.getElementById('skip-link').setAttribute('href', '#content');
 	}
+</script>
+<script>
+	// The header's sidebar toggle hides or shows the desktop sidebar on
+	// pages that have one, sliding it out and back in, and remembers the
+	// choice in localStorage. The sidebar only changes on full page loads,
+	// so checking for it once here is enough.
+	(function() {
+		var toggle = document.getElementById('sidebar-toggle');
+		if (!toggle || !document.getElementById('groupsidebar')) {
+			return;
+		}
+		toggle.classList.remove('d-none');
+		var root = document.documentElement;
+		// The tooltip names the keyboard shortcut (see keydownFunc): ⌘B on a
+		// Mac, Ctrl+B elsewhere.
+		var isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+		var shortcut = isMac ? '\u2318B' : 'Ctrl+B';
+		toggle.setAttribute('aria-keyshortcuts', isMac ? 'Meta+B' : 'Control+B');
+		var sync = function() {
+			var hidden = root.classList.contains('sidebar-hidden');
+			var label = hidden ? toggle.dataset.showLabel : toggle.dataset.hideLabel;
+			toggle.setAttribute('aria-expanded', hidden ? 'false' : 'true');
+			toggle.setAttribute('aria-label', label);
+			toggle.setAttribute('title', label + ' (' + shortcut + ')');
+		};
+		sync();
+		toggle.addEventListener('click', function() {
+			var hidden = root.classList.toggle('sidebar-hidden');
+			sync();
+			try {
+				localStorage.setItem('sidebarHidden', hidden ? '1' : '0');
+			} catch (e) {}
+		});
+	})();
 </script>
 <script>
 	// Site-wide accessibility behaviour. The page-level parts run on load and

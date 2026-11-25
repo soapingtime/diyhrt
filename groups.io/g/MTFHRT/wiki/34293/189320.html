@@ -6,6 +6,14 @@
 			<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			
+			<script>
+				try {
+					if (localStorage.getItem('sidebarHidden') == '1') {
+						document.documentElement.classList.add('sidebar-hidden');
+					}
+				} catch (e) {}
+			</script>
+			
 			
 				<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 			
@@ -165,7 +173,7 @@
 			gioReport({
 				msg: "bundle-load-failure",
 				url: src,
-				client_id: "web.app01-g2.4457516.1794977332445812448"
+				client_id: "web.app01-g2.9311294.1795585556975443875"
 			});
 		};
 		if (window.__gioBundleErr) {
@@ -186,7 +194,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app01-g2.4457516.1794977332445812448");
+				console.log("client_id:", "web.app01-g2.9311294.1795585556975443875");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -241,7 +249,7 @@
 				column: column,
 				stack: stack,
 				last_error: lastError,
-				client_id: "web.app01-g2.4457516.1794977332445812448"
+				client_id: "web.app01-g2.9311294.1795585556975443875"
 			});
 			lastError = errorMessage;
 			return true;
@@ -251,7 +259,7 @@
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-df47ed7c9de4594f5da8a2a6a58e9674.css" rel="stylesheet" id="groupsio-css">
+			<link href="../../../../css/application-f5a5770abdbb1f6729eb4c4b060a34bc.css" rel="stylesheet" id="groupsio-css">
 			<script src="../../../../js/application-40ac8ffb23613d6c0b3d3fbada2e0e67.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>MTFHRT@groups.io | Wiki | steam sterilization</title>
@@ -677,7 +685,7 @@
 </script>
 		</head>
 		
-		<body id="body" class="" hx-headers='{"Accept-Version": "8a2b6a0fdfc66d1b9ec1d5c8cf09f007cb11d9d9", "Accept-Context": "group:4415"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "3a8c4a6c86c37dfdacd0ae79724a4f02280493db", "Accept-Context": "group:4415"}' hx-ext="preload" hx-boost="false">
 			<a id="skip-link" class="skip-link visually-hidden-focusable" href="189320.html#maincontent">Skip to main content</a>
 			
 			<div id="page-announcer" class="visually-hidden" role="status"></div>
@@ -1297,6 +1305,19 @@ function showAutocompleteModal(modalName) {
 		// The shortcuts modal closes on Escape, which Bootstrap handles; Tab
 		// and other keys stay inside it.
 
+		// Cmd-B on a Mac, Ctrl-B elsewhere, hides or shows the desktop
+		// sidebar. It is left to the browser where there is no sidebar toggle
+		// on screen (pages without a sidebar, and narrow screens).
+		if (event.key.toLowerCase() === 'b' && !event.shiftKey && !event.altKey) {
+			var isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+			var sidebarToggle = document.getElementById('sidebar-toggle');
+			if ((isMac ? event.metaKey : event.ctrlKey) && sidebarToggle && sidebarToggle.offsetParent !== null) {
+				event.preventDefault();
+				sidebarToggle.click();
+				return;
+			}
+		}
+
 		if (event.key.toLowerCase() === 'g') {
 			// For Windows and Linux
 			if (event.ctrlKey) {
@@ -1421,6 +1442,10 @@ function showAutocompleteModal(modalName) {
 		<div class="row">
 			<div class="col-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>shift</strong> + <strong>f</strong>&nbsp;&nbsp;:</div>
 			<div class="col-9" style="margin-left: -23px;">Find</div>
+		</div>
+		<div class="row">
+			<div class="col-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>b</strong>&nbsp;&nbsp;:</div>
+			<div class="col-9" style="margin-left: -23px;">Show or hide the sidebar</div>
 		</div>
 		<div class="row">
 			<div class="col-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>/</strong>&nbsp;&nbsp;:</div>
@@ -1857,46 +1882,48 @@ function createAlert(msg, isError, autoClose, noClose) {
 	<div class="row wiki-layout">
 		
 			
-			<nav class="col-lg-2 d-none d-lg-block d-print-none" aria-label="Wiki pages">
-				
-				<div id="wiki-pagelist" class="list-group wiki-pagelist">
+			<nav id="wiki-pagelist-col" class="col-lg-2 d-none d-print-none" aria-label="Wiki pages">
+				<div class="wiki-pagelist-sticky">
 					
+					<div id="wiki-pagelist" class="list-group wiki-pagelist">
 						
-						<a class="list-group-item list-group-item-action" href="../30846.html">
 							
-								<i class="fa fa-home" aria-hidden="true"></i>
-							
-							Home
-						</a>
-					
+							<a class="list-group-item list-group-item-action" href="../30846.html">
+								
+									<i class="fa fa-home" aria-hidden="true"></i>
+								
+								Home
+							</a>
 						
-						<a class="list-group-item list-group-item-action" href="../37530.html">
 							
-							Basic Estrogel Guide
-						</a>
-					
+							<a class="list-group-item list-group-item-action" href="../37530.html">
+								
+								Basic Estrogel Guide
+							</a>
 						
-						<a class="list-group-item list-group-item-action" href="../32288.html">
 							
-							How to measure melting point of most organic powders using typical household items.
-						</a>
-					
+							<a class="list-group-item list-group-item-action" href="../32288.html">
+								
+								How to measure melting point of most organic powders using typical household items.
+							</a>
 						
-						<a class="list-group-item list-group-item-action active" aria-current="page" href="../34293.html">
 							
-							steam sterilization
-						</a>
-					
+							<a class="list-group-item list-group-item-action active" aria-current="page" href="../34293.html">
+								
+								steam sterilization
+							</a>
 						
-						<a class="list-group-item list-group-item-action" href="../29602.html">
 							
-							Ultimate DIY
-						</a>
-					
+							<a class="list-group-item list-group-item-action" href="../29602.html">
+								
+								Ultimate DIY
+							</a>
+						
+					</div>
 				</div>
 			</nav>
 		
-		<div class="col-12 col-lg-10">
+		<div class="col-12 col-lg">
 			<div class="wiki-header">
 				<div class="d-flex justify-content-between align-items-start gap-2">
 					
@@ -1905,12 +1932,22 @@ function createAlert(msg, isError, autoClose, noClose) {
 						</h2>
 					
 					<span class="d-print-none text-nowrap">
-						<div class="btn-group d-lg-none">
+						<div class="btn-group">
 							<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 								Pages
 								<span class="caret"></span>
 							</button>
-							<ul class="dropdown-menu dropdown-menu-end">
+							<ul class="dropdown-menu dropdown-menu-end wiki-pages-menu">
+								
+									<li class="d-none d-lg-block">
+										<button type="button" id="wiki-pagelist-toggle" class="dropdown-item" aria-controls="wiki-pagelist-col" aria-expanded="false">
+											<i class="fa fa-columns" aria-hidden="true"></i>
+											<span class="wiki-pagelist-show">Show page list</span>
+											<span class="wiki-pagelist-hide d-none">Hide page list</span>
+										</button>
+									</li>
+									<li class="d-none d-lg-block"><hr class="dropdown-divider"></li>
+								
 								
 									<li>
 										<a class="dropdown-item" href="../30846.html">
@@ -2002,6 +2039,30 @@ function createAlert(msg, isError, autoClose, noClose) {
 					var noMatch = q != '' && item.textContent.toLowerCase().indexOf(q) == -1;
 					item.classList.toggle('d-none', noMatch);
 				});
+			});
+		}
+		// The page list column is off by default; the toggle in the Pages
+		// dropdown shows or hides it and the choice is remembered.
+		var pageListCol = document.getElementById('wiki-pagelist-col');
+		var pageListToggle = document.getElementById('wiki-pagelist-toggle');
+		if (pageListCol && pageListToggle) {
+			var setPageList = function(show) {
+				pageListCol.classList.toggle('d-lg-block', show);
+				pageListToggle.setAttribute('aria-expanded', show ? 'true' : 'false');
+				pageListToggle.querySelector('.wiki-pagelist-show').classList.toggle('d-none', show);
+				pageListToggle.querySelector('.wiki-pagelist-hide').classList.toggle('d-none', !show);
+			};
+			var stored = null;
+			try {
+				stored = localStorage.getItem('wikiPageList');
+			} catch (e) {}
+			setPageList(stored == 'show');
+			pageListToggle.addEventListener('click', function() {
+				var show = !pageListCol.classList.contains('d-lg-block');
+				setPageList(show);
+				try {
+					localStorage.setItem('wikiPageList', show ? 'show' : 'hide');
+				} catch (e) {}
 			});
 		}
 		UpdateSidebar("wiki");
@@ -2359,6 +2420,40 @@ function createAlert(msg, isError, autoClose, noClose) {
 		document.getElementById('content').setAttribute('role', 'main');
 		document.getElementById('skip-link').setAttribute('href', '#content');
 	}
+</script>
+<script>
+	// The header's sidebar toggle hides or shows the desktop sidebar on
+	// pages that have one, sliding it out and back in, and remembers the
+	// choice in localStorage. The sidebar only changes on full page loads,
+	// so checking for it once here is enough.
+	(function() {
+		var toggle = document.getElementById('sidebar-toggle');
+		if (!toggle || !document.getElementById('groupsidebar')) {
+			return;
+		}
+		toggle.classList.remove('d-none');
+		var root = document.documentElement;
+		// The tooltip names the keyboard shortcut (see keydownFunc): ⌘B on a
+		// Mac, Ctrl+B elsewhere.
+		var isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+		var shortcut = isMac ? '\u2318B' : 'Ctrl+B';
+		toggle.setAttribute('aria-keyshortcuts', isMac ? 'Meta+B' : 'Control+B');
+		var sync = function() {
+			var hidden = root.classList.contains('sidebar-hidden');
+			var label = hidden ? toggle.dataset.showLabel : toggle.dataset.hideLabel;
+			toggle.setAttribute('aria-expanded', hidden ? 'false' : 'true');
+			toggle.setAttribute('aria-label', label);
+			toggle.setAttribute('title', label + ' (' + shortcut + ')');
+		};
+		sync();
+		toggle.addEventListener('click', function() {
+			var hidden = root.classList.toggle('sidebar-hidden');
+			sync();
+			try {
+				localStorage.setItem('sidebarHidden', hidden ? '1' : '0');
+			} catch (e) {}
+		});
+	})();
 </script>
 <script>
 	// Site-wide accessibility behaviour. The page-level parts run on load and

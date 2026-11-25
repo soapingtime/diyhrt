@@ -6,6 +6,14 @@
 			<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			
+			<script>
+				try {
+					if (localStorage.getItem('sidebarHidden') == '1') {
+						document.documentElement.classList.add('sidebar-hidden');
+					}
+				} catch (e) {}
+			</script>
+			
 			
 				<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 			
@@ -165,7 +173,7 @@
 			gioReport({
 				msg: "bundle-load-failure",
 				url: src,
-				client_id: "web.app02-g2.4457152.1794977330117764086"
+				client_id: "web.app01-g2.9311100.1795585555442793493"
 			});
 		};
 		if (window.__gioBundleErr) {
@@ -186,7 +194,7 @@
 					console.log("stack:", errorObj.stack);
 					stack = errorObj.stack;
 				}
-				console.log("client_id:", "web.app02-g2.4457152.1794977330117764086");
+				console.log("client_id:", "web.app01-g2.9311100.1795585555442793493");
 				console.log("last_error:", lastError);
 				console.log("stack:", stack);
 			}
@@ -241,7 +249,7 @@
 				column: column,
 				stack: stack,
 				last_error: lastError,
-				client_id: "web.app02-g2.4457152.1794977330117764086"
+				client_id: "web.app01-g2.9311100.1795585555442793493"
 			});
 			lastError = errorMessage;
 			return true;
@@ -251,7 +259,7 @@
 			
 			<script src="../../../../tinymce-5.10.9/tinymce.min.js"></script>
 			<script src="../../../../js/browser-image-compression-2.0.2.min.js"></script>
-			<link href="../../../../css/application-df47ed7c9de4594f5da8a2a6a58e9674.css" rel="stylesheet" id="groupsio-css">
+			<link href="../../../../css/application-f5a5770abdbb1f6729eb4c4b060a34bc.css" rel="stylesheet" id="groupsio-css">
 			<script src="../../../../js/application-40ac8ffb23613d6c0b3d3fbada2e0e67.js" id="groupsio-js" onerror="(window.__gioBundleFailed||function(s){window.__gioBundleErr=s})(this.src)"></script>
 			<script src="../../../../js/run_prettify.js"></script>
 			<title>MTFHRT@groups.io | Wiki | Ultimate DIY | History</title>
@@ -676,7 +684,7 @@
 </script>
 		</head>
 		
-		<body id="body" class="" hx-headers='{"Accept-Version": "8a2b6a0fdfc66d1b9ec1d5c8cf09f007cb11d9d9", "Accept-Context": "group:4415"}' hx-ext="preload" hx-boost="false">
+		<body id="body" class="" hx-headers='{"Accept-Version": "3a8c4a6c86c37dfdacd0ae79724a4f02280493db", "Accept-Context": "group:4415"}' hx-ext="preload" hx-boost="false">
 			<a id="skip-link" class="skip-link visually-hidden-focusable" href="history.html#maincontent">Skip to main content</a>
 			
 			<div id="page-announcer" class="visually-hidden" role="status"></div>
@@ -1296,6 +1304,19 @@ function showAutocompleteModal(modalName) {
 		// The shortcuts modal closes on Escape, which Bootstrap handles; Tab
 		// and other keys stay inside it.
 
+		// Cmd-B on a Mac, Ctrl-B elsewhere, hides or shows the desktop
+		// sidebar. It is left to the browser where there is no sidebar toggle
+		// on screen (pages without a sidebar, and narrow screens).
+		if (event.key.toLowerCase() === 'b' && !event.shiftKey && !event.altKey) {
+			var isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+			var sidebarToggle = document.getElementById('sidebar-toggle');
+			if ((isMac ? event.metaKey : event.ctrlKey) && sidebarToggle && sidebarToggle.offsetParent !== null) {
+				event.preventDefault();
+				sidebarToggle.click();
+				return;
+			}
+		}
+
 		if (event.key.toLowerCase() === 'g') {
 			// For Windows and Linux
 			if (event.ctrlKey) {
@@ -1420,6 +1441,10 @@ function showAutocompleteModal(modalName) {
 		<div class="row">
 			<div class="col-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>shift</strong> + <strong>f</strong>&nbsp;&nbsp;:</div>
 			<div class="col-9" style="margin-left: -23px;">Find</div>
+		</div>
+		<div class="row">
+			<div class="col-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>b</strong>&nbsp;&nbsp;:</div>
+			<div class="col-9" style="margin-left: -23px;">Show or hide the sidebar</div>
 		</div>
 		<div class="row">
 			<div class="col-3 text-right"><strong class="ctrlmeta">ctrl</strong> + <strong>/</strong>&nbsp;&nbsp;:</div>
@@ -1836,8 +1861,173 @@ function createAlert(msg, isError, autoClose, noClose) {
 							
 								<tr>
 									<td>
-										<input class="form-check-input" type="checkbox" name="dataid" id="295285" value="295285" aria-labelledby="revselect revlink295285 revdate295285" onclick="countChecked('295285')"
+										<input class="form-check-input" type="checkbox" name="dataid" id="301241" value="301241" aria-labelledby="revselect revlink301241 revdate301241" onclick="countChecked('301241')"
                          checked>
+
+										
+  
+	
+		
+			<a href="https://groups.io/g/MTFHRT/profile/@Lena">Lena</a>
+		
+  
+
+									</td>
+									<td>
+										<a id="revlink301241" href="301241.html">
+											
+												
+													Updated page
+												
+											
+										</a>
+									</td>
+									<td id="revdate301241">
+										
+<script id="timedispwdataupdated301241">
+	$('#timedispwdataupdated301241').replaceWith(DisplayShortTime(1795520141882490574, false
+		));
+</script>
+
+									</td>
+								</tr>
+							
+								<tr>
+									<td>
+										<input class="form-check-input" type="checkbox" name="dataid" id="301209" value="301209" aria-labelledby="revselect revlink301209 revdate301209" onclick="countChecked('301209')"
+                        >
+
+										
+  
+	
+		
+			<a href="https://groups.io/g/MTFHRT/profile/@Lena">Lena</a>
+		
+  
+
+									</td>
+									<td>
+										<a id="revlink301209" href="301209.html">
+											
+												
+													Updated page
+												
+											
+										</a>
+									</td>
+									<td id="revdate301209">
+										
+<script id="timedispwdataupdated301209">
+	$('#timedispwdataupdated301209').replaceWith(DisplayShortTime(1795513508707782709, false
+		));
+</script>
+
+									</td>
+								</tr>
+							
+								<tr>
+									<td>
+										<input class="form-check-input" type="checkbox" name="dataid" id="300889" value="300889" aria-labelledby="revselect revlink300889 revdate300889" onclick="countChecked('300889')"
+                        >
+
+										
+  
+	
+		
+			<a href="https://groups.io/g/MTFHRT/profile/@Lena">Lena</a>
+		
+  
+
+									</td>
+									<td>
+										<a id="revlink300889" href="300889.html">
+											
+												
+													Updated page
+												
+											
+										</a>
+									</td>
+									<td id="revdate300889">
+										
+<script id="timedispwdataupdated300889">
+	$('#timedispwdataupdated300889').replaceWith(DisplayShortTime(1795448525358069660, false
+		));
+</script>
+
+									</td>
+								</tr>
+							
+								<tr>
+									<td>
+										<input class="form-check-input" type="checkbox" name="dataid" id="300885" value="300885" aria-labelledby="revselect revlink300885 revdate300885" onclick="countChecked('300885')"
+                        >
+
+										
+  
+	
+		
+			<a href="https://groups.io/g/MTFHRT/profile/@Lena">Lena</a>
+		
+  
+
+									</td>
+									<td>
+										<a id="revlink300885" href="300885.html">
+											
+												
+													Updated page
+												
+											
+										</a>
+									</td>
+									<td id="revdate300885">
+										
+<script id="timedispwdataupdated300885">
+	$('#timedispwdataupdated300885').replaceWith(DisplayShortTime(1795448325966659242, false
+		));
+</script>
+
+									</td>
+								</tr>
+							
+								<tr>
+									<td>
+										<input class="form-check-input" type="checkbox" name="dataid" id="300706" value="300706" aria-labelledby="revselect revlink300706 revdate300706" onclick="countChecked('300706')"
+                        >
+
+										
+  
+	
+		
+			<a href="https://groups.io/g/MTFHRT/profile/@Lena">Lena</a>
+		
+  
+
+									</td>
+									<td>
+										<a id="revlink300706" href="300706.html">
+											
+												
+													Updated page
+												
+											
+										</a>
+									</td>
+									<td id="revdate300706">
+										
+<script id="timedispwdataupdated300706">
+	$('#timedispwdataupdated300706').replaceWith(DisplayShortTime(1795411818687858919, false
+		));
+</script>
+
+									</td>
+								</tr>
+							
+								<tr>
+									<td>
+										<input class="form-check-input" type="checkbox" name="dataid" id="295285" value="295285" aria-labelledby="revselect revlink295285 revdate295285" onclick="countChecked('295285')"
+                        >
 
 										
   
@@ -8515,7 +8705,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink175930" href="175930.html">
+										<a id="revlink175930" href="https://groups.io/g/MTFHRT/wiki/29602/175930">
 											
 												
 													Updated page
@@ -8548,7 +8738,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink175908" href="175908.html">
+										<a id="revlink175908" href="https://groups.io/g/MTFHRT/wiki/29602/175908">
 											
 												
 													Updated page
@@ -8581,7 +8771,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink175730" href="175730.html">
+										<a id="revlink175730" href="https://groups.io/g/MTFHRT/wiki/29602/175730">
 											
 												
 													Updated page
@@ -8614,7 +8804,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink175689" href="175689.html">
+										<a id="revlink175689" href="https://groups.io/g/MTFHRT/wiki/29602/175689">
 											
 												
 													Updated page
@@ -8647,7 +8837,7 @@ function createAlert(msg, isError, autoClose, noClose) {
 
 									</td>
 									<td>
-										<a id="revlink175671" href="175671.html">
+										<a id="revlink175671" href="https://groups.io/g/MTFHRT/wiki/29602/175671">
 											
 												
 													Updated page
@@ -13602,6 +13792,40 @@ function countChecked(id) {
 		document.getElementById('content').setAttribute('role', 'main');
 		document.getElementById('skip-link').setAttribute('href', '#content');
 	}
+</script>
+<script>
+	// The header's sidebar toggle hides or shows the desktop sidebar on
+	// pages that have one, sliding it out and back in, and remembers the
+	// choice in localStorage. The sidebar only changes on full page loads,
+	// so checking for it once here is enough.
+	(function() {
+		var toggle = document.getElementById('sidebar-toggle');
+		if (!toggle || !document.getElementById('groupsidebar')) {
+			return;
+		}
+		toggle.classList.remove('d-none');
+		var root = document.documentElement;
+		// The tooltip names the keyboard shortcut (see keydownFunc): ⌘B on a
+		// Mac, Ctrl+B elsewhere.
+		var isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+		var shortcut = isMac ? '\u2318B' : 'Ctrl+B';
+		toggle.setAttribute('aria-keyshortcuts', isMac ? 'Meta+B' : 'Control+B');
+		var sync = function() {
+			var hidden = root.classList.contains('sidebar-hidden');
+			var label = hidden ? toggle.dataset.showLabel : toggle.dataset.hideLabel;
+			toggle.setAttribute('aria-expanded', hidden ? 'false' : 'true');
+			toggle.setAttribute('aria-label', label);
+			toggle.setAttribute('title', label + ' (' + shortcut + ')');
+		};
+		sync();
+		toggle.addEventListener('click', function() {
+			var hidden = root.classList.toggle('sidebar-hidden');
+			sync();
+			try {
+				localStorage.setItem('sidebarHidden', hidden ? '1' : '0');
+			} catch (e) {}
+		});
+	})();
 </script>
 <script>
 	// Site-wide accessibility behaviour. The page-level parts run on load and

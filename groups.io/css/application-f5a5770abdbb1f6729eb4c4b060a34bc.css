@@ -6143,6 +6143,8 @@ body.dark-mode .grouppost-options-toggle {
 .drawer-left .drawer-wrapper {
 	left: 0;
 	right: auto;
+	/* Keeps the drawer's contents clear of the notch in landscape. */
+	padding-left: env(safe-area-inset-left);
 	-webkit-transform: translate3d(-100%, 0, 0);
 	transform: translate3d(-100%, 0, 0);
 }
@@ -6156,6 +6158,9 @@ body.dark-mode .grouppost-options-toggle {
 	width: 100%;
 	max-height: 500px;
 	max-width: none;
+	/* Keeps the sheet's contents clear of the notch in landscape. */
+	padding-left: env(safe-area-inset-left);
+	padding-right: env(safe-area-inset-right);
 	-webkit-transform: translateY(103%);
 	transform: translateY(103%);
 	/* extra 3% because of box-shadow */
@@ -6481,8 +6486,13 @@ body.app .form-check:not(.form-check-inline):not(table .form-check):not(.dropdow
 		position: absolute;
 		top: calc(55px + env(safe-area-inset-top));
 		bottom: 80px;
-		right: 0;
-		left: 0;
+		/* The insets keep the page clear of the notch in landscape. The
+		   width comes from left and right, overriding the col-12 width
+		   TermsSidebar puts on #maincontent, which would push the page
+		   past the right edge by the left inset. */
+		right: env(safe-area-inset-right);
+		left: env(safe-area-inset-left);
+		width: auto;
 		/* COMMENTED OUT for now because it causes HTMX to not handle infinite scrolling correctly. It causes a jump back to the top of the page. */
 		/*overflow-y: auto !important;*/
 	}
@@ -10546,6 +10556,17 @@ body.dark-mode .empty-state-title {
 	align-items: stretch;
 }
 
+/* The pages use viewport-fit=cover, so a phone in landscape draws them
+ * under its notch. The fixed header and tab bar keep their contents clear
+ * of it; the page itself is inset by #maincontent's left and right. The
+ * header title is positioned against the header's padding edge, so its
+ * offsets above add the same insets. */
+#headerbar,
+#mobileSidebar .navbar.fixed-bottom {
+	padding-left: env(safe-area-inset-left);
+	padding-right: env(safe-area-inset-right);
+}
+
 body.dark-mode #mobileSidebar .navbar {
 	background-color: var(--dark-mode-primary-color);
 	border-top-color: #000;
@@ -12933,8 +12954,8 @@ body.dark-mode .btn.chat-message-actions:is(:focus, :focus-visible) {
  * action (search, settings) when there is one. */
 .navbar-mobile-title {
 	position: absolute;
-	left: 44px;
-	right: 64px;
+	left: calc(44px + env(safe-area-inset-left));
+	right: calc(64px + env(safe-area-inset-right));
 	top: env(safe-area-inset-top);
 	bottom: 0;
 	display: flex;
@@ -12960,12 +12981,12 @@ body.dark-mode .btn.chat-message-actions:is(:focus, :focus-visible) {
  * re-match :has() when the slot is filled after the page loads, leaving
  * the title running under the icon. */
 #headerbar.has-header-action .navbar-mobile-title {
-	right: 112px;
+	right: calc(112px + env(safe-area-inset-right));
 }
 
 /* A title with no chevron beside it (NavbarTitle) can start further left. */
 .navbar-mobile-title.navbar-mobile-title-only {
-	left: 16px;
+	left: calc(16px + env(safe-area-inset-left));
 }
 
 .navbar-mobile-title h4 {
@@ -13074,10 +13095,13 @@ body.dark-mode .btn.chat-message-actions:is(:focus, :focus-visible) {
 
 	/* The row's negative margins were hidden while the content column
 	 * was positioned against the viewport; in the flow they would add a
-	 * horizontal scroll. */
+	 * horizontal scroll. In the flow, #maincontent's left and right no
+	 * longer keep it clear of the notch either, so the row's padding does. */
 	#mainrow {
 		margin-left: 0;
 		margin-right: 0;
+		padding-left: env(safe-area-inset-left);
+		padding-right: env(safe-area-inset-right);
 	}
 
 	#maincontent-column {
@@ -13549,6 +13573,11 @@ body.dark-mode .wiki-updated {
 	font-size: 0.875rem;
 }
 
+.wiki-pages-menu {
+	max-height: 60vh;
+	overflow-y: auto;
+}
+
 .wiki-pagelist .list-group-item {
 	padding: 0.35rem 0.75rem;
 	border: 0;
@@ -13570,6 +13599,10 @@ body.dark-mode .wiki-pagelist .list-group-item.active {
 	background: var(--dark-mode-highlight-color);
 }
 
+/* The page list and the right-hand aside stay in view while the page
+ * scrolls and scroll on their own, so a long list never makes a short
+ * page taller. */
+.wiki-pagelist-sticky,
 .wiki-aside {
 	position: sticky;
 	top: 70px;
@@ -13640,5 +13673,80 @@ body.dark-mode .wiki-toc {
 
 body.dark-mode .search-section {
 	border-color: var(--dark-mode-divider);
+}
+
+/* The header's sidebar toggle (base.qtpl) hides the desktop sidebar by
+ * putting .sidebar-hidden on <html>. The sidebar slides out to the left
+ * while the content widens into its space, and slides back in when shown.
+ * visibility waits for the slide to finish before hiding the sidebar, which
+ * also takes its links out of the tab order. Below 992px the sidebar is
+ * already replaced by the mobile navigation. */
+.sidebar-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	margin: 0 4px 0 8px;
+	padding: 0;
+	border: 0;
+	border-radius: 6px;
+	background: transparent;
+	color: #fff;
+	font-size: 1.15rem;
+	vertical-align: middle;
+}
+
+/* The Groups.io logo has transparent space on its left, so for it the logo
+ * is pulled in under the button's right edge to sit near the icon; the
+ * button stacks above it so it keeps its clicks. Other orgs' logos may
+ * start at their left edge, so they keep the normal spacing. */
+.sidebar-toggle-tight {
+	position: relative;
+	z-index: 1;
+	margin-right: -34px;
+}
+
+.sidebar-toggle:hover,
+.sidebar-toggle:focus-visible {
+	background: rgba(255, 255, 255, 0.15);
+}
+
+@media screen and (min-width: 992px) {
+	#groupsidebar {
+		transition: transform 0.25s ease, visibility 0s linear 0s;
+	}
+
+	.groupmaincontent {
+		transition: margin-left 0.25s ease;
+	}
+
+	.maincontent-chat-column {
+		transition: left 0.25s ease, width 0.25s ease;
+	}
+
+	html.sidebar-hidden #groupsidebar {
+		transform: translateX(-100%);
+		visibility: hidden;
+		transition: transform 0.25s ease, visibility 0s linear 0.25s;
+	}
+
+	html.sidebar-hidden .groupmaincontent {
+		margin-left: 0;
+	}
+
+	html.sidebar-hidden .maincontent-chat-column {
+		left: 0;
+		width: 100vw;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	#groupsidebar,
+	html.sidebar-hidden #groupsidebar,
+	.groupmaincontent,
+	.maincontent-chat-column {
+		transition: none;
+	}
 }
 
